@@ -1,13 +1,13 @@
 from setuptools import setup, find_packages
 
 VERSION = '0.0.1'
-DESCRIPTION = 'Defichain Node and Ocean Library'
+DESCRIPTION = 'Defichain RPC Library'
 
 # Setting up
 setup(
     name="defichain",
     version=VERSION,
-    author="Intr0c (Eric Volzp)",
+    author="Intr0c",
     author_email="introc@volz.link",
     description=DESCRIPTION,
     packages=find_packages(),
