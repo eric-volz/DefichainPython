@@ -11,7 +11,7 @@ setup(
     author_email="introc@volz.link",
     description=DESCRIPTION,
     packages=find_packages(),
-    install_requires=[],
+    install_requires=["requests"],
     keywords=['python', 'defichain', 'node', 'ocean'],
     classifiers=[
         "Development Status :: 1 - Planning",
