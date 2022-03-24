@@ -11,7 +11,13 @@ class RPC(object):
         self._headers = {'content-type': 'application/json'}
 
     def call(self, rpc_method, *params):
-        payload = json.dumps({"method": rpc_method, "params": list(params), "jsonrpc": "2.0"})
+
+        filtered_params = []
+        for param in params:
+            if param is not None:
+                filtered_params.append(param)
+
+        payload = json.dumps({"method": rpc_method, "params": list(filtered_params), "jsonrpc": "2.0"})
         tries = 5
         hadConnectionFailures = False
         while True:
@@ -32,6 +38,6 @@ class RPC(object):
         if not response.status_code in (200, 500):
             raise Exception('RPC connection failure: ' + str(response.status_code) + ' ' + response.reason)
         response_json = response.json()
-        if 'error' in response_json and response_json['error'] != None:
+        if 'error' in response_json and response_json['error'] is not None:
             raise Exception('Error in RPC call: ' + str(response_json['error']))
         return response_json['result']
