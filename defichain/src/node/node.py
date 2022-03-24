@@ -24,8 +24,6 @@ class Node:
         self.url = f"http://{user}:{password}@{url}:{port}"
         self.rpc = RPC(self.url)
 
-
-
         self.accounts = Accounts(self)
         self.blockchain = Blockchain(self)
         self.control = Control(self)
