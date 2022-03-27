@@ -10,11 +10,13 @@ class BuildJson:
         if value is not None:
             self.json.update(new)
 
-    def build(self):
+    def empty(self):
         if self.json == {}:
-            return None
-        else:
-            return self.json
+            return True
+        return False
+
+    def build(self):
+        return self.json
 
 
 class BuildToJson:
@@ -23,7 +25,7 @@ class BuildToJson:
 
     def add(self, address, coin, amount):
         existing_json = self.json.build()
-        if existing_json is not None:
+        if not self.json.empty():
             if address in existing_json:
                 value = existing_json[address]
                 if isinstance(value, list):
