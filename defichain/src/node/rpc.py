@@ -1,4 +1,4 @@
-#from __future__ import print_function
+# from __future__ import print_function
 import json
 import requests
 import time
@@ -35,6 +35,8 @@ class RPC(object):
                 if hadConnectionFailures:
                     print('Connected for remote procedure call after retry.')
                 break
+        if response.status_code == 400:
+            raise Exception('Bad Request ' + str(response.status_code) + ': ' + response.json()["error"]["message"])
         if not response.status_code in (200, 500):
             raise Exception('RPC connection failure: ' + str(response.status_code) + ' ' + response.reason)
         response_json = response.json()
