@@ -18,7 +18,7 @@ class RPC(object):
                 filtered_params.append(param)
 
         payload = json.dumps({"method": rpc_method, "params": list(filtered_params), "jsonrpc": "2.0"})
-        tries = 5
+        tries = 3
         hadConnectionFailures = False
         while True:
             try:
@@ -30,7 +30,7 @@ class RPC(object):
                 hadFailedConnections = True
                 print("Couldn't connect for remote procedure call, will sleep for five seconds and then try again "
                       "({} more tries)".format(tries))
-                time.sleep(10)
+                time.sleep(5)
             else:
                 if hadConnectionFailures:
                     print('Connected for remote procedure call after retry.')
