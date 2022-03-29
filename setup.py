@@ -1,7 +1,12 @@
 from setuptools import setup, find_packages
+from os import path
 
 VERSION = '0.0.1'
 DESCRIPTION = 'Defichain RPC Library'
+
+this_directory = path.abspath(path.dirname(__file__))
+with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    LONG_DESCRIPTION = f.read()
 
 # Setting up
 setup(
@@ -9,7 +14,10 @@ setup(
     version=VERSION,
     author="Intr0c",
     author_email="introc@volz.link",
+    url="https://github.com/eric-volz/defichainLibrary",
     description=DESCRIPTION,
+    long_description=LONG_DESCRIPTION,
+    long_description_content_type='text/markdown',
     packages=find_packages(),
     install_requires=["requests"],
     keywords=['python', 'defichain', 'node', 'ocean'],
