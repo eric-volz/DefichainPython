@@ -58,41 +58,42 @@ class Blockchain:
     def getrawmempool(self, verbose=None):  # 18
         return self.node.rpc.call("getrawmempool", verbose)
 
-    def gettxout(self):
-        pass
+    def gettxout(self, txid, n, include_mempool=None):  # 19
+        return self.node.rpc.call("gettxout", txid, n, include_mempool)
 
-    def gettxoutproof(self):
-        pass
+    def gettxoutproof(self, txids, blockhash=None):  # 20
+        return self.node.rpc.call("gettxoutproof", txids, blockhash)
 
-    def gettxoutsetinfo(self):
-        pass
+    def gettxoutsetinfo(self):  # 21
+        return self.node.rpc.call("gettxoutsetinfo")
 
-    def isappliedcustomtx(self):
-        pass
+    def isappliedcustomtx(self, txid, blockhash):  # 22
+        return self.node.rpc.call("isappliedcustomtx", txid, blockhash)
 
-    def listgovs(self):
-        pass
+    def listgovs(self):  # 23
+        return self.node.rpc.call("listgovs")
 
-    def preciousblock(self):
-        pass
+    def preciousblock(self, blockhash):  # 24
+        return self.node.rpc.call("preciousblock", blockhash)
 
-    def pruneblockchain(self):
-        pass
+    def pruneblockchain(self, height):  # 25
+        return self.node.rpc.call("pruneblockchain", height)
 
-    def savemempool(self):
-        pass
+    def savemempool(self):  # 26
+        return self.node.rpc.call("savemempool")
 
-    def scantxoutset(self):
-        pass
+    def scantxoutset(self, action, scanobjects):  # 27
+        return self.node.rpc.call("scantxoutset", action, scanobjects)
 
-    def setgov(self):
-        pass
+    def setgov(self, variables, inputs=None):  # 28
+        return self.node.rpc.call("setgov", variables, inputs)
 
-    def setgovheight(self):
-        pass
+    def setgovheight(self, variables, height, inputs=None):  # 29
+        return self.node.rpc.call("setgovheight", variables, height, inputs)
 
-    def verifychain(self):
-        pass
+    def verifychain(self, checklevel=None, nblocks=None):  # 30
+        checklevel = 3 if checklevel is None else checklevel
+        return self.node.rpc.call("verifychain", checklevel, nblocks)
 
-    def verifytxoutproof(self):
-        pass
+    def verifytxoutproof(self, proof):  # 31
+        return self.node.rpc.call("verifytxoutproof", proof)
