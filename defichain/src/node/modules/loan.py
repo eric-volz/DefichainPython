@@ -43,3 +43,46 @@ class Loan:
         metadata.append("amounts", f"{amount}@{token}")
 
         return self.node.rpc.call("paybackloan", metadata.build(), inputs)
+
+    def setcollateraltoken(self, token, factor, fixedIntervalPriceId, activateAfterBlock=None, inputs=None):  # 12
+        metadata = BuildJson()
+        metadata.append("token", token)
+        metadata.append("factor", factor)
+        metadata.append("fixedIntervalPriceId", fixedIntervalPriceId)
+        metadata.append("activateAfterBlock", activateAfterBlock)
+        return self.node.rpc.call("setcollateraltoken", metadata.build(), inputs)
+
+    def setdefaultloanscheme(self, id, inputs=None):  # 13
+        return self.node.rpc.call("setdefaultloanscheme", id, inputs)
+
+    def setloantoken(self, symbol, fixedIntervalPriceId, name=None, mintable=None, interest=None, inputs=None):  # 14
+        name = "" if name is None else name
+        mintable = True if mintable is None else mintable
+        interest = 0 if interest is None else interest
+        metadata = BuildJson()
+        metadata.append("symbol", symbol)
+        metadata.append("name", name)
+        metadata.append("fixedIntervalPriceId", fixedIntervalPriceId)
+        metadata.append("mintable", mintable)
+        metadata.append("interest", interest)
+        return self.node.rpc.call("setloantoken", metadata.build(), inputs)
+
+    def takeloan(self, vaultId, token, amount, to=None, inputs=None):  # 15
+        metadata = BuildJson()
+        metadata.append("vaultId", vaultId)
+        metadata.append("to", to)
+        metadata.append("amounts", f"{amount}@{token}")
+        return self.node.rpc.call("takeloan", metadata.build(), inputs)
+
+    def updateloanscheme(self, mincolratio, interestrate, id, ACTIVATE_AFTER_BLOCK=None, inputs=None):  # 16
+        ACTIVATE_AFTER_BLOCK = self.node.blockchain.getblockcount() + 1 if ACTIVATE_AFTER_BLOCK is None else ACTIVATE_AFTER_BLOCK
+        return self.node.rpc.call("updateloanscheme", mincolratio, interestrate, id, ACTIVATE_AFTER_BLOCK, inputs)
+
+    def updateloantoken(self, token, symbol, fixedIntervalPriceId, name=None, mintable=None, interest=None, inputs=None):  # 17
+        metadata = BuildJson()
+        metadata.append("symbol", symbol)
+        metadata.append("name", name)
+        metadata.append("fixedIntervalPriceId", fixedIntervalPriceId)
+        metadata.append("mintable", mintable)
+        metadata.append("interest", interest)
+        return self.node.rpc.call("updateloantoken", token, metadata.build(), inputs)
