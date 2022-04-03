@@ -11,14 +11,14 @@ class Util:
     def estimatesmartfee(self, conf_target, estimate_mode=None):  # 03
         return self.node.rpc.call("estimatesmartfee", conf_target, estimate_mode)
 
-    def getdescriptorinfo(self):  # 04
-        pass
+    def getdescriptorinfo(self, descriptor):  # 04
+        return self.node.rpc.call("getdescriptorinfo", descriptor)
 
-    def signmessagewithprivkey(self):  # 05
-        pass
+    def signmessagewithprivkey(self, privkey, message):  # 05
+        return self.node.rpc.call("signmessagewithprivkey", privkey, message)
 
-    def validateaddress(self):  # 06
-        pass
+    def validateaddress(self, address):  # 06
+        return self.node.rpc.call("validateaddress", address)
 
-    def verifymessage(self):  # 07
-        pass
+    def verifymessage(self, address, signature, message):  # 07
+        return self.node.rpc.call("verifymessage", address, signature, message)
