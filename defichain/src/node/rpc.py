@@ -2,6 +2,7 @@
 import json
 import requests
 import time
+from .exeptions.ExceptionHandler import ExceptionHandler
 
 
 class RPC(object):
@@ -11,7 +12,6 @@ class RPC(object):
         self._headers = {'content-type': 'application/json'}
 
     def call(self, rpc_method, *params):
-
         filtered_params = []
         for param in params:
             if param is not None:
@@ -35,11 +35,6 @@ class RPC(object):
                 if hadConnectionFailures:
                     print('Connected for remote procedure call after retry.')
                 break
-        if response.status_code == 400:
-            raise Exception('Bad Request ' + str(response.status_code) + ': ' + response.json()["error"]["message"])
-        if not response.status_code in (200, 500):
-            raise Exception('RPC connection failure: ' + str(response.status_code) + ' ' + response.reason)
-        response_json = response.json()
-        if 'error' in response_json and response_json['error'] is not None:
-            raise Exception('Error in RPC call: ' + str(response_json['error']))
-        return response_json['result']
+
+        ExceptionHandler(response)  # Check for Exceptions
+        return response.json()['result']
