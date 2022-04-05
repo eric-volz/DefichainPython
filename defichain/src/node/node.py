@@ -20,8 +20,8 @@ from .modules.zmq import Zmq
 
 
 class Node:
-    def __init__(self, url, port, user, password):
-        self.url = f"http://{user}:{password}@{url}:{port}"
+    def __init__(self, user, password, url="127.0.0.1", port=8554, wallet_path="", protocol="http"):
+        self.url = f"{protocol}://{user}:{password}@{url}:{port}{wallet_path}"
         self.rpc = RPC(self.url)
 
         self.accounts = Accounts(self)
@@ -42,17 +42,3 @@ class Node:
         self.vault = Vault(self)
         self.wallet = Wallet(self)
         self.zmq = Zmq(self)
-
-        self.checkConnection()
-
-    def checkConnection(self):
-        if not self.testConnection():
-            raise Exception(f"There is no Connection to the Node! \n"
-                            f"Check your Config: {self.url}")
-
-    def testConnection(self):
-        try:
-            self.blockchain.getblockcount()
-            return True
-        except:
-            return False
