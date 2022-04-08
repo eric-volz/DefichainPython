@@ -2,7 +2,7 @@
 import json
 import requests
 import time
-from .exeptions.ExceptionHandler import ExceptionHandler
+from .exceptions.ExceptionHandler import ExceptionHandler
 
 
 class RPC(object):
