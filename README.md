@@ -1,6 +1,6 @@
 [![Downloads](https://static.pepy.tech/personalized-badge/defichain?period=total&units=international_system&left_color=blue&right_color=green&left_text=Downloads)](https://pepy.tech/project/defichain)
 
-# DefichainPython
+# [DefichainPython](https://github.com/eric-volz/DefichainPython)
 
 ## This library is not finished yet and therefore should not be used in production!
 
