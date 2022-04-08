@@ -32,6 +32,8 @@ node.poolpair.compositeswap("fromAddress", "BTC", 0.01, "toAddress", "DFI")  # s
 ## Progress and Updates
 ___
 
+### Up to date to the node version: [v2.7.0 - Fort Canning Road](https://github.com/DeFiCh/ain/releases/tag/v2.7.0)
+
 :heavy_check_mark: = Finished and UpToDate
 
 :heavy_minus_sign: = In Production or not UpToDate
@@ -56,7 +58,7 @@ ___
 | Tokens          | :heavy_check_mark: |
 | Util            | :heavy_check_mark: |
 | Vault           | :heavy_check_mark: |
-| Wallet          | :heavy_minus_sign: |
+| Wallet          | :heavy_check_mark: |
 | Zmq             | :heavy_check_mark: |
 
 ### Ocean Requests
