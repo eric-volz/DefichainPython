@@ -22,7 +22,6 @@ setup(
     install_requires=["requests"],
     keywords=['python', 'defichain', 'node', 'ocean'],
     classifiers=[
-        "Development Status :: 1 - Alpha",
         "Programming Language :: Python :: 3",
         "Operating System :: Unix",
         "Operating System :: MacOS :: MacOS X",
