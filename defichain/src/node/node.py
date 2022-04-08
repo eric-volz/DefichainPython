@@ -22,7 +22,7 @@ from .modules.zmq import Zmq
 class Node:
     def __init__(self, user, password, url="127.0.0.1", port=8554, wallet_path="", protocol="http"):
         self.url = f"{protocol}://{user}:{password}@{url}:{port}{wallet_path}"
-        self.rpc = RPC(self.url)
+        self._rpc = RPC(self.url)
 
         self.accounts = Accounts(self)
         self.blockchain = Blockchain(self)

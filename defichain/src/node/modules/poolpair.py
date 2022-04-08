@@ -6,7 +6,7 @@ class Poolpair:
         self.node = node
 
     def addpoolliquidity(self, _from, shareAddress, inputs=None):  # 01
-        return self.node.rpc.call("addpoolliquidity", _from, shareAddress, inputs)
+        return self.node._rpc.call("addpoolliquidity", _from, shareAddress, inputs)
 
     def compositeswap(self, _from, tokenFrom, amountFrom, to, tokenTo, maxPrice=None, inputs=None):  # 02
         metadata = BuildJson()
@@ -16,7 +16,7 @@ class Poolpair:
         metadata.append("to", to)
         metadata.append("tokenTo", tokenTo)
         metadata.append("maxPrice", maxPrice)
-        return self.node.rpc.call("compositeswap", metadata.build(), inputs)
+        return self.node._rpc.call("compositeswap", metadata.build(), inputs)
 
     def createpoolpair(self, tokenA, tokenB, commission, status, ownerAddress, customRewards=None, pairSymbol=None, inputs=None):  # 03
         metadata = BuildJson()
@@ -27,17 +27,17 @@ class Poolpair:
         metadata.append("ownerAddress", ownerAddress)
         metadata.append("customRewards", customRewards)
         metadata.append("pairSymbol", pairSymbol)
-        return self.node.rpc.call("createpoolpair", metadata.build(), inputs)
+        return self.node._rpc.call("createpoolpair", metadata.build(), inputs)
 
     def getpoolpair(self, key, verbose=None):  # 04
-        return self.node.rpc.call("getpoolpair", key, verbose)
+        return self.node._rpc.call("getpoolpair", key, verbose)
 
     def listpoolpairs(self, start=None, including_start=None, limit=None, verbose=None):  # 05
         pagination = BuildJson()
         pagination.append("start", start)
         pagination.append("including_start", including_start)
         pagination.append("limit", limit)
-        return self.node.rpc.call("listpoolpairs", pagination.build(), verbose)
+        return self.node._rpc.call("listpoolpairs", pagination.build(), verbose)
 
     def listpoolshares(self, start=None, including_start=None, limit=None, verbose=None, is_mine_only=None):  # 06
         verbose = True if verbose is None else verbose
@@ -45,7 +45,7 @@ class Poolpair:
         pagination.append("start", start)
         pagination.append("including_start", including_start)
         pagination.append("limit", limit)
-        return self.node.rpc.call("listpoolshares", pagination.build(), verbose, is_mine_only)
+        return self.node._rpc.call("listpoolshares", pagination.build(), verbose, is_mine_only)
 
     def poolswap(self, _from, tokenFrom, amountFrom, to, tokenTo, maxPrice=None, inputs=None):  # 07
         metadata = BuildJson()
@@ -55,10 +55,10 @@ class Poolpair:
         metadata.append("to", to)
         metadata.append("tokenTo", tokenTo)
         metadata.append("maxPrice", maxPrice)
-        return self.node.rpc.call("poolswap", metadata.build(), inputs)
+        return self.node._rpc.call("poolswap", metadata.build(), inputs)
 
     def removepoolliquidity(self, _from, poolSymbol, amount, inputs=None):  # 08
-        return self.node.rpc.call("removepoolliquidity", _from, f"{amount}@{poolSymbol}", inputs)
+        return self.node._rpc.call("removepoolliquidity", _from, f"{amount}@{poolSymbol}", inputs)
 
     def testpoolswap(self, _from, tokenFrom, amountFrom, to, tokenTo, maxPrice=None, path=None, verbose=None):  # 09
         path = "direct" if path is None else path
@@ -70,7 +70,7 @@ class Poolpair:
         metadata.append("to", to)
         metadata.append("tokenTo", tokenTo)
         metadata.append("maxPrice", maxPrice)
-        return self.node.rpc.call("testpoolswap", metadata.build(), path, verbose)
+        return self.node._rpc.call("testpoolswap", metadata.build(), path, verbose)
 
     def updatepoolpair(self, pool, status=None, commission=None, ownerAddress=None, customRewards=None, inputs=None):  # 10
         metadata = BuildJson()
@@ -79,4 +79,4 @@ class Poolpair:
         metadata.append("commission", commission)
         metadata.append("ownerAddress", ownerAddress)
         metadata.append("customRewards", customRewards)
-        return self.node.rpc.call("updatepoolpair", metadata.build(), inputs)
+        return self.node._rpc.call("updatepoolpair", metadata.build(), inputs)

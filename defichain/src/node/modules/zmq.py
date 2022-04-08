@@ -3,4 +3,4 @@ class Zmq:
         self.node = node
 
     def getzmqnotifications(self):
-        return self.node.rpc.call("getzmqnotifications")
+        return self.node._rpc.call("getzmqnotifications")

@@ -15,26 +15,26 @@ class Tokens:
         metadata.append("limit", limit)
         metadata.append("mintable", mintable)
         metadata.append("tradeable", tradeable)
-        return self.node.rpc.call("createtoken", metadata.build(), inputs)
+        return self.node._rpc.call("createtoken", metadata.build(), inputs)
 
     def decodecustomtx(self, hexstring, iswitness=None):  # 02
-        return self.node.rpc.call("decodecustomtx", hexstring, iswitness)
+        return self.node._rpc.call("decodecustomtx", hexstring, iswitness)
 
     def getcustomtx(self, txid, blockhash=None):  # 03
-        return self.node.rpc.call("getcustomtx", txid, blockhash)
+        return self.node._rpc.call("getcustomtx", txid, blockhash)
 
     def gettoken(self, key):  # 04
-        return self.node.rpc.call("gettoken", key)
+        return self.node._rpc.call("gettoken", key)
 
     def listtokens(self, start=None, including_start=None, limit=None, verbose=None):  # 05
         pagination = BuildJson()
         pagination.append("start", start)
         pagination.append("including_start", including_start)
         pagination.append("limit", limit)
-        return self.node.rpc.call("listtokens", pagination.build(), verbose)
+        return self.node._rpc.call("listtokens", pagination.build(), verbose)
 
     def minttokens(self, token, amount):  # 06
-        return self.node.rpc.call("minttokens", f"{amount}@{token}")
+        return self.node._rpc.call("minttokens", f"{amount}@{token}")
 
     def updatetoken(self, token, symbol, name=None, isDAT=None, mintable=None, tradeable=None, finalize=None, inputs=None):  # 07
         metadata = BuildJson()
@@ -44,4 +44,4 @@ class Tokens:
         metadata.append("mintable", mintable)
         metadata.append("tradeable", tradeable)
         metadata.append("finalize", finalize)
-        return self.node.rpc.call("updatetoken", token, metadata.build(), inputs)
+        return self.node._rpc.call("updatetoken", token, metadata.build(), inputs)
