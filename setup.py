@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 from os import path
 
-VERSION = '0.0.2'
+VERSION = '0.0.3'
 DESCRIPTION = 'Defichain Python Library'
 
 this_directory = path.abspath(path.dirname(__file__))
