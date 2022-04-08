@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 from os import path
 
-VERSION = '0.0.3'
+VERSION = '0.0.4'
 DESCRIPTION = 'Defichain Python Library'
 
 this_directory = path.abspath(path.dirname(__file__))
@@ -18,7 +18,8 @@ setup(
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
-    packages=find_packages(),
+    packages=['defichain', 'defichain.src', 'defichain.src.node',
+              'defichain.src.node.modules', 'defichain.src.node.exceptions'],
     install_requires=["requests"],
     keywords=['python', 'defichain', 'node', 'ocean'],
     classifiers=[
