@@ -3,17 +3,21 @@ accounthistorycount ( "owner" {"no_rewards":bool,"token":"str","txtype":"str"} )
 accounttoaccount "from" {"address":"str"} ( [{"txid":"hex","vout":n},...] )
 accounttoutxos "from" {"address":"str"} ( [{"txid":"hex","vout":n},...] )
 executesmartcontract "name" "amount" ( "address" [{"txid":"hex","vout":n},...] )
+futureswap "address" "amount" ( "destination" [{"txid":"hex","vout":n},...] )
 getaccount "owner" ( {"start":"str","including_start":bool,"limit":n} indexed_amounts )
 getaccounthistory "owner" blockHeight txn
 getburninfo
+getpendingfutureswaps "address"
 gettokenbalances ( {"start":"str","including_start":bool,"limit":n} indexed_amounts symbol_lookup )
-listaccounthistory ( "owner" {"maxBlockHeight":n,"depth":n,"no_rewards":bool,"token":"str","txtype":"str","limit":n} )
+listaccounthistory ( "owner" {"maxBlockHeight":n,"depth":n,"no_rewards":bool,"token":"str","txtype":"str","limit":n,"txn":n} )
 listaccounts ( {"start":"str","including_start":bool,"limit":n} verbose indexed_amounts is_mine_only )
 listburnhistory ( {"maxBlockHeight":n,"depth":n,"token":"str","txtype":"str","limit":n} )
 listcommunitybalances
+listpendingfutureswaps
 sendtokenstoaddress {"address":"str"} {"address":"str"} ( "selectionMode" )
 sendutxosfrom "from" "to" amount ( "change" )
 utxostoaccount {"address":"str"} ( [{"txid":"hex","vout":n},...] )
+withdrawfutureswap "address" "amount" ( "destination" [{"txid":"hex","vout":n},...] )
 
 == Blockchain ==
 clearmempool
@@ -83,7 +87,7 @@ getloantoken "token"
 listcollateraltokens ( {"height":n,"all":bool} )
 listloanschemes
 listloantokens
-paybackloan {"vaultId":"hex","from":"str","amounts":"str"} ( [{"txid":"hex","vout":n},...] )
+paybackloan {"vaultId":"hex","from":"str","amounts":"str","loans":[{"dToken":"str","amounts":"str"},...]} ( [{"txid":"hex","vout":n},...] )
 setcollateraltoken {"token":"str","factor":n,"fixedIntervalPriceId":"hex","activateAfterBlock":n} ( [{"txid":"hex","vout":n},...] )
 setdefaultloanscheme "id" ( [{"txid":"hex","vout":n},...] )
 setloantoken {"symbol":"str","name":"str","fixedIntervalPriceId":"hex","mintable":bool,"interest":n} ( [{"txid":"hex","vout":n},...] )
@@ -129,6 +133,7 @@ setnetworkactive state
 == Oracles ==
 appointoracle "address" [{"currency":"str","token":"str"},...] weightage ( [{"txid":"hex","vout":n},...] )
 getfixedintervalprice "fixedIntervalPriceId"
+getfutureswapblock
 getoracledata "oracleid"
 getprice {"currency":"str","token":"str"}
 listfixedintervalprices ( {"start":n,"limit":n} )
