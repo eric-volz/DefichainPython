@@ -22,7 +22,7 @@ pip install defichain
 ```python
 from defichain import Node
 
-node = Node("127.0.0.1", 8554, "user", "password")
+node = Node("user", "password", "127.0.0.1", 8554)
 
 node.blockchain.getblockcount() #  returns block height of the latest block
 
