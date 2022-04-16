@@ -98,7 +98,7 @@ class Accounts:
         return self.node._rpc.call("executesmartcontract", name, amount, address, inputs)
 
     def futureswap(self, address, token, amount, destination=None, inputs=None):  # 05
-        destination = "DUSD" if destination is None else destination
+        destination = "" if destination is None else destination
         return self.node._rpc.call("futureswap", address, f"{amount}@{token}", destination, inputs)
 
     def getaccount(self, owner, start=None, including_start=None, limit=None, indexed_amounts=None):  # 06
