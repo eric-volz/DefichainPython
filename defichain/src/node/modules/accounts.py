@@ -67,7 +67,7 @@ class Accounts:
         """
         return self.node._rpc.call("accounttoaccount", _from, to, inputs)
 
-    def accounttoutxos(self, _from, to, inputs=None):  # 03
+    def accounttoutxos(self, _from, to, amount, inputs=None):  # 03
         """
         Creates (and submits to local node and network) a transfer transaction from the specified account to UTXOs.
         The third optional argument (may be empty array) is an array of specific UTXOs to spend.
@@ -92,7 +92,10 @@ class Accounts:
             str
                 (string) The hex-encoded hash of broadcasted transaction
         """
-        return self.node._rpc.call("accounttoutxos", _from, to, inputs)
+        metadata = BuildJson()
+        metadata.append(to, str(amount) +"@DFI")
+
+        return self.node._rpc.call("accounttoutxos", _from, metadata.build(), inputs)
 
     def executesmartcontract(self, name, amount, address=None, inputs=None):  # 04
         return self.node._rpc.call("executesmartcontract", name, amount, address, inputs)
@@ -172,8 +175,11 @@ class Accounts:
     def sendutxosfrom(self, _from, to, amount, change=None):  # 17
         return self.node._rpc.call("sendutxosfrom", _from, to, amount, change)
 
-    def utxostoaccount(self, amounts, inputs=None):  # 18
-        return self.node._rpc.call("utxostoaccount", amounts, inputs)
+    def utxostoaccount(self, to, amounts, inputs=None):  # 18
+        metadata = BuildJson()
+        metadata.append(to, str(amounts) + "@DFI")
+
+        return self.node._rpc.call("utxostoaccount", metadata.build(), inputs)
 
     def withdrawfutureswap(self, address, token, amount, destination=None, inputs=None):  # 19
         destination = "DUSD" if destination is None else destination

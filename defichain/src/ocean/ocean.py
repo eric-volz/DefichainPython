@@ -3,6 +3,8 @@ from .connection import Connection
 from .modules.address import Address
 from .modules.oracles import Oracles
 from .modules.prices import Prices
+from .modules.poolpairs import PoolPairs
+
 
 BASE_URL = "https://ocean.defichain.com/"
 
@@ -23,7 +25,7 @@ class Ocean:
         #self.loan   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Loan.ts
         #self.masternodes   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/MasterNodes.ts
         self.oracles = Oracles(self)
-        #self.poolpairs   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/PoolPairs.ts
+        self.poolpairs = PoolPairs(self) #https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/PoolPairs.ts
         self.prices = Prices(self)
         #self.rawTx   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/RawTx.ts
         #self.rpc   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Rpc.ts

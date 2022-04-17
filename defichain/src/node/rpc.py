@@ -1,5 +1,7 @@
 # from __future__ import print_function
 import json
+import logging
+
 import requests
 import time
 from .exceptions.ExceptionHandler import ExceptionHandler
@@ -18,6 +20,7 @@ class RPC(object):
                 filtered_params.append(param)
 
         payload = json.dumps({"method": rpc_method, "params": list(filtered_params), "jsonrpc": "2.0"})
+        logging.debug(payload)
         tries = 3
         hadConnectionFailures = False
         while True:
