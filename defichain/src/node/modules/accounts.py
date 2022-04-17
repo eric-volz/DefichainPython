@@ -141,7 +141,7 @@ class Accounts:
         options.append("limit", limit)
 
         return self.node._rpc.call("listaccounthistory", owner, options.build())
-
+    
     def listaccounts(self, start=None, including_start=None, limit=None, verbose=None, indexed_amounts=None, is_mine_only=None):  # 12
         pagnation = BuildJson()
         pagnation.append("start", start)

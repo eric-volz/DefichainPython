@@ -4,7 +4,7 @@ from ..util import BuildJson
 class Poolpair:
     def __init__(self, node):
         self.node = node
-
+        
     def addpoolliquidity(self, _from, shareAddress, inputs=None):  # 01
         return self.node._rpc.call("addpoolliquidity", _from, shareAddress, inputs)
 

@@ -15,6 +15,7 @@ class Ocean:
         self.version = "v0/" if version is None else version
         self.network = "mainnet/" if network is None else network
 
+
         self.attachedURL = self.url + self.version + self.network
 
         self.con = Connection(self.attachedURL)
