@@ -8,14 +8,10 @@ BASE_URL = "https://ocean.defichain.com/"
 
 
 class Ocean:
-    def __init__(self, url=None, version=None, network=None):
-        self.url = BASE_URL if url is None else url
-        self.version = "v0/" if version is None else version
-        self.network = "mainnet/" if network is None else network
+    def __init__(self, url="https://ocean.defichain.com/", version="v0/", network="mainnet/"):
+        self.attachedURL = url + version + network
 
-        self.attachedURL = self.url + self.version + self.network
-
-        self.con = Connection(self.attachedURL)
+        self.conn = Connection(self.attachedURL)
 
         self.address = Address(self)
         #self.blocks   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Blocks.ts
