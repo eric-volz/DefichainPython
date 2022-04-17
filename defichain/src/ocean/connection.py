@@ -1,4 +1,5 @@
 import requests
+import json
 
 
 class Connection:
@@ -14,6 +15,6 @@ class Connection:
                 url += f"?size={size}"
             elif next is not None:
                 url += f"?next={next}"
-            return requests.get(url).text
+            return json.loads(requests.get(url).text)
         except Exception as e:
             raise Exception(e)
