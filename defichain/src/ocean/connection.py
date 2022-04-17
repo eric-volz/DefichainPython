@@ -14,6 +14,6 @@ class Connection:
                 url += f"?size={size}"
             elif next is not None:
                 url += f"?next={next}"
-            return requests.get(url)
+            return requests.get(url).text
         except Exception as e:
             raise Exception(e)
