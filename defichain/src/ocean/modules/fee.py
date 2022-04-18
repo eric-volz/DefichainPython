@@ -4,5 +4,5 @@ class Fee:
     def __init__(self, ocean):
         self.ocean = ocean
 
-    def estimate(self, confirmationTarget=10):
-        return self.ocean.conn.call(f"fee/estimate?confirmationTarget={confirmationTarget}")
+    def estimate(self, confirmationTarget=10):  # 01
+        return self.ocean._conn.call(f"fee/estimate?confirmationTarget={confirmationTarget}")
