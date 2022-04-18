@@ -64,12 +64,12 @@ ___
 ### Ocean Requests
 | Ocean Requests | Progress                 |
 |----------------|--------------------------|
-| Address        | :heavy_multiplication_x: |
-| Blocks         | :heavy_multiplication_x: | 
-| Fee            | :heavy_multiplication_x: |
-| Loan           | :heavy_multiplication_x: |
-| Masternodes    | :heavy_multiplication_x: |
-| Oracles        | :heavy_multiplication_x: |
+| Address        | :heavy_check_mark:       |
+| Blocks         | :heavy_check_mark:       | 
+| Fee            | :heavy_check_mark:       |
+| Loan           | :heavy_check_mark:       |
+| Masternodes    | :heavy_check_mark:       |
+| Oracles        | :heavy_check_mark:       |
 | Poolpairs      | :heavy_multiplication_x: |
 | Prices         | :heavy_multiplication_x: |
 | RawTx          | :heavy_multiplication_x: |
