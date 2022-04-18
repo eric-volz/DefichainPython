@@ -4,5 +4,33 @@ class Loan:
     def __init__(self, ocean):
         self.ocean = ocean
 
-    def listScheme(self, size=30, next=None):
-        return self.ocean.conn.call(f"loans/schemes", size=size, next=next)
+    def listScheme(self, size=30, next=None):  # 01
+        return self.ocean._conn.call(f"loans/schemes", size=size, next=next)
+
+    def getScheme(self, id):  # 02
+        return self.ocean._conn.call(f"loans/schemes/{id}")
+
+    def listCollateralToken(self, size=30, next=None):  # 03
+        return self.ocean._conn.call(f"loans/collaterals", size=size, next=next)
+
+    def getCollateralToken(self, id):  # 04
+        return self.ocean._conn.call(f"loans/collaterals/{id}")
+
+    def listLoanToken(self, size=30, next=None):  # 05
+        return self.ocean._conn.call(f"loans/tokens", size=size, next=next)
+
+    def getLoanToken(self, id):  # 06
+        return self.ocean._conn.call(f"loans/tokens/{id}")
+
+    def listVault(self, size=30, next=None):  # 07
+        return self.ocean._conn.call("loans/vaults", size=size, next=next)
+
+    def getVault(self, id):  # 08
+        return self.ocean._conn.call(f"loans/vaults/{id}")
+
+    def listVaultAuctionHistory(self, id, height, batchIndex, size=30, next=None):  # 09
+        return self.ocean._conn.call(f"loans/vaults/{id}/auctions/{height}/batches/{batchIndex}/history", size=size,
+                                     next=next)
+
+    def listAuction(self, size=30, next=None):  # 10
+        return self.ocean._conn.call(f"loans/auctions", size=size, next=next)
