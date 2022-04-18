@@ -1,6 +1,9 @@
 from .connection import Connection
 
 from .modules.address import Address
+from .modules.blocks import Blocks
+from .modules.fee import Fee
+from .modules.loan import Loan
 from .modules.oracles import Oracles
 from .modules.prices import Prices
 
@@ -14,9 +17,9 @@ class Ocean:
         self.conn = Connection(self.attachedURL)
 
         self.address = Address(self)
-        #self.blocks   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Blocks.ts
-        #self.fee   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Fee.ts
-        #self.loan   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Loan.ts
+        self.blocks = Blocks(self)
+        self.fee = Fee(self)
+        self.loan = Loan(self)
         #self.masternodes   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/MasterNodes.ts
         self.oracles = Oracles(self)
         #self.poolpairs   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/PoolPairs.ts
