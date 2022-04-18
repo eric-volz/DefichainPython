@@ -6,6 +6,7 @@ from .modules.fee import Fee
 from .modules.loan import Loan
 from .modules.masternodes import Masternodes
 from .modules.oracles import Oracles
+from .modules.poolpairs import Poolpairs
 from .modules.prices import Prices
 
 BASE_URL = "https://ocean.defichain.com/"
@@ -23,7 +24,7 @@ class Ocean:
         self.loan = Loan(self)
         self.masternodes = Masternodes(self)
         self.oracles = Oracles(self)
-        #self.poolpairs   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/PoolPairs.ts
+        self.poolpairs = Poolpairs(self)
         self.prices = Prices(self)
         #self.rawTx   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/RawTx.ts
         #self.rpc   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Rpc.ts
