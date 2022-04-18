@@ -4,12 +4,12 @@ class Oracles:
     def __init__(self, ocean):
         self.ocean = ocean
 
-    def list(self, size=30, next=None):
+    def list(self, size=30, next=None):  # 01
         return self.ocean._conn.call("oracles", size=size, next=next)
 
-    def getPriceFeed(self, oracleId, token, currency, size=30, next=None):
+    def getPriceFeed(self, oracleId, token, currency, size=30, next=None):  # 02
         key = f"{token}-{currency}"
         return self.ocean._conn.call(f"oracles/{oracleId}/{key}/feed", size=size, next=next)
 
-    def getOracleByAddress(self, address):
+    def getOracleByAddress(self, address):  # 03
         return self.ocean._conn.call(f"oracles/{address}")

@@ -4,8 +4,8 @@ class Masternodes:
     def __init__(self, ocean):
         self.ocean = ocean
 
-    def list(self, size=30, next=None):
+    def list(self, size=30, next=None):  # 01
         return self.ocean._conn.call("masternodes", size=size, next=next)
 
-    def get(self, id):
+    def get(self, id):  # 02
         return self.ocean._conn.call(f"masternodes/{id}")
