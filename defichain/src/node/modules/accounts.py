@@ -141,7 +141,7 @@ class Accounts:
         options.append("limit", limit)
 
         return self.node._rpc.call("listaccounthistory", owner, options.build())
-    
+
     def listaccounts(self, start=None, including_start=None, limit=None, verbose=None, indexed_amounts=None, is_mine_only=None):  # 12
         pagnation = BuildJson()
         pagnation.append("start", start)
@@ -176,10 +176,21 @@ class Accounts:
         return self.node._rpc.call("sendutxosfrom", _from, to, amount, change)
 
     def utxostoaccount(self, to, amounts, inputs=None):  # 18
-        metadata = BuildJson()
-        metadata.append(to, str(amounts) + "@DFI")
-
-        return self.node._rpc.call("utxostoaccount", metadata.build(), inputs)
+        '''
+        amounts is a json string, f.e.
+        amounts={'8SXhUhdxmHRwPnsXkQBbC58euip8hPSJx8': '0.00000005@DFI', 'dDbCcF2BpEjGqxxQ78iS7DUBb5wFYmyYW6': '0.00000015@DFI'}
+        build it with
+        BuildToJson()
+            j.add("8SXhUhdxmHRwPnsXkQBbC58euip8hPSJx8", "DFI", 0.00000005)
+            j.add("8SXhUhdxmHRwPnsXkQBbC58euip8hPSJx8", "DFI", 0.00000010)
+            j.add("dDbCcF2BpEjGqxxQ78iS7DUBb5wFYmyYW6", "DFI", 0.00000015)
+        Multiple values possible in one transaction
+        :param to:
+        :param amounts:
+        :param inputs:
+        :return:
+        '''
+        return self.node._rpc.call("utxostoaccount", amounts, inputs)
 
     def withdrawfutureswap(self, address, token, amount, destination=None, inputs=None):  # 19
         destination = "DUSD" if destination is None else destination
