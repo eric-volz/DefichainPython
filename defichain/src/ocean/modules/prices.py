@@ -4,55 +4,25 @@ class Prices:
     def __init__(self, ocean):
         self.ocean = ocean
 
-    def list(self, size=None, next=None) -> str:
-        """
-        Get a list of available Price Ticker.
-        @param size: how many ticker
-        @param next: next page hash
-        @return: json
-        """
-        size = 30 if size is None else size
-        next = "" if next is None else f"&next={next}"
-        addOn = f"?size={size}{next}"
-        request = f"prices{addOn}"
-        return self.ocean.con.request(request)
+    def list(self, size=30, next=None):  # 01
+        return self.ocean._conn.get("prices", size=size, next=next)
 
-    def get(self, token: str, currency: str) -> str:
-        """
-        Get a single Price Ticker.
-        @param token: token like DFI
-        @param currency: currency like USD
-        @return: json
-        """
-        request = f"prices/{token}-{currency}"
-        return self.ocean.con.request(request)
+    def get(self, token, currency):  # 02
+        key = f"{token}-{currency}"
+        return self.ocean._conn.get(f"prices/{key}")
 
-    def getFeed(self, token: str, currency: str, size=None, next=None) -> str:
-        """
-        Get a list of Price Feed by Price Ticker.
-        @param token: token like DFI
-        @param currency: currency like USD
-        @param size: how many feeds
-        @param next: next page hash
-        @return: json
-        """
-        size = 30 if size is None else size
-        next = "" if next is None else f"&next={next}"
-        addOn = f"?size={size}{next}"
-        request = f"prices/{token}-{currency}/feed{addOn}"
-        return self.ocean.con.request(request)
+    def getFeedActive(self, token, currency, size=30, next=None):  # 03
+        key = f"{token}-{currency}"
+        return self.ocean._conn.get(f"prices/{key}/feed/active", size=size, next=next)
 
-    def getOracles(self, token: str, currency: str, size=None, next=None) -> str:
-        """
-        Get a list of OceanOracles by Price Ticker.
-        @param token: token like DFI
-        @param currency: currency like USD
-        @param size: how many oracles
-        @param next: next page hash
-        @return: json
-        """
-        size = 30 if size is None else size
-        next = "" if next is None else f"&next={next}"
-        addOn = f"?size={size}{next}"
-        request = f"prices/{token}-{currency}/oracles{addOn}"
-        return self.ocean.con.request(request)
+    def getFeed(self, token, currency, size=30, next=None):  # 04
+        key = f"{token}-{currency}"
+        return self.ocean._conn.get(f"prices/{key}/feed", size=size, next=next)
+
+    def getFeedWithInterval(self, token, currency, interval, size=30, next=None):  # 05
+        key = f"{token}-{currency}"
+        return self.ocean._conn.get(f"prices/{key}/feed/interval/{interval}", size=size, next=next)
+
+    def getOracles(self, token, currency, size=30, next=None):  # 06
+        key = f"{token}-{currency}"
+        return self.ocean._conn.get(f"prices/{key}/oracles", size=size, next=next)
