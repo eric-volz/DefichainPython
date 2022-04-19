@@ -8,6 +8,11 @@ from .modules.masternodes import Masternodes
 from .modules.oracles import Oracles
 from .modules.poolpairs import Poolpairs
 from .modules.prices import Prices
+from .modules.rawTx import RawTx
+from .modules.rpc import Rpc
+from .modules.stats import Stats
+from .modules.tokens import Tokens
+from .modules.transactions import Transactions
 
 BASE_URL = "https://ocean.defichain.com/"
 
@@ -26,8 +31,8 @@ class Ocean:
         self.oracles = Oracles(self)
         self.poolpairs = Poolpairs(self)
         self.prices = Prices(self)
-        #self.rawTx   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/RawTx.ts
-        #self.rpc   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Rpc.ts
-        #self.stats   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Stats.ts
-        #self.tokens   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Tokens.ts
-        #self.transactions   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Transactions.ts
+        self.rawTx = RawTx(self)
+        self.rpc = Rpc(self)
+        self.stats = Stats(self)
+        self.tokens = Tokens(self)
+        self.transactions = Transactions(self)
