@@ -36,11 +36,11 @@ class Loan:
     def listloantokens(self):  # 10
         return self.node._rpc.call("listloantokens")
 
-    def paybackloan(self, vaultId, _from, token, amount, inputs=None):  # 11
+    def paybackloan(self, vaultId, _from, amounts, inputs=None):  # 11
         metadata = BuildJson()
         metadata.append("vaultId", vaultId)
         metadata.append("from", _from)
-        metadata.append("amounts", f"{amount}@{token}")
+        metadata.append("amounts", amounts)
 
         return self.node._rpc.call("paybackloan", metadata.build(), inputs)
 
@@ -67,11 +67,12 @@ class Loan:
         metadata.append("interest", interest)
         return self.node._rpc.call("setloantoken", metadata.build(), inputs)
 
-    def takeloan(self, vaultId, token, amount, to=None, inputs=None):  # 15
+    def takeloan(self, vaultId, amounts, to=None, inputs=None):  # 15
         metadata = BuildJson()
         metadata.append("vaultId", vaultId)
         metadata.append("to", to)
-        metadata.append("amounts", f"{amount}@{token}")
+        metadata.append("amounts", amounts)
+        print(metadata.build())
         return self.node._rpc.call("takeloan", metadata.build(), inputs)
 
     def updateloanscheme(self, mincolratio, interestrate, id, ACTIVATE_AFTER_BLOCK=None, inputs=None):  # 16
