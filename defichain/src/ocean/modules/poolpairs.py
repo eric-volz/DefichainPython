@@ -5,26 +5,26 @@ class Poolpairs:
         self.ocean = ocean
 
     def list(self, size=30, next=None):  # 01
-        return self.ocean._conn.call(f"poolpairs", size=size, next=next)
+        return self.ocean._conn.get(f"poolpairs", size=size, next=next)
 
     def get(self, id):  # 02
-        return self.ocean._conn.call(f"poolpairs/{id}")
+        return self.ocean._conn.get(f"poolpairs/{id}")
 
     def listPoolSwaps(self, id, size=30, next=None):  # 03
-        return self.ocean._conn.call(f"poolpairs/{id}/swaps", size=size, next=next)
+        return self.ocean._conn.get(f"poolpairs/{id}/swaps", size=size, next=next)
 
     def listPoolSwapsVerbose(self, id, size=10, next=None):  # 04
-        return self.ocean._conn.call(f"poolpairs/{id}/swaps/verbose", size=size, next=next)
+        return self.ocean._conn.get(f"poolpairs/{id}/swaps/verbose", size=size, next=next)
 
     def listPoolSwapAggregates(self, id, interval,  size=30, next=None):  # 05
-        return self.ocean._conn.call(f"poolpairs/{id}/swaps/aggregate/{interval}", size=size, next=next)
+        return self.ocean._conn.get(f"poolpairs/{id}/swaps/aggregate/{interval}", size=size, next=next)
 
     def getSwappableTokens(self, tokenId):  # 06
-        return self.ocean._conn.call(f"poolpairs/paths/swappable/{tokenId}")
+        return self.ocean._conn.get(f"poolpairs/paths/swappable/{tokenId}")
 
     def getBestPath(self, fromTokenId, toTokenId):  # 07
-        return self.ocean._conn.call(f"poolpairs/paths/best/from/{fromTokenId}/to/{toTokenId}")
+        return self.ocean._conn.get(f"poolpairs/paths/best/from/{fromTokenId}/to/{toTokenId}")
 
     def getAllPaths(self, fromTokenId, toTokenId):  # 08
-        return self.ocean._conn.call(f"poolpairs/paths/from/{fromTokenId}/to/{toTokenId}")
+        return self.ocean._conn.get(f"poolpairs/paths/from/{fromTokenId}/to/{toTokenId}")
 

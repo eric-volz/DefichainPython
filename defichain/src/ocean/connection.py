@@ -6,7 +6,7 @@ class Connection:
     def __init__(self, url):
         self.url = url
 
-    def call(self, data, size=None, next=None):
+    def get(self, data, size=None, next=None):
         try:
             url = self.url + data
             if size is not None and next is not None:
