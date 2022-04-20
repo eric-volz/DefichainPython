@@ -2,7 +2,7 @@
 
 class Fee:
     def __init__(self, ocean):
-        self.ocean = ocean
+        self._ocean = ocean
 
     def estimate(self, confirmationTarget=10):  # 01
-        return self.ocean._conn.get(f"fee/estimate?confirmationTarget={confirmationTarget}")
+        return self._ocean._conn.get(f"fee/estimate?confirmationTarget={confirmationTarget}")

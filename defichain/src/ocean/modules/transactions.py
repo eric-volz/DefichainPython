@@ -2,13 +2,13 @@
 
 class Transactions:
     def __init__(self, ocean):
-        self.ocean = ocean
+        self._ocean = ocean
 
     def get(self, id):
-        return self.ocean._conn.get(f"transactions/{id}")
+        return self._ocean._conn.get(f"transactions/{id}")
 
     def getVins(self, txid, size=30, next=None):
-        return self.ocean._conn.get(f"transactions/{txid}/vins", size=size, next=next)
+        return self._ocean._conn.get(f"transactions/{txid}/vins", size=size, next=next)
 
     def getVouts(self, txid, size=30, next=None):
-        return self.ocean._conn.get(f"transactions/{txid}/vouts", size=size, next=next)
+        return self._ocean._conn.get(f"transactions/{txid}/vouts", size=size, next=next)

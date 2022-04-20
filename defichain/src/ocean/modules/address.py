@@ -2,25 +2,25 @@
 
 class Address:
     def __init__(self, ocean):
-        self.ocean = ocean
+        self._ocean = ocean
 
     def listAccountHistory(self, address, size=30, next=None):  # 01
-        return self.ocean._conn.get(f"address/{address}/history", size=size, next=next)
+        return self._ocean._conn.get(f"address/{address}/history", size=size, next=next)
 
     def getBalance(self, address):
-        return self.ocean._conn.get(f"address/{address}/balance")  # 02
+        return self._ocean._conn.get(f"address/{address}/balance")  # 02
 
     def getAggregation(self, address):
-        return self.ocean._conn.get(f"address/{address}/aggregation")  # 03
+        return self._ocean._conn.get(f"address/{address}/aggregation")  # 03
 
     def listToken(self, address, size=30, next=None):  # 04
-        return self.ocean._conn.get(f"address/{address}/tokens", size=size, next=next)
+        return self._ocean._conn.get(f"address/{address}/tokens", size=size, next=next)
 
     def listVault(self, address, size=30, next=None):  # 05
-        return self.ocean._conn.get(f"address/{address}/vaults", size=size, next=next)
+        return self._ocean._conn.get(f"address/{address}/vaults", size=size, next=next)
 
     def listTransaction(self, address, size=30, next=None):  # 06
-        return self.ocean._conn.get(f"address/{address}/transactions", size=size, next=next)
+        return self._ocean._conn.get(f"address/{address}/transactions", size=size, next=next)
 
     def listTransactionUnspent(self, address, size=30, next=None):  # 07
-        return self.ocean._conn.get(f"address/{address}/transactions/unspent", size=size, next=next)
+        return self._ocean._conn.get(f"address/{address}/transactions/unspent", size=size, next=next)

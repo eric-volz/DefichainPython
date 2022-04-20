@@ -2,13 +2,13 @@
 
 class Stats:
     def __init__(self, ocean):
-        self.ocean = ocean
+        self._ocean = ocean
 
     def get(self):
-        return self.ocean._conn.get("stats")
+        return self._ocean._conn.get("stats")
 
     def getSupply(self):
-        return self.ocean._conn.get("stats/supply")
+        return self._ocean._conn.get("stats/supply")
 
     def getBurn(self):
-        return self.ocean._conn.get("stats/burn")
+        return self._ocean._conn.get("stats/burn")

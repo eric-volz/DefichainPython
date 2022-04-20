@@ -2,10 +2,10 @@
 
 class Rpc:
     def __init__(self, ocean):
-        self.ocean = ocean
+        self._ocean = ocean
 
     def call(self, method, *params):
         if params == ():
-            return self.ocean._conn.post(f"rpc/{method}")
+            return self._ocean._conn.post(f"rpc/{method}")
         else:
-            return self.ocean._conn.post(f"rpc/{method}", params)
+            return self._ocean._conn.post(f"rpc/{method}", params)

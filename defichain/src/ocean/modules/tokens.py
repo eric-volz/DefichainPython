@@ -2,10 +2,10 @@
 
 class Tokens:
     def __init__(self, ocean):
-        self.ocean = ocean
+        self._ocean = ocean
 
     def list(self, size=30, next=None):
-        return self.ocean._conn.get("tokens", size=size, next=next)
+        return self._ocean._conn.get("tokens", size=size, next=next)
 
     def get(self, id):
-        return self.ocean._conn.get(f"tokens/{id}")
+        return self._ocean._conn.get(f"tokens/{id}")
