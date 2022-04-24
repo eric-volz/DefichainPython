@@ -1,6 +1,6 @@
 class Zmq:
     def __init__(self, node):
-        self.node = node
+        self._node = node
 
     def getzmqnotifications(self):
-        return self.node._rpc.call("getzmqnotifications")
+        return self._node._rpc.call("getzmqnotifications")

@@ -1,30 +1,38 @@
 from .connection import Connection
 
 from .modules.address import Address
+from .modules.blocks import Blocks
+from .modules.fee import Fee
+from .modules.loan import Loan
+from .modules.masternodes import Masternodes
 from .modules.oracles import Oracles
+from .modules.poolpairs import Poolpairs
 from .modules.prices import Prices
-from .modules.poolpairs import PoolPairs
-
+from .modules.rawTx import RawTx
+from .modules.rpc import Rpc
+from .modules.stats import Stats
+from .modules.tokens import Tokens
+from .modules.transactions import Transactions
 
 BASE_URL = "https://ocean.defichain.com/"
 
 
 class Ocean:
     def __init__(self, url="https://ocean.defichain.com/", version="v0/", network="mainnet/"):
-        self.attachedURL = url + version + network
+        self._attachedURL = url + version + network
 
-        self.conn = Connection(self.attachedURL)
+        self._conn = Connection(self._attachedURL)
 
         self.address = Address(self)
-        #self.blocks   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Blocks.ts
-        #self.fee   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Fee.ts
-        #self.loan   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Loan.ts
-        #self.masternodes   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/MasterNodes.ts
+        self.blocks = Blocks(self)
+        self.fee = Fee(self)
+        self.loan = Loan(self)
+        self.masternodes = Masternodes(self)
         self.oracles = Oracles(self)
-        self.poolpairs = PoolPairs(self) #https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/PoolPairs.ts
+        self.poolpairs = Poolpairs(self)
         self.prices = Prices(self)
-        #self.rawTx   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/RawTx.ts
-        #self.rpc   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Rpc.ts
-        #self.stats   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Stats.ts
-        #self.tokens   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Tokens.ts
-        #self.transactions   https://github.com/DeFiCh/jellyfish/blob/main/packages/whale-api-client/src/api/Transactions.ts
+        self.rawTx = RawTx(self)
+        self.rpc = Rpc(self)
+        self.stats = Stats(self)
+        self.tokens = Tokens(self)
+        self.transactions = Transactions(self)
