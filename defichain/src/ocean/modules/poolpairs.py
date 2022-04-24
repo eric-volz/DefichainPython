@@ -15,4 +15,4 @@ class PoolPairs:
         next = "" if next is None else f"&next={next}"
         addOn = f"?size={size}{next}"
         request = f"poolpairs{addOn}"
-        return self.ocean.con.request(request)
+        return self.ocean.conn.call(request)
