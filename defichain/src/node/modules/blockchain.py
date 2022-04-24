@@ -67,8 +67,8 @@ class Blockchain:
     def gettxoutsetinfo(self):  # 21
         return self._node._rpc.call("gettxoutsetinfo")
 
-    def isappliedcustomtx(self, txid, blockhash):  # 22
-        return self._node._rpc.call("isappliedcustomtx", txid, blockhash)
+    def isappliedcustomtx(self, txid, blockHeight):  # 22
+        return self._node._rpc.call("isappliedcustomtx", txid, blockHeight)
 
     def listgovs(self):  # 23
         return self._node._rpc.call("listgovs")
