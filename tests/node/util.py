@@ -22,10 +22,7 @@ def createNode():
     secrets = load_secrets_conf()
 
     if "wallet_path" in secrets:
-        print("wallet")
         return Node(user=secrets["user"], password=secrets["password"], url=secrets["url"], port=secrets["port"],
                     wallet_path=secrets["wallet_path"])
-    print("hdöpahdöad")
     return Node(user=secrets["user"], password=secrets["password"], url=secrets["url"], port=secrets["port"])
 
-test = createNode()
