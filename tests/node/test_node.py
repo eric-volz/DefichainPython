@@ -1,6 +1,6 @@
 import pytest
 from defichain import Node
-from util import load_secrets_conf
+from tests.node.util import load_secrets_conf
 
 
 secrets = load_secrets_conf()

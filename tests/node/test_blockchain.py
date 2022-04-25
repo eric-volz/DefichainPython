@@ -1,5 +1,5 @@
 import pytest
-from util import createNode
+from tests.node.util import createNode
 
 # Import Exceptions
 from defichain.src.node.exceptions.InternalServerError import InternalServerError

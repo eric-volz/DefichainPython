@@ -1,9 +1,11 @@
+import os
 from os import path
 from defichain import Node
 
 
 def load_secrets_conf():
     if not path.isfile("secrets_conf.py"):
+        print(os.listdir())
         raise Exception("There is not secrets_conf.py File: \n"
                         "To create one: read secrets_conf.example.py!")
 
@@ -25,4 +27,3 @@ def createNode():
         return Node(user=secrets["user"], password=secrets["password"], url=secrets["url"], port=secrets["port"],
                     wallet_path=secrets["wallet_path"])
     return Node(user=secrets["user"], password=secrets["password"], url=secrets["url"], port=secrets["port"])
-
