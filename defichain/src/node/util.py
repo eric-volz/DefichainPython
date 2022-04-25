@@ -1,9 +1,10 @@
-import json
+import copy
 
 
 class BuildJson:
-    def __init__(self):
-        self.json = {}
+    def __init__(self, json=None):
+        new_json = copy.deepcopy(json)
+        self.json = new_json if new_json is not None else {}
 
     def append(self, key, value):
         new = {key: value}
@@ -20,8 +21,9 @@ class BuildJson:
 
 
 class BuildToJson:
-    def __init__(self):
-        self.json = BuildJson()
+    def __init__(self, json=None):
+        new_json = copy.deepcopy(json)
+        self.json = BuildJson(new_json) if new_json is not None else BuildJson()
 
     def add(self, address, coin, amount):
         existing_json = self.json.build()
@@ -38,6 +40,7 @@ class BuildToJson:
                 self.json.append(address, f'{amount}@{coin}')
         else:
             self.json.append(address, f'{amount}@{coin}')
+        return self.json.build()
 
     def build(self):
         return self.json.build()
