@@ -1,3 +1,6 @@
+from multiprocessing import Process
+from .exceptions.ServiceUnavailable import ServiceUnavailable
+
 from .rpc import RPC
 
 from .modules.accounts import Accounts
@@ -42,3 +45,14 @@ class Node:
         self.vault = Vault(self)
         self.wallet = Wallet(self)
         self.zmq = Zmq(self)
+
+        self.test_connection()
+
+    def test_connection(self):
+        p = Process(target=self.network.ping, name='ping')
+        p.start()
+        p.join(timeout=3)
+        p.terminate()
+
+        if p.exitcode is None:
+            raise ServiceUnavailable(-30, "Invalid IP/Subnet")
