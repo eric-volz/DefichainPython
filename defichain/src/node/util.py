@@ -38,6 +38,7 @@ class BuildToJson:
                 self.json.append(address, f'{amount}@{coin}')
         else:
             self.json.append(address, f'{amount}@{coin}')
+        return self.json.build()
 
     def build(self):
         return self.json.build()
