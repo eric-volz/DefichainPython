@@ -60,6 +60,6 @@ class Oracles:
     def setoracledata(self, oracleid, timestamp, prices, inputs=None):  # 11
         return self._node._rpc.call("setoracledata", oracleid, timestamp, prices, inputs)
 
-    def updateoracle(self, oracleid, timestamp, prices, weightage, inputs=None):  # 12
-        return self._node._rpc.call("updateoracle", oracleid, timestamp, prices, weightage, inputs)
+    def updateoracle(self, oracleid, address, pricefeeds, weightage, inputs=None):  # 12
+        return self._node._rpc.call("updateoracle", oracleid, address, pricefeeds, weightage, inputs)
 
