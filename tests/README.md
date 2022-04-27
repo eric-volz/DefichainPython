@@ -27,6 +27,14 @@ pip install pytest
 ```bash
 cd tests # navigate into the tests folder
 
-pytest run_tests.py # run tests
+python3 run_tests.py # run all tests
+```
+You can also filter tests by giving the script parameters:
+1. Parameter Modules: name of module to test or all for every module
+2. Parameter Marker: name of marker to do the tests on or all for every marker
+```bash
+cd tests # navigate into the tests folder
+
+python3 run_tests.py blockchain query # run all tests in the blockchain module with the marker query
 ```
 --> no test should fail
