@@ -1,11 +1,9 @@
-import os
 from os import path
 from defichain import Node
 
 
 def load_secrets_conf():
     if not path.isfile("secrets_conf.py"):
-        print(os.listdir())
         raise Exception("There is not secrets_conf.py File: \n"
                         "To create one: read secrets_conf.example.py!")
 
