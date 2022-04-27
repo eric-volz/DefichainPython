@@ -9,7 +9,7 @@ class Oracles:
         return self._node._rpc.call("appointoracle", address, pricefeeds, weightage, inputs)
 
     def getfixedintervalprice(self, currency, token):  # 02
-        return self._node._rpc.call("getfixedintervalprice", f"{currency}/{token}")
+        return self._node._rpc.call("getfixedintervalprice", f"{token}/{currency}")
 
     def getfutureswapblock(self):  # 03
         return self._node._rpc.call("getfutureswapblock")
