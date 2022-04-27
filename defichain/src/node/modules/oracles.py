@@ -8,8 +8,8 @@ class Oracles:
     def appointoracle(self, address, pricefeeds, weightage, inputs=None):  # 01
         return self._node._rpc.call("appointoracle", address, pricefeeds, weightage, inputs)
 
-    def getfixedintervalprice(self, fixedIntervalPriceId):  # 02
-        return self._node._rpc.call("getfixedintervalprice", fixedIntervalPriceId)
+    def getfixedintervalprice(self, currency, token):  # 02
+        return self._node._rpc.call("getfixedintervalprice", f"{currency}/{token}")
 
     def getfutureswapblock(self):  # 03
         return self._node._rpc.call("getfutureswapblock")
