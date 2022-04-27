@@ -20,8 +20,9 @@ def test_getbestblockhash():  # 02
 
 @pytest.mark.query
 def test_getblock():  # 03
-    hash = "934d72c71e768db9dd10c1279fd00389f576317c72f22a149566a18097046d0d"
-    assert node.blockchain.getblock(hash)
+    blockhash = "934d72c71e768db9dd10c1279fd00389f576317c72f22a149566a18097046d0d"
+    assert node.blockchain.getblock(blockhash)
+    assert node.blockchain.getblock(blockhash=blockhash)
 
 
 @pytest.mark.query
@@ -39,22 +40,27 @@ def test_getblockfilter():  # 06
     """
     Node only supports filtertype if it is started with argument: -blockfilterindex
     """
-    hash = "934d72c71e768db9dd10c1279fd00389f576317c72f22a149566a18097046d0d"
-    with pytest.raises(InternalServerError):
-        assert node.blockchain.getblockfilter(hash)
-        assert node.blockchain.getblockfilter(hash, filtertype="basic")
+    blockhash = "934d72c71e768db9dd10c1279fd00389f576317c72f22a149566a18097046d0d"
+    string = ".* RPC_MISC_ERROR: Index is not enabled for filtertype basic"
+    with pytest.raises(InternalServerError, match=string):
+        assert node.blockchain.getblockfilter(blockhash)
+        assert node.blockchain.getblockfilter(blockhash, "basic")
+        assert node.blockchain.getblockfilter(blockhash=blockhash, filtertype="basic")
 
 
 @pytest.mark.query
 def test_getblockhash():  # 07
-    assert node.blockchain.getblockhash(0)
+    height = 0
+    assert node.blockchain.getblockhash(height)
+    assert node.blockchain.getblockhash(height=height)
 
 
 @pytest.mark.query
 def test_getblockheader():  # 08
-    hash = "934d72c71e768db9dd10c1279fd00389f576317c72f22a149566a18097046d0d"
-    assert node.blockchain.getblockheader(hash)
-    assert node.blockchain.getblockheader(hash, verbose=False)
+    blockhash = "934d72c71e768db9dd10c1279fd00389f576317c72f22a149566a18097046d0d"
+    assert node.blockchain.getblockheader(blockhash)
+    assert node.blockchain.getblockheader(blockhash, False)
+    assert node.blockchain.getblockheader(blockhash, verbose=False)
 
 
 @pytest.mark.query
@@ -65,6 +71,8 @@ def test_getblockstats():  # 09
     assert node.blockchain.getblockstats(height)
     assert node.blockchain.getblockstats(hash, ["height", "txs", "minfee"])
     assert node.blockchain.getblockstats(height, ["height", "txs", "minfee"])
+    assert node.blockchain.getblockstats(hash_or_height=hash, stats=["height", "txs", "minfee"])
+    assert node.blockchain.getblockstats(hash_or_height=height, stats=["height", "txs", "minfee"])
 
 
 @pytest.mark.query
@@ -74,9 +82,11 @@ def test_getchaintips():  # 10
 
 @pytest.mark.query
 def test_getchaintxstats():  # 11
-    hash = "934d72c71e768db9dd10c1279fd00389f576317c72f22a149566a18097046d0d"
+    nblocks = 100
+    blockhash = "934d72c71e768db9dd10c1279fd00389f576317c72f22a149566a18097046d0d"
     assert node.blockchain.getchaintxstats()
-    assert node.blockchain.getchaintxstats(nblocks=100, blockhash=hash)
+    assert node.blockchain.getchaintxstats(nblocks, blockhash)
+    assert node.blockchain.getchaintxstats(nblocks=nblocks, blockhash=blockhash)
 
 
 @pytest.mark.query
@@ -96,34 +106,38 @@ def test_getgov():  # 13
 @pytest.mark.query
 def test_getmempoolancestors():  # 14
     while True:
-        mempool_txid = node.blockchain.getrawmempool()
-        if mempool_txid:
+        txid = node.blockchain.getrawmempool()
+        if txid:
             break
-    result = node.blockchain.getmempoolancestors(mempool_txid[0])
-    assert result or result == []
-    result2 = node.blockchain.getmempoolancestors(mempool_txid[0], True)
+    result1 = node.blockchain.getmempoolancestors(txid[0])
+    assert result1 or result1 == []
+    result2 = node.blockchain.getmempoolancestors(txid[0], True)
     assert result2 or result2 == {}
+    result3 = node.blockchain.getmempoolancestors(txid=txid[0], verbose=True)
+    assert result3 or result3 == {}
 
 
 @pytest.mark.query
 def test_getmempooldescendants():  # 15
     while True:
-        mempool_txid = node.blockchain.getrawmempool()
-        if mempool_txid:
+        txid = node.blockchain.getrawmempool()
+        if txid:
             break
-    result = node.blockchain.getmempooldescendants(mempool_txid[0])
-    assert result or result == []
-    result2 = node.blockchain.getmempooldescendants(mempool_txid[0], True)
+    result1 = node.blockchain.getmempooldescendants(txid[0])
+    assert result1 or result1 == []
+    result2 = node.blockchain.getmempooldescendants(txid[0], True)
     assert result2 or result2 == {}
+    result3 = node.blockchain.getmempooldescendants(txid=txid[0], verbose=True)
+    assert result3 or result3 == {}
 
 
 @pytest.mark.query
 def test_getmempoolentry():  # 16
     while True:
-        mempool_txid = node.blockchain.getrawmempool()
-        if mempool_txid:
+        txid = node.blockchain.getrawmempool()
+        if txid:
             break
-    assert node.blockchain.getmempoolentry(mempool_txid[0])
+    assert node.blockchain.getmempoolentry(txid[0])
 
 
 @pytest.mark.query
@@ -135,23 +149,28 @@ def test_getmempoolinfo():  # 17
 def test_getrawmempool():  # 18
     result = node.blockchain.getrawmempool()
     assert result or result == []
-    result2 = node.blockchain.getrawmempool(verbose=True)
+    result2 = node.blockchain.getrawmempool(True)
     assert result2 or result2 == []
+    result3 = node.blockchain.getrawmempool(verbose=True)
+    assert result3 or result3 == []
 
 
 @pytest.mark.query
 def test_gettxoutl():  # 19
     txid = "be1e5d5f26752d6957e527c94c8b0758b7ce30b01bbc5f5f97db28fa2a3b4e2d"
-    assert node.blockchain.gettxout(txid=txid, n=1)
-    assert node.blockchain.gettxout(txid=txid, n=1, include_mempool=True)
+    n = 1
+    assert node.blockchain.gettxout(txid, n)
+    assert node.blockchain.gettxout(txid=txid, n=n)
+    assert node.blockchain.gettxout(txid=txid, n=n, include_mempool=True)
 
 
 @pytest.mark.query
 def test_gettxoutproof():  # 20
     txid = "be1e5d5f26752d6957e527c94c8b0758b7ce30b01bbc5f5f97db28fa2a3b4e2d"
-    hash = "3da537b48af9ff99d472486c2ecbc34aa84a22f43a0a900cc0168ab4fc460c10"
+    blockhash = "3da537b48af9ff99d472486c2ecbc34aa84a22f43a0a900cc0168ab4fc460c10"
     assert node.blockchain.gettxoutproof([txid])
-    assert node.blockchain.gettxoutproof([txid], blockhash=hash)
+    assert node.blockchain.gettxoutproof([txid], blockhash)
+    assert node.blockchain.gettxoutproof([txid], blockhash=blockhash)
 
 
 @pytest.mark.query
@@ -162,8 +181,9 @@ def test_gettxoutsetinfo():  # 21
 @pytest.mark.query
 def test_isappliedcustomtx():  # 22
     txid = "be1e5d5f26752d6957e527c94c8b0758b7ce30b01bbc5f5f97db28fa2a3b4e2d"
-    height = 1825112
-    assert node.blockchain.isappliedcustomtx(txid=txid, blockHeight=height)
+    blockHeight = 1825112
+    assert node.blockchain.isappliedcustomtx(txid, blockHeight)
+    assert node.blockchain.isappliedcustomtx(txid=txid, blockHeight=blockHeight)
 
 
 @pytest.mark.query
@@ -178,8 +198,9 @@ def test_listsmartcontracts():  # 24
 
 @pytest.mark.query
 def test_preciousblock():  # 25
-    hash = "3da537b48af9ff99d472486c2ecbc34aa84a22f43a0a900cc0168ab4fc460c10"
-    assert node.blockchain.preciousblock(hash) is None
+    blockhash = "3da537b48af9ff99d472486c2ecbc34aa84a22f43a0a900cc0168ab4fc460c10"
+    assert node.blockchain.preciousblock(blockhash) is None
+    assert node.blockchain.preciousblock(blockhash=blockhash) is None
 
 
 @pytest.mark.query
@@ -187,6 +208,7 @@ def test_pruneblockchain():  # 26
     height = 1825112
     with pytest.raises(InternalServerError):
         assert node.blockchain.pruneblockchain(height)
+        assert node.blockchain.pruneblockchain(height=height)
 
 
 @pytest.mark.query
@@ -201,13 +223,19 @@ def test_scantxoutset():  # 28
 
 @pytest.mark.query
 def test_setgov():  # 29
-    with pytest.raises(InternalServerError):
+    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
+    with pytest.raises(InternalServerError, match=string):
+        assert node.blockchain.setgov({"ORACLE_BLOCK_INTERVAL": 60})
+        assert node.blockchain.setgov({"ORACLE_BLOCK_INTERVAL": 60}, [])
         assert node.blockchain.setgov(variables={"ORACLE_BLOCK_INTERVAL": 60}, inputs=[])
 
 
 @pytest.mark.query
 def test_setgovheight():  # 30
-    with pytest.raises(InternalServerError):
+    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
+    with pytest.raises(InternalServerError, match=string):
+        assert node.blockchain.setgovheight({"ORACLE_DEVIATION": 1}, 20000000)
+        assert node.blockchain.setgovheight({"ORACLE_DEVIATION": 1}, 20000000, [])
         assert node.blockchain.setgovheight(variables={"ORACLE_DEVIATION": 1}, height=20000000, inputs=[])
         assert node.blockchain.setgovheight(variables={"LP_SPLITS": {"2": 0.2, "3": 0.8}}, height=20000000, inputs=[])
 
@@ -215,6 +243,7 @@ def test_setgovheight():  # 30
 @pytest.mark.query
 def test_verifychain():  # 31
     assert node.blockchain.verifychain()
+    assert node.blockchain.verifychain(1, 10)
     assert node.blockchain.verifychain(checklevel=1, nblocks=10)
 
 
@@ -223,3 +252,4 @@ def test_verifytxoutproof():  # 32
     txid = "be1e5d5f26752d6957e527c94c8b0758b7ce30b01bbc5f5f97db28fa2a3b4e2d"
     proof = node.blockchain.gettxoutproof([txid])
     assert node.blockchain.verifytxoutproof(proof)
+    assert node.blockchain.verifytxoutproof(proof=proof)
