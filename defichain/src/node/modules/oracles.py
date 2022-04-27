@@ -8,8 +8,8 @@ class Oracles:
     def appointoracle(self, address, pricefeeds, weightage, inputs=None):  # 01
         return self._node._rpc.call("appointoracle", address, pricefeeds, weightage, inputs)
 
-    def getfixedintervalprice(self, fixedIntervalPriceId):  # 02
-        return self._node._rpc.call("getfixedintervalprice", fixedIntervalPriceId)
+    def getfixedintervalprice(self, currency, token):  # 02
+        return self._node._rpc.call("getfixedintervalprice", f"{currency}/{token}")
 
     def getfutureswapblock(self):  # 03
         return self._node._rpc.call("getfutureswapblock")
@@ -60,6 +60,6 @@ class Oracles:
     def setoracledata(self, oracleid, timestamp, prices, inputs=None):  # 11
         return self._node._rpc.call("setoracledata", oracleid, timestamp, prices, inputs)
 
-    def updateoracle(self, oracleid, timestamp, prices, weightage, inputs=None):  # 12
-        return self._node._rpc.call("updateoracle", oracleid, timestamp, prices, weightage, inputs)
+    def updateoracle(self, oracleid, address, pricefeeds, weightage, inputs=None):  # 12
+        return self._node._rpc.call("updateoracle", oracleid, address, pricefeeds, weightage, inputs)
 
