@@ -38,3 +38,48 @@ cd tests # navigate into the tests folder
 python3 run_tests.py blockchain query # run all tests in the blockchain module with the marker query
 ```
 --> no test should fail
+
+## Progess of Tests
+
+:heavy_check_mark: = Finished and UpToDate
+
+:heavy_minus_sign: = In Production or not UpToDate
+
+:heavy_multiplication_x: = Not yet implemented
+
+### RPC 
+| RPC Parts       | Progress                 |
+|-----------------|--------------------------|
+| Accounts        | :heavy_multiplication_x: |
+| Blockchain      | :heavy_check_mark:       | 
+| Control         | :heavy_multiplication_x: |
+| Generating      | :heavy_check_mark:       |
+| Loan            | :heavy_multiplication_x: |
+| Masternodes     | :heavy_multiplication_x: |
+| Mining          | :heavy_multiplication_x: |
+| Network         | :heavy_multiplication_x: |
+| Oracles         | :heavy_check_mark:       |
+| Poolpair        | :heavy_multiplication_x: |
+| Rawtransactions | :heavy_multiplication_x: |
+| Spv             | :heavy_multiplication_x: |
+| Tokens          | :heavy_minus_sign:       |
+| Util            | :heavy_multiplication_x: |
+| Vault           | :heavy_multiplication_x: |
+| Wallet          | :heavy_multiplication_x: |
+| Zmq             | :heavy_check_mark:       |
+
+### Ocean Requests
+| Ocean Requests | Progress                 |
+|----------------|--------------------------|
+| Address        | :heavy_multiplication_x: |
+| Blocks         | :heavy_multiplication_x: | 
+| Fee            | :heavy_multiplication_x: |
+| Loan           | :heavy_multiplication_x: |
+| Masternodes    | :heavy_multiplication_x: |
+| Oracles        | :heavy_multiplication_x: |
+| Poolpairs      | :heavy_multiplication_x: |
+| Prices         | :heavy_multiplication_x: |
+| RawTx          | :heavy_multiplication_x: |
+| stats          | :heavy_multiplication_x: |
+| Tokens         | :heavy_multiplication_x: |
+| Transactions   | :heavy_multiplication_x: |
