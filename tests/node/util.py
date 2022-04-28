@@ -7,8 +7,8 @@ def load_secrets_conf():
         raise Exception("There is not secrets_conf.py File: \n"
                         "To create one: read secrets_conf.example.py!")
 
-    from tests.secrets_conf import USER, PASSWORD, URL, PORT
-    json = {"user": USER, "password": PASSWORD, "url": URL, "port": PORT}
+    from tests.secrets_conf import USER, PASSWORD, URL, PORT, WALLET_ADDRESS
+    json = {"user": USER, "password": PASSWORD, "url": URL, "port": PORT, "wallet_address": WALLET_ADDRESS}
 
     try:
         from tests.secrets_conf import WALLET_PATH
