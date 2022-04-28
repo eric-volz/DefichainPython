@@ -21,8 +21,8 @@ def test_appointoracle():  # 01
 def test_getfixedintervalprice():  # 02
     currency = "USD"
     token = "DFI"
-    assert node.oracles.getfixedintervalprice(currency, token)
-    assert node.oracles.getfixedintervalprice(currency=currency, token=token)
+    assert node.oracles.getfixedintervalprice(token, currency)
+    assert node.oracles.getfixedintervalprice(token=token, currency=currency)
 
 
 @pytest.mark.query
@@ -41,8 +41,8 @@ def test_getoracledata():  # 04
 def test_getprice():  # 05
     currency = "USD"
     token = "DFI"
-    assert node.oracles.getprice(currency, token)
-    assert node.oracles.getprice(currency=currency, token=token)
+    assert node.oracles.getprice(token, currency)
+    assert node.oracles.getprice(token=token, currency=currency)
 
 
 @pytest.mark.query
@@ -59,8 +59,8 @@ def test_listlatestrawprices():  # 07
     currency = "USD"
     token = "DFI"
     start = "a4492224b78b065d3c044e65e4968e9b326f1b19b615b50f79d3ab58df10f2c5"
-    assert node.oracles.listlatestrawprices(currency, token, start, True, 3)
-    assert node.oracles.listlatestrawprices(currency=currency, token=token, start=start, including_start=True, limit=3)
+    assert node.oracles.listlatestrawprices(token, currency, start, True, 3)
+    assert node.oracles.listlatestrawprices(token=token, currency=currency, start=start, including_start=True, limit=3)
 
 
 @pytest.mark.query
