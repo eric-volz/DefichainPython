@@ -9,6 +9,7 @@ The place to store credentials for your Defichain Node
 # PASSWORD =
 # URL =
 # PORT =
+# WALLET_ADDRESS =
 
 # Optional
 # WALLET_PATH =
