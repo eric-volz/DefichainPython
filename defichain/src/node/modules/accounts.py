@@ -176,5 +176,5 @@ class Accounts:
         return self._node._rpc.call("utxostoaccount", amounts, inputs)
 
     def withdrawfutureswap(self, address, token, amount, destination=None, inputs=None):  # 19
-        destination = "DUSD" if destination is None else destination
+        destination = "" if destination is None else destination
         return self._node._rpc.call("withdrawfutureswap", address, f"{amount}@{token}", destination, inputs)

@@ -8,7 +8,7 @@ class Oracles:
     def appointoracle(self, address, pricefeeds, weightage, inputs=None):  # 01
         return self._node._rpc.call("appointoracle", address, pricefeeds, weightage, inputs)
 
-    def getfixedintervalprice(self, currency, token):  # 02
+    def getfixedintervalprice(self, token, currency):  # 02
         return self._node._rpc.call("getfixedintervalprice", f"{token}/{currency}")
 
     def getfutureswapblock(self):  # 03
@@ -17,7 +17,7 @@ class Oracles:
     def getoracledata(self, oracleid):  # 04
         return self._node._rpc.call("getoracledata", oracleid)
 
-    def getprice(self, currency, token):  # 05
+    def getprice(self, token, currency):  # 05
         request = BuildJson()
         request.append("currency", currency)
         request.append("token", token)
@@ -29,7 +29,7 @@ class Oracles:
         pagination.append("limit", limit)
         return self._node._rpc.call("listfixedintervalprices", pagination.build())
 
-    def listlatestrawprices(self, currency, token, start=None, including_start=None, limit=None):  # 07
+    def listlatestrawprices(self, token, currency, start=None, including_start=None, limit=None):  # 07
         request = BuildJson()
         request.append("currency", currency)
         request.append("token", token)

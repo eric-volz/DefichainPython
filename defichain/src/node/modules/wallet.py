@@ -57,7 +57,7 @@ class Wallet:
     def getbalances(self, with_tokens=None):  # 13
         return self._node._rpc.call("getbalances", with_tokens)
 
-    def getnewaddress(self, label, address_type):  # 14
+    def getnewaddress(self, label=None, address_type=None):  # 14
         label = "" if label is None else label
         return self._node._rpc.call("getnewaddress", label, address_type)
 
