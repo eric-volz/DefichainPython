@@ -12,7 +12,7 @@ from .InternalServerError import InternalServerError
 from .ServiceUnavailable import ServiceUnavailable
 
 
-class ExceptionHandler:
+class RPCErrorHandler:
     def __init__(self, response):
         self.statusCode = response.status_code
 
