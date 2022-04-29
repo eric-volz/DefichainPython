@@ -1,5 +1,6 @@
 import requests
 import json
+from .exceptions.OceanErrorHandler import OceanErrorHandler
 
 
 class Connection:
@@ -16,15 +17,13 @@ class Connection:
             url += f"?size={size}"
         elif next is not None:
             url += f"?next={next}"
-        try:
-            return json.loads(requests.get(url).text)
-        except Exception as e:
-            raise Exception(e)
+        result = json.loads(requests.get(url).text)
+        OceanErrorHandler(result)  # Handle Exceptions
+        return result
 
     def post(self, method, params):
         payload = json.dumps({"params": list(params), "jsonrpc": "2.0"})
-        try:
-            response = self._session.post(self._url + method, headers=self._headers, data=payload)
-            return response.json()
-        except Exception as e:
-            raise Exception(e)
+        response = self._session.post(self._url + method, headers=self._headers, data=payload)
+        result = response.json()
+        OceanErrorHandler(result)  # Handle Exceptions
+        return result
