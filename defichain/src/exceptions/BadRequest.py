@@ -1,4 +1,4 @@
-from .RPCErrorCode import RPCErrorCode
+from defichain.src.exceptions.RPCErrorCode import RPCErrorCode
 
 
 class BadRequest(Exception):

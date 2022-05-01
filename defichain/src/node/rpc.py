@@ -1,7 +1,7 @@
 import json
 import requests
 import time
-from .exceptions.RPCErrorHandler import RPCErrorHandler
+from defichain.src.node.RPCErrorHandler import RPCErrorHandler
 
 
 class RPC(object):

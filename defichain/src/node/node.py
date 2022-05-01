@@ -1,5 +1,5 @@
 from multiprocessing import Process
-from .exceptions.ServiceUnavailable import ServiceUnavailable
+from defichain.src.exceptions.ServiceUnavailable import ServiceUnavailable
 
 from .rpc import RPC
 
