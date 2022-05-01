@@ -17,13 +17,12 @@ class Connection:
             url += f"?size={size}"
         elif next is not None:
             url += f"?next={next}"
-        result = json.loads(requests.get(url).text)
-        OceanErrorHandler(result)  # Handle Exceptions
-        return result
+        response = requests.get(url)
+        OceanErrorHandler(response)  # Handle Exceptions
+        return json.loads(response.text)
 
     def post(self, method, params):
         payload = json.dumps({"params": list(params), "jsonrpc": "2.0"})
         response = self._session.post(self._url + method, headers=self._headers, data=payload)
-        result = response.json()
-        OceanErrorHandler(result)  # Handle Exceptions
-        return result
+        OceanErrorHandler(response)  # Handle Exceptions
+        return response.json
