@@ -1,6 +1,6 @@
 import requests
 import json
-from .exceptions.OceanErrorHandler import OceanErrorHandler
+from defichain.src.ocean.OceanErrorHandler import OceanErrorHandler
 
 
 class Connection:
