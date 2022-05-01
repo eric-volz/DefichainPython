@@ -20,11 +20,11 @@ class RPCErrorHandler:
         if self.statusCode == HTTPStatusCode.HTTP_UNAUTHORIZED.value:
             raise Unauthorized()
         else:
-            self.response = response.json()
-            if 'error' in self.response and self.response['error'] is not None:
-                code = self.response["error"]["code"]
+            self.response_text = response.json()
+            if 'error' in self.response_text and self.response_text['error'] is not None:
+                code = self.response_text["error"]["code"]
                 error_code_name = RPCErrorCode(code).name
-                msg = self.response["error"]["message"]
+                msg = self.response_text["error"]["message"]
                 if self.statusCode == HTTPStatusCode.HTTP_BAD_REQUEST.value:
                     raise BadRequest(f"{error_code_name}: {msg}")
                 elif self.statusCode == HTTPStatusCode.HTTP_FORBIDDEN.value:
