@@ -1,6 +1,8 @@
 import sys
 import os
 
+from tests.node.util import createNode
+
 MODULES = ["accounts", "blockchain", "control", "generating", "loan", "masternodes", "mining", "network", "oracles",
            "poolpair", "rawtransaction", "spv", "tokens", "util", "vault", "wallet", "zmq", "node", "exceptions"]
 MARKER = ["mandatory", "query", "transaction"]
@@ -22,6 +24,10 @@ if module != "all" and not module in MODULES:
     raise Exception(f"The passed parameter is not supported: {module}")
 if marker != "all" and not marker in MARKER:
     raise Exception(f"The passed parameter is not supported: {marker}")
+
+# Test Node before tests
+createNode()
+
 
 # Test Handling
 if module == "all" and marker == "all":
