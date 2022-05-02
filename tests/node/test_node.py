@@ -11,9 +11,7 @@ def test_createNode():
     """
     Checking if the Node Object builds as wanted
     """
-    assert Node(user=secrets["user"], password=secrets["password"])
-    assert Node(user=secrets["user"], password=secrets["password"], url=secrets["url"])
-    assert Node(user=secrets["user"], password=secrets["password"], port=secrets["port"])
+    assert Node(secrets["user"], secrets["password"], secrets["url"], secrets["port"])
     assert Node(user=secrets["user"], password=secrets["password"], url=secrets["url"], port=secrets["port"])
     if "wallet_path" in secrets:
         assert Node(user=secrets["user"], password=secrets["password"], url=secrets["url"], port=secrets["port"],
