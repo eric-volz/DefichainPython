@@ -33,10 +33,10 @@ class Tokens:
         pagination.append("limit", limit)
         return self._node._rpc.call("listtokens", pagination.build(), verbose)
 
-    def minttokens(self, token, amount):  # 06
-        return self._node._rpc.call("minttokens", f"{amount}@{token}")
+    def minttokens(self, amounts, inputs=None):  # 06
+        return self._node._rpc.call("minttokens", amounts, inputs)
 
-    def updatetoken(self, token, symbol, name=None, isDAT=None, mintable=None, tradeable=None, finalize=None, inputs=None):  # 07
+    def updatetoken(self, token, symbol=None, name=None, isDAT=None, mintable=None, tradeable=None, finalize=None, inputs=None):  # 07
         metadata = BuildJson()
         metadata.append("symbol", symbol)
         metadata.append("name", name)

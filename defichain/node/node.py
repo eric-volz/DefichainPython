@@ -55,4 +55,4 @@ class Node:
         p.terminate()
 
         if p.exitcode is None:
-            raise ServiceUnavailable(-30, "Invalid IP/Subnet")
+            raise ServiceUnavailable("RPC_CLIENT_INVALID_IP_OR_SUBNET: Invalid IP/Subnet")
