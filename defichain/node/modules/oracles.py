@@ -1,4 +1,5 @@
 from ..util import BuildJson
+from defichain.exceptions.InternalServerError import InternalServerError
 
 
 class Oracles:
@@ -23,9 +24,11 @@ class Oracles:
         request.append("token", token)
         return self._node._rpc.call("getprice", request.build())
 
-    def listfixedintervalprices(self, start=None, limit=None):  # 06
+    def listfixedintervalprices(self, start_token=None, start_currency=None, limit=None):  # 06
+        if start_token and not start_currency or not start_token and start_currency:
+            raise InternalServerError(-1, "if one of the first two parameters is given, the other must also be given")
         pagination = BuildJson()
-        pagination.append("start", start)
+        pagination.append("start", f"{start_token}/{start_currency}")
         pagination.append("limit", limit)
         return self._node._rpc.call("listfixedintervalprices", pagination.build())
 

@@ -1,7 +1,7 @@
 import json
 import requests
 import time
-from .exceptions.ExceptionHandler import ExceptionHandler
+from defichain.node.RPCErrorHandler import RPCErrorHandler
 
 
 class RPC(object):
@@ -35,5 +35,5 @@ class RPC(object):
                     print('Connected for remote procedure call after retry.')
                 break
 
-        ExceptionHandler(response)  # Check for Exceptions
+        RPCErrorHandler(response)  # Check for Exceptions
         return response.json()['result']
