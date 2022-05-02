@@ -2,7 +2,7 @@ import pytest
 from tests.node.util import createNode
 
 # Import Exceptions
-from defichain.src.node.exceptions.InternalServerError import InternalServerError
+from defichain.exceptions.InternalServerError import InternalServerError
 
 node = createNode()
 
@@ -50,8 +50,8 @@ def test_listfixedintervalprices():  # 06
     currency = "USD"
     token = "DFI"
     assert node.oracles.listfixedintervalprices()
-    assert node.oracles.listfixedintervalprices(f"{token}/{currency}", 5)
-    assert node.oracles.listfixedintervalprices(start=f"{token}/{currency}", limit=5)
+    assert node.oracles.listfixedintervalprices(token, currency, 5)
+    assert node.oracles.listfixedintervalprices(start_token=token, start_currency=currency, limit=5)
 
 
 @pytest.mark.query
