@@ -93,7 +93,6 @@ ___
 
 ## Next Steps
 - Finish the RPC Code
-- Better error handling for Ocean API
 - Write unit tests for RPC and Ocean commands
 - Document all functions and publish it on [ReadTheDocs](https://readthedocs.org/)
 
