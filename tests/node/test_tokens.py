@@ -62,3 +62,31 @@ def test_listtoken():  # 05
     assert node.tokens.listtokens()
     assert node.tokens.listtokens(start, including_start, limit)
     assert node.tokens.listtokens(start=start, including_start=including_start, limit=limit)
+
+
+@pytest.mark.query
+def test_minttokens():  # 06
+    token = "SPY"
+    amount = 1
+    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Incorrect authorization for "
+    with pytest.raises(InternalServerError, match=string):
+        assert node.tokens.minttokens(f"{amount}@{token}")
+        assert node.tokens.minttokens(f"{amount}@{token}", [])
+        assert node.tokens.minttokens(amounts=f"{amount}@{token}", inputs=[])
+
+
+@pytest.mark.query
+def test_updatetoken():  # 07
+    token = "SPY"
+    symbol = "SPY"
+    name = "SPY"
+    isDAT = False
+    mintable = True
+    tradeable = True
+    finalize = True
+    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
+    with pytest.raises(InternalServerError, match=string):
+        assert node.tokens.updatetoken(token)
+        assert node.tokens.updatetoken(token, symbol, name, isDAT, mintable, tradeable, finalize, [])
+        assert node.tokens.updatetoken(token=token, symbol=symbol, isDAT=isDAT, mintable=mintable,
+                                       tradeable=tradeable, finalize=finalize, inputs=[])
