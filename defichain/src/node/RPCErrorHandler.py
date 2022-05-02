@@ -1,7 +1,6 @@
 # RPC Error Codes
 # https://github.com/bitcoin/bitcoin/blob/master/src/rpc/protocol.h
 
-from defichain.src.exceptions.HTTPStatusCode import HTTPStatusCode
 from defichain.src.exceptions.RPCErrorCode import RPCErrorCode
 
 from defichain.src.exceptions.BadRequest import BadRequest
@@ -12,28 +11,31 @@ from defichain.src.exceptions.BadMethod import BadMethod
 from defichain.src.exceptions.InternalServerError import InternalServerError
 from defichain.src.exceptions.ServiceUnavailable import ServiceUnavailable
 
+STATUS_CODES_WITH_ERROR = [400, 401, 403, 404, 405, 500, 503]
+
 
 class RPCErrorHandler:
     def __init__(self, response):
         self.statusCode = response.status_code
 
-        if self.statusCode == HTTPStatusCode.HTTP_UNAUTHORIZED.value:
-            raise Unauthorized()
-        else:
-            self.response_text = response.json()
-            if 'error' in self.response_text and self.response_text['error'] is not None:
-                code = self.response_text["error"]["code"]
-                error_code_name = RPCErrorCode(code).name
-                msg = self.response_text["error"]["message"]
-                if self.statusCode == HTTPStatusCode.HTTP_BAD_REQUEST.value:
-                    raise BadRequest(f"{error_code_name}: {msg}")
-                elif self.statusCode == HTTPStatusCode.HTTP_FORBIDDEN.value:
-                    raise Forbidden(f"{error_code_name}: {msg}")
-                elif self.statusCode == HTTPStatusCode.HTTP_NOT_FOUND.value:
-                    raise NotFound(f"{error_code_name}: {msg}")
-                elif self.statusCode == HTTPStatusCode.HTTP_BAD_METHOD.value:
-                    raise BadMethod(f"{error_code_name}: {msg}")
-                elif self.statusCode == HTTPStatusCode.HTTP_INTERNAL_SERVER_ERROR.value:
-                    raise InternalServerError(f"{error_code_name}: {msg}")
-                elif self.statusCode == HTTPStatusCode.HTTP_SERVICE_UNAVAILABLE.value:
-                    raise ServiceUnavailable(f"{error_code_name}: {msg}")
+        if self.statusCode in STATUS_CODES_WITH_ERROR:
+            if self.statusCode == 401:
+                raise Unauthorized()
+            else:
+                self.response_text = response.json()
+                if 'error' in self.response_text and self.response_text['error'] is not None:
+                    rpc_code = self.response_text["error"]["code"]
+                    rpc_name = RPCErrorCode(rpc_code).name
+                    msg = self.response_text["error"]["message"]
+                    if self.statusCode == 400:
+                        raise BadRequest(f"{rpc_name}: {msg}")
+                    if self.statusCode == 403:
+                        raise Forbidden(f"{rpc_name}: {msg}")
+                    if self.statusCode == 404:
+                        raise NotFound(f"{rpc_name}: {msg}")
+                    if self.statusCode == 405:
+                        raise BadMethod(f"{rpc_name}: {msg}")
+                    if self.statusCode == 500:
+                        raise InternalServerError(f"{rpc_name}: {msg}")
+                    if self.statusCode == 503:
+                        raise ServiceUnavailable(f"{rpc_name}: {msg}")
