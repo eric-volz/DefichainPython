@@ -25,4 +25,4 @@ class Connection:
         payload = json.dumps({"params": list(params), "jsonrpc": "2.0"})
         response = self._session.post(self._url + method, headers=self._headers, data=payload)
         OceanErrorHandler(response)  # Handle Exceptions
-        return response.json
+        return response.json()
