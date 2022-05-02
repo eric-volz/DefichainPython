@@ -70,3 +70,6 @@ class RPCErrorCode(Enum):
 
     # Unused reserved codes kept around for backwards compatibility. Do not reuse.
     RPC_FORBIDDEN_BY_SAFE_MODE = -2  # Server is in safe mode and command is not allowed in safe mode
+
+    # Defichain specific
+    INVALID_TOKEN = 0  # The token witch is used is not valid
