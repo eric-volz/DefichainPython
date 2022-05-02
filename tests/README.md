@@ -52,7 +52,7 @@ python3 run_tests.py blockchain query # run all tests in the blockchain module w
 |-----------------|--------------------------|
 | Accounts        | :heavy_multiplication_x: |
 | Blockchain      | :heavy_check_mark:       | 
-| Control         | :heavy_multiplication_x: |
+| Control         | :heavy_check_mark:       |
 | Generating      | :heavy_check_mark:       |
 | Loan            | :heavy_multiplication_x: |
 | Masternodes     | :heavy_multiplication_x: |
