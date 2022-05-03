@@ -12,8 +12,8 @@ class Vault:
         loanSchemeId = "" if loanSchemeId is None else loanSchemeId
         return self._node._rpc.call("createvault", ownerAddress, loanSchemeId, inputs)
 
-    def deposittovault(self, vaultId, _from, token, amount, inputs=None):  # 03
-        return self._node._rpc.call("deposittovault", vaultId, _from, f"{amount}@{token}", inputs)
+    def deposittovault(self, vaultId, _from, amount, inputs=None):  # 03
+        return self._node._rpc.call("deposittovault", vaultId, _from, amount, inputs)
 
     def estimatecollateral(self, loanAmounts, targetRatio, tokens=None):  # 04
         return self._node._rpc.call("estimatecollateral", loanAmounts, targetRatio, tokens)
@@ -69,8 +69,8 @@ class Vault:
         pagination.append("limit", limit)
         return self._node._rpc.call("listvaults", options.build(), pagination.build())
 
-    def placeauctionbid(self, vaultId, index, _from, token, amount, inputs=None):  # 12
-        return self._node._rpc.call("placeauctionbid", vaultId, index, _from, f"{amount}@{token}", inputs)
+    def placeauctionbid(self, vaultId, index, _from, amount, inputs=None):  # 12
+        return self._node._rpc.call("placeauctionbid", vaultId, index, _from, amount, inputs)
 
     def updatevault(self, vaultId, ownerAddress, loanSchemeId, inputs=None):  # 13
         parameters = BuildJson()
@@ -78,5 +78,5 @@ class Vault:
         parameters.append("loanSchemeId", loanSchemeId)
         return self._node._rpc.call("updatevault", vaultId, parameters.build(), inputs)
 
-    def withdrawfromvault(self, vaultId, to, token, amount, inputs=None):  # 14
-        return self._node._rpc.call("withdrawfromvault", vaultId, to, f"{amount}@{token}", inputs)
+    def withdrawfromvault(self, vaultId, to, amount, inputs=None):  # 14
+        return self._node._rpc.call("withdrawfromvault", vaultId, to, amount, inputs)

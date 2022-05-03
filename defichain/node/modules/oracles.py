@@ -9,8 +9,8 @@ class Oracles:
     def appointoracle(self, address, pricefeeds, weightage, inputs=None):  # 01
         return self._node._rpc.call("appointoracle", address, pricefeeds, weightage, inputs)
 
-    def getfixedintervalprice(self, token, currency):  # 02
-        return self._node._rpc.call("getfixedintervalprice", f"{token}/{currency}")
+    def getfixedintervalprice(self, fixedIntervalPriceId):  # 02
+        return self._node._rpc.call("getfixedintervalprice", fixedIntervalPriceId)
 
     def getfutureswapblock(self):  # 03
         return self._node._rpc.call("getfutureswapblock")
@@ -24,11 +24,9 @@ class Oracles:
         request.append("token", token)
         return self._node._rpc.call("getprice", request.build())
 
-    def listfixedintervalprices(self, start_token=None, start_currency=None, limit=None):  # 06
-        if start_token and not start_currency or not start_token and start_currency:
-            raise InternalServerError(-1, "if one of the first two parameters is given, the other must also be given")
+    def listfixedintervalprices(self, start=None, limit=None):  # 06
         pagination = BuildJson()
-        pagination.append("start", f"{start_token}/{start_currency}")
+        pagination.append("start", start)
         pagination.append("limit", limit)
         return self._node._rpc.call("listfixedintervalprices", pagination.build())
 
