@@ -8,8 +8,7 @@ class Network:
     def clearbanned(self):  # 02
         return self._node._rpc.call("clearbanned")
 
-    def disconnectnode(self, address=None, nodeid=None):  # 03
-        address = "" if address is None else address
+    def disconnectnode(self, address="", nodeid=None):  # 03
         return self._node._rpc.call(address, nodeid)
 
     def getaddednodeinfo(self, node=None):  # 04
@@ -24,7 +23,7 @@ class Network:
     def getnetworkinfo(self):  # 07
         return self._node._rpc.call("getnetworkinfo")
 
-    def getnodeaddresses(self, count=None):  # 08
+    def getnodeaddresses(self, count=1):  # 08
         return self._node._rpc.call("getnodeaddresses", count)
 
     def getpeerinfo(self):  # 09
@@ -39,8 +38,7 @@ class Network:
     def ping(self):  # 12
         return self._node._rpc.call("ping")
 
-    def setban(self, subnet, command, bantime=None, absolute=None):  # 13
-        bantime = 0 if bantime is None else bantime
+    def setban(self, subnet, command, bantime=0, absolute=False):  # 13
         return self._node._rpc.call("setban", subnet, command, bantime, absolute)
 
     def setnetworkactive(self, state):  # 14
