@@ -8,14 +8,13 @@ class Vault:
     def closevault(self, vaultId, to, inputs=None):  # 01
         return self._node._rpc.call("closevault", vaultId, to, inputs)
 
-    def createvault(self, ownerAddress, loanSchemeId=None, inputs=None):  # 02
-        loanSchemeId = "" if loanSchemeId is None else loanSchemeId
+    def createvault(self, ownerAddress, loanSchemeId="", inputs=None):  # 02
         return self._node._rpc.call("createvault", ownerAddress, loanSchemeId, inputs)
 
-    def deposittovault(self, vaultId, _from, token, amount, inputs=None):  # 03
-        return self._node._rpc.call("deposittovault", vaultId, _from, f"{amount}@{token}", inputs)
+    def deposittovault(self, vaultId, _from, amount, inputs=None):  # 03
+        return self._node._rpc.call("deposittovault", vaultId, _from, amount, inputs)
 
-    def estimatecollateral(self, loanAmounts, targetRatio, tokens=None):  # 04
+    def estimatecollateral(self, loanAmounts, targetRatio, tokens={"DFI": 1}):  # 04
         return self._node._rpc.call("estimatecollateral", loanAmounts, targetRatio, tokens)
 
     def estimateloan(self, vaultId, tokens, targetRatio=None):  # 05
@@ -27,7 +26,7 @@ class Vault:
     def getvault(self, vaultId):  # 07
         return self._node._rpc.call("getvault", vaultId)
 
-    def listauctionhistory(self, identifier, maxBlockHeight=None, vaultId=None, index=None, limit=None):  # 08
+    def listauctionhistory(self, identifier="mine", maxBlockHeight=None, vaultId=None, index=None, limit=None):  # 08
         pagination = BuildJson()
         pagination.append("maxBlockHeight", maxBlockHeight)
         pagination.append("vaultId", vaultId)
@@ -35,7 +34,7 @@ class Vault:
         pagination.append("limit", limit)
         return self._node._rpc.call("listauctionhistory", identifier, pagination.build())
 
-    def listauctions(self, vaultId=None, height=None, including_start=None, limit=None):  # 09
+    def listauctions(self, vaultId=None, height=None, including_start=False, limit=100):  # 09
         start = BuildJson()
         start.append("vaultId", vaultId)
         start.append("height", height)
@@ -46,7 +45,7 @@ class Vault:
         pagination.append("limit", limit)
         return self._node._rpc.call("listauctions", pagination.build())
 
-    def listvaulthistory(self, vaultId, maxBlockHeight=None, depth=None, token=None, txtype=None, limit=None):  # 10
+    def listvaulthistory(self, vaultId, maxBlockHeight=None, depth=None, token=None, txtype=None, limit=100):  # 10
         options = BuildJson()
         options.append("maxBlockHeight", maxBlockHeight)
         options.append("depth", depth)
@@ -55,8 +54,8 @@ class Vault:
         options.append("limit", limit)
         return self._node._rpc.call("listvaulthistory", vaultId, options.build())
 
-    def listvaults(self, ownerAddress=None, loanSchemeId=None, state=None, verbose=None, start=None,
-                   including_start=None, limit=None):  # 11
+    def listvaults(self, ownerAddress=None, loanSchemeId=None, state='unknown', verbose=False, start=None,
+                   including_start=False, limit=100):  # 11
         options = BuildJson()
         options.append("ownerAddress", ownerAddress)
         options.append("loanSchemeId", loanSchemeId)
@@ -69,8 +68,8 @@ class Vault:
         pagination.append("limit", limit)
         return self._node._rpc.call("listvaults", options.build(), pagination.build())
 
-    def placeauctionbid(self, vaultId, index, _from, token, amount, inputs=None):  # 12
-        return self._node._rpc.call("placeauctionbid", vaultId, index, _from, f"{amount}@{token}", inputs)
+    def placeauctionbid(self, vaultId, index, _from, amount, inputs=None):  # 12
+        return self._node._rpc.call("placeauctionbid", vaultId, index, _from, amount, inputs)
 
     def updatevault(self, vaultId, ownerAddress, loanSchemeId, inputs=None):  # 13
         parameters = BuildJson()
@@ -78,5 +77,5 @@ class Vault:
         parameters.append("loanSchemeId", loanSchemeId)
         return self._node._rpc.call("updatevault", vaultId, parameters.build(), inputs)
 
-    def withdrawfromvault(self, vaultId, to, token, amount, inputs=None):  # 14
-        return self._node._rpc.call("withdrawfromvault", vaultId, to, f"{amount}@{token}", inputs)
+    def withdrawfromvault(self, vaultId, to, amount, inputs=None):  # 14
+        return self._node._rpc.call("withdrawfromvault", vaultId, to, amount, inputs)

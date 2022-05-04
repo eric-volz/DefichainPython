@@ -5,7 +5,8 @@ class Tokens:
     def __init__(self, node):
         self._node = node
 
-    def createtoken(self, symbol, collateralAddress, name=None, isDAT=None, decimal=None, limit=None, mintable=None, tradeable=None, inputs=None):  # 01
+    def createtoken(self, symbol, collateralAddress, name=None, isDAT=None, decimal=None, limit=None, mintable=True,
+                    tradeable=True, inputs=None):  # 01
         metadata = BuildJson()
         metadata.append("symbol", symbol)
         metadata.append("collateralAddress", collateralAddress)
@@ -26,7 +27,7 @@ class Tokens:
     def gettoken(self, key):  # 04
         return self._node._rpc.call("gettoken", key)
 
-    def listtokens(self, start=None, including_start=None, limit=None, verbose=None):  # 05
+    def listtokens(self, start=None, including_start=False, limit=100, verbose=True):  # 05
         pagination = BuildJson()
         pagination.append("start", start)
         pagination.append("including_start", including_start)
@@ -36,7 +37,7 @@ class Tokens:
     def minttokens(self, amounts, inputs=None):  # 06
         return self._node._rpc.call("minttokens", amounts, inputs)
 
-    def updatetoken(self, token, symbol=None, name=None, isDAT=None, mintable=None, tradeable=None, finalize=None, inputs=None):  # 07
+    def updatetoken(self, token, symbol=None, name=None, isDAT=False, mintable=None, tradeable=None, finalize=None, inputs=None):  # 07
         metadata = BuildJson()
         metadata.append("symbol", symbol)
         metadata.append("name", name)

@@ -14,16 +14,13 @@ class Rawtransactions:
     def combinerawtransaction(self, txs):  # 03
         return self._node._rpc.call("combinerawtransaction", txs)
 
-    def converttopsbt(self, hexstring, permitsigdata=None, iswitness=None):  # 04
-        permitsigdata = False if permitsigdata is None else permitsigdata
+    def converttopsbt(self, hexstring, permitsigdata=False, iswitness=None):  # 04
         return self._node._rpc.call("converttopsbt", hexstring, permitsigdata, iswitness)
 
-    def createpsbt(self, inputs, outputs, locktime=None, replaceable=None):  # 05
-        locktime = 0 if locktime is None else locktime
+    def createpsbt(self, inputs, outputs, locktime=0, replaceable=False):  # 05
         return self._node._rpc.call("createpsbt", inputs, outputs, locktime, replaceable)
 
-    def createrawtransaction(self, inputs, outputs, locktime=None, replaceable=None):  # 06
-        locktime = 0 if locktime is None else locktime
+    def createrawtransaction(self, inputs, outputs, locktime=0, replaceable=False):  # 06
         return self._node._rpc.call("createrawtransaction", inputs, outputs, locktime, replaceable)
 
     def decodepsbt(self, psbt):  # 07
@@ -35,11 +32,11 @@ class Rawtransactions:
     def decodescript(self, hexstring):  # 09
         return self._node._rpc.call("decodescript", hexstring)
 
-    def finalizepsbt(self, psbt, extract=None):  # 10
+    def finalizepsbt(self, psbt, extract=True):  # 10
         return self._node._rpc.call("finalizepsbt", psbt, extract)
 
     def fundrawtransaction(self, hexstring, changeAddress=None, changePosition=None, change_type=None,
-                           includeWatching=None, lockUnspents=None, feeRate=None, subtractFeeFromOutputs=None,
+                           includeWatching=True, lockUnspents=False, feeRate=None, subtractFeeFromOutputs=None,
                            replaceable=None, conf_target=None, estimate_mode=None, iswitness=None):  # 11
         options = BuildJson()
         options.append("changeAddress", changeAddress)
@@ -54,21 +51,21 @@ class Rawtransactions:
         options.append("estimate_mode", estimate_mode)
         return self._node._rpc.call("fundrawtransaction", hexstring, options.build(), iswitness)
 
-    def getrawtransaction(self, txid, verbose=None, blockhash=None):  # 12
+    def getrawtransaction(self, txid, verbose=False, blockhash=None):  # 12
         verbose = False if verbose is None else verbose
         return self._node._rpc.call("getrawtransaction", txid, verbose, blockhash)
 
     def joinpsbts(self, txs):  # 13
         return self._node._rpc.call("joinpsbts", txs)
 
-    def sendrawtransaction(self, hexstring, maxfeerate=None):  # 14
+    def sendrawtransaction(self, hexstring, maxfeerate=0.10):  # 14
         return self._node._rpc.call("sendrawtransaction", hexstring, maxfeerate)
 
-    def signrawtransactionwithkey(self, hexstring, privatekey, prevtxs=None, sighashtype=None):  # 15
+    def signrawtransactionwithkey(self, hexstring, privatekey, prevtxs=None, sighashtype="ALL"):  # 15
         prevtxs = [] if prevtxs is None else prevtxs
         return self._node._rpc.call("signrawtransactionwithkey", hexstring, privatekey, prevtxs, sighashtype)
 
-    def testmempoolaccept(self, rawtxs, maxfeerate=None):  # 16
+    def testmempoolaccept(self, rawtxs, maxfeerate=0.10):  # 16
         return self._node._rpc.call("testmempoolaccept", rawtxs, maxfeerate)
 
     def utxoupdatepsbt(self, psbt, descriptors=None):  # 17

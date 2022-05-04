@@ -2,13 +2,13 @@ class Util:
     def __init__(self, node):
         self._node = node
 
-    def createmultisig(self, nrequired, keys, address_type=None):  # 01
+    def createmultisig(self, nrequired, keys, address_type="legacy"):  # 01
         return self._node._rpc.call("createmultisig", nrequired, keys, address_type)
 
     def deriveaddresses(self, descriptor, range=None):  # 02
         return self._node._rpc.call("deriveaddresses", descriptor, range)
 
-    def estimatesmartfee(self, conf_target, estimate_mode=None):  # 03
+    def estimatesmartfee(self, conf_target, estimate_mode="CONSERVATIVE"):  # 03
         return self._node._rpc.call("estimatesmartfee", conf_target, estimate_mode)
 
     def getdescriptorinfo(self, descriptor):  # 04

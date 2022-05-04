@@ -94,14 +94,13 @@ class Accounts:
         """
         return self._node._rpc.call("accounttoutxos", _from, to, inputs)
 
-    def executesmartcontract(self, name, amount, address=None, inputs=None):  # 04
+    def executesmartcontract(self, name, amount, address="", inputs=None):  # 04
         return self._node._rpc.call("executesmartcontract", name, amount, address, inputs)
 
-    def futureswap(self, address, token, amount, destination=None, inputs=None):  # 05
-        destination = "" if destination is None else destination
-        return self._node._rpc.call("futureswap", address, f"{amount}@{token}", destination, inputs)
+    def futureswap(self, address, amount, destination="", inputs=None):  # 05
+        return self._node._rpc.call("futureswap", address, amount, destination, inputs)
 
-    def getaccount(self, owner, start=None, including_start=None, limit=None, indexed_amounts=None):  # 06
+    def getaccount(self, owner, start=None, including_start=None, limit=None, indexed_amounts=False):  # 06
         pagination = BuildJson()
         pagination.append("start", start)
         pagination.append("including_start", including_start)
@@ -118,13 +117,11 @@ class Accounts:
     def getpendingfutureswaps(self, address):  # 09
         return self._node._rpc.call("getpendingfutureswaps", address)
 
-    def gettokenbalances(self, start=None, including_start=None, limit=None, indexed_amounts=None, symbol_lookup=None):  # 10
+    def gettokenbalances(self, start=None, including_start=None, limit=None, indexed_amounts=False, symbol_lookup=False):  # 10
         pagination = BuildJson()
         pagination.append("start", start)
         pagination.append("including_start", including_start)
         pagination.append("limit", limit)
-
-        indexed_amounts = False if indexed_amounts is None else indexed_amounts
 
         return self._node._rpc.call("gettokenbalances", pagination.build(), indexed_amounts, symbol_lookup)
 
@@ -139,14 +136,12 @@ class Accounts:
 
         return self._node._rpc.call("listaccounthistory", owner, options.build())
 
-    def listaccounts(self, start=None, including_start=None, limit=None, verbose=None, indexed_amounts=None, is_mine_only=None):  # 12
+    def listaccounts(self, start=None, including_start=None, limit=None, verbose=True, indexed_amounts=False,
+                     is_mine_only=False):  # 12
         pagnation = BuildJson()
         pagnation.append("start", start)
         pagnation.append("including_start", including_start)
         pagnation.append("limit", limit)
-
-        verbose = True if verbose is None else verbose
-        indexed_amounts = False if indexed_amounts is None else indexed_amounts
 
         return self._node._rpc.call("listaccounts", pagnation.build(), verbose, indexed_amounts, is_mine_only)
 
@@ -166,15 +161,15 @@ class Accounts:
     def listpendingfutureswaps(self):  # 15
         return self._node._rpc.call("listpendingfutureswaps")
 
-    def sendtokenstoaddress(self, _from, to, selectionMode=None):  # 16
+    def sendtokenstoaddress(self, _from, to, selectionMode="pie"):  # 16
         return self._node._rpc.call("sendtokenstoaddress", _from, to, selectionMode)
 
     def sendutxosfrom(self, _from, to, amount, change=None):  # 17
+        change = _from if change is None else change
         return self._node._rpc.call("sendutxosfrom", _from, to, amount, change)
 
     def utxostoaccount(self, amounts, inputs=None):  # 18
         return self._node._rpc.call("utxostoaccount", amounts, inputs)
 
-    def withdrawfutureswap(self, address, token, amount, destination=None, inputs=None):  # 19
-        destination = "" if destination is None else destination
-        return self._node._rpc.call("withdrawfutureswap", address, f"{amount}@{token}", destination, inputs)
+    def withdrawfutureswap(self, address, amount, destination="", inputs=None):  # 19
+        return self._node._rpc.call("withdrawfutureswap", address, amount, destination, inputs)
