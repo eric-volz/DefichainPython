@@ -21,8 +21,9 @@ def test_appointoracle():  # 01
 def test_getfixedintervalprice():  # 02
     currency = "USD"
     token = "DFI"
-    assert node.oracles.getfixedintervalprice(token, currency)
-    assert node.oracles.getfixedintervalprice(token=token, currency=currency)
+    fixedIntervalPriceId = f"{token}/{currency}"
+    assert node.oracles.getfixedintervalprice(fixedIntervalPriceId)
+    assert node.oracles.getfixedintervalprice(fixedIntervalPriceId=fixedIntervalPriceId)
 
 
 @pytest.mark.query
@@ -49,9 +50,10 @@ def test_getprice():  # 05
 def test_listfixedintervalprices():  # 06
     currency = "USD"
     token = "DFI"
+    start = f"{token}/{currency}"
     assert node.oracles.listfixedintervalprices()
-    assert node.oracles.listfixedintervalprices(token, currency, 5)
-    assert node.oracles.listfixedintervalprices(start_token=token, start_currency=currency, limit=5)
+    assert node.oracles.listfixedintervalprices(start, 5)
+    assert node.oracles.listfixedintervalprices(start=start, limit=5)
 
 
 @pytest.mark.query
