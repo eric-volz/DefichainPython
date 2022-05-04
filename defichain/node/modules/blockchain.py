@@ -8,7 +8,7 @@ class Blockchain:
     def getbestblockhash(self):  # 02
         return self._node._rpc.call("getbestblockhash")
 
-    def getblock(self, blockhash, verbosity=None):  # 03
+    def getblock(self, blockhash, verbosity=1):  # 03
         return self._node._rpc.call("getblock", blockhash, verbosity)
 
     def getblockchaininfo(self):  # 04
@@ -17,14 +17,13 @@ class Blockchain:
     def getblockcount(self):  # 05
         return self._node._rpc.call("getblockcount")
 
-    def getblockfilter(self, blockhash, filtertype=None):  # 06
+    def getblockfilter(self, blockhash, filtertype="basic"):  # 06
         return self._node._rpc.call("getblockfilter", blockhash, filtertype)
 
     def getblockhash(self, height):  # 07
         return self._node._rpc.call("getblockhash", height)
 
-    def getblockheader(self, blockhash, verbose=None):  # 08
-        verbose = True if verbose is None else verbose
+    def getblockheader(self, blockhash, verbose=True):  # 08
         return self._node._rpc.call("getblockheader", blockhash, verbose)
 
     def getblockstats(self, hash_or_height, stats=None):  # 09
@@ -33,8 +32,7 @@ class Blockchain:
     def getchaintips(self):  # 10
         return self._node._rpc.call("getchaintips")
 
-    def getchaintxstats(self, nblocks=None, blockhash=None):  # 11
-        nblocks = 86400 if nblocks is None else nblocks
+    def getchaintxstats(self, nblocks=86400, blockhash=None):  # 11
         return self._node._rpc.call("getchaintxstats", nblocks, blockhash)
 
     def getdifficulty(self):  # 12
@@ -43,10 +41,10 @@ class Blockchain:
     def getgov(self, name):  # 13
         return self._node._rpc.call("getgov", name)
 
-    def getmempoolancestors(self, txid, verbose=None):  # 14
+    def getmempoolancestors(self, txid, verbose=False):  # 14
         return self._node._rpc.call("getmempoolancestors", txid, verbose)
 
-    def getmempooldescendants(self, txid, verbose=None):  # 15
+    def getmempooldescendants(self, txid, verbose=False):  # 15
         return self._node._rpc.call("getmempooldescendants", txid, verbose)
 
     def getmempoolentry(self, txid):  # 16
@@ -55,10 +53,10 @@ class Blockchain:
     def getmempoolinfo(self):  # 17
         return self._node._rpc.call("getmempoolinfo")
 
-    def getrawmempool(self, verbose=None):  # 18
+    def getrawmempool(self, verbose=False):  # 18
         return self._node._rpc.call("getrawmempool", verbose)
 
-    def gettxout(self, txid, n, include_mempool=None):  # 19
+    def gettxout(self, txid, n, include_mempool=True):  # 19
         return self._node._rpc.call("gettxout", txid, n, include_mempool)
 
     def gettxoutproof(self, txids, blockhash=None):  # 20
@@ -94,8 +92,7 @@ class Blockchain:
     def setgovheight(self, variables, height, inputs=None):  # 30
         return self._node._rpc.call("setgovheight", variables, height, inputs)
 
-    def verifychain(self, checklevel=None, nblocks=None):  # 31
-        checklevel = 3 if checklevel is None else checklevel
+    def verifychain(self, checklevel=3, nblocks=6):  # 31
         return self._node._rpc.call("verifychain", checklevel, nblocks)
 
     def verifytxoutproof(self, proof):  # 32
