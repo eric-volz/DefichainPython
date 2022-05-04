@@ -37,7 +37,7 @@ class Rawtransactions:
 
     def fundrawtransaction(self, hexstring, changeAddress=None, changePosition=None, change_type=None,
                            includeWatching=True, lockUnspents=False, feeRate=None, subtractFeeFromOutputs=None,
-                           replaceable=None, conf_target=None, estimate_mode="UNSET", iswitness=None):  # 11
+                           replaceable=None, conf_target=None, estimate_mode=None, iswitness=None):  # 11
         options = BuildJson()
         options.append("changeAddress", changeAddress)
         options.append("changePosition", changePosition)
