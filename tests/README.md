@@ -62,7 +62,7 @@ python3 run_tests.py blockchain query # run all tests in the blockchain module w
 | Poolpair        | :heavy_multiplication_x: |
 | Rawtransactions | :heavy_multiplication_x: |
 | Spv             | :heavy_multiplication_x: |
-| Tokens          | :heavy_minus_sign:       |
+| Tokens          | :heavy_check_mark:       |
 | Util            | :heavy_multiplication_x: |
 | Vault           | :heavy_multiplication_x: |
 | Wallet          | :heavy_multiplication_x: |
