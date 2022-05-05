@@ -26,11 +26,13 @@ def test_clearbanned():  # 02
 def test_disconnectnode():  # 03
     url = "127.0.0.1:8554"
     nodeId = "1"
-    assert node.network.disconnectnode()
-    assert node.network.disconnectnode(url)
-    assert node.network.disconnectnode("", nodeId)
-    assert node.network.disconnectnode(url, nodeId)
-    assert node.network.disconnectnode(address=url, nodeid=nodeId)
+    string = ".* RPC_CLIENT_NODE_NOT_CONNECTED: Node not found in connected nodes"
+    with pytest.raises(InternalServerError, match=string):
+        assert node.network.disconnectnode()
+        assert node.network.disconnectnode(url)
+        assert node.network.disconnectnode("", nodeId)
+        assert node.network.disconnectnode(url, nodeId)
+        assert node.network.disconnectnode(address=url, nodeid=nodeId)
 
 
 @pytest.mark.query
