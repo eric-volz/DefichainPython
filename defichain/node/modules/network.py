@@ -9,7 +9,7 @@ class Network:
         return self._node._rpc.call("clearbanned")
 
     def disconnectnode(self, address="", nodeid=None):  # 03
-        return self._node._rpc.call(address, nodeid)
+        return self._node._rpc.call("disconnectnode", address, nodeid)
 
     def getaddednodeinfo(self, node=None):  # 04
         return self._node._rpc.call("getaddednodeinfo", node)
