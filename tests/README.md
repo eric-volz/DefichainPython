@@ -56,8 +56,8 @@ python3 run_tests.py blockchain query # run all tests in the blockchain module w
 | Generating      | :heavy_check_mark:       |
 | Loan            | :heavy_multiplication_x: |
 | Masternodes     | :heavy_multiplication_x: |
-| Mining          | :heavy_multiplication_x: |
-| Network         | :heavy_multiplication_x: |
+| Mining          | :heavy_check_mark:       |
+| Network         | :heavy_check_mark:       |
 | Oracles         | :heavy_check_mark:       |
 | Poolpair        | :heavy_multiplication_x: |
 | Rawtransactions | :heavy_multiplication_x: |
