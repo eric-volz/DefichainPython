@@ -27,7 +27,7 @@ pip install pytest
 ```bash
 cd tests # navigate into the tests folder
 
-python3 run_tests.py # run all tests
+python3 run_tests_for_node.py # run all tests
 ```
 You can also filter tests by giving the script parameters:
 1. Parameter Modules: name of module to test or all for every module
@@ -35,7 +35,7 @@ You can also filter tests by giving the script parameters:
 ```bash
 cd tests # navigate into the tests folder
 
-python3 run_tests.py blockchain query # run all tests in the blockchain module with the marker query
+python3 run_tests_for_node.py blockchain query # run all tests in the blockchain module with the marker query
 ```
 --> no test should fail
 
@@ -76,7 +76,7 @@ python3 run_tests.py blockchain query # run all tests in the blockchain module w
 | Ocean Requests   | Progress                 |
 |------------------|--------------------------|
 | Address          | :heavy_multiplication_x: |
-| Blocks           | :heavy_multiplication_x: | 
+| Blocks           | :heavy_check_mark:       | 
 | Fee              | :heavy_multiplication_x: |
 | Loan             | :heavy_multiplication_x: |
 | Masternodes      | :heavy_multiplication_x: |
