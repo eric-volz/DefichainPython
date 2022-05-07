@@ -67,19 +67,26 @@ python3 run_tests.py blockchain query # run all tests in the blockchain module w
 | Vault           | :heavy_multiplication_x: |
 | Wallet          | :heavy_multiplication_x: |
 | Zmq             | :heavy_check_mark:       |
+|                 |                          |
+| Node Connection | :heavy_check_mark:       |
+| Exceptions      | :heavy_multiplication_x: |
+
 
 ### Ocean Requests
-| Ocean Requests | Progress                 |
-|----------------|--------------------------|
-| Address        | :heavy_multiplication_x: |
-| Blocks         | :heavy_multiplication_x: | 
-| Fee            | :heavy_multiplication_x: |
-| Loan           | :heavy_multiplication_x: |
-| Masternodes    | :heavy_multiplication_x: |
-| Oracles        | :heavy_multiplication_x: |
-| Poolpairs      | :heavy_multiplication_x: |
-| Prices         | :heavy_multiplication_x: |
-| RawTx          | :heavy_multiplication_x: |
-| stats          | :heavy_multiplication_x: |
-| Tokens         | :heavy_multiplication_x: |
-| Transactions   | :heavy_multiplication_x: |
+| Ocean Requests   | Progress                 |
+|------------------|--------------------------|
+| Address          | :heavy_multiplication_x: |
+| Blocks           | :heavy_multiplication_x: | 
+| Fee              | :heavy_multiplication_x: |
+| Loan             | :heavy_multiplication_x: |
+| Masternodes      | :heavy_multiplication_x: |
+| Oracles          | :heavy_multiplication_x: |
+| Poolpairs        | :heavy_multiplication_x: |
+| Prices           | :heavy_multiplication_x: |
+| RawTx            | :heavy_multiplication_x: |
+| stats            | :heavy_multiplication_x: |
+| Tokens           | :heavy_multiplication_x: |
+| Transactions     | :heavy_multiplication_x: |
+|                  |                          |
+| Ocean Connection | :heavy_check_mark:       |
+| Exceptions       | :heavy_multiplication_x: |
