@@ -1,3 +1,5 @@
+import requests
+
 from .connection import Connection
 
 from .modules.address import Address
@@ -18,8 +20,9 @@ BASE_URL = "https://ocean.defichain.com/"
 
 
 class Ocean:
-    def __init__(self, url="https://ocean.defichain.com/", version="v0/", network="mainnet/"):
-        self._attachedURL = url + version + network
+    def __init__(self, url="https://ocean.defichain.com", version="v0", network="mainnet"):
+        self._attachedURL = url + "/" + version + "/" + network + "/"
+        self._test_connection()
 
         self._conn = Connection(self._attachedURL)
 
@@ -36,3 +39,12 @@ class Ocean:
         self.stats = Stats(self)
         self.tokens = Tokens(self)
         self.transactions = Transactions(self)
+
+    def _test_connection(self):
+        try:
+            requests.get(self._attachedURL)
+            return True
+        except Exception as e:
+            print(f"No connection could be established to: {self._attachedURL}")
+            print(e)
+
