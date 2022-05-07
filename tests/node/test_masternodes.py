@@ -38,3 +38,38 @@ def test_getmasternode():  # 04
     assert node.masternodes.getmasternode(mn_id)
     assert node.masternodes.getmasternode(mn_id=mn_id)
 
+
+@pytest.mark.query
+def test_getmasternodeblocks():  # 05
+    mn_id = "e54d0814d406317dfaa38f365471ff59fb7f7725769c0aecf3d0830a59de0100"
+    ownerAddress = "8TirqFLz1Gm6uPVthQdfxh4sp84CLgnHBy"
+    operatorAddress = "8V1DZnQaFRgKY9GPkvcXt1WjcsjGx7ApWM"
+    depth = 1000000
+    assert node.masternodes.getmasternodeblocks(mn_id)
+    assert node.masternodes.getmasternodeblocks(id=mn_id)
+    assert node.masternodes.getmasternodeblocks(ownerAddress=ownerAddress)
+    assert node.masternodes.getmasternodeblocks(operatorAddress=operatorAddress)
+    assert node.masternodes.getmasternodeblocks(id=mn_id, depth=depth)
+    assert node.masternodes.getmasternodeblocks(ownerAddress=ownerAddress, depth=depth)
+    assert node.masternodes.getmasternodeblocks(operatorAddress=operatorAddress, depth=depth)
+
+
+@pytest.mark.query
+def test_listanchors():  # 06
+    assert node.masternodes.listanchors()
+
+
+@pytest.mark.query
+def test_listmasternodes():  # 07
+    mn_id = "e54d0814d406317dfaa38f365471ff59fb7f7725769c0aecf3d0830a59de0100"
+    assert node.masternodes.listmasternodes()
+    assert node.masternodes.listmasternodes(mn_id, True, 10, False)
+    assert node.masternodes.listmasternodes(start=mn_id, including_start=True, limit=10, verbose=False)
+
+
+@pytest.mark.query
+def test_resignmasternode():  # 08
+    mn_id = "e54d0814d406317dfaa38f365471ff59fb7f7725769c0aecf3d0830a59de0100"
+    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Incorrect authorization for "
+    with pytest.raises(InternalServerError, match=string):
+        assert node.masternodes.resignmasternode(mn_id)
