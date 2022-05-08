@@ -75,10 +75,10 @@ python3 run_tests_for_node.py blockchain query # run all tests in the blockchain
 ### Ocean Requests
 | Ocean Requests   | Progress                 |
 |------------------|--------------------------|
-| Address          | :heavy_multiplication_x: |
+| Address          | :heavy_check_mark:       |
 | Blocks           | :heavy_check_mark:       | 
-| Fee              | :heavy_multiplication_x: |
-| Loan             | :heavy_multiplication_x: |
+| Fee              | :heavy_check_mark:       |
+| Loan             | :heavy_check_mark:       |
 | Masternodes      | :heavy_multiplication_x: |
 | Oracles          | :heavy_multiplication_x: |
 | Poolpairs        | :heavy_multiplication_x: |
