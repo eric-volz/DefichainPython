@@ -85,7 +85,7 @@ python3 run_tests_for_node.py blockchain query # run all tests in the blockchain
 | Prices           | :heavy_multiplication_x: |
 | RawTx            | :heavy_multiplication_x: |
 | stats            | :heavy_multiplication_x: |
-| Tokens           | :heavy_multiplication_x: |
+| Tokens           | :heavy_check_mark:       |
 | Transactions     | :heavy_check_mark:       |
 |                  |                          |
 | Ocean Connection | :heavy_check_mark:       |
