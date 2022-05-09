@@ -79,14 +79,14 @@ python3 run_tests_for_node.py blockchain query # run all tests in the blockchain
 | Blocks           | :heavy_check_mark:       | 
 | Fee              | :heavy_check_mark:       |
 | Loan             | :heavy_check_mark:       |
-| Masternodes      | :heavy_multiplication_x: |
-| Oracles          | :heavy_multiplication_x: |
-| Poolpairs        | :heavy_multiplication_x: |
+| Masternodes      | :heavy_check_mark:       |
+| Oracles          | :heavy_check_mark:       |
+| Poolpairs        | :heavy_check_mark:       |
 | Prices           | :heavy_multiplication_x: |
 | RawTx            | :heavy_multiplication_x: |
 | stats            | :heavy_multiplication_x: |
 | Tokens           | :heavy_multiplication_x: |
-| Transactions     | :heavy_multiplication_x: |
+| Transactions     | :heavy_check_mark:       |
 |                  |                          |
 | Ocean Connection | :heavy_check_mark:       |
 | Exceptions       | :heavy_multiplication_x: |
