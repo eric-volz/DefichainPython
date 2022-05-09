@@ -65,9 +65,8 @@ def test_getVault():  # 08
 
 @pytest.mark.query
 def test_listVaultAuctionHistory():  # 09
-    auctions = ocean.loan.listAuction()
-    id = auctions["data"][0]["vaultId"]  # 00d1f13efe448980dea15824fd3df82d311a9daeba31428929f827e8c9764e2f
-    height = auctions["data"][0]["liquidationHeight"]  # 1865100
+    id = "00d1f13efe448980dea15824fd3df82d311a9daeba31428929f827e8c9764e2f"
+    height = 1865100
     batchIndex = 0
     assert ocean.loan.listVaultAuctionHistory(id, height, batchIndex)
     assert ocean.loan.listVaultAuctionHistory(id, height, batchIndex, SIZE, NEXT)
