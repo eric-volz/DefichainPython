@@ -14,7 +14,6 @@ STATUS_CODES_WITH_ERROR = [400, 401, 403, 404, 405, 422, 500, 503]
 class OceanErrorHandler:
     def __init__(self, response):
         self.statusCode = response.status_code
-        print(self.statusCode)
 
         if self.statusCode in STATUS_CODES_WITH_ERROR:
             if self.statusCode == 401:
