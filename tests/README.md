@@ -82,8 +82,9 @@ python3 run_tests_for_node.py blockchain query # run all tests in the blockchain
 | Masternodes      | :heavy_check_mark:       |
 | Oracles          | :heavy_check_mark:       |
 | Poolpairs        | :heavy_check_mark:       |
-| Prices           | :heavy_multiplication_x: |
+| Prices           | :heavy_check_mark:       |
 | RawTx            | :heavy_multiplication_x: |
+| RPC              | :heavy_multiplication_x: |
 | stats            | :heavy_multiplication_x: |
 | Tokens           | :heavy_check_mark:       |
 | Transactions     | :heavy_check_mark:       |
