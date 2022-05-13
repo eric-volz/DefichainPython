@@ -10,7 +10,7 @@ address = load_secrets_conf()["wallet_address"]
 
 @pytest.mark.query
 def test_createmasternode():  # 01
-    string = ".* RPC_WALLET_ERROR: Add-on auth TX failed: Insufficient funds"
+    string = ".* RPC_WALLET_ERROR: Insufficient funds"
     with pytest.raises(InternalServerError, match=string):
         assert node.masternodes.createmasternode(address)
         assert node.masternodes.createmasternode(address, address, [], "TENYEARTIMELOCK")
