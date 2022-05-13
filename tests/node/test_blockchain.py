@@ -156,19 +156,21 @@ def test_getrawmempool():  # 18
 
 
 @pytest.mark.query
-def test_gettxoutl():  # 19
+def test_gettxout():  # 19
     txid = "be1e5d5f26752d6957e527c94c8b0758b7ce30b01bbc5f5f97db28fa2a3b4e2d"
-    n = 1
-    assert node.blockchain.gettxout(txid, n)
-    assert node.blockchain.gettxout(txid=txid, n=n)
-    assert node.blockchain.gettxout(txid=txid, n=n, include_mempool=True)
+    n = 0
+    result1 = node.blockchain.gettxout(txid, n)
+    assert result1 or result1 is None
+    result2 = node.blockchain.gettxout(txid=txid, n=n)
+    assert result2 or result2 is None
+    result3 = node.blockchain.gettxout(txid=txid, n=n, include_mempool=True)
+    assert result3 or result3 is None
 
 
 @pytest.mark.query
 def test_gettxoutproof():  # 20
     txid = "be1e5d5f26752d6957e527c94c8b0758b7ce30b01bbc5f5f97db28fa2a3b4e2d"
     blockhash = "3da537b48af9ff99d472486c2ecbc34aa84a22f43a0a900cc0168ab4fc460c10"
-    assert node.blockchain.gettxoutproof([txid])
     assert node.blockchain.gettxoutproof([txid], blockhash)
     assert node.blockchain.gettxoutproof([txid], blockhash=blockhash)
 
@@ -249,7 +251,8 @@ def test_verifychain():  # 31
 
 @pytest.mark.query
 def test_verifytxoutproof():  # 32
-    txid = "be1e5d5f26752d6957e527c94c8b0758b7ce30b01bbc5f5f97db28fa2a3b4e2d"
-    proof = node.blockchain.gettxoutproof([txid])
+    txid = "d6e2b314f928ba02fa844a94c75baf43dbab4c095b7592f7df18d504765072e3"
+    blockhash = "090d161e7f6be039bb416ae3033d683d00b6c71a7102156a77af8c0e6baba242"
+    proof = node.blockchain.gettxoutproof([txid], blockhash=blockhash)
     assert node.blockchain.verifytxoutproof(proof)
     assert node.blockchain.verifytxoutproof(proof=proof)
