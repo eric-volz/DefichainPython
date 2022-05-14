@@ -24,18 +24,21 @@ pip install pytest
     - fill in all mandatory and optional information if needed
 
 ## Run the test:
+1. (required) Parameter library: name of the library to be tested
 ```bash
 cd tests # navigate into the tests folder
 
-python3 run_tests_for_node.py # run all tests
+python3 run_tests.py node  # run all tests for node / rpc
+
+python3 run_tests.py ocean  # run all tests for ocean
 ```
 You can also filter tests by giving the script parameters:
-1. Parameter Modules: name of module to test or all for every module
-2. Parameter Marker: name of marker to do the tests on or all for every marker
+2. (optional) Parameter Modules: name of module to test or all for every module
+3. (optional) Parameter Marker: name of marker to do the tests on or all for every marker
 ```bash
 cd tests # navigate into the tests folder
 
-python3 run_tests_for_node.py blockchain query # run all tests in the blockchain module with the marker query
+python3 run_tests.py node blockchain query # run all tests in the blockchain module with the marker query
 ```
 --> no test should fail
 
