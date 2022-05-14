@@ -53,7 +53,7 @@ python3 run_tests.py node blockchain query # run all tests in the blockchain mod
 ### RPC 
 | RPC Parts       | Progress                 |
 |-----------------|--------------------------|
-| Accounts        | :heavy_multiplication_x: |
+| Accounts        | :heavy_minus_sign:       |
 | Blockchain      | :heavy_check_mark:       | 
 | Control         | :heavy_check_mark:       |
 | Generating      | :heavy_check_mark:       |
