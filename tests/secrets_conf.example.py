@@ -13,3 +13,4 @@ The place to store credentials for your Defichain Node
 
 # Optional
 # WALLET_PATH =
+# WALLET_PASSWORD =
