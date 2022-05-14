@@ -1,6 +1,8 @@
 from os import path
 from defichain import Node
 
+LENGTH_OF_TXID = 64
+
 
 def load_secrets_conf():
     if not path.isfile("secrets_conf.py"):
