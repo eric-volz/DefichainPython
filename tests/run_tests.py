@@ -23,9 +23,9 @@ elif len(args) == 4:
     marker = args[3]
 else:
     raise Exception("You have not set the parameters correctly!\n"
-                    "1. Parameter library: name of the library to be tested\n"
-                    "2. Parameter Modules: name of module to test or all for every module\n"
-                    "3. Parameter Marker: name of marker to do the tests on or all for every marker\n")
+                    "1. (required) Parameter library: name of the library to be tested\n"
+                    "2. (optional) Parameter Modules: name of module to test or all for every module\n"
+                    "3. (optional) Parameter Marker: name of marker to do the tests on or all for every marker\n")
 
 if not library in LIBRARY:
     raise Exception(f"The passed parameter is not supported: {library}")
