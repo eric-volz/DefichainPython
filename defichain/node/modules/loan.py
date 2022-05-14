@@ -39,11 +39,12 @@ class Loan:
     def listloantokens(self):  # 10
         return self._node._rpc.call("listloantokens")
 
-    def paybackloan(self, vaultId, _from, amounts, inputs=None):  # 11
+    def paybackloan(self, vaultId, _from, amounts=None, loans=None, inputs=None):  # 11
         metadata = BuildJson()
         metadata.append("vaultId", vaultId)
         metadata.append("from", _from)
         metadata.append("amounts", amounts)
+        metadata.append("loans", loans)
 
         return self._node._rpc.call("paybackloan", metadata.build(), inputs)
 
