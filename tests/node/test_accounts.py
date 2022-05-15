@@ -3,6 +3,7 @@ from tests.node.util import createNode, load_secrets_conf, LENGTH_OF_TXID
 
 # Import Exceptions
 from defichain.exceptions.InternalServerError import InternalServerError
+from defichain.exceptions.BadRequest import BadRequest
 
 node = createNode()
 address = load_secrets_conf()["wallet_address"]
@@ -86,3 +87,63 @@ def test_listaccounthistory():  # 11
     assert node.accounts.listaccounthistory(address, blockcount, 10000000, True, "", "", 100)
     assert node.accounts.listaccounthistory(owner=address, maxBlockHeight=blockcount, depth=10000000, no_rewards=True,
                                             token="", txtype="", limit=100)
+
+
+@pytest.mark.query
+def test_listaccounts():  # 12
+    assert node.accounts.listaccounts()
+    assert node.accounts.listaccounts('001400007a7328b9554650a56d980095071a201341a2@3', True, 100, True, False, False)
+    assert node.accounts.listaccounts(start='001400007a7328b9554650a56d980095071a201341a2@3', including_start=True,
+                                      limit=100,verbose=True, indexed_amounts=False, is_mine_only=False)
+
+
+@pytest.mark.query
+def test_listburnhistory():  # 13
+    assert node.accounts.listburnhistory()
+    assert node.accounts.listburnhistory(node.blockchain.getblockcount(), 10000, "DFI", "", 100)
+    assert node.accounts.listburnhistory(maxBlockHeight=node.blockchain.getblockcount(), depth=10000, token="DFI",
+                                         txtype="", limit=100)
+
+
+@pytest.mark.query
+def test_listcommunitybalances():  # 14
+    assert node.accounts.listcommunitybalances()
+
+
+@pytest.mark.query
+def test_listpendingfutureswaps():  # 15
+    assert node.accounts.listpendingfutureswaps()
+
+
+@pytest.mark.transactions
+def test_sendtokenstoaddress():  # 16
+    assert len(node.accounts.sendtokenstoaddress({address: "0.0001@DUSD"}, {address: "0.0001@DUSD"})) == LENGTH_OF_TXID
+    assert len(node.accounts.sendtokenstoaddress({address: "0.0001@DUSD"}, {address: "0.0001@DUSD"}, "pie")) == LENGTH_OF_TXID
+    assert len(node.accounts.sendtokenstoaddress(_from={address: "0.0001@DUSD"}, to={address: "0.0001@DUSD"},
+                                                 selectionMode="pie")) == LENGTH_OF_TXID
+
+
+@pytest.mark.transactions
+def test_sendutxosfrom():  # 17
+    assert len(node.accounts.sendutxosfrom(address, address, 0.001)) == LENGTH_OF_TXID
+    assert len(node.accounts.sendutxosfrom(address, address, 0.001, address)) == LENGTH_OF_TXID
+    assert len(node.accounts.sendutxosfrom(_from=address, to=address, amount=0.001, change=address)) == LENGTH_OF_TXID
+
+
+@pytest.mark.transactions
+def test_utxostoaccount():  # 18
+    assert len(node.accounts.utxostoaccount({address: "0.000001@DFI"})) == LENGTH_OF_TXID
+    assert len(node.accounts.utxostoaccount({address: "0.000001@DFI"}, [])) == LENGTH_OF_TXID
+    assert len(node.accounts.utxostoaccount(amounts={address: "0.000001@DFI"}, inputs=[])) == LENGTH_OF_TXID
+
+
+@pytest.mark.transactions
+def test_withdrawfutureswap():  # 19
+    string = ".* RPC_INVALID_REQUEST: Test DFIP2203Tx execution failed:\namount 0.00000000 is less than 1.00000000"
+    with pytest.raises(BadRequest, match=string):
+        assert node.accounts.withdrawfutureswap(address, "1@DUSD", "TSLA")
+    with pytest.raises(BadRequest, match=string):
+        assert node.accounts.withdrawfutureswap(address, "1@DUSD", "TSLA", [])
+    with pytest.raises(BadRequest, match=string):
+        assert node.accounts.withdrawfutureswap(address=address, amount="1@DUSD", destination="TSLA", inputs=[])
+
