@@ -81,7 +81,7 @@ pytest node/test_accounts.py -k transaction # executes just the tests that are m
 | Blockchain      | :heavy_check_mark:       | 
 | Control         | :heavy_check_mark:       |
 | Generating      | :heavy_check_mark:       |
-| Loan            | :heavy_multiplication_x: |
+| Loan            | :heavy_minus_sign:       |
 | Masternodes     | :heavy_check_mark:       |
 | Mining          | :heavy_check_mark:       |
 | Network         | :heavy_check_mark:       |
