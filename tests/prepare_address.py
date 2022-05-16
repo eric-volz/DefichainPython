@@ -79,7 +79,7 @@ def check_DFI_amount():
 
 def wait_one_block():
     current_block = node.blockchain.getblockcount()
-    print(f"Waiting for one block to be mined: {current_block}")
+    print(f"Waiting for one block to be mined: {current_block + 1}")
     while node.blockchain.getblockcount() < current_block + 1:
         time.sleep(1)
     print("Block has been mined")
@@ -96,3 +96,5 @@ wait_one_block()
 all_utxo_to_address()
 wait_one_block()
 check_min_and_max_utxo()
+
+print(f"if you see this message you are good to go to proceed with the tests")
