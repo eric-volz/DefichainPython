@@ -1,8 +1,7 @@
 import pytest
-from tests.node.util import createNode
+from tests.util import createNode
 
 # Import Exceptions
-from defichain.exceptions.InternalServerError import InternalServerError
 from defichain.exceptions.BadRequest import BadRequest
 
 node = createNode()

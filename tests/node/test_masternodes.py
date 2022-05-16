@@ -1,5 +1,5 @@
 import pytest
-from tests.node.util import createNode, load_secrets_conf
+from tests.util import createNode, load_secrets_conf
 
 # Import Exceptions
 from defichain.exceptions.InternalServerError import InternalServerError

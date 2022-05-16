@@ -1,7 +1,7 @@
 import sys
 import os
 
-from tests.node.util import createNode
+from tests.util import createNode
 
 LIBRARY = ["node", "ocean"]
 NODE_MODULES = ["accounts", "blockchain", "control", "generating", "loan", "masternodes", "mining", "network",
