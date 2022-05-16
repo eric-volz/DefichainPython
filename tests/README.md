@@ -29,7 +29,7 @@ pip install pytest
    - fill your vault at least with a dollar worth of collateral
 
 ### 5. Check if everything is properly set up
-   ####The automatic way:
+   #### The automatic way:
    - use a separate wallet if you use this script 
      - it will send all UTXOs from the wallet to the given address
    ```bash
