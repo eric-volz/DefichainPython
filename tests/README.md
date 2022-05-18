@@ -86,7 +86,7 @@ pytest node/test_accounts.py -k transaction # executes just the tests that are m
 | Mining          | :heavy_check_mark:       |
 | Network         | :heavy_check_mark:       |
 | Oracles         | :heavy_check_mark:       |
-| Poolpair        | :heavy_multiplication_x: |
+| Poolpair        | :heavy_minus_sign:       |
 | Rawtransactions | :heavy_multiplication_x: |
 | Spv             | :heavy_multiplication_x: |
 | Tokens          | :heavy_check_mark:       |
@@ -95,7 +95,7 @@ pytest node/test_accounts.py -k transaction # executes just the tests that are m
 | Wallet          | :heavy_multiplication_x: |
 | Zmq             | :heavy_check_mark:       |
 |                 |                          |
-| Node Connection | :heavy_check_mark:       |
+| Node Connection | :heavy_minus_sign:       |
 | Exceptions      | :heavy_multiplication_x: |
 
 
