@@ -3,7 +3,6 @@ from tests.util import createNode, load_secrets_conf, LENGTH_OF_TXID
 
 # Import Exceptions
 from defichain.exceptions.InternalServerError import InternalServerError
-from defichain.exceptions.BadRequest import BadRequest
 
 node = createNode()
 address = load_secrets_conf()["wallet_address"]
