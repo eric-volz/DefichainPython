@@ -77,7 +77,7 @@ pytest node/test_accounts.py -k transaction # executes just the tests that are m
 ### RPC 
 | RPC Parts       | Progress                 |
 |-----------------|--------------------------|
-| Accounts        | :heavy_check_mark:       |
+| Accounts        | :heavy_minus_sign:       |
 | Blockchain      | :heavy_check_mark:       | 
 | Control         | :heavy_check_mark:       |
 | Generating      | :heavy_check_mark:       |
