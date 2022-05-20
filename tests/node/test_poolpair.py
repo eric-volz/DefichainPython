@@ -87,3 +87,16 @@ def test_testpoolswap():  # 09
     assert node.poolpair.testpoolswap(address, "DFI", 0.00000001, address, "DUSD", 1, "direct", True)
     assert node.poolpair.testpoolswap(_from=address, tokenFrom="DFI", amountFrom=0.00000001, to=address, tokenTo="DUSD",
                                       maxPrice=1, path="direct", verbose=True)
+
+
+@pytest.mark.query
+def test_updatepoolpair():  # 10
+    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
+    with pytest.raises(InternalServerError, match=string):
+        assert node.poolpair.updatepoolpair('DUSD-DFI')
+    with pytest.raises(InternalServerError, match=string):
+        assert node.poolpair.updatepoolpair('DUSD-DFI', True, 0.5, address, 100, [])
+    with pytest.raises(InternalServerError, match=string):
+        assert node.poolpair.updatepoolpair(pool='DUSD-DFI', status=True, commission=0.5, ownerAddress=address,
+                                            customRewards=100, inputs=[])
+
