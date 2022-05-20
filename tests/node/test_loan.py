@@ -146,4 +146,11 @@ def test_updateloanscheme():  # 16
 
 @pytest.mark.query
 def test_updateloantoken():  # 17
-    pass  # has to be corrected in main and then a test will be added
+    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
+    with pytest.raises(InternalServerError, match=string):
+        assert node.loan.updateloantoken("SPY")
+    with pytest.raises(InternalServerError, match=string):
+        assert node.loan.updateloantoken("SPY", "SPYY", "S&P 500 Index", "SPY/USD", True, 0, [])
+    with pytest.raises(InternalServerError, match=string):
+        assert node.loan.updateloantoken(token="SPY", symbol="SPYY", name="S&P 500 Index",
+                                         fixedIntervalPriceId="SPY/USD", mintable=True, interest=0, inputs=[])

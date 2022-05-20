@@ -84,9 +84,9 @@ def test_gettokenbalances():  # 10
 def test_listaccounthistory():  # 11
     blockcount = node.blockchain.getblockcount()
     assert node.accounts.listaccounthistory(address)
-    assert node.accounts.listaccounthistory(address, blockcount, 10000000, True, "", "", 100)
+    assert node.accounts.listaccounthistory(address, blockcount, 10000000, True, "", "", 100, 0)
     assert node.accounts.listaccounthistory(owner=address, maxBlockHeight=blockcount, depth=10000000, no_rewards=True,
-                                            token="", txtype="", limit=100)
+                                            token="", txtype="", limit=100, txn=0)
 
 
 @pytest.mark.query
