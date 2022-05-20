@@ -77,16 +77,16 @@ pytest node/test_accounts.py -k transaction # executes just the tests that are m
 ### RPC 
 | RPC Parts       | Progress                 |
 |-----------------|--------------------------|
-| Accounts        | :heavy_minus_sign:       |
+| Accounts        | :heavy_check_mark:       |
 | Blockchain      | :heavy_check_mark:       | 
 | Control         | :heavy_check_mark:       |
 | Generating      | :heavy_check_mark:       |
-| Loan            | :heavy_minus_sign:       |
+| Loan            | :heavy_check_mark:       |
 | Masternodes     | :heavy_check_mark:       |
 | Mining          | :heavy_check_mark:       |
 | Network         | :heavy_check_mark:       |
 | Oracles         | :heavy_check_mark:       |
-| Poolpair        | :heavy_minus_sign:       |
+| Poolpair        | :heavy_check_mark:       |
 | Rawtransactions | :heavy_multiplication_x: |
 | Spv             | :heavy_multiplication_x: |
 | Tokens          | :heavy_check_mark:       |
@@ -95,7 +95,7 @@ pytest node/test_accounts.py -k transaction # executes just the tests that are m
 | Wallet          | :heavy_multiplication_x: |
 | Zmq             | :heavy_check_mark:       |
 |                 |                          |
-| Node Connection | :heavy_minus_sign:       |
+| Node Connection | :heavy_check_mark:       |
 | Exceptions      | :heavy_multiplication_x: |
 
 
