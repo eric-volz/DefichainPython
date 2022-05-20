@@ -41,7 +41,6 @@ class Poolpair:
         return self._node._rpc.call("listpoolpairs", pagination.build(), verbose)
 
     def listpoolshares(self, start=None, including_start=False, limit=100, verbose=True, is_mine_only=False):  # 06
-        verbose = True if verbose is None else verbose
         pagination = BuildJson()
         pagination.append("start", start)
         pagination.append("including_start", including_start)

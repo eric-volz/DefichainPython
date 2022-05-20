@@ -79,7 +79,7 @@ class Loan:
         ACTIVATE_AFTER_BLOCK = self._node.blockchain.getblockcount() + 1 if ACTIVATE_AFTER_BLOCK is None else ACTIVATE_AFTER_BLOCK
         return self._node._rpc.call("updateloanscheme", mincolratio, interestrate, id, ACTIVATE_AFTER_BLOCK, inputs)
 
-    def updateloantoken(self, token, symbol, fixedIntervalPriceId, name=None, mintable=True, interest=None, inputs=None):  # 17
+    def updateloantoken(self, token, symbol=None, name=None, fixedIntervalPriceId=None, mintable=True, interest=None, inputs=None):  # 17
         metadata = BuildJson()
         metadata.append("symbol", symbol)
         metadata.append("name", name)
