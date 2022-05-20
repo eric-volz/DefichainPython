@@ -125,7 +125,8 @@ class Accounts:
 
         return self._node._rpc.call("gettokenbalances", pagination.build(), indexed_amounts, symbol_lookup)
 
-    def listaccounthistory(self, owner, maxBlockHeight=None, depth=None, no_rewards=None, token=None, txtype=None, limit=None):  # 11
+    def listaccounthistory(self, owner, maxBlockHeight=None, depth=None, no_rewards=None, token=None, txtype=None,
+                           limit=None, txn=None):  # 11
         options = BuildJson()
         options.append("maxBlockHeight", maxBlockHeight)
         options.append("depth", depth)
@@ -133,6 +134,7 @@ class Accounts:
         options.append("token", token)
         options.append("txtype", txtype)
         options.append("limit", limit)
+        options.append("txn", txn)
 
         return self._node._rpc.call("listaccounthistory", owner, options.build())
 
