@@ -52,8 +52,8 @@ def all_utxo_to_address():
     addresses = node.wallet.listaddressgroupings()
     for address in addresses[0]:
         if address[0] != ADDRESS and address[1] > 0.00001:
-            node.accounts.sendutxosfrom(address[0], ADDRESS, address[1] - 0.00001)
-            print(f"Send {address[1]}UTXO from {address[0]} to {ADDRESS}")
+            node.accounts.sendutxosfrom(address[0], ADDRESS, round(address[1] - 0.00001, 8))
+            print(f"Send {round(address[1] - 0.00001, 8)}UTXO from {address[0]} to {ADDRESS}")
 
 
 def check_DUSD_amount():
