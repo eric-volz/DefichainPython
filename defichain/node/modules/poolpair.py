@@ -33,14 +33,14 @@ class Poolpair:
     def getpoolpair(self, key, verbose=True):  # 04
         return self._node._rpc.call("getpoolpair", key, verbose)
 
-    def listpoolpairs(self, start=None, including_start=False, limit=100, verbose=True):  # 05
+    def listpoolpairs(self, start=None, including_start=None, limit=100, verbose=True):  # 05
         pagination = BuildJson()
         pagination.append("start", start)
         pagination.append("including_start", including_start)
         pagination.append("limit", limit)
         return self._node._rpc.call("listpoolpairs", pagination.build(), verbose)
 
-    def listpoolshares(self, start=None, including_start=False, limit=100, verbose=True, is_mine_only=False):  # 06
+    def listpoolshares(self, start=None, including_start=None, limit=100, verbose=True, is_mine_only=False):  # 06
         pagination = BuildJson()
         pagination.append("start", start)
         pagination.append("including_start", including_start)

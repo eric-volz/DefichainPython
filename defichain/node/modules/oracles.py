@@ -30,7 +30,7 @@ class Oracles:
         pagination.append("limit", limit)
         return self._node._rpc.call("listfixedintervalprices", pagination.build())
 
-    def listlatestrawprices(self, token, currency, start=None, including_start=False, limit=100):  # 07
+    def listlatestrawprices(self, token, currency, start=None, including_start=None, limit=100):  # 07
         request = BuildJson()
         request.append("currency", currency)
         request.append("token", token)
@@ -41,14 +41,14 @@ class Oracles:
         pagination.append("limit", limit)
         return self._node._rpc.call("listlatestrawprices", request.build(), pagination.build())
 
-    def listoracles(self, start=None, including_start=False, limit=100):  # 08
+    def listoracles(self, start=None, including_start=None, limit=100):  # 08
         pagination = BuildJson()
         pagination.append("start", start)
         pagination.append("including_start", including_start)
         pagination.append("limit", limit)
         return self._node._rpc.call("listoracles", pagination.build())
 
-    def listprices(self, start=None, including_start=False, limit=100):  # 09
+    def listprices(self, start=None, including_start=None, limit=100):  # 09
         pagination = BuildJson()
         pagination.append("start", start)
         pagination.append("including_start", including_start)

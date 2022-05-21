@@ -27,7 +27,7 @@ class Tokens:
     def gettoken(self, key):  # 04
         return self._node._rpc.call("gettoken", key)
 
-    def listtokens(self, start=None, including_start=False, limit=100, verbose=True):  # 05
+    def listtokens(self, start=None, including_start=None, limit=100, verbose=True):  # 05
         pagination = BuildJson()
         pagination.append("start", start)
         pagination.append("including_start", including_start)

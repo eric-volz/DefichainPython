@@ -29,7 +29,7 @@ class Masternodes:
     def listanchors(self):  # 06
         return self._node._rpc.call("listanchors")
 
-    def listmasternodes(self, start=None, including_start=False, limit=1000000, verbose=True):  # 07
+    def listmasternodes(self, start=None, including_start=None, limit=1000000, verbose=True):  # 07
         pagination = BuildJson()
         pagination.append("start", start)
         pagination.append("including_start", including_start)

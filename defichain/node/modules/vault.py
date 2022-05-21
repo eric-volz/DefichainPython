@@ -34,7 +34,7 @@ class Vault:
         pagination.append("limit", limit)
         return self._node._rpc.call("listauctionhistory", identifier, pagination.build())
 
-    def listauctions(self, vaultId=None, height=None, including_start=False, limit=100):  # 09
+    def listauctions(self, vaultId=None, height=None, including_start=None, limit=100):  # 09
         start = BuildJson()
         start.append("vaultId", vaultId)
         start.append("height", height)
@@ -55,7 +55,7 @@ class Vault:
         return self._node._rpc.call("listvaulthistory", vaultId, options.build())
 
     def listvaults(self, ownerAddress=None, loanSchemeId=None, state='unknown', verbose=False, start=None,
-                   including_start=False, limit=100):  # 11
+                   including_start=None, limit=100):  # 11
         options = BuildJson()
         options.append("ownerAddress", ownerAddress)
         options.append("loanSchemeId", loanSchemeId)
