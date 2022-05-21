@@ -1,11 +1,11 @@
 from setuptools import setup
 from os import path
 
-VERSION = '0.0.7'
+VERSION = '0.0.8'
 DESCRIPTION = 'Defichain Python Library'
 
 this_directory = path.abspath(path.dirname(__file__))
-with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+with open(path.join(this_directory, 'README_for_pypi.md'), encoding='utf-8') as f:
     LONG_DESCRIPTION = f.read()
 
 # Setting up
