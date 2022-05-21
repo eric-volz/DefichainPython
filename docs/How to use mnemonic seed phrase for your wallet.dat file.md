@@ -5,7 +5,9 @@ Personally, I find it difficult to rely solely on a single file as security for 
 is possible to create and restore a wallet.dat file just from a mnemonic seed phrase.
 But you can also restore the wallet just from the wallet.dat file.
 
-Here is my approach to make this possible:
+To be clear: this has nothing to do with the defichain light wallet.
+
+#### Here is my approach to make this possible:
 
 ## Requirements
 - a fully synced defichain node
@@ -14,7 +16,7 @@ Here is my approach to make this possible:
     ```bash
     pip install hdwallet
     ```
-  
+
 ## Best practice
 - write down the mnemonic seed phase on a piece of paper and put it in a secure place
 - don't fully rely on the mnemonic seed phrase
