@@ -14,7 +14,7 @@ class Vault:
     def deposittovault(self, vaultId, _from, amount, inputs=None):  # 03
         return self._node._rpc.call("deposittovault", vaultId, _from, amount, inputs)
 
-    def estimatecollateral(self, loanAmounts, targetRatio, tokens={"DFI": 1}):  # 04
+    def estimatecollateral(self, loanAmounts, targetRatio, tokens=None):  # 04
         return self._node._rpc.call("estimatecollateral", loanAmounts, targetRatio, tokens)
 
     def estimateloan(self, vaultId, tokens, targetRatio=None):  # 05
