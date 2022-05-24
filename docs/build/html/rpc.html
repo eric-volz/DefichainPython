@@ -194,8 +194,8 @@
           <section id="rpc">
 <h1>RPC<a class="headerlink" href="#rpc" title="Permalink to this headline">#</a></h1>
 <p>In development</p>
-<section id="module-defichain">
-<span id="node"></span><h2>Node<a class="headerlink" href="#module-defichain" title="Permalink to this headline">#</a></h2>
+<span class="target" id="module-defichain"></span><section id="node">
+<h2>Node<a class="headerlink" href="#node" title="Permalink to this headline">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.Node">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'127.0.0.1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8554</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wallet_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wallet_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wallet_password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wallet_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'http'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.Node" title="Permalink to this definition">#</a></dt>
@@ -246,6 +246,186 @@ it will be imported and becomes usable under the same parameter</p></li>
 <dd><p>Tests Connection to Defichain Node and raises ServiceUnavailable Exception if no connection occurred</p>
 </dd></dl>
 </dd></dl>
+<span class="target" id="module-defichain.node"></span></section>
+<section id="accounts">
+<h2>Accounts<a class="headerlink" href="#accounts" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.Accounts">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Accounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Accounts" title="Permalink to this definition">#</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Accounts.accounthistorycount">
+<span class="sig-name descname"><span class="pre">accounthistorycount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_rewards</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Accounts.accounthistorycount" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns count of account history.</p>
+<dl class="simple">
+<dt>owner<span class="classifier">str</span></dt><dd><p>(required, string) Single account ID (CScript or address) or reserved words: “mine” - to list history for all owned accounts
+or “all” to list whole DB (default = “mine”)</p>
+</dd>
+<dt>no_rewards<span class="classifier">bool</span></dt><dd><p>(optional, boolean) Filter out rewards</p>
+</dd>
+<dt>token<span class="classifier">str</span></dt><dd><p>(optional, string) Filter by token</p>
+</dd>
+<dt>txtype<span class="classifier">str</span></dt><dd><p>(optional, string) Filter by transaction type, supported letter from {CustomTxType}</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>int</dt><dd><p>(int) Count of account history</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Accounts.accounttoaccount">
+<span class="sig-name descname"><span class="pre">accounttoaccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_from</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Accounts.accounttoaccount" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates (and submits to local _node and network) a transfer transaction from the specified account to the
+specfied accounts.The first optional argument (may be empty array) is an array of specific UTXOs to spend.</p>
+<dl class="simple">
+<dt>_from :</dt><dd><p>(string, required) The defi address of sender</p>
+</dd>
+<dt>to :</dt><dd><p>(json object, required) The defi address is the key, the value is amount in <a class="reference external" href="mailto:amount%40token">amount<span>@</span>token</a> format. If multiple
+tokens are to be transferred, specify an array [”<a class="reference external" href="mailto:amount1%40t1">amount1<span>@</span>t1</a>”, “<a class="reference external" href="mailto:amount2%40t2">amount2<span>@</span>t2</a>”]
+–&gt; Can be build with “BuildToJson” Class from Utils</p>
+</dd>
+<dt>inputs :</dt><dd><p>(optional) A json array of json objects</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>str</dt><dd><p>The hex-encoded hash of broadcasted transaction</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Accounts.accounttoutxos">
+<span class="sig-name descname"><span class="pre">accounttoutxos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_from</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Accounts.accounttoutxos" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates (and submits to local _node and network) a transfer transaction from the specified account to UTXOs.
+The third optional argument (may be empty array) is an array of specific UTXOs to spend.</p>
+<dl class="simple">
+<dt>_from: str</dt><dd><p>(string, required) The defi address of sender</p>
+</dd>
+<dt>to:</dt><dd><p>(string, required) The defi address is the key, the value is amount in <a class="reference external" href="mailto:amount%40token">amount<span>@</span>token</a> format. Just to send DFI
+–&gt; Can be build with “BuildToJson” Class from Utils</p>
+</dd>
+<dt>inputs:</dt><dd><p>(json array, optional) A json array of json objects</p>
+</dd>
+</dl>
+<blockquote>
+<div><dl class="simple">
+<dt>str</dt><dd><p>(string) The hex-encoded hash of broadcasted transaction</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="blockchain">
+<h2>Blockchain<a class="headerlink" href="#blockchain" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.Blockchain">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Blockchain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Blockchain" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</section>
+<section id="control">
+<h2>Control<a class="headerlink" href="#control" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.Control">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Control</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Control" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</section>
+<section id="generating">
+<h2>Generating<a class="headerlink" href="#generating" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.Generating">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Generating</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Generating" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</section>
+<section id="loan">
+<h2>Loan<a class="headerlink" href="#loan" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.Loan">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Loan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Loan" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</section>
+<section id="masternodes">
+<h2>Masternodes<a class="headerlink" href="#masternodes" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.Masternodes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Masternodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Masternodes" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</section>
+<section id="mining">
+<h2>Mining<a class="headerlink" href="#mining" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.Mining">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Mining</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Mining" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</section>
+<section id="network">
+<h2>Network<a class="headerlink" href="#network" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.Network">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Network" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</section>
+<section id="oracles">
+<h2>Oracles<a class="headerlink" href="#oracles" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.Oracles">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Oracles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Oracles" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</section>
+<section id="poolpair">
+<h2>Poolpair<a class="headerlink" href="#poolpair" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.Poolpair">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Poolpair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Poolpair" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</section>
+<section id="rawtransactions">
+<h2>Rawtransactions<a class="headerlink" href="#rawtransactions" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.Rawtransactions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Rawtransactions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Rawtransactions" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</section>
+<section id="spv">
+<h2>Spv<a class="headerlink" href="#spv" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.Spv">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Spv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Spv" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</section>
+<section id="tokens">
+<h2>Tokens<a class="headerlink" href="#tokens" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.Tokens">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Tokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Tokens" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</section>
+<section id="util">
+<h2>Util<a class="headerlink" href="#util" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.Util">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Util</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Util" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</section>
+<section id="vault">
+<h2>Vault<a class="headerlink" href="#vault" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.Vault">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Vault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Vault" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</section>
+<section id="wallet">
+<h2>Wallet<a class="headerlink" href="#wallet" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.Wallet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Wallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Wallet" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</section>
+<section id="zmq">
+<h2>Zmq<a class="headerlink" href="#zmq" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.Zmq">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Zmq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Zmq" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
 </section>
 </section>
 
@@ -307,7 +487,24 @@ it will be imported and becomes usable under the same parameter</p></li>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">RPC</a><ul>
-<li><a class="reference internal" href="#module-defichain">Node</a></li>
+<li><a class="reference internal" href="#node">Node</a></li>
+<li><a class="reference internal" href="#accounts">Accounts</a></li>
+<li><a class="reference internal" href="#blockchain">Blockchain</a></li>
+<li><a class="reference internal" href="#control">Control</a></li>
+<li><a class="reference internal" href="#generating">Generating</a></li>
+<li><a class="reference internal" href="#loan">Loan</a></li>
+<li><a class="reference internal" href="#masternodes">Masternodes</a></li>
+<li><a class="reference internal" href="#mining">Mining</a></li>
+<li><a class="reference internal" href="#network">Network</a></li>
+<li><a class="reference internal" href="#oracles">Oracles</a></li>
+<li><a class="reference internal" href="#poolpair">Poolpair</a></li>
+<li><a class="reference internal" href="#rawtransactions">Rawtransactions</a></li>
+<li><a class="reference internal" href="#spv">Spv</a></li>
+<li><a class="reference internal" href="#tokens">Tokens</a></li>
+<li><a class="reference internal" href="#util">Util</a></li>
+<li><a class="reference internal" href="#vault">Vault</a></li>
+<li><a class="reference internal" href="#wallet">Wallet</a></li>
+<li><a class="reference internal" href="#zmq">Zmq</a></li>
 </ul>
 </li>
 </ul>
