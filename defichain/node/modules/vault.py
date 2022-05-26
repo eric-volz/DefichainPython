@@ -71,7 +71,7 @@ class Vault:
     def placeauctionbid(self, vaultId, index, _from, amount, inputs=None):  # 12
         return self._node._rpc.call("placeauctionbid", vaultId, index, _from, amount, inputs)
 
-    def updatevault(self, vaultId, ownerAddress, loanSchemeId, inputs=None):  # 13
+    def updatevault(self, vaultId, ownerAddress=None, loanSchemeId=None, inputs=None):  # 13
         parameters = BuildJson()
         parameters.append("ownerAddress", ownerAddress)
         parameters.append("loanSchemeId", loanSchemeId)
