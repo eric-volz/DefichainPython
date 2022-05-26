@@ -91,7 +91,7 @@ pytest node/test_accounts.py -k transaction # executes just the tests that are m
 | Spv             | :heavy_multiplication_x: |
 | Tokens          | :heavy_check_mark:       |
 | Util            | :heavy_check_mark:       |
-| Vault           | :heavy_multiplication_x: |
+| Vault           | :heavy_check_mark:       |
 | Wallet          | :heavy_multiplication_x: |
 | Zmq             | :heavy_check_mark:       |
 |                 |                          |
