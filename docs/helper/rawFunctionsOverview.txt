@@ -42,7 +42,7 @@ gettxout "txid" n ( include_mempool )
 gettxoutproof ["txid",...] ( "blockhash" )
 gettxoutsetinfo
 isappliedcustomtx "txid" blockHeight
-listgovs
+listgovs ( "prefix" )
 listsmartcontracts
 preciousblock "blockhash"
 pruneblockchain height
@@ -84,7 +84,7 @@ getinterest "id" ( "token" )
 getloaninfo
 getloanscheme "id"
 getloantoken "token"
-listcollateraltokens ( {"height":n,"all":bool} )
+listcollateraltokens
 listloanschemes
 listloantokens
 paybackloan {"vaultId":"hex","from":"str","amounts":"str","loans":[{"dToken":"str","amounts":"str"},...]} ( [{"txid":"hex","vout":n},...] )
@@ -208,6 +208,10 @@ spv_sendrawtx "rawtx"
 spv_sendtoaddress "address" amount ( feerate )
 spv_syncstatus
 spv_validateaddress "address"
+
+== Stats ==
+getrpcstats "command"
+listrpcstats
 
 == Tokens ==
 createtoken ( {"symbol":"str","name":"str","isDAT":bool,"decimal":n,"limit":n,"mintable":bool,"tradeable":bool,"collateralAddress":"str"} [{"txid":"hex","vout":n},...] )
