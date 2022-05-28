@@ -13,6 +13,7 @@ The documentation will follow soon.
 
    instructions/quickstart
    instructions/usage
+   additionalInfos/index
 
 .. toctree::
    :caption: API

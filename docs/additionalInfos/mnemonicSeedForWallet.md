@@ -7,15 +7,15 @@ But you can also restore the wallet just from the wallet.dat file.
 
 To be clear: this has nothing to do with the defichain light wallet.
 
-#### Here is my approach to make this possible:
+Here is my approach to make this possible:
 
 ## Requirements
 - a fully synced defichain node
 - Python3 installed on your device
 - install the python package: [hdwallet]("https://github.com/meherett/python-hdwallet)
-    ```bash
-    pip install hdwallet
-    ```
+```bash
+pip install hdwallet
+  ```
 
 ## Best practice
 - write down the mnemonic seed phase on a piece of paper and put it in a secure place
