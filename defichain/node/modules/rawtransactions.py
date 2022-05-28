@@ -52,7 +52,6 @@ class Rawtransactions:
         return self._node._rpc.call("fundrawtransaction", hexstring, options.build(), iswitness)
 
     def getrawtransaction(self, txid, verbose=False, blockhash=None):  # 12
-        verbose = False if verbose is None else verbose
         return self._node._rpc.call("getrawtransaction", txid, verbose, blockhash)
 
     def joinpsbts(self, txs):  # 13
@@ -61,8 +60,7 @@ class Rawtransactions:
     def sendrawtransaction(self, hexstring, maxfeerate=0.10):  # 14
         return self._node._rpc.call("sendrawtransaction", hexstring, maxfeerate)
 
-    def signrawtransactionwithkey(self, hexstring, privatekey, prevtxs=None, sighashtype="ALL"):  # 15
-        prevtxs = [] if prevtxs is None else prevtxs
+    def signrawtransactionwithkey(self, hexstring, privatekey, prevtxs=[], sighashtype="ALL"):  # 15
         return self._node._rpc.call("signrawtransactionwithkey", hexstring, privatekey, prevtxs, sighashtype)
 
     def testmempoolaccept(self, rawtxs, maxfeerate=0.10):  # 16
