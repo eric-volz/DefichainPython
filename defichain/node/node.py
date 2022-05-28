@@ -16,6 +16,7 @@ from .modules.oracles import Oracles
 from .modules.poolpair import Poolpair
 from .modules.rawtransactions import Rawtransactions
 from .modules.spv import Spv
+from .modules.stats import Stats
 from .modules.tokens import Tokens
 from .modules.util import Util
 from .modules.vault import Vault
@@ -66,6 +67,7 @@ class Node:
         self.poolpair = Poolpair(self)
         self.rawtransactions = Rawtransactions(self)
         self.spv = Spv(self)
+        self.stats = Stats(self)
         self.tokens = Tokens(self)
         self.util = Util(self)
         self.vault = Vault(self)

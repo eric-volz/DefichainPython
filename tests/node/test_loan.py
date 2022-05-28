@@ -65,8 +65,6 @@ def test_getloantoken():  # 07
 @pytest.mark.query
 def test_listcollateraltokens():  # 08
     assert node.loan.listcollateraltokens()
-    assert node.loan.listcollateraltokens(0, True)
-    assert node.loan.listcollateraltokens(height=0, all=True)
 
 
 @pytest.mark.query
