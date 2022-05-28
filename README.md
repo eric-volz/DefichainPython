@@ -49,7 +49,7 @@ ocean.poolpairs.get(4) #  returns data from ETH-DFI Pool
 ## Progress and Updates
 ___
 
-### Up to date to the node version: [v2.7.0 - Fort Canning Road](https://github.com/DeFiCh/ain/releases/tag/v2.7.0)
+### Up to date to the node version: [v2.8.0 - Fort Canning Crunch](https://github.com/DeFiCh/ain/releases/tag/v2.8.0)
 
 :heavy_check_mark: = Finished and UpToDate
 
@@ -58,25 +58,26 @@ ___
 :heavy_multiplication_x: = Not yet implemented
 
 ### RPC 
-| RPC Parts       | Progress           |
-|-----------------|--------------------|
-| Accounts        | :heavy_check_mark: |
-| Blockchain      | :heavy_check_mark: | 
-| Control         | :heavy_check_mark: |
-| Generating      | :heavy_check_mark: |
-| Loan            | :heavy_check_mark: |
-| Masternodes     | :heavy_check_mark: |
-| Mining          | :heavy_check_mark: |
-| Network         | :heavy_check_mark: |
-| Oracles         | :heavy_check_mark: |
-| Poolpair        | :heavy_check_mark: |
-| Rawtransactions | :heavy_check_mark: |
-| Spv             | :heavy_minus_sign: |
-| Tokens          | :heavy_check_mark: |
-| Util            | :heavy_check_mark: |
-| Vault           | :heavy_check_mark: |
-| Wallet          | :heavy_check_mark: |
-| Zmq             | :heavy_check_mark: |
+| RPC Parts       | Progress                 |
+|-----------------|--------------------------|
+| Accounts        | :heavy_check_mark:       |
+| Blockchain      | :heavy_minus_sign:       | 
+| Control         | :heavy_check_mark:       |
+| Generating      | :heavy_check_mark:       |
+| Loan            | :heavy_minus_sign:       |
+| Masternodes     | :heavy_check_mark:       |
+| Mining          | :heavy_check_mark:       |
+| Network         | :heavy_check_mark:       |
+| Oracles         | :heavy_check_mark:       |
+| Poolpair        | :heavy_check_mark:       |
+| Rawtransactions | :heavy_check_mark:       |
+| Spv             | :heavy_minus_sign:       |
+| Stats           | :heavy_multiplication_x: |
+| Tokens          | :heavy_check_mark:       |
+| Util            | :heavy_check_mark:       |
+| Vault           | :heavy_check_mark:       |
+| Wallet          | :heavy_check_mark:       |
+| Zmq             | :heavy_check_mark:       |
 
 ### Ocean Requests
 | Ocean Requests | Progress           |
