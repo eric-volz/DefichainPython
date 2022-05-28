@@ -87,7 +87,7 @@ pytest node/test_accounts.py -k transaction # executes just the tests that are m
 | Network         | :heavy_check_mark:       |
 | Oracles         | :heavy_check_mark:       |
 | Poolpair        | :heavy_check_mark:       |
-| Rawtransactions | :heavy_multiplication_x: |
+| Rawtransactions | :heavy_minus_sign:       |
 | Spv             | :heavy_multiplication_x: |
 | Stats           | :heavy_check_mark:       |
 | Tokens          | :heavy_check_mark:       |
