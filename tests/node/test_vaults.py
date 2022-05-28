@@ -14,7 +14,7 @@ vault = load_secrets_conf()["vault_address"]
 def test_closevault():  # 01
     false_vault = "86bc836f30fdf840dd4eab7a314bf0ebc2f16be827475071fdb764ef04249505"
     string = ".* RPC_INVALID_ADDRESS_OR_KEY: Vault <86bc836f30fdf840dd4eab7a314bf0ebc2f16be827475071fdb764ef04249505> " \
-             "does not found"
+             "not found"
     with pytest.raises(InternalServerError, match=string):
         assert node.vault.closevault(false_vault, address)
     with pytest.raises(InternalServerError, match=string):
