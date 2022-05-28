@@ -33,6 +33,7 @@ release = 'v0.0.8'
 # ones.
 extensions = [
     "sphinx.ext.autodoc",
+    'sphinx_mdinclude',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
