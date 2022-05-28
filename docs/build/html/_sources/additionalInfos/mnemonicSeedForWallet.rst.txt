@@ -1,0 +1,1 @@
+.. mdinclude:: ../../additionalInfos/mnemonicSeedForWallet.md
