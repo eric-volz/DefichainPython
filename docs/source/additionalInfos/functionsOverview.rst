@@ -1,4 +1,4 @@
 Node Function Overview
 ======================
 
-.. include:: ../../additionalInfos/rawFunctionsOverview.txt
+.. include:: ../../additionalInfos/rawFunctionsOverview.md
