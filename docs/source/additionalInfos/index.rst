@@ -5,5 +5,6 @@ In development
 
 .. toctree::
 
-    functionsOverview
+    rawMethodsOverview
+    installDefichainNode
     mnemonicSeedForWallet
