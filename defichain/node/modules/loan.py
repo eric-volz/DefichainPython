@@ -27,11 +27,8 @@ class Loan:
     def getloantoken(self, token):  # 07
         return self._node._rpc.call("getloantoken", token)
 
-    def listcollateraltokens(self, height=None, all=None):  # 08
-        by = BuildJson()
-        by.append("height", height)
-        by.append("all", all)
-        return self._node._rpc.call("listcollateraltokens", by.build())
+    def listcollateraltokens(self):  # 08
+        return self._node._rpc.call("listcollateraltokens")
 
     def listloanschemes(self):  # 09
         return self._node._rpc.call("listloanschemes")
