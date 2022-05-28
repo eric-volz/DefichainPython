@@ -191,6 +191,8 @@ def test_isappliedcustomtx():  # 22
 @pytest.mark.query
 def test_listgovs():  # 23
     assert node.blockchain.listgovs()
+    assert node.blockchain.listgovs("gov")
+    assert node.blockchain.listgovs(prefix="gov")
 
 
 @pytest.mark.query

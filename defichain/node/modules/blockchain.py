@@ -68,8 +68,8 @@ class Blockchain:
     def isappliedcustomtx(self, txid, blockHeight):  # 22
         return self._node._rpc.call("isappliedcustomtx", txid, blockHeight)
 
-    def listgovs(self):  # 23
-        return self._node._rpc.call("listgovs")
+    def listgovs(self, prefix=None):  # 23
+        return self._node._rpc.call("listgovs", prefix)
 
     def listsmartcontracts(self):
         return self._node._rpc.call("listsmartcontracts")  # 24
