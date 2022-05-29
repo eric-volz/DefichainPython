@@ -1,5 +1,6 @@
 import pytest
-from tests.util import createNode, load_secrets_conf, LENGTH_OF_TXID
+from tests.util import createNode, load_secrets_conf
+import time
 
 # Import Exceptions
 from defichain.exceptions.InternalServerError import InternalServerError
@@ -11,6 +12,10 @@ vault = load_secrets_conf()["vault_address"]
 
 @pytest.mark.query
 def test_analyzepsbt():  # 01
+    # Wait for valid unspent parameter
+    while not node.wallet.listunspent(addresses=[address]):
+        time.sleep(0.5)
+
     unspent = node.wallet.listunspent(addresses=[address])
     txid = unspent[0]["txid"]
     vout = unspent[0]["vout"]
@@ -24,6 +29,10 @@ def test_analyzepsbt():  # 01
 
 @pytest.mark.query
 def test_combinepsbt():  # 02
+    # Wait for valid unspent parameter
+    while not node.wallet.listunspent(addresses=[address]):
+        time.sleep(0.5)
+
     unspent = node.wallet.listunspent(addresses=[address])
     txid = unspent[0]["txid"]
     vout = unspent[0]["vout"]
@@ -37,6 +46,10 @@ def test_combinepsbt():  # 02
 
 @pytest.mark.query
 def test_combinerawtransaction():  # 03
+    # Wait for valid unspent parameter
+    while not node.wallet.listunspent(addresses=[address]):
+        time.sleep(0.5)
+
     string = ".* RPC_DESERIALIZATION_ERROR: Missing transactions"
     with pytest.raises(InternalServerError, match=string):
         assert node.rawtransactions.combinerawtransaction([])
@@ -46,6 +59,10 @@ def test_combinerawtransaction():  # 03
 
 @pytest.mark.query
 def test_converttopsbt():  # 04
+    # Wait for valid unspent parameter
+    while not node.wallet.listunspent(addresses=[address]):
+        time.sleep(0.5)
+
     unspent = node.wallet.listunspent(addresses=[address])
     txid = unspent[0]["txid"]
     vout = unspent[0]["vout"]
@@ -59,6 +76,10 @@ def test_converttopsbt():  # 04
 
 @pytest.mark.query
 def test_createpsbt():  # 05
+    # Wait for valid unspent parameter
+    while not node.wallet.listunspent(addresses=[address]):
+        time.sleep(0.5)
+
     unspent = node.wallet.listunspent(addresses=[address])
     txid = unspent[0]["txid"]
     vout = unspent[0]["vout"]
@@ -71,6 +92,10 @@ def test_createpsbt():  # 05
 
 @pytest.mark.query
 def test_createrawtransaction():  # 06
+    # Wait for valid unspent parameter
+    while not node.wallet.listunspent(addresses=[address]):
+        time.sleep(0.5)
+
     unspent = node.wallet.listunspent(addresses=[address])
     txid = unspent[0]["txid"]
     vout = unspent[0]["vout"]
@@ -84,6 +109,10 @@ def test_createrawtransaction():  # 06
 
 @pytest.mark.query
 def test_decodepsbt():  # 07
+    # Wait for valid unspent parameter
+    while not node.wallet.listunspent(addresses=[address]):
+        time.sleep(0.5)
+
     unspent = node.wallet.listunspent(addresses=[address])
     txid = unspent[0]["txid"]
     vout = unspent[0]["vout"]
@@ -95,6 +124,10 @@ def test_decodepsbt():  # 07
 
 @pytest.mark.query
 def test_decoderawtransaction():  # 08
+    # Wait for valid unspent parameter
+    while not node.wallet.listunspent(addresses=[address]):
+        time.sleep(0.5)
+
     unspent = node.wallet.listunspent(addresses=[address])
     txid = unspent[0]["txid"]
     vout = unspent[0]["vout"]
@@ -109,6 +142,10 @@ def test_decoderawtransaction():  # 08
 
 @pytest.mark.query
 def test_decodescript():  # 09
+    # Wait for valid unspent parameter
+    while not node.wallet.listunspent(addresses=[address]):
+        time.sleep(0.5)
+
     unspent = node.wallet.listunspent(addresses=[address])
     txid = unspent[0]["txid"]
     vout = unspent[0]["vout"]
@@ -121,6 +158,10 @@ def test_decodescript():  # 09
 
 @pytest.mark.query
 def test_finalizepsbt():  # 10
+    # Wait for valid unspent parameter
+    while not node.wallet.listunspent(addresses=[address]):
+        time.sleep(0.5)
+
     unspent = node.wallet.listunspent(addresses=[address])
     txid = unspent[0]["txid"]
     vout = unspent[0]["vout"]
@@ -135,7 +176,24 @@ def test_finalizepsbt():  # 10
 
 @pytest.mark.query
 def test_fundrawtransaction():  # 11
-    pass
+    # Wait for valid unspent parameter
+    while not node.wallet.listunspent(addresses=[address]):
+        time.sleep(0.5)
+
+    unspent = node.wallet.listunspent(addresses=[address])
+    txid = unspent[0]["txid"]
+    vout = unspent[0]["vout"]
+
+    raw_tx = node.rawtransactions.createrawtransaction([{"txid": txid, "vout": vout}],
+                                                       [{address: 0.00001}], 0, True)
+    assert node.rawtransactions.fundrawtransaction(raw_tx, address, 0, None, False, False, None, [], True, None,
+                                                   "UNSET", True)
+    assert node.rawtransactions.fundrawtransaction(raw_tx, None, 0, "legacy", False, False, None, [], True, 1, "UNSET",
+                                                   True)
+    assert node.rawtransactions.fundrawtransaction(hexstring=raw_tx, changeAddress=address, changePosition=0,
+                                                   change_type=None, includeWatching=False, lockUnspents=False,
+                                                   feeRate=None, subtractFeeFromOutputs=[], replaceable=True,
+                                                   conf_target=1, estimate_mode="UNSET", iswitness=True)
 
 
 @pytest.mark.query
@@ -174,6 +232,10 @@ def test_sendrawtransaction():  # 14
 
 @pytest.mark.query
 def test_signrawtransactionwithkey():  # 15
+    # Wait for valid unspent parameter
+    while not node.wallet.listunspent(addresses=[address]):
+        time.sleep(0.5)
+
     key = node.wallet.dumpprivkey(address)
 
     unspent = node.wallet.listunspent(addresses=[address])
@@ -196,7 +258,6 @@ def test_testmempoolaccept():  # 16
           "94b90cda49382f012102d9438499f4280c74afa1e9cf1d3df9cff599d05740d9355acc6be97f45575251fdffffff0262390f000000" \
           "00001976a9147d8c7b0c6e867e3034afc49eabc16ed33590400388ac007950d705000000001976a9147d8c7b0c6e867e3034afc49e" \
           "abc16ed33590400388ac0000000000"
-    string = ".* RPC_VERIFY_ERROR: Missing inputs"
     assert node.rawtransactions.testmempoolaccept([HEX])
     assert node.rawtransactions.testmempoolaccept([HEX], 0.1)
     assert node.rawtransactions.testmempoolaccept(rawtxs=[HEX], maxfeerate=0.1)
@@ -204,6 +265,10 @@ def test_testmempoolaccept():  # 16
 
 @pytest.mark.query
 def test_utxoupdatepsbt():  # 17
+    # Wait for valid unspent parameter
+    while not node.wallet.listunspent(addresses=[address]):
+        time.sleep(0.5)
+
     unspent = node.wallet.listunspent(addresses=[address])
     txid = unspent[0]["txid"]
     vout = unspent[0]["vout"]
