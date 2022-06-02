@@ -5,33 +5,24 @@ class Accounts:
     def __init__(self, node):
         self._node = node
 
-    def accounthistorycount(self, owner, no_rewards=None, token=None, txtype=None):  # 01
+    def accounthistorycount(self, owner: str = "mine", no_rewards: bool = None, token: str = None,
+                            txtype: str = None) -> int:  # 01
         """
         Returns count of account history.
 
-        Parameters
-        ----------
-        owner : str
-            (required, string) Single account ID (CScript or address) or reserved words: "mine" - to list history for all owned accounts
-            or "all" to list whole DB (default = "mine")
+        :param owner: (optional) Single account ID (CScript or address) or reserved words: "mine" - to list history for all owned accounts or "all" to list whole DB (default = "mine").
+        :type owner: str
+        :param no_rewards: (optional) Filter out rewards
+        :type no_rewards: bool
+        :param token: (optional) Filter by token
+        :type token: str
+        :param txtype: (optional) Filter by transaction type, supported letter from {CustomTxType}
+        :type txtype: str
+        :return: count (int) Count of account history
 
+        :example:
 
-        no_rewards : bool
-            (optional, boolean) Filter out rewards
-
-
-        token : str
-            (optional, string) Filter by token
-
-
-        txtype : str
-            (optional, string) Filter by transaction type, supported letter from {CustomTxType}
-
-
-        Returns
-        -------
-        int
-            (int) Count of account history
+        >>> node.accounts.accounthistorycount("all", True)
         """
         j = BuildJson()
         j.append("no_rewards", no_rewards)
@@ -39,58 +30,77 @@ class Accounts:
         j.append("txtype", txtype)
         return self._node._rpc.call("accounthistorycount", owner, j.build())
 
-    def accounttoaccount(self, _from, to, inputs=None):  # 02
+    def accounttoaccount(self, _from: str, to: {}, inputs: [{}] = None) -> hash:  # 02
         """
-        Creates (and submits to local _node and network) a transfer transaction from the specified account to the
-        specfied accounts.The first optional argument (may be empty array) is an array of specific UTXOs to spend.
+        Creates (and submits to local node and network) a transfer transaction from the specified account to the specfied accounts.
+        The first optional argument (may be empty array) is an array of specific UTXOs to spend.
 
-        Parameters
-        ----------
-        _from :
-            (string, required) The defi address of sender
+        :param _from: (required) The defi address of sender
+        :type _from: str
+        :param to: (required)
 
+            .. code-block:: text
 
-        to :
-            (json object, required) The defi address is the key, the value is amount in amount@token format. If multiple
-            tokens are to be transferred, specify an array ["amount1@t1", "amount2@t2"]
-            --> Can be build with "BuildToJson" Class from Utils
+                {
+                    "address": "str",
+                    (string, required) The defi address is the key,
+                    the value is amount in amount@token format. If multiple tokens are to be transferred, specify an array ["amount1@t1", "amount2@t2"]
+                }
 
+        :type to: json object
+        :param inputs: (optional)
 
-        inputs :
-            (optional) A json array of json objects
+            .. code-block:: text
 
+                [{
+                    (json object) "txid": "hex",
+                    (string, required) The transaction id "vout": n,
+                    (numeric, required) The output number
+                }, ...]
 
-        Returns
-        -------
-        str
-            The hex-encoded hash of broadcasted transaction
+        :type inputs: json array
+        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+
+        :example:
+
+        >>> node.accounts.accounttoaccount(sender_address, {"address1":"1.0@DFI","address2":["2.0@BTC", "3.0@ETH"]}, [])
         """
         return self._node._rpc.call("accounttoaccount", _from, to, inputs)
 
-    def accounttoutxos(self, _from, to, inputs=None):  # 03
+    def accounttoutxos(self, _from: str, to: {}, inputs: [{}] = None) -> hash:  # 03
         """
-        Creates (and submits to local _node and network) a transfer transaction from the specified account to UTXOs.
+        Creates (and submits to local node and network) a transfer transaction from the specified account to UTXOs.
         The third optional argument (may be empty array) is an array of specific UTXOs to spend.
 
-        Parameters
-        ----------
-        _from: str
-            (string, required) The defi address of sender
+        :param _from: (required) The defi address of sender
+        :type _from: str
+        :param to: (required)
 
+            .. code-block:: text
 
-        to:
-            (string, required) The defi address is the key, the value is amount in amount@token format. Just to send DFI
-            --> Can be build with "BuildToJson" Class from Utils
+                {
+                    "address": "str",
+                    (string, required) The defi address is the key,
+                    the value is amount in amount@token format. If multiple tokens are to be transferred, specify an array ["amount1@t1", "amount2@t2"]
+                }
 
+        :type to: json object
+        :param inputs: (optional)
 
-        inputs:
-            (json array, optional) A json array of json objects
+            .. code-block:: text
 
+                [{
+                    (json object) "txid": "hex",
+                    (string, required) The transaction id "vout": n,
+                    (numeric, required) The output number
+                }, ...]
 
-        Returns
-        -------
-            str
-                (string) The hex-encoded hash of broadcasted transaction
+        :type inputs: json array
+        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+
+        :example:
+
+        >>> node.accounts.accounttoutxos(sender_address, {"address1":"100@DFI"}, [])
         """
         return self._node._rpc.call("accounttoutxos", _from, to, inputs)
 
@@ -100,7 +110,27 @@ class Accounts:
     def futureswap(self, address, amount, destination="", inputs=None):  # 05
         return self._node._rpc.call("futureswap", address, amount, destination, inputs)
 
-    def getaccount(self, owner, start=None, including_start=None, limit=None, indexed_amounts=False):  # 06
+    def getaccount(self, owner: str, start: str = None, including_start: bool = None, limit: int = None,
+                   indexed_amounts: bool = False) -> "[{...}]":  # 06
+        """
+        Returns information about account.
+
+        :param owner: (required) Owner address in base58/bech32/hex encoding
+        :type owner: str
+        :param start: (optional) Optional first key to iterate from, in lexicographical order.Typically it's set to last tokenID from previous request.
+        :type start: str
+        :param including_start: (optional) If true, then iterate including starting position. False by default
+        :type including_start: bool
+        :param limit: (optional) Maximum number of orders to return, 100 by default
+        :type limit: int
+        :param indexed_amounts: (optional) Format of amounts output (default = false): (true: obj = {tokenid:amount,...}, false: array = ["amount@tokenid"...])
+        :type indexed_amounts: bool
+        :return: [{...}] (array) Json object with order information
+
+        :example:
+
+        >>> node.accounts.getaccount(owner_address)
+        """
         pagination = BuildJson()
         pagination.append("start", start)
         pagination.append("including_start", including_start)
@@ -160,7 +190,26 @@ class Accounts:
     def listcommunitybalances(self):  # 14
         return self._node._rpc.call("listcommunitybalances")
 
-    def listpendingfutureswaps(self):  # 15
+    def listpendingfutureswaps(self) -> {}:  # 15
+        """
+        Get all pending futures.
+
+        :return: "json" (string) array containing json-objects having following fields:
+
+            .. code-block:: text
+
+                owner : "address"
+                values : [{
+                    tokenSymbol : "SYMBOL"
+                    amount : n.nnnnnnnn
+                    destination : "SYMBOL"
+                }...]
+
+        :example:
+
+        >>> node.accounts.listpendingfutureswaps()
+
+        """
         return self._node._rpc.call("listpendingfutureswaps")
 
     def sendtokenstoaddress(self, _from, to, selectionMode="pie"):  # 16
