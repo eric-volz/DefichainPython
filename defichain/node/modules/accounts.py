@@ -37,27 +37,9 @@ class Accounts:
 
         :param _from: (required) The defi address of sender
         :type _from: str
-        :param to: (required)
-
-            .. code-block:: text
-
-                {
-                    "address": "str",
-                    (string, required) The defi address is the key,
-                    the value is amount in amount@token format. If multiple tokens are to be transferred, specify an array ["amount1@t1", "amount2@t2"]
-                }
-
+        :param to: (required) :ref:`Node Address Amount`
         :type to: json object
-        :param inputs: (optional)
-
-            .. code-block:: text
-
-                [{
-                    (json object) "txid": "hex",
-                    (string, required) The transaction id "vout": n,
-                    (numeric, required) The output number
-                }, ...]
-
+        :param inputs: (optional) :ref:`Node Inputs`
         :type inputs: json array
         :return: "hash" (string) The hex-encoded hash of broadcasted transaction
 
@@ -74,33 +56,15 @@ class Accounts:
 
         :param _from: (required) The defi address of sender
         :type _from: str
-        :param to: (required)
-
-            .. code-block:: text
-
-                {
-                    "address": "str",
-                    (string, required) The defi address is the key,
-                    the value is amount in amount@token format. If multiple tokens are to be transferred, specify an array ["amount1@t1", "amount2@t2"]
-                }
-
+        :param to: (required) :ref:`Node Address Amount`
         :type to: json object
-        :param inputs: (optional)
-
-            .. code-block:: text
-
-                [{
-                    (json object) "txid": "hex",
-                    (string, required) The transaction id "vout": n,
-                    (numeric, required) The output number
-                }, ...]
-
+        :param inputs: (optional) :ref:`Node Inputs`
         :type inputs: json array
         :return: "hash" (string) The hex-encoded hash of broadcasted transaction
 
         :example:
 
-        >>> node.accounts.accounttoutxos(sender_address, {"address1":"100@DFI"}, [])
+            >>> node.accounts.accounttoutxos(sender_address, {"address1":"100@DFI"}, [])
         """
         return self._node._rpc.call("accounttoutxos", _from, to, inputs)
 
@@ -129,7 +93,7 @@ class Accounts:
 
         :example:
 
-        >>> node.accounts.getaccount(owner_address)
+            >>> node.accounts.getaccount(owner_address)
         """
         pagination = BuildJson()
         pagination.append("start", start)
@@ -141,7 +105,32 @@ class Accounts:
     def getaccounthistory(self, owner, blockheight, txn):  # 07
         return self._node._rpc.call("getaccounthistory", owner, blockheight, txn)
 
-    def getburninfo(self):  # 08
+    def getburninfo(self) -> {}:  # 08
+        """
+        Returns burn address and burnt coin and token information.
+        Requires full acindex for correct amount, tokens and feeburn values.
+
+        :return:
+
+            .. code-block:: text
+
+                {
+                    "address" : "address", (string) The defi burn address
+                    "amount" : n.nnnnnnnn, (string) The amount of DFI burnt
+                    "tokens" :  [
+                        {
+                            (array of burnt tokens) "name" : "name"
+                            "amount" : n.nnnnnnnn
+                        }
+                    ]
+                    "feeburn" : n.nnnnnnnn, (string) The amount of fees burnt
+                    "emissionburn" : n.nnnnnnnn, (string) The amount of non-utxo coinbase rewards burnt
+                }
+
+        :example:
+
+            >>> node.accounts.getaccount()
+        """
         return self._node._rpc.call("getburninfo")
 
     def getpendingfutureswaps(self, address):  # 09
@@ -187,7 +176,16 @@ class Accounts:
 
         return self._node._rpc.call("listburnhistory", options.build())
 
-    def listcommunitybalances(self):  # 14
+    def listcommunitybalances(self) -> {}:  # 14
+        """
+        Returns information about all community balances.
+
+        :return: {balance_type:value,...} (array) Json object with accounts information
+
+        :example:
+
+            >>> node.accounts.listcommunitybalances()
+        """
         return self._node._rpc.call("listcommunitybalances")
 
     def listpendingfutureswaps(self) -> {}:  # 15
@@ -198,17 +196,18 @@ class Accounts:
 
             .. code-block:: text
 
-                owner : "address"
-                values : [{
-                    tokenSymbol : "SYMBOL"
-                    amount : n.nnnnnnnn
-                    destination : "SYMBOL"
-                }...]
+                {
+                    owner : "address"
+                    values : [{
+                        tokenSymbol : "SYMBOL"
+                        amount : n.nnnnnnnn
+                        destination : "SYMBOL"
+                    }...]
+                }
 
         :example:
 
-        >>> node.accounts.listpendingfutureswaps()
-
+            >>> node.accounts.listpendingfutureswaps()
         """
         return self._node._rpc.call("listpendingfutureswaps")
 
