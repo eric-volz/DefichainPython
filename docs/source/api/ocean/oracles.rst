@@ -1,3 +1,5 @@
+.. _Ocean Oracles:
+
 .. automodule:: defichain.ocean
     :noindex:
 

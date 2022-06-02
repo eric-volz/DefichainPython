@@ -1,3 +1,5 @@
+.. _Ocean Stats:
+
 .. automodule:: defichain.ocean
     :noindex:
 

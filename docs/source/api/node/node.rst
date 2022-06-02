@@ -1,3 +1,5 @@
+.. _Node Node:
+
 .. automodule:: defichain
     :noindex:
 

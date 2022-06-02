@@ -1,3 +1,5 @@
+.. _Ocean Poolpair:
+
 .. automodule:: defichain.ocean
     :noindex:
 

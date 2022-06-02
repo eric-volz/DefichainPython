@@ -1,3 +1,5 @@
+.. _Node Tokens:
+
 .. automodule:: defichain.node
     :noindex:
 

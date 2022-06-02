@@ -1,3 +1,5 @@
+.. _Node Zmq:
+
 .. automodule:: defichain.node
     :noindex:
 

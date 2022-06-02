@@ -1,3 +1,5 @@
+.. _Ocean Masternodes:
+
 .. automodule:: defichain.ocean
     :noindex:
 

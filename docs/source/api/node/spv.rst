@@ -1,3 +1,5 @@
+.. _Node Spv:
+
 .. automodule:: defichain.node
     :noindex:
 

@@ -1,3 +1,5 @@
+.. _Ocean RawTx:
+
 .. automodule:: defichain.ocean
     :noindex:
 

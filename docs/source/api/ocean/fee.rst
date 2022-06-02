@@ -1,3 +1,5 @@
+.. _Ocean Fee:
+
 .. automodule:: defichain.ocean
     :noindex:
 

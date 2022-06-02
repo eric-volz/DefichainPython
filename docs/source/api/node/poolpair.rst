@@ -1,3 +1,5 @@
+.. _Node Poolpair:
+
 .. automodule:: defichain.node
     :noindex:
 

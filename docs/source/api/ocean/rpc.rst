@@ -1,3 +1,5 @@
+.. _Ocean RPC:
+
 .. automodule:: defichain.ocean
     :noindex:
 

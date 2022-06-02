@@ -1,3 +1,5 @@
+.. _Ocean Tokens:
+
 .. automodule:: defichain.ocean
     :noindex:
 

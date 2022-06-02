@@ -1,3 +1,5 @@
+.. _Ocean Address:
+
 .. automodule:: defichain.ocean
     :noindex:
 
