@@ -143,3 +143,112 @@ def test_getreceivedbyaddress():  # 16
     assert node.wallet.getreceivedbyaddress(address)
     assert node.wallet.getreceivedbyaddress(address, 1)
     assert node.wallet.getreceivedbyaddress(address=address, minconf=1)
+
+
+@pytest.mark.query
+def test_getreceivedbylabel():  # 17
+    assert node.wallet.getreceivedbylabel("")
+    assert node.wallet.getreceivedbylabel("", 1)
+    assert node.wallet.getreceivedbylabel(label="", minconf=1)
+
+
+@pytest.mark.query
+def test_gettransaction():  # 18
+    txid = node.wallet.listtransactions(count=1)[0]["txid"]
+
+    assert node.wallet.gettransaction(txid)
+    assert node.wallet.gettransaction(txid, True)
+    assert node.wallet.gettransaction(txid=txid, include_watchonly=True)
+
+
+@pytest.mark.query
+def test_getunconfirmedbalance():  # 19
+    result1 = node.wallet.getunconfirmedbalance()
+    assert result1 or result1 == 0.0
+    result2 = node.wallet.getunconfirmedbalance(False)
+    assert result2 or result2 == 0.0
+    result3 = node.wallet.getunconfirmedbalance(with_tokens=False)
+    assert result2 or result3 == 0.0
+
+
+@pytest.mark.query
+def test_getwalletinfo():  # 20
+    assert node.wallet.getwalletinfo()
+    assert node.wallet.getwalletinfo(False)
+    assert node.wallet.getwalletinfo(with_tokens=False)
+
+
+@pytest.mark.query
+def test_importaddress():  # 21
+    assert node.wallet.importaddress(address, rescan=False) is None
+    assert node.wallet.importaddress(address, "", False, False) is None
+    assert node.wallet.importaddress(address=address, label="", rescan=False, p2sh=False) is None
+
+
+@pytest.mark.query
+def test_importmulti():  # 22
+    string = '.* RPC_TYPE_ERROR: Expected type object, got bool'
+    with pytest.raises(InternalServerError, match=string):
+        assert node.wallet.importmulti([])
+    with pytest.raises(InternalServerError, match=string):
+        assert node.wallet.importmulti([], False)
+    with pytest.raises(InternalServerError, match=string):
+        assert node.wallet.importmulti(requests=[], rescan=False)
+
+
+@pytest.mark.query
+def test_importprivkey():  # 23
+    priv_key = "KxmHsh3zrURFKPsqR5fUAyE6viuqe4dRc6KUzKyGtPyjhWXzmPVN"
+
+    assert node.wallet.importprivkey(priv_key, rescan=False) is None
+    assert node.wallet.importprivkey(priv_key, "", False) is None
+    assert node.wallet.importprivkey(privkey=priv_key, label="", rescan=False) is None
+
+
+@pytest.mark.query
+def test_importprunedfunds():  # 24
+    pass
+
+
+@pytest.mark.query
+def test_importpubkey():  # 25
+    pub_key = "028bfcd13b59fe60442ae6dd2861b327ba47c5def1d289b5e5b73c8db0ad65a327"
+
+    assert node.wallet.importpubkey(pub_key, rescan=False) is None
+    assert node.wallet.importpubkey(pub_key, "", False) is None
+    assert node.wallet.importpubkey(pubkey=pub_key, label="", rescan=False) is None
+
+
+@pytest.mark.query
+def test_importwallet():  # 26
+    wallet_path = load_secrets_conf()["wallet_path"]
+
+    assert node.wallet.importwallet(wallet_path) is None
+    assert node.wallet.importwallet(filename=wallet_path) is None
+
+
+@pytest.mark.query
+def test_keypoolrefill():  # 27
+    assert node.wallet.keypoolrefill() is None
+    assert node.wallet.keypoolrefill(100) is None
+    assert node.wallet.keypoolrefill(newsize=100) is None
+
+
+@pytest.mark.query
+def test_listaddressgroupings():  # 28
+    assert node.wallet.listaddressgroupings()
+
+
+@pytest.mark.query
+def test_listlables():  # 29
+    assert node.wallet.listlabels()
+    assert node.wallet.listlabels("")
+    assert node.wallet.listlabels(purpose="")
+
+
+@pytest.mark.query
+def test_listlockunspent():  # 30
+    result = node.wallet.listlockunspent()
+    assert result or result == []
+
+
