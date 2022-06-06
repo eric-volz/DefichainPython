@@ -85,7 +85,6 @@ class Wallet:
         return self._node._rpc.call("importprunedfunds", rawtransaction, txoutproof)
 
     def importpubkey(self, pubkey, label="", rescan=True):  # 25
-        label = "" if label is None else label
         return self._node._rpc.call("importpubkey", pubkey, label, rescan)
 
     def importwallet(self, filename):  # 26
