@@ -252,3 +252,101 @@ def test_listlockunspent():  # 30
     assert result or result == []
 
 
+@pytest.mark.query
+def test_listreceivedbyaddress():  # 31
+    assert node.wallet.listreceivedbyaddress()
+    assert node.wallet.listreceivedbyaddress(1, False, True, address)
+    assert node.wallet.listreceivedbyaddress(minconf=1, include_empty=False, include_watchonly=True,
+                                             address_filter=address)
+
+
+@pytest.mark.query
+def test_listreceivedbylabel():  # 32
+    assert node.wallet.listreceivedbylabel()
+    assert node.wallet.listreceivedbylabel(1, False, True)
+    assert node.wallet.listreceivedbylabel(minconf=1, include_empty=False, include_watchonly=True)
+
+
+@pytest.mark.query
+def test_listsinceblock():  # 33
+    assert node.wallet.listsinceblock()
+    assert node.wallet.listsinceblock("279b1a87aedc7b9471d4ad4e5f12967ab6259926cd097ade188dfcf22ebfe72a", 1, True, True)
+    assert node.wallet.listsinceblock(blockhash="279b1a87aedc7b9471d4ad4e5f12967ab6259926cd097ade188dfcf22ebfe72a",
+                                      target_confirmations=1, include_watchonly=True, include_removed=True)
+
+
+@pytest.mark.query
+def test_listtransactions():  # 34
+    assert node.wallet.listtransactions()
+    assert node.wallet.listtransactions("*", 10, 0, True, False)
+    assert node.wallet.listtransactions(label="*", count=10, skip=0, include_watchonly=True, exclude_custom_tx=False)
+
+
+@pytest.mark.query
+def test_listunspent():  # 35
+    assert node.wallet.listunspent()
+    assert node.wallet.listunspent(1, 9999999, [], True, 0, 9999999, 10, 9999999, "DFI")
+    assert node.wallet.listunspent(mincof=1, maxcof=9999999, addresses=[], include_unsafe=True, minimumAmount=0,
+                                   maximumAmount=9999999, maximumCount=10, minimumSumAmount=9999999, tokenId="DFI")
+
+
+@pytest.mark.query
+def test_listwalletdir():  # 36
+    assert node.wallet.listwalletdir()
+
+
+@pytest.mark.query
+def test_listwallets():  # 37
+    assert node.wallet.listwallets()
+
+
+@pytest.mark.query
+def test_loadwallet():  # 38
+    wallet_path = load_secrets_conf()["wallet_path"]
+    string = ".* RPC_WALLET_ERROR: Wallet file verification failed: Error loading wallet .*"
+    with pytest.raises(InternalServerError, match=string):
+        assert node.wallet.loadwallet(wallet_path)
+    with pytest.raises(InternalServerError, match=string):
+        assert node.wallet.loadwallet(filename=wallet_path)
+
+
+@pytest.mark.query
+def test_lockunspent():  # 39
+    assert node.wallet.lockunspent(True)
+    assert node.wallet.lockunspent(True, [])
+    assert node.wallet.lockunspent(unlock=True, transactions=[])
+
+
+@pytest.mark.query
+def test_removeprunedfunds():  # 40
+    txid = "e56d3960e850ffe5dffd4733ced07d644527eb81e86440952195ce9556b665ea"
+
+    string = ".* RPC_INVALID_PARAMETER: Transaction does not exist in wallet."
+    with pytest.raises(InternalServerError, match=string):
+        assert node.wallet.removeprunedfunds(txid)
+    with pytest.raises(InternalServerError, match=string):
+        assert node.wallet.removeprunedfunds(txid=txid)
+
+
+@pytest.mark.query
+def test_rescanblockchain():  # 41
+    assert node.wallet.rescanblockchain(node.blockchain.getblockcount()-100, node.blockchain.getblockcount())
+    assert node.wallet.rescanblockchain(start_height=node.blockchain.getblockcount() - 100,
+                                        stop_height=node.blockchain.getblockcount())
+
+
+@pytest.mark.transactions
+def test_sendmany():  # 42
+    assert node.wallet.sendmany("", {address: 0.00001})
+    assert node.wallet.sendmany("", {address: 0.00001}, 0, "Test", [], True, 1, "UNSET")
+    assert node.wallet.sendmany(dummy="", amounts={address: 0.00001}, minconf=0, comment="Test", subtractfeefrom=[],
+                                replaceable=True, conf_target=1, estimate_mode="UNSET")
+
+
+@pytest.mark.transactions
+def test_sendtoaddress():  # 43
+    assert node.wallet.sendtoaddress(address, 0.0001)
+    assert node.wallet.sendtoaddress(address, 0.0001, "Test", "Myself", False, True, 1, "UNSET", False)
+    assert node.wallet.sendtoaddress(address=address, amount=0.0001, comment="Test", comment_to="Myself",
+                                     subtractfeefromamount=False, replaceable=True, conf_target=1,
+                                     estimate_mode="UNSET", avoid_reuse=False)
