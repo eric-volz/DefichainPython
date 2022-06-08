@@ -284,10 +284,13 @@ def test_listtransactions():  # 34
 
 @pytest.mark.query
 def test_listunspent():  # 35
-    assert node.wallet.listunspent()
-    assert node.wallet.listunspent(1, 9999999, [], True, 0, 9999999, 10, 9999999, "DFI")
-    assert node.wallet.listunspent(mincof=1, maxcof=9999999, addresses=[], include_unsafe=True, minimumAmount=0,
-                                   maximumAmount=9999999, maximumCount=10, minimumSumAmount=9999999, tokenId="DFI")
+    result1 = node.wallet.listunspent()
+    assert result1 or result1 == []
+    result2 = node.wallet.listunspent(1, 9999999, [], True, 0, 9999999, 10, 9999999, "DFI")
+    assert result2 or result2 == []
+    result3 = node.wallet.listunspent(mincof=1, maxcof=9999999, addresses=[], include_unsafe=True, minimumAmount=0,
+                                      maximumAmount=9999999, maximumCount=10, minimumSumAmount=9999999, tokenId="DFI")
+    assert result3 or result3 == []
 
 
 @pytest.mark.query
