@@ -108,10 +108,7 @@ class Wallet:
     def listreceivedbylabel(self, minconf=1, include_empty=False, include_watchonly=True):  # 32
         return self._node._rpc.call("listreceivedbylabel", minconf, include_empty, include_watchonly)
 
-    def listsinceblock(self, blockhash=None, target_confirmations=1, include_watchonly=True, include_removed=True):  # 33
-        blockhash = "" if blockhash is None else blockhash
-        target_confirmations = 1 if target_confirmations is None else target_confirmations
-        include_watchonly = True if include_watchonly is None else include_watchonly
+    def listsinceblock(self, blockhash="", target_confirmations=1, include_watchonly=True, include_removed=True):  # 33
         return self._node._rpc.call("listsinceblock", blockhash, target_confirmations, include_watchonly, include_removed)
 
     def listtransactions(self, label="*", count=10, skip=0, include_watchonly=True, exclude_custom_tx=False):  # 34
@@ -136,14 +133,13 @@ class Wallet:
     def loadwallet(self, filename):  # 38
         return self._node._rpc.call("loadwallet", filename)
 
-    def lockunspent(self, unlock, transaction=None):  # 39
-        return self._node._rpc.call("lockunspent", unlock, transaction)
+    def lockunspent(self, unlock, transactions=None):  # 39
+        return self._node._rpc.call("lockunspent", unlock, transactions)
 
     def removeprunedfunds(self, txid):  # 40
         return self._node._rpc.call("removeprunedfunds", txid)
 
     def rescanblockchain(self, start_height=0, stop_height=None):  # 41
-        start_height = 0 if start_height is None else start_height
         return self._node._rpc.call("rescanblockchain", start_height, stop_height)
 
     def sendmany(self, dummy, amounts, minconf=1, comment="", subtractfeefrom=[], replaceable=False,
@@ -152,7 +148,7 @@ class Wallet:
                                     conf_target, estimate_mode)
 
     def sendtoaddress(self, address, amount, comment="", comment_to="", subtractfeefromamount=False,
-                      replaceable=False, conf_target=1, estimate_mode="UNSET", avoid_reuse=True):  # 43
+                      replaceable=False, conf_target=1, estimate_mode="UNSET", avoid_reuse=None):  # 43
         return self._node._rpc.call("sendtoaddress", address, amount, comment, comment_to, subtractfeefromamount,
                                     replaceable, conf_target, estimate_mode, avoid_reuse)
 
