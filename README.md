@@ -49,7 +49,7 @@ ocean.poolpairs.get(4) #  returns data from ETH-DFI Pool
 ## Progress and Updates
 ___
 
-### Up to date to the node version: [v2.8.0 - Fort Canning Crunch](https://github.com/DeFiCh/ain/releases/tag/v2.8.0)
+### Up to date to the node version: [v2.8.1 - Fort Canning Crunch](https://github.com/DeFiCh/ain/releases/tag/v2.8.1)
 
 :heavy_check_mark: = Finished and UpToDate
 

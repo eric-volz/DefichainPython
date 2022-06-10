@@ -23,8 +23,8 @@ class Vault:
     def estimatevault(self, collateralAmounts, loanAmounts):  # 06
         return self._node._rpc.call("estimatevault", collateralAmounts, loanAmounts)
 
-    def getvault(self, vaultId):  # 07
-        return self._node._rpc.call("getvault", vaultId)
+    def getvault(self, vaultId, verbose=False):  # 07
+        return self._node._rpc.call("getvault", vaultId, verbose)
 
     def listauctionhistory(self, identifier="mine", maxBlockHeight=None, vaultId=None, index=None, limit=None):  # 08
         pagination = BuildJson()

@@ -478,7 +478,7 @@ estimateloan "vaultId" {"split":n} ( targetRatio )
 
 estimatevault "collateralAmounts" "loanAmounts"
 
-getvault "vaultId"
+getvault "vaultId" ( verbose )
 
 listauctionhistory ( "owner|vaultId" {"maxBlockHeight":n,"vaultId":"hex","index":n,"limit":n} )
 
