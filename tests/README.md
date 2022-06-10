@@ -75,47 +75,47 @@ pytest node/test_accounts.py -k transaction # executes just the tests that are m
 :heavy_multiplication_x: = Not yet implemented
 
 ### RPC 
-| RPC Parts       | Progress                 |
-|-----------------|--------------------------|
-| Accounts        | :heavy_check_mark:       |
-| Blockchain      | :heavy_check_mark:       | 
-| Control         | :heavy_check_mark:       |
-| Generating      | :heavy_check_mark:       |
-| Loan            | :heavy_check_mark:       |
-| Masternodes     | :heavy_check_mark:       |
-| Mining          | :heavy_check_mark:       |
-| Network         | :heavy_check_mark:       |
-| Oracles         | :heavy_check_mark:       |
-| Poolpair        | :heavy_check_mark:       |
-| Rawtransactions | :heavy_check_mark:       |
-| Spv             | :heavy_multiplication_x: |
-| Stats           | :heavy_check_mark:       |
-| Tokens          | :heavy_check_mark:       |
-| Util            | :heavy_check_mark:       |
-| Vault           | :heavy_check_mark:       |
-| Wallet          | :heavy_check_mark:       |
-| Zmq             | :heavy_check_mark:       |
-|                 |                          |
-| Node Connection | :heavy_check_mark:       |
-| Exceptions      | :heavy_multiplication_x: |
+| RPC Parts       | Progress           |
+|-----------------|--------------------|
+| Accounts        | :heavy_check_mark: |
+| Blockchain      | :heavy_check_mark: | 
+| Control         | :heavy_check_mark: |
+| Generating      | :heavy_check_mark: |
+| Loan            | :heavy_check_mark: |
+| Masternodes     | :heavy_check_mark: |
+| Mining          | :heavy_check_mark: |
+| Network         | :heavy_check_mark: |
+| Oracles         | :heavy_check_mark: |
+| Poolpair        | :heavy_check_mark: |
+| Rawtransactions | :heavy_check_mark: |
+| Spv             | :heavy_minus_sign: |
+| Stats           | :heavy_check_mark: |
+| Tokens          | :heavy_check_mark: |
+| Util            | :heavy_check_mark: |
+| Vault           | :heavy_check_mark: |
+| Wallet          | :heavy_check_mark: |
+| Zmq             | :heavy_check_mark: |
+|                 |                    |
+| Node Connection | :heavy_check_mark: |
+| Exceptions      | :heavy_check_mark: |
 
 
 ### Ocean Requests
-| Ocean Requests   | Progress                 |
-|------------------|--------------------------|
-| Address          | :heavy_check_mark:       |
-| Blocks           | :heavy_check_mark:       | 
-| Fee              | :heavy_check_mark:       |
-| Loan             | :heavy_check_mark:       |
-| Masternodes      | :heavy_check_mark:       |
-| Oracles          | :heavy_check_mark:       |
-| Poolpairs        | :heavy_check_mark:       |
-| Prices           | :heavy_check_mark:       |
-| RawTx            | :heavy_check_mark:       |
-| RPC              | :heavy_check_mark:       |
-| stats            | :heavy_check_mark:       |
-| Tokens           | :heavy_check_mark:       |
-| Transactions     | :heavy_check_mark:       |
-|                  |                          |
-| Ocean Connection | :heavy_check_mark:       |
-| Exceptions       | :heavy_multiplication_x: |
+| Ocean Requests   | Progress           |
+|------------------|--------------------|
+| Address          | :heavy_check_mark: |
+| Blocks           | :heavy_check_mark: | 
+| Fee              | :heavy_check_mark: |
+| Loan             | :heavy_check_mark: |
+| Masternodes      | :heavy_check_mark: |
+| Oracles          | :heavy_check_mark: |
+| Poolpairs        | :heavy_check_mark: |
+| Prices           | :heavy_check_mark: |
+| RawTx            | :heavy_check_mark: |
+| RPC              | :heavy_check_mark: |
+| stats            | :heavy_check_mark: |
+| Tokens           | :heavy_check_mark: |
+| Transactions     | :heavy_check_mark: |
+|                  |                    |
+| Ocean Connection | :heavy_check_mark: |
+| Exceptions       | :heavy_check_mark: |
