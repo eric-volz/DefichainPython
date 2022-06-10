@@ -286,7 +286,7 @@
 <p>gettxoutproof [“txid”,…] ( “blockhash” )</p>
 <p>gettxoutsetinfo</p>
 <p>isappliedcustomtx “txid” blockHeight</p>
-<p>listgovs</p>
+<p>listgovs ( “prefix” )</p>
 <p>listsmartcontracts</p>
 <p>preciousblock “blockhash”</p>
 <p>pruneblockchain height</p>
@@ -324,7 +324,7 @@
 <p>getloaninfo</p>
 <p>getloanscheme “id”</p>
 <p>getloantoken “token”</p>
-<p>listcollateraltokens ( {“height”:n,”all”:bool} )</p>
+<p>listcollateraltokens</p>
 <p>listloanschemes</p>
 <p>listloantokens</p>
 <p>paybackloan {“vaultId”:”hex”,”from”:”str”,”amounts”:”str”,”loans”:[{“dToken”:”str”,”amounts”:”str”},…]} ( [{“txid”:”hex”,”vout”:n},…] )</p>
@@ -441,6 +441,9 @@
 <p>spv_sendtoaddress “address” amount ( feerate )</p>
 <p>spv_syncstatus</p>
 <p>spv_validateaddress “address”</p>
+<p>== Stats ==</p>
+<p>getrpcstats “command”</p>
+<p>listrpcstats</p>
 <p>== Tokens ==</p>
 <p>createtoken ( {“symbol”:”str”,”name”:”str”,”isDAT”:bool,”decimal”:n,”limit”:n,”mintable”:bool,”tradeable”:bool,”collateralAddress”:”str”} [{“txid”:”hex”,”vout”:n},…] )</p>
 <p>decodecustomtx “hexstring” ( iswitness )</p>
@@ -464,7 +467,7 @@
 <p>estimatecollateral “loanAmounts” targetRatio ( {“split”:n} )</p>
 <p>estimateloan “vaultId” {“split”:n} ( targetRatio )</p>
 <p>estimatevault “collateralAmounts” “loanAmounts”</p>
-<p>getvault “vaultId”</p>
+<p>getvault “vaultId” ( verbose )</p>
 <p>listauctionhistory ( “owner|vaultId” {“maxBlockHeight”:n,”vaultId”:”hex”,”index”:n,”limit”:n} )</p>
 <p>listauctions ( {“start”:obj,”including_start”:bool,”limit”:n} )</p>
 <p>listvaulthistory “vaultId” ( {“maxBlockHeight”:n,”depth”:n,”token”:”str”,”txtype”:”str”,”limit”:n} )</p>
