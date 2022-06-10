@@ -1,6 +1,8 @@
 import pytest
-import os
+import os, time
 from tests.util import createNode, load_secrets_conf
+from defichain import Node
+
 from pathlib import Path
 path = str(Path.home())
 
@@ -353,3 +355,130 @@ def test_sendtoaddress():  # 43
     assert node.wallet.sendtoaddress(address=address, amount=0.0001, comment="Test", comment_to="Myself",
                                      subtractfeefromamount=False, replaceable=True, conf_target=1,
                                      estimate_mode="UNSET", avoid_reuse=False)
+
+
+@pytest.mark.query
+def test_sethdseed():  # 44
+    assert node.wallet.sethdseed() is None
+    assert node.wallet.sethdseed(False, None) is None
+    assert node.wallet.sethdseed(newkeypool=False, seed=None) is None
+
+
+@pytest.mark.query
+def test_setlabel():  # 45
+    assert node.wallet.setlabel(address, "") is None
+    assert node.wallet.setlabel(address=address, label="") is None
+
+
+@pytest.mark.query
+def test_settxfee():  # 46
+    assert node.wallet.settxfee(0.00001)
+    assert node.wallet.settxfee(amount=0.00001)
+
+
+@pytest.mark.query
+def test_setwalletflag():  # 47
+    string = ".* RPC_INVALID_PARAMETER: Wallet flag is already set to false: avoid_reuse"
+    assert node.wallet.setwalletflag("avoid_reuse")
+    assert node.wallet.setwalletflag("avoid_reuse", False)
+    with pytest.raises(InternalServerError, match=string):
+        assert node.wallet.setwalletflag(flag="avoid_reuse", value=False)
+
+
+@pytest.mark.query
+def test_signmessage():  # 48
+    assert node.wallet.signmessage(address, "test")
+    assert node.wallet.signmessage(address=address, message="test")
+
+
+@pytest.mark.query
+def test_signrawtransactionwithwallet():  # 49
+    # Wait for valid unspent parameter
+    while not node.wallet.listunspent(addresses=[address]):
+        time.sleep(0.5)
+
+    unspent = node.wallet.listunspent(addresses=[address])
+    txid = unspent[0]["txid"]
+    vout = unspent[0]["vout"]
+
+    raw_tx = node.rawtransactions.createrawtransaction([{"txid": txid, "vout": vout}],
+                                                       [{address: 0.00000001}], 0, True)
+
+    assert node.wallet.signrawtransactionwithwallet(raw_tx)
+    assert node.wallet.signrawtransactionwithwallet(raw_tx, [], "ALL")
+    assert node.wallet.signrawtransactionwithwallet(hexstring=raw_tx, prevtxs=[], sighashtype="ALL")
+
+
+@pytest.mark.query
+def test_unloadwallet():  # 50
+    assert node.wallet.unloadwallet() is None
+    node.wallet.loadwallet(load_secrets_conf()["wallet_path"])
+
+
+@pytest.mark.query
+def test_walletcreatefundedpsbt():  # 51
+    # Wait for valid unspent parameter
+    while not node.wallet.listunspent(addresses=[address]):
+        time.sleep(0.5)
+
+    unspent = node.wallet.listunspent(addresses=[address])
+    txid = unspent[0]["txid"]
+    vout = unspent[0]["vout"]
+    assert node.wallet.walletcreatefundedpsbt([{"txid": txid, "vout": vout}],
+                                              [{address: 0.00001}])
+    assert node.wallet.walletcreatefundedpsbt([{"txid": txid, "vout": vout}],
+                                              [{address: 0.00001}],
+                                              0, address, 0, None, True, False, 0.0001, [], True, None, None, False)
+    assert node.wallet.walletcreatefundedpsbt([{"txid": txid, "vout": vout}],
+                                              [{address: 0.00001}],
+                                              0, None, 0, "legacy", True, False, None, [], True, 1, "UNSET", False)
+    assert node.wallet.walletcreatefundedpsbt(inputs=[{"txid": txid, "vout": vout}],
+                                              outputs=[{address: 0.00001}],
+                                              locktime=0,
+                                              changeAddress=address,
+                                              changePosition=0,
+                                              change_type=None,
+                                              includeWatching=True,
+                                              lockUnspents=False,
+                                              feeRate=None,
+                                              subtractFeeFromOutputs=[],
+                                              replaceable=True,
+                                              conf_target=1,
+                                              estimate_mode="UNSET",
+                                              bip32derivs=False)
+
+
+@pytest.mark.query
+def test_walletlock():  # 52
+    assert node.wallet.walletlock() is None
+    node.wallet.walletpassphrase(load_secrets_conf()["wallet_password"], 3600)
+
+
+@pytest.mark.query
+def test_walletpassphrase():  # 53
+    assert node.wallet.walletpassphrase(load_secrets_conf()["wallet_password"], 3600) is None
+    assert node.wallet.walletpassphrase(passphrase=load_secrets_conf()["wallet_password"], timeout=3600) is None
+
+
+@pytest.mark.query
+def test_walletpassphrasechange():  # 54
+    secrets = load_secrets_conf()
+    assert node.wallet.walletpassphrasechange(secrets["wallet_password"], secrets["wallet_password"]) is None
+    assert node.wallet.walletpassphrasechange(oldpassphrase=secrets["wallet_password"],
+                                              newpassphrase=secrets["wallet_password"]) is None
+
+
+@pytest.mark.query
+def test_walletprocesspsbt():  # 55
+    # Wait for valid unspent parameter
+    while not node.wallet.listunspent(addresses=[address]):
+        time.sleep(0.5)
+
+    unspent = node.wallet.listunspent(addresses=[address])
+    txid = unspent[0]["txid"]
+    vout = unspent[0]["vout"]
+    psbt = node.rawtransactions.createpsbt([{"txid": txid, "vout": vout}], [{address: 0.00000001}], 0, True)
+
+    assert node.wallet.walletprocesspsbt(psbt)
+    assert node.wallet.walletprocesspsbt(psbt, True, "ALL", False)
+    assert node.wallet.walletprocesspsbt(psbt=psbt, sign=True, sighashtype="ALL", bip32derivs=False)
