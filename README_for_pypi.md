@@ -1,12 +1,9 @@
-[![Downloads](https://static.pepy.tech/personalized-badge/defichain?period=total&units=international_system&left_color=grey&right_color=green&left_text=Downloads)](https://pepy.tech/project/defichain)
 [![PyPI Version](https://img.shields.io/pypi/v/defichain.svg?color=green)](https://pypi.org/project/defichain)
-[![Documentation Status](https://readthedocs.org/projects/defichain/badge/?version=master)](https://defichain.readthedocs.io)
 [![PyPI Python Version](https://img.shields.io/pypi/pyversions/defichain.svg)](https://pypi.org/project/defichain)
+[![Documentation Status](https://readthedocs.org/projects/pytest/badge/?version=latest)](https://docs.defichain-python.de/)
+[![Downloads](https://static.pepy.tech/personalized-badge/defichain?period=total&units=international_system&left_color=grey&right_color=green&left_text=Downloads)](https://pepy.tech/project/defichain)
 
 # [DefichainPython](https://github.com/eric-volz/DefichainPython)
-
-## This library is not finished yet and therefore should not be used in production!
-## Changes can still occur at any time and may break your code!
 
 ## Welcome to Defichain's Python Library
 ___

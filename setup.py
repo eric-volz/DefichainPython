@@ -1,13 +1,13 @@
 from setuptools import setup
 from os import path
 
-VERSION = '0.0.8'
+VERSION = '1.0.0'
 DESCRIPTION = 'Defichain Python Library'
 
 # Project URLs
 project_urls = {
     "Tracker": "https://github.com/eric-volz/DefichainPython",
-    "Documentation": "https://defichain.readthedocs.io"
+    "Documentation": "https://docs.defichain-python.de"
 }
 
 this_directory = path.abspath(path.dirname(__file__))
