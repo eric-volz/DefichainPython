@@ -64,7 +64,8 @@ def test_estimatevault():  # 06
 @pytest.mark.query
 def test_getvault():  # 07
     assert node.vault.getvault(vault)
-    assert node.vault.getvault(vaultId=vault)
+    assert node.vault.getvault(vault, False)
+    assert node.vault.getvault(vaultId=vault, verbose=False)
 
 
 @pytest.mark.query
