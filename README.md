@@ -96,9 +96,7 @@ ___
 | Transactions   | :heavy_check_mark: |
 
 ## Next Steps
-- Finish the RPC Code
-- Write unit tests for RPC and Ocean commands
-- Document all functions and publish it on [ReadTheDocs](https://readthedocs.org/)
+- Document all methods and publish it on [docs.defichain-python.de](https://docs.defichain-python.de/)
 
 ## Community
 This [project](https://github.com/DeFiCh/dfips/issues/133) is funded by the Defichain Community:
