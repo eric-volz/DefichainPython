@@ -93,7 +93,7 @@ class Accounts:
 
         :example:
 
-            >>> node.accounts.getaccount(owner_address)
+            >>> node.accounts.getaccount("mxxA2sQMETJFbXcNbNbUzEsBCTn1JSHXST")
         """
         pagination = BuildJson()
         pagination.append("start", start)
@@ -102,7 +102,22 @@ class Accounts:
 
         return self._node._rpc.call("getaccount", owner, pagination.build(), indexed_amounts)
 
-    def getaccounthistory(self, owner, blockheight, txn):  # 07
+    def getaccounthistory(self, owner: str, blockheight: int, txn: int) -> {}:  # 07
+        """
+        Returns information about account history.
+
+        :param owner: (required) Single account ID (CScript or address).
+        :type owner: str
+        :param blockheight: (required) Block Height to search in.
+        :type blockheight: int
+        :param txn: (required) for order in block.
+        :type txn: int
+        :return: {}  An object with account history information
+
+        :example:
+
+            >>> node.accounts.getaccounthistory("mxxA2sQMETJFbXcNbNbUzEsBCTn1JSHXST", 103, 2)
+        """
         return self._node._rpc.call("getaccounthistory", owner, blockheight, txn)
 
     def getburninfo(self) -> {}:  # 08
@@ -133,10 +148,52 @@ class Accounts:
         """
         return self._node._rpc.call("getburninfo")
 
-    def getpendingfutureswaps(self, address):  # 09
+    def getpendingfutureswaps(self, address: str) -> {}:  # 09
+        """
+        Get specific pending futures.
+
+        :param address: (required) Address to get all pending future swaps
+        :type address: str
+        :return:
+
+            .. code-block:: text
+
+                {
+                    owner :       "address"
+                    values : [{
+                        tokenSymbol : "SYMBOL"
+                        amount :      n.nnnnnnnn
+                        destination : "SYMBOL"
+                    }...]
+                }
+
+        :example:
+
+            >>> node.accounts.getpendingfutureswaps(address)
+        """
         return self._node._rpc.call("getpendingfutureswaps", address)
 
-    def gettokenbalances(self, start=None, including_start=None, limit=None, indexed_amounts=False, symbol_lookup=False):  # 10
+    def gettokenbalances(self, start: str = None, including_start: bool = None, limit: int = None,
+                         indexed_amounts: bool = False, symbol_lookup: bool = False) -> {}:  # 10
+        """
+        Returns the balances of all accounts that belong to the wallet.
+
+        :param start: (optional) Optional first key to iterate from, in lexicographical order.Typically it's set to last tokenID from previous request.
+        :type start: str
+        :param including_start: (optional) If true, then iterate including starting position. False by default
+        :type including_start: bool
+        :param limit: (optional) Maximum number of tokens to return, 100 by default
+        :type limit: int
+        :param indexed_amounts: (optional) Format of amounts output (default = false): (true: obj = {tokenid:amount,...}, false: array = ["amount@tokenid"...])
+        :type indexed_amounts: bool
+        :param symbol_lookup: (optional) Use token symbols in output (default = false)
+        :type symbol_lookup: bool
+        :return: {...} array) Json object with balances information
+
+        :example:
+
+            >>> node.accounts.gettokenbalances()
+        """
         pagination = BuildJson()
         pagination.append("start", start)
         pagination.append("including_start", including_start)
@@ -144,8 +201,32 @@ class Accounts:
 
         return self._node._rpc.call("gettokenbalances", pagination.build(), indexed_amounts, symbol_lookup)
 
-    def listaccounthistory(self, owner, maxBlockHeight=None, depth=None, no_rewards=None, token=None, txtype=None,
-                           limit=None, txn=None):  # 11
+    def listaccounthistory(self, owner: str, maxBlockHeight: int = None, depth: int = None, no_rewards: bool = None,
+                           token: str = None, txtype: str = None, limit: int = None, txn: int = None) -> [{}]:  # 11
+        """
+
+        :param owner: (required) Single account ID (CScript or address) or reserved words: "mine" - to list history for all owned accounts or "all" to list whole DB (default = "mine").
+        :type owner: str
+        :param maxBlockHeight: (optional) Optional height to iterate from (downto genesis block), (default = chaintip).
+        :type maxBlockHeight: int
+        :param depth: (optional) Maximum depth, from the genesis block is the default
+        :type depth: int
+        :param no_rewards: (optional) Filter out rewards
+        :type no_rewards: bool
+        :param token: (optional) Filter by token
+        :type token: str
+        :param txtype: (optional) Filter by transaction type, supported letter from {CustomTxType}
+        :type txtype: str
+        :param limit: (optional) Maximum number of records to return, 100 by default
+        :type limit: int
+        :param txn: (optional) Order in block, unlimited by default
+        :type txn: int
+        :return: [{},{}...] (array) Objects with account history information
+
+        :example:
+
+            >>> node.accounts.listaccounthistory("all", 160, 10)
+        """
         options = BuildJson()
         options.append("maxBlockHeight", maxBlockHeight)
         options.append("depth", depth)
