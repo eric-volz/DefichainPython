@@ -161,7 +161,7 @@ class Wallet:
     def settxfee(self, amount):  # 46
         return self._node._rpc.call("settxfee", amount)
 
-    def setwalletflag(self, flag, value):  # 47
+    def setwalletflag(self, flag, value=True):  # 47
         return self._node._rpc.call("setwalletflag", flag, value)
 
     def signmessage(self, address, message):  # 48
