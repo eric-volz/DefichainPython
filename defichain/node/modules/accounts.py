@@ -68,10 +68,45 @@ class Accounts:
         """
         return self._node._rpc.call("accounttoutxos", _from, to, inputs)
 
-    def executesmartcontract(self, name, amount, address="", inputs=None):  # 04
+    def executesmartcontract(self, name: str, amount: str, address: str = "", inputs: [{}] = None) -> hash:  # 04
+        """
+        Creates and sends a transaction to either fund or execute a smart contract. Available contracts: dbtcdfiswap
+
+        :param name: (required) Name of the smart contract to send funds to
+        :type name: str
+        :param amount: (required) Amount to send in amount@token format
+        :type amount: str
+        :param address: (optional) Address to be used in contract execution if required
+        :type address: str
+        :param inputs: (optional) :ref:`Node Inputs`
+        :type inputs: json array
+        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+
+        :example:
+
+            >>> node.accounts.executesmartcontract("dbtcdfiswap", "1000@DFI")
+        """
         return self._node._rpc.call("executesmartcontract", name, amount, address, inputs)
 
-    def futureswap(self, address, amount, destination="", inputs=None):  # 05
+    def futureswap(self, address: str, amount: str, destination: str = "", inputs: [{}] = None) -> hash:  # 05
+        """
+        Creates and submits to the network a futures contract
+
+        :param address: (required) Address to fund contract and receive resulting token
+        :type address:  str
+        :param amount: (required) Amount to send in amount@token format
+        :type amount: str
+        :param destination: (optional) Expected dToken if DUSD supplied
+        :type destination: str
+        :param inputs: (optional) :ref:`Node Inputs`
+        :type inputs: json array
+        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+
+        :example:
+
+            >>> node.accounts.futureswap(address, "1@TSLA")
+            >>> node.accounts.futureswap(address, "1000@DUSD", "TSLA")
+        """
         return self._node._rpc.call("futureswap", address, amount, destination, inputs)
 
     def getaccount(self, owner: str, start: str = None, including_start: bool = None, limit: int = None,
@@ -238,8 +273,29 @@ class Accounts:
 
         return self._node._rpc.call("listaccounthistory", owner, options.build())
 
-    def listaccounts(self, start=None, including_start=None, limit=None, verbose=True, indexed_amounts=False,
-                     is_mine_only=False):  # 12
+    def listaccounts(self, start: str = None, including_start: bool = None, limit: int = None, verbose: bool = True,
+                     indexed_amounts: bool = False, is_mine_only: bool = False) -> {}:  # 12
+        """
+        Returns information about all accounts on chain.
+
+        :param start: (optional) Optional first key to iterate from, in lexicographical order.Typically it's set to last ID from previous request.
+        :type start: str
+        :param including_start: (optional) If true, then iterate including starting position. False by default
+        :type including_start: bool
+        :param limit: (optional) Maximum number of orders to return, 100 by default
+        :type limit: int
+        :param verbose: (optional) Flag for verbose list (default = true), otherwise limited objects are listed
+        :type verbose: bool
+        :param indexed_amounts: (optional) Format of amounts output (default = false): (true: {tokenid:amount}, false: "amount@tokenid")
+        :type indexed_amounts: bool
+        :param is_mine_only: (optional) Get balances about all accounts belonging to the wallet
+        :type is_mine_only: bool
+        :return: {id:{...},...} (array) Json object with accounts information
+
+        :example:
+
+            >>> node.accounts.listaccounts()
+        """
         pagnation = BuildJson()
         pagnation.append("start", start)
         pagnation.append("including_start", including_start)
@@ -247,7 +303,27 @@ class Accounts:
 
         return self._node._rpc.call("listaccounts", pagnation.build(), verbose, indexed_amounts, is_mine_only)
 
-    def listburnhistory(self, maxBlockHeight=None, depth=None, token=None, txtype=None, limit=None):  # 13
+    def listburnhistory(self, maxBlockHeight: int = None, depth: int = None, token: str = None, txtype: str = None,
+                        limit: int = None) -> [{}]:  # 13
+        """
+        Returns information about burn history.
+
+        :param maxBlockHeight: (optional) Optional height to iterate from (down to genesis block), (default = chaintip).
+        :type maxBlockHeight: int
+        :param depth: (optional) Maximum depth, from the genesis block is the default
+        :type depth: int
+        :param token: (optional) Filter by token
+        :type token: str
+        :param txtype: (optional) Filter by transaction type, supported letter from {CustomTxType}
+        :type txtype: str
+        :param limit: (optional) Maximum number of records to return, 100 by default
+        :type limit: int
+        :return: [{},{}...] (array) Objects with burn history information
+
+        :example:
+
+            >>> node.accounts.listburnhistory(160, 10)
+        """
         options = BuildJson()
         options.append("maxBlockHeight", maxBlockHeight)
         options.append("depth", depth)
