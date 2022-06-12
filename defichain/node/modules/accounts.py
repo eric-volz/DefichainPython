@@ -30,7 +30,7 @@ class Accounts:
         j.append("txtype", txtype)
         return self._node._rpc.call("accounthistorycount", owner, j.build())
 
-    def accounttoaccount(self, _from: str, to: {}, inputs: [{}] = None) -> hash:  # 02
+    def accounttoaccount(self, _from: str, to: {}, inputs: [{}] = None) -> str:  # 02
         """
         Creates (and submits to local node and network) a transfer transaction from the specified account to the specfied accounts.
         The first optional argument (may be empty array) is an array of specific UTXOs to spend.
@@ -49,7 +49,7 @@ class Accounts:
         """
         return self._node._rpc.call("accounttoaccount", _from, to, inputs)
 
-    def accounttoutxos(self, _from: str, to: {}, inputs: [{}] = None) -> hash:  # 03
+    def accounttoutxos(self, _from: str, to: {}, inputs: [{}] = None) -> str:  # 03
         """
         Creates (and submits to local node and network) a transfer transaction from the specified account to UTXOs.
         The third optional argument (may be empty array) is an array of specific UTXOs to spend.
@@ -68,13 +68,13 @@ class Accounts:
         """
         return self._node._rpc.call("accounttoutxos", _from, to, inputs)
 
-    def executesmartcontract(self, name: str, amount: str, address: str = "", inputs: [{}] = None) -> hash:  # 04
+    def executesmartcontract(self, name: str, amount: str, address: str = "", inputs: [{}] = None) -> str:  # 04
         """
         Creates and sends a transaction to either fund or execute a smart contract. Available contracts: dbtcdfiswap
 
         :param name: (required) Name of the smart contract to send funds to
         :type name: str
-        :param amount: (required) Amount to send in amount@token format
+        :param amount: (required) :ref:`Node Amount`
         :type amount: str
         :param address: (optional) Address to be used in contract execution if required
         :type address: str
@@ -88,13 +88,13 @@ class Accounts:
         """
         return self._node._rpc.call("executesmartcontract", name, amount, address, inputs)
 
-    def futureswap(self, address: str, amount: str, destination: str = "", inputs: [{}] = None) -> hash:  # 05
+    def futureswap(self, address: str, amount: str, destination: str = "", inputs: [{}] = None) -> str:  # 05
         """
         Creates and submits to the network a futures contract
 
         :param address: (required) Address to fund contract and receive resulting token
         :type address:  str
-        :param amount: (required) Amount to send in amount@token format
+        :param amount: (required) :ref:`Node Amount`
         :type amount: str
         :param destination: (optional) Expected dToken if DUSD supplied
         :type destination: str
@@ -368,15 +368,84 @@ class Accounts:
         """
         return self._node._rpc.call("listpendingfutureswaps")
 
-    def sendtokenstoaddress(self, _from, to, selectionMode="pie"):  # 16
+    def sendtokenstoaddress(self, _from: {}, to: {}, selectionMode: str = "pie") -> str:  # 16
+        """
+        Creates (and submits to local node and network) a transfer transaction from your accounts balances (may be picked manualy or autoselected) to the specfied accounts.
+
+        :param _from: (required) :ref:`Node Address Amount`
+        :type _from: json object
+        :param to: (required) :ref:`Node Address Amount`
+        :type to: json object
+        :param selectionMode: (optional) If param "from" is empty this param indicates accounts autoselection mode.
+                            May be once of:
+                            "forward" - Selecting accounts without sorting, just as address list sorted.
+                            "crumbs" - Selecting accounts by ascending of sum token amounts. It means that we will select first accounts with minimal sum of neccessary token amounts.
+                            "pie" - Selecting accounts by descending of sum token amounts. It means that we will select first accounts with maximal sum of neccessary token amounts.
+        :type selectionMode: str
+        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+
+        :example:
+
+            >>> node.accounts.sendtokenstoaddress({"srcAddress1":"2.0@DFI", "srcAddress2":["3.0@DFI", "2.0@ETH"]}, {"dstAddress1":["5.0@DFI", "2.0@ETH"]})
+        """
         return self._node._rpc.call("sendtokenstoaddress", _from, to, selectionMode)
 
-    def sendutxosfrom(self, _from, to, amount, change=None):  # 17
+    def sendutxosfrom(self, _from: str, to: str, amount: int, change: str = None) -> str:  # 17
+        """
+        Send a transaction using UTXOs from the specfied address.
+
+        :param _from: (required) The address of sender
+        :type _from: str
+        :param to: (required) The address of receiver
+        :type to: str
+        :param amount: (required) The amount to send
+        :type amount: int
+        :param change: (optional) The address to send change to (Default: from address)
+        :type change: str
+        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+
+        :example:
+
+            >>> node.accounts.sendutxosfrom(from_address, to_address, 100)
+        """
         change = _from if change is None else change
         return self._node._rpc.call("sendutxosfrom", _from, to, amount, change)
 
-    def utxostoaccount(self, amounts, inputs=None):  # 18
+    def utxostoaccount(self, amounts: {}, inputs: [{}] = None) -> str:  # 18
+        """
+        Creates (and submits to local node and network) a transfer transaction from the wallet UTXOs to specfied account.
+        The second optional argument (may be empty array) is an array of specific UTXOs to spend.
+
+        :param amounts: (required) :ref:`Node Address Amount`
+        :type amounts: json object
+        :param inputs: (optional) :ref:`Node Inputs`
+        :type inputs: json array
+        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+
+        :example:
+
+            >>> node.accounts.utxostoaccount({"address1":"1.0@DFI"})
+        """
         return self._node._rpc.call("utxostoaccount", amounts, inputs)
 
-    def withdrawfutureswap(self, address, amount, destination="", inputs=None):  # 19
+    def withdrawfutureswap(self, address: str, amount: str, destination: str = "", inputs: [{}] = None) -> str:  # 19
+        """
+        Creates and submits to the network a withdrawal from futures contract transaction.
+        Withdrawal will be back to the address specified in the futures contract.
+
+        :param address: (required) Address used to fund contract with
+        :type address: str
+        :param amount: (required) :ref:`Node Amount`
+        :type amount: str
+        :param destination: (optional) The dToken if DUSD supplied
+        :type destination: str
+        :param inputs: (optional) :ref:`Node Inputs`
+        :type inputs: json array
+        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+
+        :example:
+
+            >>> node.accounts.withdrawfutureswap(address, "1@TSLA")
+            >>> node.accounts.withdrawfutureswap(address, "1000@DUSD", "TSLA")
+        """
         return self._node._rpc.call("withdrawfutureswap", address, amount, destination, inputs)
