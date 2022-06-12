@@ -6,6 +6,5 @@ In development
 .. toctree::
     :maxdepth: 1
 
-    rawMethodsOverview
     installDefichainNode
     mnemonicSeedForWallet
