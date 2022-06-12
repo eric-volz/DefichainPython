@@ -4,3 +4,5 @@ pytest~=7.1.1
 requests~=2.27.1
 setuptools~=57.0.0
 furo~=2022.4.7
+sphinx_inline_tabs
+sphinxemoji
