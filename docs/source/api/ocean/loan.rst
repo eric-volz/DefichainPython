@@ -1,3 +1,5 @@
+.. _Ocean Loan:
+
 .. automodule:: defichain.ocean
     :noindex:
 

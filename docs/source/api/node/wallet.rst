@@ -1,3 +1,5 @@
+.. _Node Wallet:
+
 .. automodule:: defichain.node
     :noindex:
 

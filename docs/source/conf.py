@@ -60,3 +60,6 @@ language = "en"
 # so a file named "default.css" will overwrite the builtin "default.css".
 
 html_static_path = ["_static"]
+html_theme_options = {
+    "announcement": "This Documentation page is still in development!",
+}

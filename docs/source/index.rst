@@ -21,3 +21,4 @@ The documentation will follow soon.
 
    api/node/index
    api/ocean/index
+   api/exceptions

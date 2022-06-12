@@ -1,3 +1,5 @@
+.. _Node Accounts:
+
 .. automodule:: defichain.node
     :noindex:
 

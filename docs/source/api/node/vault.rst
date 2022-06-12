@@ -1,3 +1,5 @@
+.. _Node Vault:
+
 .. automodule:: defichain.node
     :noindex:
 

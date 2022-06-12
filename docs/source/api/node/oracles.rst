@@ -1,3 +1,5 @@
+.. _Node Oracles:
+
 .. automodule:: defichain.node
     :noindex:
 
