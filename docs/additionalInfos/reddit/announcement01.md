@@ -1,6 +1,5 @@
 ## The Defichain Python Library has reached version 1.0.0!
 
-
 Dear Defichain Community,
 
 a few weeks ago I released version 1.0.0 of the [Defichain Python Library](https://github.com/eric-volz/DefichainPython).
@@ -14,7 +13,7 @@ To ensure an easy start with the library I have created a [Quickstart](https://d
 
 For people who want to get to know the Defichain Node through this library there will be a ["How to install and configure a Defichain Node"](https://docs.defichain-python.de/build/html/additionalInfos/installDefichainNode.html) Guide.
 
-Here are some important links around the project:
+### Here are some important links around the project:
 - [Github](https://github.com/eric-volz/DefichainPython)
 - [Documentation](https://docs.defichain-python.de/)
 - [PyPI](https://pypi.org/project/defichain/)
@@ -30,4 +29,4 @@ If you have suggestions for improvement
 or other ideas open an [issue](https://github.com/eric-volz/DefichainPython/issues), 
 write me on [Twitter](https://twitter.com/Intr0c) or via email (introc@volz.link)!
 
-A big thank you goes to [MarcelKB](https://mobile.twitter.com/marcelkb1) <3
+### A big thank you goes to [MarcelKB](https://mobile.twitter.com/marcelkb1) <3

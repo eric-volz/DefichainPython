@@ -18,9 +18,9 @@ This Python library has the same functionality as the Jellyfish Full Node RPC li
 
 Furthermore, all commands of the Ocean REST API are mapped by functions.
 
-#### Example calls:
+### Example calls:
 
-##### Import and connection:
+#### Import and connection:
 
 ```
 from defichain import Node # import
@@ -58,9 +58,9 @@ print(price) # current DFI price
 
 For everything except the Ocean Rest API commands a Defichain Full Node is required!
 
-# How will the fund be spent?
+## How will the fund be spent?
 
-#### Development costs:
+### Development costs:
 
 \--> About 250 individual CLI commands
 
@@ -114,9 +114,9 @@ Diese Python Library besitzt die selbe Funktionalität wie die Jellyfish Full No
 
 Des weitern werden alle Commands der Ocean REST API durch Funktionen abgebildet.
 
-#### Beispielaufrufe:
+### Beispielaufrufe:
 
-##### Import und Verbindungsaufbau:
+#### Import und Verbindungsaufbau:
 
 ```
 from defichain import Node # Import
@@ -156,7 +156,7 @@ Für alles außer die Ocean Rest API Befehle ist ein Defichain Full Node notwend
 
 ## Wie wird das Geld ausgegeben?
 
-#### Entwicklungskosten:
+### Entwicklungskosten:
 
 \--> Circa 250 individuelle CLI Befehle
 
