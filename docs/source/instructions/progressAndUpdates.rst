@@ -1,3 +1,5 @@
+.. _instruction progressAndUpdates:
+
 Progress and Updates
 ====================
 
@@ -164,7 +166,7 @@ Since this is a community supported project, the community also has the right to
         Tokens              |:rotating_light:|
         Transactions        |:rotating_light:|
 
-        Ocean Connection    |:rotating_light:|
+        Ocean Connection    |:white_check_mark:|
         Exceptions          |:white_check_mark:|
         ================    ========
 
@@ -173,9 +175,8 @@ Since this is a community supported project, the community also has the right to
         ======================      ========
         Information                 Progress
         ======================      ========
-        Quickstart                  |:rotating_light:|
-        Usage                       |:rotating_light:|
-        Progress and Updates        |:heavy_minus_sign:|
+        Quickstart                  |:white_check_mark:|
+        Progress and Updates        |:white_check_mark:|
         Raw Methods Overview        |:white_check_mark:|
         Install Defichain Node      |:rotating_light:|
         ======================      ========
