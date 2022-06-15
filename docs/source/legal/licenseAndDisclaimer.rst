@@ -1,3 +1,5 @@
+.. _legal license&disclaimer:
+
 License & Disclaimer
 ====================
 
