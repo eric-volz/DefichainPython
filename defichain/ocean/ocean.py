@@ -16,11 +16,33 @@ from .modules.stats import Stats
 from .modules.tokens import Tokens
 from .modules.transactions import Transactions
 
-BASE_URL = "https://ocean.defichain.com/"
-
 
 class Ocean:
-    def __init__(self, url="https://ocean.defichain.com", version="v0", network="mainnet"):
+    """
+    This is the main interface to communicate with the ocean protocol.
+
+    If you want to communicate with the standard Ocean, which is also used to operate the Lightwallet,
+    then do not change anything in the parameters and create only the Ocean object as in the example.
+
+    :param url: (optional) The main URL where an ocean instance can be reached
+    :type url: str
+    :param version: (optional) witch version to use with this ocean connection
+    :type version: str
+    :param network: (optional) witch network to use with this ocean connection
+    :type network: str
+    :return: Ocean (object) The object to interact with the ocean protocol
+
+    :example:
+
+            >>> from defichain import Ocean
+            >>> ocaen = Ocean()
+            >>> blocks = ocaen.blocks.list()  #  returns the latest 30 blocks
+            >>> print(blocks)
+    """
+
+    def __init__(self, url: str = "https://ocean.defichain.com", version: str = "v0",
+                 network: str = "mainnet") -> "Ocean":
+
         self._attachedURL = url + "/" + version + "/" + network + "/"
         self._test_connection()
 
@@ -46,5 +68,7 @@ class Ocean:
             return True
         except Exception as e:
             print(f"No connection could be established to: {self._attachedURL}")
-            print(e)
+            print(f"The main URL is called: https://ocean.defichain.com")
+            print("If you are not sure how to use the ocean connection correctly, "
+                  "go to: https://docs.defichain-python.de/build/html/api/ocean/index.html")
 

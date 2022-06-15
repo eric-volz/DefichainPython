@@ -1,3 +1,5 @@
+.. _instruction rawMethodsOverview:
+
 Raw Methods Overview
 ======================
 

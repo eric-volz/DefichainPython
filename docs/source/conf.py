@@ -34,6 +34,8 @@ release = 'v1.0.0'
 extensions = [
     "sphinx.ext.autodoc",
     'sphinx_mdinclude',
+    'sphinx_inline_tabs',
+    'sphinxemoji.sphinxemoji',
 ]
 
 # Add any paths that contain templates here, relative to this directory.

@@ -9,6 +9,7 @@
         <title>Node / RPC - DefichainPython v1.0.0</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -161,9 +162,9 @@
   <p class="caption" role="heading"><span class="caption-text">Instructions</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../instructions/quickstart.html">Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../instructions/usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../instructions/progressAndUpdates.html">Progress and Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../instructions/rawMethodsOverview.html">Raw Methods Overview</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../additionalInfos/index.html">Additional Information</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../additionalInfos/rawMethodsOverview.html">Raw Methods Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../additionalInfos/installDefichainNode.html">Install Defichain Node</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../additionalInfos/mnemonicSeedForWallet.html">How to use mnemonic seed phrase for your wallet.dat file</a></li>
 </ul>
@@ -211,6 +212,11 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/licenseAndDisclaimer.html">License &amp; Disclaimer</a></li>
+</ul>
 
 </div>
 </div>
@@ -243,10 +249,71 @@
         </div>
         <article role="main">
           <section id="node-rpc">
-<h1>Node / RPC<a class="headerlink" href="#node-rpc" title="Permalink to this headline">#</a></h1>
+<span id="node-index"></span><h1>Node / RPC<a class="headerlink" href="#node-rpc" title="Permalink to this headline">#</a></h1>
+<p>This is the main page to get information about the control of the node.</p>
+<p>The most important class is the <a class="reference internal" href="node.html#node-node"><span class="std std-ref">Node</span></a> class: it takes care of the actual
+connection to the node and performs the requests made by methods.</p>
+<p>The simplest setup of the class can be seen on the <a class="reference internal" href="../../instructions/quickstart.html#instruction-quickstart"><span class="std std-ref">Quickstart</span></a> page.
+It offers other possibilities, such as automatically importing and using a
+wallet or decrypting a password-protected wallet.</p>
+<p>All individual methods are assigned to specific modules.
+These modules match the ones that are output by the <a class="reference internal" href="../../instructions/rawMethodsOverview.html#instruction-rawmethodsoverview"><span class="std std-ref">help method</span></a>.
+For example, the getblockcount method belongs to the blockchain
+module and the compositeswap method belongs to the poolpair module.</p>
+<p>You can find more explanations <a class="reference internal" href="#node-requeststructure"><span class="std std-ref">below</span></a></p>
+<section id="node-modules">
+<h2>Node Modules<a class="headerlink" href="#node-modules" title="Permalink to this headline">#</a></h2>
+<div class="important admonition">
+<p class="admonition-title">Documentation of modules</p>
+<p>I will keep documenting more methods. <a class="reference internal" href="../../instructions/progressAndUpdates.html#instruction-progressandupdates"><span class="std std-ref">Here</span></a>
+you can follow the progress.</p>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="node.html">Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="accounts.html">Accounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blockchain.html">Blockchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generating.html">Generating</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loan.html">Loan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="masternodes.html">Masternodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mining.html">Mining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="network.html">Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oracles.html">Oracles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="poolpair.html">Poolpair</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rawtransactions.html">Rawtransactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spv.html">Spv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tokens.html">Tokens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">Util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vault.html">Vault</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wallet.html">Wallet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zmq.html">Zmq</a></li>
+</ul>
+</div>
+</section>
+<section id="request-structure">
+<span id="node-requeststructure"></span><h2>Request Structure<a class="headerlink" href="#request-structure" title="Permalink to this headline">#</a></h2>
+<p>The request structure is very simple and basically consists of only three things:</p>
+<ol class="arabic simple">
+<li><p>The previously created node object by the node class.</p></li>
+<li><p>The module in which the method you want to execute is found.</p></li>
+<li><p>The method you want to execute.</p></li>
+</ol>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Node</span>  <span class="c1"># Import</span>
+
+<span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="s2">"user"</span><span class="p">,</span> <span class="s2">"password"</span><span class="p">,</span> <span class="s2">"127.0.0.1"</span><span class="p">,</span> <span class="mi">8554</span><span class="p">)</span>  <span class="c1"># creating the node object</span>
+
+<span class="c1"># 1      2            3</span>
+<span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getblockcount</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If you are not sure in which module your method is located, use the search function
+in the upper left corner or look in the <a class="reference internal" href="../../instructions/rawMethodsOverview.html#instruction-rawmethodsoverview"><span class="std std-ref">Raw Methods Overview</span></a></p>
+</section>
 <section id="default-inputs">
 <h2>Default Inputs<a class="headerlink" href="#default-inputs" title="Permalink to this headline">#</a></h2>
-<p>These are formats that are used more often as input to a method</p>
+<p>These are input formats which are very often used in the Node software.</p>
 <section id="amounts">
 <span id="node-amount"></span><h3>Amounts<a class="headerlink" href="#amounts" title="Permalink to this headline">#</a></h3>
 <p>Amount in <a class="reference external" href="mailto:amount%40token">amount<span>@</span>token</a> format.</p>
@@ -283,8 +350,6 @@
     ...
 ]
 </pre></div>
-</div>
-<div class="toctree-wrapper compound">
 </div>
 </section>
 </section>
@@ -348,6 +413,8 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Node / RPC</a><ul>
+<li><a class="reference internal" href="#node-modules">Node Modules</a></li>
+<li><a class="reference internal" href="#request-structure">Request Structure</a></li>
 <li><a class="reference internal" href="#default-inputs">Default Inputs</a><ul>
 <li><a class="reference internal" href="#amounts">Amounts</a></li>
 <li><a class="reference internal" href="#address-amount">Address Amount</a></li>
@@ -370,5 +437,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/scripts/furo.js"></script>
+    <script src="../../_static/tabs.js"></script>
     </body>
 </html>

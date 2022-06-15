@@ -1,24 +1,26 @@
-.. DefichainPython documentation master file, created by
-
-Welcome to DefichainPython's documentation!
-===========================================
-
-This is the first html render of the DefichainPython documentation.
-
-The documentation will follow soon.
+.. mdinclude:: ../../README.md
 
 .. toctree::
-   :caption: Instructions
-   :hidden:
+    :caption: Instructions
+    :hidden:
+    :maxdepth: 1
 
-   instructions/quickstart
-   instructions/usage
-   additionalInfos/index
+    instructions/quickstart
+    instructions/progressAndUpdates
+    instructions/rawMethodsOverview
+    additionalInfos/index
 
 .. toctree::
-   :caption: API
-   :hidden:
+    :caption: API
+    :hidden:
 
-   api/node/index
-   api/ocean/index
-   api/exceptions
+    api/node/index
+    api/ocean/index
+    api/exceptions
+
+.. toctree::
+    :caption: Legal
+    :hidden:
+
+    legal/community
+    legal/licenseAndDisclaimer

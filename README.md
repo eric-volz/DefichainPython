@@ -6,7 +6,7 @@
 # [DefichainPython](https://github.com/eric-volz/DefichainPython)
 
 ## Welcome to Defichain's Python Library
-___
+
 Welcome to the Python Library for the Defichain! 
 
 In this library all RPC commands of a [Defichain Node](https://defichain.com/downloads) are available and can be 
@@ -15,93 +15,25 @@ called in a few lines of code!
 If you just want to query data from the blockchain you can also use the Ocean API: you don't need a Defichain Node for 
 this, just an internet connection!
 
-But first we need to install it:
+## What are you looking for?
 
-### Installation
-```bash
-pip install defichain
-```
+1. If you don't have a Defichain node yet, here's how to set one up: :ref:`additionalInfos installDefichainNode`
 
-### Example Code for RPC
-```python
-from defichain import Node
+2. If you are looking for a quick way to get started with the library, check out the :ref:`instruction quickstart` section.
 
-node = Node("user", "password", "127.0.0.1", 8554)
-
-node.blockchain.getblockcount() #  returns block height of the latest block
-
-node.poolpair.compositeswap("fromAddress", "BTC", 0.01, "toAddress", "DFI")  # swaps 0.01 BTC to DFI
-```
-
-### Example Code for Ocean API
-```python
-from defichain import Ocean
-
-ocean = Ocean() #  creates the connection to Ocean
-
-ocean.blocks.list() #  returns the latest 30 blocks 
-
-ocean.poolpairs.get(4) #  returns data from ETH-DFI Pool
-```
+3. If you want to look at the documentation of each method: For :ref:`Node index` | For :ref:`Ocean index`
 
 ## Progress and Updates
-___
+If you want to view the progress of the project, look here: :ref:`instruction progressAndUpdates`
 
-### Up to date to the node version: [v2.8.1 - Fort Canning Crunch](https://github.com/DeFiCh/ain/releases/tag/v2.8.1)
+## :ref:`legal community`
 
-:heavy_check_mark: = Finished and UpToDate
-
-:heavy_minus_sign: = In Production or not UpToDate
-
-:heavy_multiplication_x: = Not yet implemented
-
-### RPC 
-| RPC Parts       | Progress           |
-|-----------------|--------------------|
-| Accounts        | :heavy_check_mark: |
-| Blockchain      | :heavy_check_mark: | 
-| Control         | :heavy_check_mark: |
-| Generating      | :heavy_check_mark: |
-| Loan            | :heavy_check_mark: |
-| Masternodes     | :heavy_check_mark: |
-| Mining          | :heavy_check_mark: |
-| Network         | :heavy_check_mark: |
-| Oracles         | :heavy_check_mark: |
-| Poolpair        | :heavy_check_mark: |
-| Rawtransactions | :heavy_check_mark: |
-| Spv             | :heavy_minus_sign: |
-| Stats           | :heavy_check_mark: |
-| Tokens          | :heavy_check_mark: |
-| Util            | :heavy_check_mark: |
-| Vault           | :heavy_check_mark: |
-| Wallet          | :heavy_check_mark: |
-| Zmq             | :heavy_check_mark: |
-
-### Ocean Requests
-| Ocean Requests | Progress           |
-|----------------|--------------------|
-| Address        | :heavy_check_mark: |
-| Blocks         | :heavy_check_mark: | 
-| Fee            | :heavy_check_mark: |
-| Loan           | :heavy_check_mark: |
-| Masternodes    | :heavy_check_mark: |
-| Oracles        | :heavy_check_mark: |
-| Poolpairs      | :heavy_check_mark: |
-| Prices         | :heavy_check_mark: |
-| RawTx          | :heavy_check_mark: |
-| stats          | :heavy_check_mark: |
-| Tokens         | :heavy_check_mark: |
-| Transactions   | :heavy_check_mark: |
-
-## Next Steps
-- Document all methods and publish it on [docs.defichain-python.de](https://docs.defichain-python.de/)
-
-## Community
 This [project](https://github.com/DeFiCh/dfips/issues/133) is funded by the Defichain Community:
 Thank you for your trust! If you have suggestions for improvement
 or other ideas open an [issue](https://github.com/eric-volz/DefichainPython/issues), 
 write me on [Twitter](https://twitter.com/Intr0c) or via email (introc@volz.link)!
 
-## License & Disclaimer
+## :ref:`legal license&disclaimer`
+
 By using (this repo), you (the user) agree to be bound by the 
 [terms of this license](https://github.com/eric-volz/defichainLibrary/blob/main/LICENSE) (MIT License).

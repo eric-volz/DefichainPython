@@ -9,6 +9,7 @@
         <title>DefichainPython v1.0.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -138,7 +139,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -161,9 +162,9 @@
   <p class="caption" role="heading"><span class="caption-text">Instructions</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="instructions/quickstart.html">Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="instructions/usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instructions/progressAndUpdates.html">Progress and Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instructions/rawMethodsOverview.html">Raw Methods Overview</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="additionalInfos/index.html">Additional Information</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="additionalInfos/rawMethodsOverview.html">Raw Methods Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="additionalInfos/installDefichainNode.html">Install Defichain Node</a></li>
 <li class="toctree-l2"><a class="reference internal" href="additionalInfos/mnemonicSeedForWallet.html">How to use mnemonic seed phrase for your wallet.dat file</a></li>
 </ul>
@@ -211,6 +212,11 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/exceptions.html">Exceptions</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="legal/community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal/licenseAndDisclaimer.html">License &amp; Disclaimer</a></li>
+</ul>
 
 </div>
 </div>
@@ -236,20 +242,56 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="welcome-to-defichainpython-s-documentation">
-<h1>Welcome to DefichainPython’s documentation!<a class="headerlink" href="#welcome-to-defichainpython-s-documentation" title="Permalink to this headline">#</a></h1>
-<p>This is the first html render of the DefichainPython documentation.</p>
-<p>The documentation will follow soon.</p>
+          <a class="reference external image-reference" href="https://pypi.org/project/defichain"><img alt="PyPI Version" src="https://img.shields.io/pypi/v/defichain.svg?color=green"/></a>
+<a class="reference external image-reference" href="https://pypi.org/project/defichain"><img alt="PyPI Python Version" src="https://img.shields.io/pypi/pyversions/defichain.svg"/></a>
+<a class="reference external image-reference" href="https://docs.defichain-python.de/"><img alt="Documentation Status" src="https://readthedocs.org/projects/pytest/badge/?version=latest"/></a>
+<a class="reference external image-reference" href="https://pepy.tech/project/defichain"><img alt="Downloads" src="https://static.pepy.tech/personalized-badge/defichain?period=total&amp;amp;units=international_system&amp;amp;left_color=grey&amp;amp;right_color=green&amp;amp;left_text=Downloads"/></a>
+<section id="id1">
+<h1><a class="reference external" href="https://github.com/eric-volz/DefichainPython">DefichainPython</a><a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<section id="welcome-to-defichain-s-python-library">
+<h2>Welcome to Defichain’s Python Library<a class="headerlink" href="#welcome-to-defichain-s-python-library" title="Permalink to this headline">#</a></h2>
+<p>Welcome to the Python Library for the Defichain!</p>
+<p>In this library all RPC commands of a <a class="reference external" href="https://defichain.com/downloads">Defichain Node</a> are available and can be
+called in a few lines of code!</p>
+<p>If you just want to query data from the blockchain you can also use the Ocean API: you don’t need a Defichain Node for
+this, just an internet connection!</p>
+</section>
+<section id="what-are-you-looking-for">
+<h2>What are you looking for?<a class="headerlink" href="#what-are-you-looking-for" title="Permalink to this headline">#</a></h2>
+<ol class="arabic simple">
+<li><p>If you don’t have a Defichain node yet, here’s how to set one up: <a class="reference internal" href="additionalInfos/installDefichainNode.html#additionalinfos-installdefichainnode"><span class="std std-ref">Install Defichain Node</span></a></p></li>
+<li><p>If you are looking for a quick way to get started with the library, check out the <a class="reference internal" href="instructions/quickstart.html#instruction-quickstart"><span class="std std-ref">Quickstart</span></a> section.</p></li>
+<li><p>If you want to look at the documentation of each method: For <a class="reference internal" href="api/node/index.html#node-index"><span class="std std-ref">Node / RPC</span></a> | For <a class="reference internal" href="api/ocean/index.html#ocean-index"><span class="std std-ref">Ocean</span></a></p></li>
+</ol>
+</section>
+<section id="progress-and-updates">
+<h2>Progress and Updates<a class="headerlink" href="#progress-and-updates" title="Permalink to this headline">#</a></h2>
+<p>If you want to view the progress of the project, look here: <a class="reference internal" href="instructions/progressAndUpdates.html#instruction-progressandupdates"><span class="std std-ref">Progress and Updates</span></a></p>
+</section>
+<section id="legal-community">
+<h2><a class="reference internal" href="legal/community.html#legal-community"><span class="std std-ref">Community</span></a><a class="headerlink" href="#legal-community" title="Permalink to this headline">#</a></h2>
+<p>This <a class="reference external" href="https://github.com/DeFiCh/dfips/issues/133">project</a> is funded by the Defichain Community:
+Thank you for your trust! If you have suggestions for improvement
+or other ideas open an <a class="reference external" href="https://github.com/eric-volz/DefichainPython/issues">issue</a>,
+write me on <a class="reference external" href="https://twitter.com/Intr0c">Twitter</a> or via email (<a class="reference external" href="mailto:introc%40volz.link">introc<span>@</span>volz<span>.</span>link</a>)!</p>
+</section>
+<section id="legal-license-disclaimer">
+<h2><a class="reference internal" href="legal/licenseAndDisclaimer.html#legal-license-disclaimer"><span class="std std-ref">License &amp; Disclaimer</span></a><a class="headerlink" href="#legal-license-disclaimer" title="Permalink to this headline">#</a></h2>
+<p>By using (this repo), you (the user) agree to be bound by the
+<a class="reference external" href="https://github.com/eric-volz/defichainLibrary/blob/main/LICENSE">terms of this license</a> (MIT License).</p>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
 </div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
 </section>
 
         </article>
@@ -287,8 +329,33 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">DefichainPython</a><ul>
+<li><a class="reference internal" href="#welcome-to-defichain-s-python-library">Welcome to Defichain’s Python Library</a></li>
+<li><a class="reference internal" href="#what-are-you-looking-for">What are you looking for?</a></li>
+<li><a class="reference internal" href="#progress-and-updates">Progress and Updates</a></li>
+<li><a class="reference internal" href="#legal-community"><span class="xref std std-ref">legal community</span></a></li>
+<li><a class="reference internal" href="#legal-license-disclaimer"><span class="xref std std-ref">legal license&amp;disclaimer</span></a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -298,5 +365,6 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
+    <script src="_static/tabs.js"></script>
     </body>
 </html>
