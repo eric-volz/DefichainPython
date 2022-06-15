@@ -28,21 +28,44 @@ class Node:
     """
     This is the main interface to communicate with your Defichain Node.
 
-    Set parameters as needed: just the user and password for your node are mandatory.
+    User and password are required to connect to the node and can be found in defi.conf.
+    Before returning a node object, the connection to the node is tested via ping.
+
+    If your wallet is already imported use: wallet_name to specify to use this wallet.
+    if your wallet is not imported use: wallet_path to import the wallet and use it.
 
     :param user: (required) user witch is set in your defi.conf
+    :type user: str
     :param password: (required) password witch is set in your defi.conf
-    :param url: (optional) the url or ip at which your node can be reached
-    :param port: (optional) the port at which your node can be reached
-    :param wallet_name: (optional) if your wallet is already imported, enter the name here
+    :type password: str
+    :param url: (optional) the url or ip at which your node can be reached (default=localhost)
+    :type url: str
+    :param port: (optional) the port at which your node can be reached (default=8554)
+    :type port: int
+    :param wallet_name: (optional) if your wallet is already imported, enter the name here (default="")
+    :type wallet_name: str
     :param wallet_path: (optional) if your wallet is not imported you can specify the path here:
                         it will be imported and becomes usable under the same parameter
-    :param wallet_password: (optional) password for wallet if it needs to be decrypted
-    :param wallet_timeout: (optional) time to elapse after the wallet is locked again
-    :param protocol: (optional) the protocol which is used for the request
+    :type wallet_path: str
+    :param wallet_password: (optional) password for wallet if it needs to be decrypted (default="")
+    :type wallet_password: str
+    :param wallet_timeout: (optional) time to elapse after the wallet is locked again (default=60)
+    :type wallet_timeout: int
+    :param protocol: (optional) the protocol which is used for the request (default=http)
+    :type protocol: str
+    :return: Node (object) The object to interact with your Defichain Node
+
+    :example:
+
+            >>> from defichain import Node
+            >>> node = Node(user="user", password="password", url="127.0.0.1", port=8554, wallet_name="myWallet", wallet_password="yourPassword", wallet_timeout=60)
+            >>> blockcount = node.blockchain.getblockcount()  #  returns block height of the latest block
+            >>> print(blockcount)
     """
-    def __init__(self, user, password, url="127.0.0.1", port=8554, wallet_name="", wallet_path=None, wallet_password="",
-                 wallet_timeout=60, protocol="http"):
+
+    def __init__(self, user: str, password: str, url: str = "127.0.0.1", port: int = 8554, wallet_name: str = "",
+                 wallet_path: str = None, wallet_password: str = "", wallet_timeout: int = 60,
+                 protocol: str = "http") -> "Node":
         # Parameter Check
         if wallet_name != "" and wallet_path is not None:
             raise WrongParameters(f"Only one parameter of wallet_name or wallet_path may be given at a time!")
@@ -81,30 +104,35 @@ class Node:
         self.load_wallet(wallet_path)
         self.decrypt_wallet(wallet_password, wallet_timeout)
 
-    def load_wallet(self, wallet_path):
+    def decrypt_wallet(self, wallet_password: str, wallet_timeout: int):
+        """
+        Decrypts wallet for a specific time if a password is given
+
+        :param wallet_password: wallet password
+        :type wallet_password: str
+        :param wallet_timeout: time to elapse until wallet is locked again
+        :type wallet_timeout: int
+        """
+        if wallet_password != "":
+            self.wallet.walletpassphrase(wallet_password, wallet_timeout)
+
+    def load_wallet(self, wallet_path: str):
         """
         Loads wallet into the Node
 
         :param wallet_path: Path where the wallet is located in the filesystem
+        :type wallet_path: str
         """
         if not wallet_path in self.wallet.listwallets():
             if wallet_path is not None:
                 self.wallet.loadwallet(wallet_path)
                 print(f"Wallet has bean loaded: {wallet_path}")
 
-    def decrypt_wallet(self, wallet_password, wallet_timeout):
-        """
-        Decrypts wallet for a specific time if a password is given
-
-        :param wallet_password: wallet password
-        :param wallet_timeout: time to elapse until wallet is locked again
-        """
-        if wallet_password != "":
-            self.wallet.walletpassphrase(wallet_password, wallet_timeout)
-
     def test_connection(self):
         """
-        Tests Connection to Defichain Node and raises ServiceUnavailable Exception if no connection occurred
+        Tests Connection to Defichain Node and raises ServiceUnavailable exception if no connection occurred
+
+        :exception: ServiceUnavailable
         """
         p = Process(target=self.network.ping, name='ping')
         p.start()

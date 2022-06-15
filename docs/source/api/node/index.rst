@@ -1,9 +1,82 @@
+.. _Node index:
+
 Node / RPC
 ==========
 
+This is the main page to get information about the control of the node.
+
+The most important class is the :ref:`Node Node` class: it takes care of the actual
+connection to the node and performs the requests made by methods.
+
+The simplest setup of the class can be seen on the :ref:`instruction quickstart` page.
+It offers other possibilities, such as automatically importing and using a
+wallet or decrypting a password-protected wallet.
+
+All individual methods are assigned to specific modules.
+These modules match the ones that are output by the :ref:`help method<instruction rawMethodsOverview>`.
+For example, the getblockcount method belongs to the blockchain
+module and the compositeswap method belongs to the poolpair module.
+
+You can find more explanations :ref:`below <Node requestStructure>`
+
+Node Modules
+------------
+
+.. admonition:: Documentation of modules
+    :class: important
+
+    I will keep documenting more methods. :ref:`Here<instruction progressAndUpdates>`
+    you can follow the progress.
+
+.. toctree::
+
+    node
+    accounts
+    blockchain
+    control
+    generating
+    loan
+    masternodes
+    mining
+    network
+    oracles
+    poolpair
+    rawtransactions
+    spv
+    tokens
+    util
+    vault
+    wallet
+    zmq
+
+.. _Node requestStructure:
+
+Request Structure
+-----------------
+
+The request structure is very simple and basically consists of only three things:
+
+1. The previously created node object by the node class.
+2. The module in which the method you want to execute is found.
+3. The method you want to execute.
+
+Example:
+
+.. code-block:: python
+
+    from defichain import Node  # Import
+
+    node = Node("user", "password", "127.0.0.1", 8554)  # creating the node object
+
+    # 1      2            3
+    node.blockchain.getblockcount()
+
+If you are not sure in which module your method is located, use the search function
+in the upper left corner or look in the :ref:`instruction rawMethodsOverview`
+
 Default Inputs
 --------------
-These are formats that are used more often as input to a method
+These are input formats which are very often used in the Node software.
 
 .. _Node Amount:
 
@@ -53,25 +126,3 @@ Optional argument (may be empty array) is an array of specific UTXOs to spend
         },
         ...
     ]
-
-.. toctree::
-    :hidden:
-
-    node
-    accounts
-    blockchain
-    control
-    generating
-    loan
-    masternodes
-    mining
-    network
-    oracles
-    poolpair
-    rawtransactions
-    spv
-    tokens
-    util
-    vault
-    wallet
-    zmq
