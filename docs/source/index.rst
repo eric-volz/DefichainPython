@@ -6,7 +6,6 @@
     :maxdepth: 1
 
     instructions/quickstart
-    instructions/usage
     instructions/progressAndUpdates
     instructions/rawMethodsOverview
     additionalInfos/index
