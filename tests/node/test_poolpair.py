@@ -16,7 +16,7 @@ def test_addpoolliquidity():  # 01
     reserveB = dusd_pool["17"]["reserveB"]
     price = round(reserveA / reserveB, 8)
 
-    dfi = 0.00000001
+    dfi = 0.000001
     duds = round(dfi * price, 8)
     _from = {address: [f"{dfi}@DFI", f"{duds}@DUSD"]}
     assert node.poolpair.addpoolliquidity(_from, address)
