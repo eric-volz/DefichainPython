@@ -2,6 +2,7 @@ import json
 import requests
 import time
 from defichain.node.RPCErrorHandler import RPCErrorHandler
+from defichain.exceptions.ServiceUnavailable import ServiceUnavailable
 
 
 class RPC(object):
@@ -22,13 +23,12 @@ class RPC(object):
         while True:
             try:
                 response = self._session.post(self._url, headers=self._headers, data=payload)
-            except requests.exceptions.ConnectionError:
+            except requests.exceptions.ConnectionError as e:
                 tries -= 1
                 if tries == 0:
-                    raise Exception('Failed to connect for remote procedure call.')
+                    raise ServiceUnavailable(e)
                 hadFailedConnections = True
-                print("Couldn't connect for remote procedure call, will sleep for five seconds and then try again "
-                      "({} more tries)".format(tries))
+                print(f"Couldn't connect for remote procedure call, will sleep for five seconds and then try again ({tries} more tries)")
                 time.sleep(5)
             else:
                 if hadConnectionFailures:
