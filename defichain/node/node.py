@@ -1,4 +1,3 @@
-from multiprocessing import Process
 from defichain.exceptions.ServiceUnavailable import ServiceUnavailable
 from defichain.exceptions.WrongParmeters import WrongParameters
 
@@ -101,8 +100,8 @@ class Node:
         self.test_connection()
 
         # Prepare Wallet
-        self.load_wallet(wallet_path)
-        self.decrypt_wallet(wallet_password, wallet_timeout)
+        #self.load_wallet(wallet_path)
+        #self.decrypt_wallet(wallet_password, wallet_timeout)
 
     def decrypt_wallet(self, wallet_password: str, wallet_timeout: int):
         """
@@ -134,10 +133,10 @@ class Node:
 
         :exception: ServiceUnavailable
         """
-        p = Process(target=self.network.ping, name='ping')
-        p.start()
-        p.join(timeout=3)
-        p.terminate()
+        try:
+            self.network.ping()
+        except ServiceUnavailable as e:
+            raise ServiceUnavailable(f"RPC_CLIENT_INVALID_IP_OR_SUBNET: Invalid IP/Subnet {e}")
 
-        if p.exitcode is None:
-            raise ServiceUnavailable("RPC_CLIENT_INVALID_IP_OR_SUBNET: Invalid IP/Subnet")
+        except Exception as e:
+            raise Exception(e)
