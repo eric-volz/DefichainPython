@@ -1,7 +1,7 @@
 from setuptools import setup
 from os import path
 
-VERSION = '1.0.0'
+VERSION = '1.0.1'
 DESCRIPTION = 'Defichain Python Library'
 
 # Project URLs
