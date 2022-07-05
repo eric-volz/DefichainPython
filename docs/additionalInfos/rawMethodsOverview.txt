@@ -16,17 +16,21 @@ getaccounthistory "owner" blockHeight txn
 
 getburninfo
 
+getpendingdusdswaps "address"
+
 getpendingfutureswaps "address"
 
 gettokenbalances ( {"start":"str","including_start":bool,"limit":n} indexed_amounts symbol_lookup )
 
-listaccounthistory ( "owner" {"maxBlockHeight":n,"depth":n,"no_rewards":bool,"token":"str","txtype":"str","limit":n,"txn":n} )
+listaccounthistory ( "owner" {"maxBlockHeight":n,"depth":n,"no_rewards":bool,"token":"str","txtype":"str","limit":n,"txn":n,"format":"str"} )
 
 listaccounts ( {"start":"str","including_start":bool,"limit":n} verbose indexed_amounts is_mine_only )
 
 listburnhistory ( {"maxBlockHeight":n,"depth":n,"token":"str","txtype":"str","limit":n} )
 
 listcommunitybalances
+
+listpendingdusdswaps
 
 listpendingfutureswaps
 
@@ -265,6 +269,8 @@ setnetworkactive state
 == Oracles ==
 
 appointoracle "address" [{"currency":"str","token":"str"},...] weightage ( [{"txid":"hex","vout":n},...] )
+
+getdusdswapblock
 
 getfixedintervalprice "fixedIntervalPriceId"
 

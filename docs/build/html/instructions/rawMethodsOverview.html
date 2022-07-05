@@ -263,12 +263,14 @@
 <p>getaccount “owner” ( {“start”:”str”,”including_start”:bool,”limit”:n} indexed_amounts )</p>
 <p>getaccounthistory “owner” blockHeight txn</p>
 <p>getburninfo</p>
+<p>getpendingdusdswaps “address”</p>
 <p>getpendingfutureswaps “address”</p>
 <p>gettokenbalances ( {“start”:”str”,”including_start”:bool,”limit”:n} indexed_amounts symbol_lookup )</p>
-<p>listaccounthistory ( “owner” {“maxBlockHeight”:n,”depth”:n,”no_rewards”:bool,”token”:”str”,”txtype”:”str”,”limit”:n,”txn”:n} )</p>
+<p>listaccounthistory ( “owner” {“maxBlockHeight”:n,”depth”:n,”no_rewards”:bool,”token”:”str”,”txtype”:”str”,”limit”:n,”txn”:n,”format”:”str”} )</p>
 <p>listaccounts ( {“start”:”str”,”including_start”:bool,”limit”:n} verbose indexed_amounts is_mine_only )</p>
 <p>listburnhistory ( {“maxBlockHeight”:n,”depth”:n,”token”:”str”,”txtype”:”str”,”limit”:n} )</p>
 <p>listcommunitybalances</p>
+<p>listpendingdusdswaps</p>
 <p>listpendingfutureswaps</p>
 <p>sendtokenstoaddress {“address”:”str”} {“address”:”str”} ( “selectionMode” )</p>
 <p>sendutxosfrom “from” “to” amount ( “change” )</p>
@@ -379,6 +381,7 @@
 <p>setnetworkactive state</p>
 <p>== Oracles ==</p>
 <p>appointoracle “address” [{“currency”:”str”,”token”:”str”},…] weightage ( [{“txid”:”hex”,”vout”:n},…] )</p>
+<p>getdusdswapblock</p>
 <p>getfixedintervalprice “fixedIntervalPriceId”</p>
 <p>getfutureswapblock</p>
 <p>getoracledata “oracleid”</p>
