@@ -68,7 +68,7 @@ def test_listtoken():  # 05
 def test_minttokens():  # 06
     token = "SPY"
     amount = 1
-    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
+    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Incorrect authorization for 8bL7jZe2Nk5EhqFA6yuf8HPre3M6eewkqj"
     with pytest.raises(InternalServerError, match=string):
         assert node.tokens.minttokens(f"{amount}@{token}")
         assert node.tokens.minttokens(f"{amount}@{token}", [])
