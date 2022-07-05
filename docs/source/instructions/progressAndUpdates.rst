@@ -10,7 +10,7 @@ Since this is a community supported project, the community also has the right to
 .. admonition:: Package Node Version
     :class: caution
 
-    Up to date to the node version: `v2.9.0 - Fort Canning Spring <https://github.com/DeFiCh/ain/releases/tag/v2.9.0>`_
+    Up to date to the node version: `v2.9.1 - Fort Canning Spring <https://github.com/DeFiCh/ain/releases/tag/v2.9.1>`_
 
 
 |:white_check_mark:| = Finished and UpToDate with the specified node version
