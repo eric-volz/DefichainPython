@@ -183,7 +183,28 @@ class Accounts:
         """
         return self._node._rpc.call("getburninfo")
 
-    def getpendingfutureswaps(self, address: str) -> {}:  # 09
+    def getpendingdusdswaps(self, address: str) -> {}:  # 09
+        """
+        Get specific pending DFI-to-DUSD swap.
+
+        :param address: (required) Address to get all pending future swaps
+        :type address: str
+        :return:
+
+            .. code-block:: text
+
+                {
+                    owner :       "address"
+                    amount :      n.nnnnnnnn
+                }
+
+        :example:
+
+            >>> node.accounts.getpendingdusdswaps(address)
+        """
+        return self._node._rpc.call("getpendingdusdswaps", address)
+
+    def getpendingfutureswaps(self, address: str) -> {}:  # 10
         """
         Get specific pending futures.
 
@@ -209,7 +230,7 @@ class Accounts:
         return self._node._rpc.call("getpendingfutureswaps", address)
 
     def gettokenbalances(self, start: str = None, including_start: bool = None, limit: int = None,
-                         indexed_amounts: bool = False, symbol_lookup: bool = False) -> {}:  # 10
+                         indexed_amounts: bool = False, symbol_lookup: bool = False) -> {}:  # 11
         """
         Returns the balances of all accounts that belong to the wallet.
 
@@ -237,8 +258,10 @@ class Accounts:
         return self._node._rpc.call("gettokenbalances", pagination.build(), indexed_amounts, symbol_lookup)
 
     def listaccounthistory(self, owner: str, maxBlockHeight: int = None, depth: int = None, no_rewards: bool = None,
-                           token: str = None, txtype: str = None, limit: int = None, txn: int = None) -> [{}]:  # 11
+                           token: str = None, txtype: str = None, limit: int = None, txn: int = None,
+                           format: str = None) -> [{}]:  # 12
         """
+        Returns information about account history.
 
         :param owner: (required) Single account ID (CScript or address) or reserved words: "mine" - to list history for all owned accounts or "all" to list whole DB (default = "mine").
         :type owner: str
@@ -256,6 +279,8 @@ class Accounts:
         :type limit: int
         :param txn: (optional) Order in block, unlimited by default
         :type txn: int
+        :param format: (optional) Return amounts with the following: 'id' -> <amount>@id; (default)'symbol' -> <amount>@symbol
+        :type format: str
         :return: [{},{}...] (array) Objects with account history information
 
         :example:
@@ -270,11 +295,12 @@ class Accounts:
         options.append("txtype", txtype)
         options.append("limit", limit)
         options.append("txn", txn)
+        options.append("format", format)
 
         return self._node._rpc.call("listaccounthistory", owner, options.build())
 
     def listaccounts(self, start: str = None, including_start: bool = None, limit: int = None, verbose: bool = True,
-                     indexed_amounts: bool = False, is_mine_only: bool = False) -> {}:  # 12
+                     indexed_amounts: bool = False, is_mine_only: bool = False) -> {}:  # 13
         """
         Returns information about all accounts on chain.
 
@@ -304,7 +330,7 @@ class Accounts:
         return self._node._rpc.call("listaccounts", pagnation.build(), verbose, indexed_amounts, is_mine_only)
 
     def listburnhistory(self, maxBlockHeight: int = None, depth: int = None, token: str = None, txtype: str = None,
-                        limit: int = None) -> [{}]:  # 13
+                        limit: int = None) -> [{}]:  # 14
         """
         Returns information about burn history.
 
@@ -333,7 +359,7 @@ class Accounts:
 
         return self._node._rpc.call("listburnhistory", options.build())
 
-    def listcommunitybalances(self) -> {}:  # 14
+    def listcommunitybalances(self) -> {}:  # 15
         """
         Returns information about all community balances.
 
@@ -345,7 +371,27 @@ class Accounts:
         """
         return self._node._rpc.call("listcommunitybalances")
 
-    def listpendingfutureswaps(self) -> {}:  # 15
+    def listpendingdusdswaps(self) -> {}:  # 16
+        """
+        Get all pending DFI-to_DUSD swaps.
+
+        :return: "json" (string) array containing json-objects having following fields:
+
+            .. code-block:: text
+
+                {
+                    owner : "address"
+                    amount :      n.nnnnnnnn
+                }
+
+        :example:
+
+            >>> node.accounts.listpendingdusdswaps()
+
+        """
+        return self._node._rpc.call("listpendingdusdswaps")
+
+    def listpendingfutureswaps(self) -> {}:  # 17
         """
         Get all pending futures.
 
@@ -368,7 +414,7 @@ class Accounts:
         """
         return self._node._rpc.call("listpendingfutureswaps")
 
-    def sendtokenstoaddress(self, _from: {}, to: {}, selectionMode: str = "pie") -> str:  # 16
+    def sendtokenstoaddress(self, _from: {}, to: {}, selectionMode: str = "pie") -> str:  # 18
         """
         Creates (and submits to local node and network) a transfer transaction from your accounts balances (may be picked manualy or autoselected) to the specfied accounts.
 
@@ -390,7 +436,7 @@ class Accounts:
         """
         return self._node._rpc.call("sendtokenstoaddress", _from, to, selectionMode)
 
-    def sendutxosfrom(self, _from: str, to: str, amount: int, change: str = None) -> str:  # 17
+    def sendutxosfrom(self, _from: str, to: str, amount: int, change: str = None) -> str:  # 19
         """
         Send a transaction using UTXOs from the specfied address.
 
@@ -411,7 +457,7 @@ class Accounts:
         change = _from if change is None else change
         return self._node._rpc.call("sendutxosfrom", _from, to, amount, change)
 
-    def utxostoaccount(self, amounts: {}, inputs: [{}] = None) -> str:  # 18
+    def utxostoaccount(self, amounts: {}, inputs: [{}] = None) -> str:  # 20
         """
         Creates (and submits to local node and network) a transfer transaction from the wallet UTXOs to specfied account.
         The second optional argument (may be empty array) is an array of specific UTXOs to spend.
@@ -428,7 +474,7 @@ class Accounts:
         """
         return self._node._rpc.call("utxostoaccount", amounts, inputs)
 
-    def withdrawfutureswap(self, address: str, amount: str, destination: str = "", inputs: [{}] = None) -> str:  # 19
+    def withdrawfutureswap(self, address: str, amount: str, destination: str = "", inputs: [{}] = None) -> str:  # 21
         """
         Creates and submits to the network a withdrawal from futures contract transaction.
         Withdrawal will be back to the address specified in the futures contract.

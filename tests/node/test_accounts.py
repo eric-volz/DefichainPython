@@ -67,13 +67,21 @@ def test_getburninfo():  # 08
 
 
 @pytest.mark.query
-def test_getpendingfutureswaps():  # 09
+def test_getpendingdusdswaps():  # 09
+    result1 = node.accounts.getpendingdusdswaps(address)
+    assert result1 or result1 == {}
+    result2 = node.accounts.getpendingdusdswaps(address=address)
+    assert result2 or result2 == {}
+
+
+@pytest.mark.query
+def test_getpendingfutureswaps():  # 10
     assert node.accounts.getpendingfutureswaps(address)
     assert node.accounts.getpendingfutureswaps(address=address)
 
 
 @pytest.mark.query
-def test_gettokenbalances():  # 10
+def test_gettokenbalances():  # 11
     assert node.accounts.gettokenbalances()
     assert node.accounts.gettokenbalances(0, True, 100, False, False)
     assert node.accounts.gettokenbalances(start=0, including_start=True, limit=100, indexed_amounts=False,
@@ -81,7 +89,7 @@ def test_gettokenbalances():  # 10
 
 
 @pytest.mark.query
-def test_listaccounthistory():  # 11
+def test_listaccounthistory():  # 12
     blockcount = node.blockchain.getblockcount()
     assert node.accounts.listaccounthistory(address)
     assert node.accounts.listaccounthistory(address, blockcount, 10000000, True, "", "", 100, 0)
@@ -90,7 +98,7 @@ def test_listaccounthistory():  # 11
 
 
 @pytest.mark.query
-def test_listaccounts():  # 12
+def test_listaccounts():  # 13
     assert node.accounts.listaccounts()
     assert node.accounts.listaccounts('001400007a7328b9554650a56d980095071a201341a2@3', True, 100, True, False, False)
     assert node.accounts.listaccounts(start='001400007a7328b9554650a56d980095071a201341a2@3', including_start=True,
@@ -98,7 +106,7 @@ def test_listaccounts():  # 12
 
 
 @pytest.mark.query
-def test_listburnhistory():  # 13
+def test_listburnhistory():  # 14
     assert node.accounts.listburnhistory()
     assert node.accounts.listburnhistory(node.blockchain.getblockcount(), 10000, "DFI", "", 100)
     assert node.accounts.listburnhistory(maxBlockHeight=node.blockchain.getblockcount(), depth=10000, token="DFI",
@@ -106,17 +114,22 @@ def test_listburnhistory():  # 13
 
 
 @pytest.mark.query
-def test_listcommunitybalances():  # 14
+def test_listcommunitybalances():  # 15
     assert node.accounts.listcommunitybalances()
 
+@pytest.mark.query
+def test_listpendingfutureswaps():  # 16
+    result = node.accounts.listpendingdusdswaps()
+    assert result or result == []
 
 @pytest.mark.query
-def test_listpendingfutureswaps():  # 15
-    assert node.accounts.listpendingfutureswaps()
+def test_listpendingfutureswaps():  # 17
+    result = node.accounts.listpendingfutureswaps()
+    assert result or result == []
 
 
 @pytest.mark.transactions
-def test_sendtokenstoaddress():  # 16
+def test_sendtokenstoaddress():  # 18
     assert len(node.accounts.sendtokenstoaddress({address: "0.0001@DUSD"}, {address: "0.0001@DUSD"})) == LENGTH_OF_TXID
     assert len(node.accounts.sendtokenstoaddress({address: "0.0001@DUSD"}, {address: "0.0001@DUSD"}, "pie")) == LENGTH_OF_TXID
     assert len(node.accounts.sendtokenstoaddress(_from={address: "0.0001@DUSD"}, to={address: "0.0001@DUSD"},
@@ -124,21 +137,21 @@ def test_sendtokenstoaddress():  # 16
 
 
 @pytest.mark.transactions
-def test_sendutxosfrom():  # 17
+def test_sendutxosfrom():  # 19
     assert len(node.accounts.sendutxosfrom(address, address, 0.001)) == LENGTH_OF_TXID
     assert len(node.accounts.sendutxosfrom(address, address, 0.001, address)) == LENGTH_OF_TXID
     assert len(node.accounts.sendutxosfrom(_from=address, to=address, amount=0.001, change=address)) == LENGTH_OF_TXID
 
 
 @pytest.mark.transactions
-def test_utxostoaccount():  # 18
+def test_utxostoaccount():  # 20
     assert len(node.accounts.utxostoaccount({address: "0.000001@DFI"})) == LENGTH_OF_TXID
     assert len(node.accounts.utxostoaccount({address: "0.000001@DFI"}, [])) == LENGTH_OF_TXID
     assert len(node.accounts.utxostoaccount(amounts={address: "0.000001@DFI"}, inputs=[])) == LENGTH_OF_TXID
 
 
 @pytest.mark.transactions
-def test_withdrawfutureswap():  # 19
+def test_withdrawfutureswap():  # 21
     string = ".* RPC_INVALID_REQUEST: Test DFIP2203Tx execution failed:\namount 0.00000000 is less than 1.00000000"
     with pytest.raises(BadRequest, match=string):
         assert node.accounts.withdrawfutureswap(address, "1@DUSD", "TSLA")

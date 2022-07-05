@@ -18,7 +18,12 @@ def test_appointoracle():  # 01
 
 
 @pytest.mark.query
-def test_getfixedintervalprice():  # 02
+def test_getdusdswapblock():  # 02
+    assert node.oracles.getdusdswapblock()
+
+
+@pytest.mark.query
+def test_getfixedintervalprice():  # 03
     currency = "USD"
     token = "DFI"
     fixedIntervalPriceId = f"{token}/{currency}"
@@ -27,19 +32,19 @@ def test_getfixedintervalprice():  # 02
 
 
 @pytest.mark.query
-def test_getfutureswapblock():  # 03
+def test_getfutureswapblock():  # 04
     assert node.oracles.getfutureswapblock()
 
 
 @pytest.mark.query
-def test_getoracledata():  # 04
+def test_getoracledata():  # 05
     oracleid = "a4492224b78b065d3c044e65e4968e9b326f1b19b615b50f79d3ab58df10f2c5"
     assert node.oracles.getoracledata(oracleid)
     assert node.oracles.getoracledata(oracleid=oracleid)
 
 
 @pytest.mark.query
-def test_getprice():  # 05
+def test_getprice():  # 06
     currency = "USD"
     token = "DFI"
     assert node.oracles.getprice(token, currency)
@@ -47,7 +52,7 @@ def test_getprice():  # 05
 
 
 @pytest.mark.query
-def test_listfixedintervalprices():  # 06
+def test_listfixedintervalprices():  # 07
     currency = "USD"
     token = "DFI"
     start = f"{token}/{currency}"
@@ -57,7 +62,7 @@ def test_listfixedintervalprices():  # 06
 
 
 @pytest.mark.query
-def test_listlatestrawprices():  # 07
+def test_listlatestrawprices():  # 08
     currency = "USD"
     token = "DFI"
     start = "a4492224b78b065d3c044e65e4968e9b326f1b19b615b50f79d3ab58df10f2c5"
@@ -66,7 +71,7 @@ def test_listlatestrawprices():  # 07
 
 
 @pytest.mark.query
-def test_listoracles():  # 08
+def test_listoracles():  # 09
     start = "a4492224b78b065d3c044e65e4968e9b326f1b19b615b50f79d3ab58df10f2c5"
     assert node.oracles.listoracles()
     assert node.oracles.listoracles(start, True, 3)
@@ -74,14 +79,14 @@ def test_listoracles():  # 08
 
 
 @pytest.mark.query
-def test_listprices():  # 09
+def test_listprices():  # 10
     assert node.oracles.listprices()
     assert node.oracles.listprices(2, True, 5)
     assert node.oracles.listprices(start=2, including_start=True, limit=5)
 
 
 @pytest.mark.query
-def test_removeoracle():  # 10
+def test_removeoracle():  # 11
     oracleid = "a4492224b78b065d3c044e65e4968e9b326f1b19b615b50f79d3ab58df10f2c5"
     string = r".*RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
     with pytest.raises(InternalServerError, match=string):
@@ -90,7 +95,7 @@ def test_removeoracle():  # 10
 
 
 @pytest.mark.query
-def test_setoracledata():  # 11
+def test_setoracledata():  # 12
     oracleid = "a4492224b78b065d3c044e65e4968e9b326f1b19b615b50f79d3ab58df10f2c5"
     timestamp = 1650994232
     prices = [{"currency": "USD", "tokenAmount": "4@DFI"}]
@@ -101,7 +106,7 @@ def test_setoracledata():  # 11
 
 
 @pytest.mark.query
-def test_updateoracle():  # 12
+def test_updateoracle():  # 13
     oracleid = "a4492224b78b065d3c044e65e4968e9b326f1b19b615b50f79d3ab58df10f2c5"
     address = "df1qxejhhu8xjx5mfh33khaz2fnlt8jwcyar450gtr"
     pricefeeds = [{"currency": "USD", "token": "DFI"}]
