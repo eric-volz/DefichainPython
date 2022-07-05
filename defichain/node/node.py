@@ -100,8 +100,8 @@ class Node:
         self.test_connection()
 
         # Prepare Wallet
-        #self.load_wallet(wallet_path)
-        #self.decrypt_wallet(wallet_password, wallet_timeout)
+        self.load_wallet(wallet_path)
+        self.decrypt_wallet(wallet_password, wallet_timeout)
 
     def decrypt_wallet(self, wallet_password: str, wallet_timeout: int):
         """
