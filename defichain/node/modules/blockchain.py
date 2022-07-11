@@ -351,19 +351,185 @@ class Blockchain:
         """
         return self._node._rpc.call("getchaintips")
 
-    def getchaintxstats(self, nblocks=86400, blockhash=None):  # 11
+    def getchaintxstats(self, nblocks: int = 86400, blockhash: str = None) -> {}:  # 11
+        """
+        Compute statistics about the total number and rate of transactions in the chain.
+
+        :param nblocks: (optional) Size of the window in number of blocks
+        :type nblocks: int
+        :param blockhash: (optional) The hash of the block that ends the window.
+        :type blockhash: str
+        :return:
+
+            .. code-block:: text
+
+                {
+                    "time": xxxxx,                         (numeric) The timestamp for the final block in the window in UNIX format.
+                    "txcount": xxxxx,                      (numeric) The total number of transactions in the chain up to that point.
+                    "window_final_block_hash": "...",      (string) The hash of the final block in the window.
+                    "window_final_block_height": xxxxx,    (numeric) The height of the final block in the window.
+                    "window_block_count": xxxxx,           (numeric) Size of the window in number of blocks.
+                    "window_tx_count": xxxxx,              (numeric) The number of transactions in the window. Only returned if "window_block_count" is > 0.
+                    "window_interval": xxxxx,              (numeric) The elapsed time in the window in seconds. Only returned if "window_block_count" is > 0.
+                    "txrate": x.xx,                        (numeric) The average rate of transactions per second in the window. Only returned if "window_interval" is > 0.
+                }
+        :example:
+
+            >>> node.blockchain.getchaintxstats()
+        """
         return self._node._rpc.call("getchaintxstats", nblocks, blockhash)
 
-    def getdifficulty(self):  # 12
+    def getdifficulty(self) -> float:  # 12
+        """
+        Returns the proof-of-work difficulty as a multiple of the minimum difficulty.
+
+        :return: n.nnn (numeric) the proof-of-work difficulty as a multiple of the minimum difficulty.
+
+        :example:
+
+            >>> node.blockchain.getdifficulty()
+        """
         return self._node._rpc.call("getdifficulty")
 
-    def getgov(self, name):  # 13
+    def getgov(self, name: str) -> {}:  # 13
+        """
+        Returns information about governance variable:
+
+        ATTRIBUTES, ICX_TAKERFEE_PER_BTC, LP_DAILY_LOAN_TOKEN_REWARD, LP_LOAN_TOKEN_SPLITS, LP_DAILY_DFI_REWARD,
+        LOAN_LIQUIDATION_PENALTY, LP_SPLITS, ORACLE_BLOCK_INTERVAL, ORACLE_DEVIATION
+
+        :param name: (optional) Variable name
+        :type name: str
+        :return: {id:{...}} (array) Json object with variable information
+
+        :example:
+
+            >>> node.blockchain.getgov("LP_SPLITS")
+        """
         return self._node._rpc.call("getgov", name)
 
-    def getmempoolancestors(self, txid, verbose=False):  # 14
+    def getmempoolancestors(self, txid: str, verbose: bool = False) -> []:  # 14
+        """
+        If txid is in the mempool, returns all in-mempool ancestors.
+
+        :param txid: (required) The transaction id (must be in mempool)
+        :type txid: str
+        :param verbose: (optional) True for a json object, false for array of transaction ids
+        :type verbose: bool
+        :return:
+
+            **Result (for verbose = false):**
+
+                .. code-block:: text
+
+                    [                       (json array of strings)
+                    "transactionid"           (string) The transaction id of an in-mempool ancestor transaction
+                    ,...
+                    ]
+
+            **Result (for verbose = true):**
+
+                .. code-block:: text
+
+                    {                           (json object)
+                        "transactionid" : {     (json object)
+                            "vsize" : n,            (numeric) virtual transaction size as defined in BIP 141. This is different from actual serialized size for witness transactions as witness data is discounted.
+                            "size" : n,             (numeric) (DEPRECATED) same as vsize. Only returned if defid is started with -deprecatedrpc=size
+                                                    size will be completely removed in v0.20.
+                            "weight" : n,           (numeric) transaction weight as defined in BIP 141.
+                            "fee" : n,              (numeric) transaction fee in DFI (DEPRECATED)
+                            "modifiedfee" : n,      (numeric) transaction fee with fee deltas used for mining priority (DEPRECATED)
+                            "time" : n,             (numeric) local time transaction entered pool in seconds since 1 Jan 1970 GMT
+                            "height" : n,           (numeric) block height when transaction entered pool
+                            "descendantcount" : n,  (numeric) number of in-mempool descendant transactions (including this one)
+                            "descendantsize" : n,   (numeric) virtual transaction size of in-mempool descendants (including this one)
+                            "descendantfees" : n,   (numeric) modified fees (see above) of in-mempool descendants (including this one) (DEPRECATED)
+                            "ancestorcount" : n,    (numeric) number of in-mempool ancestor transactions (including this one)
+                            "ancestorsize" : n,     (numeric) virtual transaction size of in-mempool ancestors (including this one)
+                            "ancestorfees" : n,     (numeric) modified fees (see above) of in-mempool ancestors (including this one) (DEPRECATED)
+                            "wtxid" : hash,         (string) hash of serialized transaction, including witness data
+                            "fees" : {
+                                "base" : n,         (numeric) transaction fee in DFI
+                                "modified" : n,     (numeric) transaction fee with fee deltas used for mining priority in DFI
+                                "ancestor" : n,     (numeric) modified fees (see above) of in-mempool ancestors (including this one) in DFI
+                                "descendant" : n,   (numeric) modified fees (see above) of in-mempool descendants (including this one) in DFI
+                            }
+                        "depends" : [           (array) unconfirmed transactions used as inputs for this transaction
+                            "transactionid",    (string) parent transaction id
+                        ... ]
+                        "spentby" : [           (array) unconfirmed transactions spending outputs from this transaction
+                            "transactionid",    (string) child transaction id
+                        ... ]
+                        "bip125-replaceable" : true|false,  (boolean) Whether this transaction could be replaced due to BIP125 (replace-by-fee)
+                        }, ...
+                    }
+
+        :example:
+
+            >>> node.blockchain.getmempoolancestors(txid)
+        """
         return self._node._rpc.call("getmempoolancestors", txid, verbose)
 
-    def getmempooldescendants(self, txid, verbose=False):  # 15
+    def getmempooldescendants(self, txid: str, verbose: bool = False) -> []:  # 15
+        """
+        If txid is in the mempool, returns all in-mempool descendants.
+
+        :param txid: (required) The transaction id (must be in mempool)
+        :type txid: str
+        :param verbose: (optional) True for a json object, false for array of transaction ids
+        :type verbose: bool
+        :return:
+
+            **Result (for verbose = false):**
+
+                .. code-block:: text
+
+                    [                       (json array of strings)
+                    "transactionid"           (string) The transaction id of an in-mempool ancestor transaction
+                    ,...
+                    ]
+
+            **Result (for verbose = true):**
+
+                .. code-block:: text
+
+                    {                           (json object)
+                        "transactionid" : {     (json object)
+                            "vsize" : n,            (numeric) virtual transaction size as defined in BIP 141. This is different from actual serialized size for witness transactions as witness data is discounted.
+                            "size" : n,             (numeric) (DEPRECATED) same as vsize. Only returned if defid is started with -deprecatedrpc=size
+                                                    size will be completely removed in v0.20.
+                            "weight" : n,           (numeric) transaction weight as defined in BIP 141.
+                            "fee" : n,              (numeric) transaction fee in DFI (DEPRECATED)
+                            "modifiedfee" : n,      (numeric) transaction fee with fee deltas used for mining priority (DEPRECATED)
+                            "time" : n,             (numeric) local time transaction entered pool in seconds since 1 Jan 1970 GMT
+                            "height" : n,           (numeric) block height when transaction entered pool
+                            "descendantcount" : n,  (numeric) number of in-mempool descendant transactions (including this one)
+                            "descendantsize" : n,   (numeric) virtual transaction size of in-mempool descendants (including this one)
+                            "descendantfees" : n,   (numeric) modified fees (see above) of in-mempool descendants (including this one) (DEPRECATED)
+                            "ancestorcount" : n,    (numeric) number of in-mempool ancestor transactions (including this one)
+                            "ancestorsize" : n,     (numeric) virtual transaction size of in-mempool ancestors (including this one)
+                            "ancestorfees" : n,     (numeric) modified fees (see above) of in-mempool ancestors (including this one) (DEPRECATED)
+                            "wtxid" : hash,         (string) hash of serialized transaction, including witness data
+                            "fees" : {
+                                "base" : n,         (numeric) transaction fee in DFI
+                                "modified" : n,     (numeric) transaction fee with fee deltas used for mining priority in DFI
+                                "ancestor" : n,     (numeric) modified fees (see above) of in-mempool ancestors (including this one) in DFI
+                                "descendant" : n,   (numeric) modified fees (see above) of in-mempool descendants (including this one) in DFI
+                            }
+                        "depends" : [           (array) unconfirmed transactions used as inputs for this transaction
+                            "transactionid",    (string) parent transaction id
+                        ... ]
+                        "spentby" : [           (array) unconfirmed transactions spending outputs from this transaction
+                            "transactionid",    (string) child transaction id
+                        ... ]
+                        "bip125-replaceable" : true|false,  (boolean) Whether this transaction could be replaced due to BIP125 (replace-by-fee)
+                        }, ...
+                    }
+
+        :example:
+
+            >>> node.blockchain.getmempooldescendants(txid)
+        """
         return self._node._rpc.call("getmempooldescendants", txid, verbose)
 
     def getmempoolentry(self, txid):  # 16
