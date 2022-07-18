@@ -868,7 +868,7 @@ class Blockchain:
             sh(multi(<n>,<pubkey>,<pubkey>,...)) P2SH-multisig outputs for the given threshold and pubkeys
 
         In the above, <pubkey> either refers to a fixed public key in hexadecimal notation, or to an xpub/xprv optionally followed by one
-        or more path elements separated by "/", and optionally ending in "/*" (unhardened), or "/*'" or "/*h" (hardened) to specify all
+        or more path elements separated by "/", and optionally ending in "/\*" (unhardened), or "/\*'" or "/\*h" (hardened) to specify all
         unhardened or hardened child keys.
 
         In the latter case, a range needs to be specified by below if different from 1000.
