@@ -126,7 +126,7 @@ Since this is a community supported project, the community also has the right to
         RPC Modules         Progress
         ===============     ========
         Accounts            |:white_check_mark:|
-        Blockchain          |:rotating_light:|
+        Blockchain          |:white_check_mark:|
         Control             |:rotating_light:|
         Generating          |:rotating_light:|
         Loan                |:rotating_light:|
