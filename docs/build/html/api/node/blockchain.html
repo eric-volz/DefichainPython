@@ -253,7 +253,1071 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.node.Blockchain">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Blockchain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Blockchain" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.clearmempool">
+<span class="sig-name descname"><span class="pre">clearmempool</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'str'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.node.Blockchain.clearmempool" title="Permalink to this definition">#</a></dt>
+<dd><p>Clears the memory pool and returns a list of the removed transactions.</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[               (json array of string)
+    "hash"      (string) The transaction hash
+    ,...
+]
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">clearmempool</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.getbestblockhash">
+<span class="sig-name descname"><span class="pre">getbestblockhash</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.getbestblockhash" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the hash of the best (tip) block in the most-work fully-validated chain.</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>“hex” (string) the block hash, hex-encoded</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getbestblockhash</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.getblock">
+<span class="sig-name descname"><span class="pre">getblock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blockhash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbosity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.getblock" title="Permalink to this definition">#</a></dt>
+<dd><p>If verbosity is 0, returns a string that is serialized, hex-encoded data for block ‘hash’.</p>
+<p>If verbosity is 1, returns an Object with information about block &lt;hash&gt;.</p>
+<p>If verbosity is 2, returns an Object with information about block &lt;hash&gt; and information about each transaction.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>blockhash</strong> (<em>str</em>) – (required) The block hash</p></li>
+<li><p><strong>verbosity</strong> (<em>int</em>) – (optional) 0 for hex-encoded data, 1 for a json object, and 2 for json object with transaction data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>Result (for verbosity = 0):</strong></p>
+<p>”data” (string) A string that is serialized, hex-encoded data for block ‘hash’.</p>
+<p><strong>Result (for verbosity = 1):</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "hash" : "hash",     (string) the block hash (same as provided)
+    "confirmations" : n,   (numeric) The number of confirmations, or -1 if the block is not on the main chain
+    "size" : n,            (numeric) The block size
+    "strippedsize" : n,    (numeric) The block size excluding witness data
+    "weight" : n           (numeric) The block weight as defined in BIP 141
+    "height" : n,          (numeric) The block height or index
+    "version" : n,         (numeric) The block version
+    "versionHex" : "00000000", (string) The block version formatted in hexadecimal
+    "merkleroot" : "xxxx", (string) The merkle root
+    "nonutxo" : [,         (array of string) Non-UTXO coinbase rewards
+    "type" n.nnnnnnnn   (numeric) Reward type and amount
+    ],
+    "tx" : [               (array of string) The transaction ids
+    "transactionid"     (string) The transaction id
+    ,...
+    ],
+    "time" : ttt,          (numeric) The block time in seconds since epoch (Jan 1 1970 GMT)
+    "mediantime" : ttt,    (numeric) The median block time in seconds since epoch (Jan 1 1970 GMT)
+    "nonce" : n,           (numeric) The nonce
+    "bits" : "1d00ffff", (string) The bits
+    "difficulty" : x.xxx,  (numeric) The difficulty
+    "chainwork" : "xxxx",  (string) Expected number of hashes required to produce the chain up to this block (in hex)
+    "nTx" : n,             (numeric) The number of transactions in the block.
+    "previousblockhash" : "hash",  (string) The hash of the previous block
+    "nextblockhash" : "hash"       (string) The hash of the next block
+}
+</pre></div>
+</div>
+<p><strong>Result (for verbosity = 2):</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    ...,            Same output as verbosity = 1.
+    "tx" : [        (array of Objects) The transactions in the format of the getrawtransaction RPC. Different from verbosity = 1 "tx" result.
+    ,...
+    ],
+    ,...            Same output as verbosity = 1.
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getblock</span><span class="p">(</span><span class="s2">"ffa579106ef8d396223c616b9a77b8dab22656648b55965fc9e541e864f0f9fd"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.getblockchaininfo">
+<span class="sig-name descname"><span class="pre">getblockchaininfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.getblockchaininfo" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns an object containing various state info regarding blockchain processing.</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "chain": "xxxx",              (string) current network name as defined in BIP70 (main, test, regtest)
+    "blocks": xxxxxx,             (numeric) the height of the most-work fully-validated chain. The genesis block has height 0
+    "headers": xxxxxx,            (numeric) the current number of headers we have validated
+    "bestblockhash": "...",       (string) the hash of the currently best block
+    "difficulty": xxxxxx,         (numeric) the current difficulty
+    "mediantime": xxxxxx,         (numeric) median time for the current best block
+    "verificationprogress": xxxx, (numeric) estimate of verification progress [0..1]
+    "initialblockdownload": xxxx, (bool) (debug information) estimate of whether this node is in Initial Block Download mode.
+    "chainwork": "xxxx"           (string) total amount of work in active chain, in hexadecimal
+    "size_on_disk": xxxxxx,       (numeric) the estimated size of the block and undo files on disk
+    "pruned": xx,                 (boolean) if the blocks are subject to pruning
+    "pruneheight": xxxxxx,        (numeric) lowest-height complete block stored (only present if pruning is enabled)
+    "automatic_pruning": xx,      (boolean) whether automatic pruning is enabled (only present if pruning is enabled)
+    "prune_target_size": xxxxxx,  (numeric) the target size used by pruning (only present if automatic pruning is enabled)
+    "softforks": {                (object) status of softforks
+        "xxxx" : {                 (string) name of the softfork
+            "type": "xxxx",         (string) one of "buried", "bip9"
+            "bip9": {               (object) status of bip9 softforks (only for "bip9" type)
+                "status": "xxxx",    (string) one of "defined", "started", "locked_in", "active", "failed"
+                "bit": xx,           (numeric) the bit (0-28) in the block version field used to signal this softfork (only for "started" status)
+                "startTime": xx,     (numeric) the minimum median time past of a block at which the bit gains its meaning
+                "timeout": xx,       (numeric) the median time past of a block at which the deployment is considered failed if not yet locked in
+                "since": xx,         (numeric) height of the first block to which the status applies
+                "statistics": {      (object) numeric statistics about BIP9 signalling for a softfork
+                    "period": xx,     (numeric) the length in blocks of the BIP9 signalling period
+                    "threshold": xx,  (numeric) the number of blocks with the version bit set required to activate the feature
+                    "elapsed": xx,    (numeric) the number of blocks elapsed since the beginning of the current period
+                    "count": xx,      (numeric) the number of blocks with the version bit set in the current period
+                    "possible": xx    (boolean) returns false if there are not enough blocks left in this period to pass activation threshold
+                }
+            },
+                "height": "xxxxxx",     (numeric) height of the first block which the rules are or will be enforced (only for "buried" type, or "bip9" type with "active" status)
+                "active": xx,           (boolean) true if the rules are enforced for the mempool and the next block
+        }
+    }
+    "warnings" : "...",           (string) any network and blockchain warnings.
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getblockchaininfo</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.getblockcount">
+<span class="sig-name descname"><span class="pre">getblockcount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.getblockcount" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the height of the most-work fully-validated chain.
+The genesis block has height 0.</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>n (numeric) The current block count</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getblockcount</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.getblockfilter">
+<span class="sig-name descname"><span class="pre">getblockfilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blockhash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filtertype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'basic'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.getblockfilter" title="Permalink to this definition">#</a></dt>
+<dd><p>Retrieve a BIP 157 content filter for a particular block.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>blockhash</strong> (<em>str</em>) – (required) The hash of the block</p></li>
+<li><p><strong>filtertype</strong> (<em>str</em>) – (optional) The type name of the filter</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "filter" : (string) the hex-encoded filter data
+    "header" : (string) the hex-encoded filter header
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getblockfilter</span><span class="p">(</span><span class="s2">"ffa579106ef8d396223c616b9a77b8dab22656648b55965fc9e541e864f0f9fd"</span><span class="p">,</span> <span class="s2">"basic"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.getblockhash">
+<span class="sig-name descname"><span class="pre">getblockhash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.getblockhash" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns hash of block in best-block-chain at height provided.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>height</strong> (<em>int</em>) – (required) The height index</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) The block hash</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getblockhash</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.getblockheader">
+<span class="sig-name descname"><span class="pre">getblockheader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blockhash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Blockchain.getblockheader" title="Permalink to this definition">#</a></dt>
+<dd><p>If verbose is false, returns a string that is serialized, hex-encoded data for blockheader ‘hash’.</p>
+<p>If verbose is true, returns an Object with information about blockheader &lt;hash&gt;.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>blockhash</strong> (<em>str</em>) – (required) The block hash</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – (optional) true for a json object, false for the hex-encoded data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>Result (for verbose = true):</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "hash" : "hash",     (string) the block hash (same as provided)
+    "confirmations" : n,   (numeric) The number of confirmations, or -1 if the block is not on the main chain
+    "height" : n,          (numeric) The block height or index
+    "version" : n,         (numeric) The block version
+    "versionHex" : "00000000", (string) The block version formatted in hexadecimal
+    "merkleroot" : "xxxx", (string) The merkle root
+    "time" : ttt,          (numeric) The block time in seconds since epoch (Jan 1 1970 GMT)
+    "mediantime" : ttt,    (numeric) The median block time in seconds since epoch (Jan 1 1970 GMT)
+    "nonce" : n,           (numeric) The nonce
+    "bits" : "1d00ffff", (string) The bits
+    "difficulty" : x.xxx,  (numeric) The difficulty
+    "chainwork" : "0000...1f3"     (string) Expected number of hashes required to produce the current chain (in hex)
+    "nTx" : n,             (numeric) The number of transactions in the block.
+    "previousblockhash" : "hash",  (string) The hash of the previous block
+    "nextblockhash" : "hash",      (string) The hash of the next block
+}
+</pre></div>
+</div>
+<p><strong>Result (for verbose = false):</strong>
+“data” (string) A string that is serialized, hex-encoded data for block ‘hash’.</p>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getblockheader</span><span class="p">(</span><span class="s2">"ffa579106ef8d396223c616b9a77b8dab22656648b55965fc9e541e864f0f9fd"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.getblockstats">
+<span class="sig-name descname"><span class="pre">getblockstats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hash_or_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.getblockstats" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute per block statistics for a given window. All amounts are in satoshis.</p>
+<p>It won’t work for some heights with pruning.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hash_or_height</strong> (<em>str</em><em> or </em><em>int</em>) – (required) The block hash or height of the target block</p></li>
+<li><p><strong>stats</strong> (<em>array</em>) – <p>(optional) Values to plot (see result below)</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
+    "height",     (string) Selected statistic
+    "time",       (string) Selected statistic
+    ...
+]
+</pre></div>
+</div>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{                             (json object)
+    "avgfee": xxxxx,          (numeric) Average fee in the block
+    "avgfeerate": xxxxx,      (numeric) Average feerate (in satoshis per virtual byte)
+    "avgtxsize": xxxxx,       (numeric) Average transaction size
+    "blockhash": xxxxx,       (string) The block hash (to check for potential reorgs)
+    "feerate_percentiles": [  (array of numeric) Feerates at the 10th, 25th, 50th, 75th, and 90th percentile weight unit (in satoshis per virtual byte)
+        "10th_percentile_feerate",      (numeric) The 10th percentile feerate
+        "25th_percentile_feerate",      (numeric) The 25th percentile feerate
+        "50th_percentile_feerate",      (numeric) The 50th percentile feerate
+        "75th_percentile_feerate",      (numeric) The 75th percentile feerate
+        "90th_percentile_feerate",      (numeric) The 90th percentile feerate
+    ],
+    "height": xxxxx,          (numeric) The height of the block
+    "ins": xxxxx,             (numeric) The number of inputs (excluding coinbase)
+    "maxfee": xxxxx,          (numeric) Maximum fee in the block
+    "maxfeerate": xxxxx,      (numeric) Maximum feerate (in satoshis per virtual byte)
+    "maxtxsize": xxxxx,       (numeric) Maximum transaction size
+    "medianfee": xxxxx,       (numeric) Truncated median fee in the block
+    "mediantime": xxxxx,      (numeric) The block median time past
+    "mediantxsize": xxxxx,    (numeric) Truncated median transaction size
+    "minfee": xxxxx,          (numeric) Minimum fee in the block
+    "minfeerate": xxxxx,      (numeric) Minimum feerate (in satoshis per virtual byte)
+    "mintxsize": xxxxx,       (numeric) Minimum transaction size
+    "outs": xxxxx,            (numeric) The number of outputs
+    "subsidy": xxxxx,         (numeric) The block subsidy
+    "swtotal_size": xxxxx,    (numeric) Total size of all segwit transactions
+    "swtotal_weight": xxxxx,  (numeric) Total weight of all segwit transactions divided by segwit scale factor (4)
+    "swtxs": xxxxx,           (numeric) The number of segwit transactions
+    "time": xxxxx,            (numeric) The block time
+    "total_out": xxxxx,       (numeric) Total amount in all outputs (excluding coinbase and thus reward [ie subsidy + totalfee])
+    "total_size": xxxxx,      (numeric) Total size of all non-coinbase transactions
+    "total_weight": xxxxx,    (numeric) Total weight of all non-coinbase transactions divided by segwit scale factor (4)
+    "totalfee": xxxxx,        (numeric) The fee total
+    "txs": xxxxx,             (numeric) The number of transactions (excluding coinbase)
+    "utxo_increase": xxxxx,   (numeric) The increase/decrease in the number of unspent outputs
+    "utxo_size_inc": xxxxx,   (numeric) The increase/decrease in size for the utxo index (not discounting op_return and similar)
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getblockstats</span><span class="p">(</span><span class="s2">"ffa579106ef8d396223c616b9a77b8dab22656648b55965fc9e541e864f0f9fd"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"height"</span><span class="p">,</span> <span class="n">time</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.getchaintips">
+<span class="sig-name descname"><span class="pre">getchaintips</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.getchaintips" title="Permalink to this definition">#</a></dt>
+<dd><p>Return information about all known tips in the block tree, including the main chain as well as orphaned branches.</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
+    {
+        "height": xxxx,         (numeric) height of the chain tip
+        "hash": "xxxx",         (string) block hash of the tip
+        "branchlen": 0          (numeric) zero for main chain
+        "status": "active"      (string) "active" for the main chain
+    },
+    {
+        "height": xxxx,
+        "hash": "xxxx",
+        "branchlen": 1          (numeric) length of branch connecting the tip to the main chain
+        "status": "xxxx"        (string) status of the chain (active, valid-fork, valid-headers, headers-only, invalid)
+    }
+]
+</pre></div>
+</div>
+<p><strong>Possible values for status:</strong></p>
+<ol class="arabic simple">
+<li><p>”invalid”               This branch contains at least one invalid block</p></li>
+<li><p>”headers-only”          Not all blocks for this branch are available, but the headers are valid</p></li>
+<li><p>”valid-headers”         All blocks are available for this branch, but they were never fully validated</p></li>
+<li><p>”valid-fork”            This branch is not part of the active chain, but is fully validated</p></li>
+<li><p>”active”</p></li>
+</ol>
+</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getchaintips</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.getchaintxstats">
+<span class="sig-name descname"><span class="pre">getchaintxstats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nblocks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">86400</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blockhash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.getchaintxstats" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute statistics about the total number and rate of transactions in the chain.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nblocks</strong> (<em>int</em>) – (optional) Size of the window in number of blocks</p></li>
+<li><p><strong>blockhash</strong> (<em>str</em>) – (optional) The hash of the block that ends the window.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "time": xxxxx,                         (numeric) The timestamp for the final block in the window in UNIX format.
+    "txcount": xxxxx,                      (numeric) The total number of transactions in the chain up to that point.
+    "window_final_block_hash": "...",      (string) The hash of the final block in the window.
+    "window_final_block_height": xxxxx,    (numeric) The height of the final block in the window.
+    "window_block_count": xxxxx,           (numeric) Size of the window in number of blocks.
+    "window_tx_count": xxxxx,              (numeric) The number of transactions in the window. Only returned if "window_block_count" is &gt; 0.
+    "window_interval": xxxxx,              (numeric) The elapsed time in the window in seconds. Only returned if "window_block_count" is &gt; 0.
+    "txrate": x.xx,                        (numeric) The average rate of transactions per second in the window. Only returned if "window_interval" is &gt; 0.
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getchaintxstats</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.getdifficulty">
+<span class="sig-name descname"><span class="pre">getdifficulty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.getdifficulty" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the proof-of-work difficulty as a multiple of the minimum difficulty.</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>n.nnn (numeric) the proof-of-work difficulty as a multiple of the minimum difficulty.</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getdifficulty</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.getgov">
+<span class="sig-name descname"><span class="pre">getgov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.getgov" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns information about governance variable:</p>
+<p>ATTRIBUTES, ICX_TAKERFEE_PER_BTC, LP_DAILY_LOAN_TOKEN_REWARD, LP_LOAN_TOKEN_SPLITS, LP_DAILY_DFI_REWARD,
+LOAN_LIQUIDATION_PENALTY, LP_SPLITS, ORACLE_BLOCK_INTERVAL, ORACLE_DEVIATION</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – (optional) Variable name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>{id:{…}} (array) Json object with variable information</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getgov</span><span class="p">(</span><span class="s2">"LP_SPLITS"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.getmempoolancestors">
+<span class="sig-name descname"><span class="pre">getmempoolancestors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.node.Blockchain.getmempoolancestors" title="Permalink to this definition">#</a></dt>
+<dd><p>If txid is in the mempool, returns all in-mempool ancestors.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txid</strong> (<em>str</em>) – (required) The transaction id (must be in mempool)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – (optional) True for a json object, false for array of transaction ids</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>Result (for verbose = false):</strong></p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[                       (json array of strings)
+"transactionid"           (string) The transaction id of an in-mempool ancestor transaction
+,...
+]
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Result (for verbose = true):</strong></p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{                           (json object)
+    "transactionid" : {     (json object)
+        "vsize" : n,            (numeric) virtual transaction size as defined in BIP 141. This is different from actual serialized size for witness transactions as witness data is discounted.
+        "size" : n,             (numeric) (DEPRECATED) same as vsize. Only returned if defid is started with -deprecatedrpc=size size will be completely removed in v0.20.
+        "weight" : n,           (numeric) transaction weight as defined in BIP 141.
+        "fee" : n,              (numeric) transaction fee in DFI (DEPRECATED)
+        "modifiedfee" : n,      (numeric) transaction fee with fee deltas used for mining priority (DEPRECATED)
+        "time" : n,             (numeric) local time transaction entered pool in seconds since 1 Jan 1970 GMT
+        "height" : n,           (numeric) block height when transaction entered pool
+        "descendantcount" : n,  (numeric) number of in-mempool descendant transactions (including this one)
+        "descendantsize" : n,   (numeric) virtual transaction size of in-mempool descendants (including this one)
+        "descendantfees" : n,   (numeric) modified fees (see above) of in-mempool descendants (including this one) (DEPRECATED)
+        "ancestorcount" : n,    (numeric) number of in-mempool ancestor transactions (including this one)
+        "ancestorsize" : n,     (numeric) virtual transaction size of in-mempool ancestors (including this one)
+        "ancestorfees" : n,     (numeric) modified fees (see above) of in-mempool ancestors (including this one) (DEPRECATED)
+        "wtxid" : hash,         (string) hash of serialized transaction, including witness data
+        "fees" : {
+            "base" : n,         (numeric) transaction fee in DFI
+            "modified" : n,     (numeric) transaction fee with fee deltas used for mining priority in DFI
+            "ancestor" : n,     (numeric) modified fees (see above) of in-mempool ancestors (including this one) in DFI
+            "descendant" : n,   (numeric) modified fees (see above) of in-mempool descendants (including this one) in DFI
+        }
+    "depends" : [           (array) unconfirmed transactions used as inputs for this transaction
+        "transactionid",    (string) parent transaction id
+    ... ]
+    "spentby" : [           (array) unconfirmed transactions spending outputs from this transaction
+        "transactionid",    (string) child transaction id
+    ... ]
+    "bip125-replaceable" : true|false,  (boolean) Whether this transaction could be replaced due to BIP125 (replace-by-fee)
+    }, ...
+}
+</pre></div>
+</div>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getmempoolancestors</span><span class="p">(</span><span class="n">txid</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.getmempooldescendants">
+<span class="sig-name descname"><span class="pre">getmempooldescendants</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.node.Blockchain.getmempooldescendants" title="Permalink to this definition">#</a></dt>
+<dd><p>If txid is in the mempool, returns all in-mempool descendants.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txid</strong> (<em>str</em>) – (required) The transaction id (must be in mempool)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – (optional) True for a json object, false for array of transaction ids</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>Result (for verbose = false):</strong></p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[                       (json array of strings)
+"transactionid"           (string) The transaction id of an in-mempool ancestor transaction
+,...
+]
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Result (for verbose = true):</strong></p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{                           (json object)
+    "transactionid" : {     (json object)
+        "vsize" : n,            (numeric) virtual transaction size as defined in BIP 141. This is different from actual serialized size for witness transactions as witness data is discounted.
+        "size" : n,             (numeric) (DEPRECATED) same as vsize. Only returned if defid is started with -deprecatedrpc=size size will be completely removed in v0.20.
+        "weight" : n,           (numeric) transaction weight as defined in BIP 141.
+        "fee" : n,              (numeric) transaction fee in DFI (DEPRECATED)
+        "modifiedfee" : n,      (numeric) transaction fee with fee deltas used for mining priority (DEPRECATED)
+        "time" : n,             (numeric) local time transaction entered pool in seconds since 1 Jan 1970 GMT
+        "height" : n,           (numeric) block height when transaction entered pool
+        "descendantcount" : n,  (numeric) number of in-mempool descendant transactions (including this one)
+        "descendantsize" : n,   (numeric) virtual transaction size of in-mempool descendants (including this one)
+        "descendantfees" : n,   (numeric) modified fees (see above) of in-mempool descendants (including this one) (DEPRECATED)
+        "ancestorcount" : n,    (numeric) number of in-mempool ancestor transactions (including this one)
+        "ancestorsize" : n,     (numeric) virtual transaction size of in-mempool ancestors (including this one)
+        "ancestorfees" : n,     (numeric) modified fees (see above) of in-mempool ancestors (including this one) (DEPRECATED)
+        "wtxid" : hash,         (string) hash of serialized transaction, including witness data
+        "fees" : {
+            "base" : n,         (numeric) transaction fee in DFI
+            "modified" : n,     (numeric) transaction fee with fee deltas used for mining priority in DFI
+            "ancestor" : n,     (numeric) modified fees (see above) of in-mempool ancestors (including this one) in DFI
+            "descendant" : n,   (numeric) modified fees (see above) of in-mempool descendants (including this one) in DFI
+        }
+    "depends" : [           (array) unconfirmed transactions used as inputs for this transaction
+        "transactionid",    (string) parent transaction id
+    ... ]
+    "spentby" : [           (array) unconfirmed transactions spending outputs from this transaction
+        "transactionid",    (string) child transaction id
+    ... ]
+    "bip125-replaceable" : true|false,  (boolean) Whether this transaction could be replaced due to BIP125 (replace-by-fee)
+    }, ...
+}
+</pre></div>
+</div>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getmempooldescendants</span><span class="p">(</span><span class="n">txid</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.getmempoolentry">
+<span class="sig-name descname"><span class="pre">getmempoolentry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.getmempoolentry" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns mempool data for given transaction</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>txid</strong> (<em>str</em>) – (required) The transaction id (must be in mempool)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{                           (json object)
+    "vsize" : n,            (numeric) virtual transaction size as defined in BIP 141. This is different from actual serialized size for witness transactions as witness data is discounted.
+    "size" : n,             (numeric) (DEPRECATED) same as vsize. Only returned if defid is started with -deprecatedrpc=size size will be completely removed in v0.20.
+    "weight" : n,           (numeric) transaction weight as defined in BIP 141.
+    "fee" : n,              (numeric) transaction fee in DFI (DEPRECATED)
+    "modifiedfee" : n,      (numeric) transaction fee with fee deltas used for mining priority (DEPRECATED)
+    "time" : n,             (numeric) local time transaction entered pool in seconds since 1 Jan 1970 GMT
+    "height" : n,           (numeric) block height when transaction entered pool
+    "descendantcount" : n,  (numeric) number of in-mempool descendant transactions (including this one)
+    "descendantsize" : n,   (numeric) virtual transaction size of in-mempool descendants (including this one)
+    "descendantfees" : n,   (numeric) modified fees (see above) of in-mempool descendants (including this one) (DEPRECATED)
+    "ancestorcount" : n,    (numeric) number of in-mempool ancestor transactions (including this one)
+    "ancestorsize" : n,     (numeric) virtual transaction size of in-mempool ancestors (including this one)
+    "ancestorfees" : n,     (numeric) modified fees (see above) of in-mempool ancestors (including this one) (DEPRECATED)
+    "wtxid" : hash,         (string) hash of serialized transaction, including witness data
+    "fees" : {
+        "base" : n,         (numeric) transaction fee in DFI
+        "modified" : n,     (numeric) transaction fee with fee deltas used for mining priority in DFI
+        "ancestor" : n,     (numeric) modified fees (see above) of in-mempool ancestors (including this one) in DFI
+        "descendant" : n,   (numeric) modified fees (see above) of in-mempool descendants (including this one) in DFI
+    }
+    "depends" : [           (array) unconfirmed transactions used as inputs for this transaction
+        "transactionid",    (string) parent transaction id
+    ... ]
+    "spentby" : [           (array) unconfirmed transactions spending outputs from this transaction
+        "transactionid",    (string) child transaction id
+    ... ]
+    "bip125-replaceable" : true|false,  (boolean) Whether this transaction could be replaced due to BIP125 (replace-by-fee)
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getmempoolentry</span><span class="p">(</span><span class="n">txid</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.getmempoolinfo">
+<span class="sig-name descname"><span class="pre">getmempoolinfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.getmempoolinfo" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns details on the active state of the TX memory pool.</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "loaded": true|false         (boolean) True if the mempool is fully loaded
+    "size": xxxxx,               (numeric) Current tx count
+    "bytes": xxxxx,              (numeric) Sum of all virtual transaction sizes as defined in BIP 141. Differs from actual serialized size because witness data is discounted
+    "usage": xxxxx,              (numeric) Total memory usage for the mempool
+    "maxmempool": xxxxx,         (numeric) Maximum memory usage for the mempool
+    "mempoolminfee": xxxxx       (numeric) Minimum fee rate in DFI/kB for tx to be accepted. Is the maximum of minrelaytxfee and minimum mempool fee
+    "minrelaytxfee": xxxxx       (numeric) Current minimum relay fee for transactions
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getmempoolinfo</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.getrawmempool">
+<span class="sig-name descname"><span class="pre">getrawmempool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.node.Blockchain.getrawmempool" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns all transaction ids in memory pool as a json array of string transaction ids.</p>
+<p>Hint: use getmempoolentry to fetch a specific transaction from the mempool.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>verbose</strong> (<em>bool</em>) – (optional) True for a json object, false for array of transaction ids</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>Result (for verbose = false):</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[                     (json array of string)
+"transactionid"     (string) The transaction id
+,...
+]
+</pre></div>
+</div>
+<p><strong>Result (for verbose = true):</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{                           (json object)
+    "transactionid" : {       (json object)
+        "vsize" : n,            (numeric) virtual transaction size as defined in BIP 141. This is different from actual serialized size for witness transactions as witness data is discounted.
+        "size" : n,             (numeric) (DEPRECATED) same as vsize. Only returned if defid is started with -deprecatedrpc=size size will be completely removed in v0.20.
+        "weight" : n,           (numeric) transaction weight as defined in BIP 141.
+        "fee" : n,              (numeric) transaction fee in DFI (DEPRECATED)
+        "modifiedfee" : n,      (numeric) transaction fee with fee deltas used for mining priority (DEPRECATED)
+        "time" : n,             (numeric) local time transaction entered pool in seconds since 1 Jan 1970 GMT
+        "height" : n,           (numeric) block height when transaction entered pool
+        "descendantcount" : n,  (numeric) number of in-mempool descendant transactions (including this one)
+        "descendantsize" : n,   (numeric) virtual transaction size of in-mempool descendants (including this one)
+        "descendantfees" : n,   (numeric) modified fees (see above) of in-mempool descendants (including this one) (DEPRECATED)
+        "ancestorcount" : n,    (numeric) number of in-mempool ancestor transactions (including this one)
+        "ancestorsize" : n,     (numeric) virtual transaction size of in-mempool ancestors (including this one)
+        "ancestorfees" : n,     (numeric) modified fees (see above) of in-mempool ancestors (including this one) (DEPRECATED)
+        "wtxid" : hash,         (string) hash of serialized transaction, including witness data
+        "fees" : {
+            "base" : n,         (numeric) transaction fee in DFI
+            "modified" : n,     (numeric) transaction fee with fee deltas used for mining priority in DFI
+            "ancestor" : n,     (numeric) modified fees (see above) of in-mempool ancestors (including this one) in DFI
+            "descendant" : n,   (numeric) modified fees (see above) of in-mempool descendants (including this one) in DFI
+        }
+        "depends" : [           (array) unconfirmed transactions used as inputs for this transaction
+            "transactionid",    (string) parent transaction id
+        ... ]
+        "spentby" : [           (array) unconfirmed transactions spending outputs from this transaction
+            "transactionid",    (string) child transaction id
+        ... ]
+        "bip125-replaceable" : true|false,  (boolean) Whether this transaction could be replaced due to BIP125 (replace-by-fee)
+    }, ...
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getrawmempool</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.gettxout">
+<span class="sig-name descname"><span class="pre">gettxout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_mempool</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.gettxout" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns details about an unspent transaction output.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txid</strong> (<em>str</em>) – (required) The transaction id</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – (required) vout number</p></li>
+<li><p><strong>include_mempool</strong> (<em>bool</em>) – (optional) Whether to include the mempool. Note that an unspent output that is spent in the mempool won’t appear</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "bestblock":  "hash",    (string) The hash of the block at the tip of the chain
+    "confirmations" : n,       (numeric) The number of confirmations
+    "value" : x.xxx,           (numeric) The transaction value in DFI
+    "scriptPubKey" : {         (json object)
+        "asm" : "code",       (string)
+        "hex" : "hex",        (string)
+        "reqSigs" : n,          (numeric) Number of required signatures
+        "type" : "pubkeyhash", (string) The type, eg pubkeyhash
+        "addresses" : [          (array of string) array of defi addresses
+            "address"     (string) defi address
+            ,...
+        ]
+    },
+    "coinbase" : true|false   (boolean) Coinbase or not
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">gettxout</span><span class="p">(</span><span class="n">txid</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.gettxoutproof">
+<span class="sig-name descname"><span class="pre">gettxoutproof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blockhash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.gettxoutproof" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns a hex-encoded proof that “txid” was included in a block.</p>
+<p>NOTE: By default this function only works sometimes. This is when there is an
+unspent output in the utxo for this transaction. To make it always work,
+you need to maintain a transaction index, using the -txindex command line option or
+specify the block in which the transaction is included manually (by blockhash).</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txids</strong> (<em>json array</em>) – <p>(required) A json array of txids to filter</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
+    "txid",    (string) A transaction hash
+    ...
+]
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>blockhash</strong> (<em>str</em>) – (optional) If specified, looks for txid in the block with this hash</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“data” (string) A string that is a serialized, hex-encoded data for the proof.</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">gettxoutproof</span><span class="p">([</span><span class="n">txid</span><span class="p">],</span> <span class="n">blockhash</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.gettxoutsetinfo">
+<span class="sig-name descname"><span class="pre">gettxoutsetinfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.gettxoutsetinfo" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns statistics about the unspent transaction output set.</p>
+<p>Note this call may take some time.</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "height":n,     (numeric) The current block height (index)
+    "bestblock": "hex",   (string) The hash of the block at the tip of the chain
+    "transactions": n,      (numeric) The number of transactions with unspent outputs
+    "txouts": n,            (numeric) The number of unspent transaction outputs
+    "bogosize": n,          (numeric) A meaningless metric for UTXO set size
+    "hash_serialized_2": "hash", (string) The serialized hash
+    "disk_size": n,         (numeric) The estimated size of the chainstate on disk
+    "total_amount": x.xxx          (numeric) The total amount
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">gettxoutsetinfo</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.isappliedcustomtx">
+<span class="sig-name descname"><span class="pre">isappliedcustomtx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blockHeight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.isappliedcustomtx" title="Permalink to this definition">#</a></dt>
+<dd><p>Checks that custom transaction was affected on chain</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txid</strong> (<em>str</em>) – (required) A transaction hash</p></li>
+<li><p><strong>blockHeight</strong> (<em>int</em>) – (required) The height of block which contain tx</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(bool) The boolean indicate that custom transaction was affected on chain</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">isappliedcustomtx</span><span class="p">(</span><span class="n">txid</span><span class="p">,</span> <span class="n">blockHeight</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.listgovs">
+<span class="sig-name descname"><span class="pre">listgovs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.node.Blockchain.listgovs" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns information about all governance variables including pending changes</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>prefix</strong> (<em>str</em>) – (optional) One of all, gov, attrs, live. Defaults to the all view. Any other string is treated as a prefix of attributes to filter with. <cite>v0/</cite> is assumed if not explicitly provided.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[[{id:{…}},{height:{…}},…], …] (array) Json array with JSON objects with variable information</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">listgovs</span><span class="p">(</span><span class="s2">"gov"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.listsmartcontracts">
+<span class="sig-name descname"><span class="pre">listsmartcontracts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.node.Blockchain.listsmartcontracts" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns information on smart contracts</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[           (array) JSON array with smart contract information
+    {
+            "name":"name"         smart contract name
+            "address":"address"   smart contract address
+            "token id":x.xxxxxxxx   smart contract balance per token
+    }
+    ...
+]
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">listsmartcontracts</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.preciousblock">
+<span class="sig-name descname"><span class="pre">preciousblock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blockhash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Blockchain.preciousblock" title="Permalink to this definition">#</a></dt>
+<dd><p>Treats a block as if it were received before others with the same work.</p>
+<p>A later preciousblock call can override the effect of an earlier one.</p>
+<p>The effects of preciousblock are not retained across restarts.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>blockhash</strong> (<em>str</em>) – (required) the hash of the block to mark as precious</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">preciousblock</span><span class="p">(</span><span class="n">blockhash</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.pruneblockchain">
+<span class="sig-name descname"><span class="pre">pruneblockchain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.pruneblockchain" title="Permalink to this definition">#</a></dt>
+<dd><p>pruneblockchain height</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>height</strong> (<em>int</em>) – (required) The block height to prune up to. May be set to a discrete height, or a unix timestamp
+to prune blocks whose block time is at least 2 hours older than the provided timestamp.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>n (numeric) Height of the last block pruned</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">pruneblockchain</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.savemempool">
+<span class="sig-name descname"><span class="pre">savemempool</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.savemempool" title="Permalink to this definition">#</a></dt>
+<dd><p>Dumps the mempool to disk. It will fail until the previous dump is fully loaded.</p>
+<dl class="field-list">
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">savemempool</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.scantxoutset">
+<span class="sig-name descname"><span class="pre">scantxoutset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scanobjects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.scantxoutset" title="Permalink to this definition">#</a></dt>
+<dd><p>EXPERIMENTAL warning: this call may be removed or changed in future releases.</p>
+<p>Scans the unspent transaction output set for entries that match certain output descriptors.</p>
+<p>Examples of output descriptors are:</p>
+<blockquote>
+<div><p>addr(&lt;address&gt;)                      Outputs whose scriptPubKey corresponds to the specified address (does not include P2PK)</p>
+<p>raw(&lt;hex script&gt;)                    Outputs whose scriptPubKey equals the specified hex scripts</p>
+<p>combo(&lt;pubkey&gt;)                      P2PK, P2PKH, P2WPKH, and P2SH-P2WPKH outputs for the given pubkey</p>
+<p>pkh(&lt;pubkey&gt;)                        P2PKH outputs for the given pubkey</p>
+<p>sh(multi(&lt;n&gt;,&lt;pubkey&gt;,&lt;pubkey&gt;,…)) P2SH-multisig outputs for the given threshold and pubkeys</p>
+</div></blockquote>
+<p>In the above, &lt;pubkey&gt; either refers to a fixed public key in hexadecimal notation, or to an xpub/xprv optionally followed by one
+or more path elements separated by “/”, and optionally ending in “/*” (unhardened), or “/*’” or “/*h” (hardened) to specify all
+unhardened or hardened child keys.</p>
+<p>In the latter case, a range needs to be specified by below if different from 1000.
+For more information on output descriptors, see the documentation in the doc/descriptors.md file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>action</strong> (<em>str</em>) – <p>(required) The action to execute</p>
+<p>”start” for starting a scan</p>
+<p>”abort” for aborting the current scan (returns true when abort was successful)</p>
+<p>”status” for progress report (in %) of the current scan</p>
+</p></li>
+<li><p><strong>scanobjects</strong> (<em>[</em><em>{}</em><em>]</em>) – <p>(required) Every scan object is either a string descriptor or an object:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
+    "descriptor",             (string) An output descriptor
+    {                         (json object) An object with output descriptor and metadata
+    "desc": "str",          (string, required) An output descriptor
+    "range": n or [n,n],    (numeric or array, optional, default=1000) The range of HD chain indexes to explore (either end or [begin,end])
+    },
+    ...
+]
+</pre></div>
+</div>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "unspents": [
+        {
+        "txid" : "transactionid",     (string) The transaction id
+        "vout": n,                    (numeric) the vout value
+        "scriptPubKey" : "script",    (string) the script key
+        "desc" : "descriptor",        (string) A specialized descriptor for the matched scriptPubKey
+        "amount" : x.xxx,             (numeric) The total amount in DFI of the unspent output
+        "height" : n,                 (numeric) Height of the unspent transaction output
+        }
+    ,...],
+    "total_amount" : x.xxx,          (numeric) The total amount of all found unspent outputs in DFI
+}
+</pre></div>
+</div>
+</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.setgov">
+<span class="sig-name descname"><span class="pre">setgov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.setgov" title="Permalink to this definition">#</a></dt>
+<dd><p>Set special ‘governance’ variables:: ATTRIBUTES, ICX_TAKERFEE_PER_BTC, LP_LOAN_TOKEN_SPLITS, LP_SPLITS, ORACLE_BLOCK_INTERVAL, ORACLE_DEVIATION</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variables</strong> (<em>{}</em>) – <p>(required) Object with variables</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "name": "str",      (string, required) Variable's name is the key, value is the data. Exact data type depends on variable's name.
+}
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>inputs</strong> (<em>[</em><em>{}</em><em>]</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">setgov</span><span class="p">({</span><span class="s2">"LP_SPLITS"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"2"</span><span class="p">:</span><span class="mf">0.2</span><span class="p">,</span><span class="s2">"3"</span><span class="p">:</span><span class="mf">0.8</span><span class="p">})</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.setgovheight">
+<span class="sig-name descname"><span class="pre">setgovheight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Blockchain.setgovheight" title="Permalink to this definition">#</a></dt>
+<dd><p>Change governance variable at height: ATTRIBUTES, ICX_TAKERFEE_PER_BTC, LP_LOAN_TOKEN_SPLITS, LP_SPLITS, ORACLE_DEVIATION</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variables</strong> (<em>{}</em>) – <p>(required) Object with variable</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "name": "str",      (string, required)  Variable name is the key, value is the data. Exact data type depends on variable name.
+}
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>height</strong> (<em>int</em>) – (required) Start height for the changes to take effect.</p></li>
+<li><p><strong>inputs</strong> (<em>[</em><em>{}</em><em>]</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">setgovheight</span><span class="p">({</span><span class="s2">"LP_SPLITS"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"2"</span><span class="p">:</span><span class="mf">0.2</span><span class="p">,</span><span class="s2">"3"</span><span class="p">:</span><span class="mf">0.8</span><span class="p">},</span> <span class="mi">3000000</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.verifychain">
+<span class="sig-name descname"><span class="pre">verifychain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checklevel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nblocks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">6</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.verifychain" title="Permalink to this definition">#</a></dt>
+<dd><p>Verifies blockchain database.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>checklevel</strong> (<em>int</em>) – (optional, range=0-4) How thorough the block verification is</p></li>
+<li><p><strong>nblocks</strong> (<em>int</em>) – (optional, 0=all) The number of blocks to check</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true|false (boolean) Verified or not</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">verifychain</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Blockchain.verifytxoutproof">
+<span class="sig-name descname"><span class="pre">verifytxoutproof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proof</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[&lt;class</span> <span class="pre">'str'&gt;]</span></span></span><a class="headerlink" href="#defichain.node.Blockchain.verifytxoutproof" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>proof</strong> (<em>str</em>) – (required) The hex-encoded proof generated by gettxoutproof</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[“txid”] (array, strings) The txid(s) which the proof commits to, or empty array if the proof can not be validated</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
 </section>
 
         </article>
