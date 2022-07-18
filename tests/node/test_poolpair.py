@@ -27,9 +27,9 @@ def test_addpoolliquidity():  # 01
 @pytest.mark.transactions
 def test_compositeswap():  # 02
     assert node.poolpair.compositeswap(address, "DFI", 0.00000001, address, "DUSD")
-    assert node.poolpair.compositeswap(address, "DFI", 0.00000001, address, "DUSD", 1, [])
+    assert node.poolpair.compositeswap(address, "DFI", 0.00000001, address, "DUSD", 2, [])
     assert node.poolpair.compositeswap(_from=address, tokenFrom="DFI", amountFrom=0.00000001, to=address,
-                                       tokenTo="DUSD", maxPrice=1, inputs=[])
+                                       tokenTo="DUSD", maxPrice=2, inputs=[])
 
 
 @pytest.mark.query
@@ -69,9 +69,9 @@ def test_listpoolshares():  # 06
 @pytest.mark.transactions
 def test_poolswap():  # 07
     assert node.poolpair.poolswap(address, "DFI", 0.00000001, address, "DUSD")
-    assert node.poolpair.poolswap(address, "DFI", 0.00000001, address, "DUSD", 1, [])
+    assert node.poolpair.poolswap(address, "DFI", 0.00000001, address, "DUSD", 2, [])
     assert node.poolpair.poolswap(_from=address, tokenFrom="DFI", amountFrom=0.00000001, to=address,
-                                  tokenTo="DUSD", maxPrice=1, inputs=[])
+                                  tokenTo="DUSD", maxPrice=2, inputs=[])
 
 
 @pytest.mark.transactions
@@ -84,9 +84,9 @@ def test_removepoolliquidityy():  # 08
 @pytest.mark.query
 def test_testpoolswap():  # 09
     assert node.poolpair.testpoolswap(address, "DFI", 0.00000001, address, "DUSD")
-    assert node.poolpair.testpoolswap(address, "DFI", 0.00000001, address, "DUSD", 1, "direct", True)
+    assert node.poolpair.testpoolswap(address, "DFI", 0.00000001, address, "DUSD", 2, "direct", True)
     assert node.poolpair.testpoolswap(_from=address, tokenFrom="DFI", amountFrom=0.00000001, to=address, tokenTo="DUSD",
-                                      maxPrice=1, path="direct", verbose=True)
+                                      maxPrice=2, path="direct", verbose=True)
 
 
 @pytest.mark.query
