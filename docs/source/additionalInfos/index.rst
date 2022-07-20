@@ -8,3 +8,4 @@ In development
 
     installDefichainNode
     mnemonicSeedForWallet
+    getPrivateKeyFromLightWallet
