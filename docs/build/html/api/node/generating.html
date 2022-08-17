@@ -254,7 +254,30 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.node.Generating">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Generating</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Generating" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Generating.generatetoaddress">
+<span class="sig-name descname"><span class="pre">generatetoaddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nblocks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxtries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'str'</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.node.Generating.generatetoaddress" title="Permalink to this definition">#</a></dt>
+<dd><p>Mine blocks immediately to a specified address (before the RPC call returns)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nblocks</strong> (<em>int</em>) – (required) How many blocks are generated immediately</p></li>
+<li><p><strong>address</strong> (<em>str</em>) – (required) The address to send the newly generated DFI to</p></li>
+<li><p><strong>maxtries</strong> (<em>int</em>) – (optional) How many iterations to try</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(array) hashes of blocks generated</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>Generate 11 blocks to myaddress</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">generating</span><span class="o">.</span><span class="n">generatetoaddress</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="n">address</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+</dd></dl>
 </section>
 
         </article>
