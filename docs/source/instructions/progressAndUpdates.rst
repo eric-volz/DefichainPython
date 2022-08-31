@@ -127,8 +127,8 @@ Since this is a community supported project, the community also has the right to
         ===============     ========
         Accounts            |:white_check_mark:|
         Blockchain          |:white_check_mark:|
-        Control             |:rotating_light:|
-        Generating          |:rotating_light:|
+        Control             |:white_check_mark:|
+        Generating          |:white_check_mark:|
         Loan                |:rotating_light:|
         Masternodes         |:rotating_light:|
         Mining              |:rotating_light:|
