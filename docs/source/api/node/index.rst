@@ -43,6 +43,7 @@ Node Modules
     poolpair
     rawtransactions
     spv
+    stats
     tokens
     util
     vault
