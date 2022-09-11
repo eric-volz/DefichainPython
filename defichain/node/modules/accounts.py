@@ -64,7 +64,7 @@ class Accounts:
 
         :example:
 
-            >>> node.accounts.accounttoutxos(sender_address, {"address1":"100@DFI"}, [])
+        >>> node.accounts.accounttoutxos(sender_address, {"address1":"100@DFI"}, [])
         """
         return self._node._rpc.call("accounttoutxos", _from, to, inputs)
 
@@ -84,7 +84,7 @@ class Accounts:
 
         :example:
 
-            >>> node.accounts.executesmartcontract("dbtcdfiswap", "1000@DFI")
+        >>> node.accounts.executesmartcontract("dbtcdfiswap", "1000@DFI")
         """
         return self._node._rpc.call("executesmartcontract", name, amount, address, inputs)
 
@@ -104,8 +104,8 @@ class Accounts:
 
         :example:
 
-            >>> node.accounts.futureswap(address, "1@TSLA")
-            >>> node.accounts.futureswap(address, "1000@DUSD", "TSLA")
+        >>> node.accounts.futureswap(address, "1@TSLA")
+        >>> node.accounts.futureswap(address, "1000@DUSD", "TSLA")
         """
         return self._node._rpc.call("futureswap", address, amount, destination, inputs)
 
@@ -128,7 +128,7 @@ class Accounts:
 
         :example:
 
-            >>> node.accounts.getaccount("mxxA2sQMETJFbXcNbNbUzEsBCTn1JSHXST")
+        >>> node.accounts.getaccount("mxxA2sQMETJFbXcNbNbUzEsBCTn1JSHXST")
         """
         pagination = BuildJson()
         pagination.append("start", start)
@@ -151,7 +151,7 @@ class Accounts:
 
         :example:
 
-            >>> node.accounts.getaccounthistory("mxxA2sQMETJFbXcNbNbUzEsBCTn1JSHXST", 103, 2)
+        >>> node.accounts.getaccounthistory("mxxA2sQMETJFbXcNbNbUzEsBCTn1JSHXST", 103, 2)
         """
         return self._node._rpc.call("getaccounthistory", owner, blockheight, txn)
 
@@ -162,24 +162,24 @@ class Accounts:
 
         :return:
 
-            .. code-block:: text
+        .. code-block:: text
 
-                {
-                    "address" : "address", (string) The defi burn address
-                    "amount" : n.nnnnnnnn, (string) The amount of DFI burnt
-                    "tokens" :  [
-                        {
-                            (array of burnt tokens) "name" : "name"
-                            "amount" : n.nnnnnnnn
-                        }
-                    ]
-                    "feeburn" : n.nnnnnnnn, (string) The amount of fees burnt
-                    "emissionburn" : n.nnnnnnnn, (string) The amount of non-utxo coinbase rewards burnt
-                }
+            {
+                "address" : "address", (string) The defi burn address
+                "amount" : n.nnnnnnnn, (string) The amount of DFI burnt
+                "tokens" :  [
+                    {
+                        (array of burnt tokens) "name" : "name"
+                        "amount" : n.nnnnnnnn
+                    }
+                ]
+                "feeburn" : n.nnnnnnnn, (string) The amount of fees burnt
+                "emissionburn" : n.nnnnnnnn, (string) The amount of non-utxo coinbase rewards burnt
+            }
 
         :example:
 
-            >>> node.accounts.getaccount()
+        >>> node.accounts.getaccount()
         """
         return self._node._rpc.call("getburninfo")
 
@@ -191,16 +191,16 @@ class Accounts:
         :type address: str
         :return:
 
-            .. code-block:: text
+        .. code-block:: text
 
-                {
-                    owner :       "address"
-                    amount :      n.nnnnnnnn
-                }
+            {
+                owner :       "address"
+                amount :      n.nnnnnnnn
+            }
 
         :example:
 
-            >>> node.accounts.getpendingdusdswaps(address)
+        >>> node.accounts.getpendingdusdswaps(address)
         """
         return self._node._rpc.call("getpendingdusdswaps", address)
 
@@ -212,20 +212,20 @@ class Accounts:
         :type address: str
         :return:
 
-            .. code-block:: text
+        .. code-block:: text
 
-                {
-                    owner :       "address"
-                    values : [{
-                        tokenSymbol : "SYMBOL"
-                        amount :      n.nnnnnnnn
-                        destination : "SYMBOL"
-                    }...]
-                }
+            {
+                owner :       "address"
+                values : [{
+                    tokenSymbol : "SYMBOL"
+                    amount :      n.nnnnnnnn
+                    destination : "SYMBOL"
+                }...]
+            }
 
         :example:
 
-            >>> node.accounts.getpendingfutureswaps(address)
+        >>> node.accounts.getpendingfutureswaps(address)
         """
         return self._node._rpc.call("getpendingfutureswaps", address)
 
@@ -248,7 +248,7 @@ class Accounts:
 
         :example:
 
-            >>> node.accounts.gettokenbalances()
+        >>> node.accounts.gettokenbalances()
         """
         pagination = BuildJson()
         pagination.append("start", start)
@@ -285,7 +285,7 @@ class Accounts:
 
         :example:
 
-            >>> node.accounts.listaccounthistory("all", 160, 10)
+        >>> node.accounts.listaccounthistory("all", 160, 10)
         """
         options = BuildJson()
         options.append("maxBlockHeight", maxBlockHeight)
@@ -320,7 +320,7 @@ class Accounts:
 
         :example:
 
-            >>> node.accounts.listaccounts()
+        >>> node.accounts.listaccounts()
         """
         pagnation = BuildJson()
         pagnation.append("start", start)
@@ -348,7 +348,7 @@ class Accounts:
 
         :example:
 
-            >>> node.accounts.listburnhistory(160, 10)
+        >>> node.accounts.listburnhistory(160, 10)
         """
         options = BuildJson()
         options.append("maxBlockHeight", maxBlockHeight)
@@ -367,7 +367,7 @@ class Accounts:
 
         :example:
 
-            >>> node.accounts.listcommunitybalances()
+        >>> node.accounts.listcommunitybalances()
         """
         return self._node._rpc.call("listcommunitybalances")
 
@@ -377,16 +377,16 @@ class Accounts:
 
         :return: "json" (string) array containing json-objects having following fields:
 
-            .. code-block:: text
+        .. code-block:: text
 
-                {
-                    owner : "address"
-                    amount :      n.nnnnnnnn
-                }
+            {
+                owner : "address"
+                amount :      n.nnnnnnnn
+            }
 
         :example:
 
-            >>> node.accounts.listpendingdusdswaps()
+        >>> node.accounts.listpendingdusdswaps()
 
         """
         return self._node._rpc.call("listpendingdusdswaps")
@@ -397,20 +397,20 @@ class Accounts:
 
         :return: "json" (string) array containing json-objects having following fields:
 
-            .. code-block:: text
+        .. code-block:: text
 
-                {
-                    owner : "address"
-                    values : [{
-                        tokenSymbol : "SYMBOL"
-                        amount : n.nnnnnnnn
-                        destination : "SYMBOL"
-                    }...]
-                }
+            {
+                owner : "address"
+                values : [{
+                    tokenSymbol : "SYMBOL"
+                    amount : n.nnnnnnnn
+                    destination : "SYMBOL"
+                }...]
+            }
 
         :example:
 
-            >>> node.accounts.listpendingfutureswaps()
+        >>> node.accounts.listpendingfutureswaps()
         """
         return self._node._rpc.call("listpendingfutureswaps")
 
@@ -432,7 +432,7 @@ class Accounts:
 
         :example:
 
-            >>> node.accounts.sendtokenstoaddress({"srcAddress1":"2.0@DFI", "srcAddress2":["3.0@DFI", "2.0@ETH"]}, {"dstAddress1":["5.0@DFI", "2.0@ETH"]})
+        >>> node.accounts.sendtokenstoaddress({"srcAddress1":"2.0@DFI", "srcAddress2":["3.0@DFI", "2.0@ETH"]}, {"dstAddress1":["5.0@DFI", "2.0@ETH"]})
         """
         return self._node._rpc.call("sendtokenstoaddress", _from, to, selectionMode)
 
@@ -452,7 +452,7 @@ class Accounts:
 
         :example:
 
-            >>> node.accounts.sendutxosfrom(from_address, to_address, 100)
+        >>> node.accounts.sendutxosfrom(from_address, to_address, 100)
         """
         change = _from if change is None else change
         return self._node._rpc.call("sendutxosfrom", _from, to, amount, change)
@@ -470,7 +470,7 @@ class Accounts:
 
         :example:
 
-            >>> node.accounts.utxostoaccount({"address1":"1.0@DFI"})
+        >>> node.accounts.utxostoaccount({"address1":"1.0@DFI"})
         """
         return self._node._rpc.call("utxostoaccount", amounts, inputs)
 
@@ -491,7 +491,7 @@ class Accounts:
 
         :example:
 
-            >>> node.accounts.withdrawfutureswap(address, "1@TSLA")
-            >>> node.accounts.withdrawfutureswap(address, "1000@DUSD", "TSLA")
+        >>> node.accounts.withdrawfutureswap(address, "1@TSLA")
+        >>> node.accounts.withdrawfutureswap(address, "1000@DUSD", "TSLA")
         """
         return self._node._rpc.call("withdrawfutureswap", address, amount, destination, inputs)

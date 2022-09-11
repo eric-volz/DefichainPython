@@ -8,19 +8,19 @@ class Zmq:
 
         :return:
 
-            .. code-block:: text
+        .. code-block:: text
 
-                [
-                    {                        (json object)
-                        "type": "pubhashtx", (string) Type of notification
-                        "address": "...",    (string) Address of the publisher
-                        "hwm": n             (numeric) Outbound message high water mark
-                    },
-                    ...
-                ]
+            [
+                {                        (json object)
+                    "type": "pubhashtx", (string) Type of notification
+                    "address": "...",    (string) Address of the publisher
+                    "hwm": n             (numeric) Outbound message high water mark
+                },
+                ...
+            ]
 
         :example:
 
-            >>> node.control.getzmqnotifications()
+        >>> node.control.getzmqnotifications()
         """
         return self._node._rpc.call("getzmqnotifications")

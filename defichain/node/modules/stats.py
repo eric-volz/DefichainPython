@@ -13,27 +13,27 @@ class Stats:
         :type command: str
         :return:
 
-            .. code-block:: text
+        .. code-block:: text
 
-                {
-                    "name":               (string) The RPC command name.
-                    "latency":            (json object) Min, max and average latency.
-                    "payload":            (json object) Min, max and average payload size in bytes.
-                    "count":              (numeric) The number of times this command as been used.
-                    "lastUsedTime":       (numeric) Last used time as timestamp.
-                    "history":            (json array) History of last 5 RPC calls.
-                    [
-                        {
-                        "timestamp": (numeric)
-                        "latency":   (numeric)
-                        "payload":   (numeric)
-                        }
-                    ]
-                }
+            {
+                "name":               (string) The RPC command name.
+                "latency":            (json object) Min, max and average latency.
+                "payload":            (json object) Min, max and average payload size in bytes.
+                "count":              (numeric) The number of times this command as been used.
+                "lastUsedTime":       (numeric) Last used time as timestamp.
+                "history":            (json array) History of last 5 RPC calls.
+                [
+                    {
+                    "timestamp": (numeric)
+                    "latency":   (numeric)
+                    "payload":   (numeric)
+                    }
+                ]
+            }
 
-            :example:
+        :example:
 
-                >>> node.stats.getrpcstats("getblockcount")
+        >>> node.stats.getrpcstats("getblockcount")
         """
         return self._node._rpc.call("getrpcstats", command)
 
@@ -43,28 +43,28 @@ class Stats:
 
         :return:
 
-            .. code-block:: text
+        .. code-block:: text
 
-                [
-                    {
-                        "name":               (string) The RPC command name.
-                        "latency":            (json object) Min, max and average latency.
-                        "payload":            (json object) Min, max and average payload size in bytes.
-                        "count":              (numeric) The number of times this command as been used.
-                        "lastUsedTime":       (numeric) Last used time as timestamp.
-                        "history":            (json array) History of last 5 RPC calls.
-                        [
-                            {
-                                "timestamp": (numeric)
-                                "latency":   (numeric)
-                                "payload":   (numeric)
-                            }
-                        ]
-                    }
-                ]
+            [
+                {
+                    "name":               (string) The RPC command name.
+                    "latency":            (json object) Min, max and average latency.
+                    "payload":            (json object) Min, max and average payload size in bytes.
+                    "count":              (numeric) The number of times this command as been used.
+                    "lastUsedTime":       (numeric) Last used time as timestamp.
+                    "history":            (json array) History of last 5 RPC calls.
+                    [
+                        {
+                            "timestamp": (numeric)
+                            "latency":   (numeric)
+                            "payload":   (numeric)
+                        }
+                    ]
+                }
+            ]
 
-            :example:
+        :example:
 
-                >>> node.stats.listrpcstats()
+        >>> node.stats.listrpcstats()
         """
         return self._node._rpc.call("listrpcstats")
