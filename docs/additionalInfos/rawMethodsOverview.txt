@@ -494,6 +494,8 @@ listvaulthistory "vaultId" ( {"maxBlockHeight":n,"depth":n,"token":"str","txtype
 
 listvaults ( {"ownerAddress":"str","loanSchemeId":"str","state":"str","verbose":bool} {"start":"hex","including_start":bool,"limit":n} )
 
+paybackwithcollateral "vaultId"
+
 placeauctionbid "vaultId" index "from" "amount" ( [{"txid":"hex","vout":n},...] )
 
 updatevault "vaultId" {"ownerAddress":"hex","loanSchemeId":"str"} ( [{"txid":"hex","vout":n},...] )

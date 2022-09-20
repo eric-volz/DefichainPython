@@ -68,14 +68,17 @@ class Vault:
         pagination.append("limit", limit)
         return self._node._rpc.call("listvaults", options.build(), pagination.build())
 
-    def placeauctionbid(self, vaultId, index, _from, amount, inputs=None):  # 12
+    def paybackwithcollateral(self, vaultId):  # 12
+        return self._node._rpc.call("paybackwithcollateral", vaultId)
+
+    def placeauctionbid(self, vaultId, index, _from, amount, inputs=None):  # 13
         return self._node._rpc.call("placeauctionbid", vaultId, index, _from, amount, inputs)
 
-    def updatevault(self, vaultId, ownerAddress=None, loanSchemeId=None, inputs=None):  # 13
+    def updatevault(self, vaultId, ownerAddress=None, loanSchemeId=None, inputs=None):  # 14
         parameters = BuildJson()
         parameters.append("ownerAddress", ownerAddress)
         parameters.append("loanSchemeId", loanSchemeId)
         return self._node._rpc.call("updatevault", vaultId, parameters.build(), inputs)
 
-    def withdrawfromvault(self, vaultId, to, amount, inputs=None):  # 14
+    def withdrawfromvault(self, vaultId, to, amount, inputs=None):  # 15
         return self._node._rpc.call("withdrawfromvault", vaultId, to, amount, inputs)
