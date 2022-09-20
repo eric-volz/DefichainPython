@@ -109,9 +109,12 @@ def test_listvaults():  # 11
     assert node.vault.listvaults(ownerAddress=address, loanSchemeId="MIN150", state="active", verbose=False,
                                  start=vault, including_start=True, limit=100)
 
+@pytest.mark.query
+def test_paybackwithcollateral():  # 12
+    pass  # has to be implemented (tested manually)
 
 @pytest.mark.query
-def test_placeauctionbid():  # 12
+def test_placeauctionbid():  # 13
     string = ".* RPC_TYPE_ERROR: amount: Invalid amount"
     with pytest.raises(InternalServerError, match=string):
         assert node.vault.placeauctionbid(vault, 0, address, "0.01DUSD")
@@ -122,7 +125,7 @@ def test_placeauctionbid():  # 12
 
 
 @pytest.mark.transactions
-def test_updatevault():  # 13
+def test_updatevault():  # 14
     assert len(node.vault.updatevault(vault, address)) == LENGTH_OF_TXID
     assert len(node.vault.updatevault(vault, None, "MIN150")) == LENGTH_OF_TXID
     assert len(node.vault.updatevault(vault, address, None, [])) == LENGTH_OF_TXID
@@ -132,7 +135,7 @@ def test_updatevault():  # 13
 
 
 @pytest.mark.transactions
-def test_withdrawfromvault():  # 14
+def test_withdrawfromvault():  # 15
     assert len(node.vault.withdrawfromvault(vault, address, "0.00000001@DUSD")) == LENGTH_OF_TXID
     assert len(node.vault.withdrawfromvault(vault, address, "0.00000001@DUSD", [])) == LENGTH_OF_TXID
     assert len(node.vault.withdrawfromvault(vaultId=vault, to=address, amount="0.00000001@DUSD", inputs=[])) == \
