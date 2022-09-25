@@ -124,7 +124,7 @@ def test_setloantoken():  # 14
 
 @pytest.mark.transactions
 def test_takeloan():  # 15
-    amounts = ["0.00000001@DUSD", "0.00000001@DUSD"]
+    amounts = ["0.00000001@SPY", "0.00000001@SPY"]
     assert node.loan.takeloan(vault, amounts)
     assert node.loan.takeloan(vault, amounts, address, [])
     assert node.loan.takeloan(vaultId=vault, amounts=amounts, to=address, inputs=[])
