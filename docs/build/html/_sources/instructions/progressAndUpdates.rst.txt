@@ -10,7 +10,7 @@ Since this is a community supported project, the community also has the right to
 .. admonition:: Package Node Version
     :class: caution
 
-    Up to date to the node version: `v2.10.0 - Fort Canning Great World <https://github.com/DeFiCh/ain/releases/tag/v2.10.0>`_
+    Up to date to the node version: `v2.11.1 - Fort Canning Epilogue <https://github.com/DeFiCh/ain/releases/tag/v2.11.1>`_
 
 
 |:white_check_mark:| = Finished and UpToDate with the specified node version
@@ -129,7 +129,7 @@ Since this is a community supported project, the community also has the right to
         Blockchain          |:white_check_mark:|
         Control             |:white_check_mark:|
         Generating          |:white_check_mark:|
-        Loan                |:rotating_light:|
+        Loan                |:white_check_mark:|
         Masternodes         |:rotating_light:|
         Mining              |:rotating_light:|
         Network             |:rotating_light:|
@@ -137,12 +137,12 @@ Since this is a community supported project, the community also has the right to
         Poolpair            |:rotating_light:|
         Rawtransactions     |:rotating_light:|
         Spv                 |:rotating_light:|
-        Stats               |:rotating_light:|
+        Stats               |:white_check_mark:|
         Tokens              |:rotating_light:|
         Util                |:rotating_light:|
         Vault               |:rotating_light:|
         Wallet              |:rotating_light:|
-        Zmq                 |:rotating_light:|
+        Zmq                 |:white_check_mark:|
 
         Node Connection     |:white_check_mark:|
         Exceptions          |:white_check_mark:|

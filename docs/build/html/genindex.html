@@ -301,6 +301,8 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/control.html#defichain.node.Control">Control (class in defichain.node)</a>
 </li>
+        <li><a href="api/node/loan.html#defichain.node.Loan.createloanscheme">createloanscheme() (defichain.node.Loan method)</a>
+</li>
     </ul></td>
   </tr></table>
 </section>
@@ -311,8 +313,6 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/node.html#defichain.Node.decrypt_wallet">decrypt_wallet() (defichain.Node method)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     defichain.exceptions
 
@@ -320,6 +320,10 @@
           <li><a href="api/exceptions.html#module-defichain.exceptions">module</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/node/loan.html#defichain.node.Loan.destroyloanscheme">destroyloanscheme() (defichain.node.Loan method)</a>
+</li>
     </ul></td>
   </tr></table>
 </section>
@@ -384,11 +388,21 @@
 </li>
         <li><a href="api/node/blockchain.html#defichain.node.Blockchain.getchaintxstats">getchaintxstats() (defichain.node.Blockchain method)</a>
 </li>
+        <li><a href="api/node/loan.html#defichain.node.Loan.getcollateraltoken">getcollateraltoken() (defichain.node.Loan method)</a>
+</li>
         <li><a href="api/node/blockchain.html#defichain.node.Blockchain.getdifficulty">getdifficulty() (defichain.node.Blockchain method)</a>
+</li>
+        <li><a href="api/node/blockchain.html#defichain.node.Blockchain.getgov">getgov() (defichain.node.Blockchain method)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api/node/blockchain.html#defichain.node.Blockchain.getgov">getgov() (defichain.node.Blockchain method)</a>
+        <li><a href="api/node/loan.html#defichain.node.Loan.getinterest">getinterest() (defichain.node.Loan method)</a>
+</li>
+        <li><a href="api/node/loan.html#defichain.node.Loan.getloaninfo">getloaninfo() (defichain.node.Loan method)</a>
+</li>
+        <li><a href="api/node/loan.html#defichain.node.Loan.getloanscheme">getloanscheme() (defichain.node.Loan method)</a>
+</li>
+        <li><a href="api/node/loan.html#defichain.node.Loan.getloantoken">getloantoken() (defichain.node.Loan method)</a>
 </li>
         <li><a href="api/node/control.html#defichain.node.Control.getmemoryinfo">getmemoryinfo() (defichain.node.Control method)</a>
 </li>
@@ -458,14 +472,20 @@
 </li>
         <li><a href="api/node/accounts.html#defichain.node.Accounts.listburnhistory">listburnhistory() (defichain.node.Accounts method)</a>
 </li>
+        <li><a href="api/node/loan.html#defichain.node.Loan.listcollateraltokens">listcollateraltokens() (defichain.node.Loan method)</a>
+</li>
         <li><a href="api/node/accounts.html#defichain.node.Accounts.listcommunitybalances">listcommunitybalances() (defichain.node.Accounts method)</a>
 </li>
         <li><a href="api/node/blockchain.html#defichain.node.Blockchain.listgovs">listgovs() (defichain.node.Blockchain method)</a>
 </li>
-        <li><a href="api/node/accounts.html#defichain.node.Accounts.listpendingdusdswaps">listpendingdusdswaps() (defichain.node.Accounts method)</a>
+        <li><a href="api/node/loan.html#defichain.node.Loan.listloanschemes">listloanschemes() (defichain.node.Loan method)</a>
+</li>
+        <li><a href="api/node/loan.html#defichain.node.Loan.listloantokens">listloantokens() (defichain.node.Loan method)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/node/accounts.html#defichain.node.Accounts.listpendingdusdswaps">listpendingdusdswaps() (defichain.node.Accounts method)</a>
+</li>
         <li><a href="api/node/accounts.html#defichain.node.Accounts.listpendingfutureswaps">listpendingfutureswaps() (defichain.node.Accounts method)</a>
 </li>
         <li><a href="api/node/stats.html#defichain.node.Stats.listrpcstats">listrpcstats() (defichain.node.Stats method)</a>
@@ -549,6 +569,8 @@
   <h2>P</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/node/loan.html#defichain.node.Loan.paybackloan">paybackloan() (defichain.node.Loan method)</a>
+</li>
         <li><a href="api/node/poolpair.html#defichain.node.Poolpair">Poolpair (class in defichain.node)</a>
 </li>
         <li><a href="api/ocean/poolpair.html#defichain.ocean.Poolpairs">Poolpairs (class in defichain.ocean)</a>
@@ -595,11 +617,17 @@
 </li>
         <li><a href="api/exceptions.html#defichain.exceptions.ServiceUnavailable">ServiceUnavailable (class in defichain.exceptions)</a>
 </li>
+        <li><a href="api/node/loan.html#defichain.node.Loan.setcollateraltoken">setcollateraltoken() (defichain.node.Loan method)</a>
+</li>
+        <li><a href="api/node/loan.html#defichain.node.Loan.setdefaultloanscheme">setdefaultloanscheme() (defichain.node.Loan method)</a>
+</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/blockchain.html#defichain.node.Blockchain.setgov">setgov() (defichain.node.Blockchain method)</a>
 </li>
         <li><a href="api/node/blockchain.html#defichain.node.Blockchain.setgovheight">setgovheight() (defichain.node.Blockchain method)</a>
+</li>
+        <li><a href="api/node/loan.html#defichain.node.Loan.setloantoken">setloantoken() (defichain.node.Loan method)</a>
 </li>
         <li><a href="api/node/spv.html#defichain.node.Spv">Spv (class in defichain.node)</a>
 </li>
@@ -619,16 +647,18 @@
   <h2>T</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/node/loan.html#defichain.node.Loan.takeloan">takeloan() (defichain.node.Loan method)</a>
+</li>
         <li><a href="api/node/node.html#defichain.Node.test_connection">test_connection() (defichain.Node method)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/tokens.html#defichain.node.Tokens">Tokens (class in defichain.node)</a>
 
         <ul>
           <li><a href="api/ocean/tokens.html#defichain.ocean.Tokens">(class in defichain.ocean)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/ocean/transactions.html#defichain.ocean.Transactions">Transactions (class in defichain.ocean)</a>
 </li>
     </ul></td>
@@ -643,8 +673,12 @@
 </li>
         <li><a href="api/exceptions.html#defichain.exceptions.UnprocessableEntity">UnprocessableEntity (class in defichain.exceptions)</a>
 </li>
+        <li><a href="api/node/loan.html#defichain.node.Loan.updateloanscheme">updateloanscheme() (defichain.node.Loan method)</a>
+</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/node/loan.html#defichain.node.Loan.updateloantoken">updateloantoken() (defichain.node.Loan method)</a>
+</li>
         <li><a href="api/node/control.html#defichain.node.Control.uptime">uptime() (defichain.node.Control method)</a>
 </li>
         <li><a href="api/node/util.html#defichain.node.Util">Util (class in defichain.node)</a>
