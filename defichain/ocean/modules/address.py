@@ -14,7 +14,8 @@ class Address:
         :type size: int
         :param next: (optional) next set of account history
         :type next: str
-        :return: (json string) {owner: str, txid: str, txn: int, type: str, amounts: str[], block: {height: int, hash: str, time: int}
+        :return: (json string) {owner: str, txid: str, txn: int, type: str, amounts: str[], block: {height: int,
+            hash: str, time: int}
 
         :example:
 
@@ -42,7 +43,9 @@ class Address:
 
         :param address: (required) address bech32/legacy/b58 formatted address
         :type address: str
-        :return: (json string) {id: str, hid: str, block: {hash: str, height: int, time: int, medianTime: int}, script: {type: str, hex: str}, statistic: {txCount: int, txInCount: int, txOutCount: int}, amount: {txIn: str, txOut: str, unspent: str}}
+        :return: (json string) {id: str, hid: str, block: {hash: str, height: int, time: int, medianTime: int},
+            script: {type: str, hex: str}, statistic: {txCount: int, txInCount: int, txOutCount: int},
+            amount: {txIn: str, txOut: str, unspent: str}}
 
         :example:
 
@@ -60,7 +63,8 @@ class Address:
         :type size: int
         :param next: (optional) next token for next slice of AddressToken
         :type next: str
-        :return: (json string) {id: str, amount: str, symbol: str, displaySymbol: str, symbolKey: str, name: str, isDAT: bool, isLPS: bool, isLoanToken: bool}
+        :return: (json string) {id: str, amount: str, symbol: str, displaySymbol: str, symbolKey: str, name: str,
+            isDAT: bool, isLPS: bool, isLoanToken: bool}
 
         :example:
 
@@ -90,11 +94,11 @@ class Address:
         """
         List all transaction activity belonging to an address
 
-        :param address: address bech32/legacy/b58 formatted address
+        :param address: (required) address bech32/legacy/b58 formatted address
         :type address: str
-        :param size: size to query
+        :param size: (optional) size to query
         :type size: int
-        :param next: next token for next slice of AddressActivity
+        :param next: (optional) next token for next slice of AddressActivity
         :type next: str
         :return: (json string) {id: str, hid: str, type: 'vin' | 'vout', typeHex: '00' | '01', txid: str,
             block: {hash: str, height: int, time: int, medianTime: int}, script: {type: str, hex: str},
@@ -110,11 +114,11 @@ class Address:
         """
         List all unspent belonging to an address
 
-        :param address: address bech32/legacy/b58 formatted address
+        :param address: (required) address bech32/legacy/b58 formatted address
         :type address: str
-        :param size: size to query
+        :param size: (optional) size to query
         :type size: int
-        :param next: next token for next slice of AddressUnspent
+        :param next: (optional) next token for next slice of AddressUnspent
         :type next: str
         :return: (json string) {id: string, hid: string, sort: string, block: {hash: string, height: number,
             time: number, medianTime: number}, script: {type: string, hex: string}, vout: {txid: string, n: number,
