@@ -50,9 +50,9 @@ class Blocks:
         :type size: int
         :param next: (optional) next token for next slice of blocks
         :type next: str
-        :return: (json string) {id: string, order: number, block: {hash: string, height: number, time: number,
-            medianTime: number}, txid: string, hash: string, version: number, size: number, vSize: number,
-            weight: number, lockTime: number, vinCount: number, voutCount: number, totalVoutValue: string}
+        :return: (json string) {id: str, order: int, block: {hash: str, height: int, time: int,
+            medianTime: int}, txid: str, hash: str, version: int, size: int, vSize: int,
+            weight: int, lockTime: int, vinCount: int, voutCount: int, totalVoutValue: str}
 
         :example:
 

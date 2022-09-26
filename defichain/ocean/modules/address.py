@@ -120,9 +120,9 @@ class Address:
         :type size: int
         :param next: (optional) next token for next slice of AddressUnspent
         :type next: str
-        :return: (json string) {id: string, hid: string, sort: string, block: {hash: string, height: number,
-            time: number, medianTime: number}, script: {type: string, hex: string}, vout: {txid: string, n: number,
-            value: string, tokenId?: number}}
+        :return: (json string) {id: str, hid: str, sort: str, block: {hash: str, height: int,
+            time: int, medianTime: int}, script: {type: str, hex: str}, vout: {txid: str, n: int,
+            value: str, tokenId: int}}
 
         :example:
 

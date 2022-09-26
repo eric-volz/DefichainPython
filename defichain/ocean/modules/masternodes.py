@@ -12,9 +12,9 @@ class Masternodes:
         :type size: int
         :param next: (optional) next set of masternodes to get
         :type next: str
-        :return: (json string) {id: string, sort: string, state: MasternodeState, mintedBlocks: number, owner: {address: string},
-            operator: {address: string}, creation: {height: number}, resign?: {tx: string, height: number},
-            timelock: number}
+        :return: (json string) {id: str, sort: str, state: MasternodeState, mintedBlocks: int, owner: {address: str},
+            operator: {address: str}, creation: {height: int}, resign: {tx: str, height: int},
+            timelock: int}
 
         :example:
 
@@ -28,9 +28,9 @@ class Masternodes:
 
         :param id: (required) id masternode id to get
         :type id: str
-        :return: (json string) {id: string, sort: string, state: MasternodeState, mintedBlocks: number, owner: {address: string},
-            operator: {address: string}, creation: {height: number}, resign?: {tx: string, height: number},
-            timelock: number}
+        :return: (json string) {id: str, sort: str, state: MasternodeState, mintedBlocks: int, owner: {address: str},
+            operator: {address: str}, creation: {height: int}, resign: {tx: str, height: int},
+            timelock: int}
 
         :example:
 
