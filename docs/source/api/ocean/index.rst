@@ -69,4 +69,64 @@ in the upper left corner.
 Default Inputs
 --------------
 
-Will follow soon
+These are input formats which are very often used.
+
+.. _Ocean Pagination:
+
+Pagination
+~~~~~~~~~~
+
+Most API with LIST operation can be paginated. All paginate-able resource endpoint in
+Ocean REST API represent one sort indexes/projection. Pagination within Ocean REST API is
+done via "slice window", if there are more items in your query, you are given a "next token" to
+get the next slice.
+
+Example:
+Should show how to work with the size and next parameter
+
+.. code-block:: python
+
+    from defichain import Ocean
+
+    ocean = Ocean() #  creates the connection to Ocean
+    next = "" # initialize the next value
+
+    while True: # infinite loop
+        request = ocean.blocks.list(size=200, next=next) # request for 200 blocks with correct next value
+
+        next = request["page"]["next"] # set new next value from previous request
+        blocks = request["data"] # slize block data
+
+        print(blocks) # print block data
+
+.. _Ocean Size:
+
+Size
+____
+How many elements a List output should have.
+
+Default: 30
+
+Maximum: 200
+
+.. code-block:: python
+
+    ocean = Ocean() #  creates the connection to Ocean
+
+    ocean.blocks.list(size=200) #  returns the latest 200 blocks
+
+.. _Ocean Next:
+
+Next
+____
+Scrolls through a list.
+
+Points to the data of the next request.
+
+The next pointer can be found in the output of the previous request.
+
+.. code-block:: python
+
+    ocean = Ocean() #  creates the connection to Ocean
+
+    ocean.blocks.list(next="2269079") #  returns 30 blocks from next pointer 2269079
