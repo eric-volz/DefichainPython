@@ -12,7 +12,7 @@ class Oracles:
         :type size: int
         :param next: (optional) offset for the next page
         :type next: str
-        :return: {id: str, weightage: int, ownerAddress: str, priceFeeds: [{token: str, currency: str}],
+        :return: (json string) {id: str, weightage: int, ownerAddress: str, priceFeeds: [{token: str, currency: str}],
             block: {hash: str, height: int, time: int, medianTime: int}}
 
         :example:
@@ -35,7 +35,7 @@ class Oracles:
         :type size: int
         :param next: (optional) offset for the next page
         :type next: str
-        :return: {id: str, key: str, sort: str, token: str, currency: str, oracleId: str,
+        :return: (json string) {id: str, key: str, sort: str, token: str, currency: str, oracleId: str,
             txid: str, time: int, amount: str, block: {hash: str, height: int, time: int,
             medianTime: int}}
 
@@ -52,7 +52,7 @@ class Oracles:
 
         :param address: (required) address owner address for an Oracle
         :type address: str
-        :return: {id: str, weightage: int, ownerAddress: str, priceFeeds: [{token: str, currency: str}],
+        :return: (json string) {id: str, weightage: int, ownerAddress: str, priceFeeds: [{token: str, currency: str}],
             block: {hash: str, height: int, time: int, medianTime: int}}
 
         :example:

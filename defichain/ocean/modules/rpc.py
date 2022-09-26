@@ -12,7 +12,7 @@ class Rpc:
         :type method: str
         :param params: (optinal) params to send upstream
         :type params: array
-        :return: json array
+        :return: json string
 
         :example:
 
