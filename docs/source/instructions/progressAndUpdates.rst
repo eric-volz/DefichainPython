@@ -61,6 +61,7 @@ Since this is a community supported project, the community also has the right to
         Poolpairs           |:white_check_mark:|
         Prices              |:white_check_mark:|
         RawTx               |:white_check_mark:|
+        RPC                 |:white_check_mark:|
         Stats               |:white_check_mark:|
         Tokens              |:white_check_mark:|
         Transactions        |:white_check_mark:|
@@ -110,6 +111,7 @@ Since this is a community supported project, the community also has the right to
         Poolpairs           |:white_check_mark:|
         Prices              |:white_check_mark:|
         RawTx               |:white_check_mark:|
+        RPC                 |:white_check_mark:|
         Stats               |:white_check_mark:|
         Tokens              |:white_check_mark:|
         Transactions        |:white_check_mark:|
@@ -153,18 +155,19 @@ Since this is a community supported project, the community also has the right to
         ================    ========
         Oceab Modules       Progress
         ================    ========
-        Address             |:rotating_light:|
-        Blocks              |:rotating_light:|
-        Fee                 |:rotating_light:|
-        Loan                |:rotating_light:|
-        Masternodes         |:rotating_light:|
-        Oracles             |:rotating_light:|
-        Poolpairs           |:rotating_light:|
-        Prices              |:rotating_light:|
-        RawTx               |:rotating_light:|
-        Stats               |:rotating_light:|
-        Tokens              |:rotating_light:|
-        Transactions        |:rotating_light:|
+        Address             |:white_check_mark:|
+        Blocks              |:white_check_mark:|
+        Fee                 |:white_check_mark:|
+        Loan                |:white_check_mark:|
+        Masternodes         |:white_check_mark:|
+        Oracles             |:white_check_mark:|
+        Poolpairs           |:white_check_mark:|
+        Prices              |:white_check_mark:|
+        RawTx               |:white_check_mark:|
+        RPC                 |:white_check_mark:|
+        Stats               |:white_check_mark:|
+        Tokens              |:white_check_mark:|
+        Transactions        |:white_check_mark:|
 
         Ocean Connection    |:white_check_mark:|
         Exceptions          |:white_check_mark:|
