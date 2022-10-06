@@ -255,7 +255,28 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.ocean.Rpc">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.ocean.</span></span><span class="sig-name descname"><span class="pre">Rpc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ocean</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.ocean.Rpc" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Rpc.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Rpc.call" title="Permalink to this definition">#</a></dt>
+<dd><p>Call an RPC method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> (<em>str</em>) – (required) method of the RPC method</p></li>
+<li><p><strong>params</strong> (<em>array</em>) – (optinal) params to send upstream</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>json string</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">rpc</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">"getblockcount"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+</dd></dl>
 </section>
 
         </article>

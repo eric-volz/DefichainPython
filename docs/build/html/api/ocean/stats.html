@@ -255,7 +255,62 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.ocean.Stats">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.ocean.</span></span><span class="sig-name descname"><span class="pre">Stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ocean</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.ocean.Stats" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Stats.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Stats.get" title="Permalink to this definition">#</a></dt>
+<dd><p>Get stats of DeFi Blockchain</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(json string) {count: {blocks: int, tokens: int, prices: int, masternodes: int}, tvl: {total: float,
+dex: float, loan: float, masternodes: float}, burned: {total: float, address: float, fee: int,
+auction: float, payback: float, emission: float}, price: {usd: float, usdt: float},
+masternodes: {locked: [{ weeks: int, tvl: float, count: int}]}, emission: {total: float,
+masternode: float, dex: float, community: float, anchor: float, burned: float},
+loan: {count: {schemes: int, loanTokens: int, collateralTokens: int, openVaults: int,
+openAuctions: int}, value: {collateral: float, loan: float}}, blockchain: {difficulty: float},
+net: {version: int, subversion: str, protocolversion: int}}</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Stats.getBurn">
+<span class="sig-name descname"><span class="pre">getBurn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Stats.getBurn" title="Permalink to this definition">#</a></dt>
+<dd><p>Get burn info of DeFi Blockchain</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(json string) {address: str, amount: str, tokens: str[], feeburn: float, emissionburn: float,
+auctionburn: float, paybackburn: float, paybackburntokens: str[], dexfeetokens: str[],
+dfipaybackfee: float, dfipaybacktokens: str[], paybackfees: str[], paybacktokens: str[],
+dfip2203: str[], dfip2206f: str[]}</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">getBurn</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Stats.getSupply">
+<span class="sig-name descname"><span class="pre">getSupply</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Stats.getSupply" title="Permalink to this definition">#</a></dt>
+<dd><p>Get supply of DeFi Blockchain</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(json string) {max: float, total: float, burned: float, circulating: float}</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">getSupply</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+</dd></dl>
 </section>
 
         </article>

@@ -255,7 +255,74 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.ocean.Transactions">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.ocean.</span></span><span class="sig-name descname"><span class="pre">Transactions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ocean</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.ocean.Transactions" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Transactions.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Transactions.get" title="Permalink to this definition">#</a></dt>
+<dd><p>Get a Transaction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – (required) id of transaction to query</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) {id: str, order: int, block: {hash: str, height: int, time: int,
+medianTime: int}, txid: str, hash: str, version: int, size: int, vSize: int,
+weight: int, lockTime: int, vinCount: int, voutCount: int, totalVoutValue: str}</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">transactions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"8d654cdaeba4633aa08e46f1aa258aae7234e89945145f61bc1bd5b342df1069"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Transactions.getVins">
+<span class="sig-name descname"><span class="pre">getVins</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Transactions.getVins" title="Permalink to this definition">#</a></dt>
+<dd><p>Get a list of vins of a Transaction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txid</strong> (<em>str</em>) – (required) txid of the transaction</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – (optional) size to query</p></li>
+<li><p><strong>next</strong> (<em>str</em>) – (optional) next token for next slice of vin</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) {id: str, txid: str, coinbase: str, vout: {id: str, txid: str, n: int,
+value: str, tokenId: int, script: {hex: str}}, script: {hex: str}, txInWitness: str[],
+sequence: str}</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">transactions</span><span class="o">.</span><span class="n">getVins</span><span class="p">(</span><span class="s2">"8d654cdaeba4633aa08e46f1aa258aae7234e89945145f61bc1bd5b342df1069"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Transactions.getVouts">
+<span class="sig-name descname"><span class="pre">getVouts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Transactions.getVouts" title="Permalink to this definition">#</a></dt>
+<dd><p>Get a list of vouts of a Transaction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txid</strong> (<em>str</em>) – (required) txid of the transaction</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – (optional) size to query</p></li>
+<li><p><strong>next</strong> (<em>str</em>) – (optional) next token for next slice of vout</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) {id: str, txid: str, n: int, value: str, tokenId: int,
+script: {hex: str, type: str}}</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">transactions</span><span class="o">.</span><span class="n">getVouts</span><span class="p">(</span><span class="s2">"8d654cdaeba4633aa08e46f1aa258aae7234e89945145f61bc1bd5b342df1069"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+</dd></dl>
 </section>
 
         </article>

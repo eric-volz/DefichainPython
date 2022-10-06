@@ -255,7 +255,151 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.ocean.Prices">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.ocean.</span></span><span class="sig-name descname"><span class="pre">Prices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ocean</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.ocean.Prices" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Prices.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">currency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Prices.get" title="Permalink to this definition">#</a></dt>
+<dd><p>Get a PriceTicker</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>token</strong> (<em>str</em>) – (required) token symbol for the PriceTicker</p></li>
+<li><p><strong>currency</strong> (<em>str</em>) – (required) currency fiat currency for the PriceTicker</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) {id: str, sort: str, price: PriceFeed}</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">prices</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"DFI"</span><span class="p">,</span> <span class="s2">"USD"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Prices.getFeed">
+<span class="sig-name descname"><span class="pre">getFeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">currency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.ocean.Prices.getFeed" title="Permalink to this definition">#</a></dt>
+<dd><p>Get a list of price feed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>token</strong> (<em>str</em>) – (required) token symbol for the PriceTicker</p></li>
+<li><p><strong>currency</strong> (<em>str</em>) – (required) currency fiat for the PriceTicker</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – (optional) for number of records per page</p></li>
+<li><p><strong>next</strong> (<em>str</em>) – (optional) offset for the next page</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) {id: str, key: str, sort: str, active: {amount: str, weightage: int,
+oracles: {active: int, total: int}}, next?: {amount: str, weightage: int,
+oracles: {active: int, total: int}}, isLive: bool, block: {hash: str, height: int,
+time: int, medianTime: int}}</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">prices</span><span class="o">.</span><span class="n">getFeed</span><span class="p">(</span><span class="s2">"DFI"</span><span class="p">,</span> <span class="s2">"USD"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Prices.getFeedActive">
+<span class="sig-name descname"><span class="pre">getFeedActive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">currency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.ocean.Prices.getFeedActive" title="Permalink to this definition">#</a></dt>
+<dd><p>Get active price feed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>token</strong> (<em>str</em>) – (required) token symbol for the PriceTicker</p></li>
+<li><p><strong>currency</strong> (<em>str</em>) – (required) currency fiat currency for the PriceTicker</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – (optional) for the number of feeds per page</p></li>
+<li><p><strong>next</strong> (<em>str</em>) – (optional) offset for the next page</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) {id: str, key: str, sort: str, active: {amount: str, weightage: int,
+oracles: {active: int, total: int}}, next: {amount: str, weightage: int,
+oracles: {active: int, total: int}}, isLive: bool, block: {hash: str, height: int,
+time: int, medianTime: int}}</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">prices</span><span class="o">.</span><span class="n">getFeedActive</span><span class="p">(</span><span class="s2">"DFI"</span><span class="p">,</span> <span class="s2">"USD"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Prices.getFeedWithInterval">
+<span class="sig-name descname"><span class="pre">getFeedWithInterval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">currency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.ocean.Prices.getFeedWithInterval" title="Permalink to this definition">#</a></dt>
+<dd><p>Get a list of price feed wit interval</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>token</strong> (<em>str</em>) – (required) token symbol for the PriceTicker</p></li>
+<li><p><strong>currency</strong> (<em>str</em>) – (required) currency fiat for the PriceTicker</p></li>
+<li><p><strong>interval</strong> (<em>int</em>) – (required) Time interval for graphing: 15 * 60, 60 * 60, 24 * 60 * 60</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – (optional) for number of records per page</p></li>
+<li><p><strong>next</strong> (<em>str</em>) – (optional) offset for the next page</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) {id: str, key: str, sort: str, token: str, currency: str,
+aggregated: {amount: str, weightage: int, count: int, oracles: {active: int, total: int},
+time: {interval: int, start: int, end: int}}, block: hash: str, height: int, time: int,
+medianTime: int}}</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">prices</span><span class="o">.</span><span class="n">getFeedWithInterval</span><span class="p">(</span><span class="s2">"DFI"</span><span class="p">,</span> <span class="s2">"USD"</span><span class="p">,</span> <span class="mi">900</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Prices.getOracles">
+<span class="sig-name descname"><span class="pre">getOracles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">currency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.ocean.Prices.getOracles" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>token</strong> (<em>str</em>) – (required) token symbol for the PriceOracle</p></li>
+<li><p><strong>currency</strong> (<em>str</em>) – (required) currency fiat currency for the PriceOracle</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – (optional) for number of records per page</p></li>
+<li><p><strong>next</strong> (<em>str</em>) – (optional) offset for the next page</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) {id: str, key: str, token: str, currency: str, oracleId: str, weightage: int,
+feed: OraclePriceFeed, block: {hash: str, height: int, time: int, medianTime: int}}</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">prices</span><span class="o">.</span><span class="n">getOracles</span><span class="p">(</span><span class="s2">"DFI"</span><span class="p">,</span> <span class="s2">"USD"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Prices.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.ocean.Prices.list" title="Permalink to this definition">#</a></dt>
+<dd><p>Get a list of PriceTicker</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<em>int</em>) – (optional) for the number of records per page</p></li>
+<li><p><strong>next</strong> (<em>str</em>) – (optional) offset for the next page</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) {id: str, sort: str, price: PriceFeed}</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">prices</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+</dd></dl>
 </section>
 
         </article>
