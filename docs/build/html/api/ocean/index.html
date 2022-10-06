@@ -307,7 +307,52 @@ in the upper left corner.</p>
 </section>
 <section id="default-inputs">
 <h2>Default Inputs<a class="headerlink" href="#default-inputs" title="Permalink to this headline">#</a></h2>
-<p>Will follow soon</p>
+<p>These are input formats which are very often used.</p>
+<section id="pagination">
+<span id="ocean-pagination"></span><h3>Pagination<a class="headerlink" href="#pagination" title="Permalink to this headline">#</a></h3>
+<p>Most API with LIST operation can be paginated. All paginate-able resource endpoint in
+Ocean REST API represent one sort indexes/projection. Pagination within Ocean REST API is
+done via “slice window”, if there are more items in your query, you are given a “next token” to
+get the next slice.</p>
+<p>Example:
+Should show how to work with the size and next parameter</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Ocean</span>
+
+<span class="n">ocean</span> <span class="o">=</span> <span class="n">Ocean</span><span class="p">()</span> <span class="c1">#  creates the connection to Ocean</span>
+<span class="nb">next</span> <span class="o">=</span> <span class="s2">""</span> <span class="c1"># initialize the next value</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span> <span class="c1"># infinite loop</span>
+    <span class="n">request</span> <span class="o">=</span> <span class="n">ocean</span><span class="o">.</span><span class="n">blocks</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="nb">next</span><span class="o">=</span><span class="nb">next</span><span class="p">)</span> <span class="c1"># request for 200 blocks with correct next value</span>
+
+    <span class="nb">next</span> <span class="o">=</span> <span class="n">request</span><span class="p">[</span><span class="s2">"page"</span><span class="p">][</span><span class="s2">"next"</span><span class="p">]</span> <span class="c1"># set new next value from previous request</span>
+    <span class="n">blocks</span> <span class="o">=</span> <span class="n">request</span><span class="p">[</span><span class="s2">"data"</span><span class="p">]</span> <span class="c1"># slize block data</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span> <span class="c1"># print block data</span>
+</pre></div>
+</div>
+<section id="size">
+<span id="ocean-size"></span><h4>Size<a class="headerlink" href="#size" title="Permalink to this headline">#</a></h4>
+<p>How many elements a List output should have.</p>
+<p>Default: 30</p>
+<p>Maximum: 200</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ocean</span> <span class="o">=</span> <span class="n">Ocean</span><span class="p">()</span> <span class="c1">#  creates the connection to Ocean</span>
+
+<span class="n">ocean</span><span class="o">.</span><span class="n">blocks</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span> <span class="c1">#  returns the latest 200 blocks</span>
+</pre></div>
+</div>
+</section>
+<section id="next">
+<span id="ocean-next"></span><h4>Next<a class="headerlink" href="#next" title="Permalink to this headline">#</a></h4>
+<p>Scrolls through a list.</p>
+<p>Points to the data of the next request.</p>
+<p>The next pointer can be found in the output of the previous request.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ocean</span> <span class="o">=</span> <span class="n">Ocean</span><span class="p">()</span> <span class="c1">#  creates the connection to Ocean</span>
+
+<span class="n">ocean</span><span class="o">.</span><span class="n">blocks</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="nb">next</span><span class="o">=</span><span class="s2">"2269079"</span><span class="p">)</span> <span class="c1">#  returns 30 blocks from next pointer 2269079</span>
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 </section>
 
@@ -371,7 +416,14 @@ in the upper left corner.</p>
 <li><a class="reference internal" href="#">Ocean</a><ul>
 <li><a class="reference internal" href="#ocean-modules">Ocean Modules</a></li>
 <li><a class="reference internal" href="#request-structure">Request Structure</a></li>
-<li><a class="reference internal" href="#default-inputs">Default Inputs</a></li>
+<li><a class="reference internal" href="#default-inputs">Default Inputs</a><ul>
+<li><a class="reference internal" href="#pagination">Pagination</a><ul>
+<li><a class="reference internal" href="#size">Size</a></li>
+<li><a class="reference internal" href="#next">Next</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
