@@ -2,7 +2,7 @@ import json
 import requests
 import time
 from defichain.node.RPCErrorHandler import RPCErrorHandler
-from defichain.exceptions.ServiceUnavailable import ServiceUnavailable
+from defichain.exceptions.http.ServiceUnavailable import ServiceUnavailable
 
 
 class RPC(object):
