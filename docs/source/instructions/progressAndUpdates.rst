@@ -141,7 +141,7 @@ Since this is a community supported project, the community also has the right to
         Spv                 |:rotating_light:|
         Stats               |:white_check_mark:|
         Tokens              |:rotating_light:|
-        Util                |:rotating_light:|
+        Util                |:white_check_mark:|
         Vault               |:rotating_light:|
         Wallet              |:rotating_light:|
         Zmq                 |:white_check_mark:|
