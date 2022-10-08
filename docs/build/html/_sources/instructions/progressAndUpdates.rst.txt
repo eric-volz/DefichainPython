@@ -132,7 +132,7 @@ Since this is a community supported project, the community also has the right to
         Control             |:white_check_mark:|
         Generating          |:white_check_mark:|
         Loan                |:white_check_mark:|
-        Masternodes         |:rotating_light:|
+        Masternodes         |:white_check_mark:|
         Mining              |:rotating_light:|
         Network             |:rotating_light:|
         Oracles             |:rotating_light:|
@@ -141,7 +141,7 @@ Since this is a community supported project, the community also has the right to
         Spv                 |:rotating_light:|
         Stats               |:white_check_mark:|
         Tokens              |:rotating_light:|
-        Util                |:rotating_light:|
+        Util                |:white_check_mark:|
         Vault               |:rotating_light:|
         Wallet              |:rotating_light:|
         Zmq                 |:white_check_mark:|
