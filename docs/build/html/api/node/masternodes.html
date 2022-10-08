@@ -255,7 +255,175 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.node.Masternodes">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Masternodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Masternodes" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Masternodes.createmasternode">
+<span class="sig-name descname"><span class="pre">createmasternode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ownerAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operatorAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timelock</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Masternodes.createmasternode" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates (and submits to local node and network) a masternode creation transaction with given owner and operator
+addresses, spending the given inputs..
+The last optional argument (may be empty array) is an array of specific UTXOs to spend.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ownerAddress</strong> (<em>str</em>) – (required) Any valid address for keeping collateral amount (any P2PKH or P2WKH address) - used as owner key</p></li>
+<li><p><strong>operatorAddress</strong> – (optional) Optional (== ownerAddress) masternode operator auth address (P2PKH only, unique)</p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+<li><p><strong>timelock</strong> (<em>str</em>) – (optional) Defaults to no timelock period so masternode can be resigned once active. To set a timelock period
+specify either FIVEYEARTIMELOCK or TENYEARTIMELOCK to create a masternode that cannot be resigned for
+five or ten years and will have 1.5x or 2.0 the staking power respectively. Be aware that this means
+that you cannot spend the collateral used to create a masternode for whatever period is specified.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">masternodes</span><span class="o">.</span><span class="n">createmasternode</span><span class="p">(</span><span class="s2">"ownerAddress"</span><span class="p">,</span> <span class="s2">"operatorAddress"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Masternodes.getactivemasternodecount">
+<span class="sig-name descname"><span class="pre">getactivemasternodecount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blockCount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20160</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#defichain.node.Masternodes.getactivemasternodecount" title="Permalink to this definition">#</a></dt>
+<dd><p>Return number of unique masternodes in the last specified number of blocks</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>blockCount</strong> (<em>int</em>) – (optional) The number of blocks to check for unique masternodes</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>n (numeric) Number of unique masternodes seen</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">masternodes</span><span class="o">.</span><span class="n">getactivemasternodecount</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Masternodes.getanchorteams">
+<span class="sig-name descname"><span class="pre">getanchorteams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blockHeight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Masternodes.getanchorteams" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the auth and confirm anchor masternode teams at current or specified height</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>blockHeight</strong> (<em>int</em>) – (optional) The height of block which contain tx</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>{“auth”:[Address,…],”confirm”:[Address,…]} Two sets of masternode operator addresses</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">masternodes</span><span class="o">.</span><span class="n">getanchorteams</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Masternodes.getmasternode">
+<span class="sig-name descname"><span class="pre">getmasternode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mn_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Masternodes.getmasternode" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns information about specified masternode</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mn_id</strong> (<em>str</em>) – (required)  Masternode’s id</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>{id:{…}} (object) Json object with masternode information</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">masternodes</span><span class="o">.</span><span class="n">getmasternode</span><span class="p">(</span><span class="s2">"095d2bfb5d05ba73fa96502df85aca818ee79810b9ababa71a9dc97e2c360100"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Masternodes.getmasternodeblocks">
+<span class="sig-name descname"><span class="pre">getmasternodeblocks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ownerAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operatorAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Masternodes.getmasternodeblocks" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns blocks generated by the specified masternode</p>
+<p>Needs one of the three identifier: id, ownerAddress, operatorAddress</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>str</em>) – (optional) Masternode’s id</p></li>
+<li><p><strong>ownerAddress</strong> (<em>str</em>) – (optional) Masternode owner address</p></li>
+<li><p><strong>operatorAddress</strong> (<em>str</em>) – (optional) Masternode operator address</p></li>
+<li><p><strong>depth</strong> (<em>int</em>) – (optional) Maximum depth, from the genesis block is the default</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>{…} (object) Json object with block hash and height information</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">masternodes</span><span class="o">.</span><span class="n">getmasternodeblocks</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">"095d2bfb5d05ba73fa96502df85aca818ee79810b9ababa71a9dc97e2c360100"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Masternodes.listanchors">
+<span class="sig-name descname"><span class="pre">listanchors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.node.Masternodes.listanchors" title="Permalink to this definition">#</a></dt>
+<dd><p>List anchors (if any)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>“array” Returns array of anchors</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">masternodes</span><span class="o">.</span><span class="n">listanchors</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Masternodes.listmasternodes">
+<span class="sig-name descname"><span class="pre">listmasternodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">including_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Masternodes.listmasternodes" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns information about specified masternodes (or all, if list of ids is empty).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> (<em>str</em>) – (optional) Optional first key to iterate from, in lexicographical order. Typically, it’s set to last ID from previous request</p></li>
+<li><p><strong>including_start</strong> (<em>bool</em>) – (optional) If true, then iterate including starting position. False by default</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – (optional) Maximum number of orders to return, 1000000 by default</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – (optional) Flag for verbose list (default = true), otherwise only ids are listed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>{id:{…},…} (array) Json object with masternodes information</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">masternodes</span><span class="o">.</span><span class="n">listmasternodes</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Masternodes.resignmasternode">
+<span class="sig-name descname"><span class="pre">resignmasternode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mn_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Masternodes.resignmasternode" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates (and submits to local node and network) a transaction resigning your masternode.
+Collateral will be unlocked after 2016 blocks.</p>
+<p>The last optional argument (may be empty array) is an array of specific UTXOs to spend. One of UTXO’s must
+belong to the MN’s owner (collateral) address</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mn_id</strong> (<em>str</em>) – (required) The Masternode’s ID</p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">masternodes</span><span class="o">.</span><span class="n">resignmasternode</span><span class="p">(</span><span class="s2">"095d2bfb5d05ba73fa96502df85aca818ee79810b9ababa71a9dc97e2c360100"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+</dd></dl>
 </section>
 
         </article>
