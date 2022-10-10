@@ -1,7 +1,10 @@
 from typing import Optional
 
 
-class SymbolError(Exception):
+class DerivationError(Exception):
+    """
+    Bad derivation index
+    """
 
     def __init__(self, error_message: str, error_detail: Optional[str] = None):
         self.error_message = error_message
