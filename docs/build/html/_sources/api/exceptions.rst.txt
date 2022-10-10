@@ -1,6 +1,11 @@
+.. _Exceptions:
+
 Exceptions
+==========
+
+HTTP Error
 ----------
-.. automodule:: defichain.exceptions
+.. automodule:: defichain.exceptions.http
 
 .. autoclass:: BadMethod
 .. autoclass:: BadRequest
@@ -11,3 +16,10 @@ Exceptions
 .. autoclass:: Unauthorized
 .. autoclass:: UnprocessableEntity
 .. autoclass:: WrongParameters
+
+Wallet Error
+------------
+
+.. automodule:: defichain.exceptions.hdwallet
+
+.. autoclass:: DerivationError

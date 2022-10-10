@@ -212,6 +212,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/ocean/transactions.html">Transactions</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/hdwallet/index.html">HDWallet</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/hdwallet/wallet.html">Wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/hdwallet/utils.html">Utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/mnemonic.html">Mnemonic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/exceptions.html">Exceptions</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Legal</span></p>
@@ -258,7 +264,7 @@
 <ol class="arabic simple">
 <li><p>The library was published on PyPi and can be installed with only one command.</p></li>
 </ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install defichain
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install defichain -U
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
@@ -271,13 +277,10 @@
 <section id="make-a-request-to-the-node">
 <h2>Make a request to the Node<a class="headerlink" href="#make-a-request-to-the-node" title="Permalink to this headline">#</a></h2>
 <p>Here is an example of how you can connect to the node and how individual requests are executed:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Node</span>
-
-<span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="s2">"user"</span><span class="p">,</span> <span class="s2">"password"</span><span class="p">,</span> <span class="s2">"127.0.0.1"</span><span class="p">,</span> <span class="mi">8554</span><span class="p">)</span>
-
-<span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getblockcount</span><span class="p">()</span> <span class="c1">#  returns block height of the latest block</span>
-
-<span class="n">node</span><span class="o">.</span><span class="n">poolpair</span><span class="o">.</span><span class="n">compositeswap</span><span class="p">(</span><span class="s2">"fromAddress"</span><span class="p">,</span> <span class="s2">"BTC"</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="s2">"toAddress"</span><span class="p">,</span> <span class="s2">"DFI"</span><span class="p">)</span>  <span class="c1"># swaps 0.01 BTC to DFI</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="s2">"user"</span><span class="p">,</span> <span class="s2">"password"</span><span class="p">,</span> <span class="s2">"127.0.0.1"</span><span class="p">,</span> <span class="mi">8554</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getblockcount</span><span class="p">()</span> <span class="c1">#  returns block height of the latest block</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">poolpair</span><span class="o">.</span><span class="n">compositeswap</span><span class="p">(</span><span class="s2">"fromAddress"</span><span class="p">,</span> <span class="s2">"BTC"</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="s2">"toAddress"</span><span class="p">,</span> <span class="s2">"DFI"</span><span class="p">)</span>  <span class="c1"># swaps 0.01 BTC to DFI</span>
 </pre></div>
 </div>
 <p>For more information check the <a class="reference internal" href="../api/node/index.html#node-index"><span class="std std-ref">Node / RPC</span></a> section.</p>
@@ -285,16 +288,30 @@
 <section id="make-a-request-to-ocean">
 <h2>Make a request to Ocean<a class="headerlink" href="#make-a-request-to-ocean" title="Permalink to this headline">#</a></h2>
 <p>Here is an example of how you can connect to Ocean and how to request blockchain data:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Ocean</span>
-
-<span class="n">ocean</span> <span class="o">=</span> <span class="n">Ocean</span><span class="p">()</span> <span class="c1">#  creates the connection to Ocean</span>
-
-<span class="n">ocean</span><span class="o">.</span><span class="n">blocks</span><span class="o">.</span><span class="n">list</span><span class="p">()</span> <span class="c1">#  returns the latest 30 blocks</span>
-
-<span class="n">ocean</span><span class="o">.</span><span class="n">poolpairs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1">#  returns data from ETH-DFI Pool</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Ocean</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span> <span class="o">=</span> <span class="n">Ocean</span><span class="p">()</span> <span class="c1">#  creates the connection to Ocean</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">blocks</span><span class="o">.</span><span class="n">list</span><span class="p">()</span> <span class="c1">#  returns the latest 30 blocks</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">poolpairs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1">#  returns data from ETH-DFI Pool</span>
 </pre></div>
 </div>
 <p>For more information check the <a class="reference internal" href="../api/ocean/index.html#ocean-index"><span class="std std-ref">Ocean</span></a> section.</p>
+</section>
+<section id="setup-a-wallet-and-get-the-first-address">
+<h2>Setup a wallet and get the first address<a class="headerlink" href="#setup-a-wallet-and-get-the-first-address" title="Permalink to this headline">#</a></h2>
+<p>Here is an example how to create a new wallet with a newly generated mnemonic seed and how to
+retrieve the first bech32 address from it:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.hdwallet.utils</span> <span class="kn">import</span> <span class="n">generate_mnemonic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mnemonic</span> <span class="o">=</span> <span class="n">generate_mnemonic</span><span class="p">()</span>
+<span class="go">wisdom path obscure scrub travel vessel boring solar truth original quiz letter exhibit spy point mail else entire involve announce vault outer mirror rug</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">bech32_address</span><span class="p">()</span>
+<span class="go">df1q95vyvvu05sgpaem7w8lwufxwnzdchwk9xr7j0y</span>
+</pre></div>
+</div>
+<p>For more information check the <a class="reference internal" href="../api/hdwallet/index.html#hdwallet-index"><span class="std std-ref">HDWallet</span></a> section.</p>
 </section>
 </section>
 
@@ -359,6 +376,7 @@
 <li><a class="reference internal" href="#install-the-defichain-python-package">Install the Defichain Python Package</a></li>
 <li><a class="reference internal" href="#make-a-request-to-the-node">Make a request to the Node</a></li>
 <li><a class="reference internal" href="#make-a-request-to-ocean">Make a request to Ocean</a></li>
+<li><a class="reference internal" href="#setup-a-wallet-and-get-the-first-address">Setup a wallet and get the first address</a></li>
 </ul>
 </li>
 </ul>
