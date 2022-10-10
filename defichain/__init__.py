@@ -7,7 +7,7 @@ from defichain.node.node import Node
 from defichain.ocean.ocean import Ocean
 
 # Wallet
-from defichain.wallet.wallet import Wallet
+from defichain.hdwallet.wallet import Wallet
 
 # Mnemonic
 from defichain.mnemonic.mnemonic import Mnemonic

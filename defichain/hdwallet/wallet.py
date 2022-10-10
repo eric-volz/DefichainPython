@@ -22,11 +22,11 @@ from .libs.ecc import S256Point, G
 from .libs.bech32 import encode
 from .libs.base58 import check_encode, check_decode, ensure_string
 
-from defichain.networks.networks import Cryptocurrency
+from defichain.networks.networks import Network
 
 from .derivations import Derivation
 
-from defichain.exceptions.wallet.DerivationError import DerivationError
+from defichain.exceptions.hdwallet.DerivationError import DerivationError
 
 from .utils import (
     get_bytes, is_entropy, is_mnemonic, get_entropy_strength, _unhexlify,
@@ -46,25 +46,22 @@ class Wallet:
     """
     Hierarchical Deterministic Wallet
 
-    :param cryptocurrency: Cryptocurrency instance, defaults to ``None``.
-    :type cryptocurrency: Cryptocurrency
+    :param network: Cryptocurrency instance, defaults to ``None``.
+    :type network: Network
     :param semantic: Extended semantic, defaults to ``P2PKH``.
     :type semantic: str
     :param use_default_path: Use default derivation path, defaults to ``False``.
     :type use_default_path: bool
 
-    :returns: HDWallet -- Hierarchical Deterministic Wallet instance.
-
-    .. note::
-        To initialize HDWallet symbol or cryptocurrency is required.
+    :returns: Wallet -- Hierarchical Deterministic Wallet instance.
     """
 
-    def __init__(self, cryptocurrency: Any, semantic: Optional[str] = None, use_default_path: bool = True):
+    def __init__(self, network: Any, semantic: Optional[str] = None, use_default_path: bool = True):
         self._cryptocurrency: Any = None
-        if cryptocurrency:
-            if not issubclass(cryptocurrency, Cryptocurrency):
-                raise TypeError("Invalid Cryptocurrency type, the sub class must be Cryptocurrency instance.")
-            self._cryptocurrency: Any = cryptocurrency
+        if network:
+            if not issubclass(network, Network):
+                raise TypeError("Invalid Network type, the sub class must be Network instance.")
+            self._cryptocurrency: Any = network
 
         self._strength: Optional[int] = None
         self._entropy: Optional[bytes] = None
@@ -108,13 +105,13 @@ class Wallet:
         :param passphrase: Mnemonic passphrase or password, default to ``None``.
         :type passphrase: str
 
-        :returns: HDWallet -- Hierarchical Deterministic Wallet instance.
+        :returns: Wallet -- Hierarchical Deterministic Wallet instance.
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_entropy(entropy="ee535b143b0d9d1f87546f9df0d06b1a", language="english", passphrase=None)
-        <wallet.wallet.HDWallet object at 0x000001E8BFB98D60>
+        <defichain.hdwallet.wallet.Wallet object at 0x7f6c94b7be50>
         """
 
         if not is_entropy(entropy=entropy):
@@ -146,13 +143,13 @@ class Wallet:
         :param passphrase: Mnemonic passphrase or password, default to ``None``.
         :type passphrase: str
 
-        :returns: HDWallet -- Hierarchical Deterministic Wallet instance.
+        :returns: Wallet -- Hierarchical Deterministic Wallet instance.
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="sceptre capter séquence girafe absolu relatif fleur zoologie muscle sirop saboter parure", passphrase=None)
-        <wallet.wallet.HDWallet object at 0x000001E8BFB98D60>
+        <defichain.hdwallet.wallet.Wallet object at 0x7f2f5698de50>
         """
 
         if not is_mnemonic(mnemonic=mnemonic, language=language):
@@ -176,13 +173,13 @@ class Wallet:
         :param seed: Seed hex string.
         :type seed: str
 
-        :returns: HDWallet -- Hierarchical Deterministic Wallet instance.
+        :returns: Wallet -- Hierarchical Deterministic Wallet instance.
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_seed(seed="8d5f4fe5b81a6a6a18b08603b6b3f59df9f4bbb25d10c55d23e0cbdc5ee385e5fddad9d7e6114f11afdec45928328081f9a598151a7613dc5f5a0c16a4612aa4")
-        <wallet.wallet.HDWallet object at 0x000001E8BFB98D60>
+        <defichain.hdwallet.wallet.Wallet object at 0x7f61d053fe50>
         """
 
         self._seed = unhexlify(seed)
@@ -205,22 +202,20 @@ class Wallet:
             self._semantic = "p2pkh"
         return self
 
-    def from_xprivate_key(self, xprivate_key: str, strict: bool = False) -> "Wallet":
+    def from_xprivate_key(self, xprivate_key: str) -> "Wallet":
         """
         Master from XPrivate Key.
 
         :param xprivate_key: Root or Non-Root XPrivate key.
         :type xprivate_key: str
-        :param strict: Strict for must be root xprivate key, default to ``False``.
-        :type strict: bool
 
-        :returns: HDWallet -- Hierarchical Deterministic Wallet instance.
+        :returns: Wallet -- Hierarchical Deterministic Wallet instance.
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_xprivate_key(xprivate_key="xprv9s21ZrQH143K3xPGUzpogJeKtRdjHkK6muBJo8v7rEVRzT83xJgNcLpMoJXUf9wJFKfuHR4SGvfgdShh4t9VmjjrE9usBunK3LfNna31LGF")
-        <wallet.wallet.HDWallet object at 0x000001E8BFB98D60>
+        <defichain.hdwallet.wallet.Wallet object at 0x7f9c26fe6e50>
         """
 
         _deserialize_xprivate_key = self._deserialize_xprivate_key(xprivate_key=xprivate_key)
@@ -251,22 +246,20 @@ class Wallet:
         )
         return self
 
-    def from_xpublic_key(self, xpublic_key: str, strict: bool = False) -> "Wallet":
+    def from_xpublic_key(self, xpublic_key: str) -> "Wallet":
         """
         Master from XPublic Key.
 
         :param xpublic_key: Root or Non-Root XPublic key.
         :type xpublic_key: str
-        :param strict: Strict for must be root xpublic key, default to ``False``.
-        :type strict: bool
 
-        :returns: HDWallet -- Hierarchical Deterministic Wallet instance.
+        :returns: Wallet -- Hierarchical Deterministic Wallet instance.
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_xpublic_key(xpublic_key="xpub661MyMwAqRbcGSTjb2Mp3Sb4STUDhD2x986ubXKjQa2QsFTCVqzdA98qeZjcncHT1AaZcMSjiP1HJ16jH97q72RwyFfiNhmG8zQ6KBB5PaQ")
-        <wallet.wallet.HDWallet object at 0x000001E8BFB98D60>
+        <defichain.hdwallet.wallet.Wallet object at 0x7fbd211bce50>
         """
 
         _deserialize_xpublic_key = self._deserialize_xpublic_key(xpublic_key=xpublic_key)
@@ -306,13 +299,13 @@ class Wallet:
         :param wif: Wallet important format.
         :type wif: str
 
-        :returns: HDWallet -- Hierarchical Deterministic Wallet instance.
+        :returns: Wallet -- Hierarchical Deterministic Wallet instance.
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_wif(wif="KzsHWUJsrTWUUhBGPfMMxLLydiH7NhEn6z7mKHXD5qNkUWaC4TEn")
-        <wallet.wallet.HDWallet object at 0x000001E8BFB98D60>
+        <defichain.hdwallet.wallet.Wallet object at 0x7f6fd2509e50>
         """
 
         raw = check_decode(wif)[:-1]
@@ -332,13 +325,13 @@ class Wallet:
         :param private_key: Private key.
         :type private_key: str
 
-        :returns: HDWallet -- Hierarchical Deterministic Wallet instance.
+        :returns: Wallet -- Hierarchical Deterministic Wallet instance.
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_private_key(private_key="6cd78b0d69eab1a47bfa53a52b9d8c4331e858b5d7a599270a95d9735fdb0b94")
-        <wallet.wallet.HDWallet object at 0x000001E8BFB98D60>
+        <defichain.hdwallet.wallet.Wallet object at 0x7ff405eebe50>
         """
 
         self._private_key = unhexlify(private_key)
@@ -354,13 +347,13 @@ class Wallet:
         :param public_key: Public key.
         :type public_key: str
 
-        :returns: HDWallet -- Hierarchical Deterministic Wallet instance.
+        :returns: Wallet -- Hierarchical Deterministic Wallet instance.
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_public_key(public_key="02f93f58b97c3bb616645c3dda256ec946d87c45baf531984c022dd0fd1503b0a8")
-        <wallet.wallet.HDWallet object at 0x000001E8BFB98D60>
+        <defichain.hdwallet.wallet.Wallet object at 0x7fb8c47ece50>
         """
 
         self._verified_key = ecdsa.VerifyingKey.from_string(
@@ -373,17 +366,30 @@ class Wallet:
         """
         Derivation from Path.
 
+            Default path for defichain is: ``m/1129/0/0/0``
+
+        You can calculate the next addresses by increasing the last index by 1:
+
+            First Address in Wallet: ``m/1129/0/0/0``
+
+            Second Address in Wallet: ``m/1129/0/0/1``
+
+            Third Address in Wallet: ``m/1129/0/0/2``
+
+        .. note::
+            Do not forget all derivation paths are start swith 'm/' prefix.
+
         :param path: Derivation path.
         :type path: str, Derivation
 
-        :returns: HDWallet -- Hierarchical Deterministic Wallet instance.
+        :returns: Wallet -- Hierarchical Deterministic Wallet instance.
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_xprivate_key(xprivate_key="xprv9s21ZrQH143K3xPGUzpogJeKtRdjHkK6muBJo8v7rEVRzT83xJgNcLpMoJXUf9wJFKfuHR4SGvfgdShh4t9VmjjrE9usBunK3LfNna31LGF")
-        >>> wallet.from_path(path="m/44'/0'/'0/0/0")
-        <wallet.wallet.HDWallet object at 0x000001E8BFB98D60>
+        >>> wallet.from_path(path="m/1129/0/0/0")
+        <defichain.hdwallet.wallet.Wallet object at 0x7ff968489e50>
         """
 
         if isinstance(path, Derivation):
@@ -411,18 +417,17 @@ class Wallet:
         :param hardened: Hardened address, default to ``False``.
         :type hardened: bool
 
-        :returns: HDWallet -- Hierarchical Deterministic Wallet instance.
+        :returns: Wallet -- Hierarchical Deterministic Wallet instance.
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_xprivate_key(xprivate_key="xprv9s21ZrQH143K3xPGUzpogJeKtRdjHkK6muBJo8v7rEVRzT83xJgNcLpMoJXUf9wJFKfuHR4SGvfgdShh4t9VmjjrE9usBunK3LfNna31LGF")
-        >>> wallet.from_index(index=44, hardened=True)
-        >>> wallet.from_index(index=0, hardened=True)
-        >>> wallet.from_index(index=0, hardened=True)
+        >>> wallet.from_index(index=1129)
         >>> wallet.from_index(index=0)
         >>> wallet.from_index(index=0)
-        <wallet.wallet.HDWallet object at 0x000001E8BFB98D60>
+        >>> wallet.from_index(index=0)
+        <defichain.hdwallet.wallet.Wallet object at 0x7feb0fbe9e50>
         """
 
         if not isinstance(index, int):
@@ -525,11 +530,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_entropy(entropy="ee535b143b0d9d1f87546f9df0d06b1a")
-        >>> wallet.from_path(path="m/44'/0'/'0/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet.root_xprivate_key()
-        "xprv9s21ZrQH143K3xPGUzpogJeKtRdjHkK6muBJo8v7rEVRzT83xJgNcLpMoJXUf9wJFKfuHR4SGvfgdShh4t9VmjjrE9usBunK3LfNna31LGF"
+        "xprv9s21ZrQH143K3wyDj3RFDZ2NyueHmj42SkAhqN62guhz5hr5N2qzPKzLnzrRsYdi4DwoeBeqKyjizqdiSNr3yAn2yMMMwWoJQp2PsC4BPLp"
         """
 
         if self._semantic is None:
@@ -563,11 +568,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_entropy(entropy="ee535b143b0d9d1f87546f9df0d06b1a")
-        >>> wallet.from_path(path="m/44'/0'/'0/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet.root_xpublic_key()
-        "xpub661MyMwAqRbcGSTjb2Mp3Sb4STUDhD2x986ubXKjQa2QsFTCVqzdA98qeZjcncHT1AaZcMSjiP1HJ16jH97q72RwyFfiNhmG8zQ6KBB5PaQ"
+        "xpub661MyMwAqRbcGS3gq4xFagy7XwUnBBmsoy6JdkVeFFExxWBDuaAEw8JpeFVhYKJctV1ZXFdV6SPoN41MVkNMdTcZpxcqJoRWgJvede7ME9n"
         """
 
         if self._semantic is None:
@@ -606,11 +611,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_entropy(entropy="ee535b143b0d9d1f87546f9df0d06b1a")
-        >>> wallet.from_path(path="m/44'/0'/'0/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet.xprivate_key()
-        "xprvA3BYGWQ9FmhyaNRRXB2f1LphNPnaY9T6gngw4BaTbkFtscSH4RCuJhgWUSKs9S6ciGioHd4TX4UeyUg53MkfN9Xh38xkS1j2Wb9YKsYpJHQ"
+        "xprvA1525gQR3JEkXUQqTYa64yfAeys9URDBqTNSqwCLdFsaDohB7p5DaPAqtJkUMxG7dQhijttqvvxxWtUaXYX4yvpHx7y2Z8Uewcw3c9ZcjA3"
         """
 
         if self._semantic is None:
@@ -644,11 +649,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_entropy(entropy="ee535b143b0d9d1f87546f9df0d06b1a")
-        >>> wallet.from_path(path="m/44'/0'/'0/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet.xpublic_key()
-        "xpub6GAtg1w369GGnrVtdCZfNUmRvRd4wcAx41cXrZz5A5nskQmRbxX9rVzzKiRU4JruirBrfm4KQXNSU7GfqL1tzZWpZYe9Zo4xKGJYohWoQe7"
+        "xpub6E4NVBwJsfo3jxVJZa76S7buD1hdssw3CgJ3eKbxBbQZ6c2KfMPU8BVKjaT2wfDX1AWcUvr2NGj1teU2PJGrT1oCdREZ63zRFgTS3C8rrpR"
         """
 
         if self._semantic is None:
@@ -673,17 +678,16 @@ class Wallet:
         """
         Clean derivation Path or Indexes.
 
-        :returns: HDWallet -- Hierarchical Deterministic Wallet instance.
+        :returns: Wallet -- Hierarchical Deterministic Wallet instance.
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_xprivate_key(xprivate_key="xprv9s21ZrQH143K3xPGUzpogJeKtRdjHkK6muBJo8v7rEVRzT83xJgNcLpMoJXUf9wJFKfuHR4SGvfgdShh4t9VmjjrE9usBunK3LfNna31LGF")
-        >>> wallet.from_path(path="m/44'/0'/'0/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet.path()
-        "m/44'/0'/'0/0/0"
+        "m/1129/0/0/0"
         >>> wallet.clean_derivation()
-        <wallet.wallet.HDWallet object at 0x000001E8BFB98D60>
         >>> wallet.path()
         None
         """
@@ -716,11 +720,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet.uncompressed()
-        "f93f58b97c3bb616645c3dda256ec946d87c45baf531984c022dd0fd1503b0a875f63285a539213ac241fc4a88e7137ba1c8d897b1c1e5efb81bfc6b45a22d40"
+        "5af8506eb2b42f63842402cf4a462c0c4200797ab707acc5c215aee8a276a2c1b52749070d113497b118fa5aa1f5f1260475e1b6b766c4e0b84108c5322f1a7a"
         """
 
         p = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F
@@ -744,11 +748,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet.compressed()
-        "02f93f58b97c3bb616645c3dda256ec946d87c45baf531984c022dd0fd1503b0a8"
+        "025af8506eb2b42f63842402cf4a462c0c4200797ab707acc5c215aee8a276a2c1"
         """
 
         _verified_key = ecdsa.VerifyingKey.from_string(
@@ -770,11 +774,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet.private_key()
-        "6cd78b0d69eab1a47bfa53a52b9d8c4331e858b5d7a599270a95d9735fdb0b94"
+        "56605e027fdb039e86fabdf3057b117fcd2c82ceaaa997a4a47afdf03ce9b155"
         """
 
         return hexlify(self._key.to_string()).decode() if self._key else None
@@ -792,11 +796,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet.public_key()
-        "02f93f58b97c3bb616645c3dda256ec946d87c45baf531984c022dd0fd1503b0a8"
+        "025af8506eb2b42f63842402cf4a462c0c4200797ab707acc5c215aee8a276a2c1"
         """
 
         if private_key:
@@ -820,7 +824,7 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash")
         >>> wallet.strength()
         160
@@ -836,7 +840,7 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash")
         >>> wallet.entropy()
         "f24afe7fc1418815ee7fd256beb55518e7c34ecd"
@@ -852,7 +856,7 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash")
         >>> wallet.mnemonic()
         "venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"
@@ -868,7 +872,7 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
         >>> wallet.passphrase()
         "password"
@@ -884,7 +888,7 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
         >>> wallet.language()
         "english"
@@ -894,32 +898,32 @@ class Wallet:
 
     def cryptocurrency(self) -> Optional[str]:
         """
-        Get Cryptocurrency name.
+        Get Network name.
 
-        :returns: str -- Cryptocurrency name.
+        :returns: str -- Network name.
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
         >>> wallet.cryptocurrency()
-        "Bitcoin"
+        "Defichain"
         """
 
         return str(self._cryptocurrency.NAME)
 
     def symbol(self) -> Optional[str]:
         """
-        Get Cryptocurrency symbol.
+        Get Network symbol.
 
-        :returns: str -- Cryptocurrency symbol.
+        :returns: str -- Network symbol.
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
         >>> wallet.symbol()
-        "BTC"
+        "DFI"
         """
 
         return str(self._cryptocurrency.SYMBOL)
@@ -932,7 +936,7 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
         >>> wallet.semantic()
         "p2pkh"
@@ -942,13 +946,13 @@ class Wallet:
 
     def network(self) -> Optional[str]:
         """
-        Get Cryptocurrency network type.
+        Get Network network type.
 
-        :returns: str -- Cryptocurrency network type.
+        :returns: str -- Network network type.
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
         >>> wallet.network()
         "mainnet"
@@ -964,11 +968,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet.seed()
-        "8d5f4fe5b81a6a6a18b08603b6b3f59df9f4bbb25d10c55d23e0cbdc5ee385e5fddad9d7e6114f11afdec45928328081f9a598151a7613dc5f5a0c16a4612aa4"
+        "06ea9f5dd74699c50626ea80c6cf29ebc0d7d7536a489924928d9a1bba0a01ff37339d82f80f863fc0a326d86b7258a2ebd9e05b76e94a9afc87a260e30cf02b"
         """
 
         return hexlify(self._seed).decode() if self._seed else None
@@ -981,11 +985,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet.path()
-        "m/44'/0'/0'/0/0"
+        "m/1129/0/0/0"
         """
 
         return str(self._path) if not self._path == "m" else None
@@ -998,11 +1002,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet.chain_code()
-        "ed45793b944d1f22522f2d6f48c487029fae2cfcd999ed23087a148bcdda6314"
+        "6a6fe745530a2a5a2834293fb7aeda2f8d9253cd3241a28139da74acdff25ee2"
         """
 
         return hexlify(self._chain_code).decode() if self._chain_code else None
@@ -1015,11 +1019,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet.hash()
-        "4d887566d408dfe5ea8090f2b716f9639523ca89"
+        "ead6524e1ee52c7750e5cb2fe3dc3ab30a49b0c3"
         """
 
         return hexlify(ripemd160(sha256(unhexlify(self.public_key(
@@ -1034,11 +1038,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet.finger_print()
-        "4d887566"
+        "ead6524e"
         """
 
         return self.hash(self.private_key())[:8]
@@ -1051,11 +1055,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
-        >>> wallet._p2wpkh_in_p2sh_address()
-        "3CCrxPrHNa6ePbnB7qjh7S3vaPx9qiLc3e"
+        >>> wallet.from_path(path="m/1129/0/0/0")
+        >>> wallet.default_address()
+        "dKYzYQDmN9TFEdZy46mFtStbqYLnougqzY"
         """
         return self._p2wpkh_in_p2sh_address()
 
@@ -1067,11 +1071,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
-        >>> wallet._p2pkh_address()
-        "184xW5gWDnhS7LriL2JAZs1XGTJjimz7pq"
+        >>> wallet.from_path(path="m/1129/0/0/0")
+        >>> wallet.legacy_address()
+        "8cVZbAQGU11dYPoSPHYYjakHCFQ3NSiyS6"
         """
         return self._p2pkh_address()
 
@@ -1083,11 +1087,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
-        >>> wallet._p2wpkh_address()
-        "bc1qfky82ek5pr07t65qjretw9hevw2j8j5fdrn5hc"
+        >>> wallet.from_path(path="m/1129/0/0/0")
+        >>> wallet.bech32_address()
+        "df1qatt9yns7u5k8w589evh78hp6kv9ynvxr2xlvpn"
         """
         return self._p2wpkh_address()
 
@@ -1099,11 +1103,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet._p2pkh_address()
-        "184xW5gWDnhS7LriL2JAZs1XGTJjimz7pq"
+        "8cVZbAQGU11dYPoSPHYYjakHCFQ3NSiyS6"
         """
 
         compressed_public_key = unhexlify(self.compressed())
@@ -1119,11 +1123,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet._p2sh_address()
-        "3Jp6ad4ErhibQmhSRfavbPRiUyg2xTTT4j"
+        "dKVkaEEuwANu4cYdaWS3NwSTPNA27enY5U"
         """
 
         compressed_public_key = unhexlify(self.compressed())
@@ -1141,11 +1145,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet._p2wpkh_address()
-        "bc1qfky82ek5pr07t65qjretw9hevw2j8j5fdrn5hc"
+        "df1qatt9yns7u5k8w589evh78hp6kv9ynvxr2xlvpn"
         """
 
         compressed_public_key = unhexlify(self.compressed())
@@ -1162,11 +1166,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet._p2wpkh_in_p2sh_address()
-        "3CCrxPrHNa6ePbnB7qjh7S3vaPx9qiLc3e"
+        "dKYzYQDmN9TFEdZy46mFtStbqYLnougqzY"
         """
 
         compressed_public_key = unhexlify(self.compressed())
@@ -1185,11 +1189,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet._p2wsh_address()
-        "bc1qaj2xa9j6eegcxls3y8p6erw6vdgdxynasrd4hl3xuctht5edu3msdeshgf"
+        "df1q2dypg3vmqaqqcl8n557xea63qqmq50f5eda6zxnrnll4cusz2ezqtga6yz"
         """
 
         compressed_public_key = unhexlify("5121" + self.compressed() + "51ae")
@@ -1206,11 +1210,11 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet._p2wsh_in_p2sh_address()
-        "38YMonfh2yLFRViLrM2kdvZx8ctcp1vbbV"
+        "dV6J1XkQJ8HzWCBo8gv9jAQCBxN1h3PdND"
         """
 
         compressed_public_key = unhexlify("5121" + self.compressed() + "51ae")
@@ -1229,28 +1233,28 @@ class Wallet:
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet.wif()
-        "KzsHWUJsrTWUUhBGPfMMxLLydiH7NhEn6z7mKHXD5qNkUWaC4TEn"
+        "KxGKLeymbFrSY7t3X31FMaDgQDUQGYvhUACLe4o1LXokvWtMs1WU"
         """
 
         return check_encode(_unhexlify(self._cryptocurrency.WIF_SECRET_KEY) + self._key.to_string() + b"\x01") if self._key else None
 
     def dumps(self) -> dict:
         """
-        Get All HDWallet imformations.
+        Get All Wallet imformations.
 
-        :returns: dict -- All HDWallet imformations.
+        :returns: dict -- All Wallet imformations.
 
         >>> from defichain import Wallet
         >>> from defichain.networks import DefichainMainnet
-        >>> wallet = Wallet(cryptocurrency=DefichainMainnet)
+        >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
-        >>> wallet.from_path(path="m/44'/0'/0'/0/0")
+        >>> wallet.from_path(path="m/1129/0/0/0")
         >>> wallet.dumps()
-        {'cryptocurrency': 'Bitcoin', 'symbol': 'BTC', 'network': 'mainnet', 'strength': 160, 'entropy': 'f24afe7fc1418815ee7fd256beb55518e7c34ecd', 'mnemonic': 'venture fitness paper little blush april rigid where find volcano fetch crack label polar dash', 'language': 'english', 'passphrase': None, 'seed': '8d5f4fe5b81a6a6a18b08603b6b3f59df9f4bbb25d10c55d23e0cbdc5ee385e5fddad9d7e6114f11afdec45928328081f9a598151a7613dc5f5a0c16a4612aa4', 'root_xprivate_key': 'xprv9s21ZrQH143K3xPGUzpogJeKtRdjHkK6muBJo8v7rEVRzT83xJgNcLpMoJXUf9wJFKfuHR4SGvfgdShh4t9VmjjrE9usBunK3LfNna31LGF', 'root_xpublic_key': 'xpub661MyMwAqRbcGSTjb2Mp3Sb4STUDhD2x986ubXKjQa2QsFTCVqzdA98qeZjcncHT1AaZcMSjiP1HJ16jH97q72RwyFfiNhmG8zQ6KBB5PaQ', 'xprivate_key': 'xprvA3BYGWQ9FmhyaNRRXB2f1LphNPnaY9T6gngw4BaTbkFtscSH4RCuJhgWUSKs9S6ciGioHd4TX4UeyUg53MkfN9Xh38xkS1j2Wb9YKsYpJHQ', 'xpublic_key': 'xpub6GAtg1w369GGnrVtdCZfNUmRvRd4wcAx41cXrZz5A5nskQmRbxX9rVzzKiRU4JruirBrfm4KQXNSU7GfqL1tzZWpZYe9Zo4xKGJYohWoQe7', 'uncompressed': 'f93f58b97c3bb616645c3dda256ec946d87c45baf531984c022dd0fd1503b0a875f63285a539213ac241fc4a88e7137ba1c8d897b1c1e5efb81bfc6b45a22d40', 'compressed': '02f93f58b97c3bb616645c3dda256ec946d87c45baf531984c022dd0fd1503b0a8', 'chain_code': 'ed45793b944d1f22522f2d6f48c487029fae2cfcd999ed23087a148bcdda6314', 'private_key': '6cd78b0d69eab1a47bfa53a52b9d8c4331e858b5d7a599270a95d9735fdb0b94', 'public_key': '02f93f58b97c3bb616645c3dda256ec946d87c45baf531984c022dd0fd1503b0a8', 'wif': 'KzsHWUJsrTWUUhBGPfMMxLLydiH7NhEn6z7mKHXD5qNkUWaC4TEn', 'identifier': '4d887566d408dfe5ea8090f2b716f9639523ca89', 'finger_print': '4d887566', 'path': "m/44'/0'/0'/0/0", 'addresses': {'p2pkh': '184xW5gWDnhS7LriL2JAZs1XGTJjimz7pq', 'p2sh': '3Jp6ad4ErhibQmhSRfavbPRiUyg2xTTT4j', 'p2wpkh': 'bc1qfky82ek5pr07t65qjretw9hevw2j8j5fdrn5hc', 'p2wpkh_in_p2sh': '3CCrxPrHNa6ePbnB7qjh7S3vaPx9qiLc3e', 'p2wsh': 'bc1qaj2xa9j6eegcxls3y8p6erw6vdgdxynasrd4hl3xuctht5edu3msdeshgf', 'p2wsh_in_p2sh': '38YMonfh2yLFRViLrM2kdvZx8ctcp1vbbV'}}
+        {'cryptocurrency': 'Defichain', 'symbol': 'DFI', 'network': 'mainnet', 'strength': 160, 'entropy': 'f24afe7fc1418815ee7fd256beb55518e7c34ecd', 'mnemonic': 'venture fitness paper little blush april rigid where find volcano fetch crack label polar dash', 'language': 'english', 'passphrase': 'password', 'seed': '06ea9f5dd74699c50626ea80c6cf29ebc0d7d7536a489924928d9a1bba0a01ff37339d82f80f863fc0a326d86b7258a2ebd9e05b76e94a9afc87a260e30cf02b', 'root_xprivate_key': 'xprv9s21ZrQH143K3eriRHBmTz27FBxHSsjdPJy3c7G7RxLV7JKgYEwZo8iNW7tCnC1p7754tnpgW3WBwNSy5kEU2uQLywxpKfxZSbsDJWXriKf', 'root_xpublic_key': 'xpub661MyMwAqRbcG8wBXJimq7xqoDnmrLTUkXteQVfizHsTz6eq5nFpLw2rMQ96dg7MHGTWD3U6UUFMY2XiJtQh7rWKNg7x1nb8QHyu4CFQ3GR', 'xprivate_key': 'xprv9zihFAyvszfdonyejxCCch1JTGVrfqd3VLxKrmSdAht1XmYzVw8YCH4965HYfEXNnnZAHVnga2JFBSpLYhNrmrYEgVpmN33gHXEzy5CJ5Ff', 'xpublic_key': 'xpub6Di3egWpiNDw2H47qyjCypx31JLM5JLtrZsvf9rEj3QzQZt93USnk5NcwMqHKNs6s1VGqLzZ7gJNRpa55gSgyycC27wLorzFHasi8A8Fg4S', 'uncompressed': 'e6ec494e1eb0b254e0d0a8fe783ec89d0ba33a4ddf33bf9f521912c34dd84115eeb3b6a4c7fb78fbdc81ad05ff216f0e8445bcfa46b9a3975f3aa65b00bf8202', 'compressed': '02e6ec494e1eb0b254e0d0a8fe783ec89d0ba33a4ddf33bf9f521912c34dd84115', 'chain_code': '6a6fe745530a2a5a2834293fb7aeda2f8d9253cd3241a28139da74acdff25ee2', 'private_key': '1f2d96f945df65d442c86b08fd4355cd7d1894beab060f47437f7d2721080900', 'public_key': '02e6ec494e1eb0b254e0d0a8fe783ec89d0ba33a4ddf33bf9f521912c34dd84115', 'wif': 'KxGKLeymbFrSY7t3X31FMaDgQDUQGYvhUACLe4o1LXokvWtMs1WU', 'finger_print': 'ead6524e', 'semantic': 'p2pkh', 'path': 'm/1129/0/0/0', 'hash': 'ead6524e1ee52c7750e5cb2fe3dc3ab30a49b0c3', 'addresses': {'legacy': '8cVZbAQGU11dYPoSPHYYjakHCFQ3NSiyS6', 'bech32': 'df1qatt9yns7u5k8w589evh78hp6kv9ynvxr2xlvpn', 'default': 'dKYzYQDmN9TFEdZy46mFtStbqYLnougqzY'}}
         """
 
         return dict(
@@ -1282,8 +1286,8 @@ class Wallet:
             path=self.path(),
             hash=self.hash(),
             addresses=dict(
-                p2pkh=self._p2pkh_address(),
-                p2wpkh=self._p2wpkh_address(),
-                p2wpkh_in_p2sh=self._p2wpkh_in_p2sh_address()
+                legacy=self._p2pkh_address(),
+                bech32=self._p2wpkh_address(),
+                default=self._p2wpkh_in_p2sh_address()
             )
         )

@@ -10,7 +10,7 @@ import binascii
 from defichain.mnemonic import Mnemonic
 
 from ..networks import networks
-from defichain.networks.networks import Cryptocurrency
+from defichain.networks.networks import Network
 
 # Alphabet and digits.
 letters = string.ascii_letters + string.digits
@@ -23,10 +23,10 @@ def _unhexlify(integer: int):
         return binascii.unhexlify("%x" % integer)
 
 
-def get_semantic(_cryptocurrency: Cryptocurrency, version: bytes, key_type: str) -> str:
+def get_semantic(_cryptocurrency: Network, version: bytes, key_type: str) -> str:
     for name, cryptocurrency in inspect.getmembers(networks):
         if inspect.isclass(cryptocurrency):
-            if issubclass(cryptocurrency, networks.Cryptocurrency) and cryptocurrency == _cryptocurrency:
+            if issubclass(cryptocurrency, networks.Network) and cryptocurrency == _cryptocurrency:
                 if key_type == "private_key":
                     for key, value in inspect.getmembers(cryptocurrency.EXTENDED_PRIVATE_KEY):
                         if value == int(version.hex(), 16):
@@ -56,7 +56,7 @@ def generate_passphrase(length: int = 32) -> str:
 
     :returns: str -- Passphrase hex string.
 
-    >>> from defichain.wallet.utils import generate_passphrase
+    >>> from defichain.hdwallet.utils import generate_passphrase
     >>> generate_passphrase(length=32)
     "N39rPfa3QvF2Tm2nPyoBpXNiBFXJywTz"
     """
@@ -73,7 +73,7 @@ def generate_entropy(strength: int = 128) -> str:
 
     :returns: str -- Entropy hex string.
 
-    >>> from defichain.wallet.utils import generate_entropy
+    >>> from defichain.hdwallet.utils import generate_entropy
     >>> generate_entropy(strength=128)
     "ee535b143b0d9d1f87546f9df0d06b1a"
     """
@@ -98,7 +98,7 @@ def generate_mnemonic(language: str = "english", strength: int = 256) -> str:
 
     :returns: str -- Mnemonic words.
 
-    >>> from defichain.wallet.utils import generate_mnemonic
+    >>> from defichain.hdwallet.utils import generate_mnemonic
     >>> generate_mnemonic(language="french")
     "sceptre capter séquence girafe absolu relatif fleur zoologie muscle sirop saboter parure"
     """
@@ -126,7 +126,7 @@ def is_entropy(entropy: str) -> bool:
 
     :returns: bool -- Entropy valid/invalid.
 
-    >>> from defichain.wallet.utils import is_entropy
+    >>> from defichain.hdwallet.utils import is_entropy
     >>> is_entropy(entropy="ee535b143b0d9d1f87546f9df0d06b1a")
     True
     """
@@ -148,7 +148,7 @@ def is_mnemonic(mnemonic: str, language: Optional[str] = None) -> bool:
 
     :returns: bool -- Mnemonic valid/invalid.
 
-    >>> from defichain.wallet.utils import is_mnemonic
+    >>> from defichain.hdwallet.utils import is_mnemonic
     >>> is_mnemonic(mnemonic="sceptre capter séquence girafe absolu relatif fleur zoologie muscle sirop saboter parure")
     True
     """
@@ -182,7 +182,7 @@ def get_entropy_strength(entropy: str) -> int:
 
     :returns: int -- Entropy strength.
 
-    >>> from defichain.wallet.utils import get_entropy_strength
+    >>> from defichain.hdwallet.utils import get_entropy_strength
     >>> get_entropy_strength(entropy="ee535b143b0d9d1f87546f9df0d06b1a")
     128
     """
@@ -214,7 +214,7 @@ def get_mnemonic_strength(mnemonic: str, language: Optional[str] = None) -> int:
 
     :returns: int -- Mnemonic strength.
 
-    >>> from defichain.wallet.utils import get_mnemonic_strength
+    >>> from defichain.hdwallet.utils import get_mnemonic_strength
     >>> get_mnemonic_strength(mnemonic="sceptre capter séquence girafe absolu relatif fleur zoologie muscle sirop saboter parure")
     128
     """
@@ -244,7 +244,7 @@ def get_mnemonic_language(mnemonic: str) -> str:
 
     :returns: str -- Mnemonic language.
 
-    >>> from defichain.wallet.utils import get_mnemonic_language
+    >>> from defichain.hdwallet.utils import get_mnemonic_language
     >>> get_mnemonic_language(mnemonic="sceptre capter séquence girafe absolu relatif fleur zoologie muscle sirop saboter parure")
     "french"
     """
@@ -273,7 +273,7 @@ def entropy_to_mnemonic(entropy: str, language: str = "english") -> str:
 
     :returns: str -- Mnemonic words.
 
-    >>> from defichain.wallet.utils import entropy_to_mnemonic
+    >>> from defichain.hdwallet.utils import entropy_to_mnemonic
     >>> entropy_to_mnemonic(entropy="ee535b143b0d9d1f87546f9df0d06b1a", language="korean")
     "학력 외침 주민 스위치 출연 연습 근본 여전히 울음 액수 귀신 마누라"
     """
@@ -300,7 +300,7 @@ def mnemonic_to_entropy(mnemonic: str, language: Optional[str] = None) -> str:
 
     :returns: str -- Enropy hex string.
 
-    >>> from defichain.wallet.utils import mnemonic_to_entropy
+    >>> from defichain.hdwallet.utils import mnemonic_to_entropy
     >>> mnemonic_to_entropy(mnemonic="학력 외침 주민 스위치 출연 연습 근본 여전히 울음 액수 귀신 마누라", language="korean")
     "ee535b143b0d9d1f87546f9df0d06b1a"
     """

@@ -2,7 +2,7 @@ from typing import (
     Tuple, Optional
 )
 
-from defichain.exceptions.wallet.DerivationError import DerivationError
+from defichain.exceptions.hdwallet.DerivationError import DerivationError
 
 HARDENED: Tuple[str, str] = ("'", "")
 
@@ -18,13 +18,11 @@ class Derivation:
 
     :returns: Derivation -- Derivation instance.
 
-    >>> from defichain.wallet import Derivation
-    >>> Derivation()
-    <hdwallet.derivations.Derivation object at 0x000001EBC58E9F70>
+    >>> from defichain.hdwallet import Derivation
     >>> str(Derivation())
     "\0\0\0\0"
-    >>> str(Derivation(path="m/44'/0'/0'/0/0", semantic="p2pkh"))
-    "m/44'/0'/0'/0/0"
+    >>> str(Derivation(path="m/1129/0/0/0", semantic="p2pkh"))
+    "m/1129/0/0/0"
 
     .. note::
         Do not forget all derivation paths are start swith 'm/' prefix.
@@ -60,10 +58,10 @@ class Derivation:
 
         :returns: Derivation -- Derivation instance.
 
-        >>> from defichain.wallet import Derivation
+        >>> from defichain.hdwallet import Derivation
         >>> derivation = Derivation()
-        >>> derivation.from_path(path="m/44'/0'/'0/0/0")
-        <hdwallet.derivation.Derivation object at 0x000001E8BFB98D60>
+        >>> derivation.from_path(path="m/1129/0/0/0")
+        "m/1129/0/0/0"
         """
 
         if not isinstance(path, str):
@@ -88,14 +86,13 @@ class Derivation:
 
         :returns: Derivation -- Derivation instance.
 
-        >>> from defichain.wallet import Derivation
+        >>> from defichain.hdwallet import Derivation
         >>> derivation = Derivation()
-        >>> derivation.from_index(index=44, hardened=True)
-        >>> derivation.from_index(index=0, hardened=True)
-        >>> derivation.from_index(index=0, hardened=True)
+        >>> derivation.from_index(index=1129)
         >>> derivation.from_index(index=0)
         >>> derivation.from_index(index=0)
-        <hdwallet.derivation.Derivation object at 0x000001E8BFB98D60>
+        >>> derivation.from_index(index=0)
+        "m/1129/0/0/0"
         """
 
         if not isinstance(index, int):
@@ -116,14 +113,13 @@ class Derivation:
 
         :returns: Derivation -- Derivation instance.
 
-        >>> from defichain.wallet import Derivation
+        >>> from defichain.hdwallet import Derivation
         >>> derivation = Derivation()
-        >>> derivation.from_path(path="m/44'/0'/'0/0/0")
-        >>> str(derivation)
-        "m/44'/0'/'0/0/0"
+        >>> derivation.from_path(path="m/1129/0/0/0")
+        >>> derivation
+        "m/1129/0/0/0"
         >>> derivation.clean_derivation()
-        <hdwallet.wallet.HDWallet object at 0x000001E8BFB98D60>
-        >>> str(derivation)
+        >>> derivation
         "\0\0\0\0"
         """
 
