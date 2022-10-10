@@ -46,8 +46,8 @@ class Wallet:
     """
     Hierarchical Deterministic Wallet
 
-    :param network: Cryptocurrency instance, defaults to ``None``.
-    :type network: Network
+    :param network: network instance, defaults to ``None``.
+    :type network: network
     :param semantic: Extended semantic, defaults to ``P2PKH``.
     :type semantic: str
     :param use_default_path: Use default derivation path, defaults to ``False``.
