@@ -7,22 +7,28 @@
 
 ## Welcome to Defichain's Python Library
 
-Welcome to the Python Library for the Defichain! 
+Welcome to the Python Library for the Defichain!
 
-In this library all RPC commands of a [Defichain Node](https://defichain.com/downloads) are available and can be 
-called in a few lines of code!
+This is a community funded project to make it easier for the user to communicate with the defichain blockchain.
 
-If you just want to query data from the blockchain you can also use the Ocean API: you don't need a Defichain Node for 
-this, just an internet connection!
+There are currently three use cases of this Library: 
 
-## What are you looking for?
+1. Easy and seamless connection to a defichain node via python: [Node / RPC](https://docs.defichain-python.de/build/html/api/node/index.html)
+2. Easy to use Ocean integration to query data from the blockchain: [Ocean](https://docs.defichain-python.de/build/html/api/ocean/index.html)
+3. A simple way to calculate all addresses and private keys truth a wallet integration: [HDWallet](https://docs.defichain-python.de/build/html/api/hdwallet/index.html)
 
-1. If you don't have a Defichain node yet, here's how to set one up: [Install Defichain Node](https://docs.defichain-python.de/build/html/additionalInfos/installDefichainNode.html)
+## Installation
 
-2. If you are looking for a quick way to get started with the library, check out the [Quickstart](https://docs.defichain-python.de/build/html/instructions/quickstart.html) section.
+Download the PyPi package:
+```
+pip install defichain -U
+```
+Clone the GitHub Repository:
+```
+git clone https://github.com/eric-volz/DefichainPython.git
+```
 
-3. If you want to look at the documentation of each method: For [Node / RPC](https://docs.defichain-python.de/build/html/api/node/index.html)
-   | For [Ocean](https://docs.defichain-python.de/build/html/api/ocean/index.html)
+If you want to get started quick, read the [Quickstart](https://docs.defichain-python.de/build/html/instructions/quickstart.html) guide to get an overview of the library.
 
 ## Progress and Updates
 If you want to view the progress of the project, look here: [Progress and Updates](https://docs.defichain-python.de/build/html/instructions/progressAndUpdates.html)

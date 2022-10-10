@@ -50,7 +50,7 @@ Since this is a community supported project, the community also has the right to
     .. tab:: Ocean
 
         ===============     ========
-        Oceab Modules       Progress
+        Ocean Modules       Progress
         ===============     ========
         Address             |:white_check_mark:|
         Blocks              |:white_check_mark:|
@@ -65,6 +65,15 @@ Since this is a community supported project, the community also has the right to
         Stats               |:white_check_mark:|
         Tokens              |:white_check_mark:|
         Transactions        |:white_check_mark:|
+        ===============     ========
+
+    .. tab:: HDWallet
+
+        ===============     ========
+        HDWallet            Progress
+        ===============     ========
+        Wallet              |:white_check_mark:|
+        Utils               |:white_check_mark:|
         ===============     ========
 
 .. tab:: Tests
@@ -120,6 +129,15 @@ Since this is a community supported project, the community also has the right to
         Exceptions          |:white_check_mark:|
         ================    ========
 
+    .. tab:: HDWallet
+
+        ===============     ========
+        HDWallet            Progress
+        ===============     ========
+        Wallet              |:rotating_light:|
+        Utils               |:rotating_light:|
+        ===============     ========
+
 .. tab:: Documentation
 
     .. tab:: RPC
@@ -172,6 +190,15 @@ Since this is a community supported project, the community also has the right to
         Ocean Connection    |:white_check_mark:|
         Exceptions          |:white_check_mark:|
         ================    ========
+
+    .. tab:: HDWallet
+
+        ===============     ========
+        HDWallet            Progress
+        ===============     ========
+        Wallet              |:white_check_mark:|
+        Utils               |:white_check_mark:|
+        ===============     ========
 
     .. tab:: Additional Information
 
