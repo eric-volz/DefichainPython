@@ -44,7 +44,7 @@ class ExtendedPublicKey(ExtendedKey):
     pass
 
 
-class Cryptocurrency(NestedNamespace):
+class Network(NestedNamespace):
     NAME: str
     SYMBOL: str
     NETWORK: str
@@ -63,7 +63,7 @@ class Cryptocurrency(NestedNamespace):
     WIF_SECRET_KEY: int
 
 
-class DefichainMainnet(Cryptocurrency):
+class DefichainMainnet(Network):
     NAME = "Defichain"
     SYMBOL = "DFI"
     NETWORK = "mainnet"
@@ -98,7 +98,7 @@ class DefichainMainnet(Cryptocurrency):
     WIF_SECRET_KEY = 0x80
 
 
-class DefichainTestnet(Cryptocurrency):
+class DefichainTestnet(Network):
     NAME = "Defichain"
     SYMBOL = "DFI"
     NETWORK = "testnet"
@@ -133,7 +133,7 @@ class DefichainTestnet(Cryptocurrency):
     WIF_SECRET_KEY = 0xef
 
 
-class DefichainRegtest(Cryptocurrency):
+class DefichainRegtest(Network):
     NAME = "Defichain"
     SYMBOL = "DFI"
     NETWORK = "regtest"
