@@ -5,7 +5,7 @@ HDWallet
 
 This is the main page to get information about the control of the Wallet.
 
-The most important class is the :ref:`HDWallet wallet` class: within this class all important parameters of your
+The most important class is the :ref:`HDWallet wallet`: within this class all important parameters of your
 wallet are calculated.
 
 There are other methods around the wallet, which can be found under :ref:`HDWallet utils`.
@@ -14,7 +14,7 @@ These methods include for example the generation of the mnemonic seed.
 When creating a wallet, a network must be passed to the wallet, which defines how the various parameters are calculated.
 There are three different types of networks: **DefichainMainnet, DefichainTestnet, DefichainRegTest**
 
-The simplest setup of the class can be seen on the :ref:`instruction quickstart` page.
+The simplest setup of the class can be seen on the :ref:`Quickstart <instruction quickstart wallet>` page.
 
 You can find more explanations :ref:`below <HDWallet illustration>`.
 
@@ -99,7 +99,7 @@ This mnemonic seed can be generated with the method: generate_mnemonic() in the 
 damage salt diary special jealous biology uncle detect carbon shadow pelican unusual exit mansion direct paper vehicle panther obvious orchard skill ball scare jar
 
 Iterate truth addresses and private keys
-----------------------------------------
+________________________________________
 
 Calculates the first ten bech32 addresses and private keys from mnemonic
 

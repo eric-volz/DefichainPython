@@ -259,13 +259,13 @@
           <section id="hdwallet">
 <span id="hdwallet-index"></span><h1>HDWallet<a class="headerlink" href="#hdwallet" title="Permalink to this headline">#</a></h1>
 <p>This is the main page to get information about the control of the Wallet.</p>
-<p>The most important class is the <a class="reference internal" href="wallet.html#hdwallet-wallet"><span class="std std-ref">Wallet</span></a> class: within this class all important parameters of your
+<p>The most important class is the <a class="reference internal" href="wallet.html#hdwallet-wallet"><span class="std std-ref">Wallet</span></a>: within this class all important parameters of your
 wallet are calculated.</p>
 <p>There are other methods around the wallet, which can be found under <a class="reference internal" href="utils.html#hdwallet-utils"><span class="std std-ref">Utils</span></a>.
 These methods include for example the generation of the mnemonic seed.</p>
 <p>When creating a wallet, a network must be passed to the wallet, which defines how the various parameters are calculated.
 There are three different types of networks: <strong>DefichainMainnet, DefichainTestnet, DefichainRegTest</strong></p>
-<p>The simplest setup of the class can be seen on the <a class="reference internal" href="../../instructions/quickstart.html#instruction-quickstart"><span class="std std-ref">Quickstart</span></a> page.</p>
+<p>The simplest setup of the class can be seen on the <a class="reference internal" href="../../instructions/quickstart.html#instruction-quickstart-wallet"><span class="std std-ref">Quickstart</span></a> page.</p>
 <p>You can find more explanations <a class="reference internal" href="#hdwallet-illustration"><span class="std std-ref">below</span></a>.</p>
 <div class="caution admonition">
 <p class="admonition-title">Path</p>
@@ -341,9 +341,8 @@ The last index of the path can increased to calculate the next addresses and key
 </pre></div>
 </div>
 </section>
-</section>
 <section id="iterate-truth-addresses-and-private-keys">
-<h2>Iterate truth addresses and private keys<a class="headerlink" href="#iterate-truth-addresses-and-private-keys" title="Permalink to this headline">#</a></h2>
+<h3>Iterate truth addresses and private keys<a class="headerlink" href="#iterate-truth-addresses-and-private-keys" title="Permalink to this headline">#</a></h3>
 <p>Calculates the first ten bech32 addresses and private keys from mnemonic</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
@@ -375,6 +374,7 @@ The last index of the path can increased to calculate the next addresses and key
 <span class="go">10. Private Key L23iH2udEUpaUZnJzNpsRHJAtsEhQf6T4x9EWEond72s5Z5bzbLq</span>
 </pre></div>
 </div>
+</section>
 </section>
 </section>
 
@@ -442,9 +442,9 @@ The last index of the path can increased to calculate the next addresses and key
 <li><a class="reference internal" href="#wallet-from-mnemonic-seed">Wallet from mnemonic seed</a></li>
 <li><a class="reference internal" href="#wallet-from-private-key">Wallet from private key</a></li>
 <li><a class="reference internal" href="#generate-mnemonic-seed">Generate mnemonic seed</a></li>
+<li><a class="reference internal" href="#iterate-truth-addresses-and-private-keys">Iterate truth addresses and private keys</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#iterate-truth-addresses-and-private-keys">Iterate truth addresses and private keys</a></li>
 </ul>
 </li>
 </ul>

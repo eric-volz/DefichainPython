@@ -8,7 +8,7 @@ This is the main page to get information about the control of ocean.
 The most important class is the :ref:`Ocean Ocean` class: it takes care of the actual
 connection to ocean and performs the requests made by methods.
 
-The simplest setup of the class can be seen on the :ref:`instruction quickstart` page.
+The simplest setup of the class can be seen on the :ref:`Quickstart <instruction quickstart ocean>` page.
 
 All individual methods are assigned to specific modules.
 For example to output data from blocks you have to use the method List in blocks.

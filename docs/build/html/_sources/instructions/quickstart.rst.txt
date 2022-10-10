@@ -20,6 +20,7 @@ The library can be installed and used in two ways
 
     git clone https://github.com/eric-volz/DefichainPython.git
 
+.. _instruction quickstart node:
 
 Make a request to the Node
 --------------------------
@@ -33,6 +34,7 @@ Here is an example of how you can connect to the node and how individual request
 
 For more information check the :ref:`Node index` section.
 
+.. _instruction quickstart ocean:
 
 Make a request to Ocean
 -----------------------
@@ -45,6 +47,8 @@ Here is an example of how you can connect to Ocean and how to request blockchain
 >>> ocean.poolpairs.get(4) #  returns data from ETH-DFI Pool
 
 For more information check the :ref:`Ocean index` section.
+
+.. _instruction quickstart wallet:
 
 Setup a wallet and get the first address
 ----------------------------------------

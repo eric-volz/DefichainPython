@@ -8,7 +8,7 @@ This is the main page to get information about the control of the node.
 The most important class is the :ref:`Node Node` class: it takes care of the actual
 connection to the node and performs the requests made by methods.
 
-The simplest setup of the class can be seen on the :ref:`instruction quickstart` page.
+The simplest setup of the class can be seen on the :ref:`Quickstart <instruction quickstart node>` page.
 It offers other possibilities, such as automatically importing and using a
 wallet or decrypting a password-protected wallet.
 
