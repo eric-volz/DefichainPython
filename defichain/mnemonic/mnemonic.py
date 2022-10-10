@@ -21,7 +21,6 @@
 #
 
 import hashlib
-import hmac
 import itertools
 import os
 import secrets
@@ -53,6 +52,19 @@ def b58encode(v: bytes) -> str:
 
 
 class Mnemonic(object):
+    """
+    Creates a mnemonic instance
+
+    :param language: (optional) language of the mnemonic seed: english, chinese_simplified, chinese_traditional, french,
+        italian, japanese, korean, spanish
+    :type language: str
+    :returns: Mnemonic -- Mnemonic instance.
+
+    :example:
+
+    >>> from defichain import Mnemonic
+    >>> Mnemonic(language="english")
+    """
     def __init__(self, language: str = "english"):
         self.language = language
         self.radix = 2048
@@ -71,6 +83,17 @@ class Mnemonic(object):
 
     @classmethod
     def list_languages(cls) -> List[str]:
+        """
+        List all languages for mnemonic seed
+
+        :return: (array) languages
+
+        :example:
+
+        >>> from defichain import Mnemonic
+        >>> Mnemonic.list_languages()
+        ['korean', 'japanese', 'chinese_simplified', 'english', 'french', 'italian', 'chinese_traditional', 'spanish']
+        """
         return [
             f.split(".")[0]
             for f in os.listdir(os.path.join(os.path.dirname(__file__), "wordlist"))
@@ -89,9 +112,22 @@ class Mnemonic(object):
         return unicodedata.normalize("NFKD", utxt)
 
     @classmethod
-    def detect_language(cls, code: str) -> str:
-        """Scan the Mnemonic until the language becomes unambiguous."""
-        code = cls.normalize_string(code)
+    def detect_language(cls, mnemonic: str) -> str:
+        """
+        Scan the Mnemonic until the language becomes unambiguous
+
+        :param mnemonic: (required) the mnemonic seed
+        :type mnemonic: str
+        :return: (string) language of the mnemonic seed
+
+        :example:
+
+        >>> from defichain import Mnemonic
+        >>> mnemonic = Mnemonic(language="english").generate()
+        >>> Mnemonic.detect_language(mnemonic)
+        "english"
+        """
+        code = cls.normalize_string(mnemonic)
         possible = set(cls(lang) for lang in cls.list_languages())
         for word in code.split():
             possible = set(p for p in possible if word in p.wordlist)
@@ -114,10 +150,16 @@ class Mnemonic(object):
 
         The return is a list of words that encodes the generated entropy.
 
-        :param strength: Number of bytes used as entropy
+        :param strength: (optional) Number of bytes used as entropy
         :type strength: int
-        :return: A randomly generated mnemonic
-        :rtype: str
+        :return: (string) A randomly generated mnemonic
+
+        :example:
+
+        >>> from defichain import Mnemonic
+        >>> mnemonic = Mnemonic(language="english")
+        >>> mnemonic.generate()
+        "shoulder unusual practice sight apart course eager true diesel rescue diagram denial oppose total fun rocket spend chapter spider paddle benefit empower type purse"
         """
         if strength not in [128, 160, 192, 224, 256]:
             raise ValueError(
@@ -186,6 +228,21 @@ class Mnemonic(object):
         return self.delimiter.join(result)
 
     def check(self, mnemonic: str) -> bool:
+        """
+        Checks if the mnemonic seed is valid
+
+        :param mnemonic: (required) mnemonic seed
+        :type mnemonic: str
+        :return: bool
+
+        :example:
+
+        >>> from defichain import Mnemonic
+        >>> mn = Mnemonic(language="english")
+        >>> seed = mn.generate()
+        >>> mn.check(seed)
+        True
+        """
         mnemonic_list = self.normalize_string(mnemonic).split(" ")
         # list of valid mnemonic lengths
         if len(mnemonic_list) not in [12, 15, 18, 21, 24]:
@@ -217,7 +274,8 @@ class Mnemonic(object):
                 return prefix
 
     def expand(self, mnemonic: str) -> str:
-        return " ".join(map(self.expand_word, mnemonic.split(" ")))
+        return " ".join(map(self.expand_word, mnemonic.split(" ")))\
+
 
     @classmethod
     def to_seed(cls, mnemonic: str, passphrase: str = "") -> bytes:
@@ -230,45 +288,3 @@ class Mnemonic(object):
             "sha512", mnemonic_bytes, passphrase_bytes, PBKDF2_ROUNDS
         )
         return stretched[:64]
-
-    @staticmethod
-    def to_hd_master_key(seed: bytes, testnet: bool = False) -> str:
-        if len(seed) != 64:
-            raise ValueError("Provided seed should have length of 64")
-
-        # Compute HMAC-SHA512 of seed
-        seed = hmac.new(b"Bitcoin seed", seed, digestmod=hashlib.sha512).digest()
-
-        # Serialization format can be found at: https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#Serialization_format
-        xprv = b"\x04\x88\xad\xe4"  # Version for private mainnet
-        if testnet:
-            xprv = b"\x04\x35\x83\x94"  # Version for private testnet
-        xprv += b"\x00" * 9  # Depth, parent fingerprint, and child number
-        xprv += seed[32:]  # Chain code
-        xprv += b"\x00" + seed[:32]  # Master key
-
-        # Double hash using SHA256
-        hashed_xprv = hashlib.sha256(xprv).digest()
-        hashed_xprv = hashlib.sha256(hashed_xprv).digest()
-
-        # Append 4 bytes of checksum
-        xprv += hashed_xprv[:4]
-
-        # Return base58
-        return b58encode(xprv)
-
-
-def main() -> None:
-    import sys
-
-    if len(sys.argv) > 1:
-        hex_data = sys.argv[1]
-    else:
-        hex_data = sys.stdin.readline().strip()
-    data = bytes.fromhex(hex_data)
-    m = Mnemonic("english")
-    print(m.to_mnemonic(data))
-
-
-if __name__ == "__main__":
-    main()
