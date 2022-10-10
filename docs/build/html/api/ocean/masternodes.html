@@ -212,6 +212,12 @@
 <li class="toctree-l2"><a class="reference internal" href="transactions.html">Transactions</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../hdwallet/index.html">HDWallet</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../hdwallet/wallet.html">Wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hdwallet/utils.html">Utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../mnemonic.html">Mnemonic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Legal</span></p>
@@ -256,26 +262,6 @@
 <dt class="sig sig-object py" id="defichain.ocean.Masternodes">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.ocean.</span></span><span class="sig-name descname"><span class="pre">Masternodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ocean</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.ocean.Masternodes" title="Permalink to this definition">#</a></dt>
 <dd><dl class="py method">
-<dt class="sig sig-object py" id="defichain.ocean.Masternodes.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Masternodes.get" title="Permalink to this definition">#</a></dt>
-<dd><p>Get information about a masternode with given id</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – (required) id masternode id to get</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>(json string) {id: str, sort: str, state: MasternodeState, mintedBlocks: int, owner: {address: str},
-operator: {address: str}, creation: {height: int}, resign: {tx: str, height: int},
-timelock: int}</p>
-</dd>
-<dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">masternodes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"bbdd23cfb429680fd10a3ce169595ff6123ef576bb936add069812528f73ceaa"</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-<dl class="py method">
 <dt class="sig sig-object py" id="defichain.ocean.Masternodes.list">
 <span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Masternodes.list" title="Permalink to this definition">#</a></dt>
 <dd><p>Get list of masternodes</p>
@@ -295,6 +281,26 @@ timelock: int}</p>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">masternodes</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Masternodes.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Masternodes.get" title="Permalink to this definition">#</a></dt>
+<dd><p>Get information about a masternode with given id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – (required) id masternode id to get</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) {id: str, sort: str, state: MasternodeState, mintedBlocks: int, owner: {address: str},
+operator: {address: str}, creation: {height: int}, resign: {tx: str, height: int},
+timelock: int}</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">masternodes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"bbdd23cfb429680fd10a3ce169595ff6123ef576bb936add069812528f73ceaa"</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>

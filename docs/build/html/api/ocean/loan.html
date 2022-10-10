@@ -212,6 +212,12 @@
 <li class="toctree-l2"><a class="reference internal" href="transactions.html">Transactions</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../hdwallet/index.html">HDWallet</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../hdwallet/wallet.html">Wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hdwallet/utils.html">Utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../mnemonic.html">Mnemonic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Legal</span></p>
@@ -256,40 +262,23 @@
 <dt class="sig sig-object py" id="defichain.ocean.Loan">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.ocean.</span></span><span class="sig-name descname"><span class="pre">Loan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ocean</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.ocean.Loan" title="Permalink to this definition">#</a></dt>
 <dd><dl class="py method">
-<dt class="sig sig-object py" id="defichain.ocean.Loan.getCollateralToken">
-<span class="sig-name descname"><span class="pre">getCollateralToken</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Loan.getCollateralToken" title="Permalink to this definition">#</a></dt>
-<dd><p>Get information about a collateral token with given collateral token id</p>
+<dt class="sig sig-object py" id="defichain.ocean.Loan.listScheme">
+<span class="sig-name descname"><span class="pre">listScheme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.ocean.Loan.listScheme" title="Permalink to this definition">#</a></dt>
+<dd><p>Paginate query loan schemes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – (required) id of collateral token to get</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<em>int</em>) – (optional) size of scheme to query</p></li>
+<li><p><strong>next</strong> (<em>str</em>) – (optional) next set of schemes</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>(json string) {tokenId: str, token: TokenData, factor: str, activateAfterBlock: int,
-fixedIntervalPriceId: str, activePrice: ActivePrice}</p>
+<dd class="field-even"><p>(json string) {id: str, minColRatio: str, interestRate: str}</p>
 </dd>
 <dt class="field-odd">Example</dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">getCollateralToken</span><span class="p">()</span>
-</pre></div>
-</div>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="defichain.ocean.Loan.getLoanToken">
-<span class="sig-name descname"><span class="pre">getLoanToken</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Loan.getLoanToken" title="Permalink to this definition">#</a></dt>
-<dd><p>Get information about a loan token with given loan token id</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – (required) id of loanToken to get</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>(json string) {tokenId: str, token: TokenData, interest: str, fixedIntervalPriceId: str,
-activePrice: ActivePrice}</p>
-</dd>
-<dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">getLoanToken</span><span class="p">(</span><span class="s2">"0"</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">listScheme</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -308,47 +297,6 @@ activePrice: ActivePrice}</p>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">getScheme</span><span class="p">(</span><span class="s2">"MIN150"</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="defichain.ocean.Loan.getVault">
-<span class="sig-name descname"><span class="pre">getVault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Loan.getVault" title="Permalink to this definition">#</a></dt>
-<dd><p>Get information about a vault with given vault id</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – (required) id of vault to get</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>(json string) VaultActive or VaultLiquidated</p>
-</dd>
-<dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">getVault</span><span class="p">(</span><span class="s2">"8f87baa094aa166cf88dd61553ad996ea2c1f7694536c18f3d8390e436900300"</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="defichain.ocean.Loan.listAuction">
-<span class="sig-name descname"><span class="pre">listAuction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.ocean.Loan.listAuction" title="Permalink to this definition">#</a></dt>
-<dd><p>Paginate query loan auctions</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>size</strong> (<em>int</em>) – (optional) size of auctions to query</p></li>
-<li><p><strong>next</strong> (<em>str</em>) – (optional) next set of auctions</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>(json string) {vaultId: string, loanScheme: LoanScheme, ownerAddress: string,
-state: LoanVaultState.IN_LIQUIDATION, liquidationHeight: number, liquidationPenalty: number,
-batchCount: number, batches: LoanVaultLiquidationBatch[]}</p>
-</dd>
-<dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">listAuction</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -375,6 +323,25 @@ fixedIntervalPriceId: str, activePrice: ActivePrice}</p>
 </div>
 </dd></dl>
 <dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Loan.getCollateralToken">
+<span class="sig-name descname"><span class="pre">getCollateralToken</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Loan.getCollateralToken" title="Permalink to this definition">#</a></dt>
+<dd><p>Get information about a collateral token with given collateral token id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – (required) id of collateral token to get</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) {tokenId: str, token: TokenData, factor: str, activateAfterBlock: int,
+fixedIntervalPriceId: str, activePrice: ActivePrice}</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">getCollateralToken</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
 <dt class="sig sig-object py" id="defichain.ocean.Loan.listLoanToken">
 <span class="sig-name descname"><span class="pre">listLoanToken</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.ocean.Loan.listLoanToken" title="Permalink to this definition">#</a></dt>
 <dd><p>Paginate query loan tokens</p>
@@ -397,23 +364,21 @@ activePrice: ActivePrice}</p>
 </div>
 </dd></dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="defichain.ocean.Loan.listScheme">
-<span class="sig-name descname"><span class="pre">listScheme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.ocean.Loan.listScheme" title="Permalink to this definition">#</a></dt>
-<dd><p>Paginate query loan schemes</p>
+<dt class="sig sig-object py" id="defichain.ocean.Loan.getLoanToken">
+<span class="sig-name descname"><span class="pre">getLoanToken</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Loan.getLoanToken" title="Permalink to this definition">#</a></dt>
+<dd><p>Get information about a loan token with given loan token id</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>size</strong> (<em>int</em>) – (optional) size of scheme to query</p></li>
-<li><p><strong>next</strong> (<em>str</em>) – (optional) next set of schemes</p></li>
-</ul>
+<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – (required) id of loanToken to get</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>(json string) {id: str, minColRatio: str, interestRate: str}</p>
+<dd class="field-even"><p>(json string) {tokenId: str, token: TokenData, interest: str, fixedIntervalPriceId: str,
+activePrice: ActivePrice}</p>
 </dd>
 <dt class="field-odd">Example</dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">listScheme</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">getLoanToken</span><span class="p">(</span><span class="s2">"0"</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -435,6 +400,24 @@ activePrice: ActivePrice}</p>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">listVault</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Loan.getVault">
+<span class="sig-name descname"><span class="pre">getVault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Loan.getVault" title="Permalink to this definition">#</a></dt>
+<dd><p>Get information about a vault with given vault id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – (required) id of vault to get</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) VaultActive or VaultLiquidated</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">getVault</span><span class="p">(</span><span class="s2">"8f87baa094aa166cf88dd61553ad996ea2c1f7694536c18f3d8390e436900300"</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -461,6 +444,29 @@ medianTime: number}}</p>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">listVaultAuctionHistory</span><span class="p">(</span><span class="s2">"866889122ba23be0a71fc6a9e853d6b8f2b42b018393f091922be5ebcc23b600"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Loan.listAuction">
+<span class="sig-name descname"><span class="pre">listAuction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.ocean.Loan.listAuction" title="Permalink to this definition">#</a></dt>
+<dd><p>Paginate query loan auctions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<em>int</em>) – (optional) size of auctions to query</p></li>
+<li><p><strong>next</strong> (<em>str</em>) – (optional) next set of auctions</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) {vaultId: string, loanScheme: LoanScheme, ownerAddress: string,
+state: LoanVaultState.IN_LIQUIDATION, liquidationHeight: number, liquidationPenalty: number,
+batchCount: number, batches: LoanVaultLiquidationBatch[]}</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">listAuction</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd></dl>

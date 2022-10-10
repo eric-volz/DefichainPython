@@ -2,8 +2,8 @@ import pytest
 from tests.util import createNode, load_secrets_conf, LENGTH_OF_TXID
 
 # Import Exceptions
-from defichain.exceptions.InternalServerError import InternalServerError
-from defichain.exceptions.BadRequest import BadRequest
+from defichain.exceptions.http.InternalServerError import InternalServerError
+from defichain.exceptions.http.BadRequest import BadRequest
 
 node = createNode()
 address = load_secrets_conf()["wallet_address"]

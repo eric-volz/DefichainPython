@@ -1,0 +1,1117 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Utils" href="utils.html" /><link rel="prev" title="HDWallet" href="index.html" />
+
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+        <title>Wallet - DefichainPython v1.2.0</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<div class="announcement">
+  <aside class="announcement-content">
+     This Documentation page is still in development! 
+  </aside>
+</div>
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">DefichainPython v1.2.0</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">DefichainPython v1.2.0</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Instructions</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../instructions/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../instructions/progressAndUpdates.html">Progress and Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../instructions/rawMethodsOverview.html">Raw Methods Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../additionalInfos/index.html">Additional Information</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../additionalInfos/installDefichainNode.html">Install Defichain Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../additionalInfos/mnemonicSeedForWallet.html">How to use mnemonic seed phrase for your wallet.dat file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../additionalInfos/getPrivateKeyFromLightWallet.html">How to get your Light Wallet Private Key</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../node/index.html">Node / RPC</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../node/node.html">Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/accounts.html">Accounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/blockchain.html">Blockchain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/control.html">Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/generating.html">Generating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/loan.html">Loan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/masternodes.html">Masternodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/mining.html">Mining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/network.html">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/oracles.html">Oracles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/poolpair.html">Poolpair</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/rawtransactions.html">Rawtransactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/spv.html">Spv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/stats.html">Stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/tokens.html">Tokens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/util.html">Util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/vault.html">Vault</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/wallet.html">Wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../node/zmq.html">Zmq</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ocean/index.html">Ocean</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/ocean.html">Ocean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/address.html">Address</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/blocks.html">Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/fee.html">Fee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/loan.html">Loan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/masternodes.html">Masternodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/oracles.html">Oracles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/poolpair.html">Poolpairs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/prices.html">Prices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/rawTx.html">RawTx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/rpc.html">Rpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/stats.html">Stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/tokens.html">Tokens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/transactions.html">Transactions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">HDWallet</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../mnemonic.html">Mnemonic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/licenseAndDisclaimer.html">License &amp; Disclaimer</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="wallet">
+<span id="hdwallet-wallet"></span><h1>Wallet<a class="headerlink" href="#wallet" title="Permalink to this headline">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.Wallet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.</span></span><span class="sig-name descname"><span class="pre">Wallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">network</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">semantic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_default_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.Wallet" title="Permalink to this definition">#</a></dt>
+<dd><p>Hierarchical Deterministic Wallet</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> (<em>network</em>) – network instance, defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>semantic</strong> (<em>str</em>) – Extended semantic, defaults to <code class="docutils literal notranslate"><span class="pre">P2PKH</span></code>.</p></li>
+<li><p><strong>use_default_path</strong> (<em>bool</em>) – Use default derivation path, defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Wallet – Hierarchical Deterministic Wallet instance.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.from_entropy">
+<span class="sig-name descname"><span class="pre">from_entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entropy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'english'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">passphrase</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#defichain.Wallet" title="defichain.hdwallet.wallet.Wallet"><span class="pre">defichain.hdwallet.wallet.Wallet</span></a></span></span><a class="headerlink" href="#defichain.Wallet.from_entropy" title="Permalink to this definition">#</a></dt>
+<dd><p>Master from Entropy hex string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>entropy</strong> (<em>str</em>) – Entropy hex string.</p></li>
+<li><p><strong>language</strong> (<em>str</em>) – Mnemonic language, default to <code class="docutils literal notranslate"><span class="pre">english</span></code>.</p></li>
+<li><p><strong>passphrase</strong> (<em>str</em>) – Mnemonic passphrase or password, default to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Wallet – Hierarchical Deterministic Wallet instance.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_entropy</span><span class="p">(</span><span class="n">entropy</span><span class="o">=</span><span class="s2">"ee535b143b0d9d1f87546f9df0d06b1a"</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">"english"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">&lt;defichain.hdwallet.wallet.Wallet object at 0x7f6c94b7be50&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.from_mnemonic">
+<span class="sig-name descname"><span class="pre">from_mnemonic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mnemonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">passphrase</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#defichain.Wallet" title="defichain.hdwallet.wallet.Wallet"><span class="pre">defichain.hdwallet.wallet.Wallet</span></a></span></span><a class="headerlink" href="#defichain.Wallet.from_mnemonic" title="Permalink to this definition">#</a></dt>
+<dd><p>Master from Mnemonic words.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mnemonic</strong> (<em>str</em>) – Mnemonic words.</p></li>
+<li><p><strong>language</strong> (<em>str</em>) – Mnemonic language, default to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>passphrase</strong> (<em>str</em>) – Mnemonic passphrase or password, default to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Wallet – Hierarchical Deterministic Wallet instance.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"sceptre capter séquence girafe absolu relatif fleur zoologie muscle sirop saboter parure"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">&lt;defichain.hdwallet.wallet.Wallet object at 0x7f2f5698de50&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.from_seed">
+<span class="sig-name descname"><span class="pre">from_seed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#defichain.Wallet" title="defichain.hdwallet.wallet.Wallet"><span class="pre">defichain.hdwallet.wallet.Wallet</span></a></span></span><a class="headerlink" href="#defichain.Wallet.from_seed" title="Permalink to this definition">#</a></dt>
+<dd><p>Master from Seed hex string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seed</strong> (<em>str</em>) – Seed hex string.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Wallet – Hierarchical Deterministic Wallet instance.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_seed</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="s2">"8d5f4fe5b81a6a6a18b08603b6b3f59df9f4bbb25d10c55d23e0cbdc5ee385e5fddad9d7e6114f11afdec45928328081f9a598151a7613dc5f5a0c16a4612aa4"</span><span class="p">)</span>
+<span class="go">&lt;defichain.hdwallet.wallet.Wallet object at 0x7f61d053fe50&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.from_xprivate_key">
+<span class="sig-name descname"><span class="pre">from_xprivate_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xprivate_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#defichain.Wallet" title="defichain.hdwallet.wallet.Wallet"><span class="pre">defichain.hdwallet.wallet.Wallet</span></a></span></span><a class="headerlink" href="#defichain.Wallet.from_xprivate_key" title="Permalink to this definition">#</a></dt>
+<dd><p>Master from XPrivate Key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>xprivate_key</strong> (<em>str</em>) – Root or Non-Root XPrivate key.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Wallet – Hierarchical Deterministic Wallet instance.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_xprivate_key</span><span class="p">(</span><span class="n">xprivate_key</span><span class="o">=</span><span class="s2">"xprv9s21ZrQH143K3xPGUzpogJeKtRdjHkK6muBJo8v7rEVRzT83xJgNcLpMoJXUf9wJFKfuHR4SGvfgdShh4t9VmjjrE9usBunK3LfNna31LGF"</span><span class="p">)</span>
+<span class="go">&lt;defichain.hdwallet.wallet.Wallet object at 0x7f9c26fe6e50&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.from_xpublic_key">
+<span class="sig-name descname"><span class="pre">from_xpublic_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xpublic_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#defichain.Wallet" title="defichain.hdwallet.wallet.Wallet"><span class="pre">defichain.hdwallet.wallet.Wallet</span></a></span></span><a class="headerlink" href="#defichain.Wallet.from_xpublic_key" title="Permalink to this definition">#</a></dt>
+<dd><p>Master from XPublic Key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>xpublic_key</strong> (<em>str</em>) – Root or Non-Root XPublic key.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Wallet – Hierarchical Deterministic Wallet instance.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_xpublic_key</span><span class="p">(</span><span class="n">xpublic_key</span><span class="o">=</span><span class="s2">"xpub661MyMwAqRbcGSTjb2Mp3Sb4STUDhD2x986ubXKjQa2QsFTCVqzdA98qeZjcncHT1AaZcMSjiP1HJ16jH97q72RwyFfiNhmG8zQ6KBB5PaQ"</span><span class="p">)</span>
+<span class="go">&lt;defichain.hdwallet.wallet.Wallet object at 0x7fbd211bce50&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.from_wif">
+<span class="sig-name descname"><span class="pre">from_wif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wif</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#defichain.Wallet" title="defichain.hdwallet.wallet.Wallet"><span class="pre">defichain.hdwallet.wallet.Wallet</span></a></span></span><a class="headerlink" href="#defichain.Wallet.from_wif" title="Permalink to this definition">#</a></dt>
+<dd><p>Master from Wallet Important Format (WIF).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>wif</strong> (<em>str</em>) – Wallet important format.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Wallet – Hierarchical Deterministic Wallet instance.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_wif</span><span class="p">(</span><span class="n">wif</span><span class="o">=</span><span class="s2">"KzsHWUJsrTWUUhBGPfMMxLLydiH7NhEn6z7mKHXD5qNkUWaC4TEn"</span><span class="p">)</span>
+<span class="go">&lt;defichain.hdwallet.wallet.Wallet object at 0x7f6fd2509e50&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.from_private_key">
+<span class="sig-name descname"><span class="pre">from_private_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">private_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#defichain.Wallet" title="defichain.hdwallet.wallet.Wallet"><span class="pre">defichain.hdwallet.wallet.Wallet</span></a></span></span><a class="headerlink" href="#defichain.Wallet.from_private_key" title="Permalink to this definition">#</a></dt>
+<dd><p>Master from Private Key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>private_key</strong> (<em>str</em>) – Private key.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Wallet – Hierarchical Deterministic Wallet instance.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_private_key</span><span class="p">(</span><span class="n">private_key</span><span class="o">=</span><span class="s2">"6cd78b0d69eab1a47bfa53a52b9d8c4331e858b5d7a599270a95d9735fdb0b94"</span><span class="p">)</span>
+<span class="go">&lt;defichain.hdwallet.wallet.Wallet object at 0x7ff405eebe50&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.from_public_key">
+<span class="sig-name descname"><span class="pre">from_public_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">public_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#defichain.Wallet" title="defichain.hdwallet.wallet.Wallet"><span class="pre">defichain.hdwallet.wallet.Wallet</span></a></span></span><a class="headerlink" href="#defichain.Wallet.from_public_key" title="Permalink to this definition">#</a></dt>
+<dd><p>Master from Public Key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>public_key</strong> (<em>str</em>) – Public key.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Wallet – Hierarchical Deterministic Wallet instance.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_public_key</span><span class="p">(</span><span class="n">public_key</span><span class="o">=</span><span class="s2">"02f93f58b97c3bb616645c3dda256ec946d87c45baf531984c022dd0fd1503b0a8"</span><span class="p">)</span>
+<span class="go">&lt;defichain.hdwallet.wallet.Wallet object at 0x7fb8c47ece50&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.from_path">
+<span class="sig-name descname"><span class="pre">from_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">defichain.hdwallet.derivations.Derivation</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#defichain.Wallet" title="defichain.hdwallet.wallet.Wallet"><span class="pre">defichain.hdwallet.wallet.Wallet</span></a></span></span><a class="headerlink" href="#defichain.Wallet.from_path" title="Permalink to this definition">#</a></dt>
+<dd><p>Derivation from Path.</p>
+<blockquote>
+<div><p>Default path for defichain is: <code class="docutils literal notranslate"><span class="pre">m/1129/0/0/0</span></code></p>
+</div></blockquote>
+<p>You can calculate the next addresses by increasing the last index by 1:</p>
+<blockquote>
+<div><p>First Address in Wallet: <code class="docutils literal notranslate"><span class="pre">m/1129/0/0/0</span></code></p>
+<p>Second Address in Wallet: <code class="docutils literal notranslate"><span class="pre">m/1129/0/0/1</span></code></p>
+<p>Third Address in Wallet: <code class="docutils literal notranslate"><span class="pre">m/1129/0/0/2</span></code></p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Do not forget all derivation paths are start swith ‘m/’ prefix.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em>, </em><em>Derivation</em>) – Derivation path.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Wallet – Hierarchical Deterministic Wallet instance.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_xprivate_key</span><span class="p">(</span><span class="n">xprivate_key</span><span class="o">=</span><span class="s2">"xprv9s21ZrQH143K3xPGUzpogJeKtRdjHkK6muBJo8v7rEVRzT83xJgNcLpMoJXUf9wJFKfuHR4SGvfgdShh4t9VmjjrE9usBunK3LfNna31LGF"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="go">&lt;defichain.hdwallet.wallet.Wallet object at 0x7ff968489e50&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.from_index">
+<span class="sig-name descname"><span class="pre">from_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hardened</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#defichain.Wallet" title="defichain.hdwallet.wallet.Wallet"><span class="pre">defichain.hdwallet.wallet.Wallet</span></a></span></span><a class="headerlink" href="#defichain.Wallet.from_index" title="Permalink to this definition">#</a></dt>
+<dd><p>Derivation from Index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<em>int</em>) – Derivation index.</p></li>
+<li><p><strong>hardened</strong> (<em>bool</em>) – Hardened address, default to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Wallet – Hierarchical Deterministic Wallet instance.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_xprivate_key</span><span class="p">(</span><span class="n">xprivate_key</span><span class="o">=</span><span class="s2">"xprv9s21ZrQH143K3xPGUzpogJeKtRdjHkK6muBJo8v7rEVRzT83xJgNcLpMoJXUf9wJFKfuHR4SGvfgdShh4t9VmjjrE9usBunK3LfNna31LGF"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_index</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">1129</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_index</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_index</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_index</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">&lt;defichain.hdwallet.wallet.Wallet object at 0x7feb0fbe9e50&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.root_xprivate_key">
+<span class="sig-name descname"><span class="pre">root_xprivate_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encoded</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.root_xprivate_key" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Root XPrivate Key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>encoded</strong> (<em>bool</em>) – Encoded root xprivate key, default to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>str – Root XPrivate Key.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_entropy</span><span class="p">(</span><span class="n">entropy</span><span class="o">=</span><span class="s2">"ee535b143b0d9d1f87546f9df0d06b1a"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">root_xprivate_key</span><span class="p">()</span>
+<span class="go">"xprv9s21ZrQH143K3wyDj3RFDZ2NyueHmj42SkAhqN62guhz5hr5N2qzPKzLnzrRsYdi4DwoeBeqKyjizqdiSNr3yAn2yMMMwWoJQp2PsC4BPLp"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.root_xpublic_key">
+<span class="sig-name descname"><span class="pre">root_xpublic_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encoded</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.root_xpublic_key" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Root XPublic Key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>encoded</strong> (<em>bool</em>) – Encoded root xpublic key, default to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>str – Root XPublic Key.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_entropy</span><span class="p">(</span><span class="n">entropy</span><span class="o">=</span><span class="s2">"ee535b143b0d9d1f87546f9df0d06b1a"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">root_xpublic_key</span><span class="p">()</span>
+<span class="go">"xpub661MyMwAqRbcGS3gq4xFagy7XwUnBBmsoy6JdkVeFFExxWBDuaAEw8JpeFVhYKJctV1ZXFdV6SPoN41MVkNMdTcZpxcqJoRWgJvede7ME9n"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.xprivate_key">
+<span class="sig-name descname"><span class="pre">xprivate_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encoded</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.xprivate_key" title="Permalink to this definition">#</a></dt>
+<dd><p>Get XPrivate Key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>encoded</strong> (<em>bool</em>) – Encoded xprivate key, default to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>str – Root XPrivate Key.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_entropy</span><span class="p">(</span><span class="n">entropy</span><span class="o">=</span><span class="s2">"ee535b143b0d9d1f87546f9df0d06b1a"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">xprivate_key</span><span class="p">()</span>
+<span class="go">"xprvA1525gQR3JEkXUQqTYa64yfAeys9URDBqTNSqwCLdFsaDohB7p5DaPAqtJkUMxG7dQhijttqvvxxWtUaXYX4yvpHx7y2Z8Uewcw3c9ZcjA3"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.xpublic_key">
+<span class="sig-name descname"><span class="pre">xpublic_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encoded</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.xpublic_key" title="Permalink to this definition">#</a></dt>
+<dd><p>Get XPublic Key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>encoded</strong> (<em>bool</em>) – Encoded xpublic key, default to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>str – XPublic Key.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_entropy</span><span class="p">(</span><span class="n">entropy</span><span class="o">=</span><span class="s2">"ee535b143b0d9d1f87546f9df0d06b1a"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">xpublic_key</span><span class="p">()</span>
+<span class="go">"xpub6E4NVBwJsfo3jxVJZa76S7buD1hdssw3CgJ3eKbxBbQZ6c2KfMPU8BVKjaT2wfDX1AWcUvr2NGj1teU2PJGrT1oCdREZ63zRFgTS3C8rrpR"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.clean_derivation">
+<span class="sig-name descname"><span class="pre">clean_derivation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#defichain.Wallet" title="defichain.hdwallet.wallet.Wallet"><span class="pre">defichain.hdwallet.wallet.Wallet</span></a></span></span><a class="headerlink" href="#defichain.Wallet.clean_derivation" title="Permalink to this definition">#</a></dt>
+<dd><p>Clean derivation Path or Indexes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Wallet – Hierarchical Deterministic Wallet instance.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_xprivate_key</span><span class="p">(</span><span class="n">xprivate_key</span><span class="o">=</span><span class="s2">"xprv9s21ZrQH143K3xPGUzpogJeKtRdjHkK6muBJo8v7rEVRzT83xJgNcLpMoJXUf9wJFKfuHR4SGvfgdShh4t9VmjjrE9usBunK3LfNna31LGF"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">path</span><span class="p">()</span>
+<span class="go">"m/1129/0/0/0"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">clean_derivation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">path</span><span class="p">()</span>
+<span class="go">None</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.uncompressed">
+<span class="sig-name descname"><span class="pre">uncompressed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compressed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.Wallet.uncompressed" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Uncommpresed Public Key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>compressed</strong> (<em>str</em>) – Compressed public key, default to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>str – Uncommpresed public key.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">uncompressed</span><span class="p">()</span>
+<span class="go">"5af8506eb2b42f63842402cf4a462c0c4200797ab707acc5c215aee8a276a2c1b52749070d113497b118fa5aa1f5f1260475e1b6b766c4e0b84108c5322f1a7a"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.compressed">
+<span class="sig-name descname"><span class="pre">compressed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uncompressed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.Wallet.compressed" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Compresed Public Key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>uncompressed</strong> (<em>str</em>) – Uncompressed public key, default to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>str – Commpresed public key.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">compressed</span><span class="p">()</span>
+<span class="go">"025af8506eb2b42f63842402cf4a462c0c4200797ab707acc5c215aee8a276a2c1"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.private_key">
+<span class="sig-name descname"><span class="pre">private_key</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.Wallet.private_key" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Private Key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – Private key.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">private_key</span><span class="p">()</span>
+<span class="go">"56605e027fdb039e86fabdf3057b117fcd2c82ceaaa997a4a47afdf03ce9b155"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.public_key">
+<span class="sig-name descname"><span class="pre">public_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compressed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">private_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.Wallet.public_key" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Public Key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>compressed</strong> (<em>bool</em>) – Compressed public key, default to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>private_key</strong> (<em>str</em>) – Private key hex string, default to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>str – Public key.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">public_key</span><span class="p">()</span>
+<span class="go">"025af8506eb2b42f63842402cf4a462c0c4200797ab707acc5c215aee8a276a2c1"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.strength">
+<span class="sig-name descname"><span class="pre">strength</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.strength" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Entropy strength.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>int – Entropy strength.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">strength</span><span class="p">()</span>
+<span class="go">160</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.entropy">
+<span class="sig-name descname"><span class="pre">entropy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.entropy" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Entropy hex string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – Entropy hex string.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">entropy</span><span class="p">()</span>
+<span class="go">"f24afe7fc1418815ee7fd256beb55518e7c34ecd"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.mnemonic">
+<span class="sig-name descname"><span class="pre">mnemonic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.mnemonic" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Mnemonic words.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – Mnemonic words.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">mnemonic</span><span class="p">()</span>
+<span class="go">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.passphrase">
+<span class="sig-name descname"><span class="pre">passphrase</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.passphrase" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Mnemonic passphrase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – Mnemonic passphrase.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">passphrase</span><span class="p">()</span>
+<span class="go">"password"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.language">
+<span class="sig-name descname"><span class="pre">language</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.language" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Mnemonic language.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – Mnemonic language.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">language</span><span class="p">()</span>
+<span class="go">"english"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.cryptocurrency">
+<span class="sig-name descname"><span class="pre">cryptocurrency</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.cryptocurrency" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Network name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – Network name.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">cryptocurrency</span><span class="p">()</span>
+<span class="go">"Defichain"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.symbol">
+<span class="sig-name descname"><span class="pre">symbol</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.symbol" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Network symbol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – Network symbol.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">symbol</span><span class="p">()</span>
+<span class="go">"DFI"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.semantic">
+<span class="sig-name descname"><span class="pre">semantic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.semantic" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Extended semantic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – Extended semantic.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">semantic</span><span class="p">()</span>
+<span class="go">"p2pkh"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.network">
+<span class="sig-name descname"><span class="pre">network</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.network" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Network network type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – Network network type.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">network</span><span class="p">()</span>
+<span class="go">"mainnet"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.seed">
+<span class="sig-name descname"><span class="pre">seed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.seed" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Seed hex string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – Seed hex string.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
+<span class="go">"06ea9f5dd74699c50626ea80c6cf29ebc0d7d7536a489924928d9a1bba0a01ff37339d82f80f863fc0a326d86b7258a2ebd9e05b76e94a9afc87a260e30cf02b"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.path">
+<span class="sig-name descname"><span class="pre">path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.path" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Derivation path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – Drivation path.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">path</span><span class="p">()</span>
+<span class="go">"m/1129/0/0/0"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.chain_code">
+<span class="sig-name descname"><span class="pre">chain_code</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.chain_code" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Chain code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – Chain code.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">chain_code</span><span class="p">()</span>
+<span class="go">"6a6fe745530a2a5a2834293fb7aeda2f8d9253cd3241a28139da74acdff25ee2"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.hash">
+<span class="sig-name descname"><span class="pre">hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">private_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.Wallet.hash" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Public Key Hash.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – Identifier.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">hash</span><span class="p">()</span>
+<span class="go">"ead6524e1ee52c7750e5cb2fe3dc3ab30a49b0c3"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.finger_print">
+<span class="sig-name descname"><span class="pre">finger_print</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.Wallet.finger_print" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Finger print.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – Finger print.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">finger_print</span><span class="p">()</span>
+<span class="go">"ead6524e"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.default_address">
+<span class="sig-name descname"><span class="pre">default_address</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.Wallet.default_address" title="Permalink to this definition">#</a></dt>
+<dd><p>Get P2WPKH nested in P2SH address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – P2WPKH nested in P2SH address.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">default_address</span><span class="p">()</span>
+<span class="go">"dKYzYQDmN9TFEdZy46mFtStbqYLnougqzY"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.legacy_address">
+<span class="sig-name descname"><span class="pre">legacy_address</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.Wallet.legacy_address" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Pay to Public Key Hash (P2PKH) address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – P2PKH address.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">legacy_address</span><span class="p">()</span>
+<span class="go">"8cVZbAQGU11dYPoSPHYYjakHCFQ3NSiyS6"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.bech32_address">
+<span class="sig-name descname"><span class="pre">bech32_address</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.Wallet.bech32_address" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Pay to Witness Public Key Hash (P2WPKH) address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – P2WPKH address.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">bech32_address</span><span class="p">()</span>
+<span class="go">"df1qatt9yns7u5k8w589evh78hp6kv9ynvxr2xlvpn"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.wif">
+<span class="sig-name descname"><span class="pre">wif</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.wif" title="Permalink to this definition">#</a></dt>
+<dd><p>Get Wallet Important Format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str – Wallet Important Format.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">wif</span><span class="p">()</span>
+<span class="go">"KxGKLeymbFrSY7t3X31FMaDgQDUQGYvhUACLe4o1LXokvWtMs1WU"</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.dumps">
+<span class="sig-name descname"><span class="pre">dumps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#defichain.Wallet.dumps" title="Permalink to this definition">#</a></dt>
+<dd><p>Get All Wallet imformations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>dict – All Wallet imformations.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">"venture fitness paper little blush april rigid where find volcano fetch crack label polar dash"</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">dumps</span><span class="p">()</span>
+<span class="go">{'cryptocurrency': 'Defichain', 'symbol': 'DFI', 'network': 'mainnet', 'strength': 160, 'entropy': 'f24afe7fc1418815ee7fd256beb55518e7c34ecd', 'mnemonic': 'venture fitness paper little blush april rigid where find volcano fetch crack label polar dash', 'language': 'english', 'passphrase': 'password', 'seed': '06ea9f5dd74699c50626ea80c6cf29ebc0d7d7536a489924928d9a1bba0a01ff37339d82f80f863fc0a326d86b7258a2ebd9e05b76e94a9afc87a260e30cf02b', 'root_xprivate_key': 'xprv9s21ZrQH143K3eriRHBmTz27FBxHSsjdPJy3c7G7RxLV7JKgYEwZo8iNW7tCnC1p7754tnpgW3WBwNSy5kEU2uQLywxpKfxZSbsDJWXriKf', 'root_xpublic_key': 'xpub661MyMwAqRbcG8wBXJimq7xqoDnmrLTUkXteQVfizHsTz6eq5nFpLw2rMQ96dg7MHGTWD3U6UUFMY2XiJtQh7rWKNg7x1nb8QHyu4CFQ3GR', 'xprivate_key': 'xprv9zihFAyvszfdonyejxCCch1JTGVrfqd3VLxKrmSdAht1XmYzVw8YCH4965HYfEXNnnZAHVnga2JFBSpLYhNrmrYEgVpmN33gHXEzy5CJ5Ff', 'xpublic_key': 'xpub6Di3egWpiNDw2H47qyjCypx31JLM5JLtrZsvf9rEj3QzQZt93USnk5NcwMqHKNs6s1VGqLzZ7gJNRpa55gSgyycC27wLorzFHasi8A8Fg4S', 'uncompressed': 'e6ec494e1eb0b254e0d0a8fe783ec89d0ba33a4ddf33bf9f521912c34dd84115eeb3b6a4c7fb78fbdc81ad05ff216f0e8445bcfa46b9a3975f3aa65b00bf8202', 'compressed': '02e6ec494e1eb0b254e0d0a8fe783ec89d0ba33a4ddf33bf9f521912c34dd84115', 'chain_code': '6a6fe745530a2a5a2834293fb7aeda2f8d9253cd3241a28139da74acdff25ee2', 'private_key': '1f2d96f945df65d442c86b08fd4355cd7d1894beab060f47437f7d2721080900', 'public_key': '02e6ec494e1eb0b254e0d0a8fe783ec89d0ba33a4ddf33bf9f521912c34dd84115', 'wif': 'KxGKLeymbFrSY7t3X31FMaDgQDUQGYvhUACLe4o1LXokvWtMs1WU', 'finger_print': 'ead6524e', 'semantic': 'p2pkh', 'path': 'm/1129/0/0/0', 'hash': 'ead6524e1ee52c7750e5cb2fe3dc3ab30a49b0c3', 'addresses': {'legacy': '8cVZbAQGU11dYPoSPHYYjakHCFQ3NSiyS6', 'bech32': 'df1qatt9yns7u5k8w589evh78hp6kv9ynvxr2xlvpn', 'default': 'dKYzYQDmN9TFEdZy46mFtStbqYLnougqzY'}}</span>
+</pre></div>
+</div>
+</dd></dl>
+</dd></dl>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="utils.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Utils</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">HDWallet</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, Intr0c
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/scripts/furo.js"></script>
+    <script src="../../_static/tabs.js"></script>
+    </body>
+</html>

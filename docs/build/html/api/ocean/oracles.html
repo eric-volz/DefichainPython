@@ -212,6 +212,12 @@
 <li class="toctree-l2"><a class="reference internal" href="transactions.html">Transactions</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../hdwallet/index.html">HDWallet</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../hdwallet/wallet.html">Wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hdwallet/utils.html">Utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../mnemonic.html">Mnemonic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Legal</span></p>
@@ -256,12 +262,15 @@
 <dt class="sig sig-object py" id="defichain.ocean.Oracles">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.ocean.</span></span><span class="sig-name descname"><span class="pre">Oracles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ocean</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.ocean.Oracles" title="Permalink to this definition">#</a></dt>
 <dd><dl class="py method">
-<dt class="sig sig-object py" id="defichain.ocean.Oracles.getOracleByAddress">
-<span class="sig-name descname"><span class="pre">getOracleByAddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Oracles.getOracleByAddress" title="Permalink to this definition">#</a></dt>
-<dd><p>Get oracle by address</p>
+<dt class="sig sig-object py" id="defichain.ocean.Oracles.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Oracles.list" title="Permalink to this definition">#</a></dt>
+<dd><p>Get a list of Oracles</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>address</strong> (<em>str</em>) – (required) address owner address for an Oracle</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<em>int</em>) – (optional) for number of records per page</p></li>
+<li><p><strong>next</strong> (<em>str</em>) – (optional) offset for the next page</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>(json string) {id: str, weightage: int, ownerAddress: str, priceFeeds: [{token: str, currency: str}],
@@ -270,7 +279,7 @@ block: {hash: str, height: int, time: int, medianTime: int}}</p>
 <dt class="field-odd">Example</dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">oracles</span><span class="o">.</span><span class="n">getOracleByAddress</span><span class="p">(</span><span class="s2">"df1q8cz47rwefsxme29sstumepw374gzeu025gqcy4"</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">oracles</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -301,15 +310,12 @@ medianTime: int}}</p>
 </div>
 </dd></dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="defichain.ocean.Oracles.list">
-<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Oracles.list" title="Permalink to this definition">#</a></dt>
-<dd><p>Get a list of Oracles</p>
+<dt class="sig sig-object py" id="defichain.ocean.Oracles.getOracleByAddress">
+<span class="sig-name descname"><span class="pre">getOracleByAddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Oracles.getOracleByAddress" title="Permalink to this definition">#</a></dt>
+<dd><p>Get oracle by address</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>size</strong> (<em>int</em>) – (optional) for number of records per page</p></li>
-<li><p><strong>next</strong> (<em>str</em>) – (optional) offset for the next page</p></li>
-</ul>
+<dd class="field-odd"><p><strong>address</strong> (<em>str</em>) – (required) address owner address for an Oracle</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>(json string) {id: str, weightage: int, ownerAddress: str, priceFeeds: [{token: str, currency: str}],
@@ -318,7 +324,7 @@ block: {hash: str, height: int, time: int, medianTime: int}}</p>
 <dt class="field-odd">Example</dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">oracles</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">oracles</span><span class="o">.</span><span class="n">getOracleByAddress</span><span class="p">(</span><span class="s2">"df1q8cz47rwefsxme29sstumepw374gzeu025gqcy4"</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>

@@ -1,5 +1,5 @@
-from defichain.exceptions.ServiceUnavailable import ServiceUnavailable
-from defichain.exceptions.WrongParmeters import WrongParameters
+from defichain.exceptions.http.ServiceUnavailable import ServiceUnavailable
+from defichain.exceptions.http.WrongParmeters import WrongParameters
 
 from .rpc import RPC
 

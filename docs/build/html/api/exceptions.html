@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Community" href="../legal/community.html" /><link rel="prev" title="Transactions" href="ocean/transactions.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Community" href="../legal/community.html" /><link rel="prev" title="Mnemonic" href="mnemonic.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
         <title>Exceptions - DefichainPython v1.2.0</title>
@@ -139,7 +139,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -212,6 +212,12 @@
 <li class="toctree-l2"><a class="reference internal" href="ocean/transactions.html">Transactions</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="hdwallet/index.html">HDWallet</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="hdwallet/wallet.html">Wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hdwallet/utils.html">Utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mnemonic.html">Mnemonic</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Exceptions</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Legal</span></p>
@@ -244,59 +250,70 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="module-defichain.exceptions">
-<span id="exceptions"></span><h1>Exceptions<a class="headerlink" href="#module-defichain.exceptions" title="Permalink to this headline">#</a></h1>
+          <section id="exceptions">
+<span id="id1"></span><h1>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">#</a></h1>
+<section id="module-defichain.exceptions.http">
+<span id="http-error"></span><h2>HTTP Error<a class="headerlink" href="#module-defichain.exceptions.http" title="Permalink to this headline">#</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="defichain.exceptions.BadMethod">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.</span></span><span class="sig-name descname"><span class="pre">BadMethod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.exceptions.BadMethod" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="defichain.exceptions.http.BadMethod">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.http.</span></span><span class="sig-name descname"><span class="pre">BadMethod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.exceptions.http.BadMethod" title="Permalink to this definition">#</a></dt>
 <dd><p>The called method is not existent.</p>
 </dd></dl>
 <dl class="py class">
-<dt class="sig sig-object py" id="defichain.exceptions.BadRequest">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.</span></span><span class="sig-name descname"><span class="pre">BadRequest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.exceptions.BadRequest" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="defichain.exceptions.http.BadRequest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.http.</span></span><span class="sig-name descname"><span class="pre">BadRequest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.exceptions.http.BadRequest" title="Permalink to this definition">#</a></dt>
 <dd><p>The server cannot or will not process the request due to an apparent client error.</p>
 </dd></dl>
 <dl class="py class">
-<dt class="sig sig-object py" id="defichain.exceptions.Forbidden">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.</span></span><span class="sig-name descname"><span class="pre">Forbidden</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.exceptions.Forbidden" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="defichain.exceptions.http.Forbidden">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.http.</span></span><span class="sig-name descname"><span class="pre">Forbidden</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.exceptions.http.Forbidden" title="Permalink to this definition">#</a></dt>
 <dd><p>The request contained valid data and was understood by the server, but the server is refusing action.</p>
 </dd></dl>
 <dl class="py class">
-<dt class="sig sig-object py" id="defichain.exceptions.InternalServerError">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.</span></span><span class="sig-name descname"><span class="pre">InternalServerError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.exceptions.InternalServerError" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="defichain.exceptions.http.InternalServerError">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.http.</span></span><span class="sig-name descname"><span class="pre">InternalServerError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.exceptions.http.InternalServerError" title="Permalink to this definition">#</a></dt>
 <dd><p>A generic error message, given when an unexpected condition was encountered and no more specific message is suitable.</p>
 </dd></dl>
 <dl class="py class">
-<dt class="sig sig-object py" id="defichain.exceptions.NotFound">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.</span></span><span class="sig-name descname"><span class="pre">NotFound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.exceptions.NotFound" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="defichain.exceptions.http.NotFound">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.http.</span></span><span class="sig-name descname"><span class="pre">NotFound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.exceptions.http.NotFound" title="Permalink to this definition">#</a></dt>
 <dd><p>The requested resource could not be found but may be available in the future.</p>
 </dd></dl>
 <dl class="py class">
-<dt class="sig sig-object py" id="defichain.exceptions.ServiceUnavailable">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.</span></span><span class="sig-name descname"><span class="pre">ServiceUnavailable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.exceptions.ServiceUnavailable" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="defichain.exceptions.http.ServiceUnavailable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.http.</span></span><span class="sig-name descname"><span class="pre">ServiceUnavailable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.exceptions.http.ServiceUnavailable" title="Permalink to this definition">#</a></dt>
 <dd><p>The server cannot handle the request.</p>
 </dd></dl>
 <dl class="py class">
-<dt class="sig sig-object py" id="defichain.exceptions.Unauthorized">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.</span></span><span class="sig-name descname"><span class="pre">Unauthorized</span></span><a class="headerlink" href="#defichain.exceptions.Unauthorized" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="defichain.exceptions.http.Unauthorized">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.http.</span></span><span class="sig-name descname"><span class="pre">Unauthorized</span></span><a class="headerlink" href="#defichain.exceptions.http.Unauthorized" title="Permalink to this definition">#</a></dt>
 <dd><p>Similar to 403 Forbidden, but specifically for use when authentication is required and has failed or has not yet been provided.</p>
 </dd></dl>
 <dl class="py class">
-<dt class="sig sig-object py" id="defichain.exceptions.UnprocessableEntity">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.</span></span><span class="sig-name descname"><span class="pre">UnprocessableEntity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.exceptions.UnprocessableEntity" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="defichain.exceptions.http.UnprocessableEntity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.http.</span></span><span class="sig-name descname"><span class="pre">UnprocessableEntity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.exceptions.http.UnprocessableEntity" title="Permalink to this definition">#</a></dt>
 <dd><p>The request was well-formed but was unable to be followed due to semantic errors.</p>
 </dd></dl>
 <dl class="py class">
-<dt class="sig sig-object py" id="defichain.exceptions.WrongParameters">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.</span></span><span class="sig-name descname"><span class="pre">WrongParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.exceptions.WrongParameters" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="defichain.exceptions.http.WrongParameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.http.</span></span><span class="sig-name descname"><span class="pre">WrongParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.exceptions.http.WrongParameters" title="Permalink to this definition">#</a></dt>
 <dd><p>If the expected paremeters were not passed.</p>
 </dd></dl>
+</section>
+<section id="module-defichain.exceptions.hdwallet">
+<span id="wallet-error"></span><h2>Wallet Error<a class="headerlink" href="#module-defichain.exceptions.hdwallet" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.exceptions.hdwallet.DerivationError">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.exceptions.hdwallet.</span></span><span class="sig-name descname"><span class="pre">DerivationError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error_message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_detail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.exceptions.hdwallet.DerivationError" title="Permalink to this definition">#</a></dt>
+<dd><p>Bad derivation index</p>
+</dd></dl>
+</section>
 </section>
 
         </article>
@@ -313,14 +330,14 @@
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="ocean/transactions.html">
+          <a class="prev-page" href="mnemonic.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Transactions</div>
+                <div class="title">Mnemonic</div>
                 
               </div>
             </a>
@@ -344,8 +361,28 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Exceptions</a><ul>
+<li><a class="reference internal" href="#module-defichain.exceptions.http">HTTP Error</a></li>
+<li><a class="reference internal" href="#module-defichain.exceptions.hdwallet">Wallet Error</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

@@ -16,6 +16,8 @@
 
     api/node/index
     api/ocean/index
+    api/hdwallet/index
+    api/mnemonic
     api/exceptions
 
 .. toctree::

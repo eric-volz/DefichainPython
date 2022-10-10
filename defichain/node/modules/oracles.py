@@ -1,5 +1,4 @@
 from ..util import BuildJson
-from defichain.exceptions.InternalServerError import InternalServerError
 
 
 class Oracles:

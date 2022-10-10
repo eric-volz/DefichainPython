@@ -1,6 +1,6 @@
 import pytest
 from defichain import Ocean
-from defichain.exceptions.BadRequest import BadRequest
+from defichain.exceptions.http.BadRequest import BadRequest
 
 ocean = Ocean()
 

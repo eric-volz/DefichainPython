@@ -212,6 +212,12 @@
 <li class="toctree-l2"><a class="reference internal" href="transactions.html">Transactions</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../hdwallet/index.html">HDWallet</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../hdwallet/wallet.html">Wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hdwallet/utils.html">Utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../mnemonic.html">Mnemonic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Legal</span></p>
@@ -256,94 +262,6 @@
 <dt class="sig sig-object py" id="defichain.ocean.Poolpairs">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.ocean.</span></span><span class="sig-name descname"><span class="pre">Poolpairs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ocean</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.ocean.Poolpairs" title="Permalink to this definition">#</a></dt>
 <dd><dl class="py method">
-<dt class="sig sig-object py" id="defichain.ocean.Poolpairs.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Poolpairs.get" title="Permalink to this definition">#</a></dt>
-<dd><p>Get pool pair</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – (required) id of the pool pair</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>(json string) {id: str, symbol: str, displaySymbol: str, name: str, status: bool,
-tokenA: {id: str, name: str, symbol: str, displaySymbol: str, reserve: str,
-blockCommission: str, fee: {pct: str, inPct: str, outPct: str}}, tokenB: {id: str,
-name: str, symbol: str, displaySymbol: str, reserve: str, blockCommission: str,
-fee: {pct: str, inPct: str, outPct: str}}, priceRatio: {ab: str, ba: str},
-commission: str, totalLiquidity: {token: str, usd: str}, tradeEnabled: bool,
-ownerAddress: str, rewardPct: str, rewardLoanPct: str, customRewards: str[],
-creation: {tx: str, height: int}, apr: {total: float, reward: float, commission: float},
-volume?: {d30: float, h24: float}}</p>
-</dd>
-<dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">poolpairs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"4"</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="defichain.ocean.Poolpairs.getAllPaths">
-<span class="sig-name descname"><span class="pre">getAllPaths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fromTokenId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toTokenId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Poolpairs.getAllPaths" title="Permalink to this definition">#</a></dt>
-<dd><p>Get all possible swap paths from one token to another</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>fromTokenId</strong> (<em>str</em>) – (required) tokenId to swap from</p></li>
-<li><p><strong>toTokenId</strong> (<em>str</em>) – (required) tokenId to swap to</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>(json string) {fromToken: TokenIdentifier, toToken: TokenIdentifier, bestPath: SwapPathPoolPair[],
-estimatedReturn: str, estimatedReturnLessDexFees: str}</p>
-</dd>
-<dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">poolpairs</span><span class="o">.</span><span class="n">getAllPaths</span><span class="p">(</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"75"</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="defichain.ocean.Poolpairs.getBestPath">
-<span class="sig-name descname"><span class="pre">getBestPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fromTokenId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toTokenId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Poolpairs.getBestPath" title="Permalink to this definition">#</a></dt>
-<dd><p>Get the best (estimated) swap path from one token to another</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>fromTokenId</strong> (<em>str</em>) – (required) tokenId to swap from</p></li>
-<li><p><strong>toTokenId</strong> (<em>str</em>) – (required) tokenId to swap to</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>(json string) {fromToken: TokenIdentifier, toToken: TokenIdentifier, bestPath: SwapPathPoolPair[],
-estimatedReturn: str, estimatedReturnLessDexFees: str}</p>
-</dd>
-<dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">poolpairs</span><span class="o">.</span><span class="n">getBestPath</span><span class="p">(</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"75"</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="defichain.ocean.Poolpairs.getSwappableTokens">
-<span class="sig-name descname"><span class="pre">getSwappableTokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokenId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Poolpairs.getSwappableTokens" title="Permalink to this definition">#</a></dt>
-<dd><p>Get all swappable tokens for a given token</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>tokenId</strong> (<em>str</em>) – (required) id of  a token</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>(json string) {fromToken: TokenIdentifier, swappableTokens: TokenIdentifier[]}</p>
-</dd>
-<dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">poolpairs</span><span class="o">.</span><span class="n">getSwappableTokens</span><span class="p">(</span><span class="s2">"0"</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-<dl class="py method">
 <dt class="sig sig-object py" id="defichain.ocean.Poolpairs.list">
 <span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.ocean.Poolpairs.list" title="Permalink to this definition">#</a></dt>
 <dd><p>List pool pairs</p>
@@ -373,26 +291,28 @@ volume?: {d30: float, h24: float}}</p>
 </div>
 </dd></dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="defichain.ocean.Poolpairs.listPoolSwapAggregates">
-<span class="sig-name descname"><span class="pre">listPoolSwapAggregates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.ocean.Poolpairs.listPoolSwapAggregates" title="Permalink to this definition">#</a></dt>
-<dd><p>List pool swap aggregates</p>
+<dt class="sig sig-object py" id="defichain.ocean.Poolpairs.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Poolpairs.get" title="Permalink to this definition">#</a></dt>
+<dd><p>Get pool pair</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>id</strong> (<em>str</em>) – (required) id of the pool pair</p></li>
-<li><p><strong>interval</strong> (<em>int</em>) – (required) aggregated interval: 60 * 60, 60 * 60 * 24</p></li>
-<li><p><strong>size</strong> (<em>str</em>) – (optional) size of PoolSwap to query</p></li>
-<li><p><strong>next</strong> (<em>int</em>) – (optional) next set of PoolSwap</p></li>
-</ul>
+<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – (required) id of the pool pair</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>(json string) {id: str, key: str, bucket: int, aggregated: {amounts: Record&lt;str, str&gt;, usd: float},
-block: {medianTime: int}}</p>
+<dd class="field-even"><p>(json string) {id: str, symbol: str, displaySymbol: str, name: str, status: bool,
+tokenA: {id: str, name: str, symbol: str, displaySymbol: str, reserve: str,
+blockCommission: str, fee: {pct: str, inPct: str, outPct: str}}, tokenB: {id: str,
+name: str, symbol: str, displaySymbol: str, reserve: str, blockCommission: str,
+fee: {pct: str, inPct: str, outPct: str}}, priceRatio: {ab: str, ba: str},
+commission: str, totalLiquidity: {token: str, usd: str}, tradeEnabled: bool,
+ownerAddress: str, rewardPct: str, rewardLoanPct: str, customRewards: str[],
+creation: {tx: str, height: int}, apr: {total: float, reward: float, commission: float},
+volume?: {d30: float, h24: float}}</p>
 </dd>
 <dt class="field-odd">Example</dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">poolpairs</span><span class="o">.</span><span class="n">listPoolSwapsVerbose</span><span class="p">(</span><span class="s2">"4"</span><span class="p">,</span> <span class="mi">3600</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">poolpairs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"4"</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -441,6 +361,92 @@ block: {hash: str, height: int, time: int, medianTime: int}}</p>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">poolpairs</span><span class="o">.</span><span class="n">listPoolSwapsVerbose</span><span class="p">(</span><span class="s2">"4"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Poolpairs.listPoolSwapAggregates">
+<span class="sig-name descname"><span class="pre">listPoolSwapAggregates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.ocean.Poolpairs.listPoolSwapAggregates" title="Permalink to this definition">#</a></dt>
+<dd><p>List pool swap aggregates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>str</em>) – (required) id of the pool pair</p></li>
+<li><p><strong>interval</strong> (<em>int</em>) – (required) aggregated interval: 60 * 60, 60 * 60 * 24</p></li>
+<li><p><strong>size</strong> (<em>str</em>) – (optional) size of PoolSwap to query</p></li>
+<li><p><strong>next</strong> (<em>int</em>) – (optional) next set of PoolSwap</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) {id: str, key: str, bucket: int, aggregated: {amounts: Record&lt;str, str&gt;, usd: float},
+block: {medianTime: int}}</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">poolpairs</span><span class="o">.</span><span class="n">listPoolSwapsVerbose</span><span class="p">(</span><span class="s2">"4"</span><span class="p">,</span> <span class="mi">3600</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Poolpairs.getSwappableTokens">
+<span class="sig-name descname"><span class="pre">getSwappableTokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokenId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Poolpairs.getSwappableTokens" title="Permalink to this definition">#</a></dt>
+<dd><p>Get all swappable tokens for a given token</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tokenId</strong> (<em>str</em>) – (required) id of  a token</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) {fromToken: TokenIdentifier, swappableTokens: TokenIdentifier[]}</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">poolpairs</span><span class="o">.</span><span class="n">getSwappableTokens</span><span class="p">(</span><span class="s2">"0"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Poolpairs.getBestPath">
+<span class="sig-name descname"><span class="pre">getBestPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fromTokenId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toTokenId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Poolpairs.getBestPath" title="Permalink to this definition">#</a></dt>
+<dd><p>Get the best (estimated) swap path from one token to another</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fromTokenId</strong> (<em>str</em>) – (required) tokenId to swap from</p></li>
+<li><p><strong>toTokenId</strong> (<em>str</em>) – (required) tokenId to swap to</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) {fromToken: TokenIdentifier, toToken: TokenIdentifier, bestPath: SwapPathPoolPair[],
+estimatedReturn: str, estimatedReturnLessDexFees: str}</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">poolpairs</span><span class="o">.</span><span class="n">getBestPath</span><span class="p">(</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"75"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Poolpairs.getAllPaths">
+<span class="sig-name descname"><span class="pre">getAllPaths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fromTokenId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toTokenId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Poolpairs.getAllPaths" title="Permalink to this definition">#</a></dt>
+<dd><p>Get all possible swap paths from one token to another</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fromTokenId</strong> (<em>str</em>) – (required) tokenId to swap from</p></li>
+<li><p><strong>toTokenId</strong> (<em>str</em>) – (required) tokenId to swap to</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) {fromToken: TokenIdentifier, toToken: TokenIdentifier, bestPath: SwapPathPoolPair[],
+estimatedReturn: str, estimatedReturnLessDexFees: str}</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">poolpairs</span><span class="o">.</span><span class="n">getAllPaths</span><span class="p">(</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"75"</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
