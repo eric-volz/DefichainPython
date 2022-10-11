@@ -68,3 +68,4 @@ html_static_path = ["_static"]
 html_theme_options = {
     "announcement": "This Documentation page is still in development!",
 }
+html_favicon = 'logo/logo.png'
