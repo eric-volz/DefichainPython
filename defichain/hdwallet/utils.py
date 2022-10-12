@@ -121,7 +121,7 @@ def is_entropy(entropy: str) -> bool:
     """
     Check entropy hex string.
 
-    :param entropy: Mnemonic words.
+    :param entropy: entropy.
     :type entropy: str
 
     :returns: bool -- Entropy valid/invalid.
