@@ -265,7 +265,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>network</strong> (<em>network</em>) – network instance, defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>network</strong> (<em>network</em>) – network instance: DefichainMainnet, DefichainTestnet, DefichainRegtest, defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
 <li><p><strong>semantic</strong> (<em>str</em>) – Extended semantic, defaults to <code class="docutils literal notranslate"><span class="pre">P2PKH</span></code>.</p></li>
 <li><p><strong>use_default_path</strong> (<em>bool</em>) – Use default derivation path, defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
 </ul>
@@ -544,50 +544,6 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">root_xpublic_key</span><span class="p">()</span>
 <span class="go">"xpub661MyMwAqRbcGS3gq4xFagy7XwUnBBmsoy6JdkVeFFExxWBDuaAEw8JpeFVhYKJctV1ZXFdV6SPoN41MVkNMdTcZpxcqJoRWgJvede7ME9n"</span>
-</pre></div>
-</div>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="defichain.Wallet.xprivate_key">
-<span class="sig-name descname"><span class="pre">xprivate_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encoded</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.xprivate_key" title="Permalink to this definition">#</a></dt>
-<dd><p>Get XPrivate Key.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>encoded</strong> (<em>bool</em>) – Encoded xprivate key, default to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>str – Root XPrivate Key.</p>
-</dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_entropy</span><span class="p">(</span><span class="n">entropy</span><span class="o">=</span><span class="s2">"ee535b143b0d9d1f87546f9df0d06b1a"</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">xprivate_key</span><span class="p">()</span>
-<span class="go">"xprvA1525gQR3JEkXUQqTYa64yfAeys9URDBqTNSqwCLdFsaDohB7p5DaPAqtJkUMxG7dQhijttqvvxxWtUaXYX4yvpHx7y2Z8Uewcw3c9ZcjA3"</span>
-</pre></div>
-</div>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="defichain.Wallet.xpublic_key">
-<span class="sig-name descname"><span class="pre">xpublic_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encoded</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.Wallet.xpublic_key" title="Permalink to this definition">#</a></dt>
-<dd><p>Get XPublic Key.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>encoded</strong> (<em>bool</em>) – Encoded xpublic key, default to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>str – XPublic Key.</p>
-</dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_entropy</span><span class="p">(</span><span class="n">entropy</span><span class="o">=</span><span class="s2">"ee535b143b0d9d1f87546f9df0d06b1a"</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"m/1129/0/0/0"</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">xpublic_key</span><span class="p">()</span>
-<span class="go">"xpub6E4NVBwJsfo3jxVJZa76S7buD1hdssw3CgJ3eKbxBbQZ6c2KfMPU8BVKjaT2wfDX1AWcUvr2NGj1teU2PJGrT1oCdREZ63zRFgTS3C8rrpR"</span>
 </pre></div>
 </div>
 </dd></dl>
