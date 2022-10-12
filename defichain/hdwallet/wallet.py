@@ -46,7 +46,7 @@ class Wallet:
     """
     Hierarchical Deterministic Wallet
 
-    :param network: network instance, defaults to ``None``.
+    :param network: network instance: DefichainMainnet, DefichainTestnet, DefichainRegtest, defaults to ``None``.
     :type network: network
     :param semantic: Extended semantic, defaults to ``P2PKH``.
     :type semantic: str
@@ -600,7 +600,7 @@ class Wallet:
             _unhexlify(version), depth, parent_fingerprint, index, chain_code, data, encoded
         )
 
-    def xprivate_key(self, encoded=True) -> Optional[str]:
+    def _xprivate_key(self, encoded=True) -> Optional[str]:
         """
         Get XPrivate Key.
 
@@ -614,7 +614,7 @@ class Wallet:
         >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_entropy(entropy="ee535b143b0d9d1f87546f9df0d06b1a")
         >>> wallet.from_path(path="m/1129/0/0/0")
-        >>> wallet.xprivate_key()
+        >>> wallet._xprivate_key()
         "xprvA1525gQR3JEkXUQqTYa64yfAeys9URDBqTNSqwCLdFsaDohB7p5DaPAqtJkUMxG7dQhijttqvvxxWtUaXYX4yvpHx7y2Z8Uewcw3c9ZcjA3"
         """
 
@@ -638,7 +638,7 @@ class Wallet:
             _unhexlify(version), depth, parent_fingerprint, index, chain_code, data, encoded
         )
 
-    def xpublic_key(self, encoded: bool = True) -> Optional[str]:
+    def _xpublic_key(self, encoded: bool = True) -> Optional[str]:
         """
         Get XPublic Key.
 
@@ -652,7 +652,7 @@ class Wallet:
         >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_entropy(entropy="ee535b143b0d9d1f87546f9df0d06b1a")
         >>> wallet.from_path(path="m/1129/0/0/0")
-        >>> wallet.xpublic_key()
+        >>> wallet._xpublic_key()
         "xpub6E4NVBwJsfo3jxVJZa76S7buD1hdssw3CgJ3eKbxBbQZ6c2KfMPU8BVKjaT2wfDX1AWcUvr2NGj1teU2PJGrT1oCdREZ63zRFgTS3C8rrpR"
         """
 
@@ -1240,7 +1240,8 @@ class Wallet:
         "KxGKLeymbFrSY7t3X31FMaDgQDUQGYvhUACLe4o1LXokvWtMs1WU"
         """
 
-        return check_encode(_unhexlify(self._cryptocurrency.WIF_SECRET_KEY) + self._key.to_string() + b"\x01") if self._key else None
+        return check_encode(
+            _unhexlify(self._cryptocurrency.WIF_SECRET_KEY) + self._key.to_string() + b"\x01") if self._key else None
 
     def dumps(self) -> dict:
         """
@@ -1271,9 +1272,9 @@ class Wallet:
             # root_xprivate_key_hex=self.root_xprivate_key(encoded=False),
             root_xpublic_key=self.root_xpublic_key(),
             # root_xpublic_key_hex=self.root_xpublic_key(encoded=False),
-            xprivate_key=self.xprivate_key(),
+            # xprivate_key=self.xprivate_key(),
             # xprivate_key_hex=self.xprivate_key(encoded=False),
-            xpublic_key=self.xpublic_key(),
+            # xpublic_key=self.xpublic_key(),
             # xpublic_key_hex=self.xpublic_key(encoded=False),
             uncompressed=self.uncompressed(),
             compressed=self.compressed(),
