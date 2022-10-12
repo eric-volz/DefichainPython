@@ -134,8 +134,8 @@ Since this is a community supported project, the community also has the right to
         ===============     ========
         HDWallet            Progress
         ===============     ========
-        Wallet              |:rotating_light:|
-        Utils               |:rotating_light:|
+        Wallet              |:white_check_mark:|
+        Utils               |:white_check_mark:|
         ===============     ========
 
 .. tab:: Documentation
@@ -214,8 +214,7 @@ Since this is a community supported project, the community also has the right to
 Next Steps
 ----------
 1. Document the last RPC methods on `docs.defichain-python.de <https://docs.defichain-python.de>`_
-2. writing test for the new hdwallet integration
-3. implement the new ocean methods (implementation, documentation, testing)
-4. rework some of Node/RPC test
-5. implementation of the `community project <https://github.com/muirglacier/defid-indexer-docker>`_ (getting historical data via an API)
+2. implement the new ocean methods (implementation, documentation, testing)
+3. rework some of Node/RPC test
+4. implementation of the `community project <https://github.com/muirglacier/defid-indexer-docker>`_ (getting historical data via an API)
 
