@@ -47,3 +47,14 @@ DefichainPython v...
 ## Additional
 1. Version tag
 2. created binary's
+
+# Publish on TestPyPi
+
+1. Upload
+```
+twine upload --repository testpypi dist/*
+```
+2. Install
+```
+python3 -m pip install --index-url https://test.pypi.org/simple/ defichain
+```
