@@ -1,7 +1,7 @@
 from setuptools import setup
 from os import path
 
-VERSION = '1.2.0'
+VERSION = '2.0.0'
 DESCRIPTION = 'Defichain Python Library'
 
 # Project URLs
@@ -13,6 +13,10 @@ project_urls = {
 this_directory = path.abspath(path.dirname(__file__))
 with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     LONG_DESCRIPTION = f.read()
+
+# requirements.txt
+with open("requirements.txt", "r") as _requirements:
+    requirements: list = list(map(str.strip, _requirements.read().split("\n")))
 
 # Setting up
 setup(
@@ -37,7 +41,8 @@ setup(
               'defichain.ocean.modules',
               'defichain.hdwallet',
               'defichain.hdwallet.libs'],
-    install_requires=["requests", "ecdsa", "sha3", "base58", "six"],
+    package_data={'': ['*.txt']},
+    install_requires=requirements,
     keywords=['python', 'defichain', 'node', 'ocean', 'mnemonic', 'wallet', 'privateKey'],
     classifiers=[
         "Programming Language :: Python :: 3.6",
