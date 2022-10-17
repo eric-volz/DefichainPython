@@ -1,11 +1,4 @@
-sphinx~=4.5.0
-sphinx_rtd_theme~=1.0.0
-pytest~=7.1.1
+pytest~=7.0.1
 pytest-cov==4.0.0
 tox==3.26.0
-requests~=2.27.1
 setuptools~=57.0.0
-furo~=2022.4.7
-sphinx_mdinclude~=0.5.1
-sphinx_inline_tabs~=2022.1.2b11
-sphinxemoji~=0.2.0
