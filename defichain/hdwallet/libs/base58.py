@@ -1,6 +1,5 @@
 from hashlib import sha256
-
-import sha3
+from hashlib import sha3_256
 import six
 
 
@@ -11,7 +10,7 @@ __base58_radix = len(__base58_alphabet)
 
 def checksum_encode(address, crypto="eth"):
     out = ""
-    keccak = sha3.keccak_256()
+    keccak = sha3_256.keccak_256()
     addr = address.lower().replace("0x", "") if crypto == "eth" else address.lower().replace("xdc", "")
     keccak.update(addr.encode("ascii"))
     hash_addr = keccak.hexdigest()
