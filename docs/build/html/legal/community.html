@@ -266,9 +266,53 @@ other ideas open an <a class="reference external" href="https://github.com/eric-
 <div class="line"><br/></div>
 </div>
 <div class="caution admonition">
+<p class="admonition-title">Announcement 02: Release v2.0.0</p>
+<p>Introduction of HDWallet</p>
+</div>
+<section id="the-defichain-python-library-implements-hdwallet">
+<h2>The Defichain Python Library implements HDWallet!<a class="headerlink" href="#the-defichain-python-library-implements-hdwallet" title="Permalink to this headline">#</a></h2>
+<p>Dear Defichain Community,</p>
+<p>a few days ago I released version 2.0.0 of the <a class="reference external" href="https://github.com/eric-volz/DefichainPython">Defichain Python Library</a>.</p>
+<section id="what-is-new">
+<h3>What is new?<a class="headerlink" href="#what-is-new" title="Permalink to this headline">#</a></h3>
+<section id="hierarchical-deterministic-wallet">
+<h4>Hierarchical Deterministic Wallet<a class="headerlink" href="#hierarchical-deterministic-wallet" title="Permalink to this headline">#</a></h4>
+<p>The new feature of this version is the implementation of Hierarchical Deterministic Wallet.
+With this mnemonic seeds can be generated and addresses and private keys can be extracted.</p>
+<p>The HDWallet implementation corresponds to the addresses of the lightwallet.
+So it is possible to find out private keys to addresses using the mnemonic Seeds of the lightwallet.
+These private keys can then be imported into a defichain node wallet.
+With that is possible to control your lightwallet address.</p>
+<p>More information about how to use the HDWallet can be found on the
+<a class="reference external" href="https://docs.defichain-python.de/build/html/api/hdwallet/index.html">documentation page</a>.</p>
+</section>
+</section>
+<section id="what-s-next">
+<h3>What’s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>implementation of new Ocean API methods</p></li>
+<li><p>implementation of the <a class="reference external" href="https://github.com/DeFiCh/dfips/issues/209">Historic Defichain Data API</a> (when available)</p></li>
+</ul>
+</section>
+<section id="here-are-some-important-links-around-the-project">
+<h3>Here are some important links around the project:<a class="headerlink" href="#here-are-some-important-links-around-the-project" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/eric-volz/DefichainPython">Github</a></p></li>
+<li><p><a class="reference external" href="https://docs.defichain-python.de/">Documentation</a></p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/defichain/">PyPI</a></p></li>
+</ul>
+<p>If you have suggestions for improvement
+or other ideas open an <a class="reference external" href="https://github.com/eric-volz/DefichainPython/issues">issue</a>,
+write me on <a class="reference external" href="https://twitter.com/Intr0c">Twitter</a> or via email (<a class="reference external" href="mailto:introc%40volz.link">introc<span>@</span>volz<span>.</span>link</a>)!</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<div class="caution admonition">
 <p class="admonition-title">Announcement 01: Release v1.0.0</p>
 <p>This is the first project announcement witch was published on reddit</p>
 </div>
+</section>
+</section>
 <section id="the-defichain-python-library-has-reached-version-1-0-0">
 <h2>The Defichain Python Library has reached version 1.0.0!<a class="headerlink" href="#the-defichain-python-library-has-reached-version-1-0-0" title="Permalink to this headline">#</a></h2>
 <p>Dear Defichain Community,</p>
@@ -278,8 +322,8 @@ other ideas open an <a class="reference external" href="https://github.com/eric-
 You can see the progress of the different parts of the project <a class="reference external" href="https://docs.defichain-python.de/build/html/instructions/progressAndUpdates.html">here</a>.</p>
 <p>To ensure an easy start with the library I have created a <a class="reference external" href="https://docs.defichain-python.de/build/html/instructions/quickstart.html">Quickstart</a> Guide.</p>
 <p>For people who want to get to know the Defichain Node through this library there will be a <a class="reference external" href="https://docs.defichain-python.de/build/html/additionalInfos/installDefichainNode.html">“How to install and configure a Defichain Node”</a> Guide.</p>
-<section id="here-are-some-important-links-around-the-project">
-<h3>Here are some important links around the project:<a class="headerlink" href="#here-are-some-important-links-around-the-project" title="Permalink to this headline">#</a></h3>
+<section id="id4">
+<h3>Here are some important links around the project:<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/eric-volz/DefichainPython">Github</a></p></li>
 <li><p><a class="reference external" href="https://docs.defichain-python.de/">Documentation</a></p></li>
@@ -423,24 +467,24 @@ write me on <a class="reference external" href="https://twitter.com/Intr0c">Twit
 <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">verbindung</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">benutzer</span><span class="p">,</span> <span class="n">passwort</span><span class="p">)</span> <span class="c1"># Verbindungsaufbau zum Node</span>
 </pre></div>
 </div>
-<section id="id5">
-<h5>Getblockcount:<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h5>
+<section id="id12">
+<h5>Getblockcount:<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h5>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">blockcount</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getblockcount</span><span class="p">()</span> <span class="c1"># Abfrage ans Node</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">blockcount</span><span class="p">)</span> <span class="c1"># Blockcount</span>
 </pre></div>
 </div>
 </section>
-<section id="id6">
-<h5>Compositswap:<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h5>
+<section id="id13">
+<h5>Compositswap:<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h5>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">txid</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">poolpair</span><span class="o">.</span><span class="n">compositeswap</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="s2">"BTC"</span><span class="p">,</span> <span class="mi">1</span> <span class="n">address</span><span class="p">,</span> <span class="s2">"USDC"</span><span class="p">,</span> <span class="mi">40000</span><span class="p">)</span> <span class="c1"># Compositswap von BTC zu USDC</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">txid</span><span class="p">)</span> <span class="c1"># Txid des Swaps</span>
 </pre></div>
 </div>
 </section>
-<section id="id7">
-<h5>Ocean Rest API:<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h5>
+<section id="id14">
+<h5>Ocean Rest API:<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h5>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Ocean</span> <span class="c1"># Import</span>
 
 <span class="n">price</span> <span class="o">=</span> <span class="n">Ocean</span><span class="o">.</span><span class="n">prices</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"DFI"</span><span class="p">,</span> <span class="s2">"USD"</span><span class="p">)</span> <span class="c1"># Aufrufe</span>
@@ -548,8 +592,17 @@ write me on <a class="reference external" href="https://twitter.com/Intr0c">Twit
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Community</a><ul>
-<li><a class="reference internal" href="#the-defichain-python-library-has-reached-version-1-0-0">The Defichain Python Library has reached version 1.0.0!</a><ul>
+<li><a class="reference internal" href="#the-defichain-python-library-implements-hdwallet">The Defichain Python Library implements HDWallet!</a><ul>
+<li><a class="reference internal" href="#what-is-new">What is new?</a><ul>
+<li><a class="reference internal" href="#hierarchical-deterministic-wallet">Hierarchical Deterministic Wallet</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#what-s-next">What’s next?</a></li>
 <li><a class="reference internal" href="#here-are-some-important-links-around-the-project">Here are some important links around the project:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-defichain-python-library-has-reached-version-1-0-0">The Defichain Python Library has reached version 1.0.0!</a><ul>
+<li><a class="reference internal" href="#id4">Here are some important links around the project:</a></li>
 <li><a class="reference internal" href="#a-big-thank-you-goes-to-marcelkb-3">A big thank you goes to MarcelKB &lt;3</a></li>
 </ul>
 </li>
@@ -577,9 +630,9 @@ write me on <a class="reference external" href="https://twitter.com/Intr0c">Twit
 <li><a class="reference internal" href="#beschreibe-den-zweck">Beschreibe den Zweck</a><ul>
 <li><a class="reference internal" href="#beispielaufrufe">Beispielaufrufe:</a><ul>
 <li><a class="reference internal" href="#import-und-verbindungsaufbau">Import und Verbindungsaufbau:</a><ul>
-<li><a class="reference internal" href="#id5">Getblockcount:</a></li>
-<li><a class="reference internal" href="#id6">Compositswap:</a></li>
-<li><a class="reference internal" href="#id7">Ocean Rest API:</a></li>
+<li><a class="reference internal" href="#id12">Getblockcount:</a></li>
+<li><a class="reference internal" href="#id13">Compositswap:</a></li>
+<li><a class="reference internal" href="#id14">Ocean Rest API:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#voraussetzung">Voraussetzung:</a></li>
