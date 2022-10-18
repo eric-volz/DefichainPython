@@ -10,6 +10,16 @@ other ideas open an `issue <https://github.com/eric-volz/DefichainPython/issues>
 
 |
 
+.. admonition:: Announcement 02: Release v2.0.0
+    :class: caution
+
+    Introduction of HDWallet
+
+.. mdinclude:: ../../additionalInfos/reddit/announcement02.md
+
+
+|
+
 .. admonition:: Announcement 01: Release v1.0.0
     :class: caution
 
