@@ -10,7 +10,7 @@ The new feature of this version is the implementation of Hierarchical Determinis
 With this mnemonic seeds can be generated and addresses and private keys can be extracted.
 
 The HDWallet implementation corresponds to the addresses of the lightwallet. 
-So it is possible to find out private keys to addresses using the mnemonic Seeds of the lightwallet.
+So it is possible to find out private keys to addresses using the mnemonic seeds of the lightwallet.
 These private keys can then be imported into a defichain node wallet. 
 With that is possible to control your lightwallet address.
 
