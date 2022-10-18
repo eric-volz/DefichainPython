@@ -1,7 +1,7 @@
 [![PyPI Version](https://img.shields.io/pypi/v/defichain.svg?color=green)](https://pypi.org/project/defichain)
 [![PyPI Python Version](https://img.shields.io/pypi/pyversions/defichain.svg)](https://pypi.org/project/defichain)
 [![Documentation Status](https://readthedocs.org/projects/pytest/badge/?version=latest)](https://docs.defichain-python.de/)
-![Tests](https://github.com/eric-volz/DefichainPython/actions/workflows/tests.yml/badge.svg)
+[![Tests](https://github.com/eric-volz/DefichainPython/actions/workflows/tests.yml/badge.svg)](https://github.com/eric-volz/DefichainPython/actions/workflows/tests.yml)
 [![Downloads](https://static.pepy.tech/personalized-badge/defichain?period=total&units=international_system&left_color=grey&right_color=green&left_text=Downloads)](https://pepy.tech/project/defichain)
 
 # [DefichainPython](https://github.com/eric-volz/DefichainPython)
