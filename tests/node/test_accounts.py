@@ -1,4 +1,5 @@
 import pytest
+import time
 from tests.util import createNode, load_secrets_conf, LENGTH_OF_TXID
 
 # Import Exceptions
@@ -18,6 +19,9 @@ def test_accounthistorycount():  # 01
 
 @pytest.mark.transactions
 def test_accounttoaccount():  # 02
+    while len(node.wallet.listunspent()) < 1:
+        time.sleep(1)
+
     assert len(node.accounts.accounttoaccount(address, {address: "0.0001@DUSD"})) == LENGTH_OF_TXID
     assert len(node.accounts.accounttoaccount(address, {address: "0.0001@DUSD"}, [])) == LENGTH_OF_TXID
     assert len(node.accounts.accounttoaccount(_from=address, to={address: "0.0001@DUSD"}, inputs=[])) == LENGTH_OF_TXID
@@ -25,6 +29,9 @@ def test_accounttoaccount():  # 02
 
 @pytest.mark.transactions
 def test_accounttoutxos():  # 03
+    while len(node.wallet.listunspent()) < 1:
+        time.sleep(1)
+
     assert len(node.accounts.accounttoutxos(address, {address: "0.00001000"})) == LENGTH_OF_TXID
     assert len(node.accounts.accounttoutxos(address, {address: "0.00001000"}, [])) == LENGTH_OF_TXID
     assert len(node.accounts.accounttoutxos(_from=address, to={address: "0.00001000"}, inputs=[])) == LENGTH_OF_TXID
@@ -43,6 +50,9 @@ def test_executesmartcontract():  # 04
 
 @pytest.mark.transactions
 def test_futureswap():  # 05
+    while len(node.wallet.listunspent()) < 1:
+        time.sleep(1)
+
     assert len(node.accounts.futureswap(address, "0.00000001@DUSD", "SPY")) == LENGTH_OF_TXID
     assert len(node.accounts.futureswap(address, "0.00000001@DUSD", "SPY", [])) == LENGTH_OF_TXID
     assert len(node.accounts.futureswap(address=address, amount="0.00000001@DUSD", destination="SPY", inputs=[])) == LENGTH_OF_TXID
@@ -102,7 +112,7 @@ def test_listaccounts():  # 13
     assert node.accounts.listaccounts()
     assert node.accounts.listaccounts('001400007a7328b9554650a56d980095071a201341a2@3', True, 100, True, False, False)
     assert node.accounts.listaccounts(start='001400007a7328b9554650a56d980095071a201341a2@3', including_start=True,
-                                      limit=100,verbose=True, indexed_amounts=False, is_mine_only=False)
+                                      limit=100, verbose=True, indexed_amounts=False, is_mine_only=False)
 
 
 @pytest.mark.query
@@ -117,10 +127,12 @@ def test_listburnhistory():  # 14
 def test_listcommunitybalances():  # 15
     assert node.accounts.listcommunitybalances()
 
+
 @pytest.mark.query
 def test_listpendingfutureswaps():  # 16
     result = node.accounts.listpendingdusdswaps()
     assert result or result == []
+
 
 @pytest.mark.query
 def test_listpendingfutureswaps():  # 17
@@ -130,6 +142,9 @@ def test_listpendingfutureswaps():  # 17
 
 @pytest.mark.transactions
 def test_sendtokenstoaddress():  # 18
+    while len(node.wallet.listunspent()) < 1:
+        time.sleep(1)
+
     assert len(node.accounts.sendtokenstoaddress({address: "0.0001@DUSD"}, {address: "0.0001@DUSD"})) == LENGTH_OF_TXID
     assert len(node.accounts.sendtokenstoaddress({address: "0.0001@DUSD"}, {address: "0.0001@DUSD"}, "pie")) == LENGTH_OF_TXID
     assert len(node.accounts.sendtokenstoaddress(_from={address: "0.0001@DUSD"}, to={address: "0.0001@DUSD"},
@@ -138,6 +153,9 @@ def test_sendtokenstoaddress():  # 18
 
 @pytest.mark.transactions
 def test_sendutxosfrom():  # 19
+    while len(node.wallet.listunspent()) < 1:
+        time.sleep(1)
+
     assert len(node.accounts.sendutxosfrom(address, address, 0.001)) == LENGTH_OF_TXID
     assert len(node.accounts.sendutxosfrom(address, address, 0.001, address)) == LENGTH_OF_TXID
     assert len(node.accounts.sendutxosfrom(_from=address, to=address, amount=0.001, change=address)) == LENGTH_OF_TXID
@@ -145,6 +163,9 @@ def test_sendutxosfrom():  # 19
 
 @pytest.mark.transactions
 def test_utxostoaccount():  # 20
+    while len(node.wallet.listunspent()) < 1:
+        time.sleep(1)
+
     assert len(node.accounts.utxostoaccount({address: "0.000001@DFI"})) == LENGTH_OF_TXID
     assert len(node.accounts.utxostoaccount({address: "0.000001@DFI"}, [])) == LENGTH_OF_TXID
     assert len(node.accounts.utxostoaccount(amounts={address: "0.000001@DFI"}, inputs=[])) == LENGTH_OF_TXID
@@ -152,6 +173,9 @@ def test_utxostoaccount():  # 20
 
 @pytest.mark.transactions
 def test_withdrawfutureswap():  # 21
+    while len(node.wallet.listunspent()) < 1:
+        time.sleep(1)
+
     string = ".* RPC_INVALID_REQUEST: Test DFIP2203Tx execution failed:\namount 0.00000000 is less than 1.00000000"
     with pytest.raises(BadRequest, match=string):
         assert node.accounts.withdrawfutureswap(address, "1@DUSD", "TSLA")
@@ -159,4 +183,3 @@ def test_withdrawfutureswap():  # 21
         assert node.accounts.withdrawfutureswap(address, "1@DUSD", "TSLA", [])
     with pytest.raises(BadRequest, match=string):
         assert node.accounts.withdrawfutureswap(address=address, amount="1@DUSD", destination="TSLA", inputs=[])
-

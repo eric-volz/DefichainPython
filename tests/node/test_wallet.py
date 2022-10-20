@@ -1,8 +1,11 @@
+import os
+import time
+from pathlib import Path
+
 import pytest
-import os, time
+
 from tests.util import createNode, load_secrets_conf
 
-from pathlib import Path
 path = str(Path.home())
 
 # Import Exceptions
@@ -37,6 +40,7 @@ def test_addmultisigaddress():  # 03
     assert node.wallet.addmultisigaddress(nrequired=3, keys=[address1, address2, address3], label="test",
                                           address_type="legacy")
 
+
 @pytest.mark.query
 def test_backupwallet():  # 04
     assert node.wallet.backupwallet(path + os.sep + "backup_wallet") is None
@@ -59,7 +63,7 @@ def test_bumpfee():  # 05
 
 @pytest.mark.query
 def test_createwallet():  # 06
-    wallet_name = load_secrets_conf()["wallet_path"].split(os.sep)[-1]
+    wallet_name = load_secrets_conf()["wallet_name"].split(os.sep)[-1]
     string = f".* RPC_WALLET_ERROR: Wallet {wallet_name} already exists."
     with pytest.raises(InternalServerError, match=string):
         assert node.wallet.createwallet(wallet_name)
@@ -68,6 +72,7 @@ def test_createwallet():  # 06
     with pytest.raises(InternalServerError, match=string):
         assert node.wallet.createwallet(wallet_name=wallet_name, disable_private_keys=False, blank=False,
                                         passphrase="", avoid_reuse=False)
+
 
 @pytest.mark.query
 def test_dumpprivkey():  # 07
@@ -222,10 +227,12 @@ def test_importpubkey():  # 25
 
 @pytest.mark.query
 def test_importwallet():  # 26
-    wallet_path = load_secrets_conf()["wallet_path"]
-
-    assert node.wallet.importwallet(wallet_path) is None
-    assert node.wallet.importwallet(filename=wallet_path) is None
+    wallet_name = load_secrets_conf()["wallet_name"]
+    string = ".* RPC_INVALID_PARAMETER: Cannot open wallet dump file"
+    with pytest.raises(InternalServerError, match=string):
+        assert node.wallet.importwallet(wallet_name) is None
+    with pytest.raises(InternalServerError, match=string):
+        assert node.wallet.importwallet(filename=wallet_name) is None
 
 
 @pytest.mark.query
@@ -306,12 +313,12 @@ def test_listwallets():  # 37
 
 @pytest.mark.query
 def test_loadwallet():  # 38
-    wallet_path = load_secrets_conf()["wallet_path"]
+    wallet_name = load_secrets_conf()["wallet_name"]
     string = ".* RPC_WALLET_ERROR: Wallet file verification failed: Error loading wallet .*"
     with pytest.raises(InternalServerError, match=string):
-        assert node.wallet.loadwallet(wallet_path)
+        assert node.wallet.loadwallet(wallet_name)
     with pytest.raises(InternalServerError, match=string):
-        assert node.wallet.loadwallet(filename=wallet_path)
+        assert node.wallet.loadwallet(filename=wallet_name)
 
 
 @pytest.mark.query
@@ -341,6 +348,9 @@ def test_rescanblockchain():  # 41
 
 @pytest.mark.transactions
 def test_sendmany():  # 42
+    while len(node.wallet.listunspent()) < 1:
+        time.sleep(1)
+
     assert node.wallet.sendmany("", {address: 0.00001})
     assert node.wallet.sendmany("", {address: 0.00001}, 0, "Test", [], True, 1, "UNSET")
     assert node.wallet.sendmany(dummy="", amounts={address: 0.00001}, minconf=0, comment="Test", subtractfeefrom=[],
@@ -349,6 +359,9 @@ def test_sendmany():  # 42
 
 @pytest.mark.transactions
 def test_sendtoaddress():  # 43
+    while len(node.wallet.listunspent()) < 1:
+        time.sleep(1)
+
     assert node.wallet.sendtoaddress(address, 0.0001)
     assert node.wallet.sendtoaddress(address, 0.0001, "Test", "Myself", False, True, 1, "UNSET", False)
     assert node.wallet.sendtoaddress(address=address, amount=0.0001, comment="Test", comment_to="Myself",
@@ -411,7 +424,7 @@ def test_signrawtransactionwithwallet():  # 49
 @pytest.mark.query
 def test_unloadwallet():  # 50
     assert node.wallet.unloadwallet() is None
-    node.wallet.loadwallet(load_secrets_conf()["wallet_path"])
+    node.wallet.loadwallet(load_secrets_conf()["wallet_name"])
 
 
 @pytest.mark.query
