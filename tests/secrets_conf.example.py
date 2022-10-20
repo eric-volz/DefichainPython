@@ -11,7 +11,5 @@ The place to store credentials for your Defichain Node
 # PORT =
 # WALLET_ADDRESS =  # a legacy address is required
 # VAULT_ADDRESS =
-
-# Optional
-# WALLET_PATH =
+# WALLET_NAME =
 # WALLET_PASSWORD =
