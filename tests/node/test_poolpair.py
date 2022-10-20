@@ -1,4 +1,5 @@
 import pytest
+import time
 from tests.util import createNode, load_secrets_conf
 
 # Import Exceptions
@@ -11,6 +12,9 @@ vault = load_secrets_conf()["vault_address"]
 
 @pytest.mark.transactions
 def test_addpoolliquidity():  # 01
+    while len(node.wallet.listunspent()) < 1:
+        time.sleep(1)
+
     dusd_pool = node.poolpair.getpoolpair(17)
     reserveA = dusd_pool["17"]["reserveA"]
     reserveB = dusd_pool["17"]["reserveB"]
@@ -26,6 +30,9 @@ def test_addpoolliquidity():  # 01
 
 @pytest.mark.transactions
 def test_compositeswap():  # 02
+    while len(node.wallet.listunspent()) < 1:
+        time.sleep(1)
+
     assert node.poolpair.compositeswap(address, "DFI", 0.00000001, address, "DUSD")
     assert node.poolpair.compositeswap(address, "DFI", 0.00000001, address, "DUSD", 2, [])
     assert node.poolpair.compositeswap(_from=address, tokenFrom="DFI", amountFrom=0.00000001, to=address,
@@ -68,6 +75,9 @@ def test_listpoolshares():  # 06
 
 @pytest.mark.transactions
 def test_poolswap():  # 07
+    while len(node.wallet.listunspent()) < 1:
+        time.sleep(1)
+
     assert node.poolpair.poolswap(address, "DFI", 0.00000001, address, "DUSD")
     assert node.poolpair.poolswap(address, "DFI", 0.00000001, address, "DUSD", 2, [])
     assert node.poolpair.poolswap(_from=address, tokenFrom="DFI", amountFrom=0.00000001, to=address,
@@ -76,6 +86,9 @@ def test_poolswap():  # 07
 
 @pytest.mark.transactions
 def test_removepoolliquidityy():  # 08
+    while len(node.wallet.listunspent()) < 1:
+        time.sleep(1)
+
     assert node.poolpair.removepoolliquidity(address, "0.00000001@DUSD-DFI")
     assert node.poolpair.removepoolliquidity(address, "0.00000001@DUSD-DFI", [])
     assert node.poolpair.removepoolliquidity(_from=address, amount="0.00000001@DUSD-DFI", inputs=[])

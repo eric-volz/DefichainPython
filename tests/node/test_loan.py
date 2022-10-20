@@ -1,4 +1,5 @@
 import pytest
+import time
 from tests.util import createNode, load_secrets_conf
 
 # Import Exceptions
@@ -11,6 +12,9 @@ vault = load_secrets_conf()["vault_address"]
 
 @pytest.mark.transactions
 def test_createloanscheme():  # 01
+    while len(node.wallet.listunspent()) < 1:
+        time.sleep(1)
+
     string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
     with pytest.raises(InternalServerError, match=string):
         assert node.loan.createloanscheme(100, 10, "MIN100")
@@ -22,6 +26,9 @@ def test_createloanscheme():  # 01
 
 @pytest.mark.transactions
 def test_destroyloanscheme():  # 02
+    while len(node.wallet.listunspent()) < 1:
+        time.sleep(1)
+
     string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
     with pytest.raises(InternalServerError, match=string):
         assert node.loan.destroyloanscheme("MIN100")
@@ -79,8 +86,11 @@ def test_listloantokens():  # 10
 
 @pytest.mark.transactions
 def test_paybackloan():  # 11
-    amounts = ["0.00000001@DUSD", "0.00000001@DUSD"]
-    loans = [{"dToken": "DUSD", "amounts": "0.00000001@DUSD"}]
+    while len(node.wallet.listunspent()) < 1:
+        time.sleep(1)
+
+    amounts = ["0.00000001@SPY", "0.00000001@SPY"]
+    loans = [{"dToken": "SPY", "amounts": "0.00000001@SPY"}]
     assert node.loan.paybackloan(vault, address, amounts)
     assert node.loan.paybackloan(vaultId=vault, _from=address, amounts=amounts)
     assert node.loan.paybackloan(vault, address, None, loans)
@@ -124,7 +134,10 @@ def test_setloantoken():  # 14
 
 @pytest.mark.transactions
 def test_takeloan():  # 15
-    amounts = ["0.00000001@SPY", "0.00000001@SPY"]
+    while len(node.wallet.listunspent()) < 1:
+        time.sleep(1)
+
+    amounts = ["0.00000002@SPY", "0.00000002@SPY"]
     assert node.loan.takeloan(vault, amounts)
     assert node.loan.takeloan(vault, amounts, address, [])
     assert node.loan.takeloan(vaultId=vault, amounts=amounts, to=address, inputs=[])

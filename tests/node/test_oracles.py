@@ -19,7 +19,8 @@ def test_appointoracle():  # 01
 
 @pytest.mark.query
 def test_getdusdswapblock():  # 02
-    assert node.oracles.getdusdswapblock()
+    result = node.oracles.getdusdswapblock()
+    assert result or result == 0
 
 
 @pytest.mark.query

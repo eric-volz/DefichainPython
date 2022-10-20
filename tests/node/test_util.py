@@ -29,6 +29,7 @@ def test_deriveaddresses():  # 02
         assert node.util.deriveaddresses(f"pkh({pubkey})#{checksum}", [0, 10])
         assert node.util.deriveaddresses(descriptor=f"pkh({pubkey})#{checksum}", range=[0, 10])
 
+
 @pytest.mark.query
 def test_estimatesmartfee():  # 03
     assert node.util.estimatesmartfee(1)
@@ -57,7 +58,6 @@ def test_validateaddress():  # 06
     assert node.util.validateaddress(address=address)
 
 
-
 @pytest.mark.query
 def test_verifymessage():  # 07
     """
@@ -68,4 +68,3 @@ def test_verifymessage():  # 07
     assert node.util.verifymessage(address=address, signature=signature, message=msg)
     """
     assert True  # Not working on Node
-
