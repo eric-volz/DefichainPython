@@ -215,6 +215,5 @@ Next Steps
 ----------
 1. Document the last RPC methods on `docs.defichain-python.de <https://docs.defichain-python.de>`_
 2. implement the new ocean methods (implementation, documentation, testing)
-3. rework some of Node/RPC test
-4. implementation of the `community project <https://github.com/muirglacier/defid-indexer-docker>`_ (getting historical data via an API)
+3. implementation of the `community project <https://github.com/muirglacier/defid-indexer-docker>`_ (getting historical data via an API)
 
