@@ -163,7 +163,7 @@ class Poolpairs:
         """
         Get all dex prices denominated in a given token
 
-        :param denomination: denomination
+        :param denomination: (required) denomination
         :type denomination: str
         :return: (json string) {token: TokenIdentifier, denominationPrice: str}
 
