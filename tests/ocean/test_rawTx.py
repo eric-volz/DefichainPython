@@ -28,3 +28,9 @@ def test_test():  # 02
         assert ocean.rawTx.test(HEX)
         assert ocean.rawTx.test(HEX, 0.001)
         assert ocean.rawTx.test(hex=HEX, maxFeeRate=0.001)
+
+
+@pytest.mark.query
+def test_get():  # 03
+    assert ocean.rawTx.get("af6294e9729c6a4f31439e86374541658f35f4cc372a51e06c725429d875ac5c")
+    assert ocean.rawTx.get("af6294e9729c6a4f31439e86374541658f35f4cc372a51e06c725429d875ac5c")

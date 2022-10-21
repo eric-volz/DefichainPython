@@ -43,3 +43,17 @@ class RawTx:
         j.append("hex", hex)
         j.append("maxFeeRate", maxFeeRate)
         return self._ocean._conn.post("rawtx/test", json.dumps(j.build()))
+
+    def get(self, txid: str) -> {}:
+        """
+        Get a raw transaction
+
+        :param txid: (required) txid of transaction to query
+        :type txid: str
+        :return: json string
+
+        :example:
+
+        >>> ocean.rawTx.test("af6294e9729c6a4f31439e86374541658f35f4cc372a51e06c725429d875ac5c")
+        """
+        return self._ocean._conn.get(f"rawtx/{txid}")
