@@ -157,6 +157,18 @@ class Poolpairs:
 
         >>> ocean.poolpairs.getAllPaths("0", "75")
         """
-
         return self._ocean._conn.get(f"poolpairs/paths/from/{fromTokenId}/to/{toTokenId}")
 
+    def listDexPrices(self, denomination: str) -> {}:
+        """
+        Get all dex prices denominated in a given token
+
+        :param denomination: denomination
+        :type denomination: str
+        :return: (json string) {token: TokenIdentifier, denominationPrice: str}
+
+        :example:
+
+        >>> ocean.poolpairs.listDexPrices("DUSD")
+        """
+        return self._ocean._conn.get(f"poolpairs/dexprices?denomination={denomination}")
