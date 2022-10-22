@@ -284,6 +284,21 @@ net: {version: int, subversion: str, protocolversion: int}}</p>
 </div>
 </dd></dl>
 <dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Stats.getRewardDistribution">
+<span class="sig-name descname"><span class="pre">getRewardDistribution</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Stats.getRewardDistribution" title="Permalink to this definition">#</a></dt>
+<dd><p>Get reward distribution of DeFi Blockchain</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(json string) {masternode: int, community: int, anchor: int, liquidity: int, loan: int, options: int, unallocated: int}</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">getRewardDistribution</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
 <dt class="sig sig-object py" id="defichain.ocean.Stats.getSupply">
 <span class="sig-name descname"><span class="pre">getSupply</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Stats.getSupply" title="Permalink to this definition">#</a></dt>
 <dd><p>Get supply of DeFi Blockchain</p>

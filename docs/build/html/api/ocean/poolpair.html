@@ -450,6 +450,24 @@ estimatedReturn: str, estimatedReturnLessDexFees: str}</p>
 </pre></div>
 </div>
 </dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.ocean.Poolpairs.listDexPrices">
+<span class="sig-name descname"><span class="pre">listDexPrices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">denomination</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.ocean.Poolpairs.listDexPrices" title="Permalink to this definition">#</a></dt>
+<dd><p>Get all dex prices denominated in a given token</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>denomination</strong> (<em>str</em>) – (required) denomination</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json string) {token: TokenIdentifier, denominationPrice: str}</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span><span class="o">.</span><span class="n">poolpairs</span><span class="o">.</span><span class="n">listDexPrices</span><span class="p">(</span><span class="s2">"DUSD"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
 </dd></dl>
 </section>
 
