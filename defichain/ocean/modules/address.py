@@ -14,8 +14,8 @@ class Address:
         :type height: int
         :param txno: (required) order of txn
         :type txno: int
-        :return: :return: (json string) {owner: str, txid: str, txn: int, type: str, amounts: str[], block: {height: int,
-            hash: str, time: int}
+        :return: (json string) {owner: str, txid: str, txn: int, type: str, amounts: str[],
+            block: {height: int, hash: str, time: int}
 
         :example:
 
