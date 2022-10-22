@@ -214,6 +214,5 @@ Since this is a community supported project, the community also has the right to
 Next Steps
 ----------
 1. Document the last RPC methods on `docs.defichain-python.de <https://docs.defichain-python.de>`_
-2. implement the new ocean methods (implementation, documentation, testing)
-3. implementation of the `community project <https://github.com/muirglacier/defid-indexer-docker>`_ (getting historical data via an API)
+2. implementation of the `community project <https://github.com/muirglacier/defid-indexer-docker>`_ (getting historical data via an API)
 
