@@ -10,10 +10,15 @@ def test_get():  # 01
 
 
 @pytest.mark.query
-def test_getSupply():  # 02
+def test_RewardDistributiong():  # 02
+    assert ocean.stats.getRewardDistribution()
+
+
+@pytest.mark.query
+def test_getSupply():  # 03
     assert ocean.stats.getSupply()
 
 
 @pytest.mark.query
-def test_getBurn():  # 03
+def test_getBurn():  # 04
     assert ocean.stats.getBurn()

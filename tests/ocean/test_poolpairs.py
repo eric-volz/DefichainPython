@@ -66,3 +66,9 @@ def test_getAllPaths():  # 08
     toTokenId = 26  # SPY
     assert ocean.poolpairs.getAllPaths(fromTokenId, toTokenId)
     assert ocean.poolpairs.getAllPaths(fromTokenId=fromTokenId, toTokenId=toTokenId)
+
+
+@pytest.mark.query
+def test_listDexPrices():  # 09
+    assert ocean.poolpairs.listDexPrices("DUSD")
+    assert ocean.poolpairs.listDexPrices(denomination="DUSD")

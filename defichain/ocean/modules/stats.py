@@ -4,7 +4,7 @@ class Stats:
     def __init__(self, ocean):
         self._ocean = ocean
 
-    def get(self) -> {}:
+    def get(self) -> {}:  # 01
         """
         Get stats of DeFi Blockchain
 
@@ -23,7 +23,19 @@ class Stats:
         """
         return self._ocean._conn.get("stats")
 
-    def getSupply(self) -> {}:
+    def getRewardDistribution(self) -> {}:
+        """
+        Get reward distribution of DeFi Blockchain
+
+        :return: (json string) {masternode: int, community: int, anchor: int, liquidity: int, loan: int, options: int, unallocated: int}
+
+        :example:
+
+        >>> ocean.stats.getRewardDistribution()
+        """
+        return self._ocean._conn.get("stats/rewards/distribution")
+
+    def getSupply(self) -> {}:  # 02
         """
         Get supply of DeFi Blockchain
 
@@ -35,7 +47,7 @@ class Stats:
         """
         return self._ocean._conn.get("stats/supply")
 
-    def getBurn(self) -> {}:
+    def getBurn(self) -> {}:  # 03
         """
         Get burn info of DeFi Blockchain
 
