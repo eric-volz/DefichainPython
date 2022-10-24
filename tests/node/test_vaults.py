@@ -80,7 +80,7 @@ def test_listauctionhistory():  # 08
                                          0, 100) == []
     assert node.vault.listauctionhistory(identifier="all", maxBlockHeight=node.blockchain.getblockcount(),
                                          vaultId="63a41dbc6497a58f024b730ca27189cdd2da45a5f9adda78c02581de36345e18",
-                                         index=0, limit=100)
+                                         index=0, limit=100) == []
 
 
 @pytest.mark.query
