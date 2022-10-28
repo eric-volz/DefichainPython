@@ -22,11 +22,11 @@ class Masternodes:
             five or ten years and will have 1.5x or 2.0 the staking power respectively. Be aware that this means
             that you cannot spend the collateral used to create a masternode for whatever period is specified.
         :type timelock: str
-        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+        :return: "hash" (string) -- The hex-encoded hash of broadcasted transaction
 
         :example:
 
-        >>> node.masternodes.createmasternode("ownerAddress", "operatorAddress")
+            >>> node.masternodes.createmasternode("ownerAddress", "operatorAddress")
         """
         operatorAddress = ownerAddress if operatorAddress is None else operatorAddress
         return self._node._rpc.call("createmasternode", ownerAddress, operatorAddress, inputs, timelock)
@@ -37,11 +37,11 @@ class Masternodes:
 
         :param blockCount: (optional) The number of blocks to check for unique masternodes
         :type blockCount: int
-        :return: n (numeric) Number of unique masternodes seen
+        :return: n (numeric) -- Number of unique masternodes seen
 
         :example:
 
-        >>> node.masternodes.getactivemasternodecount()
+            >>> node.masternodes.getactivemasternodecount()
         """
         return self._node._rpc.call("getactivemasternodecount", blockCount)
 
@@ -51,11 +51,11 @@ class Masternodes:
 
         :param blockHeight: (optional) The height of block which contain tx
         :type blockHeight: int
-        :return: {"auth":[Address,...],"confirm":[Address,...]} Two sets of masternode operator addresses
+        :return: {"auth":[Address,...],"confirm":[Address,...]} (json) -- Two sets of masternode operator addresses
 
         :example:
 
-        >>> node.masternodes.getanchorteams()
+            >>> node.masternodes.getanchorteams()
         """
         return self._node._rpc.call("getanchorteams", blockHeight)
 
@@ -65,11 +65,11 @@ class Masternodes:
 
         :param mn_id: (required)  Masternode's id
         :type mn_id: str
-        :return: {id:{...}} (object) Json object with masternode information
+        :return: {id:{...}} (json) -- Json object with masternode information
 
         :example:
 
-        >>> node.masternodes.getmasternode("095d2bfb5d05ba73fa96502df85aca818ee79810b9ababa71a9dc97e2c360100")
+            >>> node.masternodes.getmasternode("095d2bfb5d05ba73fa96502df85aca818ee79810b9ababa71a9dc97e2c360100")
         """
         return self._node._rpc.call("getmasternode", mn_id)
 
@@ -87,11 +87,11 @@ class Masternodes:
         :type operatorAddress: str
         :param depth: (optional) Maximum depth, from the genesis block is the default
         :type depth: int
-        :return: {...} (object) Json object with block hash and height information
+        :return: {...} (json) -- Json object with block hash and height information
 
         :example:
 
-        >>> node.masternodes.getmasternodeblocks(id="095d2bfb5d05ba73fa96502df85aca818ee79810b9ababa71a9dc97e2c360100")
+            >>> node.masternodes.getmasternodeblocks(id="095d2bfb5d05ba73fa96502df85aca818ee79810b9ababa71a9dc97e2c360100")
         """
         depth = self._node.blockchain.getblockcount() if depth is None else depth
         identifier = BuildJson()
@@ -104,11 +104,11 @@ class Masternodes:
         """
         List anchors (if any)
 
-        :return: "array" Returns array of anchors
+        :return: [...] (array) -- Returns array of anchors
 
         :example:
 
-        >>> node.masternodes.listanchors()
+            >>> node.masternodes.listanchors()
         """
         return self._node._rpc.call("listanchors")
 
@@ -124,11 +124,11 @@ class Masternodes:
         :type limit: int
         :param verbose: (optional) Flag for verbose list (default = true), otherwise only ids are listed
         :type verbose: bool
-        :return: {id:{...},...} (array) Json object with masternodes information
+        :return: {id:{...},...} (json) -- Json object with masternodes information
 
         :example:
 
-        >>> node.masternodes.listmasternodes()
+            >>> node.masternodes.listmasternodes()
         """
         pagination = BuildJson()
         pagination.append("start", start)
@@ -148,10 +148,10 @@ class Masternodes:
         :type mn_id: str
         :param inputs: (optional) :ref:`Node Inputs`
         :type inputs: json array
-        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+        :return: "hash" (string) -- The hex-encoded hash of broadcasted transaction
 
         :example:
 
-        >>> node.masternodes.resignmasternode("095d2bfb5d05ba73fa96502df85aca818ee79810b9ababa71a9dc97e2c360100")
+            >>> node.masternodes.resignmasternode("095d2bfb5d05ba73fa96502df85aca818ee79810b9ababa71a9dc97e2c360100")
         """
         return self._node._rpc.call("resignmasternode", mn_id, inputs)
