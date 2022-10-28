@@ -17,11 +17,11 @@ class Loan:
         :type id: str
         :param inputs: (optional) :ref:`Node Inputs`
         :type inputs: json array
-        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+        :return: "hash" (string) -- The hex-encoded hash of broadcasted transaction
 
         :example:
 
-        >>> node.loan.createloanscheme(150, 5, "MyScheme")
+            >>> node.loan.createloanscheme(150, 5, "MyScheme")
         """
         return self._node._rpc.call("createloanscheme", mincolratio, interestrate, id, inputs)
 
@@ -35,11 +35,11 @@ class Loan:
         :type ACTIVATE_AFTER_BLOCK: int
         :param inputs: (optional) :ref:`Node Inputs`
         :type inputs: json array
-        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+        :return: "hash" (string) -- The hex-encoded hash of broadcasted transaction
 
         :example:
 
-        >>> node.loan.destroyloanscheme("MyScheme")
+            >>> node.loan.destroyloanscheme("MyScheme")
         """
         ACTIVATE_AFTER_BLOCK = self._node.blockchain.getblockcount() + 1 if ACTIVATE_AFTER_BLOCK is None else ACTIVATE_AFTER_BLOCK
         return self._node._rpc.call("destroyloanscheme", id, ACTIVATE_AFTER_BLOCK, inputs)
@@ -50,11 +50,11 @@ class Loan:
 
         :param token: (required) Symbol or id of collateral token
         :type token: str
-        :return: {...} (object) Json object with collateral token information
+        :return: {...} (json) -- Json object with collateral token information
 
         :example:
 
-        >>> node.loan.getcollateraltoken("DFI")
+            >>> node.loan.getcollateraltoken("DFI")
         """
         return self._node._rpc.call("getcollateraltoken", token)
 
@@ -66,22 +66,22 @@ class Loan:
         :type id: str
         :param token: (optional) The token's symbol, id or creation tx
         :type token: str
-        :return: {...} (object) Json object with interest information
+        :return: {...} (json) -- Json object with interest information
 
-        .. code-block:: text
+            .. code-block:: text
 
-           interestPerBlock: Interest per block is always ceiled
-           to the min. unit of fi (8 decimals), however interest
-           less than this will continue to accrue until actual utilization
-           (eg. - payback of the loan), or until sub-fi maturity.
+               interestPerBlock: Interest per block is always ceiled
+               to the min. unit of fi (8 decimals), however interest
+               less than this will continue to accrue until actual utilization
+               (eg. - payback of the loan), or until sub-fi maturity.
 
-           realizedInterestPerBlock: The actual realized interest
-           per block. This is continues to accumulate until
-           the min. unit of the blockchain (fi) can be realized.
+               realizedInterestPerBlock: The actual realized interest
+               per block. This is continues to accumulate until
+               the min. unit of the blockchain (fi) can be realized.
 
         :example:
 
-        >>> node.loan.getinterest("MyScheme", "DUSD")
+            >>> node.loan.getinterest("MyScheme", "DUSD")
         """
         return self._node._rpc.call("getinterest", id, token)
 
@@ -89,11 +89,11 @@ class Loan:
         """
         Returns the loan stats.
 
-        :return: {...} (object) Json object with loan information
+        :return: {...} (json) -- Json object with loan information
 
         :example:
 
-        >>> node.loan.getloaninfo()
+            >>> node.loan.getloaninfo()
         """
         return self._node._rpc.call("getloaninfo")
 
@@ -103,19 +103,19 @@ class Loan:
 
         :param id: (required) Unique identifier of the loan scheme (8 chars max)
         :type id: str
-        :return:
+        :return: {...} (json) -- returns loanscheme from id
 
-        .. code-block:: text
+            .. code-block:: text
 
-            {
-                "id" : n                   (string)
-                "mincolratio" : n          (numeric)
-                "interestrate" : n         (numeric)
-            }
+                {
+                    "id" : n                   (string)
+                    "mincolratio" : n          (numeric)
+                    "interestrate" : n         (numeric)
+                }
 
         :example:
 
-        >>> node.loan.getloanscheme("MyScheme")
+            >>> node.loan.getloanscheme("MyScheme")
         """
         return self._node._rpc.call("getloanscheme", id)
 
@@ -125,11 +125,11 @@ class Loan:
 
         :param token: (required) Symbol or id of loan token
         :type token: str
-        :return: {...} (object) Json object with loan token information
+        :return: {...} (json) -- Json object with loan token information
 
         :example:
 
-        >>> node.loan.getloantoken("DUSD")
+            >>> node.loan.getloantoken("DUSD")
         """
         return self._node._rpc.call("getloantoken", token)
 
@@ -138,11 +138,11 @@ class Loan:
         Return list of all created collateral tokens. If no parameters passed
         it will return all current valid setcollateraltoken transactions
 
-        :return: {...} (object) Json object with collateral token information
+        :return: {...} (json) -- Json object with collateral token information
 
         :example:
 
-        >>> node.loan.listcollateraltokens()
+            >>> node.loan.listcollateraltokens()
         """
         return self._node._rpc.call("listcollateraltokens")
 
@@ -150,18 +150,22 @@ class Loan:
         """
         List all available loan schemes.
 
-        :return:
+        :return: [{...}] (json array) -- returns list of loan schemes
 
-        .. code-block:: text
+            .. code-block:: text
 
-            [                              (json array of objects)
-                {
-                "id" : n                   (string)
-                "mincolratio" : n          (numeric)
-                "interestrate" : n         (numeric)
-                },
-                ...
-            ]
+                [                              (json array of objects)
+                    {
+                    "id" : n                   (string)
+                    "mincolratio" : n          (numeric)
+                    "interestrate" : n         (numeric)
+                    },
+                    ...
+                ]
+
+        :example:
+
+            >>> node.loan.listloanschemes()
         """
         return self._node._rpc.call("listloanschemes")
 
@@ -169,11 +173,11 @@ class Loan:
         """
         Return list of all created loan tokens.
 
-        :return: {...} (object) Json object with loan token information
+        :return: {...} (json) -- Json object with loan token information
 
         :example:
 
-        >>> node.loan.listloantokens()
+            >>> node.loan.listloantokens()
         """
         return self._node._rpc.call("listloantokens")
 
@@ -189,24 +193,24 @@ class Loan:
         :type amounts: str
         :param loans: (optional) A json array of json objects
 
-        .. code-block:: text
+            .. code-block:: text
 
-            [
-                {                      (json object)
-                "dToken": "str",     (string, required) The dTokens's symbol, id or creation tx
-                "amounts": "str",    (string, required) Amount in amount@token format.
-                },
-                ...
-            ]
+                [
+                    {                      (json object)
+                    "dToken": "str",     (string, required) The dTokens's symbol, id or creation tx
+                    "amounts": "str",    (string, required) Amount in amount@token format.
+                    },
+                    ...
+                ]
 
         :type loans: json array
         :param inputs: (optional) :ref:`Node Inputs`
         :type inputs: json array
-        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+        :return: "hash" (string) -- The hex-encoded hash of broadcasted transaction
 
         :example:
 
-        >>> node.loan.paybackloan("84b22eee1964768304e624c416f29a91d78a01dc5e8e12db26bdac0670c67bb2", "mxxA2sQMETJFbXcNbNbUzEsBCTn1JSHXST", "10@TSLA")
+            >>> node.loan.paybackloan("84b22eee1964768304e624c416f29a91d78a01dc5e8e12db26bdac0670c67bb2", "mxxA2sQMETJFbXcNbNbUzEsBCTn1JSHXST", "10@TSLA")
         """
         metadata = BuildJson()
         metadata.append("vaultId", vaultId)
@@ -229,11 +233,11 @@ class Loan:
         :type activateAfterBlock: int
         :param inputs: (optional) :ref:`Node Inputs`
         :type inputs: json array
-        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+        :return: "hash" (string) -- The hex-encoded hash of broadcasted transaction
 
         :example:
 
-        >>> node.loan.setcollateraltoken("TSLA", 150, "TSLA/USD")
+            >>> node.loan.setcollateraltoken("TSLA", 150, "TSLA/USD")
         """
         metadata = BuildJson()
         metadata.append("token", token)
@@ -250,11 +254,11 @@ class Loan:
         :type id: str
         :param inputs: (optional) :ref:`Node Inputs`
         :type inputs: json array
-        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+        :return: "hash" (string) -- The hex-encoded hash of broadcasted transaction
 
         :example:
 
-        >>> node.loan.setdefaultloanscheme("MyScheme")
+            >>> node.loan.setdefaultloanscheme("MyScheme")
         """
         return self._node._rpc.call("setdefaultloanscheme", id, inputs)
 
@@ -274,11 +278,11 @@ class Loan:
         :type interest: float
         :param inputs: (optional) :ref:`Node Inputs`
         :type inputs: json array
-        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+        :return: "hash" (string) -- The hex-encoded hash of broadcasted transaction
 
         :example:
 
-        >>> node.loan.setloantoken("TSLA", "TSLA/USD", "TSLA Stock", True, 5)
+            >>> node.loan.setloantoken("TSLA", "TSLA/USD", "TSLA Stock", True, 5)
         """
         metadata = BuildJson()
         metadata.append("symbol", symbol)
@@ -300,11 +304,11 @@ class Loan:
         :type to: str
         :param inputs: (optional) :ref:`Node Inputs`
         :type inputs: json array
-        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+        :return: "hash" (string) -- The hex-encoded hash of broadcasted transaction
 
         :example:
 
-        >>> node.loan.takeloan("84b22eee1964768304e624c416f29a91d78a01dc5e8e12db26bdac0670c67bb2", "10@SPY")
+            >>> node.loan.takeloan("84b22eee1964768304e624c416f29a91d78a01dc5e8e12db26bdac0670c67bb2", "10@SPY")
         """
         metadata = BuildJson()
         metadata.append("vaultId", vaultId)
@@ -326,11 +330,11 @@ class Loan:
         :type ACTIVATE_AFTER_BLOCK: int
         :param inputs: (optional) :ref:`Node Inputs`
         :type inputs: json array
-        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+        :return: "hash" (string) -- The hex-encoded hash of broadcasted transaction
 
         :example:
 
-        >>> node.loan.updateloanscheme(150, 5, "MyScheme")
+            >>> node.loan.updateloanscheme(150, 5, "MyScheme")
         """
         ACTIVATE_AFTER_BLOCK = self._node.blockchain.getblockcount() + 1 if ACTIVATE_AFTER_BLOCK is None else ACTIVATE_AFTER_BLOCK
         return self._node._rpc.call("updateloanscheme", mincolratio, interestrate, id, ACTIVATE_AFTER_BLOCK, inputs)
@@ -353,11 +357,11 @@ class Loan:
         :type interest: float
         :param inputs: (optional) :ref:`Node Inputs`
         :type inputs: json array
-        :return: "hash" (string) The hex-encoded hash of broadcasted transaction
+        :return: "hash" (string) -- The hex-encoded hash of broadcasted transaction
 
         :example:
 
-        >>> node.loan.updateloantoken("TSLA", "TSLAA", "TSLA Stock", "TSLA/USD", True, 5)
+            >>> node.loan.updateloantoken("TSLA", "TSLAA", "TSLA Stock", "TSLA/USD", True, 5)
         """
         metadata = BuildJson()
         metadata.append("symbol", symbol)
