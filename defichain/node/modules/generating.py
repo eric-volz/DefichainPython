@@ -12,12 +12,12 @@ class Generating:
         :type address: str
         :param maxtries: (optional) How many iterations to try
         :type maxtries: int
-        :return: (array) hashes of blocks generated
+        :return: [...] (array) -- hashes of blocks generated
 
         :example:
 
         Generate 11 blocks to myaddress
 
-        >>> node.generating.generatetoaddress(11, address)
+            >>> node.generating.generatetoaddress(11, address)
         """
         return self._node._rpc.call("generatetoaddress", nblocks, address, maxtries)
