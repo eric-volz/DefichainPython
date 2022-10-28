@@ -18,72 +18,72 @@ class Mining:
 
         :param template_request: (optional) A json object in the following spec
 
-        .. code-block:: text
+            .. code-block:: text
 
-            {
-                "mode": "str",       (string, optional) This must be set to "template", "proposal" (see BIP 23), or omitted
-                "capabilities": [    (json array, optional) A list of strings
-                    "support",         (string) client side supported feature, 'longpoll', 'coinbasetxn', 'coinbasevalue', 'proposal', 'serverlist', 'workid'
+                {
+                    "mode": "str",       (string, optional) This must be set to "template", "proposal" (see BIP 23), or omitted
+                    "capabilities": [    (json array, optional) A list of strings
+                        "support",         (string) client side supported feature, 'longpoll', 'coinbasetxn', 'coinbasevalue', 'proposal', 'serverlist', 'workid'
+                        ...
+                    ],
+                    "rules": [           (json array, required) A list of strings
+                    "support",         (string) client side supported softfork deployment
                     ...
-                ],
-                "rules": [           (json array, required) A list of strings
-                "support",         (string) client side supported softfork deployment
-                ...
-                ],
-            }
+                    ],
+                }
 
         :type template_request: json
-        :return:
+        :return: {...} (json) -- returns block template
 
-        .. code-block:: text
+            .. code-block:: text
 
-            {
-                "version" : n,                    (numeric) The preferred block version
-                "rules" : [ "rulename", ... ],    (array of strings) specific block rules that are to be enforced
-                "vbavailable" : {                 (json object) set of pending, supported versionbit (BIP 9) softfork deployments
-                    "rulename" : bitnumber        (numeric) identifies the bit number as indicating acceptance and readiness for the named softfork rule
-                    ,...
-                },
-                "vbrequired" : n,                 (numeric) bit mask of versionbits the server requires set in submissions
-                "previousblockhash" : "xxxx",     (string) The hash of current highest block
-                "transactions" : [                (array) contents of non-coinbase transactions that should be included in the next block
-                    {
-                        "data" : "xxxx",          (string) transaction data encoded in hexadecimal (byte-for-byte)
-                        "txid" : "xxxx",          (string) transaction id encoded in little-endian hexadecimal
-                        "hash" : "xxxx",          (string) hash encoded in little-endian hexadecimal (including witness data)
-                        "depends" : [             (array) array of numbers
-                            n                     (numeric) transactions before this one (by 1-based index in 'transactions' list) that must be present in the final block if this one is
-                            ,...
-                        ],
-                        "fee": n,                 (numeric) difference in value between transaction inputs and outputs (in satoshis); for coinbase transactions, this is a negative Number of the total collected block fees (ie, not including the block subsidy); if key is not present, fee is unknown and clients MUST NOT assume there isn't one
-                        "sigops" : n,             (numeric) total SigOps cost, as counted for purposes of block limits; if key is not present, sigop cost is unknown and clients MUST NOT assume it is zero
-                        "weight" : n,             (numeric) total transaction weight, as counted for purposes of block limits
-                    }
-                    ,...
-                ],
-                "coinbaseaux" : {                 (json object) data that should be included in the coinbase's scriptSig content
-                    "flags" : "xx"                (string) key name is to be ignored, and value included in scriptSig
-                },
-                "coinbasevalue" : n,              (numeric) maximum allowable input to coinbase transaction, including the generation award and transaction fees (in satoshis)
-                "coinbasetxn" : { ... },          (json object) information for coinbase transaction
-                "target" : "xxxx",                (string) The hash target
-                "mintime" : xxx,                  (numeric) The minimum timestamp appropriate for next block time in seconds since epoch (Jan 1 1970 GMT)
-                "mutable" : [                     (array of string) list of ways the block template may be changed
-                    "value"                       (string) A way the block template may be changed, e.g. 'time', 'transactions', 'prevblock'
-                    ,...
-                ],
-                "noncerange" : "00000000ffffffff",(string) A range of valid nonces
-                "sigoplimit" : n,                 (numeric) limit of sigops in blocks
-                "sizelimit" : n,                  (numeric) limit of block size
-                "weightlimit" : n,                (numeric) limit of block weight
-                "curtime" : ttt,                  (numeric) current timestamp in seconds since epoch (Jan 1 1970 GMT)
-                "bits" : "xxxxxxxx",              (string) compressed target of next block
-                "height" : n                      (numeric) The height of the next block
-            }
+                {
+                    "version" : n,                    (numeric) The preferred block version
+                    "rules" : [ "rulename", ... ],    (array of strings) specific block rules that are to be enforced
+                    "vbavailable" : {                 (json object) set of pending, supported versionbit (BIP 9) softfork deployments
+                        "rulename" : bitnumber        (numeric) identifies the bit number as indicating acceptance and readiness for the named softfork rule
+                        ,...
+                    },
+                    "vbrequired" : n,                 (numeric) bit mask of versionbits the server requires set in submissions
+                    "previousblockhash" : "xxxx",     (string) The hash of current highest block
+                    "transactions" : [                (array) contents of non-coinbase transactions that should be included in the next block
+                        {
+                            "data" : "xxxx",          (string) transaction data encoded in hexadecimal (byte-for-byte)
+                            "txid" : "xxxx",          (string) transaction id encoded in little-endian hexadecimal
+                            "hash" : "xxxx",          (string) hash encoded in little-endian hexadecimal (including witness data)
+                            "depends" : [             (array) array of numbers
+                                n                     (numeric) transactions before this one (by 1-based index in 'transactions' list) that must be present in the final block if this one is
+                                ,...
+                            ],
+                            "fee": n,                 (numeric) difference in value between transaction inputs and outputs (in satoshis); for coinbase transactions, this is a negative Number of the total collected block fees (ie, not including the block subsidy); if key is not present, fee is unknown and clients MUST NOT assume there isn't one
+                            "sigops" : n,             (numeric) total SigOps cost, as counted for purposes of block limits; if key is not present, sigop cost is unknown and clients MUST NOT assume it is zero
+                            "weight" : n,             (numeric) total transaction weight, as counted for purposes of block limits
+                        }
+                        ,...
+                    ],
+                    "coinbaseaux" : {                 (json object) data that should be included in the coinbase's scriptSig content
+                        "flags" : "xx"                (string) key name is to be ignored, and value included in scriptSig
+                    },
+                    "coinbasevalue" : n,              (numeric) maximum allowable input to coinbase transaction, including the generation award and transaction fees (in satoshis)
+                    "coinbasetxn" : { ... },          (json object) information for coinbase transaction
+                    "target" : "xxxx",                (string) The hash target
+                    "mintime" : xxx,                  (numeric) The minimum timestamp appropriate for next block time in seconds since epoch (Jan 1 1970 GMT)
+                    "mutable" : [                     (array of string) list of ways the block template may be changed
+                        "value"                       (string) A way the block template may be changed, e.g. 'time', 'transactions', 'prevblock'
+                        ,...
+                    ],
+                    "noncerange" : "00000000ffffffff",(string) A range of valid nonces
+                    "sigoplimit" : n,                 (numeric) limit of sigops in blocks
+                    "sizelimit" : n,                  (numeric) limit of block size
+                    "weightlimit" : n,                (numeric) limit of block weight
+                    "curtime" : ttt,                  (numeric) current timestamp in seconds since epoch (Jan 1 1970 GMT)
+                    "bits" : "xxxxxxxx",              (string) compressed target of next block
+                    "height" : n                      (numeric) The height of the next block
+                }
 
         :example:
 
-        >>> node.mining.getblocktemplate({"rules": ["segwit"]})
+            >>> node.mining.getblocktemplate({"rules": ["segwit"]})
         """
         return self._node._rpc.call("getblocktemplate", template_request)
 
@@ -91,26 +91,26 @@ class Mining:
         """
         Returns a json object containing mining-related information for all local masternodes
 
-        :return:
+        :return: {...} (json) -- returns mining info
 
-        .. code-block:: text
+            .. code-block:: text
 
-            {
-                "blocks": nnn,             (numeric) The current block
-                "currentblockweight": nnn, (numeric, optional) The block weight of the last assembled block (only present if a block was ever assembled)
-                "currentblocktx": nnn,     (numeric, optional) The number of block transactions of the last assembled block (only present if a block was ever assembled)
-                "difficulty": xxx.xxxxx    (numeric) The current difficulty
-                "networkhashps": nnn,      (numeric) The network hashes per second
-                "pooledtx": n              (numeric) The size of the mempool
-                "chain": "xxxx",           (string)  current network name as defined in BIP70 (main, test, regtest)
-                "isoperator": true|false   (boolean) Local master nodes are available or not
-                "masternodes": []          (array)   an array of objects which includes each master node information
-                "warnings": "..."          (string)  any network and blockchain warnings
-            }
+                {
+                    "blocks": nnn,             (numeric) The current block
+                    "currentblockweight": nnn, (numeric, optional) The block weight of the last assembled block (only present if a block was ever assembled)
+                    "currentblocktx": nnn,     (numeric, optional) The number of block transactions of the last assembled block (only present if a block was ever assembled)
+                    "difficulty": xxx.xxxxx    (numeric) The current difficulty
+                    "networkhashps": nnn,      (numeric) The network hashes per second
+                    "pooledtx": n              (numeric) The size of the mempool
+                    "chain": "xxxx",           (string)  current network name as defined in BIP70 (main, test, regtest)
+                    "isoperator": true|false   (boolean) Local master nodes are available or not
+                    "masternodes": []          (array)   an array of objects which includes each master node information
+                    "warnings": "..."          (string)  any network and blockchain warnings
+                }
 
         :example:
 
-        >>> node.mining.getmininginfo()
+            >>> node.mining.getmininginfo()
         """
         return self._node._rpc.call("getmininginfo")
 
@@ -120,26 +120,26 @@ class Mining:
 
         Returns a json object containing mining-related information.
 
-        :return:
+        :return: {...} (json) -- returns minting info
 
-        .. code-block:: text
+            .. code-block:: text
 
-            {
-                "blocks": nnn,             (numeric) The current block
-                "currentblockweight": nnn, (numeric, optional) The block weight of the last assembled block (only present if a block was ever assembled)
-                "currentblocktx": nnn,     (numeric, optional) The number of block transactions of the last assembled block (only present if a block was ever assembled)
-                "difficulty": xxx.xxxxx    (numeric) The current difficulty
-                "networkhashps": nnn,      (numeric) The network hashes per second
-                "pooledtx": n              (numeric) The size of the mempool
-                "chain": "xxxx",         (string)  current network name as defined in BIP70 (main, test, regtest)
-                "isoperator": true|false   (boolean) Local master nodes are available or not
-                "masternodes": []          (array)   an array of objects which includes each master node information
-                "warnings": "..."        (string)  any network and blockchain warnings
-            }
+                {
+                    "blocks": nnn,             (numeric) The current block
+                    "currentblockweight": nnn, (numeric, optional) The block weight of the last assembled block (only present if a block was ever assembled)
+                    "currentblocktx": nnn,     (numeric, optional) The number of block transactions of the last assembled block (only present if a block was ever assembled)
+                    "difficulty": xxx.xxxxx    (numeric) The current difficulty
+                    "networkhashps": nnn,      (numeric) The network hashes per second
+                    "pooledtx": n              (numeric) The size of the mempool
+                    "chain": "xxxx",         (string)  current network name as defined in BIP70 (main, test, regtest)
+                    "isoperator": true|false   (boolean) Local master nodes are available or not
+                    "masternodes": []          (array)   an array of objects which includes each master node information
+                    "warnings": "..."        (string)  any network and blockchain warnings
+                }
 
         :example:
 
-        >>> node.mining.getmintinginfo()
+            >>> node.mining.getmintinginfo()
         """
         return self._node._rpc.call("getmintinginfo")
 
@@ -155,11 +155,11 @@ class Mining:
         :type nblocks: int
         :param height: (optional) To estimate at the time of the given height
         :type height: int
-        :return: (int) Hashes per second estimated
+        :return: int -- Hashes per second estimated
 
         :example:
 
-        >>> node.mining.getnetworkhashps()
+            >>> node.mining.getnetworkhashps()
         """
         return self._node._rpc.call("getnetworkhashps", nblocks, height)
 
@@ -177,11 +177,11 @@ class Mining:
             The fee is not actually paid, only the algorithm for selecting transactions into a block
             considers the transaction as it would have paid a higher (or lower) fee.
         :type dummy: float
-        :return: (bool) returns true
+        :return: bool -- returns true
 
         :example:
 
-        >>> node.mining.prioritisetransaction("txid", 0.0, 10000)
+            >>> node.mining.prioritisetransaction("txid", 0.0, 10000)
         """
         return self._node._rpc.call("prioritisetransaction", txid, dummy, fee_delta)
 
@@ -198,7 +198,7 @@ class Mining:
 
         :example:
 
-        >>> node.mining.submitblock("mydata")
+            >>> node.mining.submitblock("mydata")
         """
         return self._node._rpc.call("submitblock", hexdata, dummy)
 
@@ -213,6 +213,6 @@ class Mining:
 
         :example:
 
-        >>> node.mining.submitheader("abc")
+            >>> node.mining.submitheader("abc")
         """
         return self._node._rpc.call("submitheader", hexdata)
