@@ -113,11 +113,7 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-<div class="announcement">
-  <aside class="announcement-content">
-     This Documentation page is still in development! 
-  </aside>
-</div>
+
 
 <div class="page">
   <header class="mobile-header">
@@ -261,7 +257,242 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.node.Mining">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Mining</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Mining" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Mining.getblocktemplate">
+<span class="sig-name descname"><span class="pre">getblocktemplate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Mining.getblocktemplate" title="Permalink to this definition">#</a></dt>
+<dd><p>If the request parameters include a ‘mode’ key, that is used to explicitly select between the default ‘template’ request or a ‘proposal’.
+It returns data needed to construct a block to work on.
+For full specification, see BIPs 22, 23, 9, and 145:</p>
+<p><a class="reference external" href="https://github.com/bitcoin/bips/blob/master/bip-0022.mediawiki">https://github.com/bitcoin/bips/blob/master/bip-0022.mediawiki</a></p>
+<p><a class="reference external" href="https://github.com/bitcoin/bips/blob/master/bip-0023.mediawiki">https://github.com/bitcoin/bips/blob/master/bip-0023.mediawiki</a></p>
+<p><a class="reference external" href="https://github.com/bitcoin/bips/blob/master/bip-0009.mediawiki#getblocktemplate_changes">https://github.com/bitcoin/bips/blob/master/bip-0009.mediawiki#getblocktemplate_changes</a></p>
+<p><a class="reference external" href="https://github.com/bitcoin/bips/blob/master/bip-0145.mediawiki">https://github.com/bitcoin/bips/blob/master/bip-0145.mediawiki</a></p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>template_request</strong> (<em>json</em>) – <p>(optional) A json object in the following spec</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "mode": "str",       (string, optional) This must be set to "template", "proposal" (see BIP 23), or omitted
+    "capabilities": [    (json array, optional) A list of strings
+        "support",         (string) client side supported feature, 'longpoll', 'coinbasetxn', 'coinbasevalue', 'proposal', 'serverlist', 'workid'
+        ...
+    ],
+    "rules": [           (json array, required) A list of strings
+    "support",         (string) client side supported softfork deployment
+    ...
+    ],
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – returns block template</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "version" : n,                    (numeric) The preferred block version
+    "rules" : [ "rulename", ... ],    (array of strings) specific block rules that are to be enforced
+    "vbavailable" : {                 (json object) set of pending, supported versionbit (BIP 9) softfork deployments
+        "rulename" : bitnumber        (numeric) identifies the bit number as indicating acceptance and readiness for the named softfork rule
+        ,...
+    },
+    "vbrequired" : n,                 (numeric) bit mask of versionbits the server requires set in submissions
+    "previousblockhash" : "xxxx",     (string) The hash of current highest block
+    "transactions" : [                (array) contents of non-coinbase transactions that should be included in the next block
+        {
+            "data" : "xxxx",          (string) transaction data encoded in hexadecimal (byte-for-byte)
+            "txid" : "xxxx",          (string) transaction id encoded in little-endian hexadecimal
+            "hash" : "xxxx",          (string) hash encoded in little-endian hexadecimal (including witness data)
+            "depends" : [             (array) array of numbers
+                n                     (numeric) transactions before this one (by 1-based index in 'transactions' list) that must be present in the final block if this one is
+                ,...
+            ],
+            "fee": n,                 (numeric) difference in value between transaction inputs and outputs (in satoshis); for coinbase transactions, this is a negative Number of the total collected block fees (ie, not including the block subsidy); if key is not present, fee is unknown and clients MUST NOT assume there isn't one
+            "sigops" : n,             (numeric) total SigOps cost, as counted for purposes of block limits; if key is not present, sigop cost is unknown and clients MUST NOT assume it is zero
+            "weight" : n,             (numeric) total transaction weight, as counted for purposes of block limits
+        }
+        ,...
+    ],
+    "coinbaseaux" : {                 (json object) data that should be included in the coinbase's scriptSig content
+        "flags" : "xx"                (string) key name is to be ignored, and value included in scriptSig
+    },
+    "coinbasevalue" : n,              (numeric) maximum allowable input to coinbase transaction, including the generation award and transaction fees (in satoshis)
+    "coinbasetxn" : { ... },          (json object) information for coinbase transaction
+    "target" : "xxxx",                (string) The hash target
+    "mintime" : xxx,                  (numeric) The minimum timestamp appropriate for next block time in seconds since epoch (Jan 1 1970 GMT)
+    "mutable" : [                     (array of string) list of ways the block template may be changed
+        "value"                       (string) A way the block template may be changed, e.g. 'time', 'transactions', 'prevblock'
+        ,...
+    ],
+    "noncerange" : "00000000ffffffff",(string) A range of valid nonces
+    "sigoplimit" : n,                 (numeric) limit of sigops in blocks
+    "sizelimit" : n,                  (numeric) limit of block size
+    "weightlimit" : n,                (numeric) limit of block weight
+    "curtime" : ttt,                  (numeric) current timestamp in seconds since epoch (Jan 1 1970 GMT)
+    "bits" : "xxxxxxxx",              (string) compressed target of next block
+    "height" : n                      (numeric) The height of the next block
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">mining</span><span class="o">.</span><span class="n">getblocktemplate</span><span class="p">({</span><span class="s2">"rules"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"segwit"</span><span class="p">]})</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Mining.getmininginfo">
+<span class="sig-name descname"><span class="pre">getmininginfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Mining.getmininginfo" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns a json object containing mining-related information for all local masternodes</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>{…} (json) – returns mining info</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "blocks": nnn,             (numeric) The current block
+    "currentblockweight": nnn, (numeric, optional) The block weight of the last assembled block (only present if a block was ever assembled)
+    "currentblocktx": nnn,     (numeric, optional) The number of block transactions of the last assembled block (only present if a block was ever assembled)
+    "difficulty": xxx.xxxxx    (numeric) The current difficulty
+    "networkhashps": nnn,      (numeric) The network hashes per second
+    "pooledtx": n              (numeric) The size of the mempool
+    "chain": "xxxx",           (string)  current network name as defined in BIP70 (main, test, regtest)
+    "isoperator": true|false   (boolean) Local master nodes are available or not
+    "masternodes": []          (array)   an array of objects which includes each master node information
+    "warnings": "..."          (string)  any network and blockchain warnings
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">mining</span><span class="o">.</span><span class="n">getmininginfo</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Mining.getmintinginfo">
+<span class="sig-name descname"><span class="pre">getmintinginfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Mining.getmintinginfo" title="Permalink to this definition">#</a></dt>
+<dd><p>DEPRECATED. Prefer using getmininginfo.</p>
+<p>Returns a json object containing mining-related information.</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>{…} (json) – returns minting info</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "blocks": nnn,             (numeric) The current block
+    "currentblockweight": nnn, (numeric, optional) The block weight of the last assembled block (only present if a block was ever assembled)
+    "currentblocktx": nnn,     (numeric, optional) The number of block transactions of the last assembled block (only present if a block was ever assembled)
+    "difficulty": xxx.xxxxx    (numeric) The current difficulty
+    "networkhashps": nnn,      (numeric) The network hashes per second
+    "pooledtx": n              (numeric) The size of the mempool
+    "chain": "xxxx",         (string)  current network name as defined in BIP70 (main, test, regtest)
+    "isoperator": true|false   (boolean) Local master nodes are available or not
+    "masternodes": []          (array)   an array of objects which includes each master node information
+    "warnings": "..."        (string)  any network and blockchain warnings
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">mining</span><span class="o">.</span><span class="n">getmintinginfo</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Mining.getnetworkhashps">
+<span class="sig-name descname"><span class="pre">getnetworkhashps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nblocks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">120</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#defichain.node.Mining.getnetworkhashps" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the estimated network hashes per second based on the last n blocks.</p>
+<p>Pass in [blocks] to override # of blocks, -1 specifies since last difficulty change.</p>
+<p>Pass in [height] to estimate the network speed at the time when a certain block was found.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nblocks</strong> (<em>int</em>) – (optional) The number of blocks, or -1 for blocks since last difficulty change</p></li>
+<li><p><strong>height</strong> (<em>int</em>) – (optional) To estimate at the time of the given height</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>int – Hashes per second estimated</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">mining</span><span class="o">.</span><span class="n">getnetworkhashps</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Mining.prioritisetransaction">
+<span class="sig-name descname"><span class="pre">prioritisetransaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fee_delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dummy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#defichain.node.Mining.prioritisetransaction" title="Permalink to this definition">#</a></dt>
+<dd><p>Accepts the transaction into mined blocks at a higher (or lower) priority</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txid</strong> (<em>str</em>) – (required) The transaction id</p></li>
+<li><p><strong>fee_delta</strong> (<em>int</em>) – (optional) API-Compatibility for previous API. Must be zero or null.
+DEPRECATED. For forward compatibility use named arguments and omit this parameter.</p></li>
+<li><p><strong>dummy</strong> (<em>float</em>) – (optional) The fee value (in satoshis) to add (or subtract, if negative).
+Note, that this value is not a fee rate. It is a value to modify absolute fee of the TX.
+The fee is not actually paid, only the algorithm for selecting transactions into a block
+considers the transaction as it would have paid a higher (or lower) fee.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>bool – returns true</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">mining</span><span class="o">.</span><span class="n">prioritisetransaction</span><span class="p">(</span><span class="s2">"txid"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Mining.submitblock">
+<span class="sig-name descname"><span class="pre">submitblock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hexdata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dummy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ignored'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Mining.submitblock" title="Permalink to this definition">#</a></dt>
+<dd><p>Attempts to submit new block to network.
+See <a class="reference external" href="https://en.bitcoin.it/wiki/BIP_0022">https://en.bitcoin.it/wiki/BIP_0022</a> for full specification.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hexdata</strong> (<em>str</em>) – (required) the hex-encoded block data to submit</p></li>
+<li><p><strong>dummy</strong> (<em>str</em>) – (optional) dummy value, for compatibility with BIP22. This value is ignored</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">mining</span><span class="o">.</span><span class="n">submitblock</span><span class="p">(</span><span class="s2">"mydata"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Mining.submitheader">
+<span class="sig-name descname"><span class="pre">submitheader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hexdata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Mining.submitheader" title="Permalink to this definition">#</a></dt>
+<dd><p>Decode the given hexdata as a header and submit it as a candidate chain tip if valid.
+Throws when the header is invalid.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hexdata</strong> (<em>str</em>) – (required) the hex-encoded block header data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">mining</span><span class="o">.</span><span class="n">submitheader</span><span class="p">(</span><span class="s2">"abc"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
 </section>
 
         </article>

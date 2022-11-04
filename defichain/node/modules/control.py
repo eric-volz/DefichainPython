@@ -12,30 +12,30 @@ class Control:
 
                      2. "mallocinfo" returns an XML string describing low-level heap state (only available if compiled with glibc 2.10+).
         :type mode: str
-        :return:
+        :return: {...} (json) if mode == "stats" | malloc if mode == "mallocinfo"
 
-        **Result (mode "stats"):**
+            **Result (mode "stats"):**
 
-        .. code-block:: text
+            .. code-block:: text
 
-            {
-                "locked": {               (json object) Information about locked memory manager
-                "used": xxxxx,          (numeric) Number of bytes used
-                "free": xxxxx,          (numeric) Number of bytes available in current arenas
-                "total": xxxxxxx,       (numeric) Total number of bytes managed
-                "locked": xxxxxx,       (numeric) Amount of bytes that succeeded locking. If this number is smaller than total, locking pages failed at some point and key data could be swapped to disk.
-                "chunks_used": xxxxx,   (numeric) Number allocated chunks
-                "chunks_free": xxxxx,   (numeric) Number unused chunks
+                {
+                    "locked": {               (json object) Information about locked memory manager
+                    "used": xxxxx,          (numeric) Number of bytes used
+                    "free": xxxxx,          (numeric) Number of bytes available in current arenas
+                    "total": xxxxxxx,       (numeric) Total number of bytes managed
+                    "locked": xxxxxx,       (numeric) Amount of bytes that succeeded locking. If this number is smaller than total, locking pages failed at some point and key data could be swapped to disk.
+                    "chunks_used": xxxxx,   (numeric) Number allocated chunks
+                    "chunks_free": xxxxx,   (numeric) Number unused chunks
+                    }
                 }
-            }
 
-        **Result (mode "mallocinfo"):**
+            **Result (mode "mallocinfo"):**
 
             "<malloc version="1">..."
 
         :example:
 
-        >>> node.control.getmemoryinfo()
+            >>> node.control.getmemoryinfo()
         """
         return self._node._rpc.call("getmemoryinfo", mode)
 
@@ -43,7 +43,7 @@ class Control:
         """
         Returns details of the RPC server.
 
-        :return:
+        :return: {...} (json) -- returns rpc info
 
         .. code-block:: text
 
@@ -60,7 +60,7 @@ class Control:
 
         :example:
 
-        >>> node.control.getrpcinfo()
+            >>> node.control.getrpcinfo()
         """
         return self._node._rpc.call("getrpcinfo")
 
@@ -74,8 +74,8 @@ class Control:
 
         :example:
 
-        >>> node.control.help()
-        >>> node.control.help("getblockcount")
+            >>> node.control.help()
+            >>> node.control.help("getblockcount")
         """
         return self._node._rpc.call("help", command)
 
@@ -94,36 +94,36 @@ class Control:
 
         :param include: (optinal) A json array of categories to add debug logging
 
-        .. code-block:: text
+            .. code-block:: text
 
-            [
-                "include_category",    (string) the valid logging category
-                ...
-            ]
+                [
+                    "include_category",    (string) the valid logging category
+                    ...
+                ]
 
         :type include: []
         :param exclude: (optinal) A json array of categories to remove debug logging
 
-        .. code-block:: text
+            .. code-block:: text
 
-            [
-                "exclude_category",    (string) the valid logging category
-                ...
-            ]
+                [
+                    "exclude_category",    (string) the valid logging category
+                    ...
+                ]
 
         :type exclude: []
-        :return: json object where keys are the logging categories, and values indicates its status
+        :return: {...} (json) -- object where keys are the logging categories, and values indicates its status
 
-        .. code-block:: text
+            .. code-block:: text
 
-            {
-                "category": true|false,  (bool) if being debug logged or not. false:inactive, true:active
-                ...
-            }
+                {
+                    "category": true|false,  (bool) if being debug logged or not. false:inactive, true:active
+                    ...
+                }
 
         :example:
 
-        >>> node.control.logging(["all"], ["http"])
+            >>> node.control.logging(["all"], ["http"])
         """
         return self._node._rpc.call("logging", include, exclude)
 
@@ -131,9 +131,11 @@ class Control:
         """
         Stop Defi server.
 
+        :return: None
+
         :example:
 
-        >>> node.control.stop()
+            >>> node.control.stop()
         """
         return self._node._rpc.call("stop")
 
@@ -141,11 +143,11 @@ class Control:
         """
         Returns the total uptime of the server.
 
-        :return: ttt (numeric) The number of seconds that the server has been running
+        :return: ttt (numeric) -- The number of seconds that the server has been running
 
 
         :example:
 
-        >>> node.control.uptime()
+            >>> node.control.uptime()
         """
         return self._node._rpc.call("uptime")

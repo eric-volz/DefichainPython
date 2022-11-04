@@ -151,17 +151,17 @@ Since this is a community supported project, the community also has the right to
         Generating          |:white_check_mark:|
         Loan                |:white_check_mark:|
         Masternodes         |:white_check_mark:|
-        Mining              |:rotating_light:|
-        Network             |:rotating_light:|
-        Oracles             |:rotating_light:|
-        Poolpair            |:rotating_light:|
-        Rawtransactions     |:rotating_light:|
+        Mining              |:white_check_mark:|
+        Network             |:white_check_mark:|
+        Oracles             |:white_check_mark:|
+        Poolpair            |:white_check_mark:|
+        Rawtransactions     |:white_check_mark:|
         Spv                 |:rotating_light:|
         Stats               |:white_check_mark:|
-        Tokens              |:rotating_light:|
+        Tokens              |:white_check_mark:|
         Util                |:white_check_mark:|
-        Vault               |:rotating_light:|
-        Wallet              |:rotating_light:|
+        Vault               |:white_check_mark:|
+        Wallet              |:white_check_mark:|
         Zmq                 |:white_check_mark:|
 
         Node Connection     |:white_check_mark:|
@@ -213,6 +213,5 @@ Since this is a community supported project, the community also has the right to
 
 Next Steps
 ----------
-1. Document the last RPC methods on `docs.defichain-python.de <https://docs.defichain-python.de>`_
-2. implementation of the `community project <https://github.com/muirglacier/defid-indexer-docker>`_ (getting historical data via an API)
+1. implementation of the `community project: DefiLense <https://defilense.com/>`_ (getting historical data via an API)
 

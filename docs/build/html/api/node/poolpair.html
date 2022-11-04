@@ -113,11 +113,7 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-<div class="announcement">
-  <aside class="announcement-content">
-     This Documentation page is still in development! 
-  </aside>
-</div>
+
 
 <div class="page">
   <header class="mobile-header">
@@ -261,7 +257,264 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.node.Poolpair">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Poolpair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Poolpair" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Poolpair.addpoolliquidity">
+<span class="sig-name descname"><span class="pre">addpoolliquidity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shareAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Poolpair.addpoolliquidity" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates (and submits to local node and network) a add pool liquidity transaction.</p>
+<p>The last optional argument (may be empty array) is an array of specific UTXOs to spend.</p>
+<p>Requires wallet passphrase to be set with walletpassphrase call.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_from</strong> (<em>str</em>) – <p>(required) The defi address(es) is the key(s), the value(s) is amount in <a class="reference external" href="mailto:amount%40token">amount<span>@</span>token</a> format. You
+should provide exectly two types of tokens for pool’s ‘token A’ and ‘token B’ in any combinations.If
+multiple tokens from one address are to be transferred, specify an array [”<a class="reference external" href="mailto:amount1%40t1">amount1<span>@</span>t1</a>”, “<a class="reference external" href="mailto:amount2%40t2">amount2<span>@</span>t2</a>”]</p>
+<p>If “from” obj contain only one amount entry with address-key: “*” (star), it’s means auto-selection
+accounts from wallet.</p>
+</p></li>
+<li><p><strong>shareAddress</strong> (<em>str</em>) – (required) The defi address for crediting tokens</p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">poolpair</span><span class="o">.</span><span class="n">addpoolliquidity</span><span class="p">({</span><span class="s2">"df1qpsg2v3fajhwfrc3dchsqpcwqfegdxpncwpcda2"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"1.0@BTC"</span><span class="p">,</span> <span class="s2">"1.0@DFI"</span><span class="p">]},</span> <span class="s2">"df1qpsg2v3fajhwfrc3dchsqpcwqfegdxpncwpcda2"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Poolpair.compositeswap">
+<span class="sig-name descname"><span class="pre">compositeswap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amountFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenTo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxPrice</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Poolpair.compositeswap" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates (and submits to local node and network) a composite swap (swap between multiple poolpairs) transaction with given metadata.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_from</strong> (<em>str</em>) – (required) Address of the owner of tokenA</p></li>
+<li><p><strong>tokenFrom</strong> (<em>str</em>) – (required) One of the keys may be specified (id/symbol)</p></li>
+<li><p><strong>amountFrom</strong> (<em>float</em>) – (required) tokenFrom coins amount</p></li>
+<li><p><strong>to</strong> (<em>str</em>) – (required) Address of the owner of tokenB</p></li>
+<li><p><strong>tokenTo</strong> (<em>str</em>) – (required) One of the keys may be specified (id/symbol)</p></li>
+<li><p><strong>maxPrice</strong> (<em>float</em>) – (optional) Maximum acceptable price</p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">poolpair</span><span class="o">.</span><span class="n">compositeswap</span><span class="p">(</span><span class="s2">"df1qpsg2v3fajhwfrc3dchsqpcwqfegdxpncwpcda2"</span><span class="p">,</span> <span class="s2">"BTC"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"df1qpsg2v3fajhwfrc3dchsqpcwqfegdxpncwpcda2"</span><span class="p">,</span> <span class="s2">"DFI"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Poolpair.createpoolpair">
+<span class="sig-name descname"><span class="pre">createpoolpair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokenA</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenB</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commission</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ownerAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">customRewards</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pairSymbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Poolpair.createpoolpair" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates (and submits to local node and network) a poolpair transaction with given metadata.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tokenA</strong> (<em>str</em>) – (required) One of the keys may be specified (id/symbol)</p></li>
+<li><p><strong>tokenB</strong> (<em>str</em>) – (required) One of the keys may be specified (id/symbol)</p></li>
+<li><p><strong>commission</strong> (<em>float</em>) – (required) Pool commission, up to 10^-8</p></li>
+<li><p><strong>status</strong> (<em>bool</em>) – (required) Pool Status: True is Active, False is Restricted</p></li>
+<li><p><strong>ownerAddress</strong> (<em>str</em>) – (required) Address of the pool owner</p></li>
+<li><p><strong>customRewards</strong> (<em>str</em>) – (optional) Token reward to be paid on each block, multiple can be specified</p></li>
+<li><p><strong>pairSymbol</strong> (<em>str</em>) – (optional) Pair symbol (unique), no longer than 8</p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">poolpair</span><span class="o">.</span><span class="n">createpoolpair</span><span class="p">(</span><span class="s2">"BTC"</span><span class="p">,</span> <span class="s2">"USDC"</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">"df1qpsg2v3fajhwfrc3dchsqpcwqfegdxpncwpcda2"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Poolpair.getpoolpair">
+<span class="sig-name descname"><span class="pre">getpoolpair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Poolpair.getpoolpair" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns information about pool.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>str</em>) – (required) One of the keys may be specified (id/symbol/creationTx)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – (optional) Flag for verbose list (default = true), otherwise limited objects are listed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>{id:{…}} (json) – Json object with pool information</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">poolpair</span><span class="o">.</span><span class="n">getpoolpair</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Poolpair.listpoolpairs">
+<span class="sig-name descname"><span class="pre">listpoolpairs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">including_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Poolpair.listpoolpairs" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns information about pools</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> (<em>int</em>) – (optional) Optional first key to iterate from, in lexicographical order.
+Typically it’s set to last ID from previous request</p></li>
+<li><p><strong>including_start</strong> (<em>bool</em>) – (optional) If true, then iterate including starting position</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – (optional) Maximum number of pools to return, 100 by default</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – (optional) Flag for verbose list (default = true), otherwise only ids, symbols and names are listed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>{id:{…}} (json) – Json object with pool information</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">poolpair</span><span class="o">.</span><span class="n">listpoolpairs</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Poolpair.listpoolshares">
+<span class="sig-name descname"><span class="pre">listpoolshares</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">including_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_mine_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Poolpair.listpoolshares" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns information about pool shares</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> (<em>int</em>) – (optional) Optional first key to iterate from, in lexicographical order</p></li>
+<li><p><strong>including_start</strong> (<em>bool</em>) – (optional) If true, then iterate including starting position</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – (optional) Maximum number of pools to return</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – (optional) Flag for verbose list (default = true), otherwise only % are shown</p></li>
+<li><p><strong>is_mine_only</strong> (<em>bool</em>) – (optional) Flag for verbose list (default = true), otherwise only % are shown</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>{id:{…}} (json) – Json object with pool information</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">poolpair</span><span class="o">.</span><span class="n">listpoolshares</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Poolpair.poolswap">
+<span class="sig-name descname"><span class="pre">poolswap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amountFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenTo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxPrice</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Poolpair.poolswap" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates (and submits to local node and network) a poolswap transaction with given metadata</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_from</strong> (<em>str</em>) – (required) Address of the owner of tokenA</p></li>
+<li><p><strong>tokenFrom</strong> (<em>str</em>) – (required) One of the keys may be specified (id/symbol)</p></li>
+<li><p><strong>amountFrom</strong> (<em>float</em>) – (required) tokenFrom coins amount</p></li>
+<li><p><strong>to</strong> (<em>str</em>) – (required) Address of the owner of tokenB</p></li>
+<li><p><strong>tokenTo</strong> (<em>str</em>) – (required) One of the keys may be specified (id/symbol)</p></li>
+<li><p><strong>maxPrice</strong> (<em>float</em>) – (optional) Maximum acceptable price</p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">poolpair</span><span class="o">.</span><span class="n">poolswap</span><span class="p">(</span><span class="s2">"df1qpsg2v3fajhwfrc3dchsqpcwqfegdxpncwpcda2"</span><span class="p">,</span> <span class="s2">"BTC"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"df1qpsg2v3fajhwfrc3dchsqpcwqfegdxpncwpcda2"</span><span class="p">,</span> <span class="s2">"DFI"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Poolpair.removepoolliquidity">
+<span class="sig-name descname"><span class="pre">removepoolliquidity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Poolpair.removepoolliquidity" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates (and submits to local node and network) a remove pool liquidity transaction</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_from</strong> (<em>str</em>) – (required) The defi address which has tokens</p></li>
+<li><p><strong>amount</strong> (<em>str</em>) – (required) <a class="reference internal" href="index.html#node-amount"><span class="std std-ref">Amounts</span></a></p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">poolpair</span><span class="o">.</span><span class="n">removepoolliquidity</span><span class="p">(</span><span class="s2">"df1qpsg2v3fajhwfrc3dchsqpcwqfegdxpncwpcda2"</span><span class="p">,</span> <span class="s2">"1.0@BTC-DFI"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Poolpair.testpoolswap">
+<span class="sig-name descname"><span class="pre">testpoolswap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amountFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenTo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxPrice</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'direct'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Poolpair.testpoolswap" title="Permalink to this definition">#</a></dt>
+<dd><p>Tests a poolswap transaction with given metadata and returns poolswap result</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_from</strong> (<em>str</em>) – (required) Address of the owner of tokenA</p></li>
+<li><p><strong>tokenFrom</strong> (<em>str</em>) – (required) One of the keys may be specified (id/symbol)</p></li>
+<li><p><strong>amountFrom</strong> (<em>float</em>) – (required) tokenFrom coins amount</p></li>
+<li><p><strong>to</strong> (<em>str</em>) – (required) Address of the owner of tokenB</p></li>
+<li><p><strong>tokenTo</strong> (<em>str</em>) – (required) One of the keys may be specified (id/symbol)</p></li>
+<li><p><strong>maxPrice</strong> (<em>float</em>) – (optional) Maximum acceptable price</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – <p>(optional) One of auto/direct</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>auto - automatically use composite swap or direct swap as needed
+direct - uses direct path only or fails
+composite - uses composite path only or fails
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – (optional) Returns estimated composite path when true</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“<a class="reference external" href="mailto:amount%40tokenId">amount<span>@</span>tokenId</a>” (string) – The string with amount result of poolswap in format <a class="reference external" href="mailto:AMOUNT%40TOKENID">AMOUNT<span>@</span>TOKENID</a></p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">poolpair</span><span class="o">.</span><span class="n">testpoolswap</span><span class="p">(</span><span class="s2">"df1qpsg2v3fajhwfrc3dchsqpcwqfegdxpncwpcda2"</span><span class="p">,</span> <span class="s2">"BTC"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"df1qpsg2v3fajhwfrc3dchsqpcwqfegdxpncwpcda2"</span><span class="p">,</span> <span class="s2">"DFI"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Poolpair.updatepoolpair">
+<span class="sig-name descname"><span class="pre">updatepoolpair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pool</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commission</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ownerAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">customRewards</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Poolpair.updatepoolpair" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates (and submits to local node and network) a pool status update transaction</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pool</strong> (<em>str</em>) – (required) The pool’s symbol, id or creation tx</p></li>
+<li><p><strong>status</strong> (<em>bool</em>) – (optional) Pool Status new property</p></li>
+<li><p><strong>commission</strong> (<em>float</em>) – (optional) Pool commission, up to 10^-8</p></li>
+<li><p><strong>ownerAddress</strong> (<em>str</em>) – (optional) Address of the pool owner</p></li>
+<li><p><strong>customRewards</strong> (<em>str</em>) – (optional) Token reward to be paid on each block, multiple can be specified</p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">poolpair</span><span class="o">.</span><span class="n">updatepoolpair</span><span class="p">(</span><span class="s2">"BTC-DFI"</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">"0.5"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
 </section>
 
         </article>
