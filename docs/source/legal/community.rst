@@ -35,5 +35,5 @@ other ideas open an `issue <https://github.com/eric-volz/DefichainPython/issues>
 
     This is the application for the project
 
-.. mdinclude:: ../../additionalInfos/reddit/CFP.md
+.. mdinclude:: ../../additionalInfos/reddit/CFP_01.md
 

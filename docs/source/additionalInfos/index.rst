@@ -1,7 +1,7 @@
 Additional Information
 ======================
 
-In development
+More will be added
 
 .. toctree::
     :maxdepth: 1
