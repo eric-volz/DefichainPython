@@ -113,11 +113,7 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-<div class="announcement">
-  <aside class="announcement-content">
-     This Documentation page is still in development! 
-  </aside>
-</div>
+
 
 <div class="page">
   <header class="mobile-header">
@@ -265,7 +261,7 @@
 <dt class="sig sig-object py" id="defichain.node.Loan.createloanscheme">
 <span class="sig-name descname"><span class="pre">createloanscheme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mincolratio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interestrate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Loan.createloanscheme" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates a loan scheme transaction.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mincolratio</strong> (<em>int</em>) – (required) Minimum collateralization ratio (integer)</p></li>
@@ -275,20 +271,20 @@
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">createloanscheme</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">"MyScheme"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">createloanscheme</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">"MyScheme"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Loan.destroyloanscheme">
 <span class="sig-name descname"><span class="pre">destroyloanscheme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ACTIVATE_AFTER_BLOCK</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Loan.destroyloanscheme" title="Permalink to this definition">#</a></dt>
 <dd><p>Destroys a loan scheme.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>id</strong> (<em>str</em>) – (required) Unique identifier of the loan scheme (8 chars max)</p></li>
@@ -297,38 +293,38 @@
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">destroyloanscheme</span><span class="p">(</span><span class="s2">"MyScheme"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">destroyloanscheme</span><span class="p">(</span><span class="s2">"MyScheme"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Loan.getcollateraltoken">
 <span class="sig-name descname"><span class="pre">getcollateraltoken</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Loan.getcollateraltoken" title="Permalink to this definition">#</a></dt>
 <dd><p>Return collateral token information.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>token</strong> (<em>str</em>) – (required) Symbol or id of collateral token</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>{…} (object) Json object with collateral token information</p>
+<dd class="field-even"><p>{…} (json) – Json object with collateral token information</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">getcollateraltoken</span><span class="p">(</span><span class="s2">"DFI"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">getcollateraltoken</span><span class="p">(</span><span class="s2">"DFI"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Loan.getinterest">
 <span class="sig-name descname"><span class="pre">getinterest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Loan.getinterest" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns the global and per block interest by loan scheme.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>id</strong> (<em>str</em>) – (required) Unique identifier of the loan scheme (8 chars max)</p></li>
@@ -336,9 +332,7 @@
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>{…} (object) Json object with interest information</p>
-</dd>
-</dl>
+<dd class="field-even"><p><p>{…} (json) – Json object with interest information</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>interestPerBlock: Interest per block is always ceiled
 to the min. unit of fi (8 decimals), however interest
 less than this will continue to accrue until actual utilization
@@ -349,41 +343,40 @@ per block. This is continues to accumulate until
 the min. unit of the blockchain (fi) can be realized.
 </pre></div>
 </div>
-<dl class="field-list simple">
+</p>
+</dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">getinterest</span><span class="p">(</span><span class="s2">"MyScheme"</span><span class="p">,</span> <span class="s2">"DUSD"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">getinterest</span><span class="p">(</span><span class="s2">"MyScheme"</span><span class="p">,</span> <span class="s2">"DUSD"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Loan.getloaninfo">
 <span class="sig-name descname"><span class="pre">getloaninfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Loan.getloaninfo" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns the loan stats.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>{…} (object) Json object with loan information</p>
+<dd class="field-odd"><p>{…} (json) – Json object with loan information</p>
 </dd>
 <dt class="field-even">Example</dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">getloaninfo</span><span class="p">()</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">getloaninfo</span><span class="p">()</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Loan.getloanscheme">
 <span class="sig-name descname"><span class="pre">getloanscheme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Loan.getloanscheme" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns information about loan scheme.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – (required) Unique identifier of the loan scheme (8 chars max)</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
+<dd class="field-even"><p><p>{…} (json) – returns loanscheme from id</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
     "id" : n                   (string)
     "mincolratio" : n          (numeric)
@@ -391,57 +384,56 @@ the min. unit of the blockchain (fi) can be realized.
 }
 </pre></div>
 </div>
-<dl class="field-list simple">
+</p>
+</dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">getloanscheme</span><span class="p">(</span><span class="s2">"MyScheme"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">getloanscheme</span><span class="p">(</span><span class="s2">"MyScheme"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Loan.getloantoken">
 <span class="sig-name descname"><span class="pre">getloantoken</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Loan.getloantoken" title="Permalink to this definition">#</a></dt>
 <dd><p>Return loan token information.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>token</strong> (<em>str</em>) – (required) Symbol or id of loan token</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>{…} (object) Json object with loan token information</p>
+<dd class="field-even"><p>{…} (json) – Json object with loan token information</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">getloantoken</span><span class="p">(</span><span class="s2">"DUSD"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">getloantoken</span><span class="p">(</span><span class="s2">"DUSD"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Loan.listcollateraltokens">
 <span class="sig-name descname"><span class="pre">listcollateraltokens</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Loan.listcollateraltokens" title="Permalink to this definition">#</a></dt>
 <dd><p>Return list of all created collateral tokens. If no parameters passed
 it will return all current valid setcollateraltoken transactions</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>{…} (object) Json object with collateral token information</p>
+<dd class="field-odd"><p>{…} (json) – Json object with collateral token information</p>
 </dd>
 <dt class="field-even">Example</dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">listcollateraltokens</span><span class="p">()</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">listcollateraltokens</span><span class="p">()</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Loan.listloanschemes">
 <span class="sig-name descname"><span class="pre">listloanschemes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.node.Loan.listloanschemes" title="Permalink to this definition">#</a></dt>
 <dd><p>List all available loan schemes.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
-</dd>
-</dl>
+<dd class="field-odd"><p><p>[{…}] (json array) – returns list of loan schemes</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[                              (json array of objects)
     {
     "id" : n                   (string)
@@ -452,36 +444,41 @@ it will return all current valid setcollateraltoken transactions</p>
 ]
 </pre></div>
 </div>
+</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">listloanschemes</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Loan.listloantokens">
 <span class="sig-name descname"><span class="pre">listloantokens</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Loan.listloantokens" title="Permalink to this definition">#</a></dt>
 <dd><p>Return list of all created loan tokens.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>{…} (object) Json object with loan token information</p>
+<dd class="field-odd"><p>{…} (json) – Json object with loan token information</p>
 </dd>
 <dt class="field-even">Example</dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">listloantokens</span><span class="p">()</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">listloantokens</span><span class="p">()</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Loan.paybackloan">
 <span class="sig-name descname"><span class="pre">paybackloan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vaultId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loans</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Loan.paybackloan" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates (and submits to local node and network) a tx to return the loan in desired amount.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>vaultId</strong> (<em>str</em>) – (required) Id of vault used for loan</p></li>
 <li><p><strong>_from</strong> (<em>str</em>) – (required) Address containing repayment tokens. If “from” value is: “*” (star), it’s means auto-selection accounts from wallet.</p></li>
 <li><p><strong>amounts</strong> (<em>str</em>) – (optional) <a class="reference internal" href="index.html#node-address-amount"><span class="std std-ref">Address Amount</span></a></p></li>
-<li><p><strong>loans</strong> – (optional) A json array of json objects</p></li>
-</ul>
-</dd>
-</dl>
+<li><p><strong>loans</strong> (<em>json array</em>) – <p>(optional) A json array of json objects</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
     {                      (json object)
     "dToken": "str",     (string, required) The dTokens's symbol, id or creation tx
@@ -491,25 +488,25 @@ it will return all current valid setcollateraltoken transactions</p>
 ]
 </pre></div>
 </div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p>
+</p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">paybackloan</span><span class="p">(</span><span class="s2">"84b22eee1964768304e624c416f29a91d78a01dc5e8e12db26bdac0670c67bb2"</span><span class="p">,</span> <span class="s2">"mxxA2sQMETJFbXcNbNbUzEsBCTn1JSHXST"</span><span class="p">,</span> <span class="s2">"10@TSLA"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">paybackloan</span><span class="p">(</span><span class="s2">"84b22eee1964768304e624c416f29a91d78a01dc5e8e12db26bdac0670c67bb2"</span><span class="p">,</span> <span class="s2">"mxxA2sQMETJFbXcNbNbUzEsBCTn1JSHXST"</span><span class="p">,</span> <span class="s2">"10@TSLA"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Loan.setcollateraltoken">
 <span class="sig-name descname"><span class="pre">setcollateraltoken</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixedIntervalPriceId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activateAfterBlock</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Loan.setcollateraltoken" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates (and submits to local node and network) a set colleteral token transaction.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>token</strong> (<em>str</em>) – (required) Symbol or id of collateral token</p></li>
@@ -520,20 +517,20 @@ it will return all current valid setcollateraltoken transactions</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">setcollateraltoken</span><span class="p">(</span><span class="s2">"TSLA"</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="s2">"TSLA/USD"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">setcollateraltoken</span><span class="p">(</span><span class="s2">"TSLA"</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="s2">"TSLA/USD"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Loan.setdefaultloanscheme">
 <span class="sig-name descname"><span class="pre">setdefaultloanscheme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Loan.setdefaultloanscheme" title="Permalink to this definition">#</a></dt>
 <dd><p>Sets the default loan scheme.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>id</strong> (<em>str</em>) – (required) Unique identifier of the loan scheme (8 chars max).</p></li>
@@ -541,20 +538,20 @@ it will return all current valid setcollateraltoken transactions</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">setdefaultloanscheme</span><span class="p">(</span><span class="s2">"MyScheme"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">setdefaultloanscheme</span><span class="p">(</span><span class="s2">"MyScheme"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Loan.setloantoken">
 <span class="sig-name descname"><span class="pre">setloantoken</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixedIntervalPriceId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mintable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Loan.setloantoken" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates (and submits to local node and network) a token for a price feed set in collateral token.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>symbol</strong> (<em>str</em>) – (required) Token’s symbol (unique), not longer than 8</p></li>
@@ -566,20 +563,20 @@ it will return all current valid setcollateraltoken transactions</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">setloantoken</span><span class="p">(</span><span class="s2">"TSLA"</span><span class="p">,</span> <span class="s2">"TSLA/USD"</span><span class="p">,</span> <span class="s2">"TSLA Stock"</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">setloantoken</span><span class="p">(</span><span class="s2">"TSLA"</span><span class="p">,</span> <span class="s2">"TSLA/USD"</span><span class="p">,</span> <span class="s2">"TSLA Stock"</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Loan.takeloan">
 <span class="sig-name descname"><span class="pre">takeloan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vaultId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Loan.takeloan" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates (and submits to local node and network) a tx to mint loan token in desired amount based on defined loan.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>vaultId</strong> (<em>str</em>) – (required) Id of vault used for loan</p></li>
@@ -589,20 +586,20 @@ it will return all current valid setcollateraltoken transactions</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">takeloan</span><span class="p">(</span><span class="s2">"84b22eee1964768304e624c416f29a91d78a01dc5e8e12db26bdac0670c67bb2"</span><span class="p">,</span> <span class="s2">"10@SPY"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">takeloan</span><span class="p">(</span><span class="s2">"84b22eee1964768304e624c416f29a91d78a01dc5e8e12db26bdac0670c67bb2"</span><span class="p">,</span> <span class="s2">"10@SPY"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Loan.updateloanscheme">
 <span class="sig-name descname"><span class="pre">updateloanscheme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mincolratio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interestrate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ACTIVATE_AFTER_BLOCK</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Loan.updateloanscheme" title="Permalink to this definition">#</a></dt>
 <dd><p>Updates an existing loan scheme.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mincolratio</strong> (<em>int</em>) – (required) Minimum collateralization ratio</p></li>
@@ -613,20 +610,20 @@ it will return all current valid setcollateraltoken transactions</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">updateloanscheme</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">"MyScheme"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">updateloanscheme</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">"MyScheme"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Loan.updateloantoken">
 <span class="sig-name descname"><span class="pre">updateloantoken</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixedIntervalPriceId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mintable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Loan.updateloantoken" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates (and submits to local node and network) a transaction to update loan token metadata.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>token</strong> (<em>str</em>) – (required) The tokens’s symbol, id or creation tx</p></li>
@@ -639,14 +636,14 @@ it will return all current valid setcollateraltoken transactions</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">updateloantoken</span><span class="p">(</span><span class="s2">"TSLA"</span><span class="p">,</span> <span class="s2">"TSLAA"</span><span class="p">,</span> <span class="s2">"TSLA Stock"</span><span class="p">,</span> <span class="s2">"TSLA/USD"</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">updateloantoken</span><span class="p">(</span><span class="s2">"TSLA"</span><span class="p">,</span> <span class="s2">"TSLAA"</span><span class="p">,</span> <span class="s2">"TSLA Stock"</span><span class="p">,</span> <span class="s2">"TSLA/USD"</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 </dd></dl>
 </section>

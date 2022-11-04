@@ -113,11 +113,7 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-<div class="announcement">
-  <aside class="announcement-content">
-     This Documentation page is still in development! 
-  </aside>
-</div>
+
 
 <div class="page">
   <header class="mobile-header">
@@ -266,7 +262,7 @@
 <span class="sig-name descname"><span class="pre">createmultisig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">nrequired:</span> <span class="pre">int,</span> <span class="pre">keys:</span> <span class="pre">[&lt;class</span> <span class="pre">'str'&gt;],</span> <span class="pre">address_type:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'legacy'</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Util.createmultisig" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates a multi-signature address with n signature of m keys required.
 It returns a json object with the address and redeemScript.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>nrequired</strong> (<em>int</em>) – (required) The number of required signatures out of the n keys</p></li>
@@ -275,28 +271,27 @@ It returns a json object with the address and redeemScript.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
+<dd class="field-even"><p><p>{…} (json) – returns a json object with the address and redeemScript</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
     "address":"multisigaddress",  (string) The value of the new multisig address.
     "redeemScript":"script"       (string) The string value of the hex-encoded redemption script.
 }
 </pre></div>
 </div>
-<dl class="field-list simple">
+</p>
+</dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">createmultisig</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="s2">"03789ed0bb717d88f7d321a368d905e7430207ebbd82bd342cf11ae157a7ace5fd"</span><span class="p">,</span> <span class="s2">"03dbc6764b8884a92e871274b87583e6d5c2a58819473e17e107ef3f6aa5a61626"</span><span class="p">])</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">createmultisig</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="s2">"03789ed0bb717d88f7d321a368d905e7430207ebbd82bd342cf11ae157a7ace5fd"</span><span class="p">,</span> <span class="s2">"03dbc6764b8884a92e871274b87583e6d5c2a58819473e17e107ef3f6aa5a61626"</span><span class="p">])</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Util.deriveaddresses">
 <span class="sig-name descname"><span class="pre">deriveaddresses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">descriptor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[&lt;class</span> <span class="pre">'str'&gt;]</span></span></span><a class="headerlink" href="#defichain.node.Util.deriveaddresses" title="Permalink to this definition">#</a></dt>
-<dd><p>Derives one or more addresses corresponding to an output descriptor.
-Examples of output descriptors are:</p>
+<dd><p>Derives one or more addresses corresponding to an output descriptor.</p>
+<p>Examples of output descriptors are:</p>
 <blockquote>
 <div><p>pkh(&lt;pubkey&gt;)                        P2PKH outputs for the given pubkey</p>
 <p>wpkh(&lt;pubkey&gt;)                       Native segwit P2PKH outputs for the given pubkey</p>
@@ -304,9 +299,9 @@ Examples of output descriptors are:</p>
 <p>raw(&lt;hex script&gt;)                    Outputs whose scriptPubKey equals the specified hex scripts</p>
 </div></blockquote>
 <p>In the above, &lt;pubkey&gt; either refers to a fixed public key in hexadecimal notation, or to an xpub/xprv
-optionally followed by one or more path elements separated by “/”, where “h” represents a hardened child key.
-For more information on output descriptors, see the documentation in the doc/descriptors.md file.</p>
-<dl class="field-list simple">
+optionally followed by one or more path elements separated by “/”, where “h” represents a hardened child key.</p>
+<p>For more information on output descriptors, see the documentation in the doc/descriptors.md file.</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>descriptor</strong> (<em>str</em>) – (required) The descriptor</p></li>
@@ -314,14 +309,14 @@ For more information on output descriptors, see the documentation in the doc/des
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>[ address ] (array) the derived addresses</p>
+<dd class="field-even"><p>[…] (array) – the derived addresses</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">deriveaddresses</span><span class="p">(</span><span class="s2">"wpkh([d34db33f/84h/0h/0h]xpub6DJ2dNUysrn5Vt36jH2KLBT2i1auw1tTSSomg8PhqNiUtx8QX2SvC9nrHu81fT41fvDUnhMjEzQgXnQjKEu3oaqMSzhSrHMxyyoEAmUHQbY/0/*)#cjjspncu"</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">deriveaddresses</span><span class="p">(</span><span class="s2">"wpkh([d34db33f/84h/0h/0h]xpub6DJ2dNUysrn5Vt36jH2KLBT2i1auw1tTSSomg8PhqNiUtx8QX2SvC9nrHu81fT41fvDUnhMjEzQgXnQjKEu3oaqMSzhSrHMxyyoEAmUHQbY/0/*)#cjjspncu"</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Util.estimatesmartfee">
@@ -330,25 +325,25 @@ For more information on output descriptors, see the documentation in the doc/des
 confirmation within conf_target blocks if possible and return the number of blocks
 for which the estimate is valid. Uses virtual transaction size as defined
 in BIP 141 (witness data is discounted).</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>conf_target</strong> (<em>int</em>) – (required) Confirmation target in blocks (1 - 1008)</p></li>
-<li><p><strong>estimate_mode</strong> (<em>str</em>) – (optional) The fee estimate mode.
+<li><p><strong>estimate_mode</strong> (<em>str</em>) – <p>(optional) The fee estimate mode.
 Whether to return a more conservative estimate which also satisfies
 a longer history. A conservative estimate potentially returns a
 higher feerate and is more likely to be sufficient for the desired
 target, but is not as responsive to short term drops in the
-prevailing fee market.  Must be one of:
-“UNSET”
-“ECONOMICAL”
-“CONSERVATIVE”</p></li>
+prevailing fee market.</p>
+<p>Must be one of:</p>
+<p>”UNSET”</p>
+<p>”ECONOMICAL”</p>
+<p>”CONSERVATIVE”</p>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
+<dd class="field-even"><p><p>{…} (json) – resturns a estimation of a fee</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
   "feerate" : x.x,     (numeric, optional) estimate fee rate in DFI/kB
   "errors": [ str... ] (json array of strings, optional) Errors encountered during processing
@@ -357,29 +352,28 @@ prevailing fee market.  Must be one of:
 </pre></div>
 </div>
 <p>The request target will be clamped between 2 and the highest target
-fee estimation is able to return based on how long it has been running.
-An error is returned if not enough transactions and blocks
+fee estimation is able to return based on how long it has been running.</p>
+<p>An error is returned if not enough transactions and blocks
 have been observed to make an estimate for any number of blocks.</p>
-<dl class="field-list simple">
+</p>
+</dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">estimatesmartfee</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">estimatesmartfee</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Util.getdescriptorinfo">
 <span class="sig-name descname"><span class="pre">getdescriptorinfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">descriptor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Util.getdescriptorinfo" title="Permalink to this definition">#</a></dt>
 <dd><p>Analyses a descriptor</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>descriptor</strong> (<em>str</em>) – (required) The descriptor</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
+<dd class="field-even"><p><p>{…} (json) – returns information about decriptor</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
     "descriptor" : "desc",         (string) The descriptor in canonical form, without private keys
     "checksum" : "chksum",         (string) The checksum for the input descriptor
@@ -389,19 +383,20 @@ have been observed to make an estimate for any number of blocks.</p>
 }
 </pre></div>
 </div>
-<dl class="field-list simple">
+</p>
+</dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">getdescriptorinfo</span><span class="p">(</span><span class="s2">"wpkh([d34db33f/84h/0h/0h]0279be667ef9dcbbac55a06295Ce870b07029Bfcdb2dce28d959f2815b16f81798)"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">getdescriptorinfo</span><span class="p">(</span><span class="s2">"wpkh([d34db33f/84h/0h/0h]0279be667ef9dcbbac55a06295Ce870b07029Bfcdb2dce28d959f2815b16f81798)"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Util.signmessagewithprivkey">
 <span class="sig-name descname"><span class="pre">signmessagewithprivkey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">privkey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Util.signmessagewithprivkey" title="Permalink to this definition">#</a></dt>
 <dd><p>Sign a message with the private key of an address</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>privkey</strong> (<em>str</em>) – (required) The private key to sign the message with</p></li>
@@ -409,27 +404,25 @@ have been observed to make an estimate for any number of blocks.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“signature” (string) The signature of the message encoded in base 64</p>
+<dd class="field-even"><p>“signature” (string) – The signature of the message encoded in base 64</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">signmessagewithprivkey</span><span class="p">(</span><span class="s2">"privkey"</span><span class="p">,</span> <span class="s2">"my message"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">signmessagewithprivkey</span><span class="p">(</span><span class="s2">"privkey"</span><span class="p">,</span> <span class="s2">"my message"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Util.validateaddress">
 <span class="sig-name descname"><span class="pre">validateaddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Util.validateaddress" title="Permalink to this definition">#</a></dt>
 <dd><p>Return information about the given defi address</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>address</strong> (<em>str</em>) – (required) The defi address to validate</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
+<dd class="field-even"><p><p>{…} (json) – Return information about the given defi address</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
   "isvalid" : true|false,       (boolean) If the address is valid or not. If not, this is the only property returned.
   "address" : "address",        (string) The defi address validated
@@ -441,19 +434,20 @@ have been observed to make an estimate for any number of blocks.</p>
 }
 </pre></div>
 </div>
-<dl class="field-list simple">
+</p>
+</dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">validateaddress</span><span class="p">(</span><span class="s2">"df1qduwqfyhz0n0duvmudlhmyx2uzk4u2xqmn627zr"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">validateaddress</span><span class="p">(</span><span class="s2">"df1qduwqfyhz0n0duvmudlhmyx2uzk4u2xqmn627zr"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Util.verifymessage">
 <span class="sig-name descname"><span class="pre">verifymessage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#defichain.node.Util.verifymessage" title="Permalink to this definition">#</a></dt>
 <dd><p>Verify a signed message</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>address</strong> (<em>str</em>) – (required) The defi address to use for the signature</p></li>
@@ -462,14 +456,14 @@ have been observed to make an estimate for any number of blocks.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>true|false   (boolean) If the signature is verified or not</p>
+<dd class="field-even"><p>bool – If the signature is verified or not</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">verifymessage</span><span class="p">(</span><span class="s2">"df1qduwqfyhz0n0duvmudlhmyx2uzk4u2xqmn627zr"</span><span class="p">,</span> <span class="s2">"signature"</span><span class="p">,</span> <span class="s2">"my message"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">verifymessage</span><span class="p">(</span><span class="s2">"df1qduwqfyhz0n0duvmudlhmyx2uzk4u2xqmn627zr"</span><span class="p">,</span> <span class="s2">"signature"</span><span class="p">,</span> <span class="s2">"my message"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 </dd></dl>
 </section>

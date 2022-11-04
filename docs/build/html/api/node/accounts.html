@@ -113,11 +113,7 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-<div class="announcement">
-  <aside class="announcement-content">
-     This Documentation page is still in development! 
-  </aside>
-</div>
+
 
 <div class="page">
   <header class="mobile-header">
@@ -265,7 +261,7 @@
 <dt class="sig sig-object py" id="defichain.node.Accounts.accounthistorycount">
 <span class="sig-name descname"><span class="pre">accounthistorycount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mine'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_rewards</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#defichain.node.Accounts.accounthistorycount" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns count of account history.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>owner</strong> (<em>str</em>) – (optional) Single account ID (CScript or address) or reserved words: “mine” - to list history for all owned accounts or “all” to list whole DB (default = “mine”).</p></li>
@@ -275,21 +271,21 @@
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>count (int) Count of account history</p>
+<dd class="field-even"><p>int – Count of account history</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">accounthistorycount</span><span class="p">(</span><span class="s2">"all"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">accounthistorycount</span><span class="p">(</span><span class="s2">"all"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.accounttoaccount">
 <span class="sig-name descname"><span class="pre">accounttoaccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Accounts.accounttoaccount" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates (and submits to local node and network) a transfer transaction from the specified account to the specfied accounts.
 The first optional argument (may be empty array) is an array of specific UTXOs to spend.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>_from</strong> (<em>str</em>) – (required) The defi address of sender</p></li>
@@ -298,21 +294,21 @@ The first optional argument (may be empty array) is an array of specific UTXOs t
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">accounttoaccount</span><span class="p">(</span><span class="n">sender_address</span><span class="p">,</span> <span class="p">{</span><span class="s2">"address1"</span><span class="p">:</span><span class="s2">"1.0@DFI"</span><span class="p">,</span><span class="s2">"address2"</span><span class="p">:[</span><span class="s2">"2.0@BTC"</span><span class="p">,</span> <span class="s2">"3.0@ETH"</span><span class="p">]},</span> <span class="p">[])</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">accounttoaccount</span><span class="p">(</span><span class="n">sender_address</span><span class="p">,</span> <span class="p">{</span><span class="s2">"address1"</span><span class="p">:</span><span class="s2">"1.0@DFI"</span><span class="p">,</span><span class="s2">"address2"</span><span class="p">:[</span><span class="s2">"2.0@BTC"</span><span class="p">,</span> <span class="s2">"3.0@ETH"</span><span class="p">]},</span> <span class="p">[])</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.accounttoutxos">
 <span class="sig-name descname"><span class="pre">accounttoutxos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Accounts.accounttoutxos" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates (and submits to local node and network) a transfer transaction from the specified account to UTXOs.
 The third optional argument (may be empty array) is an array of specific UTXOs to spend.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>_from</strong> (<em>str</em>) – (required) The defi address of sender</p></li>
@@ -321,20 +317,20 @@ The third optional argument (may be empty array) is an array of specific UTXOs t
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">accounttoutxos</span><span class="p">(</span><span class="n">sender_address</span><span class="p">,</span> <span class="p">{</span><span class="s2">"address1"</span><span class="p">:</span><span class="s2">"100@DFI"</span><span class="p">},</span> <span class="p">[])</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">accounttoutxos</span><span class="p">(</span><span class="n">sender_address</span><span class="p">,</span> <span class="p">{</span><span class="s2">"address1"</span><span class="p">:</span><span class="s2">"100@DFI"</span><span class="p">},</span> <span class="p">[])</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.executesmartcontract">
 <span class="sig-name descname"><span class="pre">executesmartcontract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Accounts.executesmartcontract" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates and sends a transaction to either fund or execute a smart contract. Available contracts: dbtcdfiswap</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<em>str</em>) – (required) Name of the smart contract to send funds to</p></li>
@@ -344,20 +340,20 @@ The third optional argument (may be empty array) is an array of specific UTXOs t
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">executesmartcontract</span><span class="p">(</span><span class="s2">"dbtcdfiswap"</span><span class="p">,</span> <span class="s2">"1000@DFI"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">executesmartcontract</span><span class="p">(</span><span class="s2">"dbtcdfiswap"</span><span class="p">,</span> <span class="s2">"1000@DFI"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.futureswap">
 <span class="sig-name descname"><span class="pre">futureswap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Accounts.futureswap" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates and submits to the network a futures contract</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>address</strong> (<em>str</em>) – (required) Address to fund contract and receive resulting token</p></li>
@@ -367,21 +363,21 @@ The third optional argument (may be empty array) is an array of specific UTXOs t
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">futureswap</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="s2">"1@TSLA"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">futureswap</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="s2">"1@TSLA"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">futureswap</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="s2">"1000@DUSD"</span><span class="p">,</span> <span class="s2">"TSLA"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.getaccount">
 <span class="sig-name descname"><span class="pre">getaccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">including_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indexed_amounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{...}]</span></span></span><a class="headerlink" href="#defichain.node.Accounts.getaccount" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns information about account.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>owner</strong> (<em>str</em>) – (required) Owner address in base58/bech32/hex encoding</p></li>
@@ -392,20 +388,20 @@ The third optional argument (may be empty array) is an array of specific UTXOs t
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>[{…}] (array) Json object with order information</p>
+<dd class="field-even"><p>[{…}] (json array) – object with order information</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">getaccount</span><span class="p">(</span><span class="s2">"mxxA2sQMETJFbXcNbNbUzEsBCTn1JSHXST"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">getaccount</span><span class="p">(</span><span class="s2">"mxxA2sQMETJFbXcNbNbUzEsBCTn1JSHXST"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.getaccounthistory">
 <span class="sig-name descname"><span class="pre">getaccounthistory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blockheight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Accounts.getaccounthistory" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns information about account history.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>owner</strong> (<em>str</em>) – (required) Single account ID (CScript or address).</p></li>
@@ -414,25 +410,23 @@ The third optional argument (may be empty array) is an array of specific UTXOs t
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>{}  An object with account history information</p>
+<dd class="field-even"><p>{…} (json) – An object with account history information</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">getaccounthistory</span><span class="p">(</span><span class="s2">"mxxA2sQMETJFbXcNbNbUzEsBCTn1JSHXST"</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">getaccounthistory</span><span class="p">(</span><span class="s2">"mxxA2sQMETJFbXcNbNbUzEsBCTn1JSHXST"</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.getburninfo">
 <span class="sig-name descname"><span class="pre">getburninfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Accounts.getburninfo" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns burn address and burnt coin and token information.
 Requires full acindex for correct amount, tokens and feeburn values.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
-</dd>
-</dl>
+<dd class="field-odd"><p><p>{…} (json) – information about burned coins</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
     "address" : "address", (string) The defi burn address
     "amount" : n.nnnnnnnn, (string) The amount of DFI burnt
@@ -447,52 +441,50 @@ Requires full acindex for correct amount, tokens and feeburn values.</p>
 }
 </pre></div>
 </div>
-<dl class="field-list simple">
-<dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">getaccount</span><span class="p">()</span>
+</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">getaccount</span><span class="p">()</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.getpendingdusdswaps">
 <span class="sig-name descname"><span class="pre">getpendingdusdswaps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Accounts.getpendingdusdswaps" title="Permalink to this definition">#</a></dt>
 <dd><p>Get specific pending DFI-to-DUSD swap.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>address</strong> (<em>str</em>) – (required) Address to get all pending future swaps</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
+<dd class="field-even"><p><p>{…} (json) – returns pending DUSD - DFI Swaps</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
     owner :       "address"
     amount :      n.nnnnnnnn
 }
 </pre></div>
 </div>
-<dl class="field-list simple">
+</p>
+</dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">getpendingdusdswaps</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">getpendingdusdswaps</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.getpendingfutureswaps">
 <span class="sig-name descname"><span class="pre">getpendingfutureswaps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Accounts.getpendingfutureswaps" title="Permalink to this definition">#</a></dt>
 <dd><p>Get specific pending futures.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>address</strong> (<em>str</em>) – (required) Address to get all pending future swaps</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
+<dd class="field-even"><p><p>{…} (json) – returns pending future swaps</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
     owner :       "address"
     values : [{
@@ -503,19 +495,20 @@ Requires full acindex for correct amount, tokens and feeburn values.</p>
 }
 </pre></div>
 </div>
-<dl class="field-list simple">
+</p>
+</dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">getpendingfutureswaps</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">getpendingfutureswaps</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.gettokenbalances">
-<span class="sig-name descname"><span class="pre">gettokenbalances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">including_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indexed_amounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol_lookup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Accounts.gettokenbalances" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">gettokenbalances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">including_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indexed_amounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol_lookup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.node.Accounts.gettokenbalances" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns the balances of all accounts that belong to the wallet.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>start</strong> (<em>str</em>) – (optional) Optional first key to iterate from, in lexicographical order.Typically it’s set to last tokenID from previous request.</p></li>
@@ -526,20 +519,20 @@ Requires full acindex for correct amount, tokens and feeburn values.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>{…} array) Json object with balances information</p>
+<dd class="field-even"><p>[…] (json array) – object with balances information</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">gettokenbalances</span><span class="p">()</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">gettokenbalances</span><span class="p">()</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.listaccounthistory">
 <span class="sig-name descname"><span class="pre">listaccounthistory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxBlockHeight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_rewards</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.node.Accounts.listaccounthistory" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns information about account history.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>owner</strong> (<em>str</em>) – (required) Single account ID (CScript or address) or reserved words: “mine” - to list history for all owned accounts or “all” to list whole DB (default = “mine”).</p></li>
@@ -554,20 +547,20 @@ Requires full acindex for correct amount, tokens and feeburn values.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>[{},{}…] (array) Objects with account history information</p>
+<dd class="field-even"><p>[{},{}, …] (json array) – Objects with account history information</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">listaccounthistory</span><span class="p">(</span><span class="s2">"all"</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">listaccounthistory</span><span class="p">(</span><span class="s2">"all"</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.listaccounts">
 <span class="sig-name descname"><span class="pre">listaccounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">including_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indexed_amounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_mine_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Accounts.listaccounts" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns information about all accounts on chain.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>start</strong> (<em>str</em>) – (optional) Optional first key to iterate from, in lexicographical order.Typically it’s set to last ID from previous request.</p></li>
@@ -579,20 +572,20 @@ Requires full acindex for correct amount, tokens and feeburn values.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>{id:{…},…} (array) Json object with accounts information</p>
+<dd class="field-even"><p>{id:{…},…} (json) – Json object with accounts information</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">listaccounts</span><span class="p">()</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">listaccounts</span><span class="p">()</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.listburnhistory">
 <span class="sig-name descname"><span class="pre">listburnhistory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">maxBlockHeight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.node.Accounts.listburnhistory" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns information about burn history.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>maxBlockHeight</strong> (<em>int</em>) – (optional) Optional height to iterate from (down to genesis block), (default = chaintip).</p></li>
@@ -603,29 +596,29 @@ Requires full acindex for correct amount, tokens and feeburn values.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>[{},{}…] (array) Objects with burn history information</p>
+<dd class="field-even"><p>[{},{}, …] (json array) – objects with burn history information</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">listburnhistory</span><span class="p">(</span><span class="mi">160</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">listburnhistory</span><span class="p">(</span><span class="mi">160</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.listcommunitybalances">
 <span class="sig-name descname"><span class="pre">listcommunitybalances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Accounts.listcommunitybalances" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns information about all community balances.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>{balance_type:value,…} (array) Json object with accounts information</p>
+<dd class="field-odd"><p>{balance_type:value,…} (json) – Json object with accounts information</p>
 </dd>
 <dt class="field-even">Example</dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">listcommunitybalances</span><span class="p">()</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">listcommunitybalances</span><span class="p">()</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.listpendingdusdswaps">
@@ -633,7 +626,7 @@ Requires full acindex for correct amount, tokens and feeburn values.</p>
 <dd><p>Get all pending DFI-to_DUSD swaps.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>“json” (string) array containing json-objects having following fields:</p>
+<dd class="field-odd"><p>[{…}] (json array) – array containing json-objects having following fields</p>
 </dd>
 </dl>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
@@ -642,13 +635,13 @@ Requires full acindex for correct amount, tokens and feeburn values.</p>
 }
 </pre></div>
 </div>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">listpendingdusdswaps</span><span class="p">()</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">listpendingdusdswaps</span><span class="p">()</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.listpendingfutureswaps">
@@ -656,7 +649,7 @@ Requires full acindex for correct amount, tokens and feeburn values.</p>
 <dd><p>Get all pending futures.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>“json” (string) array containing json-objects having following fields:</p>
+<dd class="field-odd"><p>[{…}] (json array) – array containing json-objects having following fields:</p>
 </dd>
 </dl>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
@@ -669,19 +662,19 @@ Requires full acindex for correct amount, tokens and feeburn values.</p>
 }
 </pre></div>
 </div>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">listpendingfutureswaps</span><span class="p">()</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">listpendingfutureswaps</span><span class="p">()</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.sendtokenstoaddress">
 <span class="sig-name descname"><span class="pre">sendtokenstoaddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selectionMode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pie'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Accounts.sendtokenstoaddress" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates (and submits to local node and network) a transfer transaction from your accounts balances (may be picked manualy or autoselected) to the specfied accounts.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>_from</strong> (<em>json object</em>) – (required) <a class="reference internal" href="index.html#node-address-amount"><span class="std std-ref">Address Amount</span></a></p></li>
@@ -694,20 +687,20 @@ May be once of:
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">sendtokenstoaddress</span><span class="p">({</span><span class="s2">"srcAddress1"</span><span class="p">:</span><span class="s2">"2.0@DFI"</span><span class="p">,</span> <span class="s2">"srcAddress2"</span><span class="p">:[</span><span class="s2">"3.0@DFI"</span><span class="p">,</span> <span class="s2">"2.0@ETH"</span><span class="p">]},</span> <span class="p">{</span><span class="s2">"dstAddress1"</span><span class="p">:[</span><span class="s2">"5.0@DFI"</span><span class="p">,</span> <span class="s2">"2.0@ETH"</span><span class="p">]})</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">sendtokenstoaddress</span><span class="p">({</span><span class="s2">"srcAddress1"</span><span class="p">:</span><span class="s2">"2.0@DFI"</span><span class="p">,</span> <span class="s2">"srcAddress2"</span><span class="p">:[</span><span class="s2">"3.0@DFI"</span><span class="p">,</span> <span class="s2">"2.0@ETH"</span><span class="p">]},</span> <span class="p">{</span><span class="s2">"dstAddress1"</span><span class="p">:[</span><span class="s2">"5.0@DFI"</span><span class="p">,</span> <span class="s2">"2.0@ETH"</span><span class="p">]})</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.sendutxosfrom">
 <span class="sig-name descname"><span class="pre">sendutxosfrom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">change</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Accounts.sendutxosfrom" title="Permalink to this definition">#</a></dt>
 <dd><p>Send a transaction using UTXOs from the specfied address.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>_from</strong> (<em>str</em>) – (required) The address of sender</p></li>
@@ -717,21 +710,21 @@ May be once of:
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">sendutxosfrom</span><span class="p">(</span><span class="n">from_address</span><span class="p">,</span> <span class="n">to_address</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">sendutxosfrom</span><span class="p">(</span><span class="n">from_address</span><span class="p">,</span> <span class="n">to_address</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.utxostoaccount">
 <span class="sig-name descname"><span class="pre">utxostoaccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Accounts.utxostoaccount" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates (and submits to local node and network) a transfer transaction from the wallet UTXOs to specfied account.
 The second optional argument (may be empty array) is an array of specific UTXOs to spend.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>amounts</strong> (<em>json object</em>) – (required) <a class="reference internal" href="index.html#node-address-amount"><span class="std std-ref">Address Amount</span></a></p></li>
@@ -739,21 +732,21 @@ The second optional argument (may be empty array) is an array of specific UTXOs 
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">utxostoaccount</span><span class="p">({</span><span class="s2">"address1"</span><span class="p">:</span><span class="s2">"1.0@DFI"</span><span class="p">})</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">utxostoaccount</span><span class="p">({</span><span class="s2">"address1"</span><span class="p">:</span><span class="s2">"1.0@DFI"</span><span class="p">})</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Accounts.withdrawfutureswap">
 <span class="sig-name descname"><span class="pre">withdrawfutureswap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Accounts.withdrawfutureswap" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates and submits to the network a withdrawal from futures contract transaction.
 Withdrawal will be back to the address specified in the futures contract.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>address</strong> (<em>str</em>) – (required) Address used to fund contract with</p></li>
@@ -763,15 +756,15 @@ Withdrawal will be back to the address specified in the futures contract.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hash” (string) The hex-encoded hash of broadcasted transaction</p>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">withdrawfutureswap</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="s2">"1@TSLA"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">withdrawfutureswap</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="s2">"1@TSLA"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">withdrawfutureswap</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="s2">"1000@DUSD"</span><span class="p">,</span> <span class="s2">"TSLA"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 </dd></dl>
 </section>

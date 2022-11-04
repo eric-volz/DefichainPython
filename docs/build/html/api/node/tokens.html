@@ -113,11 +113,7 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-<div class="announcement">
-  <aside class="announcement-content">
-     This Documentation page is still in development! 
-  </aside>
-</div>
+
 
 <div class="page">
   <header class="mobile-header">
@@ -261,7 +257,204 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.node.Tokens">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Tokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Tokens" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Tokens.createtoken">
+<span class="sig-name descname"><span class="pre">createtoken</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collateralAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isDAT</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mintable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tradeable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Tokens.createtoken" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates (and submits to local node and network) a token creation transaction with given metadata.
+The second optional argument (may be empty array) is an array of specific UTXOs to spend.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>symbol</strong> (<em>str</em>) – (required) Token’s symbol (unique), no longer than 8</p></li>
+<li><p><strong>collateralAddress</strong> (<em>str</em>) – (required) Any valid destination for keeping collateral amount - used as token’s owner auth</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – (optional) Token’s name, no longer than 128</p></li>
+<li><p><strong>isDAT</strong> (<em>bool</em>) – (optional) Token’s ‘isDAT’ property, default is ‘False’</p></li>
+<li><p><strong>decimal</strong> (<em>float</em>) – (optional) Token’s decimal places</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – (optional) Token’s total supply limit</p></li>
+<li><p><strong>mintable</strong> (<em>bool</em>) – (optional) Token’s ‘Mintable’ property</p></li>
+<li><p><strong>tradeable</strong> (<em>bool</em>) – (optional) Token’s ‘Tradeable’ property</p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="n">createtoken</span><span class="p">(</span><span class="s2">"MyToken"</span><span class="p">,</span> <span class="s2">"df1qpsg2v3fajhwfrc3dchsqpcwqfegdxpncwpcda2"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Tokens.decodecustomtx">
+<span class="sig-name descname"><span class="pre">decodecustomtx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hexstring</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iswitness</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Tokens.decodecustomtx" title="Permalink to this definition">#</a></dt>
+<dd><p>Get detailed information about a DeFiChain custom transaction.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hexstring</strong> (<em>str</em>) – (required) The transaction hex string</p></li>
+<li><p><strong>iswitness</strong> (<em>bool</em>) – <p>(optional) Whether the transaction hex is a serialized witness transaction.</p>
+<p>If iswitness is not present, heuristic tests will be used in decoding.</p>
+<p>If true, only witness deserialization will be tried.</p>
+<p>If false, only non-witness deserialization will be tried.</p>
+<p>This boolean should reflect whether the transaction has inputs
+(e.g. fully valid, or on-chain transactions), if known by the caller.</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – returns decoded custom transaction</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "txid":               (string) The transaction id.
+    "type":               (string) The transaction type.
+    "valid"               (bool) Whether the transaction was valid.
+    "results"             (json object) Set of results related to the transaction type
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="n">decodecustomtx</span><span class="p">(</span><span class="s2">"hexstring"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Tokens.getcustomtx">
+<span class="sig-name descname"><span class="pre">getcustomtx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blockhash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Tokens.getcustomtx" title="Permalink to this definition">#</a></dt>
+<dd><p>Get detailed information about a DeFiChain custom transaction. Will search wallet transactions and mempool transaction,
+if a blockhash is provided and that block is available then details for that transaction can be returned.</p>
+<p>-txindex can be enabled to return details for any transaction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txid</strong> (<em>str</em>) – (required) The transaction id</p></li>
+<li><p><strong>blockhash</strong> (<em>str</em>) – (optional) The block in which to look for the transaction</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – returns a custom transaction in json format</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "type":               (string) The transaction type.
+    "valid"               (bool) Whether the transaction was valid.
+    "results"             (json object) Set of results related to the transaction type
+    "block height"        (string) The block height containing the transaction.
+    "blockhash"           (string) The block hash containing the transaction.
+    "confirmations": n,   (numeric) The number of confirmations for the transaction.
+}
+</pre></div>
+</div>
+</div></blockquote>
+<dl class="field-list">
+<dt class="field-odd">example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="n">getcustomtx</span><span class="p">(</span><span class="s2">"66ea2ac081e2917f075e2cca7c1c0baa12fb85c469f34561185fa64d7d2f9305"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Tokens.gettoken">
+<span class="sig-name descname"><span class="pre">gettoken</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Tokens.gettoken" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns information about token.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>key</strong> (<em>str</em>) – (required) One of the keys may be specified (id/symbol/creationTx)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>{…} (json) – json object with token information</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="n">gettoken</span><span class="p">(</span><span class="s2">"DFI"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Tokens.listtokens">
+<span class="sig-name descname"><span class="pre">listtokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">including_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Tokens.listtokens" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns information about tokens</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> (<em>int</em>) – </p></li>
+<li><p><strong>including_start</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – </p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[{…}] (json array) – json object with token information</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="n">listtokens</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Tokens.minttokens">
+<span class="sig-name descname"><span class="pre">minttokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Tokens.minttokens" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates (and submits to local node and network) a transaction minting your token (for accounts and/or UTXOs).</p>
+<p>The second optional argument (may be empty array) is an array of specific UTXOs to spend. One of UTXO’s
+must belong to the token’s owner (collateral) address</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>amounts</strong> (<em>str</em>) – (required) Amount as json string, or array. Example: ‘[ “<a class="reference external" href="mailto:amount%40token">amount<span>@</span>token</a>” ]’</p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="n">minttokens</span><span class="p">(</span><span class="s2">"10@MyToken"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Tokens.updatetoken">
+<span class="sig-name descname"><span class="pre">updatetoken</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isDAT</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mintable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tradeable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">finalize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Tokens.updatetoken" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates (and submits to local node and network) a transaction of token promotion to isDAT or demotion from
+isDAT. Collateral will be unlocked.</p>
+<p>The second optional argument (may be empty array) is an array of specific UTXOs to spend. One of UTXO’s must
+belong to the token’s owner (collateral) address</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>token</strong> (<em>str</em>) – (required) The tokens’s symbol, id or creation tx</p></li>
+<li><p><strong>symbol</strong> (<em>str</em>) – (optional) New token’s symbol, no longer than 8</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – (optional)  New token’s name, no longer than 128</p></li>
+<li><p><strong>isDAT</strong> (<em>bool</em>) – (optional) Token’s ‘isDAT’ property, default is ‘False’</p></li>
+<li><p><strong>mintable</strong> (<em>bool</em>) – (optional) Token’s ‘Mintable’ property</p></li>
+<li><p><strong>tradeable</strong> (<em>bool</em>) – (optional) Token’s ‘Tradeable’ property</p></li>
+<li><p><strong>finalize</strong> (<em>bool</em>) – (optional) Lock token properties forever</p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="n">updatetoken</span><span class="p">(</span><span class="s2">"MyToken"</span><span class="p">,</span> <span class="n">isDAT</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
 </section>
 
         </article>

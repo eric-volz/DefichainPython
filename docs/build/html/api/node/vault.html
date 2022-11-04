@@ -113,11 +113,7 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-<div class="announcement">
-  <aside class="announcement-content">
-     This Documentation page is still in development! 
-  </aside>
-</div>
+
 
 <div class="page">
   <header class="mobile-header">
@@ -261,7 +257,362 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.node.Vault">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Vault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Vault" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Vault.closevault">
+<span class="sig-name descname"><span class="pre">closevault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vaultId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Vault.closevault" title="Permalink to this definition">#</a></dt>
+<dd><p>Close vault transaction.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vaultId</strong> (<em>str</em>) – (required) Vault to be closed</p></li>
+<li><p><strong>to</strong> (<em>str</em>) – (required) Any valid address to receive collaterals and half fee back</p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">closevault</span><span class="p">(</span><span class="s2">"84b22eee1964768304e624c416f29a91d78a01dc5e8e12db26bdac0670c67bb2"</span><span class="p">,</span> <span class="s2">"mwSDMvn1Hoc8DsoB7AkLv7nxdrf5Ja4jsF"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Vault.createvault">
+<span class="sig-name descname"><span class="pre">createvault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ownerAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loanSchemeId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Vault.createvault" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates a vault transaction.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ownerAddress</strong> (<em>str</em>) – (required) Any valid address</p></li>
+<li><p><strong>loanSchemeId</strong> (<em>str</em>) – (optional) Unique identifier of the loan scheme (8 chars max).
+If empty, the default loan scheme will be selected</p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">createvault</span><span class="p">(</span><span class="s2">"2MzfSNCkjgCbNLen14CYrVtwGomfDA5AGYv"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Vault.deposittovault">
+<span class="sig-name descname"><span class="pre">deposittovault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vaultId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Vault.deposittovault" title="Permalink to this definition">#</a></dt>
+<dd><p>Deposit collateral token amount to vault.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vaultId</strong> (<em>str</em>) – (required) Vault id</p></li>
+<li><p><strong>_from</strong> (<em>str</em>) – (required) Address containing collateral</p></li>
+<li><p><strong>amount</strong> (<em>str</em>) – (required) Amount of collateral in <a class="reference external" href="mailto:amount%40symbol">amount<span>@</span>symbol</a> format</p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">deposittovault</span><span class="p">(</span><span class="s2">"84b22eee1964768304e624c416f29a91d78a01dc5e8e12db26bdac0670c67bb2i"</span><span class="p">,</span> <span class="s2">"mwSDMvn1Hoc8DsoB7AkLv7nxdrf5Ja4jsF"</span><span class="p">,</span> <span class="s2">"1@DFI"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Vault.estimatecollateral">
+<span class="sig-name descname"><span class="pre">estimatecollateral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loanAmounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targetRatio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Vault.estimatecollateral" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns amount of collateral tokens needed to take an amount of loan tokens for a target collateral ratio.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>loanAmounts</strong> (<em>str</em>) – (required) Amount as json string, or array. Example: ‘[ “<a class="reference external" href="mailto:amount%40token">amount<span>@</span>token</a>” ]’</p></li>
+<li><p><strong>targetRatio</strong> (<em>float</em>) – (required) Target collateral ratio</p></li>
+<li><p><strong>tokens</strong> – (optional) Object with collateral token as key and their percent split as value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>{…} (json) – array of &lt;<a class="reference external" href="mailto:amount%40token">amount<span>@</span>token</a>&gt; strings</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">estimatecollateral</span><span class="p">(</span><span class="s2">"1@DUSD"</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Vault.estimateloan">
+<span class="sig-name descname"><span class="pre">estimateloan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vaultId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targetRatio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Vault.estimateloan" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns amount of loan tokens a vault can take depending on a target collateral ratio.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vaultId</strong> (<em>str</em>) – (required) vault hex id</p></li>
+<li><p><strong>tokens</strong> (<em>json</em>) – (required) Object with loans token as key and their percent split as value</p></li>
+<li><p><strong>targetRatio</strong> (<em>float</em>) – (required) Target collateral ratio</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>{…} (json) – array of &lt;<a class="reference external" href="mailto:amount%40token">amount<span>@</span>token</a>&gt; strings</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">estimateloan</span><span class="p">(</span><span class="s2">"5474b2e9bfa96446e5ef3c9594634e1aa22d3a0722cb79084d61253acbdf87bf"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"DUSD"</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Vault.estimatevault">
+<span class="sig-name descname"><span class="pre">estimatevault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collateralAmounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loanAmounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Vault.estimatevault" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns estimated vault for given collateral and loan amounts.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collateralAmounts</strong> (<em>str</em>) – (required) Collateral amounts as json string, or array. Example: ‘[ “<a class="reference external" href="mailto:amount%40token">amount<span>@</span>token</a>” ]’</p></li>
+<li><p><strong>loanAmounts</strong> (<em>str</em>) – (required) Loan amounts as json string, or array. Example: ‘[ “<a class="reference external" href="mailto:amount%40token">amount<span>@</span>token</a>” ]’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – returns estimate vault for given collateral and loan amounts</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "collateralValue" : n.nnnnnnnn,        (amount) The total collateral value in USD
+    "loanValue" : n.nnnnnnnn,              (amount) The total loan value in USD
+    "informativeRatio" : n.nnnnnnnn,       (amount) Informative ratio with 8 digit precision
+    "collateralRatio" : n,                 (uint) Ratio as unsigned int
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">estimatevault</span><span class="p">([</span><span class="s2">"1000.00000000@DFI"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"10@DUSD"</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Vault.getvault">
+<span class="sig-name descname"><span class="pre">getvault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vaultId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Vault.getvault" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns information about vault.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vaultId</strong> (<em>str</em>) – (required) vault hex id</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – (optional) Verbose vault information</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>{…} (json) – vault data in json form</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">getvault</span><span class="p">(</span><span class="s2">"5474b2e9bfa96446e5ef3c9594634e1aa22d3a0722cb79084d61253acbdf87bf"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Vault.listauctionhistory">
+<span class="sig-name descname"><span class="pre">listauctionhistory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identifier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mine'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxBlockHeight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vaultId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.node.Vault.listauctionhistory" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns information about auction history.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>identifier</strong> (<em>str</em>) – (optional) Single account ID (CScript or address) or vaultId or reserved words:
+“mine” - to list history for all owned accounts or “all” to list whole DB (default = “mine”).</p></li>
+<li><p><strong>maxBlockHeight</strong> (<em>int</em>) – (optional) Optional height to iterate from (downto genesis block)</p></li>
+<li><p><strong>vaultId</strong> (<em>str</em>) – (optional) Vault id</p></li>
+<li><p><strong>index</strong> (<em>int</em>) – (optional)  Batch index</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – (optional) Maximum number of orders to return</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[{},{}…] (json array) – Objects with auction history information</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">listauctionhistory</span><span class="p">(</span><span class="s2">"all"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Vault.listauctions">
+<span class="sig-name descname"><span class="pre">listauctions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vaultId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">including_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.node.Vault.listauctions" title="Permalink to this definition">#</a></dt>
+<dd><p>List all available auctions.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vaultId</strong> (<em>str</em>) – (optional) Vault id</p></li>
+<li><p><strong>height</strong> (<em>int</em>) – (optional) Height to iterate from</p></li>
+<li><p><strong>including_start</strong> (<em>bool</em>) – (optional) If true, then iterate including starting position</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – (optional)  Maximum number of orders to return</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[{…}] (json array) Json object with auction information</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">listauctions</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Vault.listvaulthistory">
+<span class="sig-name descname"><span class="pre">listvaulthistory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vaultId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxBlockHeight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.node.Vault.listvaulthistory" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the history of the specified vault</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vaultId</strong> (<em>str</em>) – (required) Vault to get history for</p></li>
+<li><p><strong>maxBlockHeight</strong> (<em>int</em>) – (optional) Optional height to iterate from (down to genesis block)</p></li>
+<li><p><strong>depth</strong> (<em>int</em>) – (optional) Maximum depth, from the genesis block is the default</p></li>
+<li><p><strong>token</strong> (<em>str</em>) – (optional) Filter by token</p></li>
+<li><p><strong>txtype</strong> (<em>str</em>) – (optional) Filter by transaction type, supported letter from {CustomTxType}</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – (optional) Maximum number of records to return, 100 by default</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[{…}] – (json array) Objects with vault history information</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">listvaulthistory</span><span class="p">(</span><span class="s2">"84b22eee1964768304e624c416f29a91d78a01dc5e8e12db26bdac0670c67bb2"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Vault.listvaults">
+<span class="sig-name descname"><span class="pre">listvaults</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ownerAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loanSchemeId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'unknown'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">including_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.node.Vault.listvaults" title="Permalink to this definition">#</a></dt>
+<dd><p>List all available vaults.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ownerAddress</strong> (<em>str</em>) – (optional) Address of the vault owner</p></li>
+<li><p><strong>loanSchemeId</strong> (<em>str</em>) – (optional) Vault’s loan scheme id</p></li>
+<li><p><strong>state</strong> (<em>str</em>) – (optional) Wether the vault is under a given state.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – (optional) Flag for verbose list (default = false), otherwise only ids, ownerAddress,
+loanSchemeIds and state are listed</p></li>
+<li><p><strong>start</strong> (<em>str</em>) – (optional) Optional first key to iterate from, in lexicographical order. Typically it’s set to
+last ID from previous request.</p></li>
+<li><p><strong>including_start</strong> (<em>bool</em>) – (optional) If true, then iterate including starting position.</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) – (optional) Maximum number of orders to return</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[{…}] (json array) – Json object with vault information</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">listvaults</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Vault.paybackwithcollateral">
+<span class="sig-name descname"><span class="pre">paybackwithcollateral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vaultId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Vault.paybackwithcollateral" title="Permalink to this definition">#</a></dt>
+<dd><p>Payback vault’s loans with vault’s collaterals.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>vaultId</strong> (<em>str</em>) – (required) vault hex id</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">paybackwithcollateral</span><span class="p">(</span><span class="s2">"5474b2e9bfa96446e5ef3c9594634e1aa22d3a0722cb79084d61253acbdf87bf"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Vault.placeauctionbid">
+<span class="sig-name descname"><span class="pre">placeauctionbid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vaultId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Vault.placeauctionbid" title="Permalink to this definition">#</a></dt>
+<dd><p>Bid to vault in auction.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vaultId</strong> (<em>str</em>) – (required) Vault id</p></li>
+<li><p><strong>index</strong> (<em>int</em>) – (required) Auction index</p></li>
+<li><p><strong>_from</strong> (<em>str</em>) – (required) Address to get tokens. If “from” value is: “*” (star), it’s means auto-selection
+accounts from wallet</p></li>
+<li><p><strong>amount</strong> (<em>str</em>) – (required) Amount of <a class="reference external" href="mailto:amount%40symbol">amount<span>@</span>symbol</a> format</p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">placeauctionbid</span><span class="p">(</span><span class="s2">"84b22eee1964768304e624c416f29a91d78a01dc5e8e12db26bdac0670c67bb2"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"mwSDMvn1Hoc8DsoB7AkLv7nxdrf5Ja4jsF"</span><span class="p">,</span> <span class="s2">"100@TSLA"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Vault.updatevault">
+<span class="sig-name descname"><span class="pre">updatevault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vaultId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ownerAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loanSchemeId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Vault.updatevault" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates (and submits to local node and network) an <cite>update vault transaction</cite>,
+and saves vault updates to database.</p>
+<p>The last optional argument (may be empty array) is an array of specific UTXOs to spend.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vaultId</strong> (<em>str</em>) – (required) Vault id</p></li>
+<li><p><strong>ownerAddress</strong> (<em>str</em>) – (optional) Vault’s owner address</p></li>
+<li><p><strong>loanSchemeId</strong> (<em>str</em>) – (optional) Vault’s loan scheme id</p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">updatevault</span><span class="p">(</span><span class="s2">"84b22eee1964768304e624c416f29a91d78a01dc5e8e12db26bdac0670c67bb2"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"ownerAddress"</span><span class="p">:</span> <span class="s2">"mwSDMvn1Hoc8DsoB7AkLv7nxdrf5Ja4jsF"</span><span class="p">})</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Vault.withdrawfromvault">
+<span class="sig-name descname"><span class="pre">withdrawfromvault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vaultId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Vault.withdrawfromvault" title="Permalink to this definition">#</a></dt>
+<dd><p>Withdraw collateral token amount from vault.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vaultId</strong> (<em>str</em>) – (required) Vault id</p></li>
+<li><p><strong>to</strong> (<em>str</em>) – (required) Destination address for withdraw of collateral</p></li>
+<li><p><strong>amount</strong> (<em>str</em>) – (required) Amount of collateral in <a class="reference external" href="mailto:amount%40symbol">amount<span>@</span>symbol</a> format</p></li>
+<li><p><strong>inputs</strong> (<em>json array</em>) – (optional) <a class="reference internal" href="index.html#node-inputs"><span class="std std-ref">Inputs</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">withdrawfromvault</span><span class="p">(</span><span class="s2">"84b22eee1964768304e624c416f29a91d78a01dc5e8e12db26bdac0670c67bb2i"</span><span class="p">,</span> <span class="s2">"mwSDMvn1Hoc8DsoB7AkLv7nxdrf5Ja4jsF"</span><span class="p">,</span> <span class="s2">"1@DFI"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
 </section>
 
         </article>

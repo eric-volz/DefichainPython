@@ -113,11 +113,7 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-<div class="announcement">
-  <aside class="announcement-content">
-     This Documentation page is still in development! 
-  </aside>
-</div>
+
 
 <div class="page">
   <header class="mobile-header">
@@ -261,7 +257,1754 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.node.Wallet">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">Wallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Wallet" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.abandontransaction">
+<span class="sig-name descname"><span class="pre">abandontransaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Wallet.abandontransaction" title="Permalink to this definition">#</a></dt>
+<dd><p>Mark in-wallet transaction as abandoned</p>
+<p>This will mark this transaction and all its in-wallet descendants as abandoned which will allow
+for their inputs to be respent.  It can be used to replace “stuck” or evicted transactions.</p>
+<p>It only works on transactions which are not included in a block and are not currently in the mempool.</p>
+<p>It has no effect on transactions which are already abandoned.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>txid</strong> (<em>str</em>) – (required) The transaction id</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">abandontransaction</span><span class="p">(</span><span class="s2">"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.abortrescan">
+<span class="sig-name descname"><span class="pre">abortrescan</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Wallet.abortrescan" title="Permalink to this definition">#</a></dt>
+<dd><p>Stops current wallet rescan triggered by an RPC call, e.g. by an importprivkey call.</p>
+<p>Note: Use “getwalletinfo” to query the scanning progress.</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">abortrescan</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.addmultisigaddress">
+<span class="sig-name descname"><span class="pre">addmultisigaddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nrequired</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.addmultisigaddress" title="Permalink to this definition">#</a></dt>
+<dd><p>Add a nrequired-to-sign multisignature address to the wallet. Requires a new wallet backup.</p>
+<p>Each key is a Defi address or hex-encoded public key.</p>
+<p>This functionality is only intended for use with non-watchonly addresses.</p>
+<p>See <cite>importaddress</cite> for watchonly p2sh address support.</p>
+<p>If ‘label’ is specified, assign address to that label.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nrequired</strong> (<em>int</em>) – (required) The number of required signatures out of the n keys or addresses</p></li>
+<li><p><strong>keys</strong> (<em>array</em>) – (required) A json array of defi addresses or hex-encoded public keys</p></li>
+<li><p><strong>label</strong> (<em>str</em>) – (optional) A label to assign the addresses to</p></li>
+<li><p><strong>address_type</strong> (<em>str</em>) – (optional) The address type to use. Options are “legacy”, “p2sh-segwit”, and “bech32”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – returns the multisigaddress and redeemScript</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "address":"multisigaddress",    (string) The value of the new multisig address.
+    "redeemScript":"script"         (string) The string value of the hex-encoded redemption script.
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">addmultisigaddress</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="s2">"16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5"</span><span class="p">,</span> <span class="s2">"171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV"</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.backupwallet">
+<span class="sig-name descname"><span class="pre">backupwallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Wallet.backupwallet" title="Permalink to this definition">#</a></dt>
+<dd><p>Safely copies current wallet file to destination, which can be a directory or a path with filename</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>destination</strong> (<em>str</em>) – (required) The destination directory or file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">backupwallet</span><span class="p">(</span><span class="s2">"backup.dat"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.bumpfee">
+<span class="sig-name descname"><span class="pre">bumpfee</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confTarget</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">totalFee</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replaceable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimate_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'UNSET'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.bumpfee" title="Permalink to this definition">#</a></dt>
+<dd><p>Bumps the fee of an opt-in-RBF transaction T, replacing it with a new transaction B.</p>
+<p>An opt-in RBF transaction with the given txid must be in the wallet.</p>
+<p>The command will pay the additional fee by reducing change outputs or adding inputs when necessary. It may
+add a new change output if one does not already exist.</p>
+<p>If <cite>totalFee</cite> (DEPRECATED) is given, adding inputs is not supported, so there must be a single change output
+that is big enough or it will fail.</p>
+<p>All inputs in the original transaction will be included in the replacement transaction.</p>
+<p>The command will fail if the wallet or mempool contains a transaction that spends one of T’s outputs.</p>
+<p>By default, the new fee will be calculated automatically using estimatesmartfee.</p>
+<p>The user can specify a confirmation target for estimatesmartfee.</p>
+<p>Alternatively, the user can specify totalFee (DEPRECATED), or use RPC settxfee to set a higher fee rate.</p>
+<p>At a minimum, the new fee rate must be high enough to pay an additional new relay fee (incrementalfee
+returned by getnetworkinfo) to enter the node’s mempool.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txid</strong> (<em>str</em>) – (required) The txid to be bumped</p></li>
+<li><p><strong>confTarget</strong> (<em>int</em>) – (optional) Confirmation target (in blocks)</p></li>
+<li><p><strong>totalFee</strong> (<em>int</em>) – (optional) Total fee (NOT feerate) to pay, in satoshis. (DEPRECATED)
+In rare cases, the actual fee paid might be slightly higher than the specified
+totalFee if the tx change output has to be removed because it is too close to
+the dust threshold.</p></li>
+<li><p><strong>replaceable</strong> (<em>bool</em>) – (optional) Whether the new transaction should still be
+marked bip-125 replaceable. If true, the sequence numbers in the transaction will
+be left unchanged from the original. If false, any input sequence numbers in the
+original transaction that were less than 0xfffffffe will be increased to 0xfffffffe
+so the new transaction will not be explicitly bip-125 replaceable (though it may
+still be replaceable in practice, for example if it has unconfirmed ancestors which
+are replaceable).</p></li>
+<li><p><strong>estimate_mode</strong> (<em>str</em>) – (optional) The fee estimate mode, must be one of:
+“UNSET”,
+“ECONOMICAL”,
+“CONSERVATIVE”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – returns txid and information about the bumped fee</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "txid":    "value",     (string)  The id of the new transaction
+    "origfee":  n,          (numeric) Fee of the replaced transaction
+    "fee":      n,          (numeric) Fee of the new transaction
+    "errors":  [ str... ]   (json array of strings) Errors encountered during processing (may be empty)
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">bumpfee</span><span class="p">(</span><span class="s2">"e6ade425016b5c7025bc8a31b41e476f092eaeaeed6b69ac28d7ce988a499d18"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.createwallet">
+<span class="sig-name descname"><span class="pre">createwallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wallet_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disable_private_keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blank</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">passphrase</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">avoid_reuse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.createwallet" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates and loads a new wallet.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wallet_name</strong> (<em>str</em>) – (required) The name for the new wallet. If this is a path, the wallet will be created at
+the path location</p></li>
+<li><p><strong>disable_private_keys</strong> (<em>bool</em>) – (optional) Disable the possibility of private keys</p></li>
+<li><p><strong>blank</strong> (<em>bool</em>) – (optional) Create a blank wallet. A blank wallet has no keys or HD seed. One can be set using sethdseed.</p></li>
+<li><p><strong>passphrase</strong> (<em>str</em>) – (optional) Encrypt the wallet with this passphrase</p></li>
+<li><p><strong>avoid_reuse</strong> (<em>bool</em>) – (optional) Keep track of coin reuse, and treat dirty and clean coins differently with
+privacy considerations in mind</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – returns information about the created wallet</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "name" :    &lt;wallet_name&gt;,        (string) The wallet name if created successfully. If the wallet was created using a full path, the wallet_name will be the full path.
+    "warning" : &lt;warning&gt;,            (string) Warning message if wallet was not loaded cleanly.
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">createwallet</span><span class="p">(</span><span class="s2">"new_wallet"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.dumpprivkey">
+<span class="sig-name descname"><span class="pre">dumpprivkey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Wallet.dumpprivkey" title="Permalink to this definition">#</a></dt>
+<dd><p>Reveals the private key corresponding to ‘address’.
+Then the importprivkey can be used with this output</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>address</strong> (<em>str</em>) – (required) The DFI address for the private key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“key” (string) – the private key</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">dumpprivkey</span><span class="p">(</span><span class="s2">"myaddress"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.dumpwallet">
+<span class="sig-name descname"><span class="pre">dumpwallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.dumpwallet" title="Permalink to this definition">#</a></dt>
+<dd><p>Dumps all wallet keys in a human-readable format to a server-side file. This does not allow overwriting existing files.</p>
+<p>Imported scripts are included in the dumpfile, but corresponding BIP173 addresses, etc. may not be added automatically by importwallet.</p>
+<p>Note that if your wallet contains keys which are not derived from your HD seed (e.g. imported keys), these are not covered by
+only backing up the seed itself, and must be backed up too (e.g. ensure you back up the whole dumpfile).</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – (required) The filename with path (either absolute or relative to defid)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – returns filename</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "filename": (string) The filename with full absolute path
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">dumpwallet</span><span class="p">(</span><span class="s2">"test"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.encryptwallet">
+<span class="sig-name descname"><span class="pre">encryptwallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">passphrase</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Wallet.encryptwallet" title="Permalink to this definition">#</a></dt>
+<dd><p>Encrypts the wallet with ‘passphrase’. This is for first time encryption.</p>
+<p>After this, any calls that interact with private keys such as sending or signing
+will require the passphrase to be set prior the making these calls.</p>
+<p>Use the walletpassphrase call for this, and then walletlock call.</p>
+<p>If the wallet is already encrypted, use the walletpassphrasechange call.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>passphrase</strong> (<em>str</em>) – (required) The pass phrase to encrypt the wallet with. It must be at least 1 character,
+but should be long.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">encryptwallet</span><span class="p">(</span><span class="s2">"passphrase"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.getaddressesbylabel">
+<span class="sig-name descname"><span class="pre">getaddressesbylabel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.getaddressesbylabel" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the list of addresses assigned the specified label.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>label</strong> (<em>str</em>) – (required) the label</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – returns addresses with a given label</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{ (json object with addresses as keys)
+    "address": { (json object with information about address)
+        "purpose": "string" (string)  Purpose of address ("send" for sending address, "receive" for receiving address)
+    },...
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">getaddressesbylabel</span><span class="p">(</span><span class="s2">"label"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.getaddressinfo">
+<span class="sig-name descname"><span class="pre">getaddressinfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.getaddressinfo" title="Permalink to this definition">#</a></dt>
+<dd><p>Return information about the given defi address. Some information requires the address
+to be in the wallet.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>address</strong> (<em>str</em>) – (required) The defi address to get the information of</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – return information about the given defi address</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "address" : "address",        (string) The defi address validated
+    "scriptPubKey" : "hex",       (string) The hex-encoded scriptPubKey generated by the address
+    "ismine" : true|false,        (boolean) If the address is yours or not
+    "iswatchonly" : true|false,   (boolean) If the address is watchonly
+    "solvable" : true|false,      (boolean) Whether we know how to spend coins sent to this address, ignoring the possible lack of private keys
+    "desc" : "desc",            (string, optional) A descriptor for spending coins sent to this address (only when solvable)
+    "isscript" : true|false,      (boolean) If the key is a script
+    "ischange" : true|false,      (boolean) If the address was used for change output
+    "iswitness" : true|false,     (boolean) If the address is a witness address
+    "witness_version" : version   (numeric, optional) The version number of the witness program
+    "witness_program" : "hex"     (string, optional) The hex value of the witness program
+    "script" : "type"             (string, optional) The output script type. Only if "isscript" is true and the redeemscript is known. Possible types: nonstandard, pubkey, pubkeyhash, scripthash, multisig, nulldata, witness_v0_keyhash, witness_v0_scripthash, witness_unknown
+    "hex" : "hex",                (string, optional) The redeemscript for the p2sh address
+    "pubkeys"                     (string, optional) Array of pubkeys associated with the known redeemscript (only if "script" is "multisig")
+    [
+        "pubkey"
+        ,...
+    ]
+    "sigsrequired" : xxxxx        (numeric, optional) Number of signatures required to spend multisig output (only if "script" is "multisig")
+    "pubkey" : "publickeyhex",    (string, optional) The hex value of the raw public key, for single-key addresses (possibly embedded in P2SH or P2WSH)
+    "embedded" : {...},           (object, optional) Information about the address embedded in P2SH or P2WSH, if relevant and known. It includes all getaddressinfo output fields for the embedded address, excluding metadata ("timestamp", "hdkeypath", "hdseedid") and relation to the wallet ("ismine", "iswatchonly").
+    "iscompressed" : true|false,  (boolean, optional) If the pubkey is compressed
+    "label" :  "label"         (string) The label associated with the address, "" is the default label
+    "timestamp" : timestamp,      (number, optional) The creation time of the key if available in seconds since epoch (Jan 1 1970 GMT)
+    "hdkeypath" : "keypath"       (string, optional) The HD keypath if the key is HD and available
+    "hdseedid" : "&lt;hash160&gt;"      (string, optional) The Hash160 of the HD seed
+    "hdmasterfingerprint" : "&lt;hash160&gt;" (string, optional) The fingperint of the master key.
+    "labels"                      (object) Array of labels associated with the address.
+    [
+        { (json object of label data)
+            "name": "labelname" (string) The label
+            "purpose": "string" (string) Purpose of address ("send" for sending address, "receive" for receiving address)
+        },...
+    ]
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">getaddressinfo</span><span class="p">(</span><span class="s2">"1PSSGeFHDnKNxiEyFrD1wcEaHr9hrQDDWc"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.getbalance">
+<span class="sig-name descname"><span class="pre">getbalance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dummy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'*'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minconf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_watchonly</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">avoid_reuse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.getbalance" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the total available balance.</p>
+<p>The available balance is what the wallet considers currently spendable, and is
+thus affected by options which limit spendability such as -spendzeroconfchange.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dummy</strong> (<em>str</em>) – (optional) Remains for backward compatibility. Must be excluded or set to “*”</p></li>
+<li><p><strong>minconf</strong> (<em>int</em>) – (optional) Only include transactions confirmed at least this many times</p></li>
+<li><p><strong>include_watchonly</strong> (<em>bool</em>) – (optional) Also include balance in watch-only addresses (see ‘importaddress’)</p></li>
+<li><p><strong>avoid_reuse</strong> (<em>bool</em>) – (optional) Do not include balance in dirty outputs; addresses are considered dirty if they
+have previously been used in a transaction</p></li>
+<li><p><strong>with_tokens</strong> (<em>bool</em>) – (optional) Include tokens balances; Default is ‘false’ for backward compatibility</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – amount (int) if with_tokens == false | {tokenId: amount,…} (json) if with_tokens == true</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "mine": {                          (object) balances from outputs that the wallet can sign
+        "trusted": xxx                 (numeric) trusted balance (outputs created by the wallet or confirmed outputs)
+        "untrusted_pending": xxx       (numeric) untrusted pending balance (outputs created by others that are in the mempool)
+        "immature": xxx                (numeric) balance from immature coinbase outputs
+        "used": xxx                    (numeric) (only present if avoid_reuse is set) balance from coins sent to addresses that were previously spent from (potentially privacy violating)
+    },
+    "watchonly": {                     (object) watchonly balances (not present if wallet does not watch anything)
+        "trusted": xxx                 (numeric) trusted balance (outputs created by the wallet or confirmed outputs)
+        "untrusted_pending": xxx       (numeric) untrusted pending balance (outputs created by others that are in the mempool)
+        "immature": xxx                (numeric) balance from immature coinbase outputs
+    },
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">getbalance</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.getbalances">
+<span class="sig-name descname"><span class="pre">getbalances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">with_tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.getbalances" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns an object with all balances in DFI.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>with_tokens</strong> (<em>bool</em>) – (optional) Include tokens balances; Default is ‘false’ for backward compatibility</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>{…} (json) – returns object with all balances in DFI</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">getbalances</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.getnewaddress">
+<span class="sig-name descname"><span class="pre">getnewaddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Wallet.getnewaddress" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns a new Defi address for receiving payments.</p>
+<p>If ‘label’ is specified, it is added to the address book
+so payments received with the address will be associated with ‘label’.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<em>str</em>) – (optional) The label name for the address to be linked to. It can also be set to the empty
+string “” to represent the default label. The label does not need to exist, it will be created if
+there is no label by the given name</p></li>
+<li><p><strong>address_type</strong> (<em>str</em>) – (optional) The address type to use. Options are “legacy”, “p2sh-segwit”, and “bech32”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“address” (string) – The new defi address</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">getnewaddress</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.getrawchangeaddress">
+<span class="sig-name descname"><span class="pre">getrawchangeaddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Wallet.getrawchangeaddress" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns a new Defi address, for receiving change.</p>
+<p>This is for use with raw transactions, NOT normal use.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>address_type</strong> (<em>str</em>) – (optional) The address type to use. Options are “legacy”, “p2sh-segwit”, and “bech32”.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“address” (string) – The address</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">getrawchangeaddress</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.getreceivedbyaddress">
+<span class="sig-name descname"><span class="pre">getreceivedbyaddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minconf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#defichain.node.Wallet.getreceivedbyaddress" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the total amount received by the given address in transactions with at least minconf confirmations.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>address</strong> (<em>str</em>) – (required) The defi address for transactions</p></li>
+<li><p><strong>minconf</strong> (<em>int</em>) – (optional) Only include transactions confirmed at least this many times</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>amount (float) – returns the total amount in DFI received at this address</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">getreceivedbyaddress</span><span class="p">(</span><span class="s2">"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.getreceivedbylabel">
+<span class="sig-name descname"><span class="pre">getreceivedbylabel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minconf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#defichain.node.Wallet.getreceivedbylabel" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the total amount received by addresses with &lt;label&gt; in transactions with at least [minconf]
+confirmations.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<em>str</em>) – (required) The selected label, may be the default label using “”</p></li>
+<li><p><strong>minconf</strong> (<em>int</em>) – (optional) Only include transactions confirmed at least this many times</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>amount (float) – returns the total amount in DFI received at this label</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">getreceivedbylabel</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.gettransaction">
+<span class="sig-name descname"><span class="pre">gettransaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_watchonly</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.gettransaction" title="Permalink to this definition">#</a></dt>
+<dd><p>Get detailed information about in-wallet transaction</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txid</strong> (<em>str</em>) – (required) The transaction id</p></li>
+<li><p><strong>include_watchonly</strong> (<em>bool</em>) – (optional) Whether to include watch-only addresses in balance calculation and details[]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – returns information about transaction</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "amount" : x.xxx,                           (numeric) The transaction amount in DFI
+    "fee": x.xxx,                               (numeric) The amount of the fee in DFI. This is negative and only available for the
+                                                'send' category of transactions.
+"confirmations" : n,                            (numeric) The number of confirmations
+    "blockhash" : "hash",                       (string) The block hash
+    "blockindex" : xx,                          (numeric) The index of the transaction in the block that includes it
+    "blocktime" : ttt,                          (numeric) The time in seconds since epoch (1 Jan 1970 GMT)
+    "txid" : "transactionid",                   (string) The transaction id.
+"time" : ttt,                                   (numeric) The transaction time in seconds since epoch (1 Jan 1970 GMT)
+    "timereceived" : ttt,                       (numeric) The time received in seconds since epoch (1 Jan 1970 GMT)
+    "bip125-replaceable": "yes|no|unknown",     (string) Whether this transaction could be replaced due to BIP125 (replace-by-fee);
+                                                may be unknown for unconfirmed transactions not in the mempool
+    "details" : [
+        {
+        "address" : "address",                  (string) The defi address involved in the transaction
+        "category" :                            (string) The transaction category.
+            "send"                              Transactions sent.
+            "receive"                           Non-coinbase transactions received.
+            "generate"                          Coinbase transactions received with more than 100 confirmations.
+            "immature"                          Coinbase transactions received with 100 or fewer confirmations.
+            "orphan"                            Orphaned coinbase transactions received.
+        "amount" : x.xxx,                       (numeric) The amount in DFI
+        "label" : "label",                      (string) A comment for the address/transaction, if any
+        "vout" : n,                             (numeric) the vout value
+        "fee": x.xxx,                           (numeric) The amount of the fee in DFI. This is negative and only available for the
+        'send' category of transactions.
+        "abandoned": xxx                        (bool) 'true' if the transaction has been abandoned (inputs are respendable). Only available for the
+        'send' category of transactions.
+        }
+        ,...
+    ],
+    "hex" : "data"                              (string) Raw data for transaction
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">gettransaction</span><span class="p">(</span><span class="s2">"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.getunconfirmedbalance">
+<span class="sig-name descname"><span class="pre">getunconfirmedbalance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">with_tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#defichain.node.Wallet.getunconfirmedbalance" title="Permalink to this definition">#</a></dt>
+<dd><p>DEPRECATED
+Identical to getbalances().mine.untrusted_pending</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>with_tokens</strong> (<em>bool</em>) – (optional)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>amount (float) – returns the unconfirmed amount of UTXO or token</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">getunconfirmedbalance</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.getwalletinfo">
+<span class="sig-name descname"><span class="pre">getwalletinfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">with_tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.getwalletinfo" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns an object containing various wallet state info.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>with_tokens</strong> (<em>bool</em>) – (optional) Include tokens balances; Default is ‘false’ for backward compatibility</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – returns information about the wallet state</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "walletname": xxxxx,               (string) the wallet name
+    "walletversion": xxxxx,            (numeric) the wallet version
+    "balance": xxxxxxx,                (numeric) DEPRECATED. Identical to getbalances().mine.trusted
+    "unconfirmed_balance": xxx,        (numeric) DEPRECATED. Identical to getbalances().mine.untrusted_pending
+    "immature_balance": xxxxxx,        (numeric) DEPRECATED. Identical to getbalances().mine.immature
+    "txcount": xxxxxxx,                (numeric) the total number of transactions in the wallet
+    "keypoololdest": xxxxxx,           (numeric) the timestamp (seconds since Unix epoch) of the oldest pre-generated key in the key pool
+    "keypoolsize": xxxx,               (numeric) how many new keys are pre-generated (only counts external keys)
+    "keypoolsize_hd_internal": xxxx,   (numeric) how many new keys are pre-generated for internal use (used for change outputs, only appears if the wallet is using this feature, otherwise external keys are used)
+    "unlocked_until": ttt,             (numeric) the timestamp in seconds since epoch (midnight Jan 1 1970 GMT) that the wallet is unlocked for transfers, or 0 if the wallet is locked
+    "paytxfee": x.xxxx,                (numeric) the transaction fee configuration, set in DFI/kB
+    "hdseedid": "&lt;hash160&gt;"            (string, optional) the Hash160 of the HD seed (only present when HD is enabled)
+    "private_keys_enabled": true|false (boolean) false if privatekeys are disabled for this wallet (enforced watch-only wallet)
+    "avoid_reuse": true|false          (boolean) whether this wallet tracks clean/dirty coins in terms of reuse
+    "scanning":                        (json object) current scanning details, or false if no scan is in progress
+    {
+        "duration" : xxxx              (numeric) elapsed seconds since scan start
+        "progress" : x.xxxx,           (numeric) scanning progress percentage [0.0, 1.0]
+    }
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">getwalletinfo</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.importaddress">
+<span class="sig-name descname"><span class="pre">importaddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescan</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p2sh</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Wallet.importaddress" title="Permalink to this definition">#</a></dt>
+<dd><p>Adds an address or script (in hex) that can be watched as if it were in your wallet but cannot be used to spend. Requires a new wallet backup.</p>
+<p>Note: This call can take over an hour to complete if rescan is true, during that time, other rpc calls
+may report that the imported address exists but related transactions are still missing, leading to temporarily
+incorrect/bogus balances and unspent outputs until rescan completes.</p>
+<p>If you have the full public key, you should call importpubkey instead of this.</p>
+<p>Hint: use importmulti to import more than one address.</p>
+<p>Note: If you import a non-standard raw script in hex form, outputs sending to it will be treated
+as change, and not show up in many RPCs.</p>
+<p>Note: Use “getwalletinfo” to query the scanning progress.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>address</strong> (<em>str</em>) – (required) The DFI address</p></li>
+<li><p><strong>label</strong> (<em>str</em>) – (optional) An optional label</p></li>
+<li><p><strong>rescan</strong> (<em>bool</em>) – (optional) Rescan the wallet for transactions</p></li>
+<li><p><strong>p2sh</strong> (<em>bool</em>) – (optional) Add the P2SH version of the script as well</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">importaddress</span><span class="p">(</span><span class="s2">"address"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.importmulti">
+<span class="sig-name descname"><span class="pre">importmulti</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">requests</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescan</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.node.Wallet.importmulti" title="Permalink to this definition">#</a></dt>
+<dd><p>Import addresses/scripts (with private or public keys, redeem script (P2SH)), optionally rescanning the
+blockchain from the earliest creation time of the imported scripts. Requires a new wallet backup.</p>
+<p>If an address/script is imported without all of the private keys required to spend from that address, it
+will be watchonly. The ‘watchonly’ option must be set to true in this case or a warning will be returned.</p>
+<p>Conversely, if all the private keys are provided and the address/script is spendable, the watchonly option
+must be set to false, or a warning will be returned.</p>
+<p>Note: This call can take over an hour to complete if rescan is true, during that time, other rpc calls
+may report that the imported keys, addresses or scripts exist but related transactions are still missing.</p>
+<p>Note: Use “getwalletinfo” to query the scanning progress.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>requests</strong> (<em>json array</em>) – <p>(required) Data to be imported</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
+    {                                                           (json object)
+        "desc": "str",                                              (string) Descriptor to import. If using descriptor, do not also provide address/scriptPubKey, scripts, or pubkeys
+        "scriptPubKey": "&lt;script&gt;" | { "address":"&lt;address&gt;" },     (string / json, required) Type of scriptPubKey (string for script, json for address). Should not be provided if using a descriptor
+        "timestamp": timestamp | "now",                             (integer / string, required) Creation time of the key in seconds since epoch (Jan 1 1970 GMT),
+                                                                    or the string "now" to substitute the current synced blockchain time. The timestamp of the oldest
+                                                                    key will determine how far back blockchain rescans need to begin for missing wallet transactions.
+                                                                    "now" can be specified to bypass scanning, for keys which are known to never have been used, and
+                                                                    0 can be specified to scan the entire blockchain. Blocks up to 2 hours before the earliest key
+                                                                    creation time of all keys being imported by the importmulti call will be scanned.
+        "redeemscript": "str",                                      (string) Allowed only if the scriptPubKey is a P2SH or P2SH-P2WSH address/scriptPubKey
+        "witnessscript": "str",                                     (string) Allowed only if the scriptPubKey is a P2SH-P2WSH or P2WSH address/scriptPubKey
+        "pubkeys": [                                                (json array, optional, default=empty array) Array of strings giving pubkeys to import. They must occur in P2PKH or P2WPKH scripts. They are not required when the private key is also provided (see the "keys" argument).
+            "pubKey",                                               (string)
+            ...
+        ],
+        "keys": [                                                   (json array, optional, default=empty array) Array of strings giving private keys to import. The corresponding public keys must occur in the output or redeemscript.
+            "key",                                                  (string)
+            ...
+        ],
+        "range": n or [n,n],                                       (numeric or array) If a ranged descriptor is used, this specifies the end or the range (in the form [begin,end]) to import
+        "internal": bool,                                          (boolean, optional, default=false) Stating whether matching outputs should be treated as not incoming payments (also known as change)
+        "watchonly": bool,                                         (boolean, optional, default=false) Stating whether matching outputs should be considered watchonly.
+        "label": "str",                                            (string, optional, default='') Label to assign to the address, only allowed with internal=false
+        "keypool": bool,                                           (boolean, optional, default=false) Stating whether imported public keys should be added to the keypool for when users request new addresses. Only allowed when wallet private keys are disabled
+    },
+    ...
+]
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>rescan</strong> (<em>bool</em>) – (optional) Stating if should rescan the blockchain after all imports</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>[{…}] (json array) – Response is an array with the same size as the input that has the execution result</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">},</span> <span class="p">{</span><span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span> <span class="s2">"warnings"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Ignoring irrelevant private key"</span><span class="p">]},</span>
+<span class="p">{</span><span class="s2">"success"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span> <span class="s2">"error"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"code"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Internal Server Error"</span><span class="p">}},</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">importmulti</span><span class="p">([{</span> <span class="s2">"scriptPubKey"</span><span class="p">:</span> <span class="p">{</span> <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"&lt;my address&gt;"</span> <span class="p">},</span> <span class="s2">"timestamp"</span><span class="p">:</span><span class="mi">1455191478</span> <span class="p">},</span> <span class="p">{</span> <span class="s2">"scriptPubKey"</span><span class="p">:</span> <span class="p">{</span> <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"&lt;my 2nd address&gt;"</span> <span class="p">},</span> <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"example 2"</span><span class="p">,</span> <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1455191480</span> <span class="p">}])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.importprivkey">
+<span class="sig-name descname"><span class="pre">importprivkey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">privkey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescan</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Wallet.importprivkey" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>privkey</strong> (<em>str</em>) – (required) The private key (see dumpprivkey)</p></li>
+<li><p><strong>label</strong> (<em>str</em>) – (optional) An optional label</p></li>
+<li><p><strong>rescan</strong> (<em>bool</em>) – (optional) Rescan the wallet for transactions</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">importprivkey</span><span class="p">(</span><span class="s2">"mykey"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.importprunedfunds">
+<span class="sig-name descname"><span class="pre">importprunedfunds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawtransaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txoutproof</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Wallet.importprunedfunds" title="Permalink to this definition">#</a></dt>
+<dd><p>Imports funds without rescan. Corresponding address or script must previously be included in wallet.
+Aimed towards pruned wallets.
+The end-user is responsible to import additional transactions that subsequently spend the imported outputs or
+rescan after the point in the blockchain the transaction is included.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rawtransaction</strong> (<em>str</em>) – (required) A raw transaction in hex funding an already-existing address in wallet</p></li>
+<li><p><strong>txoutproof</strong> (<em>str</em>) – (required) The hex output from gettxoutproof that contains the transaction</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">importprunedfunds</span><span class="p">(</span><span class="s2">"rawtransaction"</span><span class="p">,</span> <span class="s2">"txoutproof"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.importpubkey">
+<span class="sig-name descname"><span class="pre">importpubkey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pubkey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescan</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Wallet.importpubkey" title="Permalink to this definition">#</a></dt>
+<dd><p>Adds a public key (in hex) that can be watched as if it were in your wallet but cannot be used to spend. Requires a new wallet backup.</p>
+<p>Hint: use importmulti to import more than one public key.</p>
+<p>Note: This call can take over an hour to complete if rescan is true, during that time, other rpc calls
+may report that the imported pubkey exists but related transactions are still missing, leading to temporarily
+incorrect/bogus balances and unspent outputs until rescan completes.</p>
+<p>Note: Use “getwalletinfo” to query the scanning progress.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pubkey</strong> (<em>str</em>) – (required) The hex-encoded public key</p></li>
+<li><p><strong>label</strong> (<em>str</em>) – (optional) An optional label</p></li>
+<li><p><strong>rescan</strong> (<em>bool</em>) – (optional) Rescan the wallet for transactions</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">importpubkey</span><span class="p">(</span><span class="s2">"mypubkey"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.importwallet">
+<span class="sig-name descname"><span class="pre">importwallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Wallet.importwallet" title="Permalink to this definition">#</a></dt>
+<dd><p>Imports keys from a wallet dump file (see dumpwallet). Requires a new wallet backup to include imported keys.</p>
+<p>Note: Use “getwalletinfo” to query the scanning progress.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – (required) the wallet file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">importwallet</span><span class="p">(</span><span class="s2">"new_wallet"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.keypoolrefill">
+<span class="sig-name descname"><span class="pre">keypoolrefill</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">newsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Wallet.keypoolrefill" title="Permalink to this definition">#</a></dt>
+<dd><p>Fills the keypool.</p>
+<p>Requires wallet passphrase to be set with walletpassphrase call.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>newsize</strong> (<em>int</em>) – (optional) The new keypool size</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">keypoolrefill</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.listaddressgroupings">
+<span class="sig-name descname"><span class="pre">listaddressgroupings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.node.Wallet.listaddressgroupings" title="Permalink to this definition">#</a></dt>
+<dd><p>Lists groups of addresses which have had their common ownership
+made public by common use as inputs or as the resulting change
+in past transactions</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>[{…}] (json array) – returns a list of used addresses in a wallet</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
+    [
+        [
+            "address",            (string) The defi address
+            amount,                 (numeric) The amount in DFI
+            "label"               (string, optional) The label
+        ]
+        ,...
+    ]
+    ,...
+]
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">listaddressgroupings</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.listlabels">
+<span class="sig-name descname"><span class="pre">listlabels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">purpose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.node.Wallet.listlabels" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the list of all labels, or labels that are assigned to addresses with a specific purpose.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>purpose</strong> (<em>str</em>) – (optional) Address purpose to list labels for (‘send’,’receive’). An empty string is the same
+as not providing this argument.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>[…] (array) – returns a list of labels</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[                   (json array of string)
+    "label",        (string) Label name
+    ...
+]
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">listlabels</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.listlockunspent">
+<span class="sig-name descname"><span class="pre">listlockunspent</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.node.Wallet.listlockunspent" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns list of temporarily unspendable outputs.</p>
+<p>See the lockunspent call to lock and unlock transactions for spending.</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>[{…}] (json array) – returns list of temporarily unspendable outputs</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
+    {
+        "txid" : "transactionid",       (string) The transaction id locked
+        "vout" : n                      (numeric) The vout value
+    }
+    ,...
+]
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">listlockunspent</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.listreceivedbyaddress">
+<span class="sig-name descname"><span class="pre">listreceivedbyaddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minconf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_empty</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_watchonly</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.node.Wallet.listreceivedbyaddress" title="Permalink to this definition">#</a></dt>
+<dd><p>List balances by receiving address</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>minconf</strong> (<em>int</em>) – (optional) The minimum number of confirmations before payments are included</p></li>
+<li><p><strong>include_empty</strong> (<em>bool</em>) – (optional) Whether to include addresses that haven’t received any payments</p></li>
+<li><p><strong>include_watchonly</strong> (<em>bool</em>) – (optional)  Whether to include watch-only addresses (see ‘importaddress’)</p></li>
+<li><p><strong>address_filter</strong> (<em>str</em>) – (optional) If present, only return information on this address</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>[{…}] (json array) – returns balances of receiving addresses</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
+    {
+        "involvesWatchonly" : true,         (bool) Only returned if imported addresses were involved in transaction
+        "address" : "receivingaddress",     (string) The receiving address
+        "amount" : x.xxx,                   (numeric) The total amount in DFI received by the address
+        "confirmations" : n,                (numeric) The number of confirmations of the most recent transaction included
+        "label" : "label",                  (string) The label of the receiving address. The default label is "".
+        "txids": [
+            "txid",                         (string) The ids of transactions received with the address
+            ...
+        ]
+    }
+    ,...
+]
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">listreceivedbyaddress</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.listreceivedbylabel">
+<span class="sig-name descname"><span class="pre">listreceivedbylabel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minconf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_empty</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_watchonly</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.node.Wallet.listreceivedbylabel" title="Permalink to this definition">#</a></dt>
+<dd><p>List received transactions by label</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>minconf</strong> (<em>int</em>) – (optional) The minimum number of confirmations before payments are included</p></li>
+<li><p><strong>include_empty</strong> (<em>bool</em>) – (optional) Whether to include labels that haven’t received any payments</p></li>
+<li><p><strong>include_watchonly</strong> (<em>bool</em>) – (optional) Whether to include watch-only addresses (see ‘importaddress’)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>[{…}] (json array) – returns a list of receiving addresses by label</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
+    {
+        "involvesWatchonly" : true,   (bool) Only returned if imported addresses were involved in transaction
+        "amount" : x.xxx,             (numeric) The total amount received by addresses with this label
+        "confirmations" : n,          (numeric) The number of confirmations of the most recent transaction included
+        "label" : "label"           (string) The label of the receiving address. The default label is "".
+    }
+    ,...
+]
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">listreceivedbylabel</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.listsinceblock">
+<span class="sig-name descname"><span class="pre">listsinceblock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blockhash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_confirmations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_watchonly</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_removed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.listsinceblock" title="Permalink to this definition">#</a></dt>
+<dd><p>Get all transactions in blocks since block [blockhash], or all transactions if omitted.</p>
+<p>If “blockhash” is no longer a part of the main chain, transactions from the fork point onward are included.</p>
+<p>Additionally, if include_removed is set, transactions affecting the wallet which were removed are returned in
+the “removed” array.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>blockhash</strong> (<em>str</em>) – (optional) If set, the block hash to list transactions since, otherwise list all transactions</p></li>
+<li><p><strong>target_confirmations</strong> (<em>int</em>) – (optional) Return the nth block hash from the main chain. e.g. 1 would mean the
+best block hash. Note: this is not used as a filter, but only affects [lastblock] in the return value</p></li>
+<li><p><strong>include_watchonly</strong> (<em>bool</em>) – (optional) Include transactions to watch-only addresses (see ‘importaddress’)</p></li>
+<li><p><strong>include_removed</strong> (<em>bool</em>) – (optional) Show transactions that were removed due to a reorg in the “removed” array
+(not guaranteed to work on pruned nodes)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – returns all transactions in blocks since a specific block</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "transactions": [
+        "address":"address",        (string) The defi address of the transaction.
+        "category":                 (string) The transaction category.
+            "send"                  Transactions sent.
+            "receive"               Non-coinbase transactions received.
+            "generate"              Coinbase transactions received with more than 100 confirmations.
+            "immature"              Coinbase transactions received with 100 or fewer confirmations.
+            "orphan"                Orphaned coinbase transactions received.
+        "amount": x.xxx,            (numeric) The amount in DFI. This is negative for the 'send' category, and is positive
+                                    for all other categories
+        "vout" : n,                 (numeric) the vout value
+        "fee": x.xxx,               (numeric) The amount of the fee in DFI. This is negative and only available for the 'send' category of transactions.
+        "confirmations": n,         (numeric) The number of confirmations for the transaction.
+                                    When it's &lt; 0, it means the transaction conflicted that many blocks ago.
+        "blockhash": "hashvalue",   (string) The block hash containing the transaction.
+        "blockindex": n,            (numeric) The index of the transaction in the block that includes it.
+        "blocktime": xxx,           (numeric) The block time in seconds since epoch (1 Jan 1970 GMT).
+        "txid": "transactionid",    (string) The transaction id.
+        "time": xxx,                (numeric) The transaction time in seconds since epoch (Jan 1 1970 GMT).
+        "timereceived": xxx,        (numeric) The time received in seconds since epoch (Jan 1 1970 GMT).
+        "bip125-replaceable":       "yes|no|unknown",  (string) Whether this transaction could be replaced due to BIP125 (replace-by-fee);
+                                           may be unknown for unconfirmed transactions not in the mempool
+        "abandoned": xxx,           (bool) 'true' if the transaction has been abandoned (inputs are respendable). Only available for the 'send' category of transactions.
+        "comment": "...",           (string) If a comment is associated with the transaction.
+        "label" : "label"           (string) A comment for the address/transaction, if any
+        "to": "...",                (string) If a comment to is associated with the transaction.
+    ],
+    "removed": [
+        &lt;structure is the same as "transactions" above, only present if include_removed=true&gt;
+        Note: transactions that were re-added in the active chain will appear as-is in this array, and may thus have a positive confirmation count.
+    ],
+    "lastblock": "lastblockhash"    (string) The hash of the block (target_confirmations-1) from the best block on the main chain. This is typically used to feed back into listsinceblock the next time you call it. So you would generally use a target_confirmations of say 6, so you will be continually re-notified of transactions until they've reached 6 confirmations plus any new ones
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">listsinceblock</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.listtransactions">
+<span class="sig-name descname"><span class="pre">listtransactions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'*'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_watchonly</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_custom_tx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.node.Wallet.listtransactions" title="Permalink to this definition">#</a></dt>
+<dd><p>If a label name is provided, this will return only incoming transactions paying to addresses with the specified label.</p>
+<p>Returns up to ‘count’ most recent transactions skipping the first ‘from’ transactions.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<em>str</em>) – (optional) If set, should be a valid label name to return only incoming transactions
+with the specified label, or “*” to disable filtering and return all transactions.</p></li>
+<li><p><strong>count</strong> (<em>int</em>) – (optional) The number of transactions to return</p></li>
+<li><p><strong>skip</strong> (<em>int</em>) – (optional) The number of transactions to skip</p></li>
+<li><p><strong>include_watchonly</strong> (<em>bool</em>) – (optional) Include transactions to watch-only addresses (see ‘importaddress’)</p></li>
+<li><p><strong>exclude_custom_tx</strong> (<em>bool</em>) – (optional) Exclude custom transactions</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>[{…}] (json array) – returns transactions of the wallet</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
+    {
+        "address":"address",        (string) The defi address of the transaction.
+        "category":                 (string) The transaction category.
+            "send"                  Transactions sent.
+            "receive"               Non-coinbase transactions received.
+            "generate"              Coinbase transactions received with more than 100 confirmations.
+            "immature"              Coinbase transactions received with 100 or fewer confirmations.
+            "orphan"                Orphaned coinbase transactions received.
+        "amount": x.xxx,            (numeric) The amount in DFI. This is negative for the 'send' category, and is positive
+                                    for all other categories
+        "label": "label",           (string) A comment for the address/transaction, if any
+        "vout": n,                  (numeric) the vout value
+        "fee": x.xxx,               (numeric) The amount of the fee in DFI. This is negative and only available for the
+                                    'send' category of transactions.
+        "confirmations": n,         (numeric) The number of confirmations for the transaction. Negative confirmations indicate the
+                                    transaction conflicts with the block chain
+        "trusted": xxx,             (bool) Whether we consider the outputs of this unconfirmed transaction safe to spend.
+        "blockhash": "hashvalue",   (string) The block hash containing the transaction.
+        "blockindex": n,            (numeric) The index of the transaction in the block that includes it.
+        "blocktime": xxx,           (numeric) The block time in seconds since epoch (1 Jan 1970 GMT).
+        "txid": "transactionid",    (string) The transaction id.
+        "time": xxx,                (numeric) The transaction time in seconds since epoch (midnight Jan 1 1970 GMT).
+        "timereceived": xxx,        (numeric) The time received in seconds since epoch (midnight Jan 1 1970 GMT).
+        "comment": "...",           (string) If a comment is associated with the transaction.
+        "bip125-replaceable":       "yes|no|unknown",  (string) Whether this transaction could be replaced due to BIP125 (replace-by-fee);
+                                     may be unknown for unconfirmed transactions not in the mempool
+        "abandoned": xxx            (bool) 'true' if the transaction has been abandoned (inputs are respendable). Only available for the
+                                    'send' category of transactions.
+    }
+]
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">listtransactions</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.listunspent">
+<span class="sig-name descname"><span class="pre">listunspent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mincof</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxcof</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">9999999</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addresses</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_unsafe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimumAmount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximumAmount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximumCount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimumSumAmount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">[{}]</span></span></span><a class="headerlink" href="#defichain.node.Wallet.listunspent" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns array of unspent transaction outputs</p>
+<p>with between minconf and maxconf (inclusive) confirmations.</p>
+<p>Optionally filter to only include txouts paid to specified addresses.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mincof</strong> (<em>int</em>) – (optional) The minimum confirmations to filter</p></li>
+<li><p><strong>maxcof</strong> (<em>int</em>) – (optional) The maximum confirmations to filter</p></li>
+<li><p><strong>addresses</strong> (<em>json array</em>) – (optional)  A json array of defi addresses to filter</p></li>
+<li><p><strong>include_unsafe</strong> (<em>bool</em>) – (optional) Include outputs that are not safe to spend.
+See description of “safe” attribute below.</p></li>
+<li><p><strong>minimumAmount</strong> (<em>float</em>) – (optional) Minimum value of each UTXO in DFI</p></li>
+<li><p><strong>maximumAmount</strong> (<em>float</em>) – (optional) Maximum value of each UTXO in DFI</p></li>
+<li><p><strong>maximumCount</strong> (<em>float</em>) – (optional) Maximum number of UTXOs</p></li>
+<li><p><strong>minimumSumAmount</strong> (<em>float</em>) – (optional) Minimum sum value of all UTXOs in DFI</p></li>
+<li><p><strong>tokenId</strong> (<em>str</em>) – (optional)  Filter by token (id/symbol/creationTx)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>[{…}] (json array) – returns array of unspent transaction outputs</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[                                   (array of json object)
+    {
+        "txid" : "txid",            (string) the transaction id
+        "vout" : n,                 (numeric) the vout value
+        "address" : "address",      (string) the defi address
+        "label" : "label",          (string) The associated label, or "" for the default label
+        "scriptPubKey" : "key",     (string) the script key
+        "amount" : x.xxx,           (numeric) the transaction output amount in DFI
+        "tokenId" : n,              (numeric) the transaction output token Id
+        "confirmations" : n,        (numeric) The number of confirmations
+        "redeemScript" : "script"   (string) The redeemScript if scriptPubKey is P2SH
+        "witnessScript" : "script"  (string) witnessScript if the scriptPubKey is P2WSH or P2SH-P2WSH
+        "spendable" : xxx,          (bool) Whether we have the private keys to spend this output
+        "solvable" : xxx,           (bool) Whether we know how to spend this output, ignoring the lack of keys
+        "reused" : xxx,             (bool) (only present if avoid_reuse is set) Whether this output is reused/dirty (sent to an address that was previously spent from)
+        "desc" : xxx,               (string, only when solvable) A descriptor for spending this output
+        "safe" : xxx                (bool) Whether this output is considered safe to spend. Unconfirmed transactions
+                                    from outside keys and unconfirmed replacement transactions are considered unsafe
+                                    and are not eligible for spending by fundrawtransaction and sendtoaddress.
+    }
+    ,...
+]
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">listunspent</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.listwalletdir">
+<span class="sig-name descname"><span class="pre">listwalletdir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.listwalletdir" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns a list of wallets in the wallet directory</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>{…} (json) – returns list of wallets and their directory’s</p>
+</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">listwalletdir</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.listwallets">
+<span class="sig-name descname"><span class="pre">listwallets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.node.Wallet.listwallets" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns a list of currently loaded wallets.</p>
+<p>For full information on the wallet, use “getwalletinfo”</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>[…] (array) – returns a list of currently loaded wallets</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[                   (json array of strings)
+    "walletname"    (string) the wallet name
+    ...
+]
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">listwallets</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.loadwallet">
+<span class="sig-name descname"><span class="pre">loadwallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.loadwallet" title="Permalink to this definition">#</a></dt>
+<dd><p>Loads a wallet from a wallet file or directory.</p>
+<p>Note that all wallet command-line options used when starting defid will be
+applied to the new wallet (eg -zapwallettxes, upgradewallet, rescan, etc).</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – (required) The wallet directory or .dat file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – returns information about the loaded wallet</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "name" :    &lt;wallet_name&gt;,        (string) The wallet name if loaded successfully.
+    "warning" : &lt;warning&gt;,            (string) Warning message if wallet was not loaded cleanly.
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">loadwallet</span><span class="p">(</span><span class="s2">"test.dat"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.lockunspent">
+<span class="sig-name descname"><span class="pre">lockunspent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unlock</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transactions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#defichain.node.Wallet.lockunspent" title="Permalink to this definition">#</a></dt>
+<dd><p>Updates list of temporarily unspendable outputs.</p>
+<p>Temporarily lock (unlock=false) or unlock (unlock=true) specified transaction outputs.</p>
+<p>If no transaction outputs are specified when unlocking then all current locked transaction outputs are unlocked.</p>
+<p>A locked transaction output will not be chosen by automatic coin selection, when spending defis.</p>
+<p>Locks are stored in memory only. Nodes start with zero locked outputs, and the locked output list
+is always cleared (by virtue of process exit) when a node stops or fails.</p>
+<p>Also see the listunspent call</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>unlock</strong> (<em>bool</em>) – (required) Whether to unlock (true) or lock (false) the specified transactions</p></li>
+<li><p><strong>transactions</strong> (<em>json array</em>) – <p>(optional) A json array of objects. Each object the txid (string) vout (numeric)</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
+    {                       (json object)
+        "txid": "hex",      (string, required) The transaction id
+        "vout": n,          (numeric, required) The output number
+    },
+    ...
+]
+</pre></div>
+</div>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true|false (bool) – Whether the command was successful or not</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">lockunspent</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.removeprunedfunds">
+<span class="sig-name descname"><span class="pre">removeprunedfunds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Wallet.removeprunedfunds" title="Permalink to this definition">#</a></dt>
+<dd><p>Deletes the specified transaction from the wallet. Meant for use with pruned wallets and as a companion to
+importprunedfunds. This will affect wallet balances.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>txid</strong> (<em>str</em>) – (required) The hex-encoded id of the transaction you are deleting</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">removeprunedfunds</span><span class="p">(</span><span class="s2">"a8d0c0184dde994a09ec054286f1ce581bebf46446a512166eae7628734ea0a5"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.rescanblockchain">
+<span class="sig-name descname"><span class="pre">rescanblockchain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.rescanblockchain" title="Permalink to this definition">#</a></dt>
+<dd><p>Rescan the local blockchain for wallet related transactions.</p>
+<p>Note: Use “getwalletinfo” to query the scanning progress.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_height</strong> (<em>int</em>) – (optional) block height where the rescan should start</p></li>
+<li><p><strong>stop_height</strong> (<em>int</em>) – (optional) the last block height that should be scanned. If none is provided it will rescan up to the tip at return time of this call</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – returns start and stop height</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "start_height"     (numeric) The block height where the rescan started (the requested height or 0)
+    "stop_height"      (numeric) The height of the last rescanned block. May be null in rare cases if there was a reorg and the call didn't scan any blocks because they were already scanned in the background.
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">rescanblockchain</span><span class="p">(</span><span class="mi">1000000</span><span class="p">,</span> <span class="mi">2000000</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.sendmany">
+<span class="sig-name descname"><span class="pre">sendmany</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dummy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minconf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subtractfeefrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replaceable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conf_target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimate_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'UNSET'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Wallet.sendmany" title="Permalink to this definition">#</a></dt>
+<dd><p>Send multiple times. Amounts are double-precision floating point numbers.</p>
+<p>Requires wallet passphrase to be set with walletpassphrase call.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dummy</strong> (<em>str</em>) – (required) Must be set to “” for backwards compatibility</p></li>
+<li><p><strong>amounts</strong> (<em>json</em>) – (required) <a class="reference internal" href="index.html#node-address-amount"><span class="std std-ref">Address Amount</span></a></p></li>
+<li><p><strong>minconf</strong> (<em>int</em>) – (optional) Ignored dummy value</p></li>
+<li><p><strong>comment</strong> (<em>str</em>) – (optional) A comment</p></li>
+<li><p><strong>subtractfeefrom</strong> (<em>array</em>) – <p>(optional) A json array with addresses.
+The fee will be equally deducted from the amount of each selected address.
+Those recipients will receive less defis than you enter in their corresponding amount field.
+If no addresses are specified here, the sender pays the fee.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
+    "address",            (string) Subtract fee from this address
+    ...
+]
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>replaceable</strong> (<em>bool</em>) – (optional) Allow this transaction to be replaced by a transaction with higher fees via BIP 125</p></li>
+<li><p><strong>conf_target</strong> (<em>int</em>) – (optional) Confirmation target (in blocks)</p></li>
+<li><p><strong>estimate_mode</strong> (<em>str</em>) – (optional) The fee estimate mode, must be one of:
+“UNSET”,
+“ECONOMICAL”,
+“CONSERVATIVE”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“txid” (string) – The transaction id for the send. Only 1 transaction is created regardless of the number of addresses.</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">sendmany</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="p">{</span><span class="s2">"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX"</span><span class="p">:</span><span class="mf">0.01</span><span class="p">,</span><span class="s2">"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz"</span><span class="p">:</span><span class="mf">0.02</span><span class="p">})</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.sendtoaddress">
+<span class="sig-name descname"><span class="pre">sendtoaddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment_to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subtractfeefromamount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replaceable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conf_target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimate_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'UNSET'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">avoid_reuse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Wallet.sendtoaddress" title="Permalink to this definition">#</a></dt>
+<dd><p>Send an amount to a given address.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>address</strong> (<em>str</em>) – (required) The defi address to send to</p></li>
+<li><p><strong>amount</strong> (<em>float</em>) – (required) The amount in DFI to send. eg 0.1</p></li>
+<li><p><strong>comment</strong> (<em>str</em>) – (optional) A comment used to store what the transaction is for.
+This is not part of the transaction, just kept in your wallet.</p></li>
+<li><p><strong>comment_to</strong> (<em>str</em>) – (optional) A comment to store the name of the person or organization
+to which you’re sending the transaction.
+This is not part of the transaction, just kept in your wallet.</p></li>
+<li><p><strong>subtractfeefromamount</strong> (<em>bool</em>) – (optional) The fee will be deducted from the amount being sent.
+The recipient will receive less defis than you enter in the amount field.</p></li>
+<li><p><strong>replaceable</strong> (<em>bool</em>) – (optional) Allow this transaction to be replaced by a transaction with higher fees via BIP 125</p></li>
+<li><p><strong>conf_target</strong> (<em>int</em>) – (optional) Confirmation target (in blocks)</p></li>
+<li><p><strong>estimate_mode</strong> (<em>str</em>) – (optional) The fee estimate mode, must be one of:
+“UNSET”,
+“ECONOMICAL”,
+“CONSERVATIVE”</p></li>
+<li><p><strong>avoid_reuse</strong> (<em>bool</em>) – (optional) Avoid spending from dirty addresses; addresses are considered
+dirty if they have previously been used in a transaction.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“hash” (string) – The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">sendtoaddress</span><span class="p">(</span><span class="s2">"1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.sethdseed">
+<span class="sig-name descname"><span class="pre">sethdseed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">newkeypool</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Wallet.sethdseed" title="Permalink to this definition">#</a></dt>
+<dd><p>Set or generate a new HD wallet seed. Non-HD wallets will not be upgraded to being a HD wallet. Wallets that are already
+HD will have a new HD seed set so that new keys added to the keypool will be derived from this new seed.</p>
+<p>Note that you will need to MAKE A NEW BACKUP of your wallet after setting the HD wallet seed.
+Requires wallet passphrase to be set with walletpassphrase call.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>newkeypool</strong> (<em>bool</em>) – (optional)Whether to flush old unused addresses, including change addresses, from the keypool and regenerate it.
+If true, the next address from getnewaddress and change address from getrawchangeaddress will be from this new seed.
+If false, addresses (including change addresses if the wallet already had HD Chain Split enabled) from the existing
+keypool will be used until it has been depleted.</p></li>
+<li><p><strong>seed</strong> (<em>str</em>) – (optional) The WIF private key to use as the new HD seed.
+The seed value can be retrieved using the dumpwallet command. It is the private key marked hdseed=1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">sethdseed</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.setlabel">
+<span class="sig-name descname"><span class="pre">setlabel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Wallet.setlabel" title="Permalink to this definition">#</a></dt>
+<dd><p>Sets the label associated with the given address</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>address</strong> (<em>str</em>) – (required) The defi address to be associated with a label</p></li>
+<li><p><strong>label</strong> (<em>str</em>) – (required) The label to assign to the address</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">setlabel</span><span class="p">(</span><span class="s2">"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX"</span><span class="p">,</span> <span class="s2">"teddy"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.settxfee">
+<span class="sig-name descname"><span class="pre">settxfee</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#defichain.node.Wallet.settxfee" title="Permalink to this definition">#</a></dt>
+<dd><p>Set the transaction fee per kB for this wallet. Overrides the global -paytxfee command line parameter</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>amount</strong> (<em>float</em>) – (required) The transaction fee in DFI/kB</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true|false (bool) – returns true if successful</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">settxfee</span><span class="p">(</span><span class="mf">0.00001</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.setwalletflag">
+<span class="sig-name descname"><span class="pre">setwalletflag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.setwalletflag" title="Permalink to this definition">#</a></dt>
+<dd><p>Change the state of the given wallet flag for a wallet</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>flag</strong> (<em>str</em>) – (required) The name of the flag to change. Current available flags: avoid_reuse</p></li>
+<li><p><strong>value</strong> (<em>bool</em>) – (optional) The new state</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>{…} (json) – returns information about the wallet flags</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">setwalletflag</span><span class="p">(</span><span class="s2">"avoid_reuse"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.signmessage">
+<span class="sig-name descname"><span class="pre">signmessage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Wallet.signmessage" title="Permalink to this definition">#</a></dt>
+<dd><p>Sign a message with the private key of an address</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>address</strong> (<em>str</em>) – (required) The defi address to use for the private key</p></li>
+<li><p><strong>message</strong> (<em>str</em>) – (required) The message to create a signature of</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“signature” (string) – The signature of the message encoded in base 64</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">signmessage</span><span class="p">(</span><span class="s2">"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX"</span><span class="p">,</span> <span class="s2">"my message"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.signrawtransactionwithwallet">
+<span class="sig-name descname"><span class="pre">signrawtransactionwithwallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hexstring</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prevtxs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sighashtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ALL'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.signrawtransactionwithwallet" title="Permalink to this definition">#</a></dt>
+<dd><p>Sign inputs for raw transaction (serialized, hex-encoded).</p>
+<p>The second optional argument (may be null) is an array of previous transaction outputs that
+this transaction depends on but may not yet be in the block chain.</p>
+<p>Requires wallet passphrase to be set with walletpassphrase call.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hexstring</strong> (<em>str</em>) – (required) The transaction hex string</p></li>
+<li><p><strong>prevtxs</strong> (<em>json array</em>) – <p>(optional) A json array of previous dependent transaction outputs</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
+    {                            (json object)
+        "txid": "hex",             (string, required) The transaction id
+        "vout": n,                 (numeric, required) The output number
+        "scriptPubKey": "hex",     (string, required) script key
+        "redeemScript": "hex",     (string) (required for P2SH) redeem script
+        "witnessScript": "hex",    (string) (required for P2WSH or P2SH-P2WSH) witness script
+        "amount": amount,          (numeric or string) (required for Segwit inputs) the amount spent
+    },
+    ...
+]
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>sighashtype</strong> (<em>str</em>) – (optional) The signature hash type. Must be one of:
+“ALL”,
+“NONE”,
+“SINGLE”,
+“ALL|ANYONECANPAY”,
+“NONE|ANYONECANPAY”,
+“SINGLE|ANYONECANPAY”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – returns a json with the signed hexstring</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "hex" : "value",                (string) The hex-encoded raw transaction with signature(s)
+    "complete" : true|false,        (boolean) If the transaction has a complete set of signatures
+    "errors" : [                    (json array of objects) Script verification errors (if there are any)
+        {
+            "txid" : "hash",        (string) The hash of the referenced, previous transaction
+            "vout" : n,             (numeric) The index of the output to spent and used as input
+            "scriptSig" : "hex",    (string) The hex-encoded signature script
+            "sequence" : n,         (numeric) Script sequence number
+            "error" : "text"        (string) Verification or signing error related to the input
+        }
+        ,...
+    ]
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">signrawtransactionwithwallet</span><span class="p">(</span><span class="s2">"hex"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.unloadwallet">
+<span class="sig-name descname"><span class="pre">unloadwallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wallet_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Wallet.unloadwallet" title="Permalink to this definition">#</a></dt>
+<dd><p>Unloads the wallet referenced by the request endpoint otherwise unloads the wallet specified in the argument.</p>
+<p>Specifying the wallet name on a wallet endpoint is invalid.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>wallet_name</strong> (<em>str</em>) – (optional) The name of the wallet to unload</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">unloadwallet</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.walletcreatefundedpsbt">
+<span class="sig-name descname"><span class="pre">walletcreatefundedpsbt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">[{}]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locktime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">changeAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">changePosition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">change_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">includeWatching</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lockUnspents</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feeRate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subtractFeeFromOutputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replaceable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conf_target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimate_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bip32derivs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.walletcreatefundedpsbt" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates and funds a transaction in the Partially Signed Transaction format.</p>
+<p>Inputs will be added if supplied inputs are not enough
+Implements the Creator and Updater roles.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<em>json array</em>) – <p>(required) A json array of json objects</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
+    {                         (json object)
+        "txid": "hex",        (string, required) The transaction id
+        "vout": n,            (numeric, required) The output number
+        "sequence": n,        (numeric, required) The sequence number
+    },
+    ...
+]
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>outputs</strong> (<em>json array</em>) – <p>(required) a json array with outputs (key-value pairs), where none of the keys are duplicated.
+That is, each address can only appear once and there can only be one ‘data’ object.
+For compatibility reasons, a dictionary, which holds the key-value pairs directly, is also
+accepted as second parameter.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
+    {                             (json object)
+        "address": amount,        (numeric or string, required) A key-value pair. The key (string) is the defi address, the value (float or string) is the amount in DFI
+    },
+    {                             (json object)
+        "data": "hex",            (string, required) A key-value pair. The key must be "data", the value is hex-encoded data
+    },
+    ...
+]
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>locktime</strong> (<em>int</em>) – (optional) Raw locktime. Non-0 value also locktime-activates inputs</p></li>
+<li><p><strong>changeAddress</strong> (<em>str</em>) – (optional) The defi address to receive the change</p></li>
+<li><p><strong>changePosition</strong> (<em>int</em>) – (optional) The index of the change output</p></li>
+<li><p><strong>change_type</strong> (<em>str</em>) – (optional) The output type to use. Only valid if changeAddress is not specified. Options
+are “legacy”, “p2sh-segwit”, and “bech32”.</p></li>
+<li><p><strong>includeWatching</strong> (<em>bool</em>) – (optional) Also select inputs which are watch only</p></li>
+<li><p><strong>lockUnspents</strong> (<em>bool</em>) – (optional) Lock selected unspent outputs</p></li>
+<li><p><strong>feeRate</strong> (<em>float</em>) – (optional) Set a specific fee rate in DFI/kB</p></li>
+<li><p><strong>subtractFeeFromOutputs</strong> (<em>json array</em>) – <p>(optional) A json array of integers.
+The fee will be equally deducted from the amount of each specified output.
+Those recipients will receive less defis than you enter in their corresponding amount field.
+If no outputs are specified here, the sender pays the fee.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
+    vout_index,     (numeric) The zero-based output index, before a change output is added.
+    ...
+]
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>replaceable</strong> (<em>bool</em>) – (optional) Marks this transaction as BIP125 replaceable
+Allows this transaction to be replaced by a transaction with higher fees</p></li>
+<li><p><strong>conf_target</strong> (<em>int</em>) – (optional) Confirmation target (in blocks)</p></li>
+<li><p><strong>estimate_mode</strong> (<em>str</em>) – (optional) The fee estimate mode, must be one of:
+“UNSET”,
+“ECONOMICAL”,
+“CONSERVATIVE”</p></li>
+<li><p><strong>bip32derivs</strong> (<em>bool</em>) – (optional) If true, includes the BIP 32 derivation paths for public keys if we know them</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – returns an json with the partially signed transaction</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "psbt": "value",        (string)  The resulting raw transaction (base64-encoded string)
+    "fee":       n,         (numeric) Fee in DFI the resulting transaction pays
+    "changepos": n          (numeric) The position of the added change output, or -1
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">walletcreatefundedpsbt</span><span class="p">([{</span><span class="s2">"txid"</span><span class="p">:</span><span class="s2">"myid"</span><span class="p">,</span><span class="s2">"vout"</span><span class="p">:</span><span class="mi">0</span><span class="p">}]</span><span class="s2">" "</span><span class="p">[{</span><span class="s2">"data"</span><span class="p">:</span><span class="s2">"00010203"</span><span class="p">}])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.walletlock">
+<span class="sig-name descname"><span class="pre">walletlock</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Wallet.walletlock" title="Permalink to this definition">#</a></dt>
+<dd><p>Removes the wallet encryption key from memory, locking the wallet.</p>
+<p>After calling this method, you will need to call walletpassphrase again
+before being able to call any methods which require the wallet to be unlocked.</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">walletlock</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.walletpassphrase">
+<span class="sig-name descname"><span class="pre">walletpassphrase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">passphrase</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Wallet.walletpassphrase" title="Permalink to this definition">#</a></dt>
+<dd><p>Stores the wallet decryption key in memory for ‘timeout’ seconds.
+This is needed prior to performing transactions related to private keys such as sending defis</p>
+<p>Note:
+Issuing the walletpassphrase command while the wallet is already unlocked will set a new unlock
+time that overrides the old one.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>passphrase</strong> (<em>str</em>) – (required) The wallet passphrase</p></li>
+<li><p><strong>timeout</strong> (<em>int</em>) – (required) The time to keep the decryption key in seconds; capped at 100000000 (~3 years)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">walletpassphrase</span><span class="p">(</span><span class="s2">"passphrase"</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.walletpassphrasechange">
+<span class="sig-name descname"><span class="pre">walletpassphrasechange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oldpassphrase</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newpassphrase</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Wallet.walletpassphrasechange" title="Permalink to this definition">#</a></dt>
+<dd><p>Changes the wallet passphrase from ‘oldpassphrase’ to ‘newpassphrase’</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>oldpassphrase</strong> (<em>str</em>) – (required) The current passphrase</p></li>
+<li><p><strong>newpassphrase</strong> (<em>str</em>) – (required) The new passphrase</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">walletpassphrasechange</span><span class="p">(</span><span class="s2">"old"</span><span class="p">,</span> <span class="s2">"new"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.walletprocesspsbt">
+<span class="sig-name descname"><span class="pre">walletprocesspsbt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">psbt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sign</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sighashtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ALL'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bip32derivs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Wallet.walletprocesspsbt" title="Permalink to this definition">#</a></dt>
+<dd><p>Update a PSBT with input information from our wallet and then sign inputs
+that we can sign for.</p>
+<p>Requires wallet passphrase to be set with walletpassphrase call.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>psbt</strong> (<em>str</em>) – (required) The transaction base64 string</p></li>
+<li><p><strong>sign</strong> (<em>bool</em>) – (optional) Also sign the transaction when updating</p></li>
+<li><p><strong>sighashtype</strong> (<em>str</em>) – (optional) The signature hash type to sign with if not specified by the PSBT. Must be one of
+“ALL”,
+“NONE”,
+“SINGLE”,
+“ALL|ANYONECANPAY”,
+“NONE|ANYONECANPAY”,
+“SINGLE|ANYONECANPAY”</p></li>
+<li><p><strong>bip32derivs</strong> (<em>bool</em>) – (optional) If true, includes the BIP 32 derivation paths for public keys if we know them</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – returns information about PSBT from the wallet</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    "psbt" : "value",          (string) The base64-encoded partially signed transaction
+    "complete" : true|false,   (boolean) If the transaction has a complete set of signatures
+}
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">walletprocesspsbt</span><span class="p">(</span><span class="s2">"psbt"</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
 </section>
 
         </article>

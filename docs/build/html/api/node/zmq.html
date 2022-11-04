@@ -113,11 +113,7 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-<div class="announcement">
-  <aside class="announcement-content">
-     This Documentation page is still in development! 
-  </aside>
-</div>
+
 
 <div class="page">
   <header class="mobile-header">
@@ -265,11 +261,9 @@
 <dt class="sig sig-object py" id="defichain.node.Zmq.getzmqnotifications">
 <span class="sig-name descname"><span class="pre">getzmqnotifications</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Zmq.getzmqnotifications" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns information about the active ZeroMQ notifications</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
-</dd>
-</dl>
+<dd class="field-odd"><p><p>[{…}] (json array) – returns information about the active ZeroMQ notifications</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
     {                        (json object)
         "type": "pubhashtx", (string) Type of notification
@@ -280,13 +274,14 @@
 ]
 </pre></div>
 </div>
-<dl class="field-list simple">
-<dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">getzmqnotifications</span><span class="p">()</span>
+</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">getzmqnotifications</span><span class="p">()</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 </dd></dl>
 </section>

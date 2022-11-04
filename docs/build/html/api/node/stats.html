@@ -113,11 +113,7 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-<div class="announcement">
-  <aside class="announcement-content">
-     This Documentation page is still in development! 
-  </aside>
-</div>
+
 
 <div class="page">
   <header class="mobile-header">
@@ -265,14 +261,12 @@
 <dt class="sig sig-object py" id="defichain.node.Stats.getrpcstats">
 <span class="sig-name descname"><span class="pre">getrpcstats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Stats.getrpcstats" title="Permalink to this definition">#</a></dt>
 <dd><p>Get RPC stats for selected command</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>command</strong> (<em>str</em>) – (required) The command to get stats for</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
+<dd class="field-even"><p><p>{…} (json) – returns rpc stats</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
     "name":               (string) The RPC command name.
     "latency":            (json object) Min, max and average latency.
@@ -290,23 +284,22 @@
 }
 </pre></div>
 </div>
-<dl class="field-list simple">
+</p>
+</dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">getrpcstats</span><span class="p">(</span><span class="s2">"getblockcount"</span><span class="p">)</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">getrpcstats</span><span class="p">(</span><span class="s2">"getblockcount"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Stats.listrpcstats">
 <span class="sig-name descname"><span class="pre">listrpcstats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.node.Stats.listrpcstats" title="Permalink to this definition">#</a></dt>
 <dd><p>List used RPC commands</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
-</dd>
-</dl>
+<dd class="field-odd"><p><p>{…} (json) – returns a list of rpc stats</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
     {
         "name":               (string) The RPC command name.
@@ -326,13 +319,14 @@
 ]
 </pre></div>
 </div>
-<dl class="field-list simple">
-<dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">listrpcstats</span><span class="p">()</span>
+</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">listrpcstats</span><span class="p">()</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 </dd></dl>
 </section>

@@ -113,11 +113,7 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-<div class="announcement">
-  <aside class="announcement-content">
-     This Documentation page is still in development! 
-  </aside>
-</div>
+
 
 <div class="page">
   <header class="mobile-header">
@@ -265,7 +261,7 @@
 <dt class="sig sig-object py" id="defichain.node.Control.getmemoryinfo">
 <span class="sig-name descname"><span class="pre">getmemoryinfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'stats'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.Control.getmemoryinfo" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns an object containing information about memory usage.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>mode</strong> (<em>str</em>) – <p>(optional) determines what kind of information is returned.</p>
 <ol class="arabic simple">
@@ -275,9 +271,7 @@
 </p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
+<dd class="field-even"><p><p>{…} (json) if mode == “stats” | malloc if mode == “mallocinfo”</p>
 <p><strong>Result (mode “stats”):</strong></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
     "locked": {               (json object) Information about locked memory manager
@@ -292,16 +286,15 @@
 </pre></div>
 </div>
 <p><strong>Result (mode “mallocinfo”):</strong></p>
-<blockquote>
-<div><p>“&lt;malloc version=”1”&gt;…”</p>
-</div></blockquote>
-<dl class="field-list simple">
+<p>”&lt;malloc version=”1”&gt;…”</p>
+</p>
+</dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">getmemoryinfo</span><span class="p">()</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">getmemoryinfo</span><span class="p">()</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Control.getrpcinfo">
@@ -309,7 +302,7 @@
 <dd><p>Returns details of the RPC server.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dd class="field-odd"><p>{…} (json) – returns rpc info</p>
 </dd>
 </dl>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
@@ -324,19 +317,19 @@
 }
 </pre></div>
 </div>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">getrpcinfo</span><span class="p">()</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">getrpcinfo</span><span class="p">()</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Control.help">
 <span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.Control.help" title="Permalink to this definition">#</a></dt>
 <dd><p>List all commands, or get help for a specified command.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>command</strong> (<em>str</em>) – (optinal) The command to get help on</p>
 </dd>
@@ -344,12 +337,12 @@
 <dd class="field-even"><p>“text” (string) The help text</p>
 </dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">help</span><span class="p">()</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">help</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">help</span><span class="p">(</span><span class="s2">"getblockcount"</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Control.logging">
@@ -365,73 +358,73 @@ In addition, the following are available as category names with special meanings
 <li><p>“all”,  “1” : represent all logging categories.</p></li>
 <li><p>“none”, “0” : even if other logging categories are specified, ignore all of them.</p></li>
 </ul>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>include</strong> – (optinal) A json array of categories to add debug logging</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>include</strong> (<em>[</em><em>]</em>) – <p>(optinal) A json array of categories to add debug logging</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
     "include_category",    (string) the valid logging category
     ...
 ]
 </pre></div>
 </div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exclude</strong> – (optinal) A json array of categories to remove debug logging</p>
-</dd>
-</dl>
+</p></li>
+<li><p><strong>exclude</strong> (<em>[</em><em>]</em>) – <p>(optinal) A json array of categories to remove debug logging</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[
     "exclude_category",    (string) the valid logging category
     ...
 ]
 </pre></div>
 </div>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>json object where keys are the logging categories, and values indicates its status</p>
+</p></li>
+</ul>
 </dd>
-</dl>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>{…} (json) – object where keys are the logging categories, and values indicates its status</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
     "category": true|false,  (bool) if being debug logged or not. false:inactive, true:active
     ...
 }
 </pre></div>
 </div>
-<dl class="field-list simple">
+</p>
+</dd>
 <dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">logging</span><span class="p">([</span><span class="s2">"all"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"http"</span><span class="p">])</span>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">logging</span><span class="p">([</span><span class="s2">"all"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"http"</span><span class="p">])</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Control.stop">
 <span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.node.Control.stop" title="Permalink to this definition">#</a></dt>
 <dd><p>Stop Defi server.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Example</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.node.Control.uptime">
 <span class="sig-name descname"><span class="pre">uptime</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#defichain.node.Control.uptime" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns the total uptime of the server.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>ttt (numeric) The number of seconds that the server has been running</p>
+<dd class="field-odd"><p>ttt (numeric) – The number of seconds that the server has been running</p>
 </dd>
 <dt class="field-even">Example</dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">uptime</span><span class="p">()</span>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">uptime</span><span class="p">()</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 </dd></dl>
 </section>
