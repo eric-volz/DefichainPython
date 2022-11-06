@@ -45,18 +45,18 @@ class Control:
 
         :return: {...} (json) -- returns rpc info
 
-        .. code-block:: text
+            .. code-block:: text
 
-            {
-                "active_commands" (array) All active commands
-                [
-                    {               (object) Information about an active command
-                    "method"       (string)  The name of the RPC command
-                    "duration"     (numeric)  The running time in microseconds
-                    },...
-                ],
-                "logpath": "xxx" (string) The complete file path to the debug log
-            }
+                {
+                    "active_commands" (array) All active commands
+                    [
+                        {               (object) Information about an active command
+                        "method"       (string)  The name of the RPC command
+                        "duration"     (numeric)  The running time in microseconds
+                        },...
+                    ],
+                    "logpath": "xxx" (string) The complete file path to the debug log
+                }
 
         :example:
 

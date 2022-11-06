@@ -6,14 +6,14 @@ class Blockchain:
         """
         Clears the memory pool and returns a list of the removed transactions.
 
-        :return: [] (array) -- returns list of removed transactions
+        :return: [...] (array) -- returns list of removed transactions
 
-        .. code-block:: text
+            .. code-block:: text
 
-            [               (json array of string)
-                "hash"      (string) The transaction hash
-                ,...
-            ]
+                [               (json array of string)
+                    "hash"      (string) The transaction hash
+                    ,...
+                ]
 
         :example:
 
