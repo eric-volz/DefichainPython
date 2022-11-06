@@ -10,6 +10,15 @@ other ideas open an `issue <https://github.com/eric-volz/DefichainPython/issues>
 
 |
 
+.. admonition:: Defichain Python Library II (5000 DFI)
+    :class: caution
+
+    The second CFP for this project
+
+.. mdinclude:: ../../additionalInfos/reddit/CFP_02.md
+
+|
+
 .. admonition:: Announcement 02: Release v2.0.0
     :class: caution
 
