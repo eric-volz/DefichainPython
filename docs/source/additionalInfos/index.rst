@@ -7,5 +7,4 @@ More will be added
     :maxdepth: 1
 
     installDefichainNode
-    mnemonicSeedForWallet
     getPrivateKeyFromLightWallet

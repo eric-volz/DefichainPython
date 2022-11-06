@@ -8,7 +8,6 @@
     instructions/quickstart
     instructions/progressAndUpdates
     instructions/rawMethodsOverview
-    additionalInfos/index
 
 .. toctree::
     :caption: API
