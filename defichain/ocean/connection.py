@@ -5,21 +5,11 @@ from defichain.ocean.OceanErrorHandler import OceanErrorHandler
 
 
 class Connection:
-    def __init__(self, url, log):
+    def __init__(self, url, logger: Logger):
         self._url = url
         self._session = requests.Session()
         self._headers = {'content-type': 'application/json'}
-
-        # Initialization of logger
-        self._log = log
-        self._logger = None
-        self._logger_debug = None
-        self._logger_result = None
-
-        if self._log:
-            self._logger = Logger()
-            self._logger_debug = self._logger.get_debug_logger("OceanDebug")
-            self._logger_result = self._logger.get_result_logger("OceanResult")
+        self._logger = logger
 
     def get(self, data, size=None, next=None):
         url = self._url + data
@@ -31,8 +21,9 @@ class Connection:
             url += f"?next={next}"
 
         # Logging of Ocean get request url
-        if self._log:
-            self._logger_debug.debug(f"Get request url: {url}")
+        if self._logger:
+            if self._logger.log_level == "input" or self._logger.log_level == "all":
+                self._logger.input("OceanInput", f"Get request url: {url}")
 
         response = requests.get(url)
         OceanErrorHandler(response, self._logger)  # Handle Exceptions
@@ -40,8 +31,9 @@ class Connection:
         result = json.loads(response.text)
 
         # Logging of Ocean get request result
-        # if self._log:
-        #    self._logger_result.info(f"Result of get request: {result}")
+        if self._logger:
+            if self._logger.log_level == "output" or self._logger.log_level == "all":
+                self._logger.output("OceanOutput", f"Result of get request: {result}")
 
         return result
 
@@ -52,9 +44,9 @@ class Connection:
             payload = json.dumps({"params": list(params), "jsonrpc": "2.0"})
 
         # Logging of Ocean post request
-
-        if self._log:
-            self._logger_debug.debug(f"Post request: {self._url + method, self._headers, payload}")
+        if self._logger:
+            if self._logger.log_level == "input" or self._logger.log_level == "all":
+                self._logger.input("OceanInput", f"Post request: {self._url + method, self._headers, payload}")
 
         response = self._session.post(self._url + method, headers=self._headers, data=payload)
         OceanErrorHandler(response, self._logger)  # Handle Exceptions
@@ -62,7 +54,8 @@ class Connection:
         result = response.json()
 
         # Logging of Ocean get requests result
-        # if self._log:
-        #    self._logger_result.info(f"Result of post request: {result}")
+        if self._logger:
+            if self._logger.log_level == "output" or self._logger.log_level == "all":
+                self._logger.output("OceanOutput", f"Result of post request: {result}")
 
         return result

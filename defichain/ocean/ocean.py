@@ -1,5 +1,5 @@
 import requests
-
+from defichain.logger import Logger
 from .connection import Connection
 
 from .modules.address import Address
@@ -30,8 +30,8 @@ class Ocean:
     :type version: str
     :param network: (optional) witch network to use with this ocean connection
     :type network: str
-    :param logging: (optional) True if aninteration with ocean should be logged
-    :type logging: bool
+    :param logger: (optional) Logger Object
+    :type logger: :ref:`Logger`
     :return: Ocean (object) The object to interact with the ocean protocol
 
     :example:
@@ -43,12 +43,12 @@ class Ocean:
     """
 
     def __init__(self, url: str = "https://ocean.defichain.com", version: str = "v0",
-                 network: str = "mainnet", logging: bool = False) -> "Ocean":
+                 network: str = "mainnet", logger: Logger = None) -> "Ocean":
 
         self._attachedURL = url + "/" + version + "/" + network + "/"
         self._test_connection()
 
-        self._conn = Connection(self._attachedURL, logging)
+        self._conn = Connection(self._attachedURL, logger)
 
         self.address = Address(self)
         self.blocks = Blocks(self)
