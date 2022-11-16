@@ -15,14 +15,13 @@ For example to output data from blocks you have to use the method List in blocks
 
 You can find more explanations :ref:`below <Ocean requestStructure>`
 
+.. admonition:: New Logger available
+    :class: caution
+
+    If you want to log all requests and results, you can use the new :ref:`Logger` Class.
+
 Ocean Modules
 -------------
-
-.. admonition:: Documentation of modules
-    :class: important
-
-    I will keep documenting more methods. :ref:`Here<instruction progressAndUpdates>`
-    you can follow the progress.
 
 .. toctree::
 

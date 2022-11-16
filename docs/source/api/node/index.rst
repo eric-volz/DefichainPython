@@ -19,14 +19,13 @@ module and the compositeswap method belongs to the poolpair module.
 
 You can find more explanations :ref:`below <Node requestStructure>`
 
+.. admonition:: New Logger available
+    :class: caution
+
+    If you want to log all requests and results, you can use the new :ref:`Logger` Class.
+
 Node Modules
 ------------
-
-.. admonition:: Documentation of modules
-    :class: important
-
-    I will keep documenting more methods. :ref:`Here<instruction progressAndUpdates>`
-    you can follow the progress.
 
 .. toctree::
 
