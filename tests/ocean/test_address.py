@@ -1,7 +1,6 @@
 import pytest
-from defichain import Ocean
+from . import ocean
 
-ocean = Ocean()
 ADDRESS = "dN592sZaESZ8qnk4jqd5LgZdJUtCKcjZmQ"
 SIZE = 30
 NEXT = None

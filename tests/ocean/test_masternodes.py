@@ -1,7 +1,6 @@
 import pytest
-from defichain import Ocean
+from . import ocean
 
-ocean = Ocean()
 SIZE = 30
 NEXT = None
 

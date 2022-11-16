@@ -1,3 +1,4 @@
+from defichain.logger import Logger
 from defichain.exceptions.http.ServiceUnavailable import ServiceUnavailable
 from defichain.exceptions.http.WrongParmeters import WrongParameters
 
@@ -52,6 +53,8 @@ class Node:
     :type wallet_timeout: int
     :param protocol: (optional) the protocol which is used for the request (default=http)
     :type protocol: str
+    :param logger: (optional) Logger Object
+    :type logger: :ref:`Logger`
     :return: Node (object) The object to interact with your Defichain Node
 
     :example:
@@ -64,7 +67,7 @@ class Node:
 
     def __init__(self, user: str, password: str, url: str = "127.0.0.1", port: int = 8554, wallet_name: str = "",
                  wallet_path: str = None, wallet_password: str = "", wallet_timeout: int = 60,
-                 protocol: str = "http") -> "Node":
+                 protocol: str = "http", logger: Logger = None) -> "Node":
         # Parameter Check
         if wallet_name != "" and wallet_path is not None:
             raise WrongParameters(f"Only one parameter of wallet_name or wallet_path may be given at a time!")
@@ -75,7 +78,7 @@ class Node:
         self.url = f"{protocol}://{user}:{password}@{url}:{port}/wallet/{wallet_name}"
 
         # Setup all different modules
-        self._rpc = RPC(self.url)
+        self._rpc = RPC(self.url, logger)
         self.accounts = Accounts(self)
         self.blockchain = Blockchain(self)
         self.control = Control(self)
