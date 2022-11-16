@@ -1,9 +1,6 @@
 import pytest
-from defichain import Ocean
+from . import ocean
 from defichain.exceptions.http.BadRequest import BadRequest
-
-ocean = Ocean()
-
 
 HEX = "0400000001616cd43cb0d396c52d6a5342f9411307a4dc4847f9237ff8bbb62e0c247be803010000006a4730440220119839df669bf6e" \
       "b24dd7b806cdb782ffc1ffa892fd663b5be6bf3d22cc9fdd9022028f4e981bcbcfbec0ff508a9b67fd353840ed3132c4528ecc894b90c" \

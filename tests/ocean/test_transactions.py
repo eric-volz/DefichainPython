@@ -1,7 +1,6 @@
 import pytest
-from defichain import Ocean
+from . import ocean
 
-ocean = Ocean()
 TXID = "bfb4bab92292e9c9b260c30e110bbbea0d8e0c78015a9058f67f1770d84f478f"
 SIZE = 30
 NEXT = None

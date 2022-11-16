@@ -1,8 +1,5 @@
 import pytest
-from defichain import Ocean
-
-ocean = Ocean()
-
+from . import ocean
 
 @pytest.mark.query
 def test_call():  # 01
