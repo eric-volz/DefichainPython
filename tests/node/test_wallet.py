@@ -11,7 +11,7 @@ path = str(Path.home())
 # Import Exceptions
 from defichain.exceptions.http.InternalServerError import InternalServerError
 
-node = createNode()
+from . import node
 address = load_secrets_conf()["wallet_address"]
 
 
