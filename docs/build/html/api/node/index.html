@@ -321,6 +321,58 @@ in the upper left corner or look in the <a class="reference internal" href="../.
 ["1@DFI", "1@BTC", "1@ETH"]  # multiple amounts
 </pre></div>
 </div>
+<p>There is also a class for the creation of amounts, to make it evan easier:</p>
+<section id="module-defichain.node">
+<span id="buildamounts"></span><h4>BuildAmounts<a class="headerlink" href="#module-defichain.node" title="Permalink to this headline">#</a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.BuildAmounts">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">BuildAmounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amounts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.BuildAmounts" title="Permalink to this definition">#</a></dt>
+<dd><p>An easy to use class to quickly build amounts.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>amounts</strong> (<em>str</em><em> or </em><em>array str</em>) – import already existing amounts: “<a class="reference external" href="mailto:amount%40token">amount<span>@</span>token</a>” or [”<a class="reference external" href="mailto:amount1%40t1">amount1<span>@</span>t1</a>”, “<a class="reference external" href="mailto:amount2%40t2">amount2<span>@</span>t2</a>”]</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.node</span> <span class="kn">import</span> <span class="n">BuildAmounts</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">amounts</span> <span class="o">=</span> <span class="n">BuildAmounts</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">amounts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"DFI"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">amounts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"BTC"</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">amounts</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+<span class="go">['1@DFI', '2@BTC']</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.BuildAmounts.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.BuildAmounts.add" title="Permalink to this definition">#</a></dt>
+<dd><p>Add an amount to other amounts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coin</strong> (<em>str</em>) – coin to use</p></li>
+<li><p><strong>amount</strong> (<em>float</em>) – amount of specified coin</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.BuildAmounts.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.BuildAmounts.build" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the amount</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns the amount. If it is a single amount, it will return a string. If there are multiple amounts
+it will return a list of strings.</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
 </section>
 <section id="address-amount">
 <span id="node-address-amount"></span><h3>Address Amount<a class="headerlink" href="#address-amount" title="Permalink to this headline">#</a></h3>
@@ -337,6 +389,58 @@ in the upper left corner or look in the <a class="reference internal" href="../.
 }
 </pre></div>
 </div>
+<p>There is also a class for the creation of address amounts, to make it evan easier:</p>
+<section id="buildaddressamounts">
+<h4>BuildAddressAmounts<a class="headerlink" href="#buildaddressamounts" title="Permalink to this headline">#</a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.BuildAddressAmounts">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">BuildAddressAmounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_amounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.BuildAddressAmounts" title="Permalink to this definition">#</a></dt>
+<dd><p>An easy to use class to quickly build address amounts.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>address_amounts</strong> (<em>json string</em>) – import an existing json address amount: {“address”: “amounts”}</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.node</span> <span class="kn">import</span> <span class="n">BuildAddressAmounts</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">address_amounts</span> <span class="o">=</span> <span class="n">BuildAddressAmounts</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">address_amounts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"address1"</span><span class="p">,</span> <span class="s2">"DFI"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">address_amounts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"address2"</span><span class="p">,</span> <span class="s2">"BTC"</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">address_amounts</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+<span class="go">{'address1': '1@DFI', 'address2': '2@BTC'}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.BuildAddressAmounts.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.BuildAddressAmounts.add" title="Permalink to this definition">#</a></dt>
+<dd><p>Add an amount to already existing address amounts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>address</strong> (<em>str</em>) – defichain address</p></li>
+<li><p><strong>coin</strong> (<em>str</em>) – the coin to use</p></li>
+<li><p><strong>amount</strong> (<em>str</em>) – the amount of the specified coin</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.BuildAddressAmounts.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.BuildAddressAmounts.build" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the address amount.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns the address amount</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
 </section>
 <section id="inputs">
 <span id="node-inputs"></span><h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">#</a></h3>
@@ -415,8 +519,14 @@ in the upper left corner or look in the <a class="reference internal" href="../.
 <li><a class="reference internal" href="#node-modules">Node Modules</a></li>
 <li><a class="reference internal" href="#request-structure">Request Structure</a></li>
 <li><a class="reference internal" href="#default-inputs">Default Inputs</a><ul>
-<li><a class="reference internal" href="#amounts">Amounts</a></li>
-<li><a class="reference internal" href="#address-amount">Address Amount</a></li>
+<li><a class="reference internal" href="#amounts">Amounts</a><ul>
+<li><a class="reference internal" href="#module-defichain.node">BuildAmounts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#address-amount">Address Amount</a><ul>
+<li><a class="reference internal" href="#buildaddressamounts">BuildAddressAmounts</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#inputs">Inputs</a></li>
 </ul>
 </li>
