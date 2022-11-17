@@ -90,6 +90,16 @@ Amount in amount@token format.
 
     ["1@DFI", "1@BTC", "1@ETH"]  # multiple amounts
 
+There is also a class for the creation of amounts, to make it evan easier:
+
+BuildAmounts
+____________
+
+.. automodule:: defichain.node
+
+.. autoclass:: BuildAmounts
+    :members:
+
 .. _Node Address Amount:
 
 Address Amount
@@ -110,6 +120,14 @@ Example:
         "dcTKz5SQrqf4vGVsgra76ptXeNBcxPrenP": "1@DFI",
         "df1qzkf582h0sgfksj0yn0wxz0r9amyqfferm5wycs": ["2.0@BTC", "3.0@ETH"]
     }
+
+There is also a class for the creation of address amounts, to make it evan easier:
+
+BuildAddressAmounts
+___________________
+
+.. autoclass:: BuildAddressAmounts
+    :members:
 
 .. _Node Inputs:
 
