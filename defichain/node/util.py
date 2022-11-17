@@ -71,7 +71,7 @@ class BuildAmounts:
         new_amounts = copy.deepcopy(amounts)
         self.amounts = new_amounts if new_amounts is not None else ""
 
-    def add(self, coin: str, amount: float):
+    def add(self, coin: str, amount: float) -> "BuildAmounts":
         """
         Add an amount to other amounts.
 
@@ -79,8 +79,7 @@ class BuildAmounts:
         :type coin: str
         :param amount: amount of specified coin
         :type amount: float
-
-        :return: None
+        :return: "BuildAmounts"
         """
         if self.amounts == "":
             self.amounts = f"{amount}@{coin}"
@@ -88,6 +87,7 @@ class BuildAmounts:
             if not isinstance(self.amounts, list):
                 self.amounts = [self.amounts]
             self.amounts.append(f"{amount}@{coin}")
+        return self
 
     def build(self) -> {}:
         """
@@ -120,7 +120,7 @@ class BuildAddressAmounts:
 
         self.address_amounts = BuildToJson(address_amounts)
 
-    def add(self, address: str, coin: str, amount: float):
+    def add(self, address: str, coin: str, amount: float) -> "BuildAddressAmounts":
         """
         Add an amount to already existing address amounts.
 
@@ -130,9 +130,10 @@ class BuildAddressAmounts:
         :type coin: str
         :param amount: the amount of the specified coin
         :type amount: str
-        :return: None
+        :return: "BuildAddressAmounts"
         """
         self.address_amounts.add(address, coin, amount)
+        return self
 
     def build(self) -> {}:
         """
