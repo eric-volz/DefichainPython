@@ -17,3 +17,7 @@ from defichain.node.modules.util import Util
 from defichain.node.modules.vault import Vault
 from defichain.node.modules.wallet import Wallet
 from defichain.node.modules.zmq import Zmq
+
+# Util methods
+
+from defichain.node.util import BuildAmounts, BuildAddressAmounts
