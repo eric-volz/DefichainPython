@@ -1,6 +1,4 @@
 from os import path
-from defichain import Node
-from defichain.logger import Logger
 
 LENGTH_OF_TXID = 64
 

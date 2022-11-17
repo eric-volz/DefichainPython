@@ -1,5 +1,4 @@
 import pytest
-from tests.util import createNode
 
 from . import node
 
