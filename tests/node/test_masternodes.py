@@ -73,3 +73,8 @@ def test_resignmasternode():  # 08
     string = ".* RPC_INVALID_ADDRESS_OR_KEY: Incorrect authorization for "
     with pytest.raises(InternalServerError, match=string):
         assert node.masternodes.resignmasternode(mn_id)
+
+
+@pytest.mark.query
+def test_updatemasternode():  # 09
+    pass
