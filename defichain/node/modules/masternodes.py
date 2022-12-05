@@ -155,3 +155,34 @@ class Masternodes:
             >>> node.masternodes.resignmasternode("095d2bfb5d05ba73fa96502df85aca818ee79810b9ababa71a9dc97e2c360100")
         """
         return self._node._rpc.call("resignmasternode", mn_id, inputs)
+
+    def updatemasternode(self, mn_id: str, values: {} = None, inputs: [{}] = None) -> str:
+        """
+        Creates (and submits to local node and network) a masternode update transaction which update the masternode operator addresses, spending the given inputs..
+
+        The last optional argument (may be empty array) is an array of specific UTXOs to spend.
+
+        Requires wallet passphrase to be set with walletpassphrase call.
+
+        :param mn_id: (required) The Masternode's ID
+        :type mn_id: str
+        :param values: (required)
+
+            .. code-block:: text
+
+                {
+                    "ownerAddress": "str",       (string) The new masternode owner address, requires masternode collateral fee (P2PKH or P2WPKH)
+                    "operatorAddress": "str",    (string) The new masternode operator address (P2PKH or P2WPKH)
+                    "rewardAddress": "str",      (string) Masternode`s new reward address, empty "" to remove reward address.
+                }
+
+        :type values: json
+        :param inputs: :ref:`Node Inputs`
+        :type inputs: json array
+        :return: "hash" (string) -- The hex-encoded hash of broadcasted transaction
+
+        :example:
+
+            >>> node.masternodes.updatemasternode("mn_id", {"rewardAddress": "rewardAddress"})
+        """
+        return self._node._rpc.call("updatemasternode", mn_id, values, inputs)

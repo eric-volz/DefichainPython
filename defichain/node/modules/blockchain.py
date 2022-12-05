@@ -969,7 +969,24 @@ class Blockchain:
         """
         return self._node._rpc.call("setgovheight", variables, height, inputs)
 
-    def verifychain(self, checklevel: int = 3, nblocks: int = 6) -> bool:  # 31
+    def unsetgov(self, variables: {}, inputs: [{}] = None) -> str:  # 31
+        """
+        Unset special 'governance' variables:: ATTRIBUTES, ICX_TAKERFEE_PER_BTC, LP_LOAN_TOKEN_SPLITS, LP_SPLITS,
+        ORACLE_BLOCK_INTERVAL, ORACLE_DEVIATION
+
+        :param variables: (required) Object with variables; Variable's name is the key
+        :type variables: json
+        :param inputs: (optional) :ref:`Node Inputs`
+        :type inputs: [{}]
+        :return: "hash" (string) -- The hex-encoded hash of broadcasted transaction
+
+        :example:
+
+            >>> node.blockchain.unsetgov({"LP_SPLITS": ["2","3"]})
+        """
+        return self._node._rpc.call("unsetgov", variables, inputs)
+
+    def verifychain(self, checklevel: int = 3, nblocks: int = 6) -> bool:  # 32
         """
         Verifies blockchain database.
 
@@ -985,7 +1002,7 @@ class Blockchain:
         """
         return self._node._rpc.call("verifychain", checklevel, nblocks)
 
-    def verifytxoutproof(self, proof: str) -> [str]:  # 32
+    def verifytxoutproof(self, proof: str) -> [str]:  # 33
         """
         Verifies that a proof points to a transaction in a block, returning the transaction it commits to
         and throwing an RPC error if the block is not in our best chain

@@ -5,9 +5,38 @@ class Tokens:
     def __init__(self, node):
         self._node = node
 
+    def burntokens(self, amounts: str, _from: str, context: str = None, inputs: [{}] = None) -> str:  # 01
+        """
+        Creates (and submits to local node and network) a transaction burning your token (for accounts and/or UTXOs).
+
+        The second optional argument (may be empty array) is an array of specific UTXOs to spend. One of UTXO's must
+        belong to the token's owner (collateral) address
+
+        Requires wallet passphrase to be set with walletpassphrase call.
+
+        :param amounts: (required) :ref:`Node Amount`
+        :type amounts: str
+        :param _from: (required) Address containing tokens to be burned
+        :type _from: str
+        :param context: (optional) Additional data necessary for specific burn type
+        :type context: str
+        :param inputs: :ref:`Node Inputs`
+        :type inputs: json array
+        :return: "hash" (string) -- The hex-encoded hash of broadcasted transaction
+
+        :example:
+
+            >>> node.tokens.burntokens("10@BTC", "df1qpsg2v3fajhwfrc3dchsqpcwqfegdxpncwpcda2")
+        """
+        metadata = BuildJson()
+        metadata.append("amounts", amounts)
+        metadata.append("from", _from)
+        metadata.append("context", context)
+        return self._node._rpc.call("burntokens", metadata.build(), inputs)
+
     def createtoken(self, symbol: str, collateralAddress: str, name: str = None, isDAT: bool = None,
                     decimal: float = None, limit: int = None, mintable: bool = True, tradeable: bool = True,
-                    inputs: [{}] = None) -> str:  # 01
+                    inputs: [{}] = None) -> str:  # 02
         """
         Creates (and submits to local node and network) a token creation transaction with given metadata.
         The second optional argument (may be empty array) is an array of specific UTXOs to spend.
@@ -47,7 +76,7 @@ class Tokens:
         metadata.append("tradeable", tradeable)
         return self._node._rpc.call("createtoken", metadata.build(), inputs)
 
-    def decodecustomtx(self, hexstring: str, iswitness: bool = None) -> str:  # 02
+    def decodecustomtx(self, hexstring: str, iswitness: bool = None) -> str:  # 03
         """
         Get detailed information about a DeFiChain custom transaction.
 
@@ -81,7 +110,7 @@ class Tokens:
         """
         return self._node._rpc.call("decodecustomtx", hexstring, iswitness)
 
-    def getcustomtx(self, txid: str, blockhash: str = None) -> {}:  # 03
+    def getcustomtx(self, txid: str, blockhash: str = None) -> {}:  # 04
         """
         Get detailed information about a DeFiChain custom transaction. Will search wallet transactions and mempool transaction,
         if a blockhash is provided and that block is available then details for that transaction can be returned.
@@ -111,7 +140,7 @@ class Tokens:
         """
         return self._node._rpc.call("getcustomtx", txid, blockhash)
 
-    def gettoken(self, key: str):  # 04
+    def gettoken(self, key: str):  # 05
         """
         Returns information about token.
 
@@ -125,7 +154,7 @@ class Tokens:
         """
         return self._node._rpc.call("gettoken", key)
 
-    def listtokens(self, start: int = None, including_start: bool = None, limit: int = 100, verbose: bool = True) -> {}:  # 05
+    def listtokens(self, start: int = None, including_start: bool = None, limit: int = 100, verbose: bool = True) -> {}:  # 06
         """
         Returns information about tokens
 
@@ -149,7 +178,7 @@ class Tokens:
         pagination.append("limit", limit)
         return self._node._rpc.call("listtokens", pagination.build(), verbose)
 
-    def minttokens(self, amounts: str, inputs: [{}] = None) -> str:  # 06
+    def minttokens(self, amounts: str, inputs: [{}] = None) -> str:  # 07
         """
         Creates (and submits to local node and network) a transaction minting your token (for accounts and/or UTXOs).
 
@@ -169,7 +198,7 @@ class Tokens:
         return self._node._rpc.call("minttokens", amounts, inputs)
 
     def updatetoken(self, token: str, symbol: str = None, name: str = None, isDAT: bool = False, mintable: bool = None,
-                    tradeable: bool = None, finalize: bool = None, inputs: [{}] = None) -> str:  # 07
+                    tradeable: bool = None, finalize: bool = None, inputs: [{}] = None) -> str:  # 08
         """
         Creates (and submits to local node and network) a transaction of token promotion to isDAT or demotion from
         isDAT. Collateral will be unlocked.
