@@ -9,6 +9,7 @@ from defichain.node.modules.mining import Mining
 from defichain.node.modules.network import Network
 from defichain.node.modules.oracles import Oracles
 from defichain.node.modules.poolpair import Poolpair
+from defichain.node.modules.proposals import Proposals
 from defichain.node.modules.rawtransactions import Rawtransactions
 from defichain.node.modules.spv import Spv
 from defichain.node.modules.stats import Stats
