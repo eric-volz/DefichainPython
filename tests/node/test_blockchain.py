@@ -2,6 +2,7 @@ import pytest
 
 # Import Exceptions
 from defichain.exceptions.http.InternalServerError import InternalServerError
+from defichain.exceptions.http.BadRequest import BadRequest
 
 from . import node
 
@@ -226,8 +227,8 @@ def test_scantxoutset():  # 28
 
 @pytest.mark.query
 def test_setgov():  # 29
-    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
-    with pytest.raises(InternalServerError, match=string):
+    string = ".* RPC_INVALID_REQUEST: Test SetGovVariableTx execution failed:\ntx not from foundation member"
+    with pytest.raises(BadRequest, match=string):
         assert node.blockchain.setgov({"ORACLE_BLOCK_INTERVAL": 60})
         assert node.blockchain.setgov({"ORACLE_BLOCK_INTERVAL": 60}, [])
         assert node.blockchain.setgov(variables={"ORACLE_BLOCK_INTERVAL": 60}, inputs=[])
@@ -235,8 +236,8 @@ def test_setgov():  # 29
 
 @pytest.mark.query
 def test_setgovheight():  # 30
-    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
-    with pytest.raises(InternalServerError, match=string):
+    string = ".* RPC_INVALID_REQUEST: Test SetGovVariableHeightTx execution failed:\ntx not from foundation member"
+    with pytest.raises(BadRequest, match=string):
         assert node.blockchain.setgovheight({"ORACLE_DEVIATION": 1}, 20000000)
         assert node.blockchain.setgovheight({"ORACLE_DEVIATION": 1}, 20000000, [])
         assert node.blockchain.setgovheight(variables={"ORACLE_DEVIATION": 1}, height=20000000, inputs=[])

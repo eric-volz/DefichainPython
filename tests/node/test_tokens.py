@@ -3,6 +3,7 @@ from tests.util import load_secrets_conf
 
 # Import Exceptions
 from defichain.exceptions.http.InternalServerError import InternalServerError
+from defichain.exceptions.http.BadRequest import BadRequest
 
 from . import node
 address = load_secrets_conf()["wallet_address"]
@@ -73,8 +74,8 @@ def test_listtoken():  # 06
 def test_minttokens():  # 07
     token = "SPY"
     amount = 1
-    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Incorrect authorization for 8bL7jZe2Nk5EhqFA6yuf8HPre3M6eewkqj"
-    with pytest.raises(InternalServerError, match=string):
+    string = ".* RPC_INVALID_REQUEST: Test MintTokenTx execution failed:\nLoan tokens cannot be minted"
+    with pytest.raises(BadRequest, match=string):
         assert node.tokens.minttokens(f"{amount}@{token}")
         assert node.tokens.minttokens(f"{amount}@{token}", [])
         assert node.tokens.minttokens(amounts=f"{amount}@{token}", inputs=[])
@@ -89,8 +90,8 @@ def test_updatetoken():  # 08
     mintable = True
     tradeable = True
     finalize = True
-    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
-    with pytest.raises(InternalServerError, match=string):
+    string = ".* RPC_INVALID_REQUEST: Test UpdateTokenAnyTx execution failed:\ntx not from foundation member"
+    with pytest.raises(BadRequest, match=string):
         assert node.tokens.updatetoken(token)
         assert node.tokens.updatetoken(token, symbol, name, isDAT, mintable, tradeable, finalize, [])
         assert node.tokens.updatetoken(token=token, symbol=symbol, isDAT=isDAT, mintable=mintable,
