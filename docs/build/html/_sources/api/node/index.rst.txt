@@ -40,6 +40,7 @@ Node Modules
     network
     oracles
     poolpair
+    proposals
     rawtransactions
     spv
     stats

@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="search.html" />
 
-    <link rel="shortcut icon" href="_static/logo.png"/><meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/><title>Index - DefichainPython v2.1.1</title>
+    <link rel="shortcut icon" href="_static/logo.png"/><meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/><title>Index - DefichainPython v2.2.0</title>
 <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
@@ -122,7 +122,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">DefichainPython v2.1.1</div></a>
+      <a href="index.html"><div class="brand">DefichainPython v2.2.0</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -145,7 +145,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">DefichainPython v2.1.1</span>
+  <span class="sidebar-brand-text">DefichainPython v2.2.0</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -173,6 +173,7 @@
 <li class="toctree-l2"><a class="reference internal" href="api/node/network.html">Network</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/node/oracles.html">Oracles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/node/poolpair.html">Poolpair</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/node/proposals.html">Proposals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/node/rawtransactions.html">Rawtransactions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/node/spv.html">Spv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/node/stats.html">Stats</a></li>
@@ -304,10 +305,10 @@
 </li>
         <li><a href="api/node/blockchain.html#defichain.node.Blockchain">Blockchain (class in defichain.node)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/ocean/blocks.html#defichain.ocean.Blocks">Blocks (class in defichain.ocean)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/index.html#defichain.node.BuildAddressAmounts.build">build() (defichain.node.BuildAddressAmounts method)</a>
 
         <ul>
@@ -319,6 +320,8 @@
         <li><a href="api/node/index.html#defichain.node.BuildAmounts">BuildAmounts (class in defichain.node)</a>
 </li>
         <li><a href="api/node/wallet.html#defichain.node.Wallet.bumpfee">bumpfee() (defichain.node.Wallet method)</a>
+</li>
+        <li><a href="api/node/tokens.html#defichain.node.Tokens.burntokens">burntokens() (defichain.node.Tokens method)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -350,11 +353,15 @@
 </li>
         <li><a href="api/hdwallet/wallet.html#defichain.Wallet.compressed">compressed() (defichain.Wallet method)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/control.html#defichain.node.Control">Control (class in defichain.node)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/rawtransactions.html#defichain.node.Rawtransactions.converttopsbt">converttopsbt() (defichain.node.Rawtransactions method)</a>
+</li>
+        <li><a href="api/node/proposals.html#defichain.node.Proposals.creategovcfp">creategovcfp() (defichain.node.Proposals method)</a>
+</li>
+        <li><a href="api/node/proposals.html#defichain.node.Proposals.creategovvoc">creategovvoc() (defichain.node.Proposals method)</a>
 </li>
         <li><a href="api/node/loan.html#defichain.node.Loan.createloanscheme">createloanscheme() (defichain.node.Loan method)</a>
 </li>
@@ -648,11 +655,13 @@
 </li>
         <li><a href="api/node/oracles.html#defichain.node.Oracles.getfixedintervalprice">getfixedintervalprice() (defichain.node.Oracles method)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/oracles.html#defichain.node.Oracles.getfutureswapblock">getfutureswapblock() (defichain.node.Oracles method)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/blockchain.html#defichain.node.Blockchain.getgov">getgov() (defichain.node.Blockchain method)</a>
+</li>
+        <li><a href="api/node/proposals.html#defichain.node.Proposals.getgovproposal">getgovproposal() (defichain.node.Proposals method)</a>
 </li>
         <li><a href="api/node/loan.html#defichain.node.Loan.getinterest">getinterest() (defichain.node.Loan method)</a>
 </li>
@@ -884,6 +893,10 @@
 </li>
         <li><a href="api/node/oracles.html#defichain.node.Oracles.listfixedintervalprices">listfixedintervalprices() (defichain.node.Oracles method)</a>
 </li>
+        <li><a href="api/node/proposals.html#defichain.node.Proposals.listgovproposals">listgovproposals() (defichain.node.Proposals method)</a>
+</li>
+        <li><a href="api/node/proposals.html#defichain.node.Proposals.listgovproposalvotes">listgovproposalvotes() (defichain.node.Proposals method)</a>
+</li>
         <li><a href="api/node/blockchain.html#defichain.node.Blockchain.listgovs">listgovs() (defichain.node.Blockchain method)</a>
 </li>
         <li><a href="api/node/wallet.html#defichain.node.Wallet.listlabels">listlabels() (defichain.node.Wallet method)</a>
@@ -900,10 +913,10 @@
 </li>
         <li><a href="api/node/masternodes.html#defichain.node.Masternodes.listmasternodes">listmasternodes() (defichain.node.Masternodes method)</a>
 </li>
-        <li><a href="api/node/oracles.html#defichain.node.Oracles.listoracles">listoracles() (defichain.node.Oracles method)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/node/oracles.html#defichain.node.Oracles.listoracles">listoracles() (defichain.node.Oracles method)</a>
+</li>
         <li><a href="api/node/accounts.html#defichain.node.Accounts.listpendingdusdswaps">listpendingdusdswaps() (defichain.node.Accounts method)</a>
 </li>
         <li><a href="api/node/accounts.html#defichain.node.Accounts.listpendingfutureswaps">listpendingfutureswaps() (defichain.node.Accounts method)</a>
@@ -1077,10 +1090,10 @@
 </li>
         <li><a href="api/node/poolpair.html#defichain.node.Poolpair">Poolpair (class in defichain.node)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/ocean/poolpair.html#defichain.ocean.Poolpairs">Poolpairs (class in defichain.ocean)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/poolpair.html#defichain.node.Poolpair.poolswap">poolswap() (defichain.node.Poolpair method)</a>
 </li>
         <li><a href="api/node/blockchain.html#defichain.node.Blockchain.preciousblock">preciousblock() (defichain.node.Blockchain method)</a>
@@ -1090,6 +1103,8 @@
         <li><a href="api/node/mining.html#defichain.node.Mining.prioritisetransaction">prioritisetransaction() (defichain.node.Mining method)</a>
 </li>
         <li><a href="api/hdwallet/wallet.html#defichain.Wallet.private_key">private_key() (defichain.Wallet method)</a>
+</li>
+        <li><a href="api/node/proposals.html#defichain.node.Proposals">Proposals (class in defichain.node)</a>
 </li>
         <li><a href="api/node/blockchain.html#defichain.node.Blockchain.pruneblockchain">pruneblockchain() (defichain.node.Blockchain method)</a>
 </li>
@@ -1251,14 +1266,18 @@
 </li>
         <li><a href="api/exceptions.html#defichain.exceptions.http.UnprocessableEntity">UnprocessableEntity (class in defichain.exceptions.http)</a>
 </li>
+        <li><a href="api/node/blockchain.html#defichain.node.Blockchain.unsetgov">unsetgov() (defichain.node.Blockchain method)</a>
+</li>
         <li><a href="api/node/loan.html#defichain.node.Loan.updateloanscheme">updateloanscheme() (defichain.node.Loan method)</a>
 </li>
         <li><a href="api/node/loan.html#defichain.node.Loan.updateloantoken">updateloantoken() (defichain.node.Loan method)</a>
 </li>
-        <li><a href="api/node/oracles.html#defichain.node.Oracles.updateoracle">updateoracle() (defichain.node.Oracles method)</a>
+        <li><a href="api/node/masternodes.html#defichain.node.Masternodes.updatemasternode">updatemasternode() (defichain.node.Masternodes method)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/node/oracles.html#defichain.node.Oracles.updateoracle">updateoracle() (defichain.node.Oracles method)</a>
+</li>
         <li><a href="api/node/poolpair.html#defichain.node.Poolpair.updatepoolpair">updatepoolpair() (defichain.node.Poolpair method)</a>
 </li>
         <li><a href="api/node/tokens.html#defichain.node.Tokens.updatetoken">updatetoken() (defichain.node.Tokens method)</a>
@@ -1285,13 +1304,15 @@
 </li>
         <li><a href="api/node/vault.html#defichain.node.Vault">Vault (class in defichain.node)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/blockchain.html#defichain.node.Blockchain.verifychain">verifychain() (defichain.node.Blockchain method)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/util.html#defichain.node.Util.verifymessage">verifymessage() (defichain.node.Util method)</a>
 </li>
         <li><a href="api/node/blockchain.html#defichain.node.Blockchain.verifytxoutproof">verifytxoutproof() (defichain.node.Blockchain method)</a>
+</li>
+        <li><a href="api/node/proposals.html#defichain.node.Proposals.votegov">votegov() (defichain.node.Proposals method)</a>
 </li>
     </ul></td>
   </tr></table>

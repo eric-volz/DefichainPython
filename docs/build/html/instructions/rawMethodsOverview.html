@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Node / RPC" href="../api/node/index.html" /><link rel="prev" title="Progress and Updates" href="progressAndUpdates.html" />
 
     <link rel="shortcut icon" href="../_static/logo.png"/><meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>Raw Methods Overview - DefichainPython v2.1.1</title>
+        <title>Raw Methods Overview - DefichainPython v2.2.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
@@ -124,7 +124,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">DefichainPython v2.1.1</div></a>
+      <a href="../index.html"><div class="brand">DefichainPython v2.2.0</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -147,7 +147,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">DefichainPython v2.1.1</span>
+  <span class="sidebar-brand-text">DefichainPython v2.2.0</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -175,6 +175,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/node/network.html">Network</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/node/oracles.html">Oracles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/node/poolpair.html">Poolpair</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/proposals.html">Proposals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/node/rawtransactions.html">Rawtransactions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/node/spv.html">Spv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/node/stats.html">Stats</a></li>
@@ -306,6 +307,7 @@
 <p>scantxoutset “action” [scanobjects,…]</p>
 <p>setgov {“name”:”str”} ( [{“txid”:”hex”,”vout”:n},…] )</p>
 <p>setgovheight {“name”:”str”} height ( [{“txid”:”hex”,”vout”:n},…] )</p>
+<p>unsetgov {“name”:”str”} ( [{“txid”:”hex”,”vout”:n},…] )</p>
 <p>verifychain ( checklevel nblocks )</p>
 <p>verifytxoutproof “proof”</p>
 <p>== Control ==</p>
@@ -355,6 +357,7 @@
 <p>listanchors</p>
 <p>listmasternodes ( {“start”:”hex”,”including_start”:bool,”limit”:n} verbose )</p>
 <p>resignmasternode “mn_id” ( [{“txid”:”hex”,”vout”:n},…] )</p>
+<p>updatemasternode “mn_id” {“ownerAddress”:”str”,”operatorAddress”:”str”,”rewardAddress”:”str”} ( [{“txid”:”hex”,”vout”:n},…] )</p>
 <p>== Mining ==</p>
 <p>getblocktemplate ( “template_request” )</p>
 <p>getmininginfo</p>
@@ -403,6 +406,13 @@
 <p>removepoolliquidity “from” “amount” ( [{“txid”:”hex”,”vout”:n},…] )</p>
 <p>testpoolswap ( {“from”:”str”,”tokenFrom”:”str”,”amountFrom”:n,”to”:”str”,”tokenTo”:”str”,”maxPrice”:n} “path” verbose )</p>
 <p>updatepoolpair ( {“pool”:”str”,”status”:bool,”commission”:n,”ownerAddress”:”str”,”customRewards”:”str”} [{“txid”:”hex”,”vout”:n},…] )</p>
+<p>== Proposals ==</p>
+<p>creategovcfp ( {“title”:”str”,”context”:”str”,”contextHash”:”str”,”cycles”:n,”amount”:amount,”payoutAddress”:”str”} [{“txid”:”hex”,”vout”:n},…] )</p>
+<p>creategovvoc ( {“title”:”str”,”context”:”str”,”contextHash”:”str”,”emergency”:bool} [{“txid”:”hex”,”vout”:n},…] )</p>
+<p>getgovproposal “proposalId”</p>
+<p>listgovproposals ( “type” “status” )</p>
+<p>listgovproposalvotes “proposalId” ( “masternode” cycle )</p>
+<p>votegov “proposalId” “masternodeId” “decision” ( [{“txid”:”hex”,”vout”:n},…] )</p>
 <p>== Rawtransactions ==</p>
 <p>analyzepsbt “psbt”</p>
 <p>combinepsbt [“psbt”,…]</p>
@@ -458,6 +468,7 @@
 <p>getrpcstats “command”</p>
 <p>listrpcstats</p>
 <p>== Tokens ==</p>
+<p>burntokens {“amounts”:”str”,”from”:”str”,”context”:”str”} ( [{“txid”:”hex”,”vout”:n},…] )</p>
 <p>createtoken ( {“symbol”:”str”,”name”:”str”,”isDAT”:bool,”decimal”:n,”limit”:n,”mintable”:bool,”tradeable”:bool,”collateralAddress”:”str”} [{“txid”:”hex”,”vout”:n},…] )</p>
 <p>decodecustomtx “hexstring” ( iswitness )</p>
 <p>getcustomtx “txid” ( “blockhash” )</p>
