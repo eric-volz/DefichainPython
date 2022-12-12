@@ -2,6 +2,7 @@ import pytest
 
 # Import Exceptions
 from defichain.exceptions.http.InternalServerError import InternalServerError
+from defichain.exceptions.http.BadRequest import BadRequest
 
 from . import node
 
@@ -226,8 +227,8 @@ def test_scantxoutset():  # 28
 
 @pytest.mark.query
 def test_setgov():  # 29
-    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
-    with pytest.raises(InternalServerError, match=string):
+    string = ".* RPC_INVALID_REQUEST: Test SetGovVariableTx execution failed:\ntx not from foundation member"
+    with pytest.raises(BadRequest, match=string):
         assert node.blockchain.setgov({"ORACLE_BLOCK_INTERVAL": 60})
         assert node.blockchain.setgov({"ORACLE_BLOCK_INTERVAL": 60}, [])
         assert node.blockchain.setgov(variables={"ORACLE_BLOCK_INTERVAL": 60}, inputs=[])
@@ -235,8 +236,8 @@ def test_setgov():  # 29
 
 @pytest.mark.query
 def test_setgovheight():  # 30
-    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
-    with pytest.raises(InternalServerError, match=string):
+    string = ".* RPC_INVALID_REQUEST: Test SetGovVariableHeightTx execution failed:\ntx not from foundation member"
+    with pytest.raises(BadRequest, match=string):
         assert node.blockchain.setgovheight({"ORACLE_DEVIATION": 1}, 20000000)
         assert node.blockchain.setgovheight({"ORACLE_DEVIATION": 1}, 20000000, [])
         assert node.blockchain.setgovheight(variables={"ORACLE_DEVIATION": 1}, height=20000000, inputs=[])
@@ -244,14 +245,25 @@ def test_setgovheight():  # 30
 
 
 @pytest.mark.query
-def test_verifychain():  # 31
+def test_unsetgov():  # 31
+    string = ".* RPC_INVALID_REQUEST: Test UnsetGovVariableTx execution failed:\ntx not from foundation member"
+    with pytest.raises(BadRequest, match=string):
+        assert node.blockchain.unsetgov({"LP_SPLITS": ["2", "3"]})
+    with pytest.raises(BadRequest, match=string):
+        assert node.blockchain.unsetgov({"LP_SPLITS": ["2", "3"]}, [])
+    with pytest.raises(BadRequest, match=string):
+        assert node.blockchain.unsetgov(variables={"LP_SPLITS": ["2", "3"]}, inputs=[])
+
+
+@pytest.mark.query
+def test_verifychain():  # 32
     assert node.blockchain.verifychain()
     assert node.blockchain.verifychain(1, 10)
     assert node.blockchain.verifychain(checklevel=1, nblocks=10)
 
 
 @pytest.mark.query
-def test_verifytxoutproof():  # 32
+def test_verifytxoutproof():  # 33
     txid = "d6e2b314f928ba02fa844a94c75baf43dbab4c095b7592f7df18d504765072e3"
     blockhash = "090d161e7f6be039bb416ae3033d683d00b6c71a7102156a77af8c0e6baba242"
     proof = node.blockchain.gettxoutproof([txid], blockhash=blockhash)

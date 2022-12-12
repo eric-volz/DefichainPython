@@ -106,6 +106,8 @@ setgov {"name":"str"} ( [{"txid":"hex","vout":n},...] )
 
 setgovheight {"name":"str"} height ( [{"txid":"hex","vout":n},...] )
 
+unsetgov {"name":"str"} ( [{"txid":"hex","vout":n},...] )
+
 verifychain ( checklevel nblocks )
 
 verifytxoutproof "proof"
@@ -214,6 +216,8 @@ listmasternodes ( {"start":"hex","including_start":bool,"limit":n} verbose )
 
 resignmasternode "mn_id" ( [{"txid":"hex","vout":n},...] )
 
+updatemasternode "mn_id" {"ownerAddress":"str","operatorAddress":"str","rewardAddress":"str"} ( [{"txid":"hex","vout":n},...] )
+
 
 
 == Mining ==
@@ -317,6 +321,22 @@ removepoolliquidity "from" "amount" ( [{"txid":"hex","vout":n},...] )
 testpoolswap ( {"from":"str","tokenFrom":"str","amountFrom":n,"to":"str","tokenTo":"str","maxPrice":n} "path" verbose )
 
 updatepoolpair ( {"pool":"str","status":bool,"commission":n,"ownerAddress":"str","customRewards":"str"} [{"txid":"hex","vout":n},...] )
+
+
+
+== Proposals ==
+
+creategovcfp ( {"title":"str","context":"str","contextHash":"str","cycles":n,"amount":amount,"payoutAddress":"str"} [{"txid":"hex","vout":n},...] )
+
+creategovvoc ( {"title":"str","context":"str","contextHash":"str","emergency":bool} [{"txid":"hex","vout":n},...] )
+
+getgovproposal "proposalId"
+
+listgovproposals ( "type" "status" )
+
+listgovproposalvotes "proposalId" ( "masternode" cycle )
+
+votegov "proposalId" "masternodeId" "decision" ( [{"txid":"hex","vout":n},...] )
 
 
 
@@ -435,6 +455,8 @@ listrpcstats
 
 
 == Tokens ==
+
+burntokens {"amounts":"str","from":"str","context":"str"} ( [{"txid":"hex","vout":n},...] )
 
 createtoken ( {"symbol":"str","name":"str","isDAT":bool,"decimal":n,"limit":n,"mintable":bool,"tradeable":bool,"collateralAddress":"str"} [{"txid":"hex","vout":n},...] )
 

@@ -10,7 +10,7 @@ Since this is a community supported project, the community also has the right to
 .. admonition:: Package Node Version
     :class: caution
 
-    Up to date to the node version: `v2.11.1 - Fort Canning Epilogue <https://github.com/DeFiCh/ain/releases/tag/v2.11.1>`_
+    Up to date to the node version: `v3.0.1 - Grand Central <https://github.com/DeFiCh/ain/releases/tag/v3.0.1>`_
 
 
 |:white_check_mark:| = Finished and UpToDate with the specified node version
@@ -213,5 +213,6 @@ Since this is a community supported project, the community also has the right to
 
 Next Steps
 ----------
-1. implementation of the `community project: DefiLense <https://defilense.com/>`_ (getting historical data via an API)
+1. implementing new v3.0.1 - Grand Central Methods
+2. implementation of the `community project: DefiLense <https://defilense.com/>`_ (getting historical data via an API)
 

@@ -4,6 +4,7 @@ from tests.util import load_secrets_conf
 
 # Import Exceptions
 from defichain.exceptions.http.InternalServerError import InternalServerError
+from defichain.exceptions.http.BadRequest import BadRequest
 
 from . import node
 address = load_secrets_conf()["wallet_address"]
@@ -41,12 +42,12 @@ def test_compositeswap():  # 02
 
 @pytest.mark.query
 def test_createpoolpair():  # 03
-    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
-    with pytest.raises(InternalServerError, match=string):
+    string = ".* RPC_INVALID_REQUEST: Test CreatePoolPairTx execution failed:\ntx not from foundation member"
+    with pytest.raises(BadRequest, match=string):
         assert node.poolpair.createpoolpair("USDT", "USDC", 0.1, True, address)
-    with pytest.raises(InternalServerError, match=string):
+    with pytest.raises(BadRequest, match=string):
         assert node.poolpair.createpoolpair("USDT", "USDC", 0.1, True, address, 10, "USDT-USDC")
-    with pytest.raises(InternalServerError, match=string):
+    with pytest.raises(BadRequest, match=string):
         assert node.poolpair.createpoolpair(tokenA="USDT", tokenB="USDC", commission=0.1, status=True,
                                             ownerAddress=address, customRewards=10, pairSymbol="USDT-USDC")
 
@@ -104,12 +105,12 @@ def test_testpoolswap():  # 09
 
 @pytest.mark.query
 def test_updatepoolpair():  # 10
-    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
-    with pytest.raises(InternalServerError, match=string):
+    string = ".* RPC_INVALID_REQUEST: Test UpdatePoolPairTx execution failed:\ntx not from foundation member"
+    with pytest.raises(BadRequest, match=string):
         assert node.poolpair.updatepoolpair('DUSD-DFI')
-    with pytest.raises(InternalServerError, match=string):
+    with pytest.raises(BadRequest, match=string):
         assert node.poolpair.updatepoolpair('DUSD-DFI', True, 0.5, address, 100, [])
-    with pytest.raises(InternalServerError, match=string):
+    with pytest.raises(BadRequest, match=string):
         assert node.poolpair.updatepoolpair(pool='DUSD-DFI', status=True, commission=0.5, ownerAddress=address,
                                             customRewards=100, inputs=[])
 

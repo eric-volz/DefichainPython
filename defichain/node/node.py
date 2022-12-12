@@ -14,6 +14,7 @@ from .modules.mining import Mining
 from .modules.network import Network
 from .modules.oracles import Oracles
 from .modules.poolpair import Poolpair
+from .modules.proposals import Proposals
 from .modules.rawtransactions import Rawtransactions
 from .modules.spv import Spv
 from .modules.stats import Stats
@@ -90,6 +91,7 @@ class Node:
         self.network = Network(self)
         self.oracles = Oracles(self)
         self.poolpair = Poolpair(self)
+        self.proposals = Proposals(self)
         self.rawtransactions = Rawtransactions(self)
         self.spv = Spv(self)
         self.stats = Stats(self)

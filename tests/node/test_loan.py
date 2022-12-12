@@ -4,6 +4,7 @@ from tests.util import load_secrets_conf
 
 # Import Exceptions
 from defichain.exceptions.http.InternalServerError import InternalServerError
+from defichain.exceptions.http.BadRequest import BadRequest
 
 from . import node
 address = load_secrets_conf()["wallet_address"]
@@ -15,12 +16,12 @@ def test_createloanscheme():  # 01
     while len(node.wallet.listunspent()) < 1:
         time.sleep(1)
 
-    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
-    with pytest.raises(InternalServerError, match=string):
+    string = ".* RPC_INVALID_REQUEST: Test LoanSchemeTx execution failed:\ntx not from foundation member!"
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.createloanscheme(100, 10, "MIN100")
-    with pytest.raises(InternalServerError, match=string):
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.createloanscheme(100, 10, "MIN100", [])
-    with pytest.raises(InternalServerError, match=string):
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.createloanscheme(mincolratio=100, interestrate=10, id="MIN100", inputs=[])
 
 
@@ -29,12 +30,12 @@ def test_destroyloanscheme():  # 02
     while len(node.wallet.listunspent()) < 1:
         time.sleep(1)
 
-    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
-    with pytest.raises(InternalServerError, match=string):
+    string = ".* RPC_INVALID_REQUEST: Test DestroyLoanSchemeTx execution failed:\ntx not from foundation member!"
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.destroyloanscheme("MIN100")
-    with pytest.raises(InternalServerError, match=string):
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.destroyloanscheme("MIN100", node.blockchain.getblockcount() + 10, [])
-    with pytest.raises(InternalServerError, match=string):
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.destroyloanscheme(id="MIN100", ACTIVATE_AFTER_BLOCK=node.blockchain.getblockcount() + 10,
                                            inputs=[])
 
@@ -111,23 +112,23 @@ def test_setcollateraltoken():  # 12
 
 @pytest.mark.query
 def test_setdefaultloanscheme():  # 13
-    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
-    with pytest.raises(InternalServerError, match=string):
+    string = ".* Test DefaultLoanSchemeTx execution failed:"
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.setdefaultloanscheme("MIN150")
-    with pytest.raises(InternalServerError, match=string):
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.setdefaultloanscheme("MIN150", [])
-    with pytest.raises(InternalServerError, match=string):
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.setdefaultloanscheme(id="MIN150", inputs=[])
 
 
 @pytest.mark.query
 def test_setloantoken():  # 14
-    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
-    with pytest.raises(InternalServerError, match=string):
+    string = ".* RPC_INVALID_REQUEST: Test SetLoanTokenTx execution failed:\ntx not from foundation member!"
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.setloantoken("TEST", "TEST/USD")
-    with pytest.raises(InternalServerError, match=string):
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.setloantoken("TEST", "TEST/USD", "TEST Coin", True, 0, [])
-    with pytest.raises(InternalServerError, match=string):
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.setloantoken(symbol="TEST", fixedIntervalPriceId="TEST/USD", name="TEST Coin", mintable=True,
                                       interest=0, inputs=[])
 
@@ -145,23 +146,23 @@ def test_takeloan():  # 15
 
 @pytest.mark.query
 def test_updateloanscheme():  # 16
-    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
-    with pytest.raises(InternalServerError, match=string):
+    string = ".* RPC_INVALID_REQUEST: Test LoanSchemeTx execution failed:\ntx not from foundation member!"
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.updateloanscheme(100, 10, "MIN1000")
-    with pytest.raises(InternalServerError, match=string):
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.updateloanscheme(100, 10, "MIN1000", node.blockchain.getblockcount()+1, [])
-    with pytest.raises(InternalServerError, match=string):
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.updateloanscheme(mincolratio=100, interestrate=10, id="MIN1000",
                                           ACTIVATE_AFTER_BLOCK=node.blockchain.getblockcount()+1, inputs=[])
 
 
 @pytest.mark.query
 def test_updateloantoken():  # 17
-    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Need foundation member authorization"
-    with pytest.raises(InternalServerError, match=string):
+    string = ".* RPC_INVALID_REQUEST: Test UpdateLoanTokenTx execution failed:\ntx not from foundation member!"
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.updateloantoken("SPY")
-    with pytest.raises(InternalServerError, match=string):
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.updateloantoken("SPY", "SPYY", "S&P 500 Index", "SPY/USD", True, 0, [])
-    with pytest.raises(InternalServerError, match=string):
+    with pytest.raises(BadRequest, match=string):
         assert node.loan.updateloantoken(token="SPY", symbol="SPYY", name="S&P 500 Index",
                                          fixedIntervalPriceId="SPY/USD", mintable=True, interest=0, inputs=[])
