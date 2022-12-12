@@ -10,7 +10,7 @@ Since this is a community supported project, the community also has the right to
 .. admonition:: Package Node Version
     :class: caution
 
-    Up to date to the node version: `v3.0.1 - Grand Central <https://github.com/DeFiCh/ain/releases/tag/v3.0.1>`_
+    Up to date to the node version: `vv3.1.1 - Grand Central <https://github.com/DeFiCh/ain/releases/tag/v3.1.1>`_
 
 
 |:white_check_mark:| = Finished and UpToDate with the specified node version
@@ -37,6 +37,7 @@ Since this is a community supported project, the community also has the right to
         Network             |:white_check_mark:|
         Oracles             |:white_check_mark:|
         Poolpair            |:white_check_mark:|
+        Proposals           |:white_check_mark:|
         Rawtransactions     |:white_check_mark:|
         Spv                 |:rotating_light:|
         Stats               |:white_check_mark:|
@@ -93,6 +94,7 @@ Since this is a community supported project, the community also has the right to
         Network             |:white_check_mark:|
         Oracles             |:white_check_mark:|
         Poolpair            |:white_check_mark:|
+        Proposals           |:white_check_mark:|
         Rawtransactions     |:white_check_mark:|
         Spv                 |:rotating_light:|
         Stats               |:white_check_mark:|
@@ -155,6 +157,7 @@ Since this is a community supported project, the community also has the right to
         Network             |:white_check_mark:|
         Oracles             |:white_check_mark:|
         Poolpair            |:white_check_mark:|
+        Proposals           |:white_check_mark:|
         Rawtransactions     |:white_check_mark:|
         Spv                 |:rotating_light:|
         Stats               |:white_check_mark:|
@@ -213,6 +216,5 @@ Since this is a community supported project, the community also has the right to
 
 Next Steps
 ----------
-1. implementing new v3.0.1 - Grand Central Methods
-2. implementation of the `community project: DefiLense <https://defilense.com/>`_ (getting historical data via an API)
+1. implementation of the `community project: DefiLense <https://defilense.com/>`_ (getting historical data via an API)
 
