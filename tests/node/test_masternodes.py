@@ -77,4 +77,14 @@ def test_resignmasternode():  # 08
 
 @pytest.mark.query
 def test_updatemasternode():  # 09
-    pass
+    mn_id = "e54d0814d406317dfaa38f365471ff59fb7f7725769c0aecf3d0830a59de0100"
+    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Incorrect authorization for 8XctLWjNsRJByMrYCgNxqyw9F1JhGYoDNb"
+    with pytest.raises(InternalServerError, match=string):
+        assert node.masternodes.updatemasternode(mn_id, {"ownerAddress": "8N9gJZFTYrempWvr13f5SR9X3PNJBCwU5U"})
+        assert node.masternodes.updatemasternode(mn_id, {"operatorAddress": "8N9gJZFTYrempWvr13f5SR9X3PNJBCwU5U"})
+        assert node.masternodes.updatemasternode(mn_id, {"rewardAddress": "8N9gJZFTYrempWvr13f5SR9X3PNJBCwU5U"})
+        assert node.masternodes.updatemasternode(mn_id, {"ownerAddress": "8N9gJZFTYrempWvr13f5SR9X3PNJBCwU5U"}, [])
+        assert node.masternodes.updatemasternode(mn_id=mn_id,
+                                                 values={"ownerAddress": "8N9gJZFTYrempWvr13f5SR9X3PNJBCwU5U"},
+                                                 inputs=[])
+

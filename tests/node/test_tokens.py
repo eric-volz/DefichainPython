@@ -11,7 +11,12 @@ address = load_secrets_conf()["wallet_address"]
 
 @pytest.mark.query
 def test_burntokens():  # 01
-    pass
+    string = ".* RPC_INVALID_ADDRESS_OR_KEY: Incorrect authorization for 8N9gJZFTYrempWvr13f5SR9X3PNJBCwU5U"
+    with pytest.raises(InternalServerError, match=string):
+        assert node.tokens.burntokens("1@BTC", "8N9gJZFTYrempWvr13f5SR9X3PNJBCwU5U")
+        assert node.tokens.burntokens("1@BTC", "8N9gJZFTYrempWvr13f5SR9X3PNJBCwU5U", "Context", [])
+        assert node.tokens.burntokens(amounts="1@BTC", _from="8N9gJZFTYrempWvr13f5SR9X3PNJBCwU5U", context="Context",
+                                      inputs=[])
 
 
 @pytest.mark.query

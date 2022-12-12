@@ -243,9 +243,16 @@ def test_setgovheight():  # 30
         assert node.blockchain.setgovheight(variables={"ORACLE_DEVIATION": 1}, height=20000000, inputs=[])
         assert node.blockchain.setgovheight(variables={"LP_SPLITS": {"2": 0.2, "3": 0.8}}, height=20000000, inputs=[])
 
+
 @pytest.mark.query
 def test_unsetgov():  # 31
-    pass
+    string = ".* RPC_INVALID_REQUEST: Test UnsetGovVariableTx execution failed:\ntx not from foundation member"
+    with pytest.raises(BadRequest, match=string):
+        assert node.blockchain.unsetgov({"LP_SPLITS": ["2", "3"]})
+    with pytest.raises(BadRequest, match=string):
+        assert node.blockchain.unsetgov({"LP_SPLITS": ["2", "3"]}, [])
+    with pytest.raises(BadRequest, match=string):
+        assert node.blockchain.unsetgov(variables={"LP_SPLITS": ["2", "3"]}, inputs=[])
 
 
 @pytest.mark.query
