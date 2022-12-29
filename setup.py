@@ -32,6 +32,7 @@ setup(
               'defichain.exceptions',
               'defichain.exceptions.http',
               'defichain.exceptions.hdwallet',
+              'defichain.libs'
               'defichain.mnemonic',
               'defichain.mnemonic.wordlist',
               'defichain.networks',
@@ -40,7 +41,7 @@ setup(
               'defichain.ocean',
               'defichain.ocean.modules',
               'defichain.hdwallet',
-              'defichain.hdwallet.libs'],
+              'defichain.hdwallet'],
     package_data={'': ['*.txt']},
     install_requires=requirements,
     keywords=['python', 'defichain', 'node', 'ocean', 'mnemonic', 'wallet', 'privateKey'],
