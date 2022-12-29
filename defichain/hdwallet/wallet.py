@@ -17,10 +17,10 @@ import unicodedata
 import hashlib
 import base58
 
-from .libs.ripemd160 import ripemd160
-from .libs.ecc import S256Point, G
-from .libs.bech32 import encode
-from .libs.base58 import check_encode, check_decode, ensure_string
+from defichain.libs.ripemd160 import ripemd160
+from defichain.libs.ecc import S256Point, G
+from defichain.libs.bech32 import encode
+from defichain.libs.base58 import check_encode, check_decode, ensure_string
 
 from defichain.networks.networks import Network
 
