@@ -32,7 +32,7 @@ setup(
               'defichain.exceptions',
               'defichain.exceptions.http',
               'defichain.exceptions.hdwallet',
-              'defichain.libs'
+              'defichain.libs',
               'defichain.mnemonic',
               'defichain.mnemonic.wordlist',
               'defichain.networks',
