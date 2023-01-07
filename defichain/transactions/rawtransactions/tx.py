@@ -165,8 +165,8 @@ class TransactionSegwit(BaseTransaction):
         # WitnessHash
 
         if self.get_witness():
-            result += int_to_bytes(len(self.get_witness()) * 2, 1)
             for witness in self.get_witness():
+                result += int_to_bytes(2, 1)
                 result += witness.bytes()
 
         # Locktime
@@ -198,6 +198,8 @@ class TransactionSegwit(BaseTransaction):
         :param: key: private key can be in wif or hex format
         :return: None
         """
+        # TODO: allow to sign inputs with different keys
+
         key = None
         if PrivateKey.is_private_key(DefichainMainnet, private_key):
             key = PrivateKey(DefichainMainnet, private_key=private_key)
@@ -211,6 +213,7 @@ class TransactionSegwit(BaseTransaction):
         print(private_key)
 
         for input in self.get_inputs():
+            print(input.get_txid())
             witness_hash = WitnessHash(self, input)
             signature = sign_input(private_key, witness_hash.bytes_hash())
             witness = Witness(signature, public_key)
