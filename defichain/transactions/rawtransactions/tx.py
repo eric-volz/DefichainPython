@@ -7,8 +7,9 @@ from .txoutput import TxOutput
 from .witness import Witness, WitnessHash
 from .sign import sign_input
 
-from defichain.transactions.address.address import DefichainMainnet
+from defichain.networks import DefichainMainnet
 from defichain.transactions.keys import PrivateKey, KeyError
+from defichain.transactions.address import Address
 from defichain.transactions.utils import *
 from defichain.transactions.constants import SIGHASH
 
@@ -29,7 +30,7 @@ class BaseTransaction(TxBase, ABC):
 
     # Abstract Methods
     @abstractmethod
-    def sign(self, private_key: str) -> None:
+    def sign(self, private_keys: [str]) -> None:
         pass
 
     # Get Information
@@ -191,32 +192,40 @@ class TransactionSegwit(BaseTransaction):
     def verify(self) -> bool:
         """TODO: Verify transaction inputs"""
 
-    def sign(self, private_key: str) -> None:
+    def sign(self, private_keys: [str]) -> None:
         """
-        Signs the raw transaction with the given private key
+        Signs the raw transaction with the given private keys
 
         :param: key: private key can be in wif or hex format
         :return: None
         """
-        # TODO: allow to sign inputs with different keys
 
-        key = None
-        if PrivateKey.is_private_key(DefichainMainnet, private_key):
-            key = PrivateKey(DefichainMainnet, private_key=private_key)
-        elif PrivateKey.is_wif(DefichainMainnet, private_key):
-            key = PrivateKey(DefichainMainnet, wif=private_key)
-        else:
-            raise KeyError("Given private key is not valid")
-        private_key = key.get_private_key()
-        public_key = key.get_public_key()
+        # Check if wif and calc hexadecimal private key
+        keys = []
+        for key in private_keys:
+            if PrivateKey.is_private_key(DefichainMainnet, key):
+                key = PrivateKey(DefichainMainnet, private_key=key)
+            elif PrivateKey.is_wif(DefichainMainnet, key):
+                key = PrivateKey(DefichainMainnet, wif=key)
+            else:
+                raise KeyError("Given private key is not valid")
+            keys.append({"private": key.get_private_key(), "public": key.get_public_key()})
 
-        print(private_key)
-
+        # Assign private and public keys to the correct input
         for input in self.get_inputs():
-            print(input.get_txid())
+            if not input._private_key:
+                network = Address.from_address(input.get_address()).get_network()
+                for key in keys:
+                    priv = PrivateKey(network, key["private"])
+                    if input.get_address() in [priv.default_address(), priv.bech32_address(), priv.default_address()]:
+                        input._private_key = key["private"]
+                        input._public_key = key["public"]
+
+        # Sign the inputs with the given keys
+        for input in self.get_inputs():
             witness_hash = WitnessHash(self, input)
-            signature = sign_input(private_key, witness_hash.bytes_hash())
-            witness = Witness(signature, public_key)
+            signature = sign_input(input._private_key, witness_hash.bytes_hash())
+            witness = Witness(signature, input._public_key)
             self.add_witness_hash(witness_hash)
             self.add_witness(witness)
         self._signed = True

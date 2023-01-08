@@ -16,6 +16,9 @@ class TxBaseInput(TxBase, ABC):
         self.set_sequence(sequence)
         self.set_scriptsig(scriptsig)
 
+        self._private_key: str = ""
+        self._public_key: str = ""
+
     def __str__(self):
         result = f"""
         TxInput
