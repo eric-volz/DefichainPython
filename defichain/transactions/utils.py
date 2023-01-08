@@ -21,8 +21,8 @@ def hex_to_int(h: str) -> int:
     return int(h, 16)
 
 
-def int_to_hex(i: int) -> str:
-    return hex(i)
+def int_to_hex(i: int or str, length: int) -> str:
+    return i.to_bytes(length=length, byteorder="little").hex()
 
 
 def str_to_hex(s: str) -> str:

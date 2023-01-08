@@ -94,29 +94,30 @@ class TxOutput(TxBaseOutput):
         return self.get_bytes_value() + script_size + address.get_bytes_script() + self.get_bytes_tokenid()
 
 
-class TxMsg(TxBaseOutput):
+class TxMsgOutput(TxBaseOutput):
 
     @staticmethod
-    def deserialize(hex: str) -> "TxMsg":
+    def deserialize(hex: str) -> "TxMsgOutput":
         value = bytes_to_int(hex_to_bytes(hex[0:16]))
         size = hex_to_int(hex[16:18])
         OP_Code = hex[18:20]
         msg = hex_to_str(hex[22: 22 + (size - 2) * 2])
         tokenid = hex_to_int(hex[22 + (size - 2) * 2: 22 + (size - 2) * 2 + 2])
 
-        obj = TxMsg(msg)
+        obj = TxMsgOutput(msg)
         obj.set_value(value)
         obj.set_tokenid(tokenid)
         return obj
 
     def __init__(self, msg: str, tokenid: int = 0):
         super().__init__(0, "", tokenid)
-        self._msg = msg
+        self._msg = None
+        self.set_msg(msg)
 
     def __str__(self):
         result = f"""
-        TxCustomOutput
-        --------------
+        TxMsgOutput
+        -----
         Value: {self.get_value()}
         RawMessage: {self.get_hex_msg()}
         DecodedMessage: {self.get_msg()}
@@ -147,3 +148,40 @@ class TxMsg(TxBaseOutput):
     def set_msg(self, msg: str) -> None:
         self._msg = msg
 
+
+class TxCustomOutput(TxBaseOutput):
+
+    @staticmethod
+    def deserialize(hex: str) -> object:
+        pass
+
+    def __init__(self, value, defiTx: str):
+        super().__init__(value, "")
+        self._defiTx = None
+        self.set_defiTx(defiTx)
+
+    def __str__(self):
+        result = f"""
+        TxCustomOutput
+        --------------
+        Value: {self.get_value()}
+        DefiTx: {self.get_defiTx()}
+        Serialized: {self.serialize()}
+
+        """
+        return result
+
+    def __bytes__(self) -> bytes:
+        script_size = int_to_bytes(len(self.get_bytes_defiTx()), 1)
+        return self.get_bytes_value() + script_size + self.get_bytes_defiTx() + self.get_bytes_tokenid()
+
+    # Get Information
+    def get_defiTx(self) -> str:
+        return self._defiTx
+
+    def get_bytes_defiTx(self) -> bytes:
+        return hex_to_bytes(self._defiTx)
+
+    # Set Information
+    def set_defiTx(self, defiTx: str) -> None:
+        self._defiTx = defiTx

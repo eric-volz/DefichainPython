@@ -5,12 +5,10 @@ from .tx import TransactionSegwit, TransactionLegacy
 from .txinput import TxInput
 
 # Transaction Output
-from .txoutput import TxOutput, TxMsg
+from .txoutput import TxOutput, TxMsgOutput, TxCustomOutput
 
 # Sign
 from .sign import sign_input
 
 # Witness
 from .witness import WitnessHash, Witness
-
-
