@@ -9,7 +9,6 @@ from .p2sh import P2SH
 # Bech32 Addresses
 from .bech32address import Bech32Address
 from .p2wpkh import P2WPKH
-from .p2wsh import P2WSH
 
 # Script
 from .script import Script

@@ -39,19 +39,19 @@ class BaseAddress(ABC):
         return self._network
 
     @abstractmethod
-    def get_script(self) -> str:
+    def get_script_public_key(self) -> str:
         pass
 
     @abstractmethod
-    def get_script_code(self) -> str:
+    def get_redeem_script(self) -> str:
         pass
 
     @abstractmethod
-    def get_bytes_script(self) -> bytes:
+    def get_bytes_script_public_key(self) -> bytes:
         pass
 
     @abstractmethod
-    def get_bytes_script_code(self) -> bytes:
+    def get_bytes_redeem_script(self) -> bytes:
         pass
 
     # Set Information

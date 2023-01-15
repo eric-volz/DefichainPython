@@ -1,13 +1,12 @@
 from defichain.exceptions.transactions import AddressError
 
 from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
-from defichain.transactions.constants import POSSIBLE_ADDRESS_TYPES
+from defichain.transactions.constants import AddressTypes
 
 from .baseaddress import BaseAddress
 from .p2pkh import P2PKH
 from .p2sh import P2SH
 from .p2wpkh import P2WPKH
-from .p2wsh import P2WSH
 
 
 class Address:
@@ -18,34 +17,39 @@ class Address:
 
         # mainnet
         if address[0] == "8":
-            return POSSIBLE_ADDRESS_TYPES[0], DefichainMainnet
+            return AddressTypes.P2PKH, DefichainMainnet
         elif address[:2] == DefichainMainnet.SEGWIT_ADDRESS.HRP:
-            return POSSIBLE_ADDRESS_TYPES[2], DefichainMainnet
+            return AddressTypes.P2WPKH, DefichainMainnet
+        elif address[0] == "d":
+            return AddressTypes.P2SH, DefichainMainnet
+
 
         # testnet
         if address[0] == "7":
-            return POSSIBLE_ADDRESS_TYPES[0], DefichainTestnet
+            return AddressTypes.P2PKH, DefichainTestnet
         elif address[:2] == DefichainTestnet.SEGWIT_ADDRESS.HRP:
-            return POSSIBLE_ADDRESS_TYPES[2], DefichainTestnet
+            return AddressTypes.P2WPKH, DefichainTestnet
+        elif address[0] == "t":
+            return AddressTypes.P2SH, DefichainTestnet
 
         # regtest
         if address[0] == "m":
-            return POSSIBLE_ADDRESS_TYPES[0], DefichainRegtest
+            return AddressTypes.P2PKH, DefichainRegtest
+        elif address[0] == "2":
+            return AddressTypes.P2SH, DefichainRegtest
         elif address[:4] == DefichainRegtest.SEGWIT_ADDRESS.HRP:
-            return POSSIBLE_ADDRESS_TYPES[2], DefichainRegtest
-        return None
+            return AddressTypes.P2WPKH, DefichainRegtest
+        raise AddressError(f"Given Address: {address} is not valid")
 
     @staticmethod
     def from_address(address: str) -> "BaseAddress":
         # TODO: Make these methods more advanced
         type, network = Address.get_address_type(address)
-        if type == POSSIBLE_ADDRESS_TYPES[0]:  # Legacy
+        if type == AddressTypes.P2PKH:  # Legacy
             return P2PKH(network, address)
-        elif type == POSSIBLE_ADDRESS_TYPES[1]:  # Pay to Script Hash
+        elif type == AddressTypes.P2SH:  # Pay to Script Hash
             return P2SH(network, address)
-        elif type == POSSIBLE_ADDRESS_TYPES[2]:  # Native Segwit
+        elif type == AddressTypes.P2WPKH:  # Native Segwit
             return P2WPKH(network, address)
-        elif type == POSSIBLE_ADDRESS_TYPES[3]:
-            return P2WSH(network, address)
         else:
             raise AddressError("This address ist not supported")
