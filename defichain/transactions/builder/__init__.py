@@ -2,7 +2,7 @@
 from .rawtransactionbuilder import RawTransactionBuilder
 
 # UTXO
-from .utxo import UTXO
+from defichain.transactions.builder.modules.utxo import UTXO
 
 # Pool
-from .pool import Pool
+from defichain.transactions.builder.modules.pool import Pool

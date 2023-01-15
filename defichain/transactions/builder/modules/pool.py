@@ -1,5 +1,5 @@
 from defichain.transactions.defitx import DefiTx
-from .rawtransactionbuilder import RawTransactionBuilder, Transaction
+from defichain.transactions.builder.rawtransactionbuilder import RawTransactionBuilder, Transaction
 
 
 class Pool:

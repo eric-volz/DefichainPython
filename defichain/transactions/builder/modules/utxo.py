@@ -1,6 +1,6 @@
 from defichain.transactions.rawtransactions.txbase import TxBase
 from defichain.transactions.rawtransactions import TxOutput
-from .rawtransactionbuilder import RawTransactionBuilder, Transaction
+from defichain.transactions.builder.rawtransactionbuilder import RawTransactionBuilder, Transaction
 
 
 class UTXO:
