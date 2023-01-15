@@ -7,6 +7,8 @@ from defichain.transactions.remotedata import RemoteDataOcean
 
 from defichain.transactions.builder import RawTransactionBuilder, UTXO, Pool
 
+from defichain.transactions.rawtransactions import Transaction
+
 
 class TxBuilder:
     def __init__(self, address: str, account: Account, datasource: Ocean):
@@ -19,6 +21,13 @@ class TxBuilder:
 
         self.utxo = UTXO(_builder)
         self.pool = Pool(_builder)
+
+    # Methods
+    def send(self, tx: Transaction, maxFeeRate: int = None) -> str:
+        if not tx._signed:
+            raise TxBuilderError("The transaction cannot be sent because it is not yet signed!")
+
+        return self._get_datasource().send_tx(tx.serialize(), maxFeeRate)
 
     # Get Information
     def _get_address(self) -> str:

@@ -14,7 +14,7 @@ from defichain.hdwallet.wallet import Account
 from defichain.mnemonic.mnemonic import Mnemonic
 
 # Transaction Builder
-from defichain.transactions.txbuilder import TxBuilder
+from defichain.transactions.builder.txbuilder import TxBuilder
 
 # Helping Classes
 from defichain.node.util import BuildToJson
