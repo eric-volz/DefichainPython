@@ -1292,3 +1292,12 @@ class Wallet:
                 default=self._p2wpkh_in_p2sh_address()
             )
         )
+
+    def get_account(self) -> "Account":
+        return Account(self._cryptocurrency).from_wif(self.wif())
+
+
+class Account(Wallet):
+
+    def __init__(self, network):
+        super().__init__(network)
