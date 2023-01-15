@@ -1,11 +1,11 @@
 # Transaction
-from .tx import TransactionSegwit, TransactionLegacy
+from .tx import Transaction
 
 # Transaction Input
 from .txinput import TxInput
 
 # Transaction Output
-from .txoutput import TxOutput, TxMsgOutput, TxCustomOutput
+from .txoutput import TxOutput, TxMsgOutput, TxDefiOutput
 
 # Sign
 from .sign import sign_input

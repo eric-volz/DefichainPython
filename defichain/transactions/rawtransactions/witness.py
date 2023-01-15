@@ -76,8 +76,8 @@ class WitnessHashBase(TxBase, ABC):
     def get_outputs(self) -> [TxBaseOutput]:
         return self._tx.get_outputs()
 
-    def get_script_code(self) -> str:
-        return Address.from_address(self.get_address_from_input(self.get_input())).get_script_code()
+    def get_redeem_script(self) -> str:
+        return Address.from_address(self.get_address_from_input(self.get_input())).get_redeem_script()
 
     def get_locktime(self) -> int:
         return self._tx.get_locktime()
@@ -88,8 +88,8 @@ class WitnessHashBase(TxBase, ABC):
     def get_bytes_version(self) -> bytes:
         return self._tx.get_bytes_version()
 
-    def get_bytes_script_code(self) -> bytes:
-        return Address.from_address(self.get_address_from_input(self.get_input())).get_bytes_script_code()
+    def get_bytes_redeem_script(self) -> bytes:
+        return Address.from_address(self.get_address_from_input(self.get_input())).get_bytes_redeem_script()
 
     def get_bytes_locktime(self) -> bytes:
         return self._tx.get_bytes_locktime()
@@ -103,7 +103,7 @@ class WitnessHashBase(TxBase, ABC):
             "hashPrevOuts": bytes_to_hex(self.hashPrevOuts()),
             "hashSequences": bytes_to_hex(self.hashSequences()),
             "outpoint": bytes_to_hex(self.outpoint(self.get_input())),
-            "script_code": self.get_script_code(),
+            "redeem_script": self.get_redeem_script(),
             "value": self.get_value_from_input(self.get_input()),
             "sequence": self.get_sequence_from_input(self.get_input()),
             "hashOutputs": bytes_to_hex(self.hashOutputs()),
@@ -197,7 +197,8 @@ class WitnessHash(WitnessHashBase):
         result += self.hashPrevOuts()
         result += self.hashSequences()
         result += self.outpoint(self.get_input())
-        result += self.get_bytes_script_code()
+        result += int_to_bytes(len(self.get_bytes_redeem_script()), 1)
+        result += self.get_bytes_redeem_script()  # Length is no longer part of redeem script
         result += self.get_bytes_value_from_input(self.get_input())
         result += self.get_bytes_sequence_from_input(self.get_input())
         result += self.hashOutputs()
@@ -215,7 +216,7 @@ class WitnessHash(WitnessHashBase):
         Txid: {self.get_txid_from_input(self.get_input())}
         Index: {bytes_to_int(self.get_bytes_index_from_input(self.get_input()))}
         Outpoint: {bytes_to_hex(self.outpoint(self.get_input()))}
-        ScriptCode: {self.get_script_code()}
+        Redeem Script: {self.get_redeem_script()}
         Amount: {bytes_to_hex(self.get_bytes_value_from_input(self.get_input()))}
         Sequence: {bytes_to_int(self.get_bytes_sequence_from_input(self.get_input()))}
         HashOutput: {bytes_to_hex(self.hashOutputs())}

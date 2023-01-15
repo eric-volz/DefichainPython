@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
 
+from defichain.exceptions.transactions import RawTransactionError
 
 from .txbase import TxBase
-from .txinput import TxInput
-from .txoutput import TxOutput
+from .txinput import TxBaseInput
+from .txoutput import TxBaseOutput
 from .witness import Witness, WitnessHash
 from .sign import sign_input
 
@@ -32,6 +33,19 @@ class BaseTransaction(TxBase, ABC):
     @abstractmethod
     def sign(self, private_keys: [str]) -> None:
         pass
+
+    # Calculated Information
+    def get_inputs_value(self) -> int:
+        result = 0
+        for input in self.get_inputs():
+            result += input.get_value()
+        return result
+
+    def get_outputs_value(self) -> int:
+        result = 0
+        for outputs in self.get_outputs():
+            result += outputs.get_value()
+        return result
 
     # Get Information
     def get_version(self) -> int:
@@ -120,20 +134,20 @@ class BaseTransaction(TxBase, ABC):
         self.set_locktime(bytes_to_int(locktime))
 
     # Append information
-    def add_input(self, input: TxInput) -> None:
+    def add_input(self, input: TxBaseInput) -> None:
         input.verify()
         self._inputs.append(input)
 
-    def add_output(self, output: TxOutput) -> None:
+    def add_output(self, output: TxBaseOutput) -> None:
         output.verify()
         self._outputs.append(output)
 
 
-class TransactionSegwit(BaseTransaction):
+class Transaction(BaseTransaction):
 
     @staticmethod
     def deserialize(hex: str) -> object:
-        """TODO: Deserialize Segwit Transaction"""
+        """TODO: Deserialize Transactions"""
 
     def __init__(self, inputs: [], outputs: [], locktime: int = 0):
         version = 4
@@ -199,6 +213,8 @@ class TransactionSegwit(BaseTransaction):
         :param: key: private key can be in wif or hex format
         :return: None
         """
+        if not isinstance(private_keys, list):
+            raise RawTransactionError("The given private keys have to be parsed in a list: [key, key, ...]")
 
         # Check if wif and calc hexadecimal private key
         keys = []
@@ -255,10 +271,3 @@ class TransactionSegwit(BaseTransaction):
     def add_witness(self, witness: Witness) -> None:
         witness.verify()
         self._witness.append(witness)
-
-
-class TransactionLegacy(BaseTransaction):
-    """TODO: Spend Legacy Inputs"""
-    # raise NotYetSupportedError()
-
-

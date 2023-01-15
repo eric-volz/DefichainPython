@@ -7,11 +7,12 @@ class Pool:
     def __init__(self, defitx):
         self._defitx = defitx
 
-    def poolswap(self, addressFrom: str, tokenFrom: str or int, amountFrom: int, addressTo: str, tokenTo: str or int, maxPrice: int):
-        addressFrom = hex_to_bytes(Address.from_address(addressFrom).get_script())
+    def poolswap(self, addressFrom: str, tokenFrom: str or int, amountFrom: int, addressTo: str, tokenTo: str or int,
+                 maxPrice: int) -> str:
+        addressFrom = hex_to_bytes(Address.from_address(addressFrom).get_script_public_key())
         tokenFrom = hex_to_bytes(int_to_hex(tokenFrom, 1))
         amountFrom = hex_to_bytes(int_to_hex(amountFrom, 8))
-        addressTo = hex_to_bytes(Address.from_address(addressTo).get_script())
+        addressTo = hex_to_bytes(Address.from_address(addressTo).get_script_public_key())
         tokenTo = hex_to_bytes(int_to_hex(tokenTo, 1))
         max_price = hex_to_bytes(int_to_hex(maxPrice, 8))
 
@@ -30,5 +31,5 @@ class Pool:
         result += null
         result += max_price
 
-        return self._defitx.package_dftx(result)
+        return self._defitx.package_defitx(result)
 

@@ -90,8 +90,8 @@ class TxOutput(TxBaseOutput):
 
     def __bytes__(self):
         address = Address.from_address(self.get_address())
-        script_size = int_to_bytes(len(address.get_bytes_script()), 1)
-        return self.get_bytes_value() + script_size + address.get_bytes_script() + self.get_bytes_tokenid()
+        script_size = int_to_bytes(len(address.get_bytes_script_public_key()), 1)
+        return self.get_bytes_value() + script_size + address.get_bytes_script_public_key() + self.get_bytes_tokenid()
 
 
 class TxMsgOutput(TxBaseOutput):
@@ -149,7 +149,7 @@ class TxMsgOutput(TxBaseOutput):
         self._msg = msg
 
 
-class TxCustomOutput(TxBaseOutput):
+class TxDefiOutput(TxBaseOutput):
 
     @staticmethod
     def deserialize(hex: str) -> object:
@@ -162,7 +162,7 @@ class TxCustomOutput(TxBaseOutput):
 
     def __str__(self):
         result = f"""
-        TxCustomOutput
+        TxDefiOutput
         --------------
         Value: {self.get_value()}
         DefiTx: {self.get_defiTx()}
