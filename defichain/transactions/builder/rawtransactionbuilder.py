@@ -1,5 +1,5 @@
 from defichain import Account
-
+from defichain.transactions.utils import calculate_fee_for_unsigned_transaction
 from defichain.exceptions.transactions import TxBuilderError
 
 from defichain.transactions.remotedata.remotedata import RemoteData
@@ -29,19 +29,19 @@ class RawTransactionBuilder:
         # TODO: Remove static fee with dynamic fee
         tx = self.build_transaction_inputs()
         defitx_output = TxDefiOutput(value, defitx)
-        change_output = TxOutput(tx.get_inputs_value() - 300, self.get_address())
+        change_output = TxOutput(tx.get_inputs_value(), self.get_address())
         tx.add_output(defitx_output)
         tx.add_output(change_output)
+        fee = calculate_fee_for_unsigned_transaction(tx)
+
+        # Subtract fee from output
+        tx.get_outputs()[1].set_value(tx.get_outputs()[1].get_value() - fee)
+
         self.sign(tx)
         return tx
 
     def sign(self, tx: Transaction) -> None:
         tx.sign([self.get_account().wif()])
-
-    # Calculate
-    def calculate_fee(self) -> int:
-        # https://bitcoinops.org/en/tools/calc-size/
-        pass
 
     # Get Information
     def get_address(self) -> str:

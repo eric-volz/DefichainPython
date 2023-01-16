@@ -60,6 +60,9 @@ class WitnessHashBase(TxBase, ABC):
     def bytes_hash(self) -> bytes:
         return self.bytes()
 
+    def size(self) -> int:
+        return len(self.bytes())
+
     # Get Information
     def get_transaction(self) -> TxBase:
         return self._tx
@@ -148,6 +151,9 @@ class WitnessBase(TxBase, ABC):
         self._signature, self._public_key = "", ""
         self.set_signature(signature)
         self.set_public_key(public_key)
+
+    def size(self) -> int:
+        return len(self.bytes())
 
     # Get Information
     def get_signature(self) -> str:

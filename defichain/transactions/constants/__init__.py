@@ -10,3 +10,6 @@ from .opcodes import OPCodes
 
 # Raw Transactions
 from .rawtransactions import SEQUENCE, SCRIPTSIG, SIGHASH, ORDER
+
+# Fee
+from .fees import FEE_PER_BYTE, TxSize

@@ -1,4 +1,5 @@
 import hashlib
+from defichain.transactions.constants import FEE_PER_BYTE, TxSize
 
 
 def int_to_bytes(i: int, length: int) -> bytes:
@@ -49,9 +50,15 @@ def dHash256(h: hex) -> bytes:
     return hashlib.sha256(hashlib.sha256(h).digest()).digest()
 
 
+def calculate_fee_for_unsigned_transaction(tx, fee_per_byte: int = FEE_PER_BYTE) -> int:
+    # https://bitcoinops.org/en/tools/calc-size/
+    signed_size = tx.size() + TxSize.SIGNATURE_LENGTH + TxSize.SIGNATURE + TxSize.PUBLIC_KEY_LENGTH + \
+                  TxSize.PUBLIC_KEY
+    return round(signed_size * fee_per_byte)
+
+
 if __name__ == '__main__':
     print(str_to_hex("hallo"))
     print(hex_to_str(str_to_hex("hallo")))
     print(is_hex("ffffffff"))
     print(is_int(0xffffffff))
-

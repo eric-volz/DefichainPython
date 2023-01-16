@@ -89,6 +89,10 @@ class TxBase(ABC):
         """
         pass
 
+    @abstractmethod
+    def size(self) -> int:
+        pass
+
     def serialize(self) -> str:
         self.verify()
         return bytes(self).hex()

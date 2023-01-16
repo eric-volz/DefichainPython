@@ -1,5 +1,6 @@
 from defichain.transactions.rawtransactions import TxOutput
 from defichain.transactions.builder.rawtransactionbuilder import RawTransactionBuilder, Transaction
+from defichain.transactions.utils import calculate_fee_for_unsigned_transaction
 
 
 class UTXO:
@@ -19,20 +20,29 @@ class UTXO:
         # If to_address is different from account address
         tx = self._builder.build_transaction_inputs()
         input_value = tx.get_inputs_value()
-        change_output_value = input_value - value - 300
+        change_output_value = input_value - value
         sending_output = TxOutput(value, to_address)
         change_output = TxOutput(change_output_value, change_address)
         tx.add_output(sending_output)
         tx.add_output(change_output)
+
+        # Subtract fee from output
+        fee = calculate_fee_for_unsigned_transaction(tx)
+        tx.get_outputs()[1].set_value(tx.get_outputs()[1].get_value() - fee)
+
         self._builder.sign(tx)
         return tx
 
     def sendall(self, to_address: str) -> Transaction:
-        # TODO: Remove static fee with dynamic fee
         tx = self._builder.build_transaction_inputs()
         input_value = tx.get_inputs_value()
-        output = TxOutput(input_value - 300, to_address)
+        output = TxOutput(input_value, to_address)
         tx.add_output(output)
+
+        # Subtract fee from output
+        fee = calculate_fee_for_unsigned_transaction(tx)
+        tx.get_outputs()[0].set_value(tx.get_outputs()[0].get_value() - fee)
+
         self._builder.sign(tx)
         return tx
 

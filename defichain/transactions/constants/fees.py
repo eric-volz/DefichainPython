@@ -1,5 +1,8 @@
 
 
+FEE_PER_BYTE: int = 1
+
+
 class TxSize:
     """
     Specifies the size in bytes for each element of a transaction

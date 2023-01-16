@@ -206,6 +206,9 @@ class Transaction(BaseTransaction):
     def verify(self) -> bool:
         """TODO: Verify transaction inputs"""
 
+    def size(self) -> int:
+        return len(self.bytes())
+
     def sign(self, private_keys: [str]) -> None:
         """
         Signs the raw transaction with the given private keys
