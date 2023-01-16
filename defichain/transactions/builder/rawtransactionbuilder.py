@@ -1,11 +1,8 @@
-from defichain import Account, Ocean
+from defichain import Account
 
 from defichain.exceptions.transactions import TxBuilderError
 
 from defichain.transactions.remotedata.remotedata import RemoteData
-from defichain.transactions.remotedata import RemoteDataOcean
-
-from defichain.transactions.rawtransactions.txbase import TxBase
 from defichain.transactions.rawtransactions import Transaction, TxInput, TxOutput, TxDefiOutput
 
 

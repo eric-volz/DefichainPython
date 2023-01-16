@@ -1,4 +1,3 @@
-from defichain.transactions.rawtransactions.txbase import TxBase
 from defichain.transactions.rawtransactions import TxOutput
 from defichain.transactions.builder.rawtransactionbuilder import RawTransactionBuilder, Transaction
 

@@ -11,3 +11,8 @@ class Pool:
                  maxPrice: int) -> Transaction:
         defitx = DefiTx.pool.poolswap(addressFrom, tokenFrom, amountFrom, addressTo, tokenTo, maxPrice)
         return self._builder.build_defitx(0, defitx)
+
+    def addpoolliquidity(self, addressAmount: {}, shareAddress: str) -> Transaction:
+        defitx = DefiTx.pool.addpoolliquidity(addressAmount, shareAddress)
+        return self._builder.build_defitx(0, defitx)
+
