@@ -1,4 +1,4 @@
-
+from .address import AddressTypes
 
 FEE_PER_BYTE: int = 1
 
@@ -6,6 +6,8 @@ FEE_PER_BYTE: int = 1
 class TxSize:
     """
     Specifies the size in bytes for each element of a transaction
+
+    https://bitcoinops.org/en/tools/calc-size/
     """
     # Overhead
     VERSION: int = 4
@@ -30,5 +32,5 @@ class TxSize:
     # Output
     VALUE: int = 8
     SCRIPT_PUBLIC_KEY_LENGTH: int = 1
-    SCRIPT_PUBLIC_KEY: int
+    SCRIPT_PUBLIC_KEY: {} = {AddressTypes.P2PKH: 25, AddressTypes.P2SH: 23, AddressTypes.P2WPKH: 22}
     TOKEN_ID: int = 1

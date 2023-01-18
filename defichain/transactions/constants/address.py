@@ -10,7 +10,6 @@ class AddressTypes:
     P2PKH: str = "P2PKH"
     P2SH: str = "P2SH"
     P2WPKH: str = "P2WPKH"
-    P2WSH: str = "P2WSH"
 
 
 # Max Script Length
