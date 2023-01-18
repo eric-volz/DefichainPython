@@ -1,5 +1,5 @@
 from defichain import Account
-from defichain.transactions.utils import calculate_fee_for_unsigned_transaction
+from defichain.transactions.rawtransactions import calculate_fee_for_unsigned_transaction
 from defichain.exceptions.transactions import TxBuilderError
 
 from defichain.transactions.remotedata.remotedata import RemoteData

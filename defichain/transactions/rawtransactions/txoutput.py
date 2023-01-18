@@ -3,7 +3,7 @@ from abc import ABC
 from .txbase import TxBase
 from defichain.transactions.address import Address
 from defichain.transactions.address import Script
-from defichain.transactions.utils import *
+from defichain.transactions.utils import Converter
 
 
 class TxBaseOutput(TxBase, ABC):
@@ -46,13 +46,13 @@ class TxBaseOutput(TxBase, ABC):
         return self._tokenid
 
     def get_bytes_value(self) -> bytes:
-        return int_to_bytes(self._value, 8)
+        return Converter.int_to_bytes(self._value, 8)
 
     def get_bytes_address(self) -> bytes:
-        return hex_to_bytes(self._address)
+        return Converter.hex_to_bytes(self._address)
 
     def get_bytes_tokenid(self) -> bytes:
-        return int_to_bytes(self._tokenid, 1)
+        return Converter.int_to_bytes(self._tokenid, 1)
 
     def to_json(self) -> {}:
         result = {
@@ -73,13 +73,13 @@ class TxBaseOutput(TxBase, ABC):
         self._tokenid = tokenid
 
     def set_bytes_value(self, value: bytes) -> None:
-        self.set_value(bytes_to_int(value))
+        self.set_value(Converter.bytes_to_int(value))
 
     def set_bytes_address(self, address: bytes) -> None:
-        self.set_address(bytes_to_hex(address))
+        self.set_address(Converter.bytes_to_hex(address))
 
     def set_bytes_tokenid(self, tokenid: bytes) -> None:
-        self.set_tokenid(bytes_to_int(tokenid))
+        self.set_tokenid(Converter.bytes_to_int(tokenid))
 
 
 class TxOutput(TxBaseOutput):
@@ -93,7 +93,7 @@ class TxOutput(TxBaseOutput):
 
     def __bytes__(self):
         address = Address.from_address(self.get_address())
-        script_size = int_to_bytes(len(address.get_bytes_script_public_key()), 1)
+        script_size = Converter.int_to_bytes(len(address.get_bytes_script_public_key()), 1)
         return self.get_bytes_value() + script_size + address.get_bytes_script_public_key() + self.get_bytes_tokenid()
 
 
@@ -101,11 +101,11 @@ class TxMsgOutput(TxBaseOutput):
 
     @staticmethod
     def deserialize(hex: str) -> "TxMsgOutput":
-        value = bytes_to_int(hex_to_bytes(hex[0:16]))
-        size = hex_to_int(hex[16:18])
+        value = Converter.bytes_to_int(Converter.hex_to_bytes(hex[0:16]))
+        size = Converter.hex_to_int(hex[16:18])
         OP_Code = hex[18:20]
-        msg = hex_to_str(hex[22: 22 + (size - 2) * 2])
-        tokenid = hex_to_int(hex[22 + (size - 2) * 2: 22 + (size - 2) * 2 + 2])
+        msg = Converter.hex_to_str(hex[22: 22 + (size - 2) * 2])
+        tokenid = Converter.hex_to_int(hex[22 + (size - 2) * 2: 22 + (size - 2) * 2 + 2])
 
         obj = TxMsgOutput(msg)
         obj.set_value(value)
@@ -131,7 +131,7 @@ class TxMsgOutput(TxBaseOutput):
 
     def __bytes__(self):
         script = self.get_bytes_custom_script()
-        script_size = int_to_bytes(len(script), 1)
+        script_size = Converter.int_to_bytes(len(script), 1)
         return self.get_bytes_value() + script_size + script + self.get_bytes_tokenid()
 
     # Get Information
@@ -139,13 +139,13 @@ class TxMsgOutput(TxBaseOutput):
         return self._msg
 
     def get_custom_script(self) -> str:
-        return bytes_to_hex(Script.script_custom(self.get_msg()))
+        return Converter.bytes_to_hex(Script.script_custom(self.get_msg()))
 
     def get_bytes_custom_script(self) -> bytes:
-        return hex_to_bytes(self.get_custom_script())
+        return Converter.hex_to_bytes(self.get_custom_script())
 
     def get_hex_msg(self) -> str:
-        return str_to_hex(self.get_msg())
+        return Converter.str_to_hex(self.get_msg())
 
     # Set Information
     def set_msg(self, msg: str) -> None:
@@ -175,7 +175,7 @@ class TxDefiOutput(TxBaseOutput):
         return result
 
     def __bytes__(self) -> bytes:
-        script_size = int_to_bytes(len(self.get_bytes_defiTx()), 1)
+        script_size = Converter.int_to_bytes(len(self.get_bytes_defiTx()), 1)
         return self.get_bytes_value() + script_size + self.get_bytes_defiTx() + self.get_bytes_tokenid()
 
     # Get Information
@@ -183,7 +183,7 @@ class TxDefiOutput(TxBaseOutput):
         return self._defiTx
 
     def get_bytes_defiTx(self) -> bytes:
-        return hex_to_bytes(self._defiTx)
+        return Converter.hex_to_bytes(self._defiTx)
 
     # Set Information
     def set_defiTx(self, defiTx: str) -> None:

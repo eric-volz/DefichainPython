@@ -1,5 +1,5 @@
 from defichain.transactions.address import Address
-from defichain.transactions.utils import *
+from defichain.transactions.utils import Converter
 from defichain.transactions.constants import DefiTxType
 
 
@@ -20,18 +20,18 @@ class Pool:
         :param maxPrice: (required) maximum acceptable price
         :return: "hex" (string) -- returns the finished defi transaction
         """
-        addressFrom = hex_to_bytes(Address.from_address(addressFrom).get_script_public_key())
-        tokenFrom = hex_to_bytes(int_to_hex(tokenFrom, 1))
-        amountFrom = hex_to_bytes(int_to_hex(amountFrom, 8))
-        addressTo = hex_to_bytes(Address.from_address(addressTo).get_script_public_key())
-        tokenTo = hex_to_bytes(int_to_hex(tokenTo, 1))
-        max_price = hex_to_bytes(int_to_hex(maxPrice, 8))
+        addressFrom = Converter.hex_to_bytes(Address.from_address(addressFrom).get_script_public_key())
+        tokenFrom = Converter.hex_to_bytes(Converter.int_to_hex(tokenFrom, 1))
+        amountFrom = Converter.hex_to_bytes(Converter.int_to_hex(amountFrom, 8))
+        addressTo = Converter.hex_to_bytes(Address.from_address(addressTo).get_script_public_key())
+        tokenTo = Converter.hex_to_bytes(Converter.int_to_hex(tokenTo, 1))
+        max_price = Converter.hex_to_bytes(Converter.int_to_hex(maxPrice, 8))
 
-        length_of_fromAddress_script = int_to_bytes(len(addressFrom), 1)
-        length_of_toAddress_script = int_to_bytes(len(addressTo), 1)
-        null = hex_to_bytes(int_to_hex(0, 8))
+        length_of_fromAddress_script = Converter.int_to_bytes(len(addressFrom), 1)
+        length_of_toAddress_script = Converter.int_to_bytes(len(addressTo), 1)
+        null = Converter.hex_to_bytes(Converter.int_to_hex(0, 8))
 
-        result = hex_to_bytes(DefiTxType.OP_DEFI_TX_POOL_SWAP)
+        result = Converter.hex_to_bytes(DefiTxType.OP_DEFI_TX_POOL_SWAP)
         result += length_of_fromAddress_script
         result += addressFrom
         result += tokenFrom
@@ -56,26 +56,26 @@ class Pool:
         :return: "hex" (string) -- returns the finished defi transaction
         """
 
-        number_of_entries = int_to_bytes(len(addressAmount), 1)
+        number_of_entries = Converter.int_to_bytes(len(addressAmount), 1)
 
-        result = hex_to_bytes(DefiTxType.OP_DEFI_TX_POOL_ADD_LIQUIDITY)
+        result = Converter.hex_to_bytes(DefiTxType.OP_DEFI_TX_POOL_ADD_LIQUIDITY)
         result += number_of_entries
 
         for address in addressAmount:
-            address_script = hex_to_bytes(Address.from_address(address).get_script_public_key())
-            length_of_script = int_to_bytes(len(address_script), 1)
+            address_script = Converter.hex_to_bytes(Address.from_address(address).get_script_public_key())
+            length_of_script = Converter.int_to_bytes(len(address_script), 1)
             result += length_of_script + address_script
 
-            number_of_tokens = int_to_bytes(len(addressAmount[address]), 1)
+            number_of_tokens = Converter.int_to_bytes(len(addressAmount[address]), 1)
             result += number_of_tokens
             for amount in addressAmount[address]:
                 split = amount.split('@')
-                value = int_to_bytes(int(split[0]), 8)
-                token = int_to_bytes(int(split[1]), 4)
+                value = Converter.int_to_bytes(int(split[0]), 8)
+                token = Converter.int_to_bytes(int(split[1]), 4)
                 result += token + value
 
-        share_address_script = hex_to_bytes(Address.from_address(shareAddress).get_script_public_key())
-        length_of_share_script = int_to_bytes(len(share_address_script), 1)
+        share_address_script = Converter.hex_to_bytes(Address.from_address(shareAddress).get_script_public_key())
+        length_of_share_script = Converter.int_to_bytes(len(share_address_script), 1)
         result += length_of_share_script + share_address_script
 
         return self._defitx.package_defitx(result)
@@ -88,6 +88,3 @@ class Pool:
 
     def updatepoolpair(self):
         pass
-
-
-

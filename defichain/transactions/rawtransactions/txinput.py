@@ -1,7 +1,7 @@
 from abc import ABC
 
 from .txbase import TxBase
-from defichain.transactions.utils import *
+from defichain.transactions.utils import Converter
 from defichain.transactions.constants import SEQUENCE, SCRIPTSIG
 
 
@@ -65,22 +65,22 @@ class TxBaseInput(TxBase, ABC):
         return self._scriptsig
 
     def get_bytes_txid(self) -> bytes:
-        return bytes(reversed(hex_to_bytes(self.get_txid())))
+        return bytes(reversed(Converter.hex_to_bytes(self.get_txid())))
 
     def get_bytes_index(self) -> bytes:
-        return int_to_bytes(self.get_index(), 4)
+        return Converter.int_to_bytes(self.get_index(), 4)
 
     def get_bytes_address(self) -> bytes:
-        return hex_to_bytes(self.get_address())
+        return Converter.hex_to_bytes(self.get_address())
 
     def get_bytes_value(self) -> bytes:
-        return int_to_bytes(self.get_value(), 8)
+        return Converter.int_to_bytes(self.get_value(), 8)
 
     def get_bytes_sequence(self) -> bytes:
-        return hex_to_bytes(self.get_sequence())
+        return Converter.hex_to_bytes(self.get_sequence())
 
     def get_bytes_scriptsig(self) -> bytes:
-        return hex_to_bytes(self.get_scriptsig())
+        return Converter.hex_to_bytes(self.get_scriptsig())
 
     def to_json(self) -> {}:
         result = {
@@ -113,30 +113,30 @@ class TxBaseInput(TxBase, ABC):
         self._scriptsig = scriptsig
 
     def set_bytes_txid(self, txid: bytes) -> None:
-        self.set_txid(bytes_to_hex(bytes(reversed(txid))))
+        self.set_txid(Converter.bytes_to_hex(bytes(reversed(txid))))
 
     def set_bytes_index(self, index: bytes) -> None:
-        self.set_index(bytes_to_int(index))
+        self.set_index(Converter.bytes_to_int(index))
 
     def set_bytes_address(self, address: bytes) -> None:
-        self.set_address(bytes_to_hex(address))
+        self.set_address(Converter.bytes_to_hex(address))
 
     def set_bytes_value(self, value: bytes) -> None:
-        self.set_value(bytes_to_int(value))
+        self.set_value(Converter.bytes_to_int(value))
 
     def set_bytes_sequence(self, sequence: bytes) -> None:
-        self.set_sequence(bytes_to_hex(sequence))
+        self.set_sequence(Converter.bytes_to_hex(sequence))
 
     def set_bytes_scriptsig(self, scriptsig: bytes) -> None:
-        self.set_scriptsig(bytes_to_hex(scriptsig))
+        self.set_scriptsig(Converter.bytes_to_hex(scriptsig))
 
 
 class TxInput(TxBaseInput):
 
     @staticmethod
     def deserialize(hex) -> "TxBaseInput":
-        txid = bytes_to_hex(bytes(reversed(hex_to_bytes(hex[0:64]))))
-        index = hex_to_int(hex[64:72])
+        txid = Converter.bytes_to_hex(bytes(reversed(Converter.hex_to_bytes(hex[0:64]))))
+        index = Converter.hex_to_int(hex[64:72])
         scriptsig = hex[72:74]
         sequence = hex[74:82]
         return TxInput(txid=txid, index=index, sequence=sequence, scriptsig=scriptsig)

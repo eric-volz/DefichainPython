@@ -11,7 +11,7 @@ from .sign import sign_input
 from defichain.networks import DefichainMainnet
 from defichain.transactions.keys import PrivateKey, KeyError
 from defichain.transactions.address import Address
-from defichain.transactions.utils import *
+from defichain.transactions.utils import Converter
 from defichain.transactions.constants import SIGHASH
 
 
@@ -70,13 +70,13 @@ class BaseTransaction(TxBase, ABC):
         return self._locktime
 
     def get_bytes_version(self) -> bytes:
-        return int_to_bytes(self.get_version(), 4)
+        return Converter.int_to_bytes(self.get_version(), 4)
 
     def get_bytes_marker(self) -> bytes:
-        return int_to_bytes(self.get_marker(), 1)
+        return Converter.int_to_bytes(self.get_marker(), 1)
 
     def get_bytes_flag(self) -> bytes:
-        return int_to_bytes(self.get_flag(), 1)
+        return Converter.int_to_bytes(self.get_flag(), 1)
 
     def get_bytes_inputs(self) -> bytes:
         result = b''
@@ -91,10 +91,10 @@ class BaseTransaction(TxBase, ABC):
         return result
 
     def get_bytes_sighash(self) -> bytes:
-        return int_to_bytes(self._sighash, 4)
+        return Converter.int_to_bytes(self._sighash, 4)
 
     def get_bytes_locktime(self) -> bytes:
-        return int_to_bytes(self._locktime, 4)
+        return Converter.int_to_bytes(self._locktime, 4)
 
     # Set Information
     def set_version(self, version: int) -> None:
@@ -119,19 +119,19 @@ class BaseTransaction(TxBase, ABC):
         self._locktime = locktime
 
     def set_bytes_version(self, version: bytes) -> None:
-        self.set_version(bytes_to_int(version))
+        self.set_version(Converter.bytes_to_int(version))
 
     def set_bytes_marker(self, marker: bytes) -> None:
-        self.set_marker(bytes_to_int(marker))
+        self.set_marker(Converter.bytes_to_int(marker))
 
     def set_bytes_flag(self, flag: bytes) -> None:
-        self.set_flag(bytes_to_int(flag))
+        self.set_flag(Converter.bytes_to_int(flag))
 
     def set_bytes_sighash(self, sighash: bytes) -> None:
-        self.set_sighash(bytes_to_int(sighash))
+        self.set_sighash(Converter.bytes_to_int(sighash))
 
     def set_bytes_locktime(self, locktime: bytes) -> None:
-        self.set_locktime(bytes_to_int(locktime))
+        self.set_locktime(Converter.bytes_to_int(locktime))
 
     # Append information
     def add_input(self, input: TxBaseInput) -> None:
@@ -168,12 +168,12 @@ class Transaction(BaseTransaction):
             result += self.get_bytes_flag()  # defi segwit transaction has no flag
 
         # Inputs
-        result += int_to_bytes(len(self.get_inputs()), 1)
+        result += Converter.int_to_bytes(len(self.get_inputs()), 1)
         for input in self.get_inputs():
             result += input.bytes()
 
         # Outputs
-        result += int_to_bytes(len(self.get_outputs()), 1)
+        result += Converter.int_to_bytes(len(self.get_outputs()), 1)
         for output in self.get_outputs():
             result += output.bytes()
 
@@ -181,7 +181,7 @@ class Transaction(BaseTransaction):
 
         if self.get_witness():
             for witness in self.get_witness():
-                result += int_to_bytes(2, 1)
+                result += Converter.int_to_bytes(2, 1)
                 result += witness.bytes()
 
         # Locktime

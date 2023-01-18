@@ -1,5 +1,5 @@
 from abc import ABC
-from defichain.transactions.utils import *
+from defichain.transactions.utils import Converter, Calculate
 from defichain.transactions.rawtransactions.txbase import TxBase
 from defichain.transactions.rawtransactions.txinput import TxBaseInput
 from defichain.transactions.rawtransactions.txoutput import TxBaseOutput
@@ -55,7 +55,7 @@ class WitnessHashBase(TxBase, ABC):
         self.set_input(input)
 
     def hash(self) -> str:
-        return bytes_to_hex(self.bytes())
+        return Converter.bytes_to_hex(self.bytes())
 
     def bytes_hash(self) -> bytes:
         return self.bytes()
@@ -103,13 +103,13 @@ class WitnessHashBase(TxBase, ABC):
     def to_json(self) -> {}:
         result = {
             "version": self.get_version(),
-            "hashPrevOuts": bytes_to_hex(self.hashPrevOuts()),
-            "hashSequences": bytes_to_hex(self.hashSequences()),
-            "outpoint": bytes_to_hex(self.outpoint(self.get_input())),
+            "hashPrevOuts": Converter.bytes_to_hex(self.hashPrevOuts()),
+            "hashSequences": Converter.bytes_to_hex(self.hashSequences()),
+            "outpoint": Converter.bytes_to_hex(self.outpoint(self.get_input())),
             "redeem_script": self.get_redeem_script(),
             "value": self.get_value_from_input(self.get_input()),
             "sequence": self.get_sequence_from_input(self.get_input()),
-            "hashOutputs": bytes_to_hex(self.hashOutputs()),
+            "hashOutputs": Converter.bytes_to_hex(self.hashOutputs()),
             "locktime": self.get_locktime(),
             "sighash": self.get_sighash(),
             "hash": self.hash()
@@ -131,19 +131,19 @@ class WitnessHashBase(TxBase, ABC):
         outpoint = b''
         for input in self.get_inputs():
             outpoint += self.outpoint(input)
-        return dHash256(outpoint)
+        return Calculate.dHash256(outpoint)
 
     def hashSequences(self) -> bytes:
         sequences = b''
         for input in self.get_inputs():
             sequences += self.get_bytes_sequence_from_input(input)
-        return dHash256(sequences)
+        return Calculate.dHash256(sequences)
 
     def hashOutputs(self) -> bytes:
         outputs = b''
         for output in self.get_outputs():
             outputs += bytes(output)
-        return dHash256(outputs)
+        return Calculate.dHash256(outputs)
 
 
 class WitnessBase(TxBase, ABC):
@@ -163,10 +163,10 @@ class WitnessBase(TxBase, ABC):
         return self._public_key
 
     def get_bytes_signature(self) -> bytes:
-        return hex_to_bytes(self.get_signature())
+        return Converter.hex_to_bytes(self.get_signature())
 
     def get_bytes_public_key(self) -> bytes:
-        return hex_to_bytes(self.get_public_key())
+        return Converter.hex_to_bytes(self.get_public_key())
 
     def to_json(self) -> {}:
         result = {
@@ -183,10 +183,10 @@ class WitnessBase(TxBase, ABC):
         self._public_key = public_key
 
     def set_bytes_signature(self, signature: bytes) -> None:
-        self._signature = bytes_to_hex(signature)
+        self._signature = Converter.bytes_to_hex(signature)
 
     def set_bytes_public_key(self, public_key: bytes) -> None:
-        self._public_key = bytes_to_hex(public_key)
+        self._public_key = Converter.bytes_to_hex(public_key)
 
 
 class WitnessHash(WitnessHashBase):
@@ -203,31 +203,31 @@ class WitnessHash(WitnessHashBase):
         result += self.hashPrevOuts()
         result += self.hashSequences()
         result += self.outpoint(self.get_input())
-        result += int_to_bytes(len(self.get_bytes_redeem_script()), 1)
+        result += Converter.int_to_bytes(len(self.get_bytes_redeem_script()), 1)
         result += self.get_bytes_redeem_script()  # Length is no longer part of redeem script
         result += self.get_bytes_value_from_input(self.get_input())
         result += self.get_bytes_sequence_from_input(self.get_input())
         result += self.hashOutputs()
         result += self.get_bytes_locktime()
         result += self.get_bytes_sighash()
-        return dHash256(result)
+        return Calculate.dHash256(result)
 
     def __str__(self):
         string = f"""
         Witness Hash
         ------------
-        Version: {bytes_to_hex(self.get_bytes_version())}
-        HashPrevOut: {bytes_to_hex(self.hashPrevOuts())}
-        HashSequence: {bytes_to_hex(self.hashSequences())}
+        Version: {Converter.bytes_to_hex(self.get_bytes_version())}
+        HashPrevOut: {Converter.bytes_to_hex(self.hashPrevOuts())}
+        HashSequence: {Converter.bytes_to_hex(self.hashSequences())}
         Txid: {self.get_txid_from_input(self.get_input())}
-        Index: {bytes_to_int(self.get_bytes_index_from_input(self.get_input()))}
-        Outpoint: {bytes_to_hex(self.outpoint(self.get_input()))}
+        Index: {Converter.bytes_to_int(self.get_bytes_index_from_input(self.get_input()))}
+        Outpoint: {Converter.bytes_to_hex(self.outpoint(self.get_input()))}
         Redeem Script: {self.get_redeem_script()}
-        Amount: {bytes_to_hex(self.get_bytes_value_from_input(self.get_input()))}
-        Sequence: {bytes_to_int(self.get_bytes_sequence_from_input(self.get_input()))}
-        HashOutput: {bytes_to_hex(self.hashOutputs())}
-        LockTime: {bytes_to_hex(self.get_bytes_locktime())}
-        SigHash: {bytes_to_hex(self.get_bytes_sighash())}
+        Amount: {Converter.bytes_to_hex(self.get_bytes_value_from_input(self.get_input()))}
+        Sequence: {Converter.bytes_to_int(self.get_bytes_sequence_from_input(self.get_input()))}
+        HashOutput: {Converter.bytes_to_hex(self.hashOutputs())}
+        LockTime: {Converter.bytes_to_hex(self.get_bytes_locktime())}
+        SigHash: {Converter.bytes_to_hex(self.get_bytes_sighash())}
         Hash: {self.hash()}
         """
         return string
@@ -239,8 +239,8 @@ class WitnessHash(WitnessHashBase):
 class Witness(WitnessBase):
     @staticmethod
     def deserialize(hex: str) -> "Witness":
-        signature_length = hex_to_int(hex[:2]) * 2
-        public_key_length = hex_to_int(hex[2 + signature_length: 2 + signature_length + 2]) * 2
+        signature_length = Converter.hex_to_int(hex[:2]) * 2
+        public_key_length = Converter.hex_to_int(hex[2 + signature_length: 2 + signature_length + 2]) * 2
         signature = hex[2:signature_length + 2]
         public_key = hex[2 + signature_length + 2: 2 + signature_length + 2 + public_key_length]
         return Witness(signature=signature, public_key=public_key)
@@ -249,8 +249,8 @@ class Witness(WitnessBase):
         super().__init__(signature, public_key)
 
     def __bytes__(self) -> bytes:
-        signature_length = int_to_bytes(int(len(self.get_signature()) / 2), 1)
-        public_key_length = int_to_bytes(int(len(self.get_public_key()) / 2), 1)
+        signature_length = Converter.int_to_bytes(int(len(self.get_signature()) / 2), 1)
+        public_key_length = Converter.int_to_bytes(int(len(self.get_public_key()) / 2), 1)
         result = signature_length
         result += self.get_bytes_signature()
         result += public_key_length
@@ -258,8 +258,8 @@ class Witness(WitnessBase):
         return result
 
     def __str__(self) -> str:
-        signature_length = int_to_bytes(int(len(self.get_signature()) / 2), 1)
-        public_key_length = int_to_bytes(int(len(self.get_public_key()) / 2), 1)
+        signature_length = Converter.int_to_bytes(int(len(self.get_signature()) / 2), 1)
+        public_key_length = Converter.int_to_bytes(int(len(self.get_public_key()) / 2), 1)
         result = f"""
         Witness
         -------

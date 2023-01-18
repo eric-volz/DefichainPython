@@ -1,6 +1,5 @@
-from defichain.transactions.rawtransactions import TxOutput
+from defichain.transactions.rawtransactions import TxOutput, calculate_fee_for_unsigned_transaction
 from defichain.transactions.builder.rawtransactionbuilder import RawTransactionBuilder, Transaction
-from defichain.transactions.utils import calculate_fee_for_unsigned_transaction
 
 
 class UTXO:
