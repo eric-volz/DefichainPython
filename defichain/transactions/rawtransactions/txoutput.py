@@ -32,9 +32,6 @@ class TxBaseOutput(TxBase, ABC):
         self._is_tokenid(self.get_tokenid())
         return True
 
-    def size(self) -> int:
-        return len(self.bytes())
-
     # Get Information
     def get_value(self) -> int:
         return self._value

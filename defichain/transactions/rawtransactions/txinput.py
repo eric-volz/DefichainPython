@@ -42,9 +42,6 @@ class TxBaseInput(TxBase, ABC):
         self._is_sequence(self.get_sequence())
         return True
 
-    def size(self) -> int:
-        return len(self.bytes())
-
     # Get Information
     def get_txid(self) -> str:
         return self._txid
