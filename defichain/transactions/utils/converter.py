@@ -37,3 +37,30 @@ class Converter:
     @staticmethod
     def hex_to_str(h: str) -> str:
         return bytes.fromhex(h).decode("ascii")
+
+    # Float - Integer
+    @staticmethod
+    def int_to_float(i: int) -> float:
+        """
+        Turns a given integer number into a float with eight decimal places
+
+        1111 -> 0.00001111
+        122222222 -> 1.22222222
+
+        :param i: Integer number
+        :return: returns the float number shifted by eight decimal places
+        """
+        return float(i) / 100000000.0
+
+    @staticmethod
+    def float_to_int(f: float) -> int:
+        """
+        Turns a given float number with eight decimal places into an integer
+
+        0.00001111 -> 1111
+        1.22222222 -> 122222222
+
+        :param f: Float number
+        :return: returns the integer number shifted by eight decimal places
+        """
+        return int(f * 100000000)

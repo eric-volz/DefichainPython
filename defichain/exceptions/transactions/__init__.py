@@ -5,3 +5,5 @@ from .keyerror import KeyError
 from .notsupported import NotYetSupportedError
 from .rawtransactionerror import RawTransactionError
 from .txbuildererror import TxBuilderError
+from .tokenerror import TokenError
+from .inputerror import InputError

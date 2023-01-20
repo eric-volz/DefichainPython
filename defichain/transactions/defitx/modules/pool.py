@@ -7,40 +7,44 @@ class Pool:
     def __init__(self, defitx):
         self._defitx = defitx
 
-    def poolswap(self, addressFrom: str, tokenFrom: str or int, amountFrom: int, addressTo: str, tokenTo: str or int,
-                 maxPrice: int) -> str:
+    def poolswap(self, addressFrom: str, tokenFrom: int, amountFrom: int, addressTo: str, tokenTo: int,
+                  maxPrice: int) -> str:
         """
         Builds the defi transaction for a poolswap
 
         :param addressFrom: (required) the address where the tokens are located
-        :param tokenFrom: (required) the token that should be changed
-        :param amountFrom: (required) the amount that should be changed
+        :param tokenFrom: (required) the token that should be exchanged
+        :param amountFrom: (required) the amount that should be exchanged
         :param addressTo: (required) the address where the exchanged tokens are sent to
         :param tokenTo: (required) the token to change into
         :param maxPrice: (required) maximum acceptable price
         :return: "hex" (string) -- returns the finished defi transaction
         """
+
+        # Convert to Bytes
+        defiTxType = Converter.hex_to_bytes(DefiTxType.OP_DEFI_TX_POOL_SWAP)
         addressFrom = Converter.hex_to_bytes(Address.from_address(addressFrom).get_script_public_key())
-        tokenFrom = Converter.hex_to_bytes(Converter.int_to_hex(tokenFrom, 1))
-        amountFrom = Converter.hex_to_bytes(Converter.int_to_hex(amountFrom, 8))
+        tokenFrom = Converter.int_to_bytes(tokenFrom, 1)
+        amountFrom = Converter.int_to_bytes(amountFrom, 8)
         addressTo = Converter.hex_to_bytes(Address.from_address(addressTo).get_script_public_key())
-        tokenTo = Converter.hex_to_bytes(Converter.int_to_hex(tokenTo, 1))
-        max_price = Converter.hex_to_bytes(Converter.int_to_hex(maxPrice, 8))
+        tokenTo = Converter.int_to_bytes(tokenTo, 1)
+        maxPrice = Converter.int_to_bytes(maxPrice, 8)
 
-        length_of_fromAddress_script = Converter.int_to_bytes(len(addressFrom), 1)
-        length_of_toAddress_script = Converter.int_to_bytes(len(addressTo), 1)
-        null = Converter.hex_to_bytes(Converter.int_to_hex(0, 8))
+        length_addressFrom = Converter.int_to_bytes(len(addressFrom), 1)
+        length_addressTo = Converter.int_to_bytes(len(addressTo), 1)
+        null = Converter.int_to_bytes(0, 8)
 
-        result = Converter.hex_to_bytes(DefiTxType.OP_DEFI_TX_POOL_SWAP)
-        result += length_of_fromAddress_script
+        # Build PoolSwapDefiTx
+        result = defiTxType
+        result += length_addressFrom
         result += addressFrom
         result += tokenFrom
         result += amountFrom
-        result += length_of_toAddress_script
+        result += length_addressTo
         result += addressTo
         result += tokenTo
         result += null
-        result += max_price
+        result += maxPrice
 
         return self._defitx.package_defitx(result)
 
