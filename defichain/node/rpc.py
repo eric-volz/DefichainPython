@@ -23,7 +23,7 @@ class RPC(object):
         tries = 3
         hadConnectionFailures = False
 
-        # Logging of Ocean get request url
+        # Logging of Node get request url
         if self._logger:
             if self._logger.log_level == "input" or self._logger.log_level == "all":
                 self._logger.input("NodeInput", f"Node request URL: {self._url} | Headers: {self._headers} | Payload: {payload}")
@@ -53,3 +53,6 @@ class RPC(object):
                 self._logger.output("NodeOutput", f"Node requests result: {result}")
 
         return result
+
+    def update_url(self, url: str) -> None:
+        self._url = url
