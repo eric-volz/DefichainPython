@@ -22,6 +22,11 @@ class BaseAddress(ABC):
     def decode(address: str) -> str:
         pass
 
+    @staticmethod
+    @abstractmethod
+    def encode(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, scriptPublicKey: str) -> str:
+        pass
+
     def __init__(self, network: DefichainMainnet or DefichainTestnet or DefichainRegtest):
         self._network: DefichainMainnet or DefichainTestnet or DefichainRegtest = None
         self.set_network(network)

@@ -1,4 +1,5 @@
 from abc import ABC
+import binascii
 
 from defichain.exceptions.transactions import AddressError
 
@@ -15,6 +16,13 @@ class Bech32Address(BaseAddress, ABC):
     def decode(address: str) -> str:
         data = reversed(address[4:-6])
         return '%x' % sum([CHARSET.find(c) * CHARSET_BASE ** i for i, c in enumerate(data)])
+
+    @staticmethod
+    def encode(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, scriptPublicKey: str) -> str:
+        binary = binascii.unhexlify(scriptPublicKey)
+        version = binary[0] - 0x50 if binary[0] else 0
+        program = binary[2:]
+        return bech32.encode(network.SEGWIT_ADDRESS.HRP, version, program)
 
     def _is_bech32address(self, address: str) -> bool:
         bech32decode = bech32.bech32_decode(address)

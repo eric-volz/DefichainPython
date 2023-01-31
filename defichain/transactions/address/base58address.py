@@ -4,6 +4,7 @@ from defichain.exceptions.transactions import AddressError
 
 from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
 from .baseaddress import BaseAddress
+from defichain.transactions.utils import Converter
 
 from defichain.libs import base58
 import binascii
@@ -27,6 +28,10 @@ class Base58Address(BaseAddress, ABC):
     @staticmethod
     def decode(address: str) -> str:
         return base58.decode(address).hex()
+
+    @staticmethod
+    def encode(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, scriptPublicKey: str) -> str:
+        return base58.check_encode(Converter.hex_to_bytes(scriptPublicKey))
 
     def __init__(self, network: DefichainMainnet or DefichainTestnet or DefichainRegtest, address: str):
         super().__init__(network)

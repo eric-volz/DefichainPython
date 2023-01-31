@@ -4,6 +4,8 @@ from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegt
 from defichain.transactions.constants import AddressTypes
 
 from .baseaddress import BaseAddress
+from .base58address import Base58Address
+from .bech32address import Bech32Address
 from .p2pkh import P2PKH
 from .p2sh import P2SH
 from .p2wpkh import P2WPKH
@@ -53,3 +55,22 @@ class Address:
             return P2WPKH(network, address)
         else:
             raise AddressError("This address ist not supported")
+
+    @staticmethod
+    def from_script_public_key(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, scriptPublicKey: str) -> "BaseAddress":
+        # TODO: Make these methods more advanced
+        # P2PKH
+        if scriptPublicKey[0:6] == "76a914":
+            script = "12" + scriptPublicKey[6:46]
+            return Address.from_address(Base58Address.encode(network, script))
+
+        # P2SH
+        if scriptPublicKey[0:4] == "a914":
+            script = "5a" + scriptPublicKey[4:44]
+            return Address.from_address(Base58Address.encode(network, script))
+
+        # P2WPKH
+        if scriptPublicKey[0:4] == "0014":
+            return Address.from_address(Bech32Address.encode(network, scriptPublicKey))
+
+        raise AddressError("This script public key is not supported")
