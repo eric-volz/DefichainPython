@@ -4,7 +4,7 @@ from defichain.exceptions.transactions import KeyError
 
 from defichain import Wallet
 from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
-from defichain.transactions.utils import *
+from defichain.transactions.utils import Converter
 
 
 # TODO: Documentation
@@ -118,7 +118,7 @@ class PublicKey(Key):
         super().__init__(network, public_key)
 
     def __bytes__(self) -> bytes:
-        return hex_to_bytes(self.get_public_key())
+        return Converter.hex_to_bytes(self.get_public_key())
 
     def __str__(self) -> str:
         return self.get_public_key()
@@ -146,7 +146,7 @@ class PrivateKey(Key):
             raise KeyError("You have to provide at least of one input: private_key or wif")
 
     def __bytes__(self) -> bytes:
-        return hex_to_bytes(self.get_private_key())
+        return Converter.hex_to_bytes(self.get_private_key())
 
     def __str__(self) -> str:
         return self.get_private_key()
