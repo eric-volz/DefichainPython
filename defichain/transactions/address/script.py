@@ -12,6 +12,7 @@ class Script(object):
 
         -> the length of the script is not included at the front of the script
         :param data: script parameters and a decoded address
+        :type data: [hex]
         :return: the script that was asked for
         """
         result = ""

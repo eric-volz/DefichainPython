@@ -26,6 +26,13 @@ class Base58Address(BaseAddress, ABC):
             raise AddressError(f"The given address: {address} is not a valid base58 address")
 
     @staticmethod
+    def _is_scriptPublicKey(scriptPublicKey: str) -> bool:
+        if not ((scriptPublicKey[0:6] == "76a914" and len(scriptPublicKey) == 50) or
+                (scriptPublicKey[0:4] == "a914" and len(scriptPublicKey) == 46)):
+            raise AddressError(f"The given script public key: {scriptPublicKey} is not valid")
+        return True
+
+    @staticmethod
     def decode(address: str) -> str:
         return base58.decode(address).hex()
 
@@ -33,13 +40,25 @@ class Base58Address(BaseAddress, ABC):
     def encode(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, scriptPublicKey: str) -> str:
         return base58.check_encode(Converter.hex_to_bytes(scriptPublicKey))
 
+    @staticmethod
+    def scriptPublicKey_to_address(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
+                                   scriptPublicKey: str) -> str:
+        Base58Address._is_scriptPublicKey(scriptPublicKey)
+        if scriptPublicKey[0:6] == "76a914":  # P2PKH
+            script = Converter.int_to_hex(network.PUBLIC_KEY_ADDRESS, 1) + scriptPublicKey[6:46]
+            return Base58Address.encode(network, script)
+        elif scriptPublicKey[0:4] == "a914":  # P2SH
+            script = Converter.int_to_hex(network.SCRIPT_ADDRESS, 1) + scriptPublicKey[4:44]
+            return Base58Address.encode(network, script)
+
+    @staticmethod
+    def verify(address: str) -> bool:
+        return Base58Address._is_base58address(address)
+
     def __init__(self, network: DefichainMainnet or DefichainTestnet or DefichainRegtest, address: str):
         super().__init__(network)
         self._address = None
         self.set_address(address)
-
-    def verify(self, address: str) -> bool:
-        return self._is_base58address(address)
 
     # Get Information
     def get_address(self) -> str:
@@ -49,3 +68,7 @@ class Base58Address(BaseAddress, ABC):
     def set_address(self, address: str) -> None:
         self.verify(address)
         self._address = address
+
+    def set_scriptPublicKey(self, scriptPublicKey: str) -> None:
+        self._is_scriptPublicKey(scriptPublicKey)
+        self.set_address(self.scriptPublicKey_to_address(self.get_network(), scriptPublicKey))
