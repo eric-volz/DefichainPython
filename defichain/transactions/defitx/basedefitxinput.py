@@ -48,7 +48,7 @@ class ScriptBalances(BaseDefiTxInput):
     def __init__(self, address, tokenBalanceInt32: [TokenBalanceInt32]):
         self.address = address
         self.tokenBalanceInt32 = tokenBalanceInt32
-        self._script = Address.from_address(self.address).get_script_public_key()
+        self._script = Address.from_address(self.address).get_scriptPublicKey()
 
     def size(self) -> str:
         size = 0

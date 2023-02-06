@@ -90,8 +90,8 @@ class TxOutput(TxBaseOutput):
 
     def __bytes__(self):
         address = Address.from_address(self.get_address())
-        script_size = Converter.int_to_bytes(len(address.get_bytes_script_public_key()), 1)
-        return self.get_bytes_value() + script_size + address.get_bytes_script_public_key() + self.get_bytes_tokenid()
+        script_size = Converter.int_to_bytes(len(address.get_bytes_scriptPublicKey()), 1)
+        return self.get_bytes_value() + script_size + address.get_bytes_scriptPublicKey() + self.get_bytes_tokenid()
 
 
 class TxMsgOutput(TxBaseOutput):

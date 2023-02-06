@@ -23,10 +23,10 @@ class Pool:
 
         # Convert to Bytes
         defiTxType = Converter.hex_to_bytes(DefiTxType.OP_DEFI_TX_POOL_SWAP)
-        addressFrom = Converter.hex_to_bytes(Address.from_address(addressFrom).get_script_public_key())
+        addressFrom = Converter.hex_to_bytes(Address.from_address(addressFrom).get_scriptPublicKey())
         tokenFrom = Converter.int_to_bytes(tokenFrom, 1)
         amountFrom = Converter.int_to_bytes(amountFrom, 8)
-        addressTo = Converter.hex_to_bytes(Address.from_address(addressTo).get_script_public_key())
+        addressTo = Converter.hex_to_bytes(Address.from_address(addressTo).get_scriptPublicKey())
         tokenTo = Converter.int_to_bytes(tokenTo, 1)
         maxPrice = Converter.int_to_bytes(maxPrice, 8)
 
@@ -66,7 +66,7 @@ class Pool:
         result += number_of_entries
 
         for address in addressAmount:
-            address_script = Converter.hex_to_bytes(Address.from_address(address).get_script_public_key())
+            address_script = Converter.hex_to_bytes(Address.from_address(address).get_scriptPublicKey())
             length_of_script = Converter.int_to_bytes(len(address_script), 1)
             result += length_of_script + address_script
 
@@ -78,7 +78,7 @@ class Pool:
                 token = Converter.int_to_bytes(int(split[1]), 4)
                 result += token + value
 
-        share_address_script = Converter.hex_to_bytes(Address.from_address(shareAddress).get_script_public_key())
+        share_address_script = Converter.hex_to_bytes(Address.from_address(shareAddress).get_scriptPublicKey())
         length_of_share_script = Converter.int_to_bytes(len(share_address_script), 1)
         result += length_of_share_script + share_address_script
 

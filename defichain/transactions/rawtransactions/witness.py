@@ -77,7 +77,7 @@ class WitnessHashBase(TxBase, ABC):
         return self._tx.get_outputs()
 
     def get_redeem_script(self) -> str:
-        return Address.from_address(self.get_address_from_input(self.get_input())).get_redeem_script()
+        return Address.from_address(self.get_address_from_input(self.get_input())).get_redeemScript()
 
     def get_locktime(self) -> int:
         return self._tx.get_locktime()
@@ -89,7 +89,7 @@ class WitnessHashBase(TxBase, ABC):
         return self._tx.get_bytes_version()
 
     def get_bytes_redeem_script(self) -> bytes:
-        return Address.from_address(self.get_address_from_input(self.get_input())).get_bytes_redeem_script()
+        return Address.from_address(self.get_address_from_input(self.get_input())).get_bytes_redeemScript()
 
     def get_bytes_locktime(self) -> bytes:
         return self._tx.get_bytes_locktime()
