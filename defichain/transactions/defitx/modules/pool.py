@@ -46,7 +46,7 @@ class Pool:
         result += null
         result += maxPrice
 
-        return self._defitx.package_defitx(result)
+        return self._defitx.package_defiTx(result)
 
     def compositeswap(self):
         pass
@@ -82,7 +82,7 @@ class Pool:
         length_of_share_script = Converter.int_to_bytes(len(share_address_script), 1)
         result += length_of_share_script + share_address_script
 
-        return self._defitx.package_defitx(result)
+        return self._defitx.package_defiTx(result)
 
     def removepoolliquidity(self):
         pass

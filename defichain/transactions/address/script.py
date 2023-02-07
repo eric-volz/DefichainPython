@@ -11,6 +11,7 @@ class Script(object):
         Builds the script with the given parameters
 
         -> the length of the script is not included at the front of the script
+
         :param data: script parameters and a decoded address
         :type data: [hex]
         :return: the script that was asked for
@@ -28,8 +29,8 @@ class Script(object):
     def script_custom(msg: str) -> bytes:
         op_return = Converter.hex_to_bytes(OPCodes.OP_RETURN)
         msg = Converter.hex_to_bytes(Converter.str_to_hex(msg))
-        msg_length = Converter.int_to_bytes(len(msg), 1)
-        return op_return + msg_length + msg
+        length_msg = Converter.int_to_bytes(len(msg), 1)
+        return op_return + length_msg + msg
 
     # Deprecated
     @staticmethod
@@ -40,5 +41,5 @@ class Script(object):
         return witness_version + witness_length + witness_program
 
     @staticmethod
-    def p2wpkh_script_code(address: str) -> bytes:
+    def p2wpkh_scriptCode(address: str) -> bytes:
         return bytes.fromhex(f"1976a914{Bech32Address.decode(address)}88ac")

@@ -7,23 +7,22 @@ class UTXO:
     def __init__(self, builder):
         self._builder: RawTransactionBuilder = builder
 
-    def send(self, value: int, to_address: str, change_address: str = "from_address") -> Transaction:
-        # TODO: Remove static fee with dynamic fee
-        if change_address == "from_address":
-            change_address = self._builder.get_address()
+    def send(self, value: int, addressTo: str, changeAddress: str = "fromAddress") -> Transaction:
+        if changeAddress == "fromAddress":
+            changeAddress = self._builder.get_address()
 
         # If to_address is the same as account address
-        if to_address == self._builder.get_address() or to_address == change_address:
-            return self.sendall(to_address)
+        if addressTo == self._builder.get_address() or addressTo == changeAddress:
+            return self.sendall(addressTo)
 
         # If to_address is different from account address
-        tx = self._builder.build_transaction_inputs()
-        input_value = tx.get_inputs_value()
-        change_output_value = input_value - value
-        sending_output = TxOutput(value, to_address)
-        change_output = TxOutput(change_output_value, change_address)
-        tx.add_output(sending_output)
-        tx.add_output(change_output)
+        tx = self._builder.build_transactionInputs()
+        input_value = tx.get_inputsValue()
+        changeOutputValue = input_value - value
+        sendingOutput = TxOutput(value, addressTo)
+        changeOutput = TxOutput(changeOutputValue, changeAddress)
+        tx.add_output(sendingOutput)
+        tx.add_output(changeOutput)
 
         # Subtract fee from output
         fee = calculate_fee_for_unsigned_transaction(tx)
@@ -32,10 +31,10 @@ class UTXO:
         self._builder.sign(tx)
         return tx
 
-    def sendall(self, to_address: str) -> Transaction:
-        tx = self._builder.build_transaction_inputs()
-        input_value = tx.get_inputs_value()
-        output = TxOutput(input_value, to_address)
+    def sendall(self, addressTo: str) -> Transaction:
+        tx = self._builder.build_transactionInputs()
+        inputValue = tx.get_inputsValue()
+        output = TxOutput(inputValue, addressTo)
         tx.add_output(output)
 
         # Subtract fee from output

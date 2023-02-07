@@ -10,7 +10,7 @@ class BaseDefiTxInput(ABC):
         pass
 
     @abstractmethod
-    def size_bytes(self) -> bytes:
+    def bytes_size(self) -> bytes:
         pass
 
 
@@ -23,7 +23,7 @@ class TokenBalanceInt32(BaseDefiTxInput):
     def size(self) -> str:
         return Converter.int_to_hex(len(self.get_bytes_token() + self.get_bytes_amount()), 1)
 
-    def size_bytes(self) -> bytes:
+    def bytes_size(self) -> bytes:
         return Converter.hex_to_bytes(self.size())
 
     def get_token(self) -> int:
@@ -54,17 +54,17 @@ class ScriptBalances(BaseDefiTxInput):
         size = 0
         for balance in self.get_tokenBalanceInt32():
             size += Converter.hex_to_int(balance.size())
-        size += Converter.hex_to_int(self.script_size())
+        size += Converter.hex_to_int(self.get_scriptSize())
         return Converter.int_to_hex(size, 1)
 
-    def size_bytes(self) -> bytes:
+    def bytes_size(self) -> bytes:
         return Converter.hex_to_bytes(self.size())
 
-    def script_size(self) -> str:
+    def get_scriptSize(self) -> str:
         return Converter.int_to_hex(len(self.get_bytes_script()), 1)
 
-    def script_bytes_size(self) -> bytes:
-        return Converter.hex_to_bytes(self.script_size())
+    def get_bytes_scriptSize(self) -> bytes:
+        return Converter.hex_to_bytes(self.get_scriptSize())
 
     def get_address(self) -> str:
         return self.address

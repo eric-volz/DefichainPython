@@ -75,8 +75,8 @@ class Address:
             raise AddressError("This address ist not supported")
 
     @staticmethod
-    def from_script_public_key(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
-                               scriptPublicKey: str) -> "BaseAddress":
+    def from_scriptPublicKey(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
+                             scriptPublicKey: str) -> "BaseAddress":
         """
         Creates the matching address object for the given script public key.
 

@@ -17,17 +17,17 @@ from defichain.transactions.constants import SIGHASH
 
 class BaseTransaction(TxBase, ABC):
 
-    def __init__(self, version: int, marker: int, flag: int, inputs: [], outputs: [], sighash: int = SIGHASH,
-                 locktime: int = 0):
-        self._version, self._marker, self._flag, self._inputs, self._outputs, self._sighash, self._locktime = None, None, None, [], [], None, None
+    def __init__(self, version: int, marker: int, flag: int, inputs: [], outputs: [], sigHash: int = SIGHASH,
+                 lockTime: int = 0):
+        self._version, self._marker, self._flag, self._inputs, self._outputs, self._sigHash, self._lockTime = None, None, None, [], [], None, None
         self._signed = False
         self.set_version(version)
         self.set_marker(marker)
         self.set_flag(flag)
         self.set_inputs(inputs)
         self.set_outputs(outputs)
-        self.set_sighash(sighash)
-        self.set_locktime(locktime)
+        self.set_sigHash(sigHash)
+        self.set_lockTime(lockTime)
 
     # Abstract Methods
     @abstractmethod
@@ -35,13 +35,13 @@ class BaseTransaction(TxBase, ABC):
         pass
 
     # Calculated Information
-    def get_inputs_value(self) -> int:
+    def get_inputsValue(self) -> int:
         result = 0
         for input in self.get_inputs():
             result += input.get_value()
         return result
 
-    def get_outputs_value(self) -> int:
+    def get_outputsValue(self) -> int:
         result = 0
         for outputs in self.get_outputs():
             result += outputs.get_value()
@@ -63,11 +63,11 @@ class BaseTransaction(TxBase, ABC):
     def get_outputs(self) -> []:
         return self._outputs
 
-    def get_sighash(self) -> int:
-        return self._sighash
+    def get_sigHash(self) -> int:
+        return self._sigHash
 
-    def get_locktime(self) -> int:
-        return self._locktime
+    def get_lockTime(self) -> int:
+        return self._lockTime
 
     def get_bytes_version(self) -> bytes:
         return Converter.int_to_bytes(self.get_version(), 4)
@@ -90,11 +90,11 @@ class BaseTransaction(TxBase, ABC):
             result += output.bytes()
         return result
 
-    def get_bytes_sighash(self) -> bytes:
-        return Converter.int_to_bytes(self._sighash, 4)
+    def get_bytes_sigHash(self) -> bytes:
+        return Converter.int_to_bytes(self._sigHash, 4)
 
-    def get_bytes_locktime(self) -> bytes:
-        return Converter.int_to_bytes(self._locktime, 4)
+    def get_bytes_lockTime(self) -> bytes:
+        return Converter.int_to_bytes(self._lockTime, 4)
 
     # Set Information
     def set_version(self, version: int) -> None:
@@ -112,11 +112,11 @@ class BaseTransaction(TxBase, ABC):
     def set_outputs(self, outputs: []) -> None:
         self._outputs = outputs
 
-    def set_sighash(self, sighash: int) -> None:
-        self._sighash = sighash
+    def set_sigHash(self, sigHash: int) -> None:
+        self._sigHash = sigHash
 
-    def set_locktime(self, locktime: int) -> None:
-        self._locktime = locktime
+    def set_lockTime(self, lockTime: int) -> None:
+        self._lockTime = lockTime
 
     def set_bytes_version(self, version: bytes) -> None:
         self.set_version(Converter.bytes_to_int(version))
@@ -127,11 +127,11 @@ class BaseTransaction(TxBase, ABC):
     def set_bytes_flag(self, flag: bytes) -> None:
         self.set_flag(Converter.bytes_to_int(flag))
 
-    def set_bytes_sighash(self, sighash: bytes) -> None:
-        self.set_sighash(Converter.bytes_to_int(sighash))
+    def set_bytes_sigHash(self, sigHash: bytes) -> None:
+        self.set_sigHash(Converter.bytes_to_int(sigHash))
 
-    def set_bytes_locktime(self, locktime: bytes) -> None:
-        self.set_locktime(Converter.bytes_to_int(locktime))
+    def set_bytes_lockTime(self, lockTime: bytes) -> None:
+        self.set_lockTime(Converter.bytes_to_int(lockTime))
 
     # Append information
     def add_input(self, input: TxBaseInput) -> None:
@@ -150,14 +150,14 @@ class Transaction(BaseTransaction):
         """TODO: Deserialize Transactions
         """
 
-    def __init__(self, inputs: [], outputs: [], locktime: int = 0):
+    def __init__(self, inputs: [], outputs: [], lockTime: int = 0):
         version = 4
         marker = 0
         flag = 1
-        sighash = SIGHASH
+        sigHash = SIGHASH
 
-        super().__init__(version, marker, flag, inputs, outputs, sighash, locktime)
-        self._witness_hash: [] = []
+        super().__init__(version, marker, flag, inputs, outputs, sigHash, lockTime)
+        self._witnessHash: [] = []
         self._witness: [] = []
 
     def __bytes__(self):
@@ -186,7 +186,7 @@ class Transaction(BaseTransaction):
                 result += witness.bytes()
 
         # Locktime
-        result += self.get_bytes_locktime()
+        result += self.get_bytes_lockTime()
         return result
 
     def __str__(self) -> str:
@@ -199,7 +199,7 @@ class Transaction(BaseTransaction):
         Number of Inputs: {len(self.get_inputs())}
         Number of Outputs: {len(self.get_outputs())}
         Number of Witnesses: {len(self.get_witness())}
-        Locktime: {self.get_locktime()}
+        Locktime: {self.get_lockTime()}
         
         """
         return result
@@ -220,13 +220,13 @@ class Transaction(BaseTransaction):
         # Check if wif and calc hexadecimal private key
         keys = []
         for key in private_keys:
-            if PrivateKey.is_private_key(DefichainMainnet, key):
-                key = PrivateKey(DefichainMainnet, private_key=key)
+            if PrivateKey.is_privateKey(DefichainMainnet, key):
+                key = PrivateKey(DefichainMainnet, privateKey=key)
             elif PrivateKey.is_wif(DefichainMainnet, key):
                 key = PrivateKey(DefichainMainnet, wif=key)
             else:
                 raise KeyError("Given private key is not valid")
-            keys.append({"private": key.get_private_key(), "public": key.get_public_key()})
+            keys.append({"private": key.get_privateKey(), "public": key.get_publicKey()})
 
         # Assign private and public keys to the correct input
         for input in self.get_inputs():
@@ -234,22 +234,22 @@ class Transaction(BaseTransaction):
                 network = Address.from_address(input.get_address()).get_network()
                 for key in keys:
                     priv = PrivateKey(network, key["private"])
-                    if input.get_address() in [priv.default_address(), priv.bech32_address(), priv.default_address()]:
+                    if input.get_address() in [priv.p2sh_address(), priv.p2wpkh_address(), priv.p2sh_address()]:
                         input._private_key = key["private"]
-                        input._public_key = key["public"]
+                        input._publicKey = key["public"]
 
         # Sign the inputs with the given keys
         for input in self.get_inputs():
             witness_hash = WitnessHash(self, input)
             signature = sign_input(input._private_key, witness_hash.bytes_hash())
-            witness = Witness(signature, input._public_key)
-            self.add_witness_hash(witness_hash)
+            witness = Witness(signature, input._publicKey)
+            self.add_witnessHash(witness_hash)
             self.add_witness(witness)
         self._signed = True
 
     # Get Information
-    def get_witness_hash(self) -> [WitnessHash]:
-        return self._witness_hash
+    def get_witnessHash(self) -> [WitnessHash]:
+        return self._witnessHash
 
     def get_witness(self) -> [Witness]:
         return self._witness
@@ -258,16 +258,16 @@ class Transaction(BaseTransaction):
         pass
 
     # Set Information
-    def set_witness_hash(self, witness_hash: []) -> None:
-        self._witness_hash = witness_hash
+    def set_witnessHash(self, witnessHash: []) -> None:
+        self._witnessHash = witnessHash
 
     def set_witness(self, witness: []) -> None:
         self._witness = witness
 
     # Append Information
-    def add_witness_hash(self, witness_hash: WitnessHash) -> None:
-        witness_hash.verify()
-        self._witness_hash.append(witness_hash)
+    def add_witnessHash(self, witnessHash: WitnessHash) -> None:
+        witnessHash.verify()
+        self._witnessHash.append(witnessHash)
 
     def add_witness(self, witness: Witness) -> None:
         witness.verify()

@@ -13,17 +13,17 @@ from defichain.transactions.utils import Converter
 class Key(ABC):
 
     @staticmethod
-    def is_public_key(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, public_key: str) -> bool:
+    def is_publicKey(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, publicKey: str) -> bool:
         try:
-            Wallet(network).from_public_key(public_key)
+            Wallet(network).from_public_key(publicKey)
             return True
         except:
             return False
 
     @staticmethod
-    def is_private_key(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, private_key: str) -> bool:
+    def is_privateKey(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, privateKey: str) -> bool:
         try:
-            Wallet(network).from_private_key(private_key)
+            Wallet(network).from_private_key(privateKey)
             return True
         except:
             return False
@@ -41,11 +41,11 @@ class Key(ABC):
     def verify(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, key: str) -> bool:
         pass
 
-    def __init__(self, network: DefichainMainnet or DefichainTestnet or DefichainRegtest, public_key: str):
+    def __init__(self, network: DefichainMainnet or DefichainTestnet or DefichainRegtest, publicKey: str):
         self._network = None
         self._account: Wallet = None
         self.set_network(network)
-        self.set_public_key(public_key)
+        self.set_publicKey(publicKey)
 
     @abstractmethod
     def __bytes__(self) -> bytes:
@@ -58,18 +58,18 @@ class Key(ABC):
     def bytes(self) -> bytes:
         return bytes(self)
 
-    def default_address(self) -> str:
+    def p2sh_address(self) -> str:
         return self._account.default_address()
 
-    def legacy_address(self) -> str:
+    def p2pkh_address(self) -> str:
         return self._account.legacy_address()
 
-    def bech32_address(self) -> str:
+    def p2wpkh_address(self) -> str:
         return self._account.bech32_address()
 
     # Get Information
 
-    def get_public_key(self) -> str:
+    def get_publicKey(self) -> str:
         return self._account.public_key()
 
     def get_network(self):
@@ -77,10 +77,10 @@ class Key(ABC):
 
     # Set Information
 
-    def set_public_key(self, public_key: str) -> None:
-        if not public_key == "":
-            PublicKey.verify(self.get_network(), public_key)
-            self._account.from_public_key(public_key)
+    def set_publicKey(self, publicKey: str) -> None:
+        if not publicKey == "":
+            PublicKey.verify(self.get_network(), publicKey)
+            self._account.from_public_key(publicKey)
 
     def set_network(self, network: DefichainMainnet or DefichainTestnet or DefichainRegtest) -> None:
         self._network = network
@@ -90,10 +90,10 @@ class Key(ABC):
 class PublicKey(Key):
 
     @staticmethod
-    def from_private_key(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
-                         private_key: str) -> "PublicKey":
-        if PublicKey.is_private_key(network, private_key):
-            account = Wallet(network).from_private_key(private_key)
+    def from_privateKey(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
+                         privateKey: str) -> "PublicKey":
+        if PublicKey.is_privateKey(network, privateKey):
+            account = Wallet(network).from_private_key(privateKey)
             return PublicKey(network, account.public_key())
         else:
             raise KeyError("The given private key is not valid")
@@ -107,61 +107,61 @@ class PublicKey(Key):
             raise KeyError("The given wif is not valid")
 
     @staticmethod
-    def verify(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, public_key: str) -> bool:
-        if not PublicKey.is_public_key(network, public_key):
+    def verify(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, publicKey: str) -> bool:
+        if not PublicKey.is_publicKey(network, publicKey):
             raise KeyError("The given public key is not valid")
         return True
 
-    def __init__(self, network: DefichainMainnet or DefichainTestnet or DefichainRegtest, public_key: str):
-        if not PublicKey.verify(network, public_key):
+    def __init__(self, network: DefichainMainnet or DefichainTestnet or DefichainRegtest, publicKey: str):
+        if not PublicKey.verify(network, publicKey):
             raise KeyError("The given public key is not valid")
-        super().__init__(network, public_key)
+        super().__init__(network, publicKey)
 
     def __bytes__(self) -> bytes:
-        return Converter.hex_to_bytes(self.get_public_key())
+        return Converter.hex_to_bytes(self.get_publicKey())
 
     def __str__(self) -> str:
-        return self.get_public_key()
+        return self.get_publicKey()
 
 
 class PrivateKey(Key):
 
     @staticmethod
     def verify(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, key: str) -> bool:
-        if not (PrivateKey.is_private_key(network, key) or PrivateKey.is_wif(network, key)):
+        if not (PrivateKey.is_privateKey(network, key) or PrivateKey.is_wif(network, key)):
             raise KeyError("The given private key or wif is not a valid private key")
         return True
 
-    def __init__(self, network: DefichainMainnet or DefichainTestnet or DefichainRegtest, private_key: str = "",
+    def __init__(self, network: DefichainMainnet or DefichainTestnet or DefichainRegtest, privateKey: str = "",
                  wif: str = ""):
         super().__init__(network, "")
 
-        if private_key != "" and wif != "":
-            raise KeyError("Only one input is allowed: private_key or wif")
-        elif private_key != "" and wif == "":
-            self.set_private_key(private_key)
-        elif private_key == "" and wif != "":
+        if privateKey != "" and wif != "":
+            raise KeyError("Only one input is allowed: privateKey or wif")
+        elif privateKey != "" and wif == "":
+            self.set_privateKey(privateKey)
+        elif privateKey == "" and wif != "":
             self.set_wif(wif)
         else:
-            raise KeyError("You have to provide at least of one input: private_key or wif")
+            raise KeyError("You have to provide at least of one input: privateKey or wif")
 
     def __bytes__(self) -> bytes:
-        return Converter.hex_to_bytes(self.get_private_key())
+        return Converter.hex_to_bytes(self.get_privateKey())
 
     def __str__(self) -> str:
-        return self.get_private_key()
+        return self.get_privateKey()
 
     # Get Information
-    def get_private_key(self) -> str:
+    def get_privateKey(self) -> str:
         return self._account.private_key()
 
     def get_wif(self) -> str:
         return self._account.wif()
 
     # Set information
-    def set_private_key(self, private_key: str) -> None:
-        self.verify(self.get_network(), private_key)
-        self._account.from_private_key(private_key)
+    def set_privateKey(self, privateKey: str) -> None:
+        self.verify(self.get_network(), privateKey)
+        self._account.from_private_key(privateKey)
 
     def set_wif(self, wif: str) -> None:
         self.verify(self.get_network(), wif)

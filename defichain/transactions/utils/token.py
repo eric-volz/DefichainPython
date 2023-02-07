@@ -11,9 +11,9 @@ class Token:
     @staticmethod
     def _get_tokens(TYPE: str) -> [{}]:
         if TYPE == TokenTypes.STANDARD:
-            return Tokens.get_standard_tokens()
+            return Tokens.get_standardTokens()
         elif TYPE == TokenTypes.LIQUIDITY:
-            return Tokens.get_liquidity_tokens()
+            return Tokens.get_liquidityTokens()
         elif TYPE == TokenTypes.LOAN:
             return Tokens.get_loan_tokens()
         elif TYPE == TokenTypes.CUSTOM:

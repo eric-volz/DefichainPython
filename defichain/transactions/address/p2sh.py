@@ -9,35 +9,34 @@ from .script import Script
 class P2SH(Base58Address):  # Pay to Script Hash
 
     @staticmethod
-    def from_public_key(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, public_key: str) -> "P2SH":
+    def from_publicKey(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, publicKey: str) -> "P2SH":
         """
         Generates a P2SH address object from the given public key
 
         :param network: (required) The network in witch the public key should be used
         :type network: DefichainMainnet or DefichainTestnet or DefichainRegtest
-        :param public_key: (required) public key
-        :type public_key: str
+        :param publicKey: (required) public key
+        :type publicKey: str
         :return: P2SH - returns the P2SH address object
         """
-        return P2SH(network, PublicKey(network, public_key).bech32_address())
+        return P2SH(network, PublicKey(network, publicKey).p2wpkh_address())
 
     @staticmethod
-    def from_private_key(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
-                         private_key: str) -> "P2SH":
+    def from_privateKey(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, privateKey: str) -> "P2SH":
         """
         Generates a P2SH address object from the given private key
 
         :param network: (required) The network in witch the private key should be used
         :type network: DefichainMainnet or DefichainTestnet or DefichainRegtest
-        :param private_key: (required) private key
-        :type private_key: str
+        :param privateKey: (required) private key
+        :type privateKey: str
         :return: P2SH - returns the P2SH address object
         """
-        return P2SH(network, PrivateKey(network, private_key).bech32_address())
+        return P2SH(network, PrivateKey(network, privateKey).p2wpkh_address())
 
     @staticmethod
-    def from_script_public_key(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
-                               scriptPublicKey: str) -> "P2SH":
+    def from_scriptPublicKey(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
+                             scriptPublicKey: str) -> "P2SH":
         """
         Generates a P2SH address object from the given script private key
 

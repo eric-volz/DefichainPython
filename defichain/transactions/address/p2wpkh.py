@@ -8,35 +8,34 @@ from .script import Script
 
 class P2WPKH(Bech32Address):  # Native Segwit
     @staticmethod
-    def from_public_key(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, public_key: str) -> "P2WPKH":
+    def from_publicKey(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, publicKey: str) -> "P2WPKH":
         """
         Generates a P2WPKH address object from the given public key
 
         :param network: (required) The network in witch the public key should be used
         :type network: DefichainMainnet or DefichainTestnet or DefichainRegtest
-        :param public_key: (required) public key
-        :type public_key: str
+        :param publicKey: (required) public key
+        :type publicKey: str
         :return: P2WPKH - returns the P2WPKH address object
         """
-        return P2WPKH(network, PublicKey(network, public_key).bech32_address())
+        return P2WPKH(network, PublicKey(network, publicKey).p2wpkh_address())
 
     @staticmethod
-    def from_private_key(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
-                         private_key: str) -> "P2WPKH":
+    def from_privateKey(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, privateKey: str) -> "P2WPKH":
         """
         Generates a P2WPKH address object from the given private key
 
         :param network: (required) The network in witch the private key should be used
         :type network: DefichainMainnet or DefichainTestnet or DefichainRegtest
-        :param private_key: (required) private key
-        :type private_key: str
+        :param privateKey: (required) private key
+        :type privateKey: str
         :return: P2WPKH - returns the P2WPKH address object
         """
-        return P2WPKH(network, PrivateKey(network, private_key).bech32_address())
+        return P2WPKH(network, PrivateKey(network, privateKey).p2wpkh_address())
 
     @staticmethod
-    def from_script_public_key(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
-                               scriptPublicKey: str) -> "P2WPKH":
+    def from_scriptPublicKey(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
+                             scriptPublicKey: str) -> "P2WPKH":
         """
         Generates a P2WPKH address object from the given script private key
 

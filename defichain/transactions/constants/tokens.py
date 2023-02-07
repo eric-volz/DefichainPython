@@ -16,27 +16,27 @@ class Tokens:
     PATH = os.path.join(os.path.dirname(__file__))
 
     @staticmethod
-    def get_standard_tokens() -> [{}]:
+    def get_standardTokens() -> [{}]:
         with open(Tokens.PATH + f"/{TokenTypes.STANDARD}_tokens.json", "r") as f:
             return json.loads(f.read())
 
     @staticmethod
-    def get_liquidity_tokens() -> [{}]:
+    def get_liquidityTokens() -> [{}]:
         with open(Tokens.PATH + f"/{TokenTypes.LIQUIDITY}_tokens.json", "r") as f:
             return json.loads(f.read())
 
     @staticmethod
-    def get_loan_tokens() -> [{}]:
+    def get_loanTokens() -> [{}]:
         with open(Tokens.PATH + f"/{TokenTypes.LOAN}_tokens.json", "r") as f:
             return json.loads(f.read())
 
     @staticmethod
-    def get_custom_tokens() -> [{}]:
+    def get_customTokens() -> [{}]:
         with open(Tokens.PATH + f"/{TokenTypes.CUSTOM}_tokens.json", "r") as f:
             return json.loads(f.read())
 
     @staticmethod
-    def _build_token_json() -> None:
+    def _build_tokenJson() -> None:
         """
         Asks the ocean API for the newest tokens and prints the results in json files into the current folder
         """
@@ -74,4 +74,4 @@ class Tokens:
 
 
 if __name__ == "__main__":
-    Tokens._build_token_json()
+    Tokens._build_tokenJson()

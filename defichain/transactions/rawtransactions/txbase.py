@@ -49,18 +49,18 @@ class TxBase(ABC):
             return True
 
     @staticmethod
-    def _is_scriptsig(scriptsig: str) -> bool:
-        if scriptsig:
-            if not Verify.is_hex(scriptsig):
+    def _is_scriptSig(scriptSig: str) -> bool:
+        if scriptSig:
+            if not Verify.is_hex(scriptSig):
                 raise RawTransactionError("The given script signature is not an hexadecimal string")
-            if not len(scriptsig) == 2:
+            if not len(scriptSig) == 2:
                 raise RawTransactionError("The given script signature has not the length of 2 characters")
             return True
 
     @staticmethod
-    def _is_tokenid(tokenid: int) -> bool:
-        if tokenid:
-            if not Verify.is_int(tokenid):
+    def _is_tokenId(tokenId: int) -> bool:
+        if tokenId:
+            if not Verify.is_int(tokenId):
                 raise RawTransactionError("The given tokenid is not an integer")
             return True
 

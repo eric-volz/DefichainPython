@@ -55,10 +55,10 @@ class Pool:
             maxPrice = Converter.float_to_int(maxPrice)
             print(maxPrice)
 
-        defitx = DefiTx.pool.poolswap(addressFrom, tokenFrom, amountFrom, addressTo, tokenTo, maxPrice)
-        return self._builder.build_defitx(0, defitx)
+        defiTx = DefiTx.pool.poolswap(addressFrom, tokenFrom, amountFrom, addressTo, tokenTo, maxPrice)
+        return self._builder.build_defiTx(0, defiTx)
 
     def addpoolliquidity(self, addressAmount: {}, shareAddress: str) -> Transaction:
-        defitx = DefiTx.pool.addpoolliquidity(addressAmount, shareAddress)
-        return self._builder.build_defitx(0, defitx)
+        defiTx = DefiTx.pool.addpoolliquidity(addressAmount, shareAddress)
+        return self._builder.build_defiTx(0, defiTx)
 

@@ -7,38 +7,38 @@ class BaseAddress(ABC):
 
     @staticmethod
     @abstractmethod
-    def from_public_key(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
-                        public_key: str) -> "BaseAddress":
+    def from_publicKey(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
+                       publicKey: str) -> "BaseAddress":
         """
         Generates a specified address object from the given public key
 
         :param network: (required) The network in witch the public key should be used
         :type network: DefichainMainnet or DefichainTestnet or DefichainRegtest
-        :param public_key: (required) public key
-        :type public_key: str
+        :param publicKey: (required) public key
+        :type publicKey: str
         :return: BaseAddress - returns the address object for which the function is applied
         """
         pass
 
     @staticmethod
     @abstractmethod
-    def from_private_key(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
-                         private_key: str) -> "BaseAddress":
+    def from_privateKey(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
+                         privateKey: str) -> "BaseAddress":
         """
         Generates a specified address object from the given private key
 
         :param network: (required) The network in witch the private key should be used
         :type network: DefichainMainnet or DefichainTestnet or DefichainRegtest
-        :param private_key: (required) private key
-        :type private_key: str
+        :param privateKey: (required) private key
+        :type privateKey: str
         :return: BaseAddress - returns the address object for which the function is applied
         """
         pass
 
     @staticmethod
     @abstractmethod
-    def from_script_public_key(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
-                               scriptPublicKey: str) -> "BaseAddress":
+    def from_scriptPublicKey(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
+                             scriptPublicKey: str) -> "BaseAddress":
         """
         Generates a specified address object from the given script private key
 

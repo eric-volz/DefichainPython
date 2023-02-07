@@ -79,39 +79,39 @@ class WitnessHashBase(TxBase, ABC):
     def get_outputs(self) -> [TxBaseOutput]:
         return self._tx.get_outputs()
 
-    def get_redeem_script(self) -> str:
+    def get_redeemScript(self) -> str:
         return Address.from_address(self.get_address_from_input(self.get_input())).get_redeemScript()
 
-    def get_locktime(self) -> int:
-        return self._tx.get_locktime()
+    def get_lockTime(self) -> int:
+        return self._tx.get_lockTime()
 
-    def get_sighash(self) -> int:
-        return self._tx.get_sighash()
+    def get_sigHash(self) -> int:
+        return self._tx.get_sigHash()
 
     def get_bytes_version(self) -> bytes:
         return self._tx.get_bytes_version()
 
-    def get_bytes_redeem_script(self) -> bytes:
+    def get_bytes_redeemScript(self) -> bytes:
         return Address.from_address(self.get_address_from_input(self.get_input())).get_bytes_redeemScript()
 
-    def get_bytes_locktime(self) -> bytes:
-        return self._tx.get_bytes_locktime()
+    def get_bytes_lockTime(self) -> bytes:
+        return self._tx.get_bytes_lockTime()
 
-    def get_bytes_sighash(self) -> bytes:
-        return self._tx.get_bytes_sighash()
+    def get_bytes_sigHash(self) -> bytes:
+        return self._tx.get_bytes_sigHash()
 
     def to_json(self) -> {}:
         result = {
             "version": self.get_version(),
-            "hashPrevOuts": Converter.bytes_to_hex(self.hashPrevOuts()),
-            "hashSequences": Converter.bytes_to_hex(self.hashSequences()),
+            "hashPrevOuts": Converter.bytes_to_hex(self.hash_prevOuts()),
+            "hashSequences": Converter.bytes_to_hex(self.hash_sequences()),
             "outpoint": Converter.bytes_to_hex(self.outpoint(self.get_input())),
-            "redeem_script": self.get_redeem_script(),
+            "redeem_script": self.get_redeemScript(),
             "value": self.get_value_from_input(self.get_input()),
             "sequence": self.get_sequence_from_input(self.get_input()),
-            "hashOutputs": Converter.bytes_to_hex(self.hashOutputs()),
-            "locktime": self.get_locktime(),
-            "sighash": self.get_sighash(),
+            "hashOutputs": Converter.bytes_to_hex(self.hash_outputs()),
+            "locktime": self.get_lockTime(),
+            "sighash": self.get_sigHash(),
             "hash": self.hash()
         }
         return result
@@ -127,19 +127,19 @@ class WitnessHashBase(TxBase, ABC):
     def outpoint(self, input: TxBaseInput) -> bytes:
         return self.get_bytes_txid_from_input(input) + self.get_bytes_index_from_input(input)
 
-    def hashPrevOuts(self) -> bytes:
+    def hash_prevOuts(self) -> bytes:
         outpoint = b''
         for input in self.get_inputs():
             outpoint += self.outpoint(input)
         return Calculate.dHash256(outpoint)
 
-    def hashSequences(self) -> bytes:
+    def hash_sequences(self) -> bytes:
         sequences = b''
         for input in self.get_inputs():
             sequences += self.get_bytes_sequence_from_input(input)
         return Calculate.dHash256(sequences)
 
-    def hashOutputs(self) -> bytes:
+    def hash_outputs(self) -> bytes:
         outputs = b''
         for output in self.get_outputs():
             outputs += bytes(output)
@@ -147,28 +147,28 @@ class WitnessHashBase(TxBase, ABC):
 
 
 class WitnessBase(TxBase, ABC):
-    def __init__(self, signature: str, public_key: str):
-        self._signature, self._public_key = "", ""
+    def __init__(self, signature: str, publicKey: str):
+        self._signature, self._publicKey = "", ""
         self.set_signature(signature)
-        self.set_public_key(public_key)
+        self.set_publicKey(publicKey)
 
     # Get Information
     def get_signature(self) -> str:
         return self._signature
 
-    def get_public_key(self) -> str:
-        return self._public_key
+    def get_publicKey(self) -> str:
+        return self._publicKey
 
     def get_bytes_signature(self) -> bytes:
         return Converter.hex_to_bytes(self.get_signature())
 
-    def get_bytes_public_key(self) -> bytes:
-        return Converter.hex_to_bytes(self.get_public_key())
+    def get_bytes_publicKey(self) -> bytes:
+        return Converter.hex_to_bytes(self.get_publicKey())
 
     def to_json(self) -> {}:
         result = {
             "signature": self.get_signature(),
-            "public_key": self.get_public_key()
+            "publicKey": self.get_publicKey()
         }
         return result
 
@@ -176,14 +176,14 @@ class WitnessBase(TxBase, ABC):
     def set_signature(self, signature: str) -> None:
         self._signature = signature
 
-    def set_public_key(self, public_key: str) -> None:
-        self._public_key = public_key
+    def set_publicKey(self, publicKey: str) -> None:
+        self._publicKey = publicKey
 
     def set_bytes_signature(self, signature: bytes) -> None:
         self._signature = Converter.bytes_to_hex(signature)
 
-    def set_bytes_public_key(self, public_key: bytes) -> None:
-        self._public_key = Converter.bytes_to_hex(public_key)
+    def set_bytes_publicKey(self, publicKey: bytes) -> None:
+        self._publicKey = Converter.bytes_to_hex(publicKey)
 
 
 class WitnessHash(WitnessHashBase):
@@ -198,16 +198,16 @@ class WitnessHash(WitnessHashBase):
 
     def __bytes__(self) -> bytes:
         result = self.get_bytes_version()
-        result += self.hashPrevOuts()
-        result += self.hashSequences()
+        result += self.hash_prevOuts()
+        result += self.hash_sequences()
         result += self.outpoint(self.get_input())
-        result += Converter.int_to_bytes(len(self.get_bytes_redeem_script()), 1)
-        result += self.get_bytes_redeem_script()  # Length is no longer part of redeem script
+        result += Converter.int_to_bytes(len(self.get_bytes_redeemScript()), 1)
+        result += self.get_bytes_redeemScript()  # Length is no longer part of redeem script
         result += self.get_bytes_value_from_input(self.get_input())
         result += self.get_bytes_sequence_from_input(self.get_input())
-        result += self.hashOutputs()
-        result += self.get_bytes_locktime()
-        result += self.get_bytes_sighash()
+        result += self.hash_outputs()
+        result += self.get_bytes_lockTime()
+        result += self.get_bytes_sigHash()
         return Calculate.dHash256(result)
 
     def __str__(self):
@@ -215,17 +215,17 @@ class WitnessHash(WitnessHashBase):
         Witness Hash
         ------------
         Version: {Converter.bytes_to_hex(self.get_bytes_version())}
-        HashPrevOut: {Converter.bytes_to_hex(self.hashPrevOuts())}
-        HashSequence: {Converter.bytes_to_hex(self.hashSequences())}
+        HashPrevOut: {Converter.bytes_to_hex(self.hash_prevOuts())}
+        HashSequence: {Converter.bytes_to_hex(self.hash_sequences())}
         Txid: {self.get_txid_from_input(self.get_input())}
         Index: {Converter.bytes_to_int(self.get_bytes_index_from_input(self.get_input()))}
         Outpoint: {Converter.bytes_to_hex(self.outpoint(self.get_input()))}
-        Redeem Script: {self.get_redeem_script()}
+        Redeem Script: {self.get_redeemScript()}
         Amount: {Converter.bytes_to_hex(self.get_bytes_value_from_input(self.get_input()))}
         Sequence: {Converter.bytes_to_int(self.get_bytes_sequence_from_input(self.get_input()))}
-        HashOutput: {Converter.bytes_to_hex(self.hashOutputs())}
-        LockTime: {Converter.bytes_to_hex(self.get_bytes_locktime())}
-        SigHash: {Converter.bytes_to_hex(self.get_bytes_sighash())}
+        HashOutput: {Converter.bytes_to_hex(self.hash_outputs())}
+        LockTime: {Converter.bytes_to_hex(self.get_bytes_lockTime())}
+        SigHash: {Converter.bytes_to_hex(self.get_bytes_sigHash())}
         Hash: {self.hash()}
         """
         return string
@@ -237,34 +237,34 @@ class WitnessHash(WitnessHashBase):
 class Witness(WitnessBase):
     @staticmethod
     def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "Witness":
-        signature_length = Converter.hex_to_int(hex[:2]) * 2
-        public_key_length = Converter.hex_to_int(hex[2 + signature_length: 2 + signature_length + 2]) * 2
-        signature = hex[2:signature_length + 2]
-        public_key = hex[2 + signature_length + 2: 2 + signature_length + 2 + public_key_length]
-        return Witness(signature=signature, public_key=public_key)
+        length_signature = Converter.hex_to_int(hex[:2]) * 2
+        length_publicKey = Converter.hex_to_int(hex[2 + length_signature: 2 + length_signature + 2]) * 2
+        signature = hex[2:length_signature + 2]
+        publicKey = hex[2 + length_signature + 2: 2 + length_signature + 2 + length_publicKey]
+        return Witness(signature=signature, publicKey=publicKey)
 
-    def __init__(self, signature: str, public_key: str):
-        super().__init__(signature, public_key)
+    def __init__(self, signature: str, publicKey: str):
+        super().__init__(signature, publicKey)
 
     def __bytes__(self) -> bytes:
-        signature_length = Converter.int_to_bytes(int(len(self.get_signature()) / 2), 1)
-        public_key_length = Converter.int_to_bytes(int(len(self.get_public_key()) / 2), 1)
-        result = signature_length
+        length_signature = Converter.int_to_bytes(int(len(self.get_signature()) / 2), 1)
+        length_publicKey = Converter.int_to_bytes(int(len(self.get_publicKey()) / 2), 1)
+        result = length_signature
         result += self.get_bytes_signature()
-        result += public_key_length
-        result += self.get_bytes_public_key()
+        result += length_publicKey
+        result += self.get_bytes_publicKey()
         return result
 
     def __str__(self) -> str:
-        signature_length = Converter.int_to_bytes(int(len(self.get_signature()) / 2), 1)
-        public_key_length = Converter.int_to_bytes(int(len(self.get_public_key()) / 2), 1)
+        length_signature = Converter.int_to_bytes(int(len(self.get_signature()) / 2), 1)
+        length_publicKey = Converter.int_to_bytes(int(len(self.get_publicKey()) / 2), 1)
         result = f"""
         Witness
         -------
-        Signature Length: {signature_length}
+        Signature Length: {length_signature}
         Signature: {self.get_signature()}
-        Public Key Length: {public_key_length}
-        Public Key: {self.get_public_key()}
+        Public Key Length: {length_publicKey}
+        Public Key: {self.get_publicKey()}
         
         """
         return result

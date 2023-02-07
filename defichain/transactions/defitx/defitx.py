@@ -7,7 +7,7 @@ from .modules.pool import Pool
 class BaseDefiTx:
 
     @staticmethod
-    def get_hex_script_length(length: int) -> str:
+    def get_hex_scriptLength(length: int) -> str:
         """
         Calculates the correct length parameter for a defi transaction
 
@@ -24,29 +24,33 @@ class BaseDefiTx:
         return Converter.int_to_hex(MAX_OP_LENGTH, 1) + Converter.int_to_hex(length, 1)
 
     @staticmethod
-    def package_defitx(defitx: bytes) -> str:
+    def package_defiTx(defiTx: bytes) -> str:
         """
         Packages the defi transaction. In this sate it can be implemented into a transaction and broadcasted to the
         blockchain.
 
-        :param defitx:
+        :param defiTx:
         :return: the correct defi transaction
         """
-        signature_dftx = Converter.hex_to_bytes(DefiTx_SIGNATURE) + defitx
-        length_of_siganture_dftx = BaseDefiTx.get_hex_script_length(len(signature_dftx))
+        signature_defiTx = Converter.hex_to_bytes(DefiTx_SIGNATURE) + defiTx
+        length_siganture_defiTx = BaseDefiTx.get_hex_scriptLength(len(signature_defiTx))
 
-        return OPCodes.OP_RETURN + length_of_siganture_dftx + signature_dftx.hex()
+        return OPCodes.OP_RETURN + length_siganture_defiTx + signature_defiTx.hex()
+
+    @staticmethod
+    def deserialize(hex: str) -> object:
+        pass
 
 
 class DefiTx(BaseDefiTx):
 
-    _baseDefiTx = BaseDefiTx()
+    _base_defiTx = BaseDefiTx()
 
     accounts = None
     governance = None
     loans = None
     masterndoe = None
     oracles = None
-    pool = Pool(_baseDefiTx)
+    pool = Pool(_base_defiTx)
     token = None
     vault = None

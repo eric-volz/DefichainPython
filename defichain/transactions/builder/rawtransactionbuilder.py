@@ -12,24 +12,23 @@ class RawTransactionBuilder:
     def new_transaction() -> Transaction:
         return Transaction([], [])
 
-    def __init__(self, address: str, account: Account, datasource: RemoteData):
-        self._address, self._account, self._datasource = None, None, None
+    def __init__(self, address: str, account: Account, dataSource: RemoteData):
+        self._address, self._account, self._dataSource = None, None, None
         self.set_address(address)
         self.set_account(account)
-        self.set_datasource(datasource)
+        self.set_dataSource(dataSource)
 
     # Build Transaction
-    def build_transaction_inputs(self) -> Transaction:
+    def build_transactionInputs(self) -> Transaction:
         tx = self.new_transaction()
-        for input in self.get_datasource().get_unspent(self.get_address()):
+        for input in self.get_dataSource().get_unspent(self.get_address()):
             tx.add_input(TxInput(input["txid"], input["index"], self.get_address(), input["value"]))
         return tx
 
-    def build_defitx(self, value: int, defitx: str) -> Transaction:
-        # TODO: Remove static fee with dynamic fee
-        tx = self.build_transaction_inputs()
-        defitx_output = TxDefiOutput(value, defitx)
-        change_output = TxOutput(tx.get_inputs_value(), self.get_address())
+    def build_defiTx(self, value: int, defiTx: str) -> Transaction:
+        tx = self.build_transactionInputs()
+        defitx_output = TxDefiOutput(value, defiTx)
+        change_output = TxOutput(tx.get_inputsValue(), self.get_address())
         tx.add_output(defitx_output)
         tx.add_output(change_output)
         fee = calculate_fee_for_unsigned_transaction(tx)
@@ -50,8 +49,8 @@ class RawTransactionBuilder:
     def get_account(self) -> Account:
         return self._account
 
-    def get_datasource(self) -> "RemoteData":
-        return self._datasource
+    def get_dataSource(self) -> "RemoteData":
+        return self._dataSource
 
     # Set Information
     def set_address(self, address: str) -> None:
@@ -60,5 +59,5 @@ class RawTransactionBuilder:
     def set_account(self, account: Account) -> None:
         self._account = account
 
-    def set_datasource(self, datasource: RemoteData) -> None:
-        self._datasource = datasource
+    def set_dataSource(self, dataSource: RemoteData) -> None:
+        self._dataSource = dataSource

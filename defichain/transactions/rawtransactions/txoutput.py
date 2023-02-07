@@ -10,11 +10,11 @@ from defichain.transactions.utils import Converter
 
 class TxBaseOutput(TxBase, ABC):
 
-    def __init__(self, value: int, address: str, tokenid: int = 0):
-        self._value, self._address, self._tokenid = None, None, None
+    def __init__(self, value: int, address: str, tokenId: int = 0):
+        self._value, self._address, self._tokenId = None, None, None
         self.set_value(value)
         self.set_address(address)
-        self.set_tokenid(tokenid)
+        self.set_tokenId(tokenId)
 
     def __str__(self):
         result = f"""
@@ -22,7 +22,7 @@ class TxBaseOutput(TxBase, ABC):
         --------
         Value: {self.get_value()}
         Address: {self.get_address()}
-        TokenID: {self.get_tokenid()}
+        TokenID: {self.get_tokenId()}
         Serialized: {self.serialize()}
         
         """
@@ -31,7 +31,7 @@ class TxBaseOutput(TxBase, ABC):
     def verify(self) -> bool:
         self._is_value(self.get_value())
         self._is_address(self.get_address())
-        self._is_tokenid(self.get_tokenid())
+        self._is_tokenId(self.get_tokenId())
         return True
 
     # Get Information
@@ -41,8 +41,8 @@ class TxBaseOutput(TxBase, ABC):
     def get_address(self) -> str:
         return self._address
 
-    def get_tokenid(self) -> int:
-        return self._tokenid
+    def get_tokenId(self) -> int:
+        return self._tokenId
 
     def get_bytes_value(self) -> bytes:
         return Converter.int_to_bytes(self._value, 8)
@@ -50,14 +50,14 @@ class TxBaseOutput(TxBase, ABC):
     def get_bytes_address(self) -> bytes:
         return Converter.hex_to_bytes(self._address)
 
-    def get_bytes_tokenid(self) -> bytes:
-        return Converter.int_to_bytes(self._tokenid, 1)
+    def get_bytes_tokenId(self) -> bytes:
+        return Converter.int_to_bytes(self._tokenId, 1)
 
     def to_json(self) -> {}:
         result = {
             "value": self.get_value(),
             "address": self.get_address(),
-            "tokenid": self.get_tokenid()
+            "tokenId": self.get_tokenId()
         }
         return result
 
@@ -68,8 +68,8 @@ class TxBaseOutput(TxBase, ABC):
     def set_address(self, address: str) -> None:
         self._address = address
 
-    def set_tokenid(self, tokenid: int) -> None:
-        self._tokenid = tokenid
+    def set_tokenId(self, tokenId: int) -> None:
+        self._tokenId = tokenId
 
     def set_bytes_value(self, value: bytes) -> None:
         self.set_value(Converter.bytes_to_int(value))
@@ -77,8 +77,8 @@ class TxBaseOutput(TxBase, ABC):
     def set_bytes_address(self, address: bytes) -> None:
         self.set_address(Converter.bytes_to_hex(address))
 
-    def set_bytes_tokenid(self, tokenid: bytes) -> None:
-        self.set_tokenid(Converter.bytes_to_int(tokenid))
+    def set_bytes_tokenId(self, tokenId: bytes) -> None:
+        self.set_tokenId(Converter.bytes_to_int(tokenId))
 
 
 class TxOutput(TxBaseOutput):
@@ -88,13 +88,13 @@ class TxOutput(TxBaseOutput):
         """TODO: Deserialize the output
         """
 
-    def __init__(self, value: int, address: str, tokenid: int = 0):
-        super().__init__(value, address, tokenid)
+    def __init__(self, value: int, address: str, tokenId: int = 0):
+        super().__init__(value, address, tokenId)
 
     def __bytes__(self):
         address = Address.from_address(self.get_address())
-        script_size = Converter.int_to_bytes(len(address.get_bytes_scriptPublicKey()), 1)
-        return self.get_bytes_value() + script_size + address.get_bytes_scriptPublicKey() + self.get_bytes_tokenid()
+        scriptSize = Converter.int_to_bytes(len(address.get_bytes_scriptPublicKey()), 1)
+        return self.get_bytes_value() + scriptSize + address.get_bytes_scriptPublicKey() + self.get_bytes_tokenId()
 
 
 class TxMsgOutput(TxBaseOutput):
@@ -105,15 +105,15 @@ class TxMsgOutput(TxBaseOutput):
         size = Converter.hex_to_int(hex[16:18])
         OP_Code = hex[18:20]
         msg = Converter.hex_to_str(hex[22: 22 + (size - 2) * 2])
-        tokenid = Converter.hex_to_int(hex[22 + (size - 2) * 2: 22 + (size - 2) * 2 + 2])
+        tokenId = Converter.hex_to_int(hex[22 + (size - 2) * 2: 22 + (size - 2) * 2 + 2])
 
         obj = TxMsgOutput(msg)
         obj.set_value(value)
-        obj.set_tokenid(tokenid)
+        obj.set_tokenId(tokenId)
         return obj
 
-    def __init__(self, msg: str, tokenid: int = 0):
-        super().__init__(0, "", tokenid)
+    def __init__(self, msg: str, tokenId: int = 0):
+        super().__init__(0, "", tokenId)
         self._msg = None
         self.set_msg(msg)
 
@@ -130,19 +130,19 @@ class TxMsgOutput(TxBaseOutput):
         return result
 
     def __bytes__(self):
-        script = self.get_bytes_custom_script()
-        script_size = Converter.int_to_bytes(len(script), 1)
-        return self.get_bytes_value() + script_size + script + self.get_bytes_tokenid()
+        script = self.get_bytes_customScript()
+        scriptSize = Converter.int_to_bytes(len(script), 1)
+        return self.get_bytes_value() + scriptSize + script + self.get_bytes_tokenId()
 
     # Get Information
     def get_msg(self) -> str:
         return self._msg
 
-    def get_custom_script(self) -> str:
+    def get_customScript(self) -> str:
         return Converter.bytes_to_hex(Script.script_custom(self.get_msg()))
 
-    def get_bytes_custom_script(self) -> bytes:
-        return Converter.hex_to_bytes(self.get_custom_script())
+    def get_bytes_customScript(self) -> bytes:
+        return Converter.hex_to_bytes(self.get_customScript())
 
     def get_hex_msg(self) -> str:
         return Converter.str_to_hex(self.get_msg())
@@ -175,8 +175,8 @@ class TxDefiOutput(TxBaseOutput):
         return result
 
     def __bytes__(self) -> bytes:
-        script_size = Converter.int_to_bytes(len(self.get_bytes_defiTx()), 1)
-        return self.get_bytes_value() + script_size + self.get_bytes_defiTx() + self.get_bytes_tokenid()
+        scriptSize = Converter.int_to_bytes(len(self.get_bytes_defiTx()), 1)
+        return self.get_bytes_value() + scriptSize + self.get_bytes_defiTx() + self.get_bytes_tokenId()
 
     # Get Information
     def get_defiTx(self) -> str:
