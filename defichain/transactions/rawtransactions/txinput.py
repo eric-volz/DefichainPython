@@ -1,5 +1,7 @@
 from abc import ABC
 
+from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
+
 from .txbase import TxBase
 from defichain.transactions.utils import Converter
 from defichain.transactions.constants import SEQUENCE, SCRIPTSIG
@@ -131,7 +133,7 @@ class TxBaseInput(TxBase, ABC):
 class TxInput(TxBaseInput):
 
     @staticmethod
-    def deserialize(hex) -> "TxBaseInput":
+    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "TxBaseInput":
         txid = Converter.bytes_to_hex(bytes(reversed(Converter.hex_to_bytes(hex[0:64]))))
         index = Converter.hex_to_int(hex[64:72])
         scriptsig = hex[72:74]

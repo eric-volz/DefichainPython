@@ -1,4 +1,7 @@
 from abc import ABC
+
+from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
+
 from defichain.transactions.utils import Converter, Calculate
 from defichain.transactions.rawtransactions.txbase import TxBase
 from defichain.transactions.rawtransactions.txinput import TxBaseInput
@@ -186,8 +189,9 @@ class WitnessBase(TxBase, ABC):
 class WitnessHash(WitnessHashBase):
 
     @staticmethod
-    def deserialize(hex: str) -> object:
-        """TODO: Deserialize WitnessHash"""
+    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> object:
+        """TODO: Deserialize WitnessHash
+        """
 
     def __init__(self, tx, input: TxBaseInput):
         super().__init__(tx, input)
@@ -232,7 +236,7 @@ class WitnessHash(WitnessHashBase):
 
 class Witness(WitnessBase):
     @staticmethod
-    def deserialize(hex: str) -> "Witness":
+    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "Witness":
         signature_length = Converter.hex_to_int(hex[:2]) * 2
         public_key_length = Converter.hex_to_int(hex[2 + signature_length: 2 + signature_length + 2]) * 2
         signature = hex[2:signature_length + 2]

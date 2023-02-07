@@ -1,5 +1,7 @@
 from abc import ABC
 
+from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
+
 from .txbase import TxBase
 from defichain.transactions.address import Address
 from defichain.transactions.address import Script
@@ -82,8 +84,9 @@ class TxBaseOutput(TxBase, ABC):
 class TxOutput(TxBaseOutput):
 
     @staticmethod
-    def deserialize(hex: str) -> "TxOutput":
-        """TODO: Deserialize the output"""
+    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "TxOutput":
+        """TODO: Deserialize the output
+        """
 
     def __init__(self, value: int, address: str, tokenid: int = 0):
         super().__init__(value, address, tokenid)
@@ -97,7 +100,7 @@ class TxOutput(TxBaseOutput):
 class TxMsgOutput(TxBaseOutput):
 
     @staticmethod
-    def deserialize(hex: str) -> "TxMsgOutput":
+    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "TxMsgOutput":
         value = Converter.bytes_to_int(Converter.hex_to_bytes(hex[0:16]))
         size = Converter.hex_to_int(hex[16:18])
         OP_Code = hex[18:20]
@@ -152,7 +155,7 @@ class TxMsgOutput(TxBaseOutput):
 class TxDefiOutput(TxBaseOutput):
 
     @staticmethod
-    def deserialize(hex: str) -> object:
+    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> object:
         pass
 
     def __init__(self, value, defiTx: str):

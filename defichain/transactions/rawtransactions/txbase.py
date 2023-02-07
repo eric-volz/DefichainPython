@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
 from defichain.exceptions.transactions import RawTransactionError
 
 from defichain.transactions.address import Address
@@ -65,7 +66,7 @@ class TxBase(ABC):
 
     @staticmethod
     @abstractmethod
-    def deserialize(hex: str) -> object:
+    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> object:
         pass
 
     @abstractmethod

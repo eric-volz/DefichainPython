@@ -8,7 +8,7 @@ from .txoutput import TxBaseOutput
 from .witness import Witness, WitnessHash
 from .sign import sign_input
 
-from defichain.networks import DefichainMainnet
+from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
 from defichain.transactions.keys import PrivateKey, KeyError
 from defichain.transactions.address import Address
 from defichain.transactions.utils import Converter
@@ -146,8 +146,9 @@ class BaseTransaction(TxBase, ABC):
 class Transaction(BaseTransaction):
 
     @staticmethod
-    def deserialize(hex: str) -> object:
-        """TODO: Deserialize Transactions"""
+    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> object:
+        """TODO: Deserialize Transactions
+        """
 
     def __init__(self, inputs: [], outputs: [], locktime: int = 0):
         version = 4
