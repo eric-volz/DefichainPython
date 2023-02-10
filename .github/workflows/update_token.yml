@@ -22,7 +22,8 @@ jobs:
     - name: Run script
       run: |
         pip install defichain~=2.3.0
-        python3 defichain/transactions/constants/tokens.py
+        cd defichain/transactions/constants
+        python3 tokens.py
 
     - name: Commit changes
       run: |
