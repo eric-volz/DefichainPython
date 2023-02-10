@@ -1,0 +1,37 @@
+name: UpdateToken
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+
+defaults:
+  branch:
+    description: The name of the branch to use for the script execution and push changes
+    default: raw_transactions
+
+jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.branch }}
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          pip install defichain~=2.3.0
+
+      - name: execute py script
+        run: |
+          cd defichain/transactions/constants
+          python3 tokens.py
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Updated token at $(date +'%Y-%m-%d %H:%M:%S')"
+          git push
