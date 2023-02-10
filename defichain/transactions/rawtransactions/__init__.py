@@ -2,7 +2,7 @@
 from .tx import Transaction
 
 # Transaction Input
-from .txinput import TxInput
+from .txinput import TxP2WPKHInput
 
 # Transaction Output
 from .txoutput import TxOutput, TxMsgOutput, TxDefiOutput

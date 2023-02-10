@@ -3,7 +3,7 @@ from defichain.transactions.rawtransactions import calculate_fee_for_unsigned_tr
 from defichain.exceptions.transactions import TxBuilderError
 
 from defichain.transactions.remotedata.remotedata import RemoteData
-from defichain.transactions.rawtransactions import Transaction, TxInput, TxOutput, TxDefiOutput
+from defichain.transactions.rawtransactions import Transaction, TxP2WPKHInput, TxOutput, TxDefiOutput
 
 
 class RawTransactionBuilder:
@@ -22,7 +22,7 @@ class RawTransactionBuilder:
     def build_transactionInputs(self) -> Transaction:
         tx = self.new_transaction()
         for input in self.get_dataSource().get_unspent(self.get_address()):
-            tx.add_input(TxInput(input["txid"], input["index"], self.get_address(), input["value"]))
+            tx.add_input(TxP2WPKHInput(input["txid"], input["index"], self.get_address(), input["value"]))
         return tx
 
     def build_defiTx(self, value: int, defiTx: str) -> Transaction:

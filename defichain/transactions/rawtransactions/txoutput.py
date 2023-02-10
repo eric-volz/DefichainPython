@@ -85,8 +85,14 @@ class TxOutput(TxBaseOutput):
 
     @staticmethod
     def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "TxOutput":
-        """TODO: Deserialize the output
-        """
+        value = Converter.hex_to_int(hex[0:16])
+        scriptSize = Converter.hex_to_int(hex[16:18])
+        length_scriptPublicKey = scriptSize * 2
+        scriptPublicKey = hex[18: 18 + length_scriptPublicKey]
+        tokenId = Converter.hex_to_int(hex[18 + length_scriptPublicKey: 18 + length_scriptPublicKey + 2])
+
+        address = Address.from_scriptPublicKey(network, scriptPublicKey).get_address()
+        return TxOutput(value=value, address=address, tokenId=tokenId)
 
     def __init__(self, value: int, address: str, tokenId: int = 0):
         super().__init__(value, address, tokenId)
@@ -155,8 +161,10 @@ class TxMsgOutput(TxBaseOutput):
 class TxDefiOutput(TxBaseOutput):
 
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> object:
-        pass
+    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "TxDefiOutput":
+        """TODO"""
+
+        return TxDefiOutput(value=0, defiTx="")
 
     def __init__(self, value, defiTx: str):
         super().__init__(value, "")

@@ -2,6 +2,8 @@ from abc import ABC
 
 from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
 
+from defichain.exceptions.transactions import RawTransactionError
+
 from defichain.transactions.utils import Converter, Calculate
 from defichain.transactions.rawtransactions.txbase import TxBase
 from defichain.transactions.rawtransactions.txinput import TxBaseInput
@@ -189,9 +191,8 @@ class WitnessBase(TxBase, ABC):
 class WitnessHash(WitnessHashBase):
 
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> object:
-        """TODO: Deserialize WitnessHash
-        """
+    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "WitnessHash":
+        raise RawTransactionError("The witness hash cannot be deserialized")
 
     def __init__(self, tx, input: TxBaseInput):
         super().__init__(tx, input)

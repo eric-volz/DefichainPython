@@ -23,7 +23,7 @@ class Converter:
     # Hex - Integer
     @staticmethod
     def hex_to_int(h: str) -> int:
-        return int(h, 16)
+        return Converter.bytes_to_int(Converter.hex_to_bytes(h))
 
     @staticmethod
     def int_to_hex(i: int or str, length: int) -> str:

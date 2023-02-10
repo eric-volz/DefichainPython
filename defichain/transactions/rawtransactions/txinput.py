@@ -130,7 +130,15 @@ class TxBaseInput(TxBase, ABC):
         self.set_scriptSig(Converter.bytes_to_hex(scriptSig))
 
 
-class TxInput(TxBaseInput):
+class TxP2PKHInput(TxBaseInput):
+    pass
+
+
+class TxP2SHInput(TxBaseInput):
+    pass
+
+
+class TxP2WPKHInput(TxBaseInput):
 
     @staticmethod
     def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "TxBaseInput":
@@ -138,7 +146,7 @@ class TxInput(TxBaseInput):
         index = Converter.hex_to_int(hex[64:72])
         scriptSig = hex[72:74]
         sequence = hex[74:82]
-        return TxInput(txid=txid, index=index, sequence=sequence, scriptSig=scriptSig)
+        return TxP2WPKHInput(txid=txid, index=index, sequence=sequence, scriptSig=scriptSig)
 
     def __init__(self, txid: str, index: int, address: str = None, value: int = None, sequence: str = SEQUENCE, scriptSig: str = SCRIPTSIG):
         super().__init__(txid, index, address, value, sequence, scriptSig)
@@ -146,3 +154,6 @@ class TxInput(TxBaseInput):
     def __bytes__(self) -> bytes:
         return self.get_bytes_txid() + self.get_bytes_index() + self.get_bytes_scriptSig() + self.get_bytes_sequence()
 
+
+class TxCoinbaseInput(TxBaseInput):
+    pass

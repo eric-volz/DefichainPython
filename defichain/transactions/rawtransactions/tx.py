@@ -3,8 +3,8 @@ from abc import ABC, abstractmethod
 from defichain.exceptions.transactions import RawTransactionError
 
 from .txbase import TxBase
-from .txinput import TxBaseInput
-from .txoutput import TxBaseOutput
+from .txinput import TxBaseInput, TxP2WPKHInput
+from .txoutput import TxBaseOutput, TxOutput, TxMsgOutput, TxDefiOutput
 from .witness import Witness, WitnessHash
 from .sign import sign_input
 
@@ -12,7 +12,7 @@ from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegt
 from defichain.transactions.keys import PrivateKey, KeyError
 from defichain.transactions.address import Address
 from defichain.transactions.utils import Converter
-from defichain.transactions.constants import SIGHASH
+from defichain.transactions.constants import SIGHASH, OPCodes, DefiTx_SIGNATURE
 
 
 class BaseTransaction(TxBase, ABC):
@@ -146,9 +146,135 @@ class BaseTransaction(TxBase, ABC):
 class Transaction(BaseTransaction):
 
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> object:
-        """TODO: Deserialize Transactions
+    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "Transaction":
         """
+        For now it's only possible to deserialize Segwit transactions
+        TODO:
+        - deserialize transactions with P2PKH Inputs
+        - deserialize transactions with P2SH inputs
+        - deserialize coinbase transactions
+        """
+        # Decode Unsigned Segwit Transaction
+        try:
+            position = 0
+
+            version = Converter.hex_to_int(hex[position: position + 8])
+            position += 8
+
+            number_of_inputs = Converter.hex_to_int(hex[position: position + 2])
+            position += 2
+
+            inputs = []
+            for n in range(number_of_inputs):
+                input = TxP2WPKHInput.deserialize(network, hex[position: position + 82])
+                position += 82
+
+                inputs.append(input)
+
+            number_of_outputs = Converter.hex_to_int(hex[position: position + 2])
+            position += 2
+
+            outputs = []
+            for n in range(number_of_outputs):
+                scriptSize = Converter.hex_to_int(hex[position + 16: position + 18]) * 2
+                standardSize = 16 + 2 + 2
+                size = standardSize + scriptSize
+
+                if hex[position + 16 + 2: position + 16 + 2 + 2] == OPCodes.OP_RETURN:
+                    if DefiTx_SIGNATURE in hex[position + 16 + 2: position + 16 + 2 + scriptSize]:
+                        output = TxDefiOutput.deserialize(network, hex[position: position + size])
+                    else:
+                        output = TxMsgOutput.deserialize(network, hex[position: position + size])
+                else:
+                    output = TxOutput.deserialize(network, hex[position: position + size])
+                position += size
+
+                outputs.append(output)
+
+            lockTime = Converter.hex_to_int(hex[position: position + 8])
+            position += 8
+
+            tx = Transaction(inputs=inputs, outputs=outputs, lockTime=lockTime)
+            tx.set_version(version)
+
+            return tx
+        except Exception as e:
+            pass
+
+        # Decode Signed Segwit Transaction
+        try:
+            position = 0
+
+            version = Converter.hex_to_int(hex[position: position + 8])
+            position += 8
+
+            marker = Converter.hex_to_int(hex[position: position + 2])
+            position += 2
+
+            flag = Converter.hex_to_int(hex[position: position + 2])
+            position += 2
+
+            number_of_inputs = Converter.hex_to_int(hex[position: position + 2])
+            position += 2
+
+            inputs = []
+            for n in range(number_of_inputs):
+
+                input = TxP2WPKHInput.deserialize(network, hex[position: position + 82])
+                position += 82
+
+                inputs.append(input)
+
+            number_of_outputs = Converter.hex_to_int(hex[position: position + 2])
+            position += 2
+
+            outputs = []
+            for n in range(number_of_outputs):
+                scriptSize = Converter.hex_to_int(hex[position + 16: position + 18]) * 2
+                standardSize = 16 + 2 + 2
+                size = standardSize + scriptSize
+                print(hex[position + 16 + 2: position + 16 + 2 + 2 + 1])
+
+                if hex[position + 16 + 2: position + 16 + 2 + 2] == OPCodes.OP_RETURN:
+                    if DefiTx_SIGNATURE in hex[position + 16 + 2: position + 16 + 2 + scriptSize]:
+                        output = TxDefiOutput.deserialize(network, hex[position: position + size])
+                    else:
+                        output = TxMsgOutput.deserialize(network, hex[position: position + size])
+                else:
+                    output = TxOutput.deserialize(network, hex[position: position + size])
+                position += size
+
+                outputs.append(output)
+
+            number_of_witnesses = number_of_inputs
+            witnesses = []
+            for n in range(number_of_witnesses):
+                number_of_witnessInputs = Converter.hex_to_int(hex[position: position + 2])
+                position += 2
+
+                signature_size = Converter.hex_to_int(hex[position: position + 2]) * 2
+                publicKey_size = Converter.hex_to_int(hex[position + signature_size + 2: position + signature_size + 4]) * 2
+                size = 2 + signature_size + 2 + publicKey_size
+                witness = Witness.deserialize(network, hex[position: position + size])
+                position += size
+
+                witnesses.append(witness)
+
+            lockTime = Converter.hex_to_int(hex[position: position + 8])
+            position += 8
+
+            tx = Transaction(inputs=inputs, outputs=outputs, lockTime=lockTime)
+            tx.set_version(version)
+            tx.set_marker(marker)
+            tx.set_flag(flag)
+            tx.set_witness(witnesses)
+            tx._signed = True
+
+            return tx
+        except Exception as e:
+            pass
+
+        raise RawTransactionError("The given raw transaction can not be decoded")
 
     def __init__(self, inputs: [], outputs: [], lockTime: int = 0):
         version = 4

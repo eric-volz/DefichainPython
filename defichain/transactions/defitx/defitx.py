@@ -1,3 +1,5 @@
+from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
+
 from defichain.transactions.constants import DefiTxType, MAX_OP_LENGTH, DefiTx_SIGNATURE, OPCodes
 from defichain.transactions.utils import Converter
 
@@ -38,7 +40,7 @@ class BaseDefiTx:
         return OPCodes.OP_RETURN + length_siganture_defiTx + signature_defiTx.hex()
 
     @staticmethod
-    def deserialize(hex: str) -> object:
+    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> object:
         pass
 
 
