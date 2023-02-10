@@ -32,9 +32,6 @@ jobs:
         git commit -m "Updated token at $(date +'%Y-%m-%d %H:%M:%S')"
 
     - name: Push changes
-      run: |
-        git push origin HEAD:${{ inputs.branch }}
-        git push --set-upstream origin ${{ inputs.branch }}
       uses: ad-m/github-push-action@v0.7.1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
