@@ -1,3 +1,4 @@
+from defichain.exceptions.transactions import VerifyError
 from .converter import Converter
 
 
@@ -9,19 +10,25 @@ class Verify:
             Converter.hex_to_int(h)
             return True
         except:
-            return False
+            raise VerifyError("The given value is not a hex string")
 
     @staticmethod
     def is_int(i: int) -> bool:
-        return isinstance(i, int)
+        if isinstance(i, int):
+            return True
+        raise VerifyError("The given value is not an integer")
 
     @staticmethod
     def is_float(f: float) -> bool:
-        return isinstance(f, float)
+        if isinstance(f, float):
+            return True
+        raise VerifyError("The given value is not an float")
 
     @staticmethod
     def is_str(s: str) -> bool:
-        return isinstance(s, str)
+        if isinstance(s, str):
+            return True
+        raise VerifyError("The given value is not an string")
 
     @staticmethod
     def is_only_number_str(s: str) -> bool:

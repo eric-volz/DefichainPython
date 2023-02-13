@@ -7,3 +7,5 @@ from .rawtransactionerror import RawTransactionError
 from .txbuildererror import TxBuilderError
 from .tokenerror import TokenError
 from .inputerror import InputError
+from .defitxerror import DefiTxError
+from .verifyerror import VerifyError

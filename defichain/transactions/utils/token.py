@@ -15,9 +15,9 @@ class Token:
         elif TYPE == TokenTypes.LIQUIDITY:
             return Tokens.get_liquidityTokens()
         elif TYPE == TokenTypes.LOAN:
-            return Tokens.get_loan_tokens()
+            return Tokens.get_loanTokens()
         elif TYPE == TokenTypes.CUSTOM:
-            return Tokens.get_custom_tokens()
+            return Tokens.get_customTokens()
         else:
             raise TokenError("The given tokens type is not valid.\n"
                              "Use the token types in defichain.transaction.constance.tokens.")
@@ -45,3 +45,14 @@ class Token:
             if token["id"] == str(id):
                 return token["name"]
         raise TokenError(f"The given id: {id} does not exist. Check your token id input.")
+
+    @staticmethod
+    def verify_tokenId(tokenId: int) -> bool:
+        tokenTypes = [TokenTypes.STANDARD, TokenTypes.LOAN, TokenTypes.LIQUIDITY, TokenTypes.CUSTOM]
+        for _type in tokenTypes:
+            try:
+                Token.get_name_from_id(tokenId, _type)
+                return True
+            except:
+                pass
+        raise TokenError("The given token id is not valid")

@@ -100,3 +100,16 @@ class Address:
             pass
 
         raise AddressError("This script public key is not supported")
+
+    @staticmethod
+    def verify_address(address: str) -> bool:
+        """
+        Verifies if the given address is valid.
+
+        Raises exception (AddressError) if address is not valid.
+
+        :param address: (requires) address
+        :return: bool - returns True if address is valid
+        """
+        Address.from_address(address)
+        return True
