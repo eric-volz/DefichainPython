@@ -1,8 +1,7 @@
 # Raw Transaction Builder
 from .rawtransactionbuilder import RawTransactionBuilder
 
-# UTXO
-from defichain.transactions.builder.modules.utxo import UTXO
-
-# Pool
-from defichain.transactions.builder.modules.pool import Pool
+# Import Builder Classes
+from .modules.utxo import UTXO
+from .modules.accounts import Accounts
+from .modules.pool import Pool
