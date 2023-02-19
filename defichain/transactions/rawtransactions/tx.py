@@ -233,7 +233,6 @@ class Transaction(BaseTransaction):
                 scriptSize = Converter.hex_to_int(hex[position + 16: position + 18]) * 2
                 standardSize = 16 + 2 + 2
                 size = standardSize + scriptSize
-                print(hex[position + 16 + 2: position + 16 + 2 + 2 + 1])
 
                 if hex[position + 16 + 2: position + 16 + 2 + 2] == OPCodes.OP_RETURN:
                     if DefiTx_SIGNATURE in hex[position + 16 + 2: position + 16 + 2 + scriptSize]:

@@ -3,8 +3,9 @@ from abc import ABC
 from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
 
 from .txbase import TxBase
-from defichain.transactions.address import Address
-from defichain.transactions.address import Script
+from defichain.transactions.address import Address, Script
+from defichain.transactions.defitx import DefiTx
+from defichain.transactions.defitx.modules.basedefitx import BaseDefiTx
 from defichain.transactions.utils import Converter
 
 
@@ -162,13 +163,21 @@ class TxDefiOutput(TxBaseOutput):
 
     @staticmethod
     def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "TxDefiOutput":
-        """TODO"""
+        position = 0
 
-        return TxDefiOutput(value=0, defiTx="")
+        value = Converter.hex_to_int(hex[position: position + 16])
+        position += 16
 
-    def __init__(self, value, defiTx: str):
+        lengthScript = Converter.hex_to_int(hex[position: position + 2])
+        position += 2
+
+        defiTx = DefiTx.deserialize(network, hex[position:])
+
+        return TxDefiOutput(value=value, defiTx=defiTx)
+
+    def __init__(self, value, defiTx: BaseDefiTx):
         super().__init__(value, "")
-        self._defiTx = None
+        self._defiTx: BaseDefiTx = None
         self.set_defiTx(defiTx)
 
     def __str__(self):
@@ -187,12 +196,12 @@ class TxDefiOutput(TxBaseOutput):
         return self.get_bytes_value() + scriptSize + self.get_bytes_defiTx() + self.get_bytes_tokenId()
 
     # Get Information
-    def get_defiTx(self) -> str:
+    def get_defiTx(self) -> BaseDefiTx:
         return self._defiTx
 
     def get_bytes_defiTx(self) -> bytes:
-        return Converter.hex_to_bytes(self._defiTx)
+        return self.get_defiTx().bytes()
 
     # Set Information
-    def set_defiTx(self, defiTx: str) -> None:
+    def set_defiTx(self, defiTx: BaseDefiTx) -> None:
         self._defiTx = defiTx

@@ -1,6 +1,6 @@
 from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
 from .basedefitx import BaseDefiTx
-from ..defitx import DefiTx
+from ..builddefitx import BuildDefiTx
 
 from defichain.exceptions.transactions import DefiTxError
 from defichain.transactions.address import Address
@@ -23,7 +23,36 @@ class Poolswap(BaseDefiTx):
 
     @staticmethod
     def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "Poolswap":
-        """TODO: Deserialize Poolswap"""
+        position = 0
+
+        lengthAddressFrom = Converter.hex_to_int(hex[position: position + 2]) * 2
+        position += 2
+
+        addressFrom = Address.from_scriptPublicKey(network, hex[position: position + lengthAddressFrom])
+        position += lengthAddressFrom
+
+        tokenFrom = Converter.hex_to_int(hex[position: position + 2])
+        position += 2
+
+        amountFrom = Converter.hex_to_int(hex[position: position + 16])
+        position += 16
+
+        lengthAddressTo = Converter.hex_to_int(hex[position: position + 2]) * 2
+        position += 2
+
+        addressTo = Address.from_scriptPublicKey(network, hex[position: position + lengthAddressTo])
+        position += lengthAddressTo
+
+        tokenTo = Converter.hex_to_int(hex[position: position + 2])
+        position += 2
+
+        null = Converter.hex_to_int(hex[position: position + 16])
+        position += 16
+
+        maxPrice = Converter.hex_to_int(hex[position: position + 16])
+        position += 16
+
+        return Poolswap(addressFrom.get_address(), tokenFrom, amountFrom, addressTo.get_address(), tokenTo, maxPrice)
 
     def __init__(self, addressFrom: str, tokenFrom: int, amountFrom: int, addressTo: str, tokenTo: int,
                  maxPrice: int):
@@ -63,7 +92,7 @@ class Poolswap(BaseDefiTx):
         result += null
         result += maxPrice
 
-        return DefiTx.build_defiTx(result)
+        return BuildDefiTx.build_defiTx(result)
 
     def __str__(self) -> str:
         result = f"""
@@ -81,6 +110,7 @@ class Poolswap(BaseDefiTx):
 
     def to_json(self) -> {}:
         result = {
+            "defiTxType": self.get_defiTxType(),
             "addressFrom": self.get_addressFrom(),
             "tokenFrom": self.get_tokenFrom(),
             "amountFrom": self.get_amountFrom(),
