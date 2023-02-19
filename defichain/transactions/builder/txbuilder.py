@@ -5,29 +5,34 @@ from defichain.exceptions.transactions import TxBuilderError
 from defichain.transactions.remotedata.remotedata import RemoteData
 from defichain.transactions.remotedata import RemoteDataOcean
 
-from defichain.transactions.builder import RawTransactionBuilder, UTXO, Pool
+from defichain.transactions.builder import RawTransactionBuilder, UTXO, Pool, Accounts
 
 from defichain.transactions.rawtransactions import Transaction
 
 
 class TxBuilder:
-    def __init__(self, address: str, account: Account, dataSource: Ocean):
-        self._address, self._account, self._dataSource = None, None, None
+    def __init__(self, address: str, account: Account, dataSource: Ocean, feePerByte=1.0):
+        self._address, self._account, self._dataSource, self._feePerByte = None, None, None, None
         self._set_address(address)
         self._set_account(account)
         self._set_dataSource(dataSource)
+        self._set_feePerByte(feePerByte)
 
         _builder = RawTransactionBuilder(self._get_address(), self._get_account(), self._get_dataSource())
 
         self.utxo = UTXO(_builder)
+        self.accounts = Accounts(_builder)
         self.pool = Pool(_builder)
 
     # Methods
-    def send(self, tx: Transaction, maxFeeRate: int = None) -> str:
+    def send_tx(self, tx: Transaction, maxFeeRate: int = None) -> str:
         if not tx._signed:
             raise TxBuilderError("The transaction cannot be sent because it is not yet signed!")
 
         return self._get_dataSource().send_tx(tx.serialize(), maxFeeRate)
+
+    def test_tx(self, tx: Transaction, maxFeeRate: int = None) -> str:
+        pass
 
     # Get Information
     def _get_address(self) -> str:
@@ -38,6 +43,9 @@ class TxBuilder:
 
     def _get_dataSource(self) -> "RemoteData":
         return self._dataSource
+
+    def _get_feePerByte(self) -> float:
+        return self._feePerByte
 
     # Set Information
     def _set_address(self, address: str) -> None:
@@ -51,5 +59,8 @@ class TxBuilder:
             self._dataSource = RemoteDataOcean(dataSource)
         else:
             raise TxBuilderError("The given source is currently not usable")
+
+    def _set_feePerByte(self, feePerByte: float) -> None:
+        self._feePerByte = feePerByte
 
 

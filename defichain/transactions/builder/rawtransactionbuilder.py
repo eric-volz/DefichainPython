@@ -4,6 +4,7 @@ from defichain.exceptions.transactions import TxBuilderError
 
 from defichain.transactions.remotedata.remotedata import RemoteData
 from defichain.transactions.rawtransactions import Transaction, TxP2WPKHInput, TxOutput, TxDefiOutput
+from defichain.transactions.defitx.modules.basedefitx import BaseDefiTx
 
 
 class RawTransactionBuilder:
@@ -19,14 +20,17 @@ class RawTransactionBuilder:
         self.set_dataSource(dataSource)
 
     # Build Transaction
-    def build_transactionInputs(self) -> Transaction:
+    def build_transactionInputs(self, inputs=[]) -> Transaction:
         tx = self.new_transaction()
-        for input in self.get_dataSource().get_unspent(self.get_address()):
-            tx.add_input(TxP2WPKHInput(input["txid"], input["index"], self.get_address(), input["value"]))
+        if inputs:
+            tx.set_inputs(inputs)
+        else:
+            for input in self.get_dataSource().get_unspent(self.get_address()):
+                tx.add_input(TxP2WPKHInput(input["txid"], input["index"], self.get_address(), input["value"]))
         return tx
 
-    def build_defiTx(self, value: int, defiTx: str) -> Transaction:
-        tx = self.build_transactionInputs()
+    def build_defiTx(self, value: int, defiTx: BaseDefiTx, inputs=[]) -> Transaction:
+        tx = self.build_transactionInputs(inputs)
         defitx_output = TxDefiOutput(value, defiTx)
         change_output = TxOutput(tx.get_inputsValue(), self.get_address())
         tx.add_output(defitx_output)
@@ -34,7 +38,7 @@ class RawTransactionBuilder:
         fee = calculate_fee_for_unsigned_transaction(tx)
 
         # Subtract fee from output
-        tx.get_outputs()[1].set_value(tx.get_outputs()[1].get_value() - fee)
+        tx.get_outputs()[1].set_value(tx.get_outputs()[1].get_value() - value - fee)
 
         self.sign(tx)
         return tx

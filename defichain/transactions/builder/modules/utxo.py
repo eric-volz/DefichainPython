@@ -7,7 +7,7 @@ class UTXO:
     def __init__(self, builder):
         self._builder: RawTransactionBuilder = builder
 
-    def send(self, value: int, addressTo: str, changeAddress: str = "fromAddress") -> Transaction:
+    def send(self, value: int, addressTo: str, changeAddress: str = "fromAddress", inputs=[]) -> Transaction:
         if changeAddress == "fromAddress":
             changeAddress = self._builder.get_address()
 
@@ -16,7 +16,7 @@ class UTXO:
             return self.sendall(addressTo)
 
         # If to_address is different from account address
-        tx = self._builder.build_transactionInputs()
+        tx = self._builder.build_transactionInputs(inputs)
         input_value = tx.get_inputsValue()
         changeOutputValue = input_value - value
         sendingOutput = TxOutput(value, addressTo)
@@ -31,8 +31,8 @@ class UTXO:
         self._builder.sign(tx)
         return tx
 
-    def sendall(self, addressTo: str) -> Transaction:
-        tx = self._builder.build_transactionInputs()
+    def sendall(self, addressTo: str, inputs=[]) -> Transaction:
+        tx = self._builder.build_transactionInputs(inputs)
         inputValue = tx.get_inputsValue()
         output = TxOutput(inputValue, addressTo)
         tx.add_output(output)
