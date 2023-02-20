@@ -15,7 +15,7 @@ from .p2wpkh import P2WPKH
 class Address:
 
     @staticmethod
-    def get_addressType(address: str) -> (str, DefichainMainnet or DefichainTestnet or DefichainRegtest):
+    def get_addressType(address: str) -> (DefichainMainnet or DefichainTestnet or DefichainRegtest, str):
         """
         Analyses the given address and returns the network and the address type
 
