@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from defichain.transactions.utils import Converter
 from defichain.transactions.address import Address
+from defichain.transactions.utils import Converter
 
 
 class BaseDefiTxInput(ABC):

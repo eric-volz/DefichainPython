@@ -1,18 +1,18 @@
 
 # Address
-from .address import CHARSET, CHARSET_BASE, AddressTypes, MAX_OP_LENGTH
+from .address import AddressTypes, CHARSET, CHARSET_BASE, MAX_OP_LENGTH
 
 # Defi Transaction
-from .defitx import DefiTx_SIGNATURE, DefiTxType
+from .defitx import DefiTxType, DefiTx_SIGNATURE
+
+# Fee
+from .fees import FEE_PER_BYTE, TxSize
 
 # OP Codes
 from .opcodes import OPCodes
 
 # Raw Transactions
-from .rawtransactions import SEQUENCE, SCRIPTSIG, SIGHASH, ORDER
-
-# Fee
-from .fees import FEE_PER_BYTE, TxSize
+from .rawtransactions import ORDER, SCRIPTSIG, SEQUENCE, SIGHASH
 
 # Tokens
-from .tokens import Tokens, TokenTypes
+from .tokens import TokenTypes, Tokens

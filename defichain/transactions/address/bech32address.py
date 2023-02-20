@@ -2,11 +2,10 @@ from abc import ABC
 import binascii
 
 from defichain.exceptions.transactions import AddressError
-
-from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
-from .baseaddress import BaseAddress
-from defichain.transactions.constants import CHARSET, CHARSET_BASE
 from defichain.libs import bech32
+from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
+from defichain.transactions.constants import CHARSET, CHARSET_BASE
+from .baseaddress import BaseAddress
 
 
 class Bech32Address(BaseAddress, ABC):

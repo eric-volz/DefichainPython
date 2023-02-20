@@ -1,12 +1,10 @@
 from abc import ABC
-
-from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
-
 from .txbase import TxBase
+from defichain.transactions.utils import Converter
+from defichain.transactions.defitx.modules.basedefitx import BaseDefiTx
 from defichain.transactions.address import Address, Script
 from defichain.transactions.defitx import DefiTx
-from defichain.transactions.defitx.modules.basedefitx import BaseDefiTx
-from defichain.transactions.utils import Converter
+from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
 
 
 class TxBaseOutput(TxBase, ABC):

@@ -1,11 +1,10 @@
 from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
-from .basedefitx import BaseDefiTx
-from ..builddefitx import BuildDefiTx
-
-from defichain.exceptions.transactions import DefiTxError
-from defichain.transactions.address import Address
-from defichain.transactions.utils import Converter, Verify, Token
 from defichain.transactions.constants import DefiTxType
+from defichain.transactions.address import Address
+from defichain.transactions.utils import Converter, Token, Verify
+from .basedefitx import BaseDefiTx
+from ..basedefitxinput import ScriptBalances, TokenBalanceInt32
+from ..builddefitx import BuildDefiTx
 
 
 class Poolswap(BaseDefiTx):

@@ -1,10 +1,8 @@
 from abc import ABC
-
-from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
-
 from .txbase import TxBase
-from defichain.transactions.utils import Converter
 from defichain.transactions.constants import SEQUENCE, SCRIPTSIG
+from defichain.transactions.utils import Converter
+from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
 
 
 class TxBaseInput(TxBase, ABC):

@@ -1,9 +1,8 @@
 from defichain.exceptions.transactions import AddressError
-
-from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
 from defichain.libs import bech32
-from defichain.transactions.utils import Converter
+from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
 from defichain.transactions.constants import AddressTypes
+from defichain.transactions.utils import Converter
 
 from .baseaddress import BaseAddress
 from .base58address import Base58Address

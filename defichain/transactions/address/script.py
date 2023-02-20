@@ -1,6 +1,6 @@
-from .bech32address import Bech32Address
 from defichain.transactions.constants import OPCodes
 from defichain.transactions.utils import Converter
+from .bech32address import Bech32Address
 
 
 class Script(object):

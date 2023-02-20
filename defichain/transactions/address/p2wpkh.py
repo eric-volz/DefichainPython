@@ -1,9 +1,9 @@
 from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
-from .bech32address import Bech32Address
+from defichain.transactions.constants import AddressTypes, OPCodes
 from defichain.transactions.keys import PrivateKey, PublicKey
-from defichain.transactions.constants import OPCodes, AddressTypes
-
+from .bech32address import Bech32Address
 from .script import Script
+
 
 
 class P2WPKH(Bech32Address):  # Native Segwit

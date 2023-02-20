@@ -1,8 +1,5 @@
 from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
-
-from defichain.transactions.constants import DefiTxType, MAX_OP_LENGTH, DefiTx_SIGNATURE, OPCodes
-from defichain.transactions.utils import Converter
-
+from defichain.transactions.constants import DefiTxType,  DefiTx_SIGNATURE
 from .modules.basedefitx import BaseDefiTx
 from .modules.accounts import UtxosToAccount
 from .modules.pool import Poolswap

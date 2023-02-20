@@ -1,8 +1,8 @@
 from binascii import hexlify, unhexlify
-from ecdsa.util import sigencode_der
-from hashlib import sha256
 import struct
+from hashlib import sha256
 from ecdsa import SigningKey, SECP256k1
+from ecdsa.util import sigencode_der
 
 from defichain.transactions.constants import ORDER
 

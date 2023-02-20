@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
 
-from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
 from defichain.exceptions.transactions import RawTransactionError
-
+from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
 from defichain.transactions.address import Address
 from defichain.transactions.utils import Verify
 

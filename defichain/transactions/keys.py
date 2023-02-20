@@ -1,7 +1,5 @@
 from abc import ABC, abstractmethod
-
 from defichain.exceptions.transactions import KeyError
-
 from defichain import Wallet
 from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
 from defichain.transactions.utils import Converter

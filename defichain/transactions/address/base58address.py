@@ -1,14 +1,12 @@
 from abc import ABC
-
-from defichain.exceptions.transactions import AddressError
-
-from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
-from .baseaddress import BaseAddress
-from defichain.transactions.utils import Converter
-
-from defichain.libs import base58
 import binascii
 import hashlib
+
+from defichain.exceptions.transactions import AddressError
+from defichain.libs import base58
+from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
+from defichain.transactions.utils import Converter
+from .baseaddress import BaseAddress
 
 
 class Base58Address(BaseAddress, ABC):

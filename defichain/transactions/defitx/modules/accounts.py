@@ -1,11 +1,10 @@
 from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
-from .basedefitx import BaseDefiTx
-
-from defichain.transactions.utils import Converter, Verify, Token
 from defichain.transactions.constants import DefiTxType
-from ..builddefitx import BuildDefiTx
-from ..basedefitxinput import ScriptBalances, TokenBalanceInt32
 from defichain.transactions.address import Address
+from defichain.transactions.utils import Converter, Token, Verify
+from .basedefitx import BaseDefiTx
+from ..basedefitxinput import ScriptBalances, TokenBalanceInt32
+from ..builddefitx import BuildDefiTx
 
 
 class UtxosToAccount(BaseDefiTx):

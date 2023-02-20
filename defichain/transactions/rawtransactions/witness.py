@@ -1,14 +1,11 @@
 from abc import ABC
-
-from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
-
 from defichain.exceptions.transactions import RawTransactionError
-
 from defichain.transactions.utils import Converter, Calculate
+from defichain.transactions.address.address import Address
 from defichain.transactions.rawtransactions.txbase import TxBase
 from defichain.transactions.rawtransactions.txinput import TxBaseInput
 from defichain.transactions.rawtransactions.txoutput import TxBaseOutput
-from defichain.transactions.address.address import Address
+from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
 
 
 class WitnessHashBase(TxBase, ABC):

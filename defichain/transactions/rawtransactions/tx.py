@@ -1,18 +1,17 @@
 from abc import ABC, abstractmethod
 
 from defichain.exceptions.transactions import RawTransactionError
+from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
+from defichain.transactions.keys import PrivateKey, KeyError
+from defichain.transactions.address import Address
+from defichain.transactions.utils import Converter
+from defichain.transactions.constants import SIGHASH, OPCodes, DefiTx_SIGNATURE
 
 from .txbase import TxBase
 from .txinput import TxBaseInput, TxP2WPKHInput
 from .txoutput import TxBaseOutput, TxOutput, TxMsgOutput, TxDefiOutput
 from .witness import Witness, WitnessHash
 from .sign import sign_input
-
-from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
-from defichain.transactions.keys import PrivateKey, KeyError
-from defichain.transactions.address import Address
-from defichain.transactions.utils import Converter
-from defichain.transactions.constants import SIGHASH, OPCodes, DefiTx_SIGNATURE
 
 
 class BaseTransaction(TxBase, ABC):

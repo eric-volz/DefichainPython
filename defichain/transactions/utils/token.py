@@ -1,7 +1,6 @@
-import json
 from defichain import Ocean
-from defichain.transactions.constants.tokens import Tokens, TokenTypes
 from defichain.exceptions.transactions import TokenError
+from defichain.transactions.constants.tokens import Tokens, TokenTypes
 
 ocean = Ocean()
 

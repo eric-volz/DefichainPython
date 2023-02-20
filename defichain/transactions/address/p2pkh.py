@@ -1,9 +1,9 @@
 from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
-from .base58address import Base58Address
+from defichain.transactions.constants import AddressTypes, OPCodes
 from defichain.transactions.keys import PrivateKey, PublicKey
-from defichain.transactions.constants import OPCodes, AddressTypes
-
+from .base58address import Base58Address
 from .script import Script
+
 
 
 class P2PKH(Base58Address):  # Legacy
