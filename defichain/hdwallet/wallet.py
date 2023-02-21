@@ -1061,7 +1061,7 @@ class Wallet:
         >>> wallet.default_address()
         "dKYzYQDmN9TFEdZy46mFtStbqYLnougqzY"
         """
-        return self._p2wpkh_in_p2sh_address()
+        return self.p2wpkh_in_p2sh_address()
 
     def legacy_address(self) -> str:
         """
@@ -1077,7 +1077,7 @@ class Wallet:
         >>> wallet.legacy_address()
         "8cVZbAQGU11dYPoSPHYYjakHCFQ3NSiyS6"
         """
-        return self._p2pkh_address()
+        return self.p2pkh_address()
 
     def bech32_address(self) -> str:
         """
@@ -1093,9 +1093,9 @@ class Wallet:
         >>> wallet.bech32_address()
         "df1qatt9yns7u5k8w589evh78hp6kv9ynvxr2xlvpn"
         """
-        return self._p2wpkh_address()
+        return self.p2wpkh_address()
 
-    def _p2pkh_address(self) -> str:
+    def p2pkh_address(self) -> str:
         """
         Get Pay to Public Key Hash (P2PKH) address.
 
@@ -1106,7 +1106,7 @@ class Wallet:
         >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
         >>> wallet.from_path(path="m/1129/0/0/0")
-        >>> wallet._p2pkh_address()
+        >>> wallet.p2pkh_address()
         "8cVZbAQGU11dYPoSPHYYjakHCFQ3NSiyS6"
         """
 
@@ -1137,7 +1137,7 @@ class Wallet:
         network_hash160_bytes = _unhexlify(self._cryptocurrency.SCRIPT_ADDRESS) + script_hash
         return ensure_string(base58.b58encode_check(network_hash160_bytes))
 
-    def _p2wpkh_address(self) -> Optional[str]:
+    def p2wpkh_address(self) -> Optional[str]:
         """
         Get Pay to Witness Public Key Hash (P2WPKH) address.
 
@@ -1148,7 +1148,7 @@ class Wallet:
         >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
         >>> wallet.from_path(path="m/1129/0/0/0")
-        >>> wallet._p2wpkh_address()
+        >>> wallet.p2wpkh_address()
         "df1qatt9yns7u5k8w589evh78hp6kv9ynvxr2xlvpn"
         """
 
@@ -1158,7 +1158,7 @@ class Wallet:
             return None
         return ensure_string(encode(self._cryptocurrency.SEGWIT_ADDRESS.HRP, 0, public_key_hash))
 
-    def _p2wpkh_in_p2sh_address(self) -> Optional[str]:
+    def p2wpkh_in_p2sh_address(self) -> Optional[str]:
         """
         Get P2WPKH nested in P2SH address.
 
@@ -1169,7 +1169,7 @@ class Wallet:
         >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
         >>> wallet.from_path(path="m/1129/0/0/0")
-        >>> wallet._p2wpkh_in_p2sh_address()
+        >>> wallet.p2wpkh_in_p2sh_address()
         "dKYzYQDmN9TFEdZy46mFtStbqYLnougqzY"
         """
 
@@ -1243,6 +1243,22 @@ class Wallet:
         return check_encode(
             _unhexlify(self._cryptocurrency.WIF_SECRET_KEY) + self._key.to_string() + b"\x01") if self._key else None
 
+    def get_account(self, index: int = 0, prefix: str = "m/1129/0/0/"):
+        from .account import Account
+        previousPath = self.path()
+        path = prefix + str(index)
+
+        if self.seed():
+            self.from_path(path)
+
+        if self.private_key():
+            acc = Account(self._cryptocurrency, self.private_key())
+        else:
+            acc = Account(self._cryptocurrency, self.public_key())
+        if self.seed():
+            self.from_path(previousPath)
+        return acc
+
     def dumps(self) -> dict:
         """
         Get All Wallet imformations.
@@ -1287,17 +1303,8 @@ class Wallet:
             path=self.path(),
             hash=self.hash(),
             addresses=dict(
-                legacy=self._p2pkh_address(),
-                bech32=self._p2wpkh_address(),
-                default=self._p2wpkh_in_p2sh_address()
+                legacy=self.p2pkh_address(),
+                bech32=self.p2wpkh_address(),
+                default=self.p2wpkh_in_p2sh_address()
             )
         )
-
-    def get_account(self) -> "Account":
-        return Account(self._cryptocurrency).from_wif(self.wif())
-
-
-class Account(Wallet):
-
-    def __init__(self, network):
-        super().__init__(network)
