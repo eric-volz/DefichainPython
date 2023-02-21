@@ -3,7 +3,7 @@ from defichain.transactions.constants import DefiTxType
 from defichain.transactions.address import Address
 from defichain.transactions.utils import Converter, Token, Verify
 from .basedefitx import BaseDefiTx
-from ..basedefitxinput import ScriptBalances, TokenBalanceInt32
+from .baseinput import ScriptBalances, TokenBalanceInt32
 from ..builddefitx import BuildDefiTx
 
 
@@ -122,17 +122,22 @@ class UtxosToAccount(BaseDefiTx):
     def set_amount(self, amount: int) -> None:
         self._amount = amount
 
+
 class AccountToUtxos(BaseDefiTx):
+    """TODO: MVP"""
     pass
 
 
 class AccountToAccount(BaseDefiTx):
+    """TODO: MVP"""
     pass
 
 
 class AnyAccountToAccount(BaseDefiTx):
+    """TODO: MVP"""
     pass
 
 
 class SetFutureSwap(BaseDefiTx):
+    """TODO: MVP"""
     pass

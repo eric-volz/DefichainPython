@@ -3,7 +3,7 @@ from defichain.transactions.address import Address
 from defichain.transactions.utils import Converter
 
 
-class BaseDefiTxInput(ABC):
+class BaseInput(ABC):
 
     @abstractmethod
     def size(self) -> str:
@@ -14,7 +14,7 @@ class BaseDefiTxInput(ABC):
         pass
 
 
-class TokenBalanceInt32(BaseDefiTxInput):
+class TokenBalanceInt32(BaseInput):
 
     def __init__(self, token: int, amount: int):
         self.token = token
@@ -39,11 +39,11 @@ class TokenBalanceInt32(BaseDefiTxInput):
         return Converter.int_to_bytes(self.get_amount(), 8)
 
 
-class TokenBalanceVarInt(BaseDefiTxInput):
+class TokenBalanceVarInt(BaseInput):
     pass
 
 
-class ScriptBalances(BaseDefiTxInput):
+class ScriptBalances(BaseInput):
 
     def __init__(self, address, tokenBalanceInt32: [TokenBalanceInt32]):
         self.address = address
@@ -80,13 +80,6 @@ class ScriptBalances(BaseDefiTxInput):
 
 
 if __name__ == "__main__":
-    address1 = "df1q7w5p90ne2pm20wfqhm92wa8qzknmxpm5lks7gm"
-    token = 1
-    amount = 1000
-
-    int32 = TokenBalanceInt32(token, amount)
-    scriptBalance = ScriptBalances(address1, [int32])
-
-    print(scriptBalance.get_bytes_script())
+    pass
 
 

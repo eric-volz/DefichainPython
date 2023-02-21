@@ -3,7 +3,6 @@ from defichain.transactions.constants import DefiTxType
 from defichain.transactions.address import Address
 from defichain.transactions.utils import Converter, Token, Verify
 from .basedefitx import BaseDefiTx
-from ..basedefitxinput import ScriptBalances, TokenBalanceInt32
 from ..builddefitx import BuildDefiTx
 
 
@@ -171,8 +170,15 @@ class Poolswap(BaseDefiTx):
         self._maxPrice = maxPrice
 
 
-class AddPoolLiquidity(BaseDefiTx):
+class CompositeSwap(BaseDefiTx):
+    """TODO: MVP"""
+    pass
+
+
+class PoolAddLiquidity(BaseDefiTx):
     """
+    TODO: MVP
+
         Builds the defi transaction for addpoolliquidity
 
         :param addressAmount: (required) :ref:`Node Address Amount`
@@ -204,15 +210,17 @@ class AddPoolLiquidity(BaseDefiTx):
 
         return self._defitx.package_defiTx(result)
     """
-
-
-class RemovePoolLiquidity(BaseDefiTx):
     pass
 
 
-class CreatePoolPair(BaseDefiTx):
+class PoolRemoveLiquidity(BaseDefiTx):
+    """TODO: MVP"""
     pass
 
 
-class UpdatePoolPair(BaseDefiTx):
+class PoolCreatePair(BaseDefiTx):
+    pass
+
+
+class PoolUpdatePair(BaseDefiTx):
     pass
