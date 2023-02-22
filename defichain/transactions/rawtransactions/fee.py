@@ -1,7 +1,18 @@
-from defichain.transactions.constants import FEE_PER_BYTE, TxSize
+import copy
 
 
-def calculate_fee_for_unsigned_transaction(tx, fee_per_byte: int = FEE_PER_BYTE) -> int:
-    signedSize = tx.size() + TxSize.SIGNATURE_LENGTH + TxSize.SIGNATURE + TxSize.PUBLIC_KEY_LENGTH + \
-                  TxSize.PUBLIC_KEY
-    return round(signedSize * fee_per_byte)
+def define_fee(tx, keys: [], feePerByte):
+    """
+    Signes the transaction to find out the real size
+
+    :param tx: (required) the transaction object
+    :type tx: Transaction
+    :param keys: (required) array with all needed keys to sign the transaction
+    :type keys: [str]
+    :param feePerByte: (required) the amount of fee to pay per byte
+    :type feePerByte: float
+    :return: "int" - the amount of fee to pay
+    """
+    copy_tx = copy.deepcopy(tx)
+    copy_tx.sign(keys)
+    return round(copy_tx.size() * feePerByte)

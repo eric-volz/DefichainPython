@@ -1,4 +1,4 @@
-from defichain.transactions.rawtransactions import TxOutput, calculate_fee_for_unsigned_transaction
+from defichain.transactions.rawtransactions import TxOutput, define_fee
 from defichain.transactions.builder.rawtransactionbuilder import RawTransactionBuilder, Transaction
 
 
@@ -24,8 +24,10 @@ class UTXO:
         tx.add_output(sendingOutput)
         tx.add_output(changeOutput)
 
+        # Calculate fee
+        fee = define_fee(tx, [self._builder.get_account().get_wif()], self._builder.get_feePerByte())
+
         # Subtract fee from output
-        fee = calculate_fee_for_unsigned_transaction(tx)
         tx.get_outputs()[1].set_value(tx.get_outputs()[1].get_value() - fee)
 
         self._builder.sign(tx)
@@ -37,8 +39,10 @@ class UTXO:
         output = TxOutput(inputValue, addressTo)
         tx.add_output(output)
 
+        # Calculate fee
+        fee = define_fee(tx, [self._builder.get_account().get_wif()], self._builder.get_feePerByte())
+
         # Subtract fee from output
-        fee = calculate_fee_for_unsigned_transaction(tx)
         tx.get_outputs()[0].set_value(tx.get_outputs()[0].get_value() - fee)
 
         self._builder.sign(tx)

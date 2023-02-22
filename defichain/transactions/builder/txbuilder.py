@@ -18,7 +18,8 @@ class TxBuilder:
         self._set_dataSource(dataSource)
         self._set_feePerByte(feePerByte)
 
-        _builder = RawTransactionBuilder(self._get_address(), self._get_account(), self._get_dataSource())
+        _builder = RawTransactionBuilder(self._get_address(), self._get_account(), self._get_dataSource(),
+                                         self._get_feePerByte())
 
         self.utxo = UTXO(_builder)
         self.accounts = Accounts(_builder)
@@ -26,7 +27,7 @@ class TxBuilder:
 
     # Methods
     def send_tx(self, tx: Transaction, maxFeeRate: int = None) -> str:
-        if not tx._signed:
+        if not tx.is_signed():
             raise TxBuilderError("The transaction cannot be sent because it is not yet signed!")
 
         return self._get_dataSource().send_tx(tx.serialize(), maxFeeRate)

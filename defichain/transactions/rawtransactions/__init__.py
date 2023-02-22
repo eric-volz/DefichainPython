@@ -14,4 +14,4 @@ from .sign import sign_input
 from .witness import WitnessHash, Witness
 
 # Fee
-from .fee import calculate_fee_for_unsigned_transaction
+from .fee import define_fee
