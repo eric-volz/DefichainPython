@@ -66,6 +66,15 @@ class TxBase(ABC):
     @staticmethod
     @abstractmethod
     def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "TxBase":
+        """
+        Deserializes the given hex into the object that was used to call this method
+
+        :param network: (required) network from defichain.networks
+        :type network: DefichainMainnet or DefichainTestnet or DefichainRegtest
+        :param hex: (required) the hey that should be deserialized
+        :type hex: str
+        :return: "TxBase" - the object that was used to call the method
+        """
         pass
 
     @abstractmethod
@@ -78,6 +87,10 @@ class TxBase(ABC):
 
     @abstractmethod
     def to_json(self) -> {}:
+        """
+        Returns information about the transaction object in json format
+        :return: "{}" - information about the object that was used to call this method
+        """
         pass
 
     @abstractmethod
@@ -85,18 +98,34 @@ class TxBase(ABC):
         """
         Verifies the correctness of all given entries in the given object
 
-        :return: (bool) returns True if all entries are correct
+        :return: "bool" - returns True if all entries are correct
         """
         pass
 
     def size(self) -> int:
+        """
+        Calculates the size in bytes of the object that was used to call this method
+
+        :return: "int" - size in bytes of the object that was used to call this method
+        """
         return len(self.bytes())
 
     def serialize(self) -> str:
+        """
+        Serializes the object that was used to call this method
+
+        :return: "str" - serialized object that that was used to call this method
+
+        """
         self.verify()
         return bytes(self).hex()
 
     def bytes(self) -> bytes:
+        """
+        Bytes representation of the object that was used to call this method
+
+        :return: "bytes" - bytes of the object that was used to call this method
+        """
         self.verify()
         return bytes(self)
 

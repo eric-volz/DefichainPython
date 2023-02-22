@@ -7,7 +7,18 @@ from ecdsa.util import sigencode_der
 from defichain.transactions.constants import ORDER
 
 
-def sign_input(privateKey, data):
+def sign_input(privateKey: str, data: bytes) -> str:
+    print(privateKey)
+    """
+    Signs the given data with a given private key in a deterministic way
+
+    :param privateKey: (required) private key to sign the input
+    :type privateKey: str
+    :param data: (required) data that has to be signed
+    :type data: bytes
+    :return: "hex" - signature of data
+    """
+
     sk = SigningKey.from_string(unhexlify(privateKey), curve=SECP256k1)
     sig = sk.sign_digest_deterministic(data, sigencode=sigencode_der, hashfunc=sha256)
 

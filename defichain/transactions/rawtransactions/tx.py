@@ -95,6 +95,9 @@ class BaseTransaction(TxBase, ABC):
     def get_bytes_lockTime(self) -> bytes:
         return Converter.int_to_bytes(self._lockTime, 4)
 
+    def is_signed(self) -> bool:
+        return self._signed
+
     # Set Information
     def set_version(self, version: int) -> None:
         self._version = version
