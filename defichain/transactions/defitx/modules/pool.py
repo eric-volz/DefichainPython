@@ -1,3 +1,4 @@
+from defichain.exceptions.transactions import AddressError
 from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
 from defichain.transactions.constants import DefiTxType
 from defichain.transactions.address import Address
@@ -57,6 +58,7 @@ class Poolswap(BaseDefiTx):
 
         self._addressFrom, self._tokenFrom, self._amountFrom, self._addressTo, self._tokenTo, self._maxPrice = None, \
             None, None, None, None, None
+        self._network = None
         self.set_addressFrom(addressFrom)
         self.set_tokenFrom(tokenFrom)
         self.set_amountFrom(amountFrom)
@@ -119,11 +121,14 @@ class Poolswap(BaseDefiTx):
         return result
 
     def verify(self) -> bool:
-        Address.verify_address(self.get_addressFrom())
-        Token.verify_tokenId(self.get_tokenFrom())
+        address = Address.from_address(self.get_addressFrom())
+        self._network = address.get_network()
+        Token.verify_tokenId(self._network, self.get_tokenFrom())
         Verify.is_int(self.get_amountFrom())
-        Address.verify_address(self.get_addressTo())
-        Token.verify_tokenId(self.get_tokenTo())
+        address = Address.from_address(self.get_addressTo())
+        if self._network != address.get_network():
+            raise AddressError("The given addresses in the poolswap are not from the same network")
+        Token.verify_tokenId(self._network, self.get_tokenTo())
         Verify.is_int(self.get_maxPrice())
         return True
 

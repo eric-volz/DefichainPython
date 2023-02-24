@@ -47,29 +47,22 @@ class UtxosToAccount(BaseDefiTx):
     def __init__(self, address: str, amount: int, tokenId: int = 0):
 
         self._address, self._tokenId, self._amount = None, None, None
+        self._network = None
         self.set_address(address)
         self.set_tokenId(tokenId)
         self.set_amount(amount)
 
-        self._scriptBalances = ScriptBalances(self.get_address(), TokenBalanceInt32(self.get_tokenId(), self.get_amount()))
+        self._scriptBalances = ScriptBalances(self.get_address(), [TokenBalanceInt32(self.get_tokenId(), self.get_amount())])
 
     def __bytes__(self) -> bytes:
         # Convert to Bytes
         defiTxType = Converter.hex_to_bytes(DefiTxType.OP_DEFI_TX_UTXOS_TO_ACCOUNT)
         numberOfElements = Converter.int_to_bytes(1, 1)
-        lengthScriptPublicKey = Converter.hex_to_bytes(self._scriptBalances.get_scriptSize())
-        scriptPublicKey = self._scriptBalances.get_bytes_script()
-        tokenId = self._scriptBalances.get_tokenBalanceInt32().get_bytes_token()
-        amount = self._scriptBalances.get_tokenBalanceInt32().get_bytes_amount()
 
         # Build PoolSwapDefiTx
         result = defiTxType
         result += numberOfElements
-        result += lengthScriptPublicKey
-        result += scriptPublicKey
-        result += numberOfElements
-        result += tokenId
-        result += amount
+        result += self._scriptBalances.bytes()
 
         return BuildDefiTx.build_defiTx(result)
 
@@ -94,9 +87,10 @@ class UtxosToAccount(BaseDefiTx):
         return result
 
     def verify(self) -> bool:
-        Address.verify_address(self.get_address())
+        address = Address.from_address(self.get_address())
+        self._network = address.get_network()
         Verify.is_int(self.get_amount())
-        Token.verify_tokenId(self.get_tokenId())
+        Token.verify_tokenId(self._network, self.get_tokenId())
         return True
 
     # Get Information
