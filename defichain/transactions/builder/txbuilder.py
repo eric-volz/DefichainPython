@@ -5,7 +5,8 @@ from defichain.exceptions.transactions import TxBuilderError
 from defichain.transactions.remotedata.remotedata import RemoteData
 from defichain.transactions.remotedata import RemoteDataOcean
 
-from defichain.transactions.builder import RawTransactionBuilder, UTXO, Pool, Accounts
+from .rawtransactionbuilder import RawTransactionBuilder
+from .modules import *
 
 from defichain.transactions.rawtransactions import Transaction
 
