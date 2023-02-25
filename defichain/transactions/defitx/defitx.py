@@ -1,4 +1,4 @@
-from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
+from defichain.networks import DefichainMainnet, DefichainTestnet
 from defichain.transactions.constants import DefiTxType,  DefiTx_SIGNATURE
 from .modules.basedefitx import BaseDefiTx
 from .modules.accounts import UtxosToAccount
@@ -8,7 +8,7 @@ from .modules.pool import Poolswap
 class DefiTx:
 
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "BaseDefiTx":
+    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "BaseDefiTx":
         position = 0
 
         opReturn = hex[position: position + 2]

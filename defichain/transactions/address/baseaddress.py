@@ -1,19 +1,19 @@
 from abc import ABC, abstractmethod
 
-from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
+from defichain.networks import DefichainMainnet, DefichainTestnet
 
 
 class BaseAddress(ABC):
 
     @staticmethod
     @abstractmethod
-    def from_publicKey(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
+    def from_publicKey(network: DefichainMainnet or DefichainTestnet,
                        publicKey: str) -> "BaseAddress":
         """
         Generates a specified address object from the given public key
 
         :param network: (required) The network in witch the public key should be used
-        :type network: DefichainMainnet or DefichainTestnet or DefichainRegtest
+        :type network: DefichainMainnet or DefichainTestnet
         :param publicKey: (required) public key
         :type publicKey: str
         :return: BaseAddress - returns the address object for which the function is applied
@@ -22,13 +22,13 @@ class BaseAddress(ABC):
 
     @staticmethod
     @abstractmethod
-    def from_privateKey(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
+    def from_privateKey(network: DefichainMainnet or DefichainTestnet,
                          privateKey: str) -> "BaseAddress":
         """
         Generates a specified address object from the given private key
 
         :param network: (required) The network in witch the private key should be used
-        :type network: DefichainMainnet or DefichainTestnet or DefichainRegtest
+        :type network: DefichainMainnet or DefichainTestnet
         :param privateKey: (required) private key
         :type privateKey: str
         :return: BaseAddress - returns the address object for which the function is applied
@@ -37,13 +37,13 @@ class BaseAddress(ABC):
 
     @staticmethod
     @abstractmethod
-    def from_scriptPublicKey(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
+    def from_scriptPublicKey(network: DefichainMainnet or DefichainTestnet,
                              scriptPublicKey: str) -> "BaseAddress":
         """
         Generates a specified address object from the given script private key
 
         :param network: (required) The network in witch the script public key should be used
-        :type network: DefichainMainnet or DefichainTestnet or DefichainRegtest
+        :type network: DefichainMainnet or DefichainTestnet
         :param scriptPublicKey: (required) script public key
         :type scriptPublicKey: str
         :return: BaseAddress - returns the address object for which the function is applied
@@ -70,7 +70,7 @@ class BaseAddress(ABC):
 
     @staticmethod
     @abstractmethod
-    def encode(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, scriptPublicKey: str) -> str:
+    def encode(network: DefichainMainnet or DefichainTestnet, scriptPublicKey: str) -> str:
         """
         Encodes a script public key into an address
 
@@ -81,7 +81,7 @@ class BaseAddress(ABC):
         P2WPKH address: use Bech32Address or P2WpKH object
 
         :param network: (required) The network witch the script public key should be encoded for
-        :type network: DefichainMainnet or DefichainTestnet or DefichainRegtest
+        :type network: DefichainMainnet or DefichainTestnet
         :param scriptPublicKey: script public key
         :type scriptPublicKey: str
         :return: "hex" (str) - address of the given script public key
@@ -89,13 +89,13 @@ class BaseAddress(ABC):
         pass
 
     @staticmethod
-    def scriptPublicKey_to_address(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
+    def scriptPublicKey_to_address(network: DefichainMainnet or DefichainTestnet,
                                    scriptPublicKey: str) -> str:
         """
         Converts the given script public key into the corresponding address
 
         :param network: (required) Network
-        :type network: DefichainMainnet or DefichainTestnet or DefichainRegtest
+        :type network: DefichainMainnet or DefichainTestnet
         :param scriptPublicKey: (required) script public key
         :type: str
         :return: "address" (str) - corresponding address to the given script public key
@@ -114,8 +114,8 @@ class BaseAddress(ABC):
         """
         pass
 
-    def __init__(self, network: DefichainMainnet or DefichainTestnet or DefichainRegtest):
-        self._network: DefichainMainnet or DefichainTestnet or DefichainRegtest = None
+    def __init__(self, network: DefichainMainnet or DefichainTestnet):
+        self._network: DefichainMainnet or DefichainTestnet = None
         self.set_network(network)
 
     # Get Information
@@ -137,7 +137,7 @@ class BaseAddress(ABC):
         """
         pass
 
-    def get_network(self) -> DefichainMainnet or DefichainTestnet or DefichainRegtest:
+    def get_network(self) -> DefichainMainnet or DefichainTestnet:
         """
         Gets the network
 
@@ -196,7 +196,7 @@ class BaseAddress(ABC):
         """
         pass
 
-    def set_network(self, network: DefichainMainnet or DefichainTestnet or DefichainRegtest) -> None:
+    def set_network(self, network: DefichainMainnet or DefichainTestnet) -> None:
         """
         Sets the given new network
 

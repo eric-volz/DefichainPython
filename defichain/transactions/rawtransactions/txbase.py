@@ -65,12 +65,12 @@ class TxBase(ABC):
 
     @staticmethod
     @abstractmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "TxBase":
+    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "TxBase":
         """
         Deserializes the given hex into the object that was used to call this method
 
         :param network: (required) network from defichain.networks
-        :type network: DefichainMainnet or DefichainTestnet or DefichainRegtest
+        :type network: DefichainMainnet or DefichainTestnet
         :param hex: (required) the hey that should be deserialized
         :type hex: str
         :return: "TxBase" - the object that was used to call the method

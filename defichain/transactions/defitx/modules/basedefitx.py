@@ -1,12 +1,11 @@
 from abc import ABC, abstractmethod
 
-from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
-
+from defichain.networks import DefichainMainnet, DefichainTestnet
 
 class BaseDefiTx(ABC):
     @staticmethod
     @abstractmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "BaseDefiTx":
+    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "BaseDefiTx":
         pass
 
     @abstractmethod

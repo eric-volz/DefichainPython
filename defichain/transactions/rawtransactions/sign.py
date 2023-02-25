@@ -8,7 +8,6 @@ from defichain.transactions.constants import ORDER
 
 
 def sign_input(privateKey: str, data: bytes) -> str:
-    print(privateKey)
     """
     Signs the given data with a given private key in a deterministic way
 

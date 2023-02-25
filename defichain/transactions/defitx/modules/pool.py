@@ -1,5 +1,5 @@
 from defichain.exceptions.transactions import AddressError
-from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
+from defichain.networks import DefichainMainnet, DefichainTestnet
 from defichain.transactions.constants import DefiTxType
 from defichain.transactions.address import Address
 from defichain.transactions.utils import Converter, Token, Verify
@@ -21,7 +21,7 @@ class Poolswap(BaseDefiTx):
     """
 
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "Poolswap":
+    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "Poolswap":
         position = 0
 
         lengthAddressFrom = Converter.hex_to_int(hex[position: position + 2]) * 2

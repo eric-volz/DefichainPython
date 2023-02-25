@@ -5,7 +5,7 @@ from defichain.transactions.address.address import Address
 from defichain.transactions.rawtransactions.txbase import TxBase
 from defichain.transactions.rawtransactions.txinput import TxBaseInput
 from defichain.transactions.rawtransactions.txoutput import TxBaseOutput
-from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
+from defichain.networks import DefichainMainnet, DefichainTestnet
 
 
 class WitnessHashBase(TxBase, ABC):
@@ -188,7 +188,7 @@ class WitnessBase(TxBase, ABC):
 class WitnessHash(WitnessHashBase):
 
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "WitnessHash":
+    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "WitnessHash":
         raise RawTransactionError("The witness hash cannot be deserialized")
 
     def __init__(self, tx, input: TxBaseInput):
@@ -234,7 +234,7 @@ class WitnessHash(WitnessHashBase):
 
 class Witness(WitnessBase):
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "Witness":
+    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "Witness":
         length_signature = Converter.hex_to_int(hex[:2]) * 2
         length_publicKey = Converter.hex_to_int(hex[2 + length_signature: 2 + length_signature + 2]) * 2
         signature = hex[2:length_signature + 2]

@@ -1,4 +1,4 @@
-from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
+from defichain.networks import DefichainMainnet, DefichainTestnet
 from defichain.transactions.constants import DefiTxType
 from defichain.transactions.address import Address
 from defichain.transactions.utils import Converter, Token, Verify
@@ -21,7 +21,7 @@ class UtxosToAccount(BaseDefiTx):
     """
 
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "BaseDefiTx":
+    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "BaseDefiTx":
         position = 0
 
         numberOfElements1 = Converter.hex_to_int(hex[position: position + 2])

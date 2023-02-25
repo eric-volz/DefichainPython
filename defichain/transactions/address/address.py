@@ -15,7 +15,7 @@ from .p2wpkh import P2WPKH
 class Address:
 
     @staticmethod
-    def get_addressType(address: str) -> (DefichainMainnet or DefichainTestnet or DefichainRegtest, str):
+    def get_addressType(address: str) -> (DefichainMainnet or DefichainTestnet, str):
         """
         Analyses the given address and returns the network and the address type
 
@@ -34,7 +34,7 @@ class Address:
             pass
 
         if _base58:
-            for network in [DefichainMainnet, DefichainTestnet, DefichainRegtest]:
+            for network in [DefichainMainnet, DefichainTestnet]:
                 if Converter.int_to_hex(network.PUBLIC_KEY_ADDRESS, 1) == prefix:
                     return network, AddressTypes.P2PKH
                 elif Converter.int_to_hex(network.SCRIPT_ADDRESS, 1) == prefix:
@@ -49,7 +49,7 @@ class Address:
             pass
 
         if _bech32:
-            for network in [DefichainMainnet, DefichainTestnet, DefichainRegtest]:
+            for network in [DefichainMainnet, DefichainTestnet]:
                 if prefix == network.SEGWIT_ADDRESS.HRP:
                     return network, AddressTypes.P2WPKH
         raise AddressError("This address ist not supported")
@@ -74,8 +74,7 @@ class Address:
             raise AddressError("This address ist not supported")
 
     @staticmethod
-    def from_scriptPublicKey(network: DefichainMainnet or DefichainTestnet or DefichainRegtest,
-                             scriptPublicKey: str) -> "BaseAddress":
+    def from_scriptPublicKey(network: DefichainMainnet or DefichainTestnet, scriptPublicKey: str) -> "BaseAddress":
         """
         Creates the matching address object for the given script public key.
 

@@ -39,7 +39,8 @@ class RawTransactionBuilder:
         tx.add_output(change_output)
 
         # Calculate fee
-        fee = define_fee(tx, [self.get_account().get_wif()], self.get_feePerByte())
+        fee = define_fee(tx, self.get_account().get_network(), [self.get_account().get_privateKey()],
+                         self.get_feePerByte())
 
         # Subtract fee from output
         tx.get_outputs()[1].set_value(tx.get_outputs()[1].get_value() - fee)
@@ -49,7 +50,7 @@ class RawTransactionBuilder:
         return tx
 
     def sign(self, tx: Transaction) -> None:
-        tx.sign([self.get_account().get_wif()])
+        tx.sign(self.get_account().get_network(), [self.get_account().get_privateKey()])
 
     # Get Information
     def get_address(self) -> str:

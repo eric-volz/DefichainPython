@@ -1,9 +1,8 @@
 from abc import ABC, abstractmethod
 
 from defichain.exceptions.transactions import RawTransactionError
-from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
+from defichain.networks import DefichainMainnet, DefichainTestnet
 from defichain.transactions.keys import PrivateKey, KeyError
-from defichain.transactions.address import Address
 from defichain.transactions.utils import Converter
 from defichain.transactions.constants import SIGHASH, OPCodes, DefiTx_SIGNATURE
 
@@ -30,7 +29,7 @@ class BaseTransaction(TxBase, ABC):
 
     # Abstract Methods
     @abstractmethod
-    def sign(self, private_keys: [str]) -> None:
+    def sign(self, network : DefichainMainnet or DefichainTestnet, private_keys: [str]) -> None:
         pass
 
     # Calculated Information
@@ -148,7 +147,7 @@ class BaseTransaction(TxBase, ABC):
 class Transaction(BaseTransaction):
 
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet or DefichainRegtest, hex: str) -> "Transaction":
+    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "Transaction":
         """
         For now it's only possible to deserialize Segwit transactions
         TODO:
@@ -334,7 +333,7 @@ class Transaction(BaseTransaction):
     def verify(self) -> bool:
         """TODO: Verify transaction inputs"""
 
-    def sign(self, private_keys: [str]) -> None:
+    def sign(self, network: DefichainMainnet or DefichainTestnet, private_keys: [str]) -> None:
         """
         Signs the raw transaction with the given private keys
 
@@ -347,10 +346,10 @@ class Transaction(BaseTransaction):
         # Check if wif and calc hexadecimal private key
         keys = []
         for key in private_keys:
-            if PrivateKey.is_privateKey(DefichainMainnet, key):
-                key = PrivateKey(DefichainMainnet, privateKey=key)
-            elif PrivateKey.is_wif(DefichainMainnet, key):
-                key = PrivateKey(DefichainMainnet, wif=key)
+            if PrivateKey.is_privateKey(network, key):
+                key = PrivateKey(network, privateKey=key)
+            elif PrivateKey.is_wif(network, key):
+                key = PrivateKey(network, wif=key)
             else:
                 raise KeyError("Given private key is not valid")
             keys.append({"private": key.get_privateKey(), "public": key.get_publicKey()})
@@ -358,7 +357,6 @@ class Transaction(BaseTransaction):
         # Assign private and public keys to the correct input
         for input in self.get_inputs():
             if not input._private_key:
-                network = Address.from_address(input.get_address()).get_network()
                 for key in keys:
                     priv = PrivateKey(network, key["private"])
                     if input.get_address() in [priv.p2sh_address(), priv.p2wpkh_address(), priv.p2sh_address()]:
