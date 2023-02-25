@@ -66,7 +66,7 @@ class Ocean:
 
     def _test_connection(self):
         try:
-            requests.get(self._attachedURL)
+            requests.get(self._attachedURL + "stats")
             return True
         except Exception as e:
             print(f"No connection could be established to: {self._attachedURL}")
