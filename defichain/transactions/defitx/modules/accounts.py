@@ -15,7 +15,7 @@ class UtxosToAccount(BaseDefiTx):
     :type address: str
     :param amount: (required) the amount to convert
     :type amount: int
-    :param tokenId: (optional) the token id to convert (default = 0 -> DFI)
+    :param tokenId: (optional) the token id or symbol to convert (default = 0 -> DFI)
     :type tokenId: int
     :return: "hex" (string) -- returns the finished defi transaction
     """
@@ -27,25 +27,12 @@ class UtxosToAccount(BaseDefiTx):
         numberOfElements1 = Converter.hex_to_int(hex[position: position + 2])
         position += 2
 
-        lengthScriptPublicKey = Converter.hex_to_int(hex[position: position + 2]) * 2
-        position += 2
+        scriptBalances = ScriptBalances.deserialize(network, hex[position:])
 
-        address = Address.from_scriptPublicKey(network, hex[position: position + lengthScriptPublicKey])
-        position += lengthScriptPublicKey
+        return UtxosToAccount(scriptBalances.get_address(), scriptBalances.get_tokenBalanceInt32()[0].get_amount(),
+                              scriptBalances.get_tokenBalanceInt32()[0].get_tokenId())
 
-        numberOfElements2 = Converter.hex_to_int(hex[position: position + 2])
-        position += 2
-
-        tokenId = Converter.hex_to_int(hex[position: position + 8])
-        position += 8
-
-        amount = Converter.hex_to_int(hex[position: position + 16])
-        position += 16
-
-        return UtxosToAccount(address.get_address(), amount, tokenId)
-
-    def __init__(self, address: str, amount: int, tokenId: int = 0):
-
+    def __init__(self, address: str, amount: int, tokenId: int | str = 0):
         self._address, self._tokenId, self._amount = None, None, None
         self._network = None
         self.set_address(address)
@@ -68,13 +55,13 @@ class UtxosToAccount(BaseDefiTx):
 
     def __str__(self) -> str:
         result = f"""
-                UtxosToAccount
-                --------------
-                Address: {self.get_address()}
-                Amount: {self.get_amount()}
-                Token ID: {self.get_tokenId()}
-    
-                """
+        UtxosToAccount
+        --------------
+        Address: {self.get_address()}
+        Amount: {self.get_amount()}
+        Token ID: {self.get_tokenId()}
+        
+        """
         return result
 
     def to_json(self) -> {}:
@@ -85,13 +72,6 @@ class UtxosToAccount(BaseDefiTx):
             "tokenId": self.get_tokenId()
         }
         return result
-
-    def verify(self) -> bool:
-        address = Address.from_address(self.get_address())
-        self._network = address.get_network()
-        Verify.is_int(self.get_amount())
-        Token.verify_tokenId(self._network, self.get_tokenId())
-        return True
 
     # Get Information
     def get_defiTxType(self) -> str:
@@ -108,12 +88,19 @@ class UtxosToAccount(BaseDefiTx):
 
     # Set Information
     def set_address(self, address: str) -> None:
-        self._address = address
+        address = Address.from_address(address)
+        self._network = address.get_network()
+        self._address = address.get_address()
 
-    def set_tokenId(self, tokenId: int) -> None:
-        self._tokenId = tokenId
+    def set_tokenId(self, tokenId: int | str) -> None:
+        if isinstance(tokenId, str) and not Verify.is_only_number_str(tokenId):
+            self._tokenId = Token.get_id_from_symbol(self._network, tokenId)
+        else:
+            Token.verify_tokenId(self._network, tokenId)
+            self._tokenId = tokenId
 
     def set_amount(self, amount: int) -> None:
+        Verify.is_int(amount)
         self._amount = amount
 
 

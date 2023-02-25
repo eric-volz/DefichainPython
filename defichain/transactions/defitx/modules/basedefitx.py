@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 
 from defichain.networks import DefichainMainnet, DefichainTestnet
 
+
 class BaseDefiTx(ABC):
     @staticmethod
     @abstractmethod
@@ -20,19 +21,13 @@ class BaseDefiTx(ABC):
     def to_json(self) -> {}:
         pass
 
-    @abstractmethod
-    def verify(self) -> bool:
-        pass
-
     def size(self) -> int:
         return len(self.bytes())
 
     def serialize(self) -> str:
-        self.verify()
         return bytes(self).hex()
 
     def bytes(self) -> bytes:
-        self.verify()
         return bytes(self)
 
     @abstractmethod

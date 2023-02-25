@@ -120,18 +120,6 @@ class Poolswap(BaseDefiTx):
         }
         return result
 
-    def verify(self) -> bool:
-        address = Address.from_address(self.get_addressFrom())
-        self._network = address.get_network()
-        Token.verify_tokenId(self._network, self.get_tokenFrom())
-        Verify.is_int(self.get_amountFrom())
-        address = Address.from_address(self.get_addressTo())
-        if self._network != address.get_network():
-            raise AddressError("The given addresses in the poolswap are not from the same network")
-        Token.verify_tokenId(self._network, self.get_tokenTo())
-        Verify.is_int(self.get_maxPrice())
-        return True
-
     # Get information
     def get_defiTxType(self) -> str:
         return DefiTxType.OP_DEFI_TX_POOL_SWAP
@@ -157,21 +145,28 @@ class Poolswap(BaseDefiTx):
     # Set Information
 
     def set_addressFrom(self, addressFrom: str) -> None:
-        self._addressFrom = addressFrom
+        address = Address.from_address(addressFrom)
+        self._network = address.get_network()
+        self._addressFrom = address.get_address()
 
-    def set_tokenFrom(self, tokenFrom: int) -> None:
-        self._tokenFrom = tokenFrom
+    def set_tokenFrom(self, tokenFrom: int | str) -> None:
+        self._tokenFrom = Token.checkAndConvert(self._network, tokenFrom)
 
     def set_amountFrom(self, amountFrom: int) -> None:
+        Verify.is_int(amountFrom)
         self._amountFrom = amountFrom
 
     def set_addressTo(self, addressTo: str) -> None:
-        self._addressTo = addressTo
+        address = Address.from_address(addressTo)
+        if address.get_network() != self._network:
+            raise AddressError("The given addresses in the poolswap are not from the same network")
+        self._addressTo = address.get_address()
 
-    def set_tokenTo(self, tokenTo: int) -> None:
-        self._tokenTo = tokenTo
+    def set_tokenTo(self, tokenTo: int | str) -> None:
+        self._tokenTo = Token.checkAndConvert(self._network, tokenTo)
 
     def set_maxPrice(self, maxPrice: int) -> None:
+        Verify.is_int(maxPrice)
         self._maxPrice = maxPrice
 
 
