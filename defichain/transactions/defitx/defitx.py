@@ -1,8 +1,8 @@
 from defichain.networks import DefichainMainnet, DefichainTestnet
 from defichain.transactions.constants import DefiTxType,  DefiTx_SIGNATURE
 from .modules.basedefitx import BaseDefiTx
-from .modules.accounts import UtxosToAccount
-from .modules.pool import Poolswap
+from .modules.accounts import *
+from .modules.pool import *
 
 
 class DefiTx:
@@ -29,8 +29,13 @@ class DefiTx:
         defiTxType = hex[position: position + 2]
         position += 2
 
+        # Account
         if DefiTxType.OP_DEFI_TX_UTXOS_TO_ACCOUNT == defiTxType:
             return UtxosToAccount.deserialize(network, hex[position:])
+        elif DefiTxType.OP_DEFI_TX_ACCOUNT_TO_ACCOUNT == defiTxType:
+            return AccountToAccount.deserialize(network, hex[position:])
+
+        # Pool
         elif DefiTxType.OP_DEFI_TX_POOL_SWAP == defiTxType:
             return Poolswap.deserialize(network, hex[position:])
 

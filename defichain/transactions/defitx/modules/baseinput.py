@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from defichain.exceptions.transactions import DeserializeError, AddressError
 from defichain.networks import DefichainMainnet, DefichainTestnet
-from defichain.transactions.utils import Token, Verify
+from defichain.transactions.utils import Token, Verify, BuildAddressAmounts
 from defichain.transactions.address import Address
 from defichain.transactions.utils import Converter
 
@@ -38,7 +38,7 @@ class TokenBalanceInt32(BaseInput):
         amount = Converter.hex_to_int(hex[8: 24])
         return TokenBalanceInt32(tokenId, amount)
 
-    def __init__(self, tokenId: int | str, amount: int):
+    def __init__(self, tokenId: int, amount: int):
         self._token = tokenId
         self._amount = amount
 
@@ -132,6 +132,32 @@ class ScriptBalances(BaseInput):
             position += TokenBalanceInt32.estimated_size()
 
         return ScriptBalances(address.get_address(), tokenBalanceInt32)
+
+    @staticmethod
+    def deserialize_array(network: DefichainMainnet or DefichainTestnet, hex: str) -> ["ScriptBalances"]:
+        position = 0
+        numberOfReceivers = Converter.hex_to_int(hex[position: position + 2])
+        position += 2
+
+        scriptBalances = []
+
+        for _ in range(numberOfReceivers):
+            length_addressTo = Converter.hex_to_int(hex[position: position + 2]) * 2
+            numberOfAmounts = Converter.hex_to_int(hex[position + 2 + length_addressTo: position + 2 + length_addressTo + 2])
+
+            scriptBalance = ScriptBalances.deserialize(network, hex[position: position + 2 + length_addressTo + 2 + numberOfAmounts * TokenBalanceInt32.estimated_size()])
+            scriptBalances.append(scriptBalance)
+
+            position += 2 + length_addressTo + 2 + numberOfAmounts * TokenBalanceInt32.estimated_size()
+        return scriptBalances
+
+    @staticmethod
+    def to_json(scriptBalances: []) -> {}:
+        addressAmount = BuildAddressAmounts()
+        for scriptBalance in scriptBalances:
+            for tokenAmount in scriptBalance.get_tokenBalanceInt32():
+                addressAmount.add(scriptBalance.get_address(), tokenAmount.get_tokenId(), tokenAmount.get_amount())
+        return addressAmount.build()
 
     def __init__(self, address, tokenBalanceInt32: [TokenBalanceInt32]):
         self._address = address

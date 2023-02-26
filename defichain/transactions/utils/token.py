@@ -62,7 +62,7 @@ class Token:
     @staticmethod
     def checkAndConvert(network: DefichainMainnet | DefichainTestnet, tokenId: int | str):
         if isinstance(tokenId, str) and not Verify.is_only_number_str(tokenId):
-            return Token.get_id_from_symbol(network, tokenId)
+            return int(Token.get_id_from_symbol(network, tokenId))
         else:
             Token.verify_tokenId(network, tokenId)
-            return tokenId
+            return int(tokenId)
