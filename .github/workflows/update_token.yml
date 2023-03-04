@@ -1,0 +1,46 @@
+name: UpdateToken
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+env:
+  branch: raw_transactions
+
+jobs:
+    build:
+      runs-on: ubuntu-latest
+
+      steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ env.branch }}
+
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          pip install defichain~=2.3.0
+      - name: Execute Script
+        run: |
+          cd defichain/transactions/constants
+          python3 tokens.py
+      - name: Commit changes
+        run: |
+          status=$(git status --porcelain)
+          if [ -z "$status" ]; then
+            echo "No changes to the repo, skipping the commit"
+            exit 0
+          fi
+          
+          git config user.name "DefichainPython Bot"
+          git config user.email "action@github.com"
+          git add .
+          git commit -m "Updated token at $(date +'%Y-%m-%d %H:%M:%S')"
+      - name: Push changes
+        run: |
+          git push
