@@ -66,3 +66,19 @@ class DefiTxType:
     OP_DEFI_TX_WITHDRAW_FROM_VAULT: str = "4A"  # J
     OP_DEFI_TX_CLOSE_VAULT: str = "65"  # e
     OP_DEFI_TX_AUCTION_BID: str = "49"  # I
+
+    @staticmethod
+    def from_hex(hex: str) -> str:
+        # Accounts
+        if hex == "55":
+            return "OP_DEFI_TX_UTXOS_TO_ACCOUNT"
+        elif hex == "62":
+            return "OP_DEFI_TX_ACCOUNT_TO_UTXOS"
+        elif hex == "42":
+            return "OP_DEFI_TX_ACCOUNT_TO_ACCOUNT"
+        elif hex == "61":
+            return "OP_DEFI_TX_ANY_ACCOUNT_TO_ACCOUNT"
+        elif hex == "51":
+            return "OP_DEFI_TX_FUTURE_SWAP"
+
+
