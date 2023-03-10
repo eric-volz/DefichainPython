@@ -1,5 +1,6 @@
+from defichain.exceptions.transactions import RawTransactionError
 from defichain.transactions.constants import OPCodes
-from defichain.transactions.utils import Converter
+from defichain.transactions.utils import Converter, Calculate
 from .bech32address import Bech32Address
 
 
@@ -26,20 +27,8 @@ class Script(object):
         return result
 
     @staticmethod
-    def script_custom(msg: str) -> bytes:
+    def custom_script(msg: str) -> bytes:
         op_return = Converter.hex_to_bytes(OPCodes.OP_RETURN)
         msg = Converter.hex_to_bytes(Converter.str_to_hex(msg))
-        length_msg = Converter.int_to_bytes(len(msg), 1)
+        length_msg = Converter.hex_to_bytes(Calculate.write_compactSize(len(msg)))
         return op_return + length_msg + msg
-
-    # Deprecated
-    @staticmethod
-    def p2wpkh(address: str) -> bytes:
-        witness_version = Converter.int_to_bytes(0, 1)
-        witness_program = Converter.hex_to_bytes(Bech32Address.decode(address))
-        witness_length = Converter.int_to_bytes(len(witness_program), 1)
-        return witness_version + witness_length + witness_program
-
-    @staticmethod
-    def p2wpkh_scriptCode(address: str) -> bytes:
-        return bytes.fromhex(f"1976a914{Bech32Address.decode(address)}88ac")
