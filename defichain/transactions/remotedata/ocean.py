@@ -27,5 +27,9 @@ class RemoteDataOcean(RemoteData):
             return False
 
     def send_tx(self, hex: str, maxFeeRate: int = None) -> str:
-        return self.ocean.rawTx.send(hex, maxFeeRate)["data"]
+        result = self.ocean.rawTx.send(hex, maxFeeRate)
+        if "data" in result:
+            return result["data"]
+        else:
+            return result
 
