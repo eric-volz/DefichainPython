@@ -1,3 +1,4 @@
+from defichain.exceptions.transactions import RawTransactionError
 from defichain.transactions.constants import MAX_OP_LENGTH, DefiTx_SIGNATURE, OPCodes
 from defichain.transactions.utils import Converter
 
@@ -5,6 +6,7 @@ from defichain.transactions.utils import Converter
 class BuildDefiTx:
     @staticmethod
     def get_hex_scriptLength(length: int) -> str:
+        # https://github.com/JellyfishSDK/jellyfish/blob/main/packages/jellyfish-transaction/src/script/data.ts
         """
         Calculates the correct length parameter for a defi transaction
 
@@ -15,9 +17,16 @@ class BuildDefiTx:
         :param: length: number of bytes
         :return: "hex" - returns length in hexadecimal string
         """
-        if length <= MAX_OP_LENGTH:
+        if length < 76:
             return Converter.int_to_hex(length, 1)
-        return Converter.int_to_hex(MAX_OP_LENGTH, 1) + Converter.int_to_hex(length, 1)
+        elif length <= 255:
+            return "4c" + Converter.int_to_hex(length, 1)
+        elif length <= 65535:
+            return "4d" + Converter.int_to_hex(length, 2)
+        elif length <= 16777215:
+            return "4e" + Converter.int_to_hex(length, 4)
+        else:
+            raise RawTransactionError("Script is to large")
 
     @staticmethod
     def build_defiTx(defiTx: bytes) -> bytes:
