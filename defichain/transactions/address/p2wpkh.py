@@ -5,7 +5,6 @@ from .bech32address import Bech32Address
 from .script import Script
 
 
-
 class P2WPKH(Bech32Address):  # Native Segwit
     @staticmethod
     def from_publicKey(network: DefichainMainnet or DefichainTestnet, publicKey: str) -> "P2WPKH":
@@ -65,4 +64,3 @@ class P2WPKH(Bech32Address):  # Native Segwit
 
     def get_bytes_redeemScript(self) -> bytes:
         return bytes.fromhex(self.get_redeemScript())
-

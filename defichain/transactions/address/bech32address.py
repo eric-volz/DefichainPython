@@ -25,7 +25,11 @@ class Bech32Address(BaseAddress, ABC):
     @staticmethod
     def decode(address: str) -> str:
         data = reversed(address[4:-6])
-        return '%x' % sum([CHARSET.find(c) * CHARSET_BASE ** i for i, c in enumerate(data)])
+        result = '%x' % sum([CHARSET.find(c) * CHARSET_BASE ** i for i, c in enumerate(data)])
+
+        while len(result) < 40:
+            result = "0" + result
+        return result
 
     @staticmethod
     def encode(network: DefichainMainnet or DefichainTestnet, scriptPublicKey: str) -> str:

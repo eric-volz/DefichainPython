@@ -5,7 +5,6 @@ from .base58address import Base58Address
 from .script import Script
 
 
-
 class P2PKH(Base58Address):  # Legacy
 
     @staticmethod

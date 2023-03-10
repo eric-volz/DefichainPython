@@ -97,7 +97,8 @@ class Address:
         except:
             pass
 
-        raise AddressError("This script public key is not supported")
+        raise AddressError("This script public key is not supported. Could be a multi signature transaction, witch is "
+                           "currently not supported")
 
     @staticmethod
     def verify_address(address: str) -> bool:
