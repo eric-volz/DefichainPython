@@ -1,10 +1,12 @@
-import copy
-
 from defichain import Account
-from defichain.exceptions.transactions import TxBuilderError
+from defichain.exceptions.transactions import TxBuilderError, NotYetSupportedError
 
+from defichain.transactions.address import Address
+from defichain.transactions.constants import AddressTypes
+from defichain.networks import DefichainMainnet, DefichainTestnet
 from defichain.transactions.remotedata.remotedata import RemoteData
-from defichain.transactions.rawtransactions import Transaction, TxP2WPKHInput, TxOutput, TxDefiOutput, define_fee
+from defichain.transactions.rawtransactions import Transaction, TxP2WPKHInput, TxP2SHInput, TxAddressOutput, \
+    TxDefiOutput, define_fee
 from defichain.transactions.defitx.modules.basedefitx import BaseDefiTx
 
 
@@ -28,13 +30,20 @@ class RawTransactionBuilder:
             tx.set_inputs(inputs)
         else:
             for input in self.get_dataSource().get_unspent(self.get_address()):
-                tx.add_input(TxP2WPKHInput(input["txid"], input["index"], self.get_address(), input["value"]))
+                address = Address.from_scriptPublicKey(self.get_account().get_network(), input["script"])
+                if address.get_addressType() == AddressTypes.P2PKH:
+                    raise NotYetSupportedError()
+                elif address.get_addressType() == AddressTypes.P2SH:
+                    tx.add_input(TxP2SHInput(input["txid"], input["index"], self.get_account().get_p2wpkhAddress(),
+                                             input["value"]))
+                elif address.get_addressType() == AddressTypes.P2WPKH:
+                    tx.add_input(TxP2WPKHInput(input["txid"], input["index"], self.get_address(), input["value"]))
         return tx
 
     def build_defiTx(self, value: int, defiTx: BaseDefiTx, inputs=[]) -> Transaction:
         tx = self.build_transactionInputs(inputs)
         defitx_output = TxDefiOutput(value, defiTx)
-        change_output = TxOutput(tx.get_inputsValue() - value, self.get_address())
+        change_output = TxAddressOutput(tx.get_inputsValue() - value, self.get_address())
         tx.add_output(defitx_output)
         tx.add_output(change_output)
 
@@ -43,7 +52,10 @@ class RawTransactionBuilder:
                          self.get_feePerByte())
 
         # Subtract fee from output
-        tx.get_outputs()[1].set_value(tx.get_outputs()[1].get_value() - fee)
+        value = tx.get_outputs()[1].get_value() - fee
+        if value < 0:
+            raise TxBuilderError("The used address has not enough UTXO to pay the transaction fee")
+        tx.get_outputs()[1].set_value(value)
 
         # Sign and Return
         self.sign(tx)
@@ -56,6 +68,9 @@ class RawTransactionBuilder:
     def get_address(self) -> str:
         return self._address
 
+    def get_addressType(self) -> str:
+        return Address.from_address(self.get_address()).get_addressType()
+
     def get_account(self) -> Account:
         return self._account
 
@@ -64,6 +79,9 @@ class RawTransactionBuilder:
 
     def get_feePerByte(self) -> float:
         return self._feePerByte
+
+    def get_network(self) -> DefichainMainnet | DefichainTestnet:
+        return self.get_account().get_network()
 
     # Set Information
     def set_address(self, address: str) -> None:

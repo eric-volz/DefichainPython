@@ -1,4 +1,4 @@
-from defichain.transactions.rawtransactions import TxOutput, define_fee
+from defichain.transactions.rawtransactions import TxOutput, TxAddressOutput, define_fee
 from defichain.transactions.builder.rawtransactionbuilder import RawTransactionBuilder, Transaction
 
 
@@ -19,13 +19,14 @@ class UTXO:
         tx = self._builder.build_transactionInputs(inputs)
         input_value = tx.get_inputsValue()
         changeOutputValue = input_value - value
-        sendingOutput = TxOutput(value, addressTo)
-        changeOutput = TxOutput(changeOutputValue, changeAddress)
+        sendingOutput = TxAddressOutput(value, addressTo)
+        changeOutput = TxAddressOutput(changeOutputValue, changeAddress)
         tx.add_output(sendingOutput)
         tx.add_output(changeOutput)
 
         # Calculate fee
-        fee = define_fee(tx, [self._builder.get_account().get_wif()], self._builder.get_feePerByte())
+        fee = define_fee(tx, self._builder.get_network(), [self._builder.get_account().get_wif()],
+                         self._builder.get_feePerByte())
 
         # Subtract fee from output
         tx.get_outputs()[1].set_value(tx.get_outputs()[1].get_value() - fee)
@@ -36,16 +37,14 @@ class UTXO:
     def sendall(self, addressTo: str, inputs=[]) -> Transaction:
         tx = self._builder.build_transactionInputs(inputs)
         inputValue = tx.get_inputsValue()
-        output = TxOutput(inputValue, addressTo)
+        output = TxAddressOutput(inputValue, addressTo)
         tx.add_output(output)
 
         # Calculate fee
-        fee = define_fee(tx, [self._builder.get_account().get_wif()], self._builder.get_feePerByte())
+        fee = define_fee(tx, self._builder.get_network(), [self._builder.get_account().get_wif()], self._builder.get_feePerByte())
 
         # Subtract fee from output
         tx.get_outputs()[0].set_value(tx.get_outputs()[0].get_value() - fee)
 
         self._builder.sign(tx)
         return tx
-
-
