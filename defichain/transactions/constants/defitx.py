@@ -81,4 +81,8 @@ class DefiTxType:
         elif hex == "51":
             return "OP_DEFI_TX_FUTURE_SWAP"
 
+        # Pool
+        elif hex == "73":
+            return "OP_DEFI_TX_POOL_SWAP"
+
 

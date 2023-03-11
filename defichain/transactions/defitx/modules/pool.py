@@ -45,6 +45,7 @@ class Poolswap(BaseDefiTx):
         tokenTo = Converter.hex_to_int(hex[position: position + 2])
         position += 2
 
+        # TODO: Wrong
         null = Converter.hex_to_int(hex[position: position + 16])
         position += 16
 
@@ -78,6 +79,7 @@ class Poolswap(BaseDefiTx):
 
         length_addressFrom = Converter.int_to_bytes(len(addressFrom), 1)
         length_addressTo = Converter.int_to_bytes(len(addressTo), 1)
+        # TODO: Wrong
         null = Converter.int_to_bytes(0, 8)
 
         # Build PoolSwapDefiTx
@@ -94,31 +96,17 @@ class Poolswap(BaseDefiTx):
 
         return BuildDefiTx.build_defiTx(result)
 
-    def __str__(self) -> str:
-        result = f"""
-                Poolswap
-                -------
-                Address From: {self.get_addressFrom()}
-                Token From: {self.get_tokenFrom()}
-                Amount From: {self.get_amountFrom()}
-                Address To: {self.get_addressTo()}
-                Token To: {self.get_tokenTo()}
-                Max Price: {self.get_maxPrice()}
-
-                """
-        return result
-
     def to_json(self) -> {}:
-        result = {
-            "defiTxType": self.get_defiTxType(),
-            "addressFrom": self.get_addressFrom(),
-            "tokenFrom": self.get_tokenFrom(),
-            "amountFrom": self.get_amountFrom(),
-            "addressTo": self.get_addressTo(),
-            "tokenTo": self.get_tokenTo(),
-            "maxPrice": self.get_maxPrice()
-        }
-        return result
+        json = {}
+        json.update({"defiTxType": {"typeName": DefiTxType.from_hex(self.get_defiTxType()),
+                                    "typeHex": self.get_defiTxType()}})
+        json.update({"addressFrom": self.get_addressFrom()})
+        json.update({"tokenFrom": self.get_tokenFrom()})
+        json.update({"amountFrom": self.get_amountFrom()})
+        json.update({"addressTo": self.get_addressTo()})
+        json.update({"tokenTo": self.get_tokenTo()})
+        json.update({"maxPrice": self.get_maxPrice()})
+        return json
 
     # Get information
     def get_defiTxType(self) -> str:

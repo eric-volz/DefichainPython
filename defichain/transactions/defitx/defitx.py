@@ -1,4 +1,5 @@
 from defichain.networks import DefichainMainnet, DefichainTestnet
+from defichain.exceptions.transactions import NotYetSupportedError
 from defichain.transactions.constants import DefiTxType,  DefiTx_SIGNATURE
 from .modules.basedefitx import BaseDefiTx
 from .modules.accounts import *
@@ -8,7 +9,7 @@ from .modules.pool import *
 class DefiTx:
 
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "BaseDefiTx":
+    def deserialize(network: DefichainMainnet | DefichainTestnet, hex: str) -> "BaseDefiTx":
         position = 0
 
         opReturn = hex[position: position + 2]
@@ -37,5 +38,8 @@ class DefiTx:
 
         # Pool
         elif DefiTxType.OP_DEFI_TX_POOL_SWAP == defiTxType:
-            return Poolswap.deserialize(network, hex[position:])
+            raise NotYetSupportedError()
+            #return Poolswap.deserialize(network, hex[position:])
+
+        raise NotYetSupportedError()
 

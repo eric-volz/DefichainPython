@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import json
 
 from defichain.networks import DefichainMainnet, DefichainTestnet
 
@@ -13,9 +14,8 @@ class BaseDefiTx(ABC):
     def __bytes__(self) -> bytes:
         pass
 
-    @abstractmethod
-    def __str__(self) -> str:
-        pass
+    def __str__(self):
+        return json.dumps(self.to_json(), indent=5)
 
     @abstractmethod
     def to_json(self) -> {}:

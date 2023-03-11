@@ -52,25 +52,15 @@ class UtxosToAccount(BaseDefiTx):
 
         return BuildDefiTx.build_defiTx(result)
 
-    def __str__(self) -> str:
-        result = f"""
-        UtxosToAccount
-        --------------
-        Address: {self.get_address()}
-        Amount: {self.get_amount()}
-        Token ID: {self.get_tokenId()}
-        
-        """
-        return result
-
     def to_json(self) -> {}:
-        result = {
-            "defiTxType": self.get_defiTxType(),
-            "address": self.get_address(),
-            "amount": self.get_amount(),
-            "tokenId": self.get_tokenId()
-        }
-        return result
+
+        json = {}
+        json.update({"defiTxType": {"typeName": DefiTxType.from_hex(self.get_defiTxType()),
+                                    "typeHex": self.get_defiTxType()}})
+        json.update({"address": self.get_address()})
+        json.update({"amount": self.get_amount()})
+        json.update({"tokenId": self.get_tokenId()})
+        return json
 
     # Get Information
     def get_defiTxType(self) -> str:
@@ -158,23 +148,13 @@ class AccountToAccount(BaseDefiTx):
 
         return BuildDefiTx.build_defiTx(result)
 
-    def __str__(self) -> str:
-        result = f"""
-        AccountToAccount
-        --------------
-        Address From: {self.get_addressFrom()}
-        Address Amount To: {self.get_addressAmountTo()}
-        
-        """
-        return result
-
     def to_json(self) -> {}:
-        result = {
-            "defiTxType": self.get_defiTxType(),
-            "addressFrom": self.get_addressFrom(),
-            "addressAmountTo": self.get_addressAmountTo(),
-        }
-        return result
+        json = {}
+        json.update({"defiTxType": {"typeName": DefiTxType.from_hex(self.get_defiTxType()),
+                                    "typeHex": self.get_defiTxType()}})
+        json.update({"addressFrom": self.get_addressFrom()})
+        json.update({"addressAmountTo": self.get_addressAmountTo()})
+        return json
 
     # Get Information
     def get_defiTxType(self) -> str:
