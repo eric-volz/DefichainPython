@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
+import json
 
 from defichain.exceptions.transactions import RawTransactionError
-from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
+from defichain.networks import DefichainMainnet, DefichainTestnet
 from defichain.transactions.address import Address
 from defichain.transactions.utils import Verify
 
@@ -18,7 +19,7 @@ class TxBase(ABC):
             return True
 
     @staticmethod
-    def _is_index(index: int) -> bool:
+    def _is_vout(index: int) -> bool:
         if index:
             if not Verify.is_int(index):
                 raise RawTransactionError("The given index is not an integer")
@@ -65,7 +66,7 @@ class TxBase(ABC):
 
     @staticmethod
     @abstractmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "TxBase":
+    def deserialize(network: DefichainMainnet | DefichainTestnet, hex: str) -> "TxBase":
         """
         Deserializes the given hex into the object that was used to call this method
 
@@ -81,9 +82,8 @@ class TxBase(ABC):
     def __bytes__(self) -> bytes:
         pass
 
-    @abstractmethod
     def __str__(self) -> str:
-        pass
+        return json.dumps(self.to_json(), indent=5)
 
     @abstractmethod
     def to_json(self) -> {}:
