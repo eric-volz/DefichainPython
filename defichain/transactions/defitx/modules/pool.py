@@ -45,12 +45,16 @@ class Poolswap(BaseDefiTx):
         tokenTo = Converter.hex_to_int(hex[position: position + 2])
         position += 2
 
-        # TODO: Wrong
-        null = Converter.hex_to_int(hex[position: position + 16])
+        maxPriceInteger = Converter.hex_to_int(hex[position: position + 16])
         position += 16
 
-        maxPrice = Converter.hex_to_int(hex[position: position + 16])
+        maxPriceFraction = str(Converter.hex_to_int(hex[position: position + 16]))
         position += 16
+
+        while len(maxPriceFraction) < 8:
+            maxPriceFraction += "0"
+
+        maxPrice = int(str(maxPriceInteger) + maxPriceFraction)
 
         return Poolswap(addressFrom.get_address(), tokenFrom, amountFrom, addressTo.get_address(), tokenTo, maxPrice)
 
@@ -75,12 +79,14 @@ class Poolswap(BaseDefiTx):
         amountFrom = Converter.int_to_bytes(self.get_amountFrom(), 8)
         addressTo = Converter.hex_to_bytes(Address.from_address(self.get_addressTo()).get_scriptPublicKey())
         tokenTo = Converter.int_to_bytes(self.get_tokenTo(), 1)
-        maxPrice = Converter.int_to_bytes(self.get_maxPrice(), 8)
+
+        maxPriceInteger = int(str(self.get_maxPrice())[:-8])
+        maxPriceFraction = int(str(self.get_maxPrice())[-8:])
+        maxPriceInteger = Converter.int_to_bytes(maxPriceInteger, 8)
+        maxPriceFraction = Converter.int_to_bytes(maxPriceFraction, 8)
 
         length_addressFrom = Converter.int_to_bytes(len(addressFrom), 1)
         length_addressTo = Converter.int_to_bytes(len(addressTo), 1)
-        # TODO: Wrong
-        null = Converter.int_to_bytes(0, 8)
 
         # Build PoolSwapDefiTx
         result = defiTxType
@@ -91,8 +97,8 @@ class Poolswap(BaseDefiTx):
         result += length_addressTo
         result += addressTo
         result += tokenTo
-        result += null
-        result += maxPrice
+        result += maxPriceInteger
+        result += maxPriceFraction
 
         return BuildDefiTx.build_defiTx(result)
 
@@ -131,7 +137,6 @@ class Poolswap(BaseDefiTx):
         return self._maxPrice
 
     # Set Information
-
     def set_addressFrom(self, addressFrom: str) -> None:
         address = Address.from_address(addressFrom)
         self._network = address.get_network()
