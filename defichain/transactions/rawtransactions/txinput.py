@@ -32,7 +32,7 @@ class TxBaseInput(TxBase, ABC):
         return TxInput(txid=txid, vout=vout, scriptSig=scriptSig, sequence=sequence)
 
     def __init__(self, txid: str, vout: int, scriptSig: str = "", sequence: str = SEQUENCE):
-        self._txid, self.vout, self._scriptSig, self._sequence = None, None, None, None
+        self._txid, self.vout, self._scriptSig, self._address, self._value, self._sequence = None, None, None, None, None, None
         self.set_txid(txid)
         self.set_vout(vout)
         self.set_scriptSig(scriptSig)
@@ -65,6 +65,12 @@ class TxBaseInput(TxBase, ABC):
     def get_scriptSig(self) -> str:
         return self._scriptSig
 
+    def get_address(self) -> str:
+        return self._address
+
+    def get_value(self) -> int:
+        return self._value
+
     def get_unsignedInput(self) -> str:
         return Converter.bytes_to_hex(self.get_bytes_unsignedInput())
 
@@ -79,6 +85,12 @@ class TxBaseInput(TxBase, ABC):
 
     def get_bytes_scriptSig(self) -> bytes:
         return Converter.hex_to_bytes(self.get_scriptSig())
+
+    def get_bytes_address(self) -> bytes:
+        return Converter.hex_to_bytes(self.get_address())
+
+    def get_bytes_value(self) -> bytes:
+        return Converter.int_to_bytes(self.get_value(), 8)
 
     def get_bytes_unsignedInput(self) -> bytes:
         return self.get_bytes_txid() + self.get_bytes_vout() + Converter.int_to_bytes(0, 1) + self.get_bytes_sequence()
@@ -96,6 +108,12 @@ class TxBaseInput(TxBase, ABC):
     def set_scriptSig(self, scriptSig: str) -> None:
         self._scriptSig = scriptSig
 
+    def set_address(self, address: str) -> None:
+        self._address = address
+
+    def set_value(self, value: int) -> None:
+        self._value = value
+
     def set_bytes_txid(self, txid: bytes) -> None:
         self.set_txid(Converter.bytes_to_hex(bytes(reversed(txid))))
 
@@ -107,6 +125,12 @@ class TxBaseInput(TxBase, ABC):
 
     def set_bytes_scriptSig(self, scriptSig: bytes) -> None:
         self.set_scriptSig(Converter.bytes_to_hex(scriptSig))
+
+    def set_bytes_address(self, address: bytes) -> None:
+        self.set_address(Converter.bytes_to_hex(address))
+
+    def set_bytes_value(self, value: bytes) -> None:
+        self.set_value(Converter.bytes_to_int(value))
 
 
 class TxInput(TxBaseInput):
@@ -241,7 +265,7 @@ class TxP2SHInput(TxInput):
         return TxP2SHInput(txid=input.get_txid(), vout=input.get_vout(), address=address, sequence=input.get_sequence())
 
     def __init__(self, txid: str, vout: int, address: str = "", value: int = None, sequence: str = SEQUENCE):
-        self._address, self._value, self._witness = None, None, None
+        self._witness = None
         super().__init__(txid, vout, "", sequence)
         self.set_address(address)
         self.set_value(value)
@@ -260,20 +284,8 @@ class TxP2SHInput(TxInput):
         return json
 
     # Get Information
-    def get_address(self) -> str:
-        return self._address
-
-    def get_value(self) -> int:
-        return self._value
-
     def get_witness(self) -> "Witness":
         return self._witness
-
-    def get_bytes_address(self) -> bytes:
-        return Converter.hex_to_bytes(self.get_address())
-
-    def get_bytes_value(self) -> bytes:
-        return Converter.int_to_bytes(self.get_value(), 8)
 
     def get_bytes_witness(self) -> bytes:
         return self.get_witness().bytes()
@@ -292,17 +304,8 @@ class TxP2SHInput(TxInput):
             self._address = address
             self.set_scriptSig("")
 
-    def set_value(self, value: int) -> None:
-        self._value = value
-
     def set_witness(self, witness) -> None:
         self._witness = witness
-
-    def set_bytes_address(self, address: bytes) -> None:
-        self.set_address(Converter.bytes_to_hex(address))
-
-    def set_bytes_value(self, value: bytes) -> None:
-        self.set_value(Converter.bytes_to_int(value))
 
     def set_bytes_witness(self, witness: bytes) -> None:
         self.set_witness(Converter.bytes_to_hex(witness))
@@ -330,7 +333,7 @@ class TxP2WPKHInput(TxInput):
         return TxP2WPKHInput(txid=input.get_txid(), vout=input.get_vout(), sequence=input.get_sequence())
 
     def __init__(self, txid: str, vout: int, address: str = "", value: int = None, sequence: str = SEQUENCE):
-        self._address, self._value, self._witness = None, None, None
+        self._witness = None
         super().__init__(txid, vout, "", sequence)
         self.set_address(address)
         self.set_value(value)
@@ -349,39 +352,15 @@ class TxP2WPKHInput(TxInput):
         return json
 
     # Get Information
-    def get_address(self) -> str:
-        return self._address
-
-    def get_value(self) -> int:
-        return self._value
-
     def get_witness(self) -> "Witness":
         return self._witness
-
-    def get_bytes_address(self) -> bytes:
-        return Converter.hex_to_bytes(self.get_address())
-
-    def get_bytes_value(self) -> bytes:
-        return Converter.int_to_bytes(self.get_value(), 8)
 
     def get_bytes_witness(self) -> bytes:
         return Converter.hex_to_bytes(self.get_witness())
 
     # Set Information
-    def set_address(self, address: str) -> None:
-        self._address = address
-
-    def set_value(self, value: int) -> None:
-        self._value = value
-
     def set_witness(self, witness) -> None:
         self._witness = witness
-
-    def set_bytes_address(self, address: bytes) -> None:
-        self.set_address(Converter.bytes_to_hex(address))
-
-    def set_bytes_value(self, value: bytes) -> None:
-        self.set_value(Converter.bytes_to_int(value))
 
     def set_bytes_witness(self, witness: bytes) -> None:
         self.set_witness(Converter.bytes_to_hex(witness))

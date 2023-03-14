@@ -269,7 +269,6 @@ class TxDefiOutput(TxOutput):
         return TxDefiOutput(value=output.get_value(), defiTx=defiTx, tokenId=output.get_tokenId())
 
     def __init__(self, value, defiTx: BaseDefiTx, tokenId: int = 0):
-
         self._defiTx: BaseDefiTx = None
         self.set_defiTx(defiTx)
         super().__init__(value, self.get_defiTx().serialize(), tokenId)
