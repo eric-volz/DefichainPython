@@ -1,9 +1,9 @@
-from defichain import Account, Ocean
+from defichain import Account, Ocean, Node
 
 from defichain.exceptions.transactions import TxBuilderError
 
 from defichain.transactions.remotedata.remotedata import RemoteData
-from defichain.transactions.remotedata import RemoteDataOcean
+from defichain.transactions.remotedata import RemoteDataOcean, RemoteDataNode
 
 from .rawtransactionbuilder import RawTransactionBuilder
 from .modules import *
@@ -12,7 +12,7 @@ from defichain.transactions.rawtransactions import Transaction
 
 
 class TxBuilder:
-    def __init__(self, address: str, account: Account, dataSource: Ocean, feePerByte=1.0):
+    def __init__(self, address: str, account: Account, dataSource: Ocean | Node, feePerByte=1.0):
         self._address, self._account, self._dataSource, self._feePerByte = None, None, None, None
         self._set_address(address)
         self._set_account(account)
@@ -27,11 +27,15 @@ class TxBuilder:
         self.pool = Pool(_builder)
 
     # Methods
-    def send_tx(self, tx: Transaction, maxFeeRate: int = None) -> str:
-        if not tx.is_signed():
-            raise TxBuilderError("The transaction cannot be sent because it is not yet signed!")
-
-        return self._get_dataSource().send_tx(tx.serialize(), maxFeeRate)
+    def send_tx(self, tx: Transaction | str, maxFeeRate: int = None) -> str:
+        if isinstance(tx, Transaction):
+            if not tx.is_signed():
+                raise TxBuilderError("The transaction cannot be sent because it is not yet signed!")
+            return self._get_dataSource().send_tx(tx.serialize(), maxFeeRate)
+        elif isinstance(tx, str):
+            return self._get_dataSource().send_tx(tx, maxFeeRate)
+        else:
+            raise TxBuilderError("To send the transaction it has to be an transaction object or an hex string!")
 
     def test_tx(self, tx: Transaction, maxFeeRate: int = None) -> str:
         pass
@@ -59,6 +63,8 @@ class TxBuilder:
     def _set_dataSource(self, dataSource: Ocean) -> None:
         if isinstance(dataSource, Ocean):
             self._dataSource = RemoteDataOcean(dataSource)
+        elif isinstance(dataSource, Node):
+            self._dataSource = RemoteDataNode(dataSource)
         else:
             raise TxBuilderError("The given source is currently not usable")
 

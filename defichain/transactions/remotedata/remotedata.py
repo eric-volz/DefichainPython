@@ -15,14 +15,15 @@ class RemoteData(ABC):
         Contains all needed information about the unspent input of an address
 
         :param address: the address to list the unspent from
-        :return: [{txid: ..., index: ..., value: ..., script_type: ..., script: ...}, ...]
+        :return: [{txid: ..., vout: ..., value: ..., scriptPubKey: ...}, ...]
         """
         pass
 
     @abstractmethod
     def test_tx(self, hex: str, maxFeeRate: int = None) -> bool:
         """
-        Tests the given raw transaction
+        Test the given raw transaction
+
         :param hex: raw transaction
         :param maxFeeRate: maximum fee to pay
         :return: bool

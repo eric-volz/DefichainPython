@@ -30,19 +30,22 @@ class RawTransactionBuilder:
             tx.set_inputs(inputs)
         else:
             for input in self.get_dataSource().get_unspent(self.get_address()):
-                address = Address.from_scriptPublicKey(self.get_account().get_network(), input["script"])
+                address = Address.from_scriptPublicKey(self.get_account().get_network(), input["scriptPubKey"])
                 if address.get_addressType() == AddressTypes.P2PKH:
                     raise NotYetSupportedError()
                 elif address.get_addressType() == AddressTypes.P2SH:
-                    tx.add_input(TxP2SHInput(input["txid"], input["index"], self.get_account().get_p2wpkhAddress(),
+                    tx.add_input(TxP2SHInput(input["txid"], input["vout"], self.get_account().get_p2wpkhAddress(),
                                              input["value"]))
                 elif address.get_addressType() == AddressTypes.P2WPKH:
-                    tx.add_input(TxP2WPKHInput(input["txid"], input["index"], self.get_address(), input["value"]))
+                    tx.add_input(TxP2WPKHInput(input["txid"], input["vout"], self.get_address(), input["value"]))
         return tx
 
     def build_defiTx(self, value: int, defiTx: BaseDefiTx, inputs=[]) -> Transaction:
         tx = self.build_transactionInputs(inputs)
         defitx_output = TxDefiOutput(value, defiTx)
+        if tx.get_inputsValue() - value < 0:
+            raise TxBuilderError("The value of the output is bigger then the value of the input")
+
         change_output = TxAddressOutput(tx.get_inputsValue() - value, self.get_address())
         tx.add_output(defitx_output)
         tx.add_output(change_output)

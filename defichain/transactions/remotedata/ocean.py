@@ -14,9 +14,8 @@ class RemoteDataOcean(RemoteData):
             txid = u["vout"]["txid"]
             index = u["vout"]["n"]
             value = int(round(float(u["vout"]["value"]) * 100000000))
-            script_type = u["script"]["type"]
             script = u["script"]["hex"]
-            unspent.append({"txid": txid, "index": index, "value": value, "script_type": script_type, "script": script})
+            unspent.append({"txid": txid, "vout": index, "value": value, "scriptPubKey": script})
         return unspent
 
     def test_tx(self, hex: str, maxFeeRate: int = None) -> bool:
