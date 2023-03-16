@@ -19,12 +19,12 @@ class TxBuilder:
         self._set_dataSource(dataSource)
         self._set_feePerByte(feePerByte)
 
-        _builder = RawTransactionBuilder(self._get_address(), self._get_account(), self._get_dataSource(),
-                                         self._get_feePerByte())
+        self._builder = RawTransactionBuilder(self._get_address(), self._get_account(), self._get_dataSource(),
+                                              self._get_feePerByte())
 
-        self.utxo = UTXO(_builder)
-        self.accounts = Accounts(_builder)
-        self.pool = Pool(_builder)
+        self.utxo = UTXO(self._builder)
+        self.accounts = Accounts(self._builder)
+        self.pool = Pool(self._builder)
 
     # Methods
     def send_tx(self, tx: Transaction | str, maxFeeRate: int = None) -> str:
@@ -37,8 +37,22 @@ class TxBuilder:
         else:
             raise TxBuilderError("To send the transaction it has to be an transaction object or an hex string!")
 
-    def test_tx(self, tx: Transaction, maxFeeRate: int = None) -> str:
-        pass
+    def test_tx(self, tx: Transaction, maxFeeRate: int = None) -> bool:
+        try:
+            if isinstance(tx, Transaction):
+                if not tx.is_signed():
+                    raise TxBuilderError("The transaction cannot be sent because it is not yet signed!")
+                self._get_dataSource().test_tx(tx.serialize(), maxFeeRate)
+            elif isinstance(tx, str):
+                self._get_dataSource().test_tx(tx, maxFeeRate)
+            else:
+                raise TxBuilderError("To send the transaction it has to be an transaction object or an hex string!")
+            return True
+        except:
+            return False
+
+    def get_inputs_tx(self):
+        return self._builder.build_transactionInputs()
 
     # Get Information
     def _get_address(self) -> str:

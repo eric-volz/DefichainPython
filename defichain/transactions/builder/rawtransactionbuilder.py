@@ -31,11 +31,14 @@ class RawTransactionBuilder:
         else:
             for input in self.get_dataSource().get_unspent(self.get_address()):
                 address = Address.from_scriptPublicKey(self.get_account().get_network(), input["scriptPubKey"])
+                # Build P2PKH Input
                 if address.get_addressType() == AddressTypes.P2PKH:
                     raise NotYetSupportedError()
+                # Build P2SH Input
                 elif address.get_addressType() == AddressTypes.P2SH:
                     tx.add_input(TxP2SHInput(input["txid"], input["vout"], self.get_account().get_p2wpkhAddress(),
                                              input["value"]))
+                # build P2WPKH Input
                 elif address.get_addressType() == AddressTypes.P2WPKH:
                     tx.add_input(TxP2WPKHInput(input["txid"], input["vout"], self.get_address(), input["value"]))
         return tx
