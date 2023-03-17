@@ -1,4 +1,4 @@
-from defichain.transactions.rawtransactions import TxOutput, TxAddressOutput, define_fee
+from defichain.transactions.rawtransactions import TxAddressOutput, estimate_fee
 from defichain.transactions.builder.rawtransactionbuilder import RawTransactionBuilder, Transaction
 
 
@@ -7,8 +7,8 @@ class UTXO:
     def __init__(self, builder):
         self._builder: RawTransactionBuilder = builder
 
-    def send(self, value: int, addressTo: str, changeAddress: str = "fromAddress", inputs=[]) -> Transaction:
-        if changeAddress == "fromAddress":
+    def send(self, value: int, addressTo: str, changeAddress: str = None, inputs=[]) -> Transaction:
+        if changeAddress is None:
             changeAddress = self._builder.get_address()
 
         # If to_address is the same as account address
@@ -25,8 +25,7 @@ class UTXO:
         tx.add_output(changeOutput)
 
         # Calculate fee
-        fee = define_fee(tx, self._builder.get_network(), [self._builder.get_account().get_wif()],
-                         self._builder.get_feePerByte())
+        fee = estimate_fee(tx, self._builder.get_feePerByte())
 
         # Subtract fee from output
         tx.get_outputs()[1].set_value(tx.get_outputs()[1].get_value() - fee)
@@ -41,7 +40,7 @@ class UTXO:
         tx.add_output(output)
 
         # Calculate fee
-        fee = define_fee(tx, self._builder.get_network(), [self._builder.get_account().get_wif()], self._builder.get_feePerByte())
+        fee = estimate_fee(tx, self._builder.get_feePerByte())
 
         # Subtract fee from output
         tx.get_outputs()[0].set_value(tx.get_outputs()[0].get_value() - fee)

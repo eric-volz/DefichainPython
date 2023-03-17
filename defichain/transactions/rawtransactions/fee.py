@@ -1,22 +1,27 @@
-from defichain.networks import DefichainMainnet, DefichainTestnet
-import copy
+from defichain.transactions.constants import TxSize
+from .txinput import TxP2PKHInput, TxP2SHInput, TxP2WPKHInput
+from .tx import Transaction
 
 
-def define_fee(tx, network: DefichainMainnet or DefichainTestnet, keys: [], feePerByte):
+def estimate_fee(tx: Transaction, feePerByte: float):
     """
     Signes the transaction to find out the real size
 
-
     :param tx: (required) the transaction object
     :type tx: Transaction
-    :param network: (required) Network
-    :type network: DefichainMainnet or DefichainTestnet
-    :param keys: (required) array with all needed keys to sign the transaction
-    :type keys: [str]
     :param feePerByte: (required) the amount of fee to pay per byte
     :type feePerByte: float
     :return: "int" - the amount of fee to pay
     """
-    copy_tx = copy.deepcopy(tx)
-    copy_tx.sign(network, keys)
-    return round(copy_tx.size() * feePerByte)
+    # Current Size
+    size = tx.size()
+
+    # Add witniss and signature size
+    for input in tx.get_inputs():
+        if isinstance(input, TxP2SHInput) or isinstance(input, TxP2WPKHInput):
+            size += TxSize.WITNESS_SIGNATURE_LENGTH + TxSize.WITNESS_SIGNATURE + \
+                    TxSize.PUBLIC_KEY_LENGTH + TxSize.PUBLIC_KEY
+        elif isinstance(input, TxP2PKHInput):
+            size += TxSize.SCRIPTSIG_SIGNATURE
+    return round(size * feePerByte)
+

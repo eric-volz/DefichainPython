@@ -1,6 +1,6 @@
 from defichain.exceptions.transactions import AddressError
 from defichain.libs import bech32
-from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
+from defichain.networks import DefichainMainnet, DefichainTestnet
 from defichain.transactions.constants import AddressTypes
 from defichain.transactions.utils import Converter
 
@@ -81,7 +81,7 @@ class Address:
         Important: The script public key is universal.
         The correct network has to be specified to get the wanted address.
 
-        :param network: (required) Network
+        :param network: (required) DefichainMainnet | DefichainTestnet
         :param scriptPublicKey: (required) script public key
         :return: BaseAddress - returns one of these objects: P2PKH, P2SH, P2WPKH
         """

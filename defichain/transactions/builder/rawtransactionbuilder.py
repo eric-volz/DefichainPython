@@ -6,7 +6,7 @@ from defichain.transactions.constants import AddressTypes
 from defichain.networks import DefichainMainnet, DefichainTestnet
 from defichain.transactions.remotedata.remotedata import RemoteData
 from defichain.transactions.rawtransactions import Transaction, TxP2WPKHInput, TxP2SHInput, TxAddressOutput, \
-    TxDefiOutput, define_fee
+    TxDefiOutput, estimate_fee
 from defichain.transactions.defitx.modules.basedefitx import BaseDefiTx
 
 
@@ -54,8 +54,7 @@ class RawTransactionBuilder:
         tx.add_output(change_output)
 
         # Calculate fee
-        fee = define_fee(tx, self.get_account().get_network(), [self.get_account().get_privateKey()],
-                         self.get_feePerByte())
+        fee = estimate_fee(tx, self.get_feePerByte())
 
         # Subtract fee from output
         value = tx.get_outputs()[1].get_value() - fee
