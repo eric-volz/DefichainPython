@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Any
 import json
 
 from defichain.exceptions.transactions import RawTransactionError
@@ -66,7 +67,7 @@ class TxBase(ABC):
 
     @staticmethod
     @abstractmethod
-    def deserialize(network: Network, hex: str) -> "TxBase":
+    def deserialize(network: Any, hex: str) -> "TxBase":
         """
         Deserializes the given hex into the object that was used to call this method
 

@@ -1,10 +1,10 @@
 from abc import ABC
+from typing import Any
 import binascii
 import hashlib
 
 from defichain.exceptions.transactions import AddressError
 from defichain.libs import base58
-from defichain.networks import Network
 from defichain.transactions.utils import Converter
 from .baseaddress import BaseAddress
 
@@ -35,11 +35,11 @@ class Base58Address(BaseAddress, ABC):
         return base58.decode(address).hex()
 
     @staticmethod
-    def encode(network: Network, scriptPublicKey: str) -> str:
+    def encode(network: Any, scriptPublicKey: str) -> str:
         return base58.check_encode(Converter.hex_to_bytes(scriptPublicKey))
 
     @staticmethod
-    def scriptPublicKey_to_address(network: Network,
+    def scriptPublicKey_to_address(network: Any,
                                    scriptPublicKey: str) -> str:
         Base58Address._is_scriptPublicKey(scriptPublicKey)
         if scriptPublicKey[0:6] == "76a914":  # P2PKH
@@ -53,7 +53,7 @@ class Base58Address(BaseAddress, ABC):
     def verify(address: str) -> bool:
         return Base58Address._is_base58address(address)
 
-    def __init__(self, network: Network, address: str):
+    def __init__(self, network: Any, address: str):
         super().__init__(network)
         self._address = None
         self.set_address(address)

@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Any
 
 from defichain.exceptions.transactions import RawTransactionError, NotYetSupportedError, DeserializeError
 from defichain.networks import Network
@@ -27,7 +28,7 @@ class BaseTransaction(TxBase, ABC):
 
     # Abstract Methods
     @abstractmethod
-    def sign(self, network: Network, private_keys: [str]) -> "Transaction":
+    def sign(self, network: Any, private_keys: [str]) -> "Transaction":
         pass
 
     @abstractmethod
@@ -218,7 +219,7 @@ class BaseTransaction(TxBase, ABC):
 class Transaction(BaseTransaction):
 
     @staticmethod
-    def deserialize(network: Network, hex: str) -> "Transaction":
+    def deserialize(network: Any, hex: str) -> "Transaction":
         """
         Deserializes unsigned and signed transaction.
 
@@ -418,7 +419,7 @@ class Transaction(BaseTransaction):
 
         return result
 
-    def sign(self, network: Network, private_keys: [str]) -> "Transaction":
+    def sign(self, network: Any, private_keys: [str]) -> "Transaction":
         """
         Signs the raw transaction with the given private keys
 

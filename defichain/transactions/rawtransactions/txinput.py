@@ -1,4 +1,5 @@
 from abc import ABC
+from typing import Any
 
 from .txbase import TxBase
 from defichain.exceptions.transactions import AddressError, DeserializeError
@@ -11,7 +12,7 @@ from defichain.transactions.constants import AddressTypes
 
 class TxBaseInput(TxBase, ABC):
     @staticmethod
-    def deserialize(network: Network, hex: str) -> "TxBaseInput":
+    def deserialize(network: Any, hex: str) -> "TxBaseInput":
         position = 0
 
         txid = Converter.bytes_to_hex(bytes(reversed(Converter.hex_to_bytes(hex[position: position + 64]))))
@@ -148,7 +149,7 @@ class TxInput(TxBaseInput):
     """
 
     @staticmethod
-    def deserialize(network: Network, hex: str) -> "TxInput":
+    def deserialize(network: Any, hex: str) -> "TxInput":
         """
         Deserializes unsigned transaction input into input object: TxInput.
 
@@ -192,7 +193,7 @@ class TxInput(TxBaseInput):
     def to_p2pkhInput(self) -> "TxP2PKHInput":
         return TxP2PKHInput(self.get_txid(), self.get_vout(), self.get_scriptSig(), self.get_sequence())
 
-    def to_p2shInput(self, network: Network) -> "TxP2SHInput":
+    def to_p2shInput(self, network: Any) -> "TxP2SHInput":
         address = Address.from_scriptPublicKey(network, self.get_scriptSig()).get_address()
         return TxP2SHInput(self.get_txid(), self.get_vout(), address, None, self.get_sequence())
 
@@ -215,7 +216,7 @@ class TxP2PKHInput(TxInput):
     """
 
     @staticmethod
-    def deserialize(network: Network, hex: str) -> "TxP2PKHInput":
+    def deserialize(network: Any, hex: str) -> "TxP2PKHInput":
         input = TxBaseInput.deserialize(network, hex)
         if input.get_scriptSig() != "":
             if len(input.get_scriptSig()) < 23:
@@ -253,7 +254,7 @@ class TxP2SHInput(TxInput):
     """
 
     @staticmethod
-    def deserialize(network: Network, hex: str) -> "TxP2SHInput":
+    def deserialize(network: Any, hex: str) -> "TxP2SHInput":
         input = TxBaseInput.deserialize(network, hex)
         address = ""
         if input.get_scriptSig() != "":
@@ -328,7 +329,7 @@ class TxP2WPKHInput(TxInput):
     """
 
     @staticmethod
-    def deserialize(network: Network, hex: str) -> "TxP2WPKHInput":
+    def deserialize(network: Any, hex: str) -> "TxP2WPKHInput":
         input = TxBaseInput.deserialize(network, hex)
         return TxP2WPKHInput(txid=input.get_txid(), vout=input.get_vout(), sequence=input.get_sequence())
 
@@ -374,7 +375,7 @@ class TxCoinbaseInput(TxInput):
     :type scriptSig: str
     """
     @staticmethod
-    def deserialize(network: Network, hex: str) -> "TxCoinbaseInput":
+    def deserialize(network: Any, hex: str) -> "TxCoinbaseInput":
         input = TxBaseInput.deserialize(network, hex)
         if input.get_txid() != "0" * 64:
             raise DeserializeError("The given input to decode is not an coinbase input")

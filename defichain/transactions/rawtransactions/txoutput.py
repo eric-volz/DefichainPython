@@ -1,4 +1,5 @@
 from abc import ABC
+from typing import Any
 
 from .txbase import TxBase
 from defichain.exceptions.transactions import DeserializeError
@@ -13,7 +14,7 @@ from defichain.networks import Network
 class TxBaseOutput(TxBase, ABC):
 
     @staticmethod
-    def deserialize(network: Network, hex: str) -> "TxOutput":
+    def deserialize(network: Any, hex: str) -> "TxOutput":
         position = 0
 
         value = Converter.hex_to_int(hex[position: position + 16])
@@ -92,7 +93,7 @@ class TxBaseOutput(TxBase, ABC):
 
 class TxOutput(TxBaseOutput):
     @staticmethod
-    def deserialize(network: Network, hex: str) -> "TxOutput":
+    def deserialize(network: Any, hex: str) -> "TxOutput":
         """
         Deserializes a transaction output into an output object: TxAddressOutput | TxMsgOutput | TxDefiOutput |
         TxCoinbaseOutput.
@@ -150,7 +151,7 @@ class TxAddressOutput(TxOutput):
     """
 
     @staticmethod
-    def deserialize(network: Network, hex: str) -> "TxAddressOutput":
+    def deserialize(network: Any, hex: str) -> "TxAddressOutput":
         output = TxBaseOutput.deserialize(network, hex)
         address = Address.from_scriptPublicKey(network, output.get_script()).get_address()
         return TxAddressOutput(value=output.get_value(), address=address, tokenId=output.get_tokenId())
@@ -189,7 +190,7 @@ class TxAddressOutput(TxOutput):
 class TxMsgOutput(TxOutput):
 
     @staticmethod
-    def deserialize(network: Network, hex: str) -> "TxMsgOutput":
+    def deserialize(network: Any, hex: str) -> "TxMsgOutput":
         output = TxBaseOutput.deserialize(network, hex)
         OP_Code = output.get_script()[0: 2]
         if OP_Code != OPCodes.OP_RETURN:
@@ -263,7 +264,7 @@ class TxDefiOutput(TxOutput):
     """
 
     @staticmethod
-    def deserialize(network: Network, hex: str) -> "TxDefiOutput":
+    def deserialize(network: Any, hex: str) -> "TxDefiOutput":
         output = TxBaseOutput.deserialize(network, hex)
         defiTx = DefiTx.deserialize(network, output.get_script())
         return TxDefiOutput(value=output.get_value(), defiTx=defiTx, tokenId=output.get_tokenId())
@@ -304,7 +305,7 @@ class TxCoinbaseOutput(TxOutput):
     """
 
     @staticmethod
-    def deserialize(network: Network, hex: str) -> "TxCoinbaseOutput":
+    def deserialize(network: Any, hex: str) -> "TxCoinbaseOutput":
         output = TxBaseOutput.deserialize(network, hex)
         txCoinbaseOutput = TxCoinbaseOutput(output.get_script())
         txCoinbaseOutput.set_value(output.get_value())

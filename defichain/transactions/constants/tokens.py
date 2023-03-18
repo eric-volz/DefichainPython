@@ -1,7 +1,9 @@
+from typing import Any
+
 import json
 import os
 from defichain import Ocean
-from defichain.networks import Network, DefichainMainnet, DefichainTestnet
+from defichain.networks import DefichainMainnet, DefichainTestnet
 
 
 class TokenTypes:
@@ -15,22 +17,22 @@ class Tokens:
     PATH = os.path.join(os.path.dirname(__file__))
 
     @staticmethod
-    def get_standardTokens(network: Network) -> [{}]:
+    def get_standardTokens(network: Any) -> [{}]:
         with open(f"{Tokens.PATH}/{network.NETWORK}/{TokenTypes.STANDARD}_tokens.json", "r") as f:
             return json.loads(f.read())
 
     @staticmethod
-    def get_liquidityTokens(network: Network) -> [{}]:
+    def get_liquidityTokens(network: Any) -> [{}]:
         with open(f"{Tokens.PATH}/{network.NETWORK}/{TokenTypes.LIQUIDITY}_tokens.json", "r") as f:
             return json.loads(f.read())
 
     @staticmethod
-    def get_loanTokens(network: Network) -> [{}]:
+    def get_loanTokens(network: Any) -> [{}]:
         with open(f"{Tokens.PATH}/{network.NETWORK}/{TokenTypes.LOAN}_tokens.json", "r") as f:
             return json.loads(f.read())
 
     @staticmethod
-    def get_customTokens(network: Network) -> [{}]:
+    def get_customTokens(network: Any) -> [{}]:
         with open(f"{Tokens.PATH}/{network.NETWORK}/{TokenTypes.CUSTOM}_tokens.json", "r") as f:
             return json.loads(f.read())
 

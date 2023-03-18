@@ -1,5 +1,5 @@
 from defichain.exceptions.transactions import RawTransactionError
-from defichain.transactions.constants import MAX_OP_LENGTH, DefiTx_SIGNATURE, OPCodes
+from defichain.transactions.constants import DefiTx_SIGNATURE, OPCodes
 from defichain.transactions.utils import Converter
 
 

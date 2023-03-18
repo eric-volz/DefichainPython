@@ -1,13 +1,12 @@
 from abc import ABC, abstractmethod
+from typing import Any
 import json
-
-from defichain.networks import Network
 
 
 class BaseDefiTx(ABC):
     @staticmethod
     @abstractmethod
-    def deserialize(network: Network, hex: str) -> "BaseDefiTx":
+    def deserialize(network: Any, hex: str) -> "BaseDefiTx":
         pass
 
     @abstractmethod

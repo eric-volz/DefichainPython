@@ -1,3 +1,4 @@
+from typing import Any
 from defichain.exceptions.transactions import AddressError
 from defichain.libs import bech32
 from defichain.networks import Network, DefichainMainnet, DefichainTestnet
@@ -74,7 +75,7 @@ class Address:
             raise AddressError("This address ist not supported")
 
     @staticmethod
-    def from_scriptPublicKey(network: Network, scriptPublicKey: str) -> "BaseAddress":
+    def from_scriptPublicKey(network: Any, scriptPublicKey: str) -> "BaseAddress":
         """
         Creates the matching address object for the given script public key.
 

@@ -1,5 +1,6 @@
+from typing import Any
+
 from defichain.exceptions.transactions import AddressError
-from defichain.networks import Network
 from defichain.transactions.constants import DefiTxType
 from defichain.transactions.address import Address
 from defichain.transactions.utils import Converter, Token, Verify
@@ -21,7 +22,7 @@ class Poolswap(BaseDefiTx):
     """
 
     @staticmethod
-    def deserialize(network: Network, hex: str) -> "Poolswap":
+    def deserialize(network: Any, hex: str) -> "Poolswap":
         position = 0
 
         lengthAddressFrom = Converter.hex_to_int(hex[position: position + 2]) * 2
@@ -205,7 +206,7 @@ class PoolAddLiquidity(BaseDefiTx):
     """
 
     @staticmethod
-    def deserialize(network: Network, hex: str) -> "BaseDefiTx":
+    def deserialize(network: Any, hex: str) -> "BaseDefiTx":
         pass
 
     def __init__(self, addressAmount: {}, shareAddress: str):
@@ -220,7 +221,6 @@ class PoolAddLiquidity(BaseDefiTx):
 
         # Build PoolSwapDefiTx
         result = defiTxType
-
 
         return BuildDefiTx.build_defiTx(result)
 

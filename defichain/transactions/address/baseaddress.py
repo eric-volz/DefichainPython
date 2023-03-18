@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Any
 
 from defichain.networks import Network
 
@@ -7,8 +8,7 @@ class BaseAddress(ABC):
 
     @staticmethod
     @abstractmethod
-    def from_publicKey(network: Network,
-                       publicKey: str) -> "BaseAddress":
+    def from_publicKey(network: Any, publicKey: str) -> "BaseAddress":
         """
         Generates a specified address object from the given public key
 
@@ -22,8 +22,7 @@ class BaseAddress(ABC):
 
     @staticmethod
     @abstractmethod
-    def from_privateKey(network: Network,
-                         privateKey: str) -> "BaseAddress":
+    def from_privateKey(network: Any, privateKey: str) -> "BaseAddress":
         """
         Generates a specified address object from the given private key
 
@@ -37,8 +36,7 @@ class BaseAddress(ABC):
 
     @staticmethod
     @abstractmethod
-    def from_scriptPublicKey(network: Network,
-                             scriptPublicKey: str) -> "BaseAddress":
+    def from_scriptPublicKey(network: Any, scriptPublicKey: str) -> "BaseAddress":
         """
         Generates a specified address object from the given script private key
 
@@ -70,7 +68,7 @@ class BaseAddress(ABC):
 
     @staticmethod
     @abstractmethod
-    def encode(network: Network, scriptPublicKey: str) -> str:
+    def encode(network: Any, scriptPublicKey: str) -> str:
         """
         Encodes a script public key into an address
 
@@ -89,8 +87,7 @@ class BaseAddress(ABC):
         pass
 
     @staticmethod
-    def scriptPublicKey_to_address(network: Network,
-                                   scriptPublicKey: str) -> str:
+    def scriptPublicKey_to_address(network: Any, scriptPublicKey: str) -> str:
         """
         Converts the given script public key into the corresponding address
 
@@ -114,7 +111,7 @@ class BaseAddress(ABC):
         """
         pass
 
-    def __init__(self, network: Network):
+    def __init__(self, network: Any):
         self._network: Network = None
         self.set_network(network)
 
@@ -196,7 +193,7 @@ class BaseAddress(ABC):
         """
         pass
 
-    def set_network(self, network: Network) -> None:
+    def set_network(self, network: Any) -> None:
         """
         Sets the given new network
 

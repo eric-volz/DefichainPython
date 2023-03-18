@@ -1,11 +1,12 @@
 from abc import ABC
+from typing import Any
+
 from defichain.exceptions.transactions import RawTransactionError
 from defichain.transactions.utils import Converter, Calculate
 from defichain.transactions.address.address import Address
 from defichain.transactions.rawtransactions.txbase import TxBase
 from defichain.transactions.rawtransactions.txinput import TxP2WPKHInput
 from defichain.transactions.rawtransactions.txoutput import TxBaseOutput
-from defichain.networks import Network
 
 
 class WitnessHashBase(TxBase, ABC):
@@ -192,7 +193,7 @@ class WitnessBase(TxBase, ABC):
 class WitnessHash(WitnessHashBase):
 
     @staticmethod
-    def deserialize(network: Network, hex: str) -> "WitnessHash":
+    def deserialize(network: Any, hex: str) -> "WitnessHash":
         raise RawTransactionError("The witness hash cannot be deserialized")
 
     def __init__(self, tx, input: TxP2WPKHInput):
@@ -218,7 +219,7 @@ class WitnessHash(WitnessHashBase):
 
 class Witness(WitnessBase):
     @staticmethod
-    def deserialize(network: Network, hex: str) -> "Witness":
+    def deserialize(network: Any, hex: str) -> "Witness":
         length_signature = Converter.hex_to_int(hex[:2]) * 2
         length_publicKey = Converter.hex_to_int(hex[2 + length_signature: 2 + length_signature + 2]) * 2
         signature = hex[2:length_signature + 2]

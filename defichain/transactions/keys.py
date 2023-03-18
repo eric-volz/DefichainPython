@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
+from typing import Any
+
 from defichain.exceptions.transactions import KeyError
 from defichain import Wallet
-from defichain.networks import Network
 from defichain.transactions.utils import Converter
 
 
@@ -11,7 +12,7 @@ from defichain.transactions.utils import Converter
 class Key(ABC):
 
     @staticmethod
-    def is_publicKey(network: Network, publicKey: str) -> bool:
+    def is_publicKey(network: Any, publicKey: str) -> bool:
         try:
             Wallet(network).from_public_key(publicKey)
             return True
@@ -19,7 +20,7 @@ class Key(ABC):
             return False
 
     @staticmethod
-    def is_privateKey(network: Network, privateKey: str) -> bool:
+    def is_privateKey(network: Any, privateKey: str) -> bool:
         try:
             Wallet(network).from_private_key(privateKey)
             return True
@@ -27,7 +28,7 @@ class Key(ABC):
             return False
 
     @staticmethod
-    def is_wif(network: Network, wif: str) -> bool:
+    def is_wif(network: Any, wif: str) -> bool:
         try:
             Wallet(network).from_wif(wif)
             return True
@@ -36,10 +37,10 @@ class Key(ABC):
 
     @staticmethod
     @abstractmethod
-    def verify(network: Network, key: str) -> bool:
+    def verify(network: Any, key: str) -> bool:
         pass
 
-    def __init__(self, network: Network, publicKey: str):
+    def __init__(self, network: Any, publicKey: str):
         self._network = None
         self._account: Wallet = None
         self.set_network(network)
@@ -80,7 +81,7 @@ class Key(ABC):
             PublicKey.verify(self.get_network(), publicKey)
             self._account.from_public_key(publicKey)
 
-    def set_network(self, network: Network) -> None:
+    def set_network(self, network: Any) -> None:
         self._network = network
         self._account = Wallet(network)
 
@@ -88,7 +89,7 @@ class Key(ABC):
 class PublicKey(Key):
 
     @staticmethod
-    def from_privateKey(network: Network, privateKey: str) -> "PublicKey":
+    def from_privateKey(network: Any, privateKey: str) -> "PublicKey":
         if PublicKey.is_privateKey(network, privateKey):
             account = Wallet(network).from_private_key(privateKey)
             return PublicKey(network, account.public_key())
@@ -96,7 +97,7 @@ class PublicKey(Key):
             raise KeyError("The given private key is not valid")
 
     @staticmethod
-    def from_wif(network: Network, wif: str) -> "PublicKey":
+    def from_wif(network: Any, wif: str) -> "PublicKey":
         if PublicKey.is_wif(network, wif):
             account = Wallet(network).from_wif(wif)
             return PublicKey(network, account.public_key())
@@ -104,12 +105,12 @@ class PublicKey(Key):
             raise KeyError("The given wif is not valid")
 
     @staticmethod
-    def verify(network: Network, publicKey: str) -> bool:
+    def verify(network: Any, publicKey: str) -> bool:
         if not PublicKey.is_publicKey(network, publicKey):
             raise KeyError("The given public key is not valid")
         return True
 
-    def __init__(self, network: Network, publicKey: str):
+    def __init__(self, network: Any, publicKey: str):
         if not PublicKey.verify(network, publicKey):
             raise KeyError("The given public key is not valid")
         super().__init__(network, publicKey)
@@ -124,12 +125,12 @@ class PublicKey(Key):
 class PrivateKey(Key):
 
     @staticmethod
-    def verify(network: Network, key: str) -> bool:
+    def verify(network: Any, key: str) -> bool:
         if not (PrivateKey.is_privateKey(network, key) or PrivateKey.is_wif(network, key)):
             raise KeyError("The given private key or wif is not a valid private key")
         return True
 
-    def __init__(self, network: Network, privateKey: str = "",
+    def __init__(self, network: Any, privateKey: str = "",
                  wif: str = ""):
         super().__init__(network, "")
 
