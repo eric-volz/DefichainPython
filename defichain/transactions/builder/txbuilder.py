@@ -12,7 +12,7 @@ from defichain.transactions.rawtransactions import Transaction
 
 
 class TxBuilder:
-    def __init__(self, address: str, account: Account, dataSource: Ocean | Node, feePerByte=1.0):
+    def __init__(self, address: str, account: Account, dataSource: "Ocean | Node", feePerByte=1.0):
         self._address, self._account, self._dataSource, self._feePerByte = None, None, None, None
         self._set_address(address)
         self._set_account(account)
@@ -27,7 +27,7 @@ class TxBuilder:
         self.pool = Pool(self._builder)
 
     # Methods
-    def send_tx(self, tx: Transaction | str, maxFeeRate: int = None) -> str:
+    def send_tx(self, tx: "Transaction | str", maxFeeRate: int = None) -> str:
         if isinstance(tx, Transaction):
             if not tx.is_signed():
                 raise TxBuilderError("The transaction cannot be sent because it is not yet signed!")

@@ -1,6 +1,6 @@
 from defichain import Ocean
 from .verify import Verify
-from defichain.networks import DefichainMainnet, DefichainTestnet
+from defichain.networks import Network
 from defichain.exceptions.transactions import TokenError
 from defichain.transactions.constants.tokens import Tokens, TokenTypes
 
@@ -11,7 +11,7 @@ class Token:
     TOKEN_TYPES = (TokenTypes.STANDARD, TokenTypes.LOAN, TokenTypes.LIQUIDITY, TokenTypes.CUSTOM)
 
     @staticmethod
-    def _get_tokens(network: DefichainMainnet or DefichainTestnet, TYPE: str) -> [{}]:
+    def _get_tokens(network: Network, TYPE: str) -> [{}]:
         if TYPE == TokenTypes.STANDARD:
             return Tokens.get_standardTokens(network)
         elif TYPE == TokenTypes.LIQUIDITY:
@@ -25,7 +25,7 @@ class Token:
                              "Use the token types in defichain.transaction.constance.tokens.")
 
     @staticmethod
-    def get_symbol_from_id(network: DefichainMainnet or DefichainTestnet, tokenId: int) -> str:
+    def get_symbol_from_id(network: Network, tokenId: int) -> str:
         for _type in Token.TOKEN_TYPES:
             tokens = Token._get_tokens(network, _type)
             for token in tokens:
@@ -34,7 +34,7 @@ class Token:
         raise TokenError(f"The given id: {tokenId} does not exist. Check your token id input.")
 
     @staticmethod
-    def get_id_from_symbol(network: DefichainMainnet or DefichainTestnet, symbol: str) -> int:
+    def get_id_from_symbol(network: Network, symbol: str) -> int:
         for _type in Token.TOKEN_TYPES:
             tokens = Token._get_tokens(network, _type)
             for token in tokens:
@@ -43,7 +43,7 @@ class Token:
         raise TokenError(f"The given symbol: {symbol} does not exist. Check your input.")
 
     @staticmethod
-    def get_name_from_id(network: DefichainMainnet or DefichainTestnet, tokenId: int) -> str:
+    def get_name_from_id(network: Network, tokenId: int) -> str:
         for _type in Token.TOKEN_TYPES:
             tokens = Token._get_tokens(network, _type)
             for token in tokens:
@@ -52,7 +52,7 @@ class Token:
         raise TokenError(f"The given id: {tokenId} does not exist. Check your token id input.")
 
     @staticmethod
-    def verify_tokenId(network: DefichainMainnet or DefichainTestnet, tokenId: int) -> bool:
+    def verify_tokenId(network: Network, tokenId: int) -> bool:
         try:
             Token.get_name_from_id(network, tokenId)
             return True
@@ -60,7 +60,7 @@ class Token:
             raise TokenError("The given token id is not valid")
 
     @staticmethod
-    def checkAndConvert(network: DefichainMainnet | DefichainTestnet, tokenId: int | str):
+    def checkAndConvert(network: Network, tokenId: "int | str"):
         if isinstance(tokenId, str) and not Verify.is_only_number_str(tokenId):
             return int(Token.get_id_from_symbol(network, tokenId))
         else:

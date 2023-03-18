@@ -7,13 +7,13 @@ from defichain.transactions.utils import Converter, Calculate
 from defichain.transactions.defitx.modules.basedefitx import BaseDefiTx
 from defichain.transactions.address import Address, Script
 from defichain.transactions.defitx import DefiTx
-from defichain.networks import DefichainMainnet, DefichainTestnet
+from defichain.networks import Network
 
 
 class TxBaseOutput(TxBase, ABC):
 
     @staticmethod
-    def deserialize(network: DefichainMainnet | DefichainTestnet, hex: str) -> "TxOutput":
+    def deserialize(network: Network, hex: str) -> "TxOutput":
         position = 0
 
         value = Converter.hex_to_int(hex[position: position + 16])
@@ -92,13 +92,13 @@ class TxBaseOutput(TxBase, ABC):
 
 class TxOutput(TxBaseOutput):
     @staticmethod
-    def deserialize(network: DefichainMainnet | DefichainTestnet, hex: str) -> "TxOutput":
+    def deserialize(network: Network, hex: str) -> "TxOutput":
         """
         Deserializes a transaction output into an output object: TxAddressOutput | TxMsgOutput | TxDefiOutput |
         TxCoinbaseOutput.
 
         :param network: (required) the corresponding network from the raw transaction
-        :type network: DefichainMainnet | DefichainTestnet
+        :type network: Network
         :param hex: (required) the raw transaction output as hexadecimal sting
         :type hex: str
         :return: "TxInput"
@@ -150,7 +150,7 @@ class TxAddressOutput(TxOutput):
     """
 
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "TxAddressOutput":
+    def deserialize(network: Network, hex: str) -> "TxAddressOutput":
         output = TxBaseOutput.deserialize(network, hex)
         address = Address.from_scriptPublicKey(network, output.get_script()).get_address()
         return TxAddressOutput(value=output.get_value(), address=address, tokenId=output.get_tokenId())
@@ -189,7 +189,7 @@ class TxAddressOutput(TxOutput):
 class TxMsgOutput(TxOutput):
 
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "TxMsgOutput":
+    def deserialize(network: Network, hex: str) -> "TxMsgOutput":
         output = TxBaseOutput.deserialize(network, hex)
         OP_Code = output.get_script()[0: 2]
         if OP_Code != OPCodes.OP_RETURN:
@@ -263,7 +263,7 @@ class TxDefiOutput(TxOutput):
     """
 
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "TxDefiOutput":
+    def deserialize(network: Network, hex: str) -> "TxDefiOutput":
         output = TxBaseOutput.deserialize(network, hex)
         defiTx = DefiTx.deserialize(network, output.get_script())
         return TxDefiOutput(value=output.get_value(), defiTx=defiTx, tokenId=output.get_tokenId())
@@ -304,7 +304,7 @@ class TxCoinbaseOutput(TxOutput):
     """
 
     @staticmethod
-    def deserialize(network: DefichainMainnet | DefichainTestnet, hex: str) -> "TxCoinbaseOutput":
+    def deserialize(network: Network, hex: str) -> "TxCoinbaseOutput":
         output = TxBaseOutput.deserialize(network, hex)
         txCoinbaseOutput = TxCoinbaseOutput(output.get_script())
         txCoinbaseOutput.set_value(output.get_value())

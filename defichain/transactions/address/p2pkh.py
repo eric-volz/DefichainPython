@@ -1,4 +1,4 @@
-from defichain.networks import DefichainMainnet, DefichainTestnet
+from defichain.networks import Network
 from defichain.transactions.constants import AddressTypes, OPCodes
 from defichain.transactions.keys import PrivateKey, PublicKey
 from .base58address import Base58Address
@@ -8,13 +8,13 @@ from .script import Script
 class P2PKH(Base58Address):  # Legacy
 
     @staticmethod
-    def from_publicKey(network: DefichainMainnet or DefichainTestnet,
+    def from_publicKey(network: Network,
                        publicKey: str) -> "P2PKH":
         """
         Generates a P2PKH address object from the given public key
 
         :param network: (required) The network in witch the public key should be used
-        :type network: DefichainMainnet or DefichainTestnet
+        :type network: Network
         :param publicKey: (required) public key
         :type publicKey: str
         :return: P2PKH - returns the P2PKH address object
@@ -22,12 +22,12 @@ class P2PKH(Base58Address):  # Legacy
         return P2PKH(network, PublicKey(network, publicKey).p2pkh_address())
 
     @staticmethod
-    def from_privateKey(network: DefichainMainnet or DefichainTestnet, privateKey: str) -> "P2PKH":
+    def from_privateKey(network: Network, privateKey: str) -> "P2PKH":
         """
         Generates a P2PKH address object from the given private key
 
         :param network: (required) The network in witch the private key should be used
-        :type network: DefichainMainnet or DefichainTestnet
+        :type network: Network
         :param privateKey: (required) private key
         :type privateKey: str
         :return: P2PKH - returns the P2PKH address object
@@ -35,20 +35,20 @@ class P2PKH(Base58Address):  # Legacy
         return P2PKH(network, PrivateKey(network, privateKey).p2pkh_address())
 
     @staticmethod
-    def from_scriptPublicKey(network: DefichainMainnet or DefichainTestnet,
+    def from_scriptPublicKey(network: Network,
                              scriptPublicKey: str) -> "P2PKH":
         """
         Generates a P2PKH address object from the given script private key
 
         :param network: (required) The network in witch the script public key should be used
-        :type network: DefichainMainnet or DefichainTestnet
+        :type network: Network
         :param scriptPublicKey: (required) script public key
         :type scriptPublicKey: str
         :return: P2PKH - returns the P2PKH address object
         """
         return P2PKH(network, Base58Address.scriptPublicKey_to_address(network, scriptPublicKey))
 
-    def __init__(self, network: DefichainMainnet or DefichainTestnet, address: str):
+    def __init__(self, network: Network, address: str):
         super().__init__(network, address)
 
     def get_addressType(self) -> str:

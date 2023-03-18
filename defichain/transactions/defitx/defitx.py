@@ -1,4 +1,4 @@
-from defichain.networks import DefichainMainnet, DefichainTestnet
+from defichain.networks import Network
 from defichain.exceptions.transactions import NotYetSupportedError
 from defichain.transactions.constants import DefiTxType,  DefiTx_SIGNATURE
 from .modules.basedefitx import BaseDefiTx
@@ -9,7 +9,7 @@ from .modules.pool import *
 class DefiTx:
 
     @staticmethod
-    def deserialize(network: DefichainMainnet | DefichainTestnet, hex: str) -> "BaseDefiTx":
+    def deserialize(network: Network, hex: str) -> "BaseDefiTx":
         position = 0
 
         opReturn = hex[position: position + 2]

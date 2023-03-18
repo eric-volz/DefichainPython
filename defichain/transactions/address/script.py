@@ -1,7 +1,5 @@
-from defichain.exceptions.transactions import RawTransactionError
 from defichain.transactions.constants import OPCodes
 from defichain.transactions.utils import Converter, Calculate
-from .bech32address import Bech32Address
 
 
 class Script(object):

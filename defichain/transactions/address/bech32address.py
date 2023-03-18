@@ -3,7 +3,7 @@ import binascii
 
 from defichain.exceptions.transactions import AddressError
 from defichain.libs import bech32
-from defichain.networks import DefichainMainnet, DefichainTestnet
+from defichain.networks import Network
 from defichain.transactions.constants import CHARSET, CHARSET_BASE
 from .baseaddress import BaseAddress
 
@@ -32,14 +32,14 @@ class Bech32Address(BaseAddress, ABC):
         return result
 
     @staticmethod
-    def encode(network: DefichainMainnet or DefichainTestnet, scriptPublicKey: str) -> str:
+    def encode(network: Network, scriptPublicKey: str) -> str:
         binary = binascii.unhexlify(scriptPublicKey)
         version = binary[0] - 0x50 if binary[0] else 0
         program = binary[2:]
         return bech32.encode(network.SEGWIT_ADDRESS.HRP, version, program)
 
     @staticmethod
-    def scriptPublicKey_to_address(network: DefichainMainnet or DefichainTestnet,
+    def scriptPublicKey_to_address(network: Network,
                                    scriptPublicKey: str) -> str:
         if scriptPublicKey[0:4] == "0014":
             return Bech32Address.encode(network, scriptPublicKey)
@@ -48,7 +48,7 @@ class Bech32Address(BaseAddress, ABC):
     def verify(address: str) -> bool:
         return Bech32Address._is_bech32address(address)
 
-    def __init__(self, network: DefichainMainnet or DefichainTestnet, address: str):
+    def __init__(self, network: Network, address: str):
         super().__init__(network)
         self._address = None
         self.set_address(address)

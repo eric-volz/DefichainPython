@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from defichain.exceptions.transactions import DeserializeError, AddressError
-from defichain.networks import DefichainMainnet, DefichainTestnet
+from defichain.exceptions.transactions import AddressError
+from defichain.networks import Network
 from defichain.transactions.utils import Token, Verify, BuildAddressAmounts
 from defichain.transactions.address import Address
 from defichain.transactions.utils import Converter
@@ -10,7 +10,7 @@ class BaseInput(ABC):
 
     @staticmethod
     @abstractmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "BaseInput":
+    def deserialize(network: Network, hex: str) -> "BaseInput":
         pass
 
     @abstractmethod
@@ -33,7 +33,7 @@ class BaseInput(ABC):
 class TokenBalanceInt32(BaseInput):
 
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "TokenBalanceInt32":
+    def deserialize(network: Network, hex: str) -> "TokenBalanceInt32":
         tokenId = Converter.hex_to_int(hex[0:8])
         amount = Converter.hex_to_int(hex[8: 24])
         return TokenBalanceInt32(tokenId, amount)
@@ -111,7 +111,7 @@ class ScriptBalances(BaseInput):
         return scriptBalances
 
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "ScriptBalances":
+    def deserialize(network: Network, hex: str) -> "ScriptBalances":
         position = 0
 
         scriptSize = Converter.hex_to_int(hex[position: position + 2]) * 2
@@ -134,7 +134,7 @@ class ScriptBalances(BaseInput):
         return ScriptBalances(address.get_address(), tokenBalanceInt32)
 
     @staticmethod
-    def deserialize_array(network: DefichainMainnet or DefichainTestnet, hex: str) -> ["ScriptBalances"]:
+    def deserialize_array(network: Network, hex: str) -> ["ScriptBalances"]:
         position = 0
         numberOfReceivers = Converter.hex_to_int(hex[position: position + 2])
         position += 2

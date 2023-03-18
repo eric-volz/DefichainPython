@@ -1,6 +1,6 @@
 from defichain.exceptions.transactions import AddressError
 from defichain.libs import bech32
-from defichain.networks import DefichainMainnet, DefichainTestnet
+from defichain.networks import Network, DefichainMainnet, DefichainTestnet
 from defichain.transactions.constants import AddressTypes
 from defichain.transactions.utils import Converter
 
@@ -15,7 +15,7 @@ from .p2wpkh import P2WPKH
 class Address:
 
     @staticmethod
-    def get_addressType(address: str) -> (DefichainMainnet or DefichainTestnet, str):
+    def get_addressType(address: str) -> (Network, str):
         """
         Analyses the given address and returns the network and the address type
 
@@ -74,14 +74,14 @@ class Address:
             raise AddressError("This address ist not supported")
 
     @staticmethod
-    def from_scriptPublicKey(network: DefichainMainnet or DefichainTestnet, scriptPublicKey: str) -> "BaseAddress":
+    def from_scriptPublicKey(network: Network, scriptPublicKey: str) -> "BaseAddress":
         """
         Creates the matching address object for the given script public key.
 
         Important: The script public key is universal.
         The correct network has to be specified to get the wanted address.
 
-        :param network: (required) DefichainMainnet | DefichainTestnet
+        :param network: (required) Network
         :param scriptPublicKey: (required) script public key
         :return: BaseAddress - returns one of these objects: P2PKH, P2SH, P2WPKH
         """

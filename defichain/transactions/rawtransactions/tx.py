@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 from defichain.exceptions.transactions import RawTransactionError, NotYetSupportedError, DeserializeError
-from defichain.networks import DefichainMainnet, DefichainTestnet
+from defichain.networks import Network
 from defichain.transactions.address import Address
 from defichain.transactions.keys import PrivateKey, KeyError, PublicKey
 from defichain.transactions.utils import Converter, Calculate
@@ -27,7 +27,7 @@ class BaseTransaction(TxBase, ABC):
 
     # Abstract Methods
     @abstractmethod
-    def sign(self, network: DefichainMainnet | DefichainTestnet, private_keys: [str]) -> "Transaction":
+    def sign(self, network: Network, private_keys: [str]) -> "Transaction":
         pass
 
     @abstractmethod
@@ -59,7 +59,7 @@ class BaseTransaction(TxBase, ABC):
         return result
 
     # Calculated Information
-    def get_inputsValue(self) -> int | None:
+    def get_inputsValue(self) -> "int | None":
         result = 0
         for input in self.get_inputs():
             if isinstance(input, TxP2PKHInput) or isinstance(input, TxCoinbaseInput):
@@ -76,7 +76,7 @@ class BaseTransaction(TxBase, ABC):
             result += outputs.get_value()
         return result
 
-    def get_fee(self) -> int | None:
+    def get_fee(self) -> "int | None":
         return self.get_inputsValue() - self.get_outputsValue() if self.get_inputsValue() is not None else None
 
     # Get Information
@@ -218,7 +218,7 @@ class BaseTransaction(TxBase, ABC):
 class Transaction(BaseTransaction):
 
     @staticmethod
-    def deserialize(network: DefichainMainnet | DefichainTestnet, hex: str) -> "Transaction":
+    def deserialize(network: Network, hex: str) -> "Transaction":
         """
         Deserializes unsigned and signed transaction.
 
@@ -228,7 +228,7 @@ class Transaction(BaseTransaction):
         multi signature transactions.
 
         :param network: (required) the corresponding network from the raw transaction
-        :type network: DefichainMainnet | DefichainTestnet
+        :type network: Network
         :param hex: (required) the raw transaction as hexadecimal sting
         :type hex: str
         :return: "Transaction"
@@ -418,7 +418,7 @@ class Transaction(BaseTransaction):
 
         return result
 
-    def sign(self, network: DefichainMainnet | DefichainTestnet, private_keys: [str]) -> "Transaction":
+    def sign(self, network: Network, private_keys: [str]) -> "Transaction":
         """
         Signs the raw transaction with the given private keys
 

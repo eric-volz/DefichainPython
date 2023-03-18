@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import json
 
 from defichain.exceptions.transactions import RawTransactionError
-from defichain.networks import DefichainMainnet, DefichainTestnet
+from defichain.networks import Network
 from defichain.transactions.address import Address
 from defichain.transactions.utils import Verify
 
@@ -66,12 +66,12 @@ class TxBase(ABC):
 
     @staticmethod
     @abstractmethod
-    def deserialize(network: DefichainMainnet | DefichainTestnet, hex: str) -> "TxBase":
+    def deserialize(network: Network, hex: str) -> "TxBase":
         """
         Deserializes the given hex into the object that was used to call this method
 
         :param network: (required) network from defichain.networks
-        :type network: DefichainMainnet or DefichainTestnet
+        :type network: Network
         :param hex: (required) the hey that should be deserialized
         :type hex: str
         :return: "TxBase" - the object that was used to call the method

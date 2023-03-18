@@ -3,7 +3,7 @@ from defichain.exceptions.transactions import TxBuilderError, NotYetSupportedErr
 
 from defichain.transactions.address import Address
 from defichain.transactions.constants import AddressTypes
-from defichain.networks import DefichainMainnet, DefichainTestnet
+from defichain.networks import Network
 from defichain.transactions.remotedata.remotedata import RemoteData
 from defichain.transactions.rawtransactions import Transaction, TxP2WPKHInput, TxP2SHInput, TxAddressOutput, \
     TxDefiOutput, estimate_fee
@@ -85,7 +85,7 @@ class RawTransactionBuilder:
     def get_feePerByte(self) -> float:
         return self._feePerByte
 
-    def get_network(self) -> DefichainMainnet | DefichainTestnet:
+    def get_network(self) -> Network:
         return self.get_account().get_network()
 
     # Set Information

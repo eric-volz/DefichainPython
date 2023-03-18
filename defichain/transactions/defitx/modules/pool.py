@@ -1,5 +1,5 @@
 from defichain.exceptions.transactions import AddressError
-from defichain.networks import DefichainMainnet, DefichainTestnet
+from defichain.networks import Network
 from defichain.transactions.constants import DefiTxType
 from defichain.transactions.address import Address
 from defichain.transactions.utils import Converter, Token, Verify
@@ -21,7 +21,7 @@ class Poolswap(BaseDefiTx):
     """
 
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "Poolswap":
+    def deserialize(network: Network, hex: str) -> "Poolswap":
         position = 0
 
         lengthAddressFrom = Converter.hex_to_int(hex[position: position + 2]) * 2
@@ -142,7 +142,7 @@ class Poolswap(BaseDefiTx):
         self._network = address.get_network()
         self._addressFrom = address.get_address()
 
-    def set_tokenFrom(self, tokenFrom: int | str) -> None:
+    def set_tokenFrom(self, tokenFrom: "int | str") -> None:
         self._tokenFrom = Token.checkAndConvert(self._network, tokenFrom)
 
     def set_amountFrom(self, amountFrom: int) -> None:
@@ -155,7 +155,7 @@ class Poolswap(BaseDefiTx):
             raise AddressError("The given addresses in the poolswap are not from the same network")
         self._addressTo = address.get_address()
 
-    def set_tokenTo(self, tokenTo: int | str) -> None:
+    def set_tokenTo(self, tokenTo: "int | str") -> None:
         self._tokenTo = Token.checkAndConvert(self._network, tokenTo)
 
     def set_maxPrice(self, maxPrice: int) -> None:
@@ -203,7 +203,46 @@ class PoolAddLiquidity(BaseDefiTx):
 
         return self._defitx.package_defiTx(result)
     """
-    pass
+
+    @staticmethod
+    def deserialize(network: Network, hex: str) -> "BaseDefiTx":
+        pass
+
+    def __init__(self, addressAmount: {}, shareAddress: str):
+        self._addressAmount, self._shareAddress = None, None
+        self.set_addressAmount(addressAmount)
+        self.set_shareAddress(shareAddress)
+
+    def __bytes__(self) -> bytes:
+        # Convert to Bytes
+        defiTxType = Converter.hex_to_bytes(DefiTxType.OP_DEFI_TX_POOL_ADD_LIQUIDITY)
+        numberOfEntries = Converter.int_to_bytes(len(self.get_addressAmount()), 1)
+
+        # Build PoolSwapDefiTx
+        result = defiTxType
+
+
+        return BuildDefiTx.build_defiTx(result)
+
+    # Get Information
+    def get_defiTxType(self) -> str:
+        pass
+
+    def get_addressAmount(self):
+        return self._addressAmount
+
+    def get_shareAddress(self):
+        return self._shareAddress
+
+    def to_json(self) -> {}:
+        pass
+
+    # Set Information
+    def set_addressAmount(self, addressAmount: {}):
+        self._addressAmount = addressAmount
+
+    def set_shareAddress(self, shareAddress: str):
+        self._shareAddress = shareAddress
 
 
 class PoolRemoveLiquidity(BaseDefiTx):

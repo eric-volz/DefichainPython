@@ -1,1 +1,1 @@
-from .networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
+from .networks import Network, DefichainMainnet, DefichainTestnet, DefichainRegtest

@@ -44,7 +44,7 @@ class Calculate:
             return 1
 
     @staticmethod
-    def write_compactSize(n: int, unit="hex") -> str | bytes:
+    def write_compactSize(n: int, unit="hex") -> "str | bytes":
         if n < 0xfd:
             result = n.to_bytes(length=1, byteorder="little").hex()
         elif n <= 0xffff:

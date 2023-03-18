@@ -1,4 +1,4 @@
-from defichain.networks import DefichainMainnet, DefichainTestnet
+from defichain.networks import Network
 from defichain.transactions.constants import DefiTxType
 from defichain.transactions.address import Address
 from defichain.transactions.utils import Converter, Token, Verify
@@ -20,7 +20,7 @@ class UtxosToAccount(BaseDefiTx):
     """
 
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "BaseDefiTx":
+    def deserialize(network: Network, hex: str) -> "BaseDefiTx":
         position = 0
 
         numberOfElements = Converter.hex_to_int(hex[position: position + 2])
@@ -31,7 +31,7 @@ class UtxosToAccount(BaseDefiTx):
         return UtxosToAccount(scriptBalances.get_address(), scriptBalances.get_tokenBalanceInt32()[0].get_amount(),
                               scriptBalances.get_tokenBalanceInt32()[0].get_tokenId())
 
-    def __init__(self, address: str, amount: int, tokenId: int | str = 0):
+    def __init__(self, address: str, amount: int, tokenId: "int | str" = 0):
         self._address, self._tokenId, self._amount = None, None, None
         self._network = None
         self.set_address(address)
@@ -81,7 +81,7 @@ class UtxosToAccount(BaseDefiTx):
         self._network = address.get_network()
         self._address = address.get_address()
 
-    def set_tokenId(self, tokenId: int | str) -> None:
+    def set_tokenId(self, tokenId: "int | str") -> None:
         if isinstance(tokenId, str) and not Verify.is_only_number_str(tokenId):
             self._tokenId = Token.get_id_from_symbol(self._network, tokenId)
         else:
@@ -109,7 +109,7 @@ class AccountToAccount(BaseDefiTx):
     """
 
     @staticmethod
-    def deserialize(network: DefichainMainnet or DefichainTestnet, hex: str) -> "AccountToAccount":
+    def deserialize(network: Network, hex: str) -> "AccountToAccount":
         position = 0
 
         length_addressFrom = Converter.hex_to_int(hex[position: position + 2]) * 2
