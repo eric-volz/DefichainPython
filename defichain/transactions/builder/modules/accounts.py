@@ -8,14 +8,14 @@ class Accounts:
     def __init__(self, builder):
         self._builder: RawTransactionBuilder = builder
 
-    def utxostoaccount(self, address: str, amount: "int | float", tokenId: int = 0, inputs=[]) -> Transaction:
+    def utxostoaccount(self, address: str, value: "int | float", tokenId: int = 0, inputs=[]) -> Transaction:
         """
         Converts UTXOs to token
 
         :param address: (required) the address of the account to be converted from
         :type address: str
-        :param amount: (required) the amount of UTXOs to convert to token
-        :type amount: int | float
+        :param value: (required) the amount of UTXOs to convert to token
+        :type value: int | float
         :param tokenId: (optional) the token id of the converted token (default: 0 -> DFI)
         :type tokenId: int
         :param inputs: (optional) Inputs
@@ -23,10 +23,10 @@ class Accounts:
         :return: Transaction
         """
         # Convert Float to Integer
-        amount = Converter.float_to_int(amount)
+        value = Converter.float_to_int(value)
 
-        defiTx = UtxosToAccount(address, amount, tokenId)
-        return self._builder.build_defiTx(amount, defiTx, inputs)
+        defiTx = UtxosToAccount(address, value, tokenId)
+        return self._builder.build_defiTx(value, defiTx, inputs)
 
     def accounttoaccount(self, addressFrom: str, addressAmountTo: {}, inputs=[]) -> Transaction:
         """
@@ -34,8 +34,8 @@ class Accounts:
 
         :param addressFrom: (required) address from which the tokens should be sent
         :type addressFrom: str
-        :param addressAmountTo: (required) AddressAmount
-        :type addressAmountTo: AddressAmount
+        :param addressAmountTo: (required) addressAmount
+        :type addressAmountTo: addressAmount
         :param inputs: (optional) Inputs
         :type inputs: TxInput
         :return: Transaction

@@ -26,7 +26,7 @@ class RawTransactionBuilder:
     # Build Transaction
     def build_transactionInputs(self, inputs=[]) -> Transaction:
         tx = self.new_transaction()
-        if inputs:
+        if inputs or self.get_dataSource() is None:
             tx.set_inputs(inputs)
         else:
             for input in self.get_dataSource().get_unspent(self.get_address()):
