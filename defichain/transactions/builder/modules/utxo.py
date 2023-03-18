@@ -1,4 +1,6 @@
+from defichain.exceptions.transactions import TxBuilderError
 from defichain.transactions.rawtransactions import TxAddressOutput, estimate_fee
+from defichain.transactions.utils import Converter
 from defichain.transactions.builder.rawtransactionbuilder import RawTransactionBuilder, Transaction
 
 
@@ -10,6 +12,9 @@ class UTXO:
     def send(self, value: int, addressTo: str, changeAddress: str = None, inputs=[]) -> Transaction:
         if changeAddress is None:
             changeAddress = self._builder.get_address()
+
+        # Convert Float to Integer
+        value = Converter.float_to_int(value)
 
         # If to_address is the same as account address
         if addressTo == self._builder.get_address() or addressTo == changeAddress:
@@ -28,7 +33,10 @@ class UTXO:
         fee = estimate_fee(tx, self._builder.get_feePerByte())
 
         # Subtract fee from output
-        tx.get_outputs()[1].set_value(tx.get_outputs()[1].get_value() - fee)
+        value = tx.get_outputs()[1].get_value() - fee
+        if value < 0:
+            raise TxBuilderError("The used address has not enough UTXO to pay the transaction fee")
+        tx.get_outputs()[1].set_value(value)
 
         self._builder.sign(tx)
         return tx
@@ -43,7 +51,10 @@ class UTXO:
         fee = estimate_fee(tx, self._builder.get_feePerByte())
 
         # Subtract fee from output
-        tx.get_outputs()[0].set_value(tx.get_outputs()[0].get_value() - fee)
+        value = tx.get_outputs()[0].get_value() - fee
+        if value < 0:
+            raise TxBuilderError("The used address has not enough UTXO to pay the transaction fee")
+        tx.get_outputs()[0].set_value(value)
 
         self._builder.sign(tx)
         return tx

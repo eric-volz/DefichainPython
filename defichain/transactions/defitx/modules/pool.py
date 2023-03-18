@@ -81,7 +81,7 @@ class Poolswap(BaseDefiTx):
         addressTo = Converter.hex_to_bytes(Address.from_address(self.get_addressTo()).get_scriptPublicKey())
         tokenTo = Converter.int_to_bytes(self.get_tokenTo(), 1)
 
-        maxPriceInteger = int(str(self.get_maxPrice())[:-8])
+        maxPriceInteger = int(str(self.get_maxPrice())[:-8]) if str(self.get_maxPrice())[:-8] != "" else 0
         maxPriceFraction = int(str(self.get_maxPrice())[-8:])
         maxPriceInteger = Converter.int_to_bytes(maxPriceInteger, 8)
         maxPriceFraction = Converter.int_to_bytes(maxPriceFraction, 8)

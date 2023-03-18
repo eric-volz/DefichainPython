@@ -50,7 +50,7 @@ class Converter:
         :param i: Integer number
         :return: returns the float number shifted by eight decimal places
         """
-        return float(i) / 100000000.0
+        return round(float(i) / 100000000.0, 8)
 
     @staticmethod
     def float_to_int(f: float) -> int:
@@ -63,4 +63,15 @@ class Converter:
         :param f: Float number
         :return: returns the integer number shifted by eight decimal places
         """
-        return int(f * 100000000)
+        return int(round(f * 100000000))
+
+    @staticmethod
+    def addressAmount_float_to_int(addressAmount: {}) -> {}:
+        from . import BuildAddressAmounts
+        newAddressAmount = BuildAddressAmounts()
+        for address in addressAmount:
+            value, token = addressAmount[address].split('@')
+            value = Converter.float_to_int(float(value))
+            newAddressAmount.add(address, token, value)
+        return newAddressAmount.build()
+
