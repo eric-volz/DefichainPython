@@ -20,23 +20,23 @@ class RemoteData(ABC):
         pass
 
     @abstractmethod
-    def test_tx(self, hex: str, maxFeeRate: int = None) -> bool:
+    def test_tx(self, hex: str, maxFeeRate: float = None) -> bool:
         """
         Test the given raw transaction
 
         :param hex: raw transaction
-        :param maxFeeRate: maximum fee to pay
+        :param maxFeeRate: maximum fee rate to pay
         :return: bool
         """
         pass
 
     @abstractmethod
-    def send_tx(self, hex: str, maxFeeRate: int = None) -> str:
+    def send_tx(self, hex: str, maxFeeRate: float = None) -> str:
         """
         Sends the given raw transaction to the blockchain
 
         :param hex: raw transaction
-        :param maxFeeRate: maximum fee to pay
+        :param maxFeeRate: maximum fee rate to pay
         :return: txid
         """
         pass

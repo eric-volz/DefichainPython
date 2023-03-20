@@ -18,14 +18,14 @@ class RemoteDataOcean(RemoteData):
             unspent.append({"txid": txid, "vout": index, "value": value, "scriptPubKey": script})
         return unspent
 
-    def test_tx(self, hex: str, maxFeeRate: int = None) -> bool:
+    def test_tx(self, hex: str, maxFeeRate: float = None) -> bool:
         try:
             self.ocean.rawTx.test(hex, maxFeeRate)
             return True
         except:
             return False
 
-    def send_tx(self, hex: str, maxFeeRate: int = None) -> str:
+    def send_tx(self, hex: str, maxFeeRate: float = None) -> str:
         result = self.ocean.rawTx.send(hex, maxFeeRate)
         if "data" in result:
             return result["data"]
