@@ -36,7 +36,7 @@ class RawTransactionBuilder:
                     raise NotYetSupportedError()
                 # Build P2SH Input
                 elif address.get_addressType() == AddressTypes.P2SH:
-                    tx.add_input(TxP2SHInput(input["txid"], input["vout"], self.get_account().get_p2wpkhAddress(),
+                    tx.add_input(TxP2SHInput(input["txid"], input["vout"], self.get_account().get_p2wpkh(),
                                              input["value"]))
                 # build P2WPKH Input
                 elif address.get_addressType() == AddressTypes.P2WPKH:
