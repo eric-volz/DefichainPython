@@ -8,7 +8,7 @@ class Accounts:
     def __init__(self, builder):
         self._builder: RawTransactionBuilder = builder
 
-    def utxostoaccount(self, address: str, value: "int | float", tokenId: int = 0, inputs=[]) -> Transaction:
+    def utxostoaccount(self, address: str, value: "int | float", tokenId: int = 0, inputs=[]) -> "Transaction":
         """
         Converts UTXOs to token
 
@@ -28,7 +28,7 @@ class Accounts:
         defiTx = UtxosToAccount(address, value, tokenId)
         return self._builder.build_defiTx(value, defiTx, inputs)
 
-    def accounttoaccount(self, addressFrom: str, addressAmountTo: {}, inputs=[]) -> Transaction:
+    def accounttoaccount(self, addressFrom: str, addressAmountTo: {}, inputs=[]) -> "Transaction":
         """
         Sends token from one address to another address
 

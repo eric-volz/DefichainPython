@@ -9,7 +9,21 @@ class UTXO:
     def __init__(self, builder):
         self._builder: RawTransactionBuilder = builder
 
-    def send(self, value: int, addressTo: str, changeAddress: str = None, inputs=[]) -> Transaction:
+    def send(self, value: "float | int", addressTo: str, changeAddress: str = None, inputs=[]) -> Transaction:
+        """
+        Sends the specified amount of UTXO to the specified address. Returns the remaining UTXO from the input to the
+        sender address if not changed.
+
+        :param value: (required) amount of UTXO to send
+        :type value: float | int
+        :param addressTo: (required) address to send the UTXO to
+        :type addressTo: str
+        :param changeAddress: (optional) address to which the remaining UTXO should be sent
+        :type changeAddress: str
+        :param inputs: (optional) Inputs
+        :type inputs: TxInputs
+        :return: Transaction
+        """
         if changeAddress is None:
             changeAddress = self._builder.get_address()
 
@@ -42,6 +56,15 @@ class UTXO:
         return tx
 
     def sendall(self, addressTo: str, inputs=[]) -> Transaction:
+        """
+        Sends all UTXO to the specified address
+
+        :param addressTo: (required) address to send the UTXO to
+        :type addressTo: str
+        :param inputs: (optional) Inputs
+        :type inputs: TxInput
+        :return: Transaction
+        """
         tx = self._builder.build_transactionInputs(inputs)
         inputValue = tx.get_inputsValue()
         output = TxAddressOutput(inputValue, addressTo)

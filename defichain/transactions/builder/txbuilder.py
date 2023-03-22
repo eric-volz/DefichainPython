@@ -33,12 +33,12 @@ class TxBuilder:
     :type address: str
     :param account: (required) account object belonging to the given address
     :type account: Account
-    :param dataSource: (optional) data source for creating the transaction
+    :param dataSource: (required) data source for creating the transaction
     :type dataSource: Ocean | Node | None
     :param feePerByte: (optional) approximate fee paid per byte
     :type feePerByte: float
     """
-    def __init__(self, address: str, account: Account, dataSource: "Ocean | Node | None" = Ocean(), feePerByte=1.0):
+    def __init__(self, address: str, account: Account, dataSource: "Ocean | Node | None", feePerByte=1.0):
         self._address, self._account, self._dataSource, self._feePerByte = None, None, None, None
         self._set_address(address)
         self._set_account(account)
