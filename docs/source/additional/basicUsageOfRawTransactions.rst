@@ -87,6 +87,15 @@ Example:
     :height: 600px
     :alt: Alternative text
 
+Installation
+------------
+
+Install the beta package from PyPi.
+
+.. code-block:: python
+
+    pip install defichain==3.0.0b0
+
 Building Raw Transaction
 ------------------------
 
