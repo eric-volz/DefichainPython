@@ -10,17 +10,17 @@ Since this is a community supported project, the community also has the right to
 .. admonition:: Package Node Version
     :class: caution
 
-    Up to date to the node version: `vv3.1.1 - Grand Central <https://github.com/DeFiCh/ain/releases/tag/v3.1.1>`_
+    Up to date to the node version: `v3.1.1 - Grand Central <https://github.com/DeFiCh/ain/releases/tag/v3.1.1>`_
 
 
 |:white_check_mark:| = Finished and UpToDate with the specified node version
 
-|:heavy_minus_sign:| = In Production or not UpToDate
+|:heavy_minus_sign:| = Not up to date: working on it
 
 |:rotating_light:| = Not yet implemented
 
 
-.. tab:: Package
+.. tab:: Implementation
 
     .. tab:: RPC
 
@@ -76,6 +76,71 @@ Since this is a community supported project, the community also has the right to
         Wallet              |:white_check_mark:|
         Utils               |:white_check_mark:|
         ===============     ========
+
+    .. tab:: Transactions
+
+        ==============      ========
+        Basis Modules       Progress
+        ==============      ========
+        Address             |:white_check_mark:|
+        DefiTx              |:heavy_minus_sign:|
+        RawTransaction      |:white_check_mark:|
+        RemoteData          |:white_check_mark:|
+        Tokens              |:white_check_mark:|
+        ==============      ========
+
+        ====================    ========
+        Transaction Methods     Progress
+        ====================    ========
+        UtxosToAccount          |:white_check_mark:|
+        AccountToUtxos          |:rotating_light:|
+        AccountToAccount        |:white_check_mark:|
+        AnyAccountToAccount     |:rotating_light:|
+        SetFutureSwap           |:rotating_light:|
+
+        SetGovernance           |:rotating_light:|
+        SetGovernanceHeight     |:rotating_light:|
+        CreateCfp               |:rotating_light:|
+        CreateVoc               |:rotating_light:|
+        Vote                    |:rotating_light:|
+
+        SetLoanScheme           |:rotating_light:|
+        DestroyLoanScheme       |:rotating_light:|
+        SetDefaultLoanScheme    |:rotating_light:|
+        SetCollateralToken      |:rotating_light:|
+        SetLoanToken            |:rotating_light:|
+        UpdateLoanToken         |:rotating_light:|
+        TakeLoan                |:rotating_light:|
+        PaybackLoan             |:rotating_light:|
+
+        CreateMasternode        |:rotating_light:|
+        ResignMasternode        |:rotating_light:|
+        UpdateMasternode        |:rotating_light:|
+
+        AppointOracle           |:rotating_light:|
+        RemoveOracle            |:rotating_light:|
+        UpdateOracle            |:rotating_light:|
+        SetOracleData           |:rotating_light:|
+
+        Poolswap                |:white_check_mark:|
+        CompositeSwap           |:rotating_light:|
+        PoolAddLiquidity        |:rotating_light:|
+        PoolRemoveLiquidity     |:rotating_light:|
+        PoolCreatePair          |:rotating_light:|
+        PoolUpdatePair          |:rotating_light:|
+
+        TokenMint               |:rotating_light:|
+        TokenCreate             |:rotating_light:|
+        TokenUpdate             |:rotating_light:|
+        TokenUpdateAny          |:rotating_light:|
+
+        CreateVault             |:rotating_light:|
+        UpdateVault             |:rotating_light:|
+        DepositToVault          |:rotating_light:|
+        WithdrawFromVault       |:rotating_light:|
+        CloseVault              |:rotating_light:|
+        PlaceAuctionBid         |:rotating_light:|
+        ====================    ========
 
 .. tab:: Tests
 
@@ -140,6 +205,71 @@ Since this is a community supported project, the community also has the right to
         Utils               |:white_check_mark:|
         ===============     ========
 
+    .. tab:: Transactions
+
+        ==============      ========
+        Basis Modules       Progress
+        ==============      ========
+        Address             |:rotating_light:|
+        DefiTx              |:rotating_light:|
+        RawTransaction      |:rotating_light:|
+        RemoteData          |:rotating_light:|
+        Tokens              |:rotating_light:|
+        ==============      ========
+
+        ====================    ========
+        Transaction Methods     Progress
+        ====================    ========
+        UtxosToAccount          |:rotating_light:|
+        AccountToUtxos          |:rotating_light:|
+        AccountToAccount        |:rotating_light:|
+        AnyAccountToAccount     |:rotating_light:|
+        SetFutureSwap           |:rotating_light:|
+
+        SetGovernance           |:rotating_light:|
+        SetGovernanceHeight     |:rotating_light:|
+        CreateCfp               |:rotating_light:|
+        CreateVoc               |:rotating_light:|
+        Vote                    |:rotating_light:|
+
+        SetLoanScheme           |:rotating_light:|
+        DestroyLoanScheme       |:rotating_light:|
+        SetDefaultLoanScheme    |:rotating_light:|
+        SetCollateralToken      |:rotating_light:|
+        SetLoanToken            |:rotating_light:|
+        UpdateLoanToken         |:rotating_light:|
+        TakeLoan                |:rotating_light:|
+        PaybackLoan             |:rotating_light:|
+
+        CreateMasternode        |:rotating_light:|
+        ResignMasternode        |:rotating_light:|
+        UpdateMasternode        |:rotating_light:|
+
+        AppointOracle           |:rotating_light:|
+        RemoveOracle            |:rotating_light:|
+        UpdateOracle            |:rotating_light:|
+        SetOracleData           |:rotating_light:|
+
+        Poolswap                |:rotating_light:|
+        CompositeSwap           |:rotating_light:|
+        PoolAddLiquidity        |:rotating_light:|
+        PoolRemoveLiquidity     |:rotating_light:|
+        PoolCreatePair          |:rotating_light:|
+        PoolUpdatePair          |:rotating_light:|
+
+        TokenMint               |:rotating_light:|
+        TokenCreate             |:rotating_light:|
+        TokenUpdate             |:rotating_light:|
+        TokenUpdateAny          |:rotating_light:|
+
+        CreateVault             |:rotating_light:|
+        UpdateVault             |:rotating_light:|
+        DepositToVault          |:rotating_light:|
+        WithdrawFromVault       |:rotating_light:|
+        CloseVault              |:rotating_light:|
+        PlaceAuctionBid         |:rotating_light:|
+        ====================    ========
+
 .. tab:: Documentation
 
     .. tab:: RPC
@@ -202,6 +332,71 @@ Since this is a community supported project, the community also has the right to
         Wallet              |:white_check_mark:|
         Utils               |:white_check_mark:|
         ===============     ========
+
+    .. tab:: Transactions
+
+        ==============      ========
+        Basis Modules       Progress
+        ==============      ========
+        Address             |:rotating_light:|
+        DefiTx              |:rotating_light:|
+        RawTransaction      |:rotating_light:|
+        RemoteData          |:rotating_light:|
+        Tokens              |:rotating_light:|
+        ==============      ========
+
+        ====================    ========
+        Transaction Methods     Progress
+        ====================    ========
+        UtxosToAccount          |:rotating_light:|
+        AccountToUtxos          |:rotating_light:|
+        AccountToAccount        |:rotating_light:|
+        AnyAccountToAccount     |:rotating_light:|
+        SetFutureSwap           |:rotating_light:|
+
+        SetGovernance           |:rotating_light:|
+        SetGovernanceHeight     |:rotating_light:|
+        CreateCfp               |:rotating_light:|
+        CreateVoc               |:rotating_light:|
+        Vote                    |:rotating_light:|
+
+        SetLoanScheme           |:rotating_light:|
+        DestroyLoanScheme       |:rotating_light:|
+        SetDefaultLoanScheme    |:rotating_light:|
+        SetCollateralToken      |:rotating_light:|
+        SetLoanToken            |:rotating_light:|
+        UpdateLoanToken         |:rotating_light:|
+        TakeLoan                |:rotating_light:|
+        PaybackLoan             |:rotating_light:|
+
+        CreateMasternode        |:rotating_light:|
+        ResignMasternode        |:rotating_light:|
+        UpdateMasternode        |:rotating_light:|
+
+        AppointOracle           |:rotating_light:|
+        RemoveOracle            |:rotating_light:|
+        UpdateOracle            |:rotating_light:|
+        SetOracleData           |:rotating_light:|
+
+        Poolswap                |:rotating_light:|
+        CompositeSwap           |:rotating_light:|
+        PoolAddLiquidity        |:rotating_light:|
+        PoolRemoveLiquidity     |:rotating_light:|
+        PoolCreatePair          |:rotating_light:|
+        PoolUpdatePair          |:rotating_light:|
+
+        TokenMint               |:rotating_light:|
+        TokenCreate             |:rotating_light:|
+        TokenUpdate             |:rotating_light:|
+        TokenUpdateAny          |:rotating_light:|
+
+        CreateVault             |:rotating_light:|
+        UpdateVault             |:rotating_light:|
+        DepositToVault          |:rotating_light:|
+        WithdrawFromVault       |:rotating_light:|
+        CloseVault              |:rotating_light:|
+        PlaceAuctionBid         |:rotating_light:|
+        ====================    ========
 
     .. tab:: Additional Information
 
