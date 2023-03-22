@@ -16,6 +16,7 @@
     api/node/index
     api/ocean/index
     api/hdwallet/index
+    api/transactions/index
     api/logger
     api/mnemonic
     api/exceptions
