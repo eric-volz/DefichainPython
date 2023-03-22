@@ -1,5 +1,5 @@
-Basic Usage Of Raw Transactions Builder
-=======================================
+Basic Usage Of Transactions Builder
+===================================
 
 Introduction
 ------------
