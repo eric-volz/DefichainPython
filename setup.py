@@ -1,7 +1,7 @@
 from setuptools import setup
 from os import path
 
-VERSION = '2.3.0'
+VERSION = '3.0.0b0'
 DESCRIPTION = 'Defichain Python Library'
 
 # Project URLs
@@ -32,6 +32,7 @@ setup(
               'defichain.exceptions',
               'defichain.exceptions.http',
               'defichain.exceptions.hdwallet',
+              'defichain.exceptions.transactions',
               'defichain.libs',
               'defichain.mnemonic',
               'defichain.mnemonic.wordlist',
@@ -41,10 +42,24 @@ setup(
               'defichain.ocean',
               'defichain.ocean.modules',
               'defichain.hdwallet',
-              'defichain.hdwallet'],
-    package_data={'': ['*.txt']},
+              'defichain.hdwallet',
+              'defichain.transactions',
+              'defichain.transactions.address',
+              'defichain.transactions.builder',
+              'defichain.transactions.builder.modules',
+              'defichain.transactions.constants',
+              'defichain.transactions.constants.mainnet',
+              'defichain.transactions.constants.testnet',
+              'defichain.transactions.defitx',
+              'defichain.transactions.defitx.modules',
+              'defichain.transactions.rawtransactions',
+              'defichain.transactions.remotedata',
+              'defichain.transactions.utils',
+              ],
+    package_data={'': ['*.txt', '*.json']},
     install_requires=requirements,
-    keywords=['python', 'defichain', 'node', 'ocean', 'mnemonic', 'wallet', 'privateKey'],
+    keywords=['python', 'defichain', 'node', 'ocean', 'mnemonic', 'wallet', 'privateKey', 'transactions',
+              'raw transactions', 'P2PKH', 'P2SH', 'P2WPKH', 'DefiTx', 'custom transaction'],
     classifiers=[
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
