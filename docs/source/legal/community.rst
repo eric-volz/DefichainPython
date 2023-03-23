@@ -26,6 +26,16 @@ other ideas open an `issue <https://github.com/eric-volz/DefichainPython/issues>
 
     `Reddit: Announcement 2 <https://www.reddit.com/r/defiblockchain/comments/y7icf1/the_defichain_python_library_implements_hdwallet/>`_
 
+    |
+
+    .. admonition:: Announcement 03: Bringing Python for Defichain to the next level!🚀🐍
+        :class: caution
+
+        Introduction of Transactions
+
+    `Reddit: Announcement 3 <https://www.reddit.com/r/defiblockchain/comments/11zsod4/bringing_python_for_defichain_to_the_next_level/>`_
+
+
 .. tab:: CFPs
 
     .. admonition:: CFP-2203-07: DeFiChain Python Library (1 800 DFI)
