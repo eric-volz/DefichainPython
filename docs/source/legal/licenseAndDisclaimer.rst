@@ -10,7 +10,7 @@ By using (this repo), you (the user) agree to be bound by the
 
     MIT License
 
-    Copyright (c) 2022 Introc
+    Copyright (c) 2023 Eric Volz
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
