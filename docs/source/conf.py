@@ -19,11 +19,11 @@ sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'DefichainPython'
-copyright = '2022, Intr0c'
+copyright = '2023, Intr0c'
 author = 'Intr0c'
 
 # The full version, including alpha/beta/rc tags
-release = 'v2.3.0'
+release = 'v3.0.0b0'
 
 
 # -- General configuration ---------------------------------------------------
