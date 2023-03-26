@@ -24,11 +24,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install defichain~=2.3.0
+          sudo pip install defichain~=2.3.0
       - name: Execute Script
         run: |
           cd defichain/transactions/constants
-          python3 tokens.py
+          sudo python3 tokens.py
       - name: Commit changes
         run: |
           status=$(git status --porcelain)
