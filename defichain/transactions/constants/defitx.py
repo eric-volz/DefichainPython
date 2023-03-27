@@ -69,20 +69,10 @@ class DefiTxType:
 
     @staticmethod
     def from_hex(hex: str) -> str:
-        # Accounts
-        if hex == "55":
-            return "OP_DEFI_TX_UTXOS_TO_ACCOUNT"
-        elif hex == "62":
-            return "OP_DEFI_TX_ACCOUNT_TO_UTXOS"
-        elif hex == "42":
-            return "OP_DEFI_TX_ACCOUNT_TO_ACCOUNT"
-        elif hex == "61":
-            return "OP_DEFI_TX_ANY_ACCOUNT_TO_ACCOUNT"
-        elif hex == "51":
-            return "OP_DEFI_TX_FUTURE_SWAP"
-
-        # Pool
-        elif hex == "73":
-            return "OP_DEFI_TX_POOL_SWAP"
+        dict = DefiTxType.__dict__
+        for key in dict:
+            if key[0:7] == "OP_DEFI":
+                if dict[key] == hex:
+                    return key
 
 
