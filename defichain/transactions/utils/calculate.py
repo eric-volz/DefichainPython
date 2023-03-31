@@ -1,4 +1,5 @@
 import hashlib
+import io
 
 
 class Calculate:
@@ -29,7 +30,16 @@ class Calculate:
 
     @staticmethod
     def read_varint(hex: str) -> int:
-        pass
+        buffer = io.BytesIO(bytes.fromhex(hex))
+
+        n = 0
+        while True:
+            buff = buffer.read(1)[0]
+            n = (n << 7) | (buff & 0x7f)
+            if (buff & 0x80) != 0:
+                n += 1
+            else:
+                return n
 
     @staticmethod
     def get_lengthCompactSize(hex: str) -> int:
@@ -73,8 +83,7 @@ class Calculate:
 
 
 if __name__ == "__main__":
-    print(Calculate.write_compactSize(299))
-    print(Calculate.read_compactSize("52"))
-
-    from converter import Converter
-    print(Converter.hex_to_int("50"))
+    c = Calculate.write_varint(2**32)
+    print(c)
+    print(Calculate.read_varint(c))
+    print(2**32)
