@@ -93,14 +93,14 @@ and the code can be viewed here:
 - Defi Transactions
     - UtxosToAccount
     - AccountToAccount
-    - Poolswap
+    - PoolSwap
 
 **What is planed?**
 
 1. Implement all essential defi transactions
     - AccountToUtxos
-    - PoolAddLiquidity
-    - PoolRemoveLiquidity
+    - AddPoolLiquidity
+    - RemovePoolLiquidity
     - CompositeSwap
     - DepositToVault
     - WithdrawFromVault

@@ -122,12 +122,12 @@ Since this is a community supported project, the community also has the right to
         UpdateOracle            |:rotating_light:|
         SetOracleData           |:rotating_light:|
 
-        Poolswap                |:white_check_mark:|
+        PoolSwap                |:white_check_mark:|
         CompositeSwap           |:rotating_light:|
-        PoolAddLiquidity        |:rotating_light:|
-        PoolRemoveLiquidity     |:rotating_light:|
-        PoolCreatePair          |:rotating_light:|
-        PoolUpdatePair          |:rotating_light:|
+        AddPoolLiquidity        |:white_check_mark:|
+        RemovePoolLiquidity     |:white_check_mark:|
+        CreatePoolPair          |:rotating_light:|
+        UpdatePoolPair          |:rotating_light:|
 
         TokenMint               |:rotating_light:|
         TokenCreate             |:rotating_light:|
@@ -250,12 +250,12 @@ Since this is a community supported project, the community also has the right to
         UpdateOracle            |:rotating_light:|
         SetOracleData           |:rotating_light:|
 
-        Poolswap                |:rotating_light:|
+        PoolSwap                |:rotating_light:|
         CompositeSwap           |:rotating_light:|
-        PoolAddLiquidity        |:rotating_light:|
-        PoolRemoveLiquidity     |:rotating_light:|
-        PoolCreatePair          |:rotating_light:|
-        PoolUpdatePair          |:rotating_light:|
+        AddPoolLiquidity        |:rotating_light:|
+        RemovePoolLiquidity     |:rotating_light:|
+        CreatePoolPair          |:rotating_light:|
+        UpdatePoolPair          |:rotating_light:|
 
         TokenMint               |:rotating_light:|
         TokenCreate             |:rotating_light:|
@@ -378,12 +378,12 @@ Since this is a community supported project, the community also has the right to
         UpdateOracle            |:rotating_light:|
         SetOracleData           |:rotating_light:|
 
-        Poolswap                |:rotating_light:|
+        PoolSwap                |:rotating_light:|
         CompositeSwap           |:rotating_light:|
-        PoolAddLiquidity        |:rotating_light:|
-        PoolRemoveLiquidity     |:rotating_light:|
-        PoolCreatePair          |:rotating_light:|
-        PoolUpdatePair          |:rotating_light:|
+        AddPoolLiquidity        |:rotating_light:|
+        RemovePoolLiquidity     |:rotating_light:|
+        CreatePoolPair          |:rotating_light:|
+        UpdatePoolPair          |:rotating_light:|
 
         TokenMint               |:rotating_light:|
         TokenCreate             |:rotating_light:|

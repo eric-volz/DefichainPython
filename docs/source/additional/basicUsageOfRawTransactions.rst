@@ -174,7 +174,7 @@ These transactions are only about sending UTXO DFI to a given address.
 ~~~~~~~~~~
 
 There are defi transactions. These transactions are all transactions that distinguish defichain from bitcoin.
-For example, there are UtxosToAccount, AccountToAccount, Poolswap ...
+For example, there are UtxosToAccount, AccountToAccount, PoolSwap ...
 
 .. code-block:: python
 
