@@ -270,7 +270,7 @@
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="defichain.transactions.builder.modules.Pool.poolswap">
 <span class="sig-name descname"><span class="pre">poolswap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addressFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amountFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addressTo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenTo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxPrice</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">defichain.transactions.rawtransactions.tx.Transaction</span></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.Pool.poolswap" title="Permalink to this definition">#</a></dt>
-<dd><p>Creates a poolswap transaction with given metadata</p>
+<dd><p>Creates a pool swap transaction with the specified data</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -280,6 +280,40 @@
 <li><p><strong>addressTo</strong> (<em>str</em>) – (required) the address where the exchanged tokens are sent to</p></li>
 <li><p><strong>tokenTo</strong> (<em>str</em><em> | </em><em>int</em>) – (required) the token to change into</p></li>
 <li><p><strong>maxPrice</strong> (<em>float</em><em> | </em><em>int</em>) – (required) maximum acceptable price</p></li>
+<li><p><strong>inputs</strong> (<em>TxInput</em>) – (optional) Inputs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Transaction</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.transactions.builder.modules.Pool.addpoolliquidity">
+<span class="sig-name descname"><span class="pre">addpoolliquidity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addressAmount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shareAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">defichain.transactions.rawtransactions.tx.Transaction</span></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.Pool.addpoolliquidity" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates a add pool liquidity transaction with the specified data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addressAmount</strong> (<em>AddressAmount</em>) – (required) AddressAmount</p></li>
+<li><p><strong>shareAddress</strong> (<em>str</em>) – (required) the address where the pool tokens are sent to</p></li>
+<li><p><strong>inputs</strong> (<em>TxInput</em>) – (optional) Inputs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Transaction</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.transactions.builder.modules.Pool.removepoolliquidity">
+<span class="sig-name descname"><span class="pre">removepoolliquidity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addressFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.transactions.builder.modules.Pool.removepoolliquidity" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates a remove pool liquidity transaction with the specified data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addressFrom</strong> (<em>str</em>) – (required) the address to remove the pool tokens from</p></li>
+<li><p><strong>amount</strong> (<em>str</em>) – (required) value and liquidity tokens which should be removed: Amount</p></li>
 <li><p><strong>inputs</strong> (<em>TxInput</em>) – (optional) Inputs</p></li>
 </ul>
 </dd>
