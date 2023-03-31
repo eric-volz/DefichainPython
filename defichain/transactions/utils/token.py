@@ -39,6 +39,11 @@ class Token:
         for _type in Token.TOKEN_TYPES:
             tokens = Token._get_tokens(network, _type)
             for token in tokens:
+                if _type == TokenTypes.LIQUIDITY:
+                    if token["symbol"] == str(symbol):
+                        return int(token["id"])
+                    elif token["symbol"] == str(f"{symbol.split('-')[1]}-{symbol.split('-')[0]}"):
+                        return int(token["id"])
                 if token["symbol"] == str(symbol):
                     return int(token["id"])
         raise TokenError(f"The given symbol: {symbol} does not exist. Check your input.")

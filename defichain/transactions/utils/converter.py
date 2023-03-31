@@ -70,8 +70,14 @@ class Converter:
         from . import BuildAddressAmounts
         newAddressAmount = BuildAddressAmounts()
         for address in addressAmount:
-            value, token = addressAmount[address].split('@')
-            value = Converter.float_to_int(float(value))
-            newAddressAmount.add(address, token, value)
+            if isinstance(addressAmount[address], list):
+                for amount in addressAmount[address]:
+                    value, token = amount.split('@')
+                    value = Converter.float_to_int(float(value))
+                    newAddressAmount.add(address, token, value)
+            else:
+                value, token = addressAmount[address].split('@')
+                value = Converter.float_to_int(float(value))
+                newAddressAmount.add(address, token, value)
         return newAddressAmount.build()
 

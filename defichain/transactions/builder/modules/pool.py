@@ -1,4 +1,4 @@
-from defichain.transactions.defitx import Poolswap
+from defichain.transactions.defitx import PoolSwap, AddPoolLiquidity, RemovePoolLiquidity
 from defichain.transactions.utils import Converter
 from defichain.transactions.builder.rawtransactionbuilder import RawTransactionBuilder, Transaction
 
@@ -11,7 +11,7 @@ class Pool:
     def poolswap(self, addressFrom: str, tokenFrom: "str | int", amountFrom: "float | int", addressTo: str,
                  tokenTo: "str | int", maxPrice: "float | int", inputs=[]) -> Transaction:
         """
-        Creates a poolswap transaction with given metadata
+        Creates a pool swap transaction with the specified data
 
         :param addressFrom: (required) the address where the tokens are located
         :type addressFrom: str
@@ -33,11 +33,44 @@ class Pool:
         amountFrom = Converter.float_to_int(amountFrom)
         maxPrice = Converter.float_to_int(maxPrice)
 
-        defiTx = Poolswap(addressFrom, tokenFrom, amountFrom, addressTo, tokenTo, maxPrice)
+        defiTx = PoolSwap(addressFrom, tokenFrom, amountFrom, addressTo, tokenTo, maxPrice)
         return self._builder.build_defiTx(0, defiTx, inputs)
 
-    #def addpoolliquidity(self, addressAmount: {}, shareAddress: str) -> Transaction:
-        #defiTx = DefiTx.pool.addpoolliquidity(addressAmount, shareAddress)
-        #return self._builder.build_defiTx(0, defiTx)
-        #pass
+    def addpoolliquidity(self, addressAmount: {}, shareAddress: str, inputs=[]) -> Transaction:
+        """
+        Creates a add pool liquidity transaction with the specified data
+
+        :param addressAmount: (required) AddressAmount
+        :type addressAmount: AddressAmount
+        :param shareAddress: (required) the address where the pool tokens are sent to
+        :type shareAddress: str
+        :param inputs: (optional) Inputs
+        :type inputs: TxInput
+        :return: Transaction
+        """
+
+        # Convert Float to Integer
+        addressAmount = Converter.addressAmount_float_to_int(addressAmount)
+
+        defiTx = AddPoolLiquidity(addressAmount, shareAddress)
+        return self._builder.build_defiTx(0, defiTx, inputs)
+
+    def removepoolliquidity(self, addressFrom: str, amount: str, inputs=[]):
+        """
+        Creates a remove pool liquidity transaction with the specified data
+
+        :param addressFrom: (required) the address to remove the pool tokens from
+        :type addressFrom: str
+        :param amount: (required) value and liquidity tokens which should be removed: Amount
+        :type amount: str
+        :param inputs: (optional) Inputs
+        :type inputs: TxInput
+        :return: Transaction
+        """
+
+        # Convert Float to Integer
+        amount = f"{Converter.float_to_int(float(amount.split('@')[0]))}@{amount.split('@')[1]}"
+
+        defiTx = RemovePoolLiquidity(addressFrom, amount)
+        return self._builder.build_defiTx(0, defiTx, inputs)
 

@@ -38,7 +38,11 @@ class DefiTx:
 
         # Pool
         elif DefiTxType.OP_DEFI_TX_POOL_SWAP == defiTxType:
-            return Poolswap.deserialize(network, hex[position:])
+            return PoolSwap.deserialize(network, hex[position:])
+        elif DefiTxType.OP_DEFI_TX_POOL_ADD_LIQUIDITY == defiTxType:
+            return AddPoolLiquidity.deserialize(network, hex[position:])
+        elif DefiTxType.OP_DEFI_TX_POOL_REMOVE_LIQUIDITY == defiTxType:
+            return RemovePoolLiquidity.deserialize(network, hex[position:])
 
         raise NotYetSupportedError()
 

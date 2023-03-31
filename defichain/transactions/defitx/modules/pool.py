@@ -3,14 +3,15 @@ from typing import Any
 from defichain.exceptions.transactions import AddressError
 from defichain.transactions.constants import DefiTxType
 from defichain.transactions.address import Address
-from defichain.transactions.utils import Converter, Token, Verify
+from defichain.transactions.utils import Converter, Token, Verify, Calculate
 from .basedefitx import BaseDefiTx
+from .baseinput import ScriptBalances, TokenBalanceInt32
 from ..builddefitx import BuildDefiTx
 
 
-class Poolswap(BaseDefiTx):
+class PoolSwap(BaseDefiTx):
     """
-    Builds the defi transaction for a poolswap
+    Builds the defi transaction: PoolSwap
 
     :param addressFrom: (required) the address where the tokens are located
     :param tokenFrom: (required) the token that should be exchanged
@@ -22,7 +23,7 @@ class Poolswap(BaseDefiTx):
     """
 
     @staticmethod
-    def deserialize(network: Any, hex: str) -> "Poolswap":
+    def deserialize(network: Any, hex: str) -> "PoolSwap":
         position = 0
 
         lengthAddressFrom = Converter.hex_to_int(hex[position: position + 2]) * 2
@@ -57,7 +58,7 @@ class Poolswap(BaseDefiTx):
 
         maxPrice = int(str(maxPriceInteger) + maxPriceFraction)
 
-        return Poolswap(addressFrom.get_address(), tokenFrom, amountFrom, addressTo.get_address(), tokenTo, maxPrice)
+        return PoolSwap(addressFrom.get_address(), tokenFrom, amountFrom, addressTo.get_address(), tokenTo, maxPrice)
 
     def __init__(self, addressFrom: str, tokenFrom: int, amountFrom: int, addressTo: str, tokenTo: int,
                  maxPrice: int):
@@ -169,47 +170,38 @@ class CompositeSwap(BaseDefiTx):
     pass
 
 
-class PoolAddLiquidity(BaseDefiTx):
+class AddPoolLiquidity(BaseDefiTx):
     """
-    TODO: MVP
+    Builds the defi transaction: AssPoolLiquidity
 
-        Builds the defi transaction for addpoolliquidity
-
-        :param addressAmount: (required) :ref:`Node Address Amount`
-        :param shareAddress: (required) the address where the pool shares are placed
-        :return: "hex" (string) -- returns the finished defi transaction
-
-
-        number_of_entries = Converter.int_to_bytes(len(addressAmount), 1)
-
-        result = Converter.hex_to_bytes(DefiTxType.OP_DEFI_TX_POOL_ADD_LIQUIDITY)
-        result += number_of_entries
-
-        for address in addressAmount:
-            address_script = Converter.hex_to_bytes(Address.from_address(address).get_scriptPublicKey())
-            length_of_script = Converter.int_to_bytes(len(address_script), 1)
-            result += length_of_script + address_script
-
-            number_of_tokens = Converter.int_to_bytes(len(addressAmount[address]), 1)
-            result += number_of_tokens
-            for amount in addressAmount[address]:
-                split = amount.split('@')
-                value = Converter.int_to_bytes(int(split[0]), 8)
-                token = Converter.int_to_bytes(int(split[1]), 4)
-                result += token + value
-
-        share_address_script = Converter.hex_to_bytes(Address.from_address(shareAddress).get_scriptPublicKey())
-        length_of_share_script = Converter.int_to_bytes(len(share_address_script), 1)
-        result += length_of_share_script + share_address_script
-
-        return self._defitx.package_defiTx(result)
+    :param addressAmount: (required) address as key, quantity and token as value: AddressAmount
+    :type addressAmount: AddressAmount
+    :param shareAddress: (required) address on which the pool token should be stored
+    :type shareAddress: str
     """
 
     @staticmethod
-    def deserialize(network: Any, hex: str) -> "BaseDefiTx":
-        pass
+    def deserialize(network: Any, hex: str) -> "AddPoolLiquidity":
+        position = 0
+
+        scriptBalances = ScriptBalances.deserialize_array(network, hex[position:])
+
+        sizeScriptBalances = 2
+        for scriptBalance in scriptBalances:
+            sizeScriptBalances += scriptBalance.size() * 2
+
+        position += sizeScriptBalances
+
+        lengthShareAddress = Converter.hex_to_int(hex[position: position + 2]) * 2
+        position += 2
+
+        shareAddress = Address.from_scriptPublicKey(network, hex[position: position + lengthShareAddress])
+        position += lengthShareAddress
+
+        return AddPoolLiquidity(ScriptBalances.to_json(scriptBalances), shareAddress.get_address())
 
     def __init__(self, addressAmount: {}, shareAddress: str):
+
         self._addressAmount, self._shareAddress = None, None
         self.set_addressAmount(addressAmount)
         self.set_shareAddress(shareAddress)
@@ -217,16 +209,25 @@ class PoolAddLiquidity(BaseDefiTx):
     def __bytes__(self) -> bytes:
         # Convert to Bytes
         defiTxType = Converter.hex_to_bytes(DefiTxType.OP_DEFI_TX_POOL_ADD_LIQUIDITY)
-        numberOfEntries = Converter.int_to_bytes(len(self.get_addressAmount()), 1)
+        scriptBalances = ScriptBalances.from_json(self.get_addressAmount())
+        shareAddress = Converter.hex_to_bytes(Address.from_address(self.get_shareAddress()).get_scriptPublicKey())
 
-        # Build PoolSwapDefiTx
+        numberOfElements = Converter.int_to_bytes(len(scriptBalances), 1)
+        lengthShareAddress = Converter.int_to_bytes(len(shareAddress), 1)
+
+        # Build PoolAddLiquidityDefiTx
         result = defiTxType
+        result += numberOfElements
+        for balances in scriptBalances:
+            result += balances.bytes()
+        result += lengthShareAddress
+        result += shareAddress
 
         return BuildDefiTx.build_defiTx(result)
 
     # Get Information
     def get_defiTxType(self) -> str:
-        pass
+        return DefiTxType.OP_DEFI_TX_POOL_ADD_LIQUIDITY
 
     def get_addressAmount(self):
         return self._addressAmount
@@ -235,7 +236,12 @@ class PoolAddLiquidity(BaseDefiTx):
         return self._shareAddress
 
     def to_json(self) -> {}:
-        pass
+        json = {}
+        json.update({"defiTxType": {"typeName": DefiTxType.from_hex(self.get_defiTxType()),
+                                    "typeHex": self.get_defiTxType()}})
+        json.update({"addressAmount": self.get_addressAmount()})
+        json.update({"shareAddress": self.get_shareAddress()})
+        return json
 
     # Set Information
     def set_addressAmount(self, addressAmount: {}):
@@ -245,14 +251,89 @@ class PoolAddLiquidity(BaseDefiTx):
         self._shareAddress = shareAddress
 
 
-class PoolRemoveLiquidity(BaseDefiTx):
-    """TODO: MVP"""
+class RemovePoolLiquidity(BaseDefiTx):
+    """
+    Builds the defi transaction: RemovePoolLiquidity
+
+    :param addressFrom: (required) the address to remove the pool tokens from
+    :type addressFrom: str
+    :param amount: (required) value and liquidity tokens which should be removed: Amount
+    :type amount: str
+    """
+
+    @staticmethod
+    def deserialize(network: Any, hex: str) -> "RemovePoolLiquidity":
+        position = 0
+
+        lengthAddressFrom = Converter.hex_to_int(hex[position: position + 2]) * 2
+        position += 2
+
+        addressFrom = Address.from_scriptPublicKey(network, hex[position: position + lengthAddressFrom])
+        position += lengthAddressFrom
+
+        lengthTokenId = len(hex[position:]) - 16
+        tokenId = Converter.hex_to_int(hex[position: position + 2])
+        position += lengthTokenId
+
+        value = Converter.hex_to_int(hex[position: position + 16])
+        position += 16
+
+        return RemovePoolLiquidity(addressFrom.get_address(), f"{value}@{tokenId}")
+
+    def __init__(self, addressFrom: str, amount: str):
+        self._addressFrom, self._amount = None, None
+        self.set_addressFrom(addressFrom)
+        self.set_amount(amount)
+
+    def __bytes__(self) -> bytes:
+        # Convert to Bytes
+        defiTxType = Converter.hex_to_bytes(self.get_defiTxType())
+        address = Address.from_address(self.get_addressFrom())
+        addressFrom = Converter.hex_to_bytes(address.get_scriptPublicKey())
+        tokenId = Converter.hex_to_bytes(Calculate.write_varint(
+            Token.checkAndConvert(address.get_network(), self.get_amount().split("@")[1])))
+        value = Converter.int_to_bytes(int(self.get_amount().split("@")[0]), 8)
+
+        lengthAddressFrom = Converter.int_to_bytes(len(addressFrom), 1)
+
+        # Build RemovePoolLiquidity
+        result = defiTxType
+        result += lengthAddressFrom
+        result += addressFrom
+        result += tokenId
+        result += value
+
+        return BuildDefiTx.build_defiTx(result)
+
+    # Get Information
+    def get_defiTxType(self) -> str:
+        return DefiTxType.OP_DEFI_TX_POOL_REMOVE_LIQUIDITY
+
+    def get_addressFrom(self) -> str:
+        return self._addressFrom
+
+    def get_amount(self) -> str:
+        return self._amount
+
+    def to_json(self) -> {}:
+        json = {}
+        json.update({"defiTxType": {"typeName": DefiTxType.from_hex(self.get_defiTxType()),
+                                    "typeHex": self.get_defiTxType()}})
+        json.update({"addressFrom": self.get_addressFrom()})
+        json.update({"amount": self.get_amount()})
+        return json
+
+    # Set Information
+    def set_addressFrom(self, addressFrom: str):
+        self._addressFrom = addressFrom
+
+    def set_amount(self, amount: str):
+        self._amount = amount
+
+
+class CreatePoolPair(BaseDefiTx):
     pass
 
 
-class PoolCreatePair(BaseDefiTx):
-    pass
-
-
-class PoolUpdatePair(BaseDefiTx):
+class UpdatePoolPair(BaseDefiTx):
     pass

@@ -191,6 +191,3 @@ class ScriptBalances(BaseInput):
     def get_bytes_script(self) -> bytes:
         return Converter.hex_to_bytes(self.get_script())
 
-
-if __name__ == "__main__":
-    pass
