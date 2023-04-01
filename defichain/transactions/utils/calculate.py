@@ -42,7 +42,7 @@ class Calculate:
                 return n
 
     @staticmethod
-    def get_lengthCompactSize(hex: str) -> int:
+    def lengthCompactSize(hex: str) -> int:
         indicator = hex[0:2]
         if indicator == "fd":
             return 3

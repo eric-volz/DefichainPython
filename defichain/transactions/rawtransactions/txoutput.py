@@ -20,7 +20,7 @@ class TxBaseOutput(TxBase, ABC):
         value = Converter.hex_to_int(hex[position: position + 16])
         position += 16
 
-        scriptSize = Calculate.get_lengthCompactSize(hex[position: position + 2])
+        scriptSize = Calculate.lengthCompactSize(hex[position: position + 2])
         length_script = Calculate.read_compactSize(hex[position: position + scriptSize * 2]) * 2
         position += scriptSize * 2
 

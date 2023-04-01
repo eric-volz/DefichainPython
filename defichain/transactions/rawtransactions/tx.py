@@ -254,7 +254,7 @@ class Transaction(BaseTransaction):
                 tx._segwit = True
 
             # Find number of inputs
-            length_numberOfInputs = Calculate.get_lengthCompactSize(hex[position: position + 2])
+            length_numberOfInputs = Calculate.lengthCompactSize(hex[position: position + 2])
             numberOfInputs = Calculate.read_compactSize(hex[position: position + length_numberOfInputs * 2])
             position += length_numberOfInputs * 2
 
@@ -267,14 +267,14 @@ class Transaction(BaseTransaction):
                 position += 82 + length_scriptSig
 
             # Find number of outputs
-            length_numberOfOutputs = Calculate.get_lengthCompactSize(hex[position: position + 2])
+            length_numberOfOutputs = Calculate.lengthCompactSize(hex[position: position + 2])
             numberOfOutputs = Calculate.read_compactSize(hex[position: position + length_numberOfOutputs * 2])
             position += length_numberOfOutputs * 2
 
             # Iterate through all outputs
             outputs = []
             for _ in range(numberOfOutputs):
-                scriptLengthSize = Calculate.get_lengthCompactSize(hex[position + 16: position + 18])
+                scriptLengthSize = Calculate.lengthCompactSize(hex[position + 16: position + 18])
                 length_script = Calculate.read_compactSize(hex[position + 16: position + 16 + scriptLengthSize * 2]) * 2
 
                 # If transaction version is 1 or 2 there is no token id at the back of an output
