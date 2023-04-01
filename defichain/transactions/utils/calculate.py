@@ -10,7 +10,16 @@ class Calculate:
 
     @staticmethod
     def length_varInt(hex: str) -> int:
-        pass
+        size = 0
+        split = [hex[i:i + 2] for i in range(0, len(hex), 2)]
+        for s in split:
+            integer = int.from_bytes(bytes.fromhex(s), byteorder="little")
+            if integer < 0x80:
+                size += 1
+                break
+            else:
+                size += 1
+        return size
 
     @staticmethod
     def write_varInt(n: int) -> str:

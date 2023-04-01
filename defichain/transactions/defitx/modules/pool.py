@@ -32,8 +32,9 @@ class PoolSwap(BaseDefiTx):
         addressFrom = Address.from_scriptPublicKey(network, hex[position: position + lengthAddressFrom])
         position += lengthAddressFrom
 
-        tokenFrom = Converter.hex_to_int(hex[position: position + 2])
-        position += 2
+        sizeVarIntTokenFrom = Calculate.length_varInt(hex[position:]) * 2
+        tokenFrom = Calculate.read_varInt(hex[position: position + sizeVarIntTokenFrom])
+        position += sizeVarIntTokenFrom
 
         amountFrom = Converter.hex_to_int(hex[position: position + 16])
         position += 16
@@ -44,8 +45,9 @@ class PoolSwap(BaseDefiTx):
         addressTo = Address.from_scriptPublicKey(network, hex[position: position + lengthAddressTo])
         position += lengthAddressTo
 
-        tokenTo = Converter.hex_to_int(hex[position: position + 2])
-        position += 2
+        sizeVarIntTokenTo = Calculate.length_varInt(hex[position:]) * 2
+        tokenTo = Calculate.read_varInt(hex[position: position + sizeVarIntTokenTo])
+        position += sizeVarIntTokenTo
 
         maxPriceInteger = Converter.hex_to_int(hex[position: position + 16])
         position += 16
@@ -77,10 +79,10 @@ class PoolSwap(BaseDefiTx):
         # Convert to Bytes
         defiTxType = Converter.hex_to_bytes(DefiTxType.OP_DEFI_TX_POOL_SWAP)
         addressFrom = Converter.hex_to_bytes(Address.from_address(self.get_addressFrom()).get_scriptPublicKey())
-        tokenFrom = Converter.int_to_bytes(self.get_tokenFrom(), 1)
+        tokenFrom = Converter.hex_to_bytes(Calculate.write_varInt(self.get_tokenFrom()))
         amountFrom = Converter.int_to_bytes(self.get_amountFrom(), 8)
         addressTo = Converter.hex_to_bytes(Address.from_address(self.get_addressTo()).get_scriptPublicKey())
-        tokenTo = Converter.int_to_bytes(self.get_tokenTo(), 1)
+        tokenTo = Converter.hex_to_bytes(Calculate.write_varInt(self.get_tokenTo()))
 
         maxPriceInteger = int(str(self.get_maxPrice())[:-8]) if str(self.get_maxPrice())[:-8] != "" else 0
         maxPriceFraction = int(str(self.get_maxPrice())[-8:])
@@ -290,8 +292,8 @@ class RemovePoolLiquidity(BaseDefiTx):
         defiTxType = Converter.hex_to_bytes(self.get_defiTxType())
         address = Address.from_address(self.get_addressFrom())
         addressFrom = Converter.hex_to_bytes(address.get_scriptPublicKey())
-        tokenId = Converter.hex_to_bytes(Calculate.write_varint(
-            Token.checkAndConvert(address.get_network(), self.get_amount().split("@")[1])))
+        tokenId = Converter.hex_to_bytes(
+            Calculate.write_varInt(Token.checkAndConvert(address.get_network(), self.get_amount().split("@")[1])))
         value = Converter.int_to_bytes(int(self.get_amount().split("@")[0]), 8)
 
         lengthAddressFrom = Converter.int_to_bytes(len(addressFrom), 1)
