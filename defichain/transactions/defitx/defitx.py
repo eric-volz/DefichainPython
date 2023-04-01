@@ -39,6 +39,8 @@ class DefiTx:
         # Pool
         elif DefiTxType.OP_DEFI_TX_POOL_SWAP == defiTxType:
             return PoolSwap.deserialize(network, hex[position:])
+        elif DefiTxType.OP_DEFI_TX_COMPOSITE_SWAP == defiTxType:
+            return CompositeSwap.deserialize(network, hex[position:])
         elif DefiTxType.OP_DEFI_TX_POOL_ADD_LIQUIDITY == defiTxType:
             return AddPoolLiquidity.deserialize(network, hex[position:])
         elif DefiTxType.OP_DEFI_TX_POOL_REMOVE_LIQUIDITY == defiTxType:

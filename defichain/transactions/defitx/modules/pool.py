@@ -167,9 +167,115 @@ class PoolSwap(BaseDefiTx):
         self._maxPrice = maxPrice
 
 
-class CompositeSwap(BaseDefiTx):
-    """TODO: MVP"""
-    pass
+class CompositeSwap(PoolSwap):
+    """
+    Builds the defi transaction: CompositeSwap
+
+    :param addressFrom: (required) the address where the tokens are located
+    :type addressFrom: str
+    :param tokenFrom: (required) the token that should be exchanged
+    :type tokenFrom: str | int
+    :param amountFrom: (required) the amount that should be exchanged
+    :type amountFrom: float | int
+    :param addressTo: (required) the address where the exchanged tokens are sent to
+    :type addressTo: str
+    :param tokenTo: (required) the token to change into
+    :type tokenTo: str | int
+    :param maxPrice: (required) maximum acceptable price
+    :type maxPrice: float | int
+    :param pools: (required) specification of all pools through which the swap should take place
+    :type pools: [str]
+    """
+
+    @staticmethod
+    def deserialize(network: Any, hex: str) -> "CompositeSwap":
+
+        poolSwap = PoolSwap.deserialize(network, hex)
+        lengthPoolSwap = len(poolSwap.serialize()[16:])
+
+        position = lengthPoolSwap
+        numberOfPools = Converter.hex_to_int(hex[position: position + 2])
+        position += 2
+
+        pools = []
+        for _ in range(numberOfPools):
+            lengthVarInt = Calculate.length_varInt(hex[position:]) * 2
+            tokenId = Calculate.read_varInt(hex[position: position + lengthVarInt])
+            position += lengthVarInt
+            pools.append(tokenId)
+
+        return CompositeSwap(poolSwap.get_addressFrom(), poolSwap.get_tokenFrom(), poolSwap.get_amountFrom(),
+                             poolSwap.get_addressTo(), poolSwap.get_tokenTo(), poolSwap.get_maxPrice(), pools)
+
+    def __init__(self, addressFrom: str, tokenFrom: int, amountFrom: int, addressTo: str, tokenTo: int, maxPrice: int,
+                 pools: [str]):
+        super().__init__(addressFrom, tokenFrom, amountFrom, addressTo, tokenTo, maxPrice)
+        self._pools = None
+        self.set_pools(pools)
+
+    def __bytes__(self) -> bytes:
+        # Convert to Bytes
+        defiTxType = Converter.hex_to_bytes(self.get_defiTxType())
+        addressFrom = Converter.hex_to_bytes(Address.from_address(self.get_addressFrom()).get_scriptPublicKey())
+        tokenFrom = Converter.hex_to_bytes(Calculate.write_varInt(self.get_tokenFrom()))
+        amountFrom = Converter.int_to_bytes(self.get_amountFrom(), 8)
+        addressTo = Converter.hex_to_bytes(Address.from_address(self.get_addressTo()).get_scriptPublicKey())
+        tokenTo = Converter.hex_to_bytes(Calculate.write_varInt(self.get_tokenTo()))
+
+        maxPriceInteger = int(str(self.get_maxPrice())[:-8]) if str(self.get_maxPrice())[:-8] != "" else 0
+        maxPriceFraction = int(str(self.get_maxPrice())[-8:])
+        maxPriceInteger = Converter.int_to_bytes(maxPriceInteger, 8)
+        maxPriceFraction = Converter.int_to_bytes(maxPriceFraction, 8)
+
+        length_addressFrom = Converter.int_to_bytes(len(addressFrom), 1)
+        length_addressTo = Converter.int_to_bytes(len(addressTo), 1)
+
+        network = Address.from_address(self.get_addressFrom()).get_network()
+        numberOfPools = Converter.int_to_bytes(len(self.get_pools()), 1)
+
+        pools = b''
+        for pool in self.get_pools():
+            pools += Converter.hex_to_bytes(Calculate.write_varInt(Token.checkAndConvert(network, pool)))
+
+        # Build CompositeSwapDefiTx
+        result = defiTxType
+        result += length_addressFrom
+        result += addressFrom
+        result += tokenFrom
+        result += amountFrom
+        result += length_addressTo
+        result += addressTo
+        result += tokenTo
+        result += maxPriceInteger
+        result += maxPriceFraction
+        result += numberOfPools
+        result += pools
+
+        return BuildDefiTx.build_defiTx(result)
+
+    def to_json(self) -> {}:
+        json = {}
+        json.update({"defiTxType": {"typeName": DefiTxType.from_hex(self.get_defiTxType()),
+                                    "typeHex": self.get_defiTxType()}})
+        json.update({"addressFrom": self.get_addressFrom()})
+        json.update({"tokenFrom": self.get_tokenFrom()})
+        json.update({"amountFrom": self.get_amountFrom()})
+        json.update({"addressTo": self.get_addressTo()})
+        json.update({"tokenTo": self.get_tokenTo()})
+        json.update({"maxPrice": self.get_maxPrice()})
+        json.update({"pools": self.get_pools()})
+        return json
+
+    # Get information
+    def get_defiTxType(self) -> str:
+        return DefiTxType.OP_DEFI_TX_COMPOSITE_SWAP
+
+    def get_pools(self):
+        return self._pools
+
+    # Set Information
+    def set_pools(self, pools: [str]):
+        self._pools = pools
 
 
 class AddPoolLiquidity(BaseDefiTx):
