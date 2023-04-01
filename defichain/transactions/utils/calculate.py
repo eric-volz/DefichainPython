@@ -9,7 +9,11 @@ class Calculate:
         return hashlib.sha256(hashlib.sha256(h).digest()).digest()
 
     @staticmethod
-    def write_varint(n: int) -> str:
+    def length_varInt(hex: str) -> int:
+        pass
+
+    @staticmethod
+    def write_varInt(n: int) -> str:
         # https://github.com/JellyfishSDK/jellyfish/blob/d57b37bb2b10dfb44389c0d1f6a0c6428fa82d7e/packages/jellyfish-buffer/src/VarInt.ts#L21
         # https://github.com/DeFiCh/ain/blob/0edc8e002ddc634dcb80785b9e9e01606fd8e4f7/src/serialize.h#L355
         buffer = [None for _ in range(20)]
@@ -29,7 +33,7 @@ class Calculate:
         return "".join(result)
 
     @staticmethod
-    def read_varint(hex: str) -> int:
+    def read_varInt(hex: str) -> int:
         buffer = io.BytesIO(bytes.fromhex(hex))
 
         n = 0
@@ -42,7 +46,7 @@ class Calculate:
                 return n
 
     @staticmethod
-    def lengthCompactSize(hex: str) -> int:
+    def length_compactSize(hex: str) -> int:
         indicator = hex[0:2]
         if indicator == "fd":
             return 3
@@ -83,7 +87,7 @@ class Calculate:
 
 
 if __name__ == "__main__":
-    c = Calculate.write_varint(2**32)
+    c = Calculate.write_varInt(2 ** 32)
     print(c)
-    print(Calculate.read_varint(c))
+    print(Calculate.read_varInt(c))
     print(2**32)
