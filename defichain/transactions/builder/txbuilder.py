@@ -52,6 +52,8 @@ class TxBuilder:
         self.accounts = Accounts(self._builder)
         self.pool = Pool(self._builder)
 
+        self.vault = Vault(self._builder)
+
         # Verify if address is represented by provided account
         self._verify()
 

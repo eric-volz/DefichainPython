@@ -74,5 +74,3 @@ class DefiTxType:
             if key[0:7] == "OP_DEFI":
                 if dict[key] == hex:
                     return key
-
-

@@ -16,3 +16,7 @@ from .rawtransactions import ORDER, SCRIPTSIG, SEQUENCE, SIGHASH
 
 # Tokens
 from .tokens import TokenTypes, Tokens
+
+# Network Constants
+from .mainnet import *
+from .testnet import *

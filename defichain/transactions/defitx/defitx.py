@@ -5,6 +5,8 @@ from defichain.transactions.constants import DefiTx_SIGNATURE
 from .modules.accounts import *
 from .modules.pool import *
 
+from .modules.vault import *
+
 
 class DefiTx:
 
@@ -45,6 +47,10 @@ class DefiTx:
             return AddPoolLiquidity.deserialize(network, hex[position:])
         elif DefiTxType.OP_DEFI_TX_POOL_REMOVE_LIQUIDITY == defiTxType:
             return RemovePoolLiquidity.deserialize(network, hex[position:])
+
+        # Vault
+        elif DefiTxType.OP_DEFI_TX_CREATE_VAULT == defiTxType:
+            return CreateVault.deserialize(network, hex[position:])
 
         raise NotYetSupportedError()
 
