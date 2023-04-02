@@ -123,7 +123,7 @@ Since this is a community supported project, the community also has the right to
         SetOracleData           |:rotating_light:|
 
         PoolSwap                |:white_check_mark:|
-        CompositeSwap           |:rotating_light:|
+        CompositeSwap           |:white_check_mark:|
         AddPoolLiquidity        |:white_check_mark:|
         RemovePoolLiquidity     |:white_check_mark:|
         CreatePoolPair          |:rotating_light:|
@@ -134,7 +134,7 @@ Since this is a community supported project, the community also has the right to
         TokenUpdate             |:rotating_light:|
         TokenUpdateAny          |:rotating_light:|
 
-        CreateVault             |:rotating_light:|
+        CreateVault             |:white_check_mark:|
         UpdateVault             |:rotating_light:|
         DepositToVault          |:rotating_light:|
         WithdrawFromVault       |:rotating_light:|

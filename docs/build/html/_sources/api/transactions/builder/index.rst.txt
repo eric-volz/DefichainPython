@@ -13,3 +13,4 @@ Builder Modules
     accounts
     pool
     utxo
+    vault

@@ -218,6 +218,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../api/transactions/builder/accounts.html">Accounts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/transactions/builder/pool.html">Pool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/transactions/builder/utxo.html">UTXO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/transactions/builder/vault.html">Vault</a></li>
 </ul>
 </li>
 </ul>
@@ -279,7 +280,7 @@ But you can also restore the wallet just from the wallet.dat file.</p>
 <li><p>Python3 installed on your device</p></li>
 <li><p>install the python package: <a class="reference external" href="%22https://github.com/meherett/python-hdwallet">hdwallet</a></p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install hdwallet
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>hdwallet
 </pre></div>
 </div>
 </section>
@@ -336,7 +337,7 @@ But you can also restore the wallet just from the wallet.dat file.</p>
 <li><p>passphrase: is recommended</p></li>
 <li><p>avoid_reuse: default is false</p></li>
 </ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>createwallet name <span class="nb">false</span> <span class="nb">true</span> passphrase <span class="nb">false</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>createwallet<span class="w"> </span>name<span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span>passphrase<span class="w"> </span><span class="nb">false</span>
 </pre></div>
 </div>
 </section>
@@ -347,7 +348,7 @@ But you can also restore the wallet just from the wallet.dat file.</p>
 <li><p>newkeypool: True</p></li>
 <li><p>seed: has to be the wif step 2</p></li>
 </ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sethdseed <span class="nb">true</span> wif
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sethdseed<span class="w"> </span><span class="nb">true</span><span class="w"> </span>wif
 </pre></div>
 </div>
 <p>Now you are good to go and able to use the wallet like every other wallet</p>

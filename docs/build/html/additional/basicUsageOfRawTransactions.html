@@ -218,6 +218,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../api/transactions/builder/accounts.html">Accounts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/transactions/builder/pool.html">Pool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/transactions/builder/utxo.html">UTXO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/transactions/builder/vault.html">Vault</a></li>
 </ul>
 </li>
 </ul>
@@ -418,61 +419,61 @@ For example, there are UtxosToAccount, AccountToAccount, PoolSwap …</p>
 </pre></div>
 </div>
 <p>Output:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">     </span><span class="nt">"txid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1fcbdcd1b18753fb24dcaeb259fffeb84123e29e04db688b37522fbe8ce49365"</span><span class="p">,</span><span class="w"></span>
-<span class="w">     </span><span class="nt">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21f16f151f688f222c380b27c95a594643794b4b51c136bbf0da42c34dfdf9db"</span><span class="p">,</span><span class="w"></span>
-<span class="w">     </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">283</span><span class="p">,</span><span class="w"></span>
-<span class="w">     </span><span class="nt">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">282</span><span class="p">,</span><span class="w"></span>
-<span class="w">     </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"></span>
-<span class="w">     </span><span class="nt">"marker"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">     </span><span class="nt">"flag"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
-<span class="w">     </span><span class="nt">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">          </span><span class="p">{</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"inputType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"P2WPKH"</span><span class="p">,</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"txid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1d9de1fb561fab9d7243d37c0b9308955bc777434e6f408a82f816da4cb40586"</span><span class="p">,</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"vout"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"scriptSig"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ffffffff"</span><span class="p">,</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tf1qqnrhvlfqp8rd40j86fa8wsrpg8pgjdm2hpw7df"</span><span class="p">,</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">4999999254</span><span class="p">,</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"witness"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">"lengthSignature"</span><span class="p">:</span><span class="w"> </span><span class="mi">72</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">"signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3045022100b11e61ff38835e09e5f4b4e5417808b99e1ddd3ccf792a60f929db22d3a93a2802203a3a69be756a4451e9461b1d795a13f0c837e104cc7081017c3dfd844529c21c01"</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">"lengthPublicKey"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">"publicKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"03a5c791ba2a9c2668fc10b095e742b971d7acd50ffa77d6b40b9974937cb6064e"</span><span class="w"></span>
-<span class="w">               </span><span class="p">}</span><span class="w"></span>
-<span class="w">          </span><span class="p">}</span><span class="w"></span>
-<span class="w">     </span><span class="p">],</span><span class="w"></span>
-<span class="w">     </span><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">          </span><span class="p">{</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"outputType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defiTx"</span><span class="p">,</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"defiTx"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">"defiTxType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                         </span><span class="nt">"typeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OP_DEFI_TX_POOL_SWAP"</span><span class="p">,</span><span class="w"></span>
-<span class="w">                         </span><span class="nt">"typeHex"</span><span class="p">:</span><span class="w"> </span><span class="s2">"73"</span><span class="w"></span>
-<span class="w">                    </span><span class="p">},</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">"addressFrom"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tf1qqnrhvlfqp8rd40j86fa8wsrpg8pgjdm2hpw7df"</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">"tokenFrom"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">"amountFrom"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000000</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">"addressTo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tf1qqnrhvlfqp8rd40j86fa8wsrpg8pgjdm2hpw7df"</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">"tokenTo"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">"maxPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">9999999999</span><span class="w"></span>
-<span class="w">               </span><span class="p">},</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"script"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6a4c4d446654787316001404c7767d2009c6dabe47d27a77406141c289376a0000e1f5050000000016001404c7767d2009c6dabe47d27a77406141c289376a016300000000000000ffe0f50500000000"</span><span class="p">,</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"tokenId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">          </span><span class="p">},</span><span class="w"></span>
-<span class="w">          </span><span class="p">{</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"outputType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"address"</span><span class="p">,</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">4999998972</span><span class="p">,</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tf1qqnrhvlfqp8rd40j86fa8wsrpg8pgjdm2hpw7df"</span><span class="p">,</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"script"</span><span class="p">:</span><span class="w"> </span><span class="s2">"001404c7767d2009c6dabe47d27a77406141c289376a"</span><span class="p">,</span><span class="w"></span>
-<span class="w">               </span><span class="nt">"tokenId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">          </span><span class="p">}</span><span class="w"></span>
-<span class="w">     </span><span class="p">],</span><span class="w"></span>
-<span class="w">     </span><span class="nt">"lockTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">     </span><span class="nt">"serialized"</span><span class="p">:</span><span class="w"> </span><span class="s2">"040000000001018605b44cda16f8828a406f4e4377c75b9508930b7cd343729dab1f56fbe19d1d0100000000ffffffff020000000000000000506a4c4d446654787316001404c7767d2009c6dabe47d27a77406141c289376a0000e1f5050000000016001404c7767d2009c6dabe47d27a77406141c289376a016300000000000000ffe0f5050000000000fced052a0100000016001404c7767d2009c6dabe47d27a77406141c289376a0002483045022100b11e61ff38835e09e5f4b4e5417808b99e1ddd3ccf792a60f929db22d3a93a2802203a3a69be756a4451e9461b1d795a13f0c837e104cc7081017c3dfd844529c21c012103a5c791ba2a9c2668fc10b095e742b971d7acd50ffa77d6b40b9974937cb6064e00000000"</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">     </span><span class="nt">"txid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1fcbdcd1b18753fb24dcaeb259fffeb84123e29e04db688b37522fbe8ce49365"</span><span class="p">,</span>
+<span class="w">     </span><span class="nt">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21f16f151f688f222c380b27c95a594643794b4b51c136bbf0da42c34dfdf9db"</span><span class="p">,</span>
+<span class="w">     </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">283</span><span class="p">,</span>
+<span class="w">     </span><span class="nt">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">282</span><span class="p">,</span>
+<span class="w">     </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">     </span><span class="nt">"marker"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">     </span><span class="nt">"flag"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">     </span><span class="nt">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">               </span><span class="nt">"inputType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"P2WPKH"</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">"txid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1d9de1fb561fab9d7243d37c0b9308955bc777434e6f408a82f816da4cb40586"</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">"vout"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">"scriptSig"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ffffffff"</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tf1qqnrhvlfqp8rd40j86fa8wsrpg8pgjdm2hpw7df"</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">4999999254</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">"witness"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">"lengthSignature"</span><span class="p">:</span><span class="w"> </span><span class="mi">72</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">"signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3045022100b11e61ff38835e09e5f4b4e5417808b99e1ddd3ccf792a60f929db22d3a93a2802203a3a69be756a4451e9461b1d795a13f0c837e104cc7081017c3dfd844529c21c01"</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">"lengthPublicKey"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">"publicKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"03a5c791ba2a9c2668fc10b095e742b971d7acd50ffa77d6b40b9974937cb6064e"</span>
+<span class="w">               </span><span class="p">}</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">     </span><span class="p">],</span>
+<span class="w">     </span><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">               </span><span class="nt">"outputType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defiTx"</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">"defiTx"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">"defiTxType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                         </span><span class="nt">"typeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OP_DEFI_TX_POOL_SWAP"</span><span class="p">,</span>
+<span class="w">                         </span><span class="nt">"typeHex"</span><span class="p">:</span><span class="w"> </span><span class="s2">"73"</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">"addressFrom"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tf1qqnrhvlfqp8rd40j86fa8wsrpg8pgjdm2hpw7df"</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">"tokenFrom"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">"amountFrom"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000000</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">"addressTo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tf1qqnrhvlfqp8rd40j86fa8wsrpg8pgjdm2hpw7df"</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">"tokenTo"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">"maxPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">9999999999</span>
+<span class="w">               </span><span class="p">},</span>
+<span class="w">               </span><span class="nt">"script"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6a4c4d446654787316001404c7767d2009c6dabe47d27a77406141c289376a0000e1f5050000000016001404c7767d2009c6dabe47d27a77406141c289376a016300000000000000ffe0f50500000000"</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">"tokenId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">               </span><span class="nt">"outputType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"address"</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">4999998972</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tf1qqnrhvlfqp8rd40j86fa8wsrpg8pgjdm2hpw7df"</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">"script"</span><span class="p">:</span><span class="w"> </span><span class="s2">"001404c7767d2009c6dabe47d27a77406141c289376a"</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">"tokenId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">     </span><span class="p">],</span>
+<span class="w">     </span><span class="nt">"lockTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">     </span><span class="nt">"serialized"</span><span class="p">:</span><span class="w"> </span><span class="s2">"040000000001018605b44cda16f8828a406f4e4377c75b9508930b7cd343729dab1f56fbe19d1d0100000000ffffffff020000000000000000506a4c4d446654787316001404c7767d2009c6dabe47d27a77406141c289376a0000e1f5050000000016001404c7767d2009c6dabe47d27a77406141c289376a016300000000000000ffe0f5050000000000fced052a0100000016001404c7767d2009c6dabe47d27a77406141c289376a0002483045022100b11e61ff38835e09e5f4b4e5417808b99e1ddd3ccf792a60f929db22d3a93a2802203a3a69be756a4451e9461b1d795a13f0c837e104cc7081017c3dfd844529c21c012103a5c791ba2a9c2668fc10b095e742b971d7acd50ffa77d6b40b9974937cb6064e00000000"</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>
