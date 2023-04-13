@@ -63,7 +63,7 @@ class DefiTxType:
     OP_DEFI_TX_CREATE_VAULT: str = "56"  # V
     OP_DEFI_TX_UPDATE_VAULT: str = "76"  # v
     OP_DEFI_TX_DEPOSIT_TO_VAULT: str = "53"  # S
-    OP_DEFI_TX_WITHDRAW_FROM_VAULT: str = "4A"  # J
+    OP_DEFI_TX_WITHDRAW_FROM_VAULT: str = "4a"  # J
     OP_DEFI_TX_CLOSE_VAULT: str = "65"  # e
     OP_DEFI_TX_AUCTION_BID: str = "49"  # I
 

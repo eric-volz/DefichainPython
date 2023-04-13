@@ -53,6 +53,8 @@ class DefiTx:
             return CreateVault.deserialize(network, hex[position:])
         elif DefiTxType.OP_DEFI_TX_DEPOSIT_TO_VAULT == defiTxType:
             return DepositToVault.deserialize(network, hex[position:])
+        elif DefiTxType.OP_DEFI_TX_WITHDRAW_FROM_VAULT == defiTxType:
+            return WithdrawFromVault.deserialize(network, hex[position:])
 
         raise NotYetSupportedError()
 
