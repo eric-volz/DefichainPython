@@ -136,8 +136,8 @@ Since this is a community supported project, the community also has the right to
 
         CreateVault             |:white_check_mark:|
         UpdateVault             |:rotating_light:|
-        DepositToVault          |:rotating_light:|
-        WithdrawFromVault       |:rotating_light:|
+        DepositToVault          |:white_check_mark:|
+        WithdrawFromVault       |:white_check_mark:|
         CloseVault              |:rotating_light:|
         PlaceAuctionBid         |:rotating_light:|
         ====================    ========
