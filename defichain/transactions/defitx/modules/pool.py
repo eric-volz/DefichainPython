@@ -5,7 +5,7 @@ from defichain.transactions.constants import DefiTxType
 from defichain.transactions.address import Address
 from defichain.transactions.utils import Converter, Token, Verify, Calculate
 from .basedefitx import BaseDefiTx
-from .baseinput import ScriptBalances, TokenBalanceInt32
+from .baseinput import ScriptBalances
 from ..builddefitx import BuildDefiTx
 
 
@@ -19,7 +19,6 @@ class PoolSwap(BaseDefiTx):
     :param addressTo: (required) the address where the exchanged tokens are sent to
     :param tokenTo: (required) the token to change into
     :param maxPrice: (required) maximum acceptable price
-    :return: "hex" (string) -- returns the finished defi transaction
     """
 
     @staticmethod
