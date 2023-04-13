@@ -66,6 +66,10 @@ class Converter:
         return int(round(f * 100000000))
 
     @staticmethod
+    def amount_float_to_int(amount: str) -> str:
+        return f'{Converter.float_to_int(float(amount.split("@")[0]))}@{amount.split("@")[1]}'
+
+    @staticmethod
     def addressAmount_float_to_int(addressAmount: {}) -> {}:
         from . import BuildAddressAmounts
         newAddressAmount = BuildAddressAmounts()
