@@ -4,7 +4,7 @@ from typing import Any
 from defichain.exceptions.transactions import AddressError
 from defichain.transactions.utils import Token, Verify, BuildAddressAmounts
 from defichain.transactions.address import Address
-from defichain.transactions.utils import Converter
+from defichain.transactions.utils import Converter, Calculate
 
 
 class BaseInput(ABC):
@@ -68,7 +68,30 @@ class TokenBalanceInt32(BaseInput):
 
 
 class TokenBalanceVarInt(BaseInput):
-    pass
+    @staticmethod
+    def deserialize(network: Any, hex: str) -> "TokenBalanceVarInt":
+        tokenId = Calculate.read_varInt(hex[0: Calculate.length_varInt(hex) * 2])
+        amount = Converter.hex_to_int(hex[Calculate.length_varInt(hex) * 2: Calculate.length_varInt(hex) * 2 + 16])
+        return TokenBalanceVarInt(tokenId, amount)
+
+    def __init__(self, tokenId: int, amount: int):
+        self._token = tokenId
+        self._amount = amount
+
+    def __bytes__(self) -> bytes:
+        return self.get_bytes_tokenId() + self.get_bytes_amount()
+
+    def get_tokenId(self) -> int:
+        return self._token
+
+    def get_amount(self) -> int:
+        return self._amount
+
+    def get_bytes_tokenId(self) -> bytes:
+        return Converter.hex_to_bytes(Calculate.write_varInt(self.get_tokenId()))
+
+    def get_bytes_amount(self) -> bytes:
+        return Converter.int_to_bytes(self.get_amount(), 8)
 
 
 class ScriptBalances(BaseInput):
