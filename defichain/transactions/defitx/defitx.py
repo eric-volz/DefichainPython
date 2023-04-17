@@ -3,6 +3,7 @@ from typing import Any
 from defichain.exceptions.transactions import NotYetSupportedError
 from defichain.transactions.constants import DefiTx_SIGNATURE
 from .modules.accounts import *
+from .modules.loans import *
 from .modules.pool import *
 
 from .modules.vault import *
@@ -37,6 +38,10 @@ class DefiTx:
             return UtxosToAccount.deserialize(network, hex[position:])
         elif DefiTxType.OP_DEFI_TX_ACCOUNT_TO_ACCOUNT == defiTxType:
             return AccountToAccount.deserialize(network, hex[position:])
+
+        # Loans
+        if DefiTxType.OP_DEFI_TX_TAKE_LOAN == defiTxType:
+            return TakeLoan.deserialize(network, hex[position:])
 
         # Pool
         elif DefiTxType.OP_DEFI_TX_POOL_SWAP == defiTxType:
