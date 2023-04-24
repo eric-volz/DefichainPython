@@ -110,8 +110,9 @@ Since this is a community supported project, the community also has the right to
         SetCollateralToken      |:rotating_light:|
         SetLoanToken            |:rotating_light:|
         UpdateLoanToken         |:rotating_light:|
-        TakeLoan                |:rotating_light:|
-        PaybackLoan             |:rotating_light:|
+        TakeLoan                |:white_check_mark:|
+        PaybackLoan             |:white_check_mark:|
+        PaybackLoanV2           |:white_check_mark:|
 
         CreateMasternode        |:rotating_light:|
         ResignMasternode        |:rotating_light:|
