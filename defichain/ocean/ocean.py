@@ -4,6 +4,7 @@ from .connection import Connection
 
 from .modules.address import Address
 from .modules.blocks import Blocks
+from .modules.consortium import Consortium
 from .modules.fee import Fee
 from .modules.governance import Governance
 from .modules.loan import Loan
@@ -53,6 +54,7 @@ class Ocean:
 
         self.address = Address(self)
         self.blocks = Blocks(self)
+        self.consortium = Consortium(self)
         self.fee = Fee(self)
         self.governance = Governance(self)
         self.loan = Loan(self)
