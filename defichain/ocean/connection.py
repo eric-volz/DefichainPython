@@ -12,13 +12,18 @@ class Connection:
         self._logger = logger
 
     def get(self, data, size=None, next=None):
+        if "?" in data:
+            sep = "&"
+        else:
+            sep = "?"
+
         url = self._url + data
         if size is not None and next is not None:
-            url += f"?size={size}&next={next}"
+            url += f"{sep}size={size}&next={next}"
         elif size is not None:
-            url += f"?size={size}"
+            url += f"{sep}size={size}"
         elif next is not None:
-            url += f"?next={next}"
+            url += f"{sep}next={next}"
 
         # Logging of Ocean get request url
         if self._logger:

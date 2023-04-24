@@ -1,7 +1,9 @@
 # Just to be present: Ocean
 from defichain.ocean.modules.address import Address
 from defichain.ocean.modules.blocks import Blocks
+from defichain.ocean.modules.consortium import Consortium
 from defichain.ocean.modules.fee import Fee
+from defichain.ocean.modules.governance import Governance
 from defichain.ocean.modules.loan import Loan
 from defichain.ocean.modules.masternodes import Masternodes
 from defichain.ocean.modules.oracles import Oracles

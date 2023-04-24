@@ -28,7 +28,9 @@ Ocean Modules
     ocean
     address
     blocks
+    consortium
     fee
+    governance
     loan
     masternodes
     oracles

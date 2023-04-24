@@ -192,7 +192,9 @@
 <li class="toctree-l2"><a class="reference internal" href="api/ocean/ocean.html">Ocean</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/ocean/address.html">Address</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/ocean/blocks.html">Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/ocean/consortium.html">Consortium</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/ocean/fee.html">Fee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/ocean/governance.html">Governance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/ocean/loan.html">Loan</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/ocean/masternodes.html">Masternodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/ocean/oracles.html">Oracles</a></li>
@@ -383,6 +385,8 @@
 </li>
         </ul></li>
         <li><a href="api/hdwallet/wallet.html#defichain.Wallet.compressed">compressed() (defichain.Wallet method)</a>
+</li>
+        <li><a href="api/ocean/consortium.html#defichain.ocean.Consortium">Consortium (class in defichain.ocean)</a>
 </li>
         <li><a href="api/node/control.html#defichain.node.Control">Control (class in defichain.node)</a>
 </li>
@@ -648,6 +652,8 @@
 </li>
         <li><a href="api/node/masternodes.html#defichain.node.Masternodes.getanchorteams">getanchorteams() (defichain.node.Masternodes method)</a>
 </li>
+        <li><a href="api/ocean/consortium.html#defichain.ocean.Consortium.getAssetBreakdown">getAssetBreakdown() (defichain.ocean.Consortium method)</a>
+</li>
         <li><a href="api/node/wallet.html#defichain.node.Wallet.getbalance">getbalance() (defichain.node.Wallet method)</a>
 </li>
         <li><a href="api/ocean/address.html#defichain.ocean.Address.getBalance">getBalance() (defichain.ocean.Address method)</a>
@@ -700,10 +706,10 @@
 </li>
         <li><a href="api/ocean/prices.html#defichain.ocean.Prices.getFeedActive">getFeedActive() (defichain.ocean.Prices method)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/ocean/prices.html#defichain.ocean.Prices.getFeedWithInterval">getFeedWithInterval() (defichain.ocean.Prices method)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/oracles.html#defichain.node.Oracles.getfixedintervalprice">getfixedintervalprice() (defichain.node.Oracles method)</a>
 </li>
         <li><a href="api/node/oracles.html#defichain.node.Oracles.getfutureswapblock">getfutureswapblock() (defichain.node.Oracles method)</a>
@@ -711,6 +717,8 @@
         <li><a href="api/node/blockchain.html#defichain.node.Blockchain.getgov">getgov() (defichain.node.Blockchain method)</a>
 </li>
         <li><a href="api/node/proposals.html#defichain.node.Proposals.getgovproposal">getgovproposal() (defichain.node.Proposals method)</a>
+</li>
+        <li><a href="api/ocean/governance.html#defichain.ocean.Governance.getGovProposal">getGovProposal() (defichain.ocean.Governance method)</a>
 </li>
         <li><a href="api/node/loan.html#defichain.node.Loan.getinterest">getinterest() (defichain.node.Loan method)</a>
 </li>
@@ -725,6 +733,8 @@
         <li><a href="api/node/masternodes.html#defichain.node.Masternodes.getmasternode">getmasternode() (defichain.node.Masternodes method)</a>
 </li>
         <li><a href="api/node/masternodes.html#defichain.node.Masternodes.getmasternodeblocks">getmasternodeblocks() (defichain.node.Masternodes method)</a>
+</li>
+        <li><a href="api/ocean/consortium.html#defichain.ocean.Consortium.getMemberStats">getMemberStats() (defichain.ocean.Consortium method)</a>
 </li>
         <li><a href="api/node/control.html#defichain.node.Control.getmemoryinfo">getmemoryinfo() (defichain.node.Control method)</a>
 </li>
@@ -819,6 +829,8 @@
         <li><a href="api/node/wallet.html#defichain.node.Wallet.getwalletinfo">getwalletinfo() (defichain.node.Wallet method)</a>
 </li>
         <li><a href="api/node/zmq.html#defichain.node.Zmq.getzmqnotifications">getzmqnotifications() (defichain.node.Zmq method)</a>
+</li>
+        <li><a href="api/ocean/governance.html#defichain.ocean.Governance">Governance (class in defichain.ocean)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -944,7 +956,11 @@
 </li>
         <li><a href="api/node/proposals.html#defichain.node.Proposals.listgovproposals">listgovproposals() (defichain.node.Proposals method)</a>
 </li>
+        <li><a href="api/ocean/governance.html#defichain.ocean.Governance.listGovProposals">listGovProposals() (defichain.ocean.Governance method)</a>
+</li>
         <li><a href="api/node/proposals.html#defichain.node.Proposals.listgovproposalvotes">listgovproposalvotes() (defichain.node.Proposals method)</a>
+</li>
+        <li><a href="api/ocean/governance.html#defichain.ocean.Governance.listGovProposalVotes">listGovProposalVotes() (defichain.ocean.Governance method)</a>
 </li>
         <li><a href="api/node/blockchain.html#defichain.node.Blockchain.listgovs">listgovs() (defichain.node.Blockchain method)</a>
 </li>
@@ -960,10 +976,10 @@
 </li>
         <li><a href="api/node/wallet.html#defichain.node.Wallet.listlockunspent">listlockunspent() (defichain.node.Wallet method)</a>
 </li>
-        <li><a href="api/node/masternodes.html#defichain.node.Masternodes.listmasternodes">listmasternodes() (defichain.node.Masternodes method)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/node/masternodes.html#defichain.node.Masternodes.listmasternodes">listmasternodes() (defichain.node.Masternodes method)</a>
+</li>
         <li><a href="api/node/oracles.html#defichain.node.Oracles.listoracles">listoracles() (defichain.node.Oracles method)</a>
 </li>
         <li><a href="api/node/accounts.html#defichain.node.Accounts.listpendingdusdswaps">listpendingdusdswaps() (defichain.node.Accounts method)</a>
