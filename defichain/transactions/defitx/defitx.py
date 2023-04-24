@@ -42,6 +42,8 @@ class DefiTx:
         # Loans
         if DefiTxType.OP_DEFI_TX_TAKE_LOAN == defiTxType:
             return TakeLoan.deserialize(network, hex[position:])
+        if DefiTxType.OP_DEFI_TX_PAYBACK_LOAN == defiTxType:
+            return PaybackLoan.deserialize(network, hex[position:])
 
         # Pool
         elif DefiTxType.OP_DEFI_TX_POOL_SWAP == defiTxType:
