@@ -4,6 +4,7 @@ from defichain import Node
 
 
 class RemoteDataNode(RemoteData):
+
     def __init__(self, source: Node):
         self.node = source
 
@@ -23,6 +24,15 @@ class RemoteDataNode(RemoteData):
             script = u["scriptPubKey"]
             unspent.append({"txid": txid, "vout": index, "value": value, "scriptPubKey": script})
         return unspent
+
+    def check_masternode(self, masternodeId: str) -> bool:
+        try:
+            data = self.node.masternodes.getmasternode(masternodeId)[masternodeId]
+            if data["state"] in ('PRE_ENABLED', 'ENABLED', 'PRE_RESIGNED'):
+                return True
+        except:
+            pass
+        return False
 
     def test_tx(self, hex: str, maxFeeRate: float = None) -> bool:
         try:

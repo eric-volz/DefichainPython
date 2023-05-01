@@ -18,6 +18,12 @@ class RemoteDataOcean(RemoteData):
             unspent.append({"txid": txid, "vout": index, "value": value, "scriptPubKey": script})
         return unspent
 
+    def check_masternode(self, masternodeId: str) -> bool:
+        data = self.ocean.masternodes.get(masternodeId)["data"]
+        if "error" in data or data["state"] not in ('PRE_ENABLED', 'ENABLED', 'PRE_RESIGNED'):
+            return False
+        return True
+
     def test_tx(self, hex: str, maxFeeRate: float = None) -> bool:
         try:
             self.ocean.rawTx.test(hex, maxFeeRate)

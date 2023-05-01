@@ -20,6 +20,16 @@ class RemoteData(ABC):
         pass
 
     @abstractmethod
+    def check_masternode(self, masternodeId: str) -> bool:
+        """
+        Returns True if the given masternode exists and is Pre-Enabled, Enabled or Pre-Resigned
+
+        :param masternodeId: txid of the creation of the masternode
+        :type masternodeId: str
+        :return: bool
+        """
+
+    @abstractmethod
     def test_tx(self, hex: str, maxFeeRate: float = None) -> bool:
         """
         Test the given raw transaction
