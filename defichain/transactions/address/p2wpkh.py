@@ -47,6 +47,11 @@ class P2WPKH(Bech32Address):  # Native Segwit
         """
         return P2WPKH(network, Bech32Address.scriptPublicKey_to_address(network, scriptPublicKey))
 
+    @staticmethod
+    def from_publicKeyHash(network: Any, publicKeyHash: str) -> "P2WPKH":
+        address = Bech32Address.encode(network, "0014" + publicKeyHash)
+        return P2WPKH(network, address)
+
     def __init__(self, network: Any, address: str):
         super().__init__(network, address)
 
@@ -60,8 +65,14 @@ class P2WPKH(Bech32Address):  # Native Segwit
         return Script.build_script([OPCodes.OP_DUP, OPCodes.OP_HASH160, Bech32Address.decode(self.get_address()),
                                     OPCodes.OP_EQUALVERIFY, OPCodes.OP_CHECKSIG])
 
+    def get_publicKeyHash(self) -> str:
+        return Bech32Address.decode(self.get_address())
+
     def get_bytes_scriptPublicKey(self) -> bytes:
         return bytes.fromhex(self.get_scriptPublicKey())
 
     def get_bytes_redeemScript(self) -> bytes:
         return bytes.fromhex(self.get_redeemScript())
+
+    def get_bytes_publicKeyHash(self) -> bytes:
+        return bytes.fromhex(self.get_publicKeyHash())

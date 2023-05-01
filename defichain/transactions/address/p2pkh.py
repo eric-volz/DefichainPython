@@ -1,8 +1,12 @@
 from typing import Any
 
+import hashlib
+import binascii
+
 from defichain.networks import Network
 from defichain.transactions.constants import AddressTypes, OPCodes
 from defichain.transactions.keys import PrivateKey, PublicKey
+from defichain.libs import base58
 from .base58address import Base58Address
 from .script import Script
 
@@ -48,6 +52,16 @@ class P2PKH(Base58Address):  # Legacy
         """
         return P2PKH(network, Base58Address.scriptPublicKey_to_address(network, scriptPublicKey))
 
+    @staticmethod
+    def from_publicKeyHash(network: Any, publicKeyHash: str) -> "P2PKH":
+        checksumHash = "12" + publicKeyHash
+        for _ in range(2):
+            checksumHash = hashlib.sha256(binascii.unhexlify(checksumHash)).hexdigest()
+        checksum = checksumHash[:8]
+        hash = "12" + publicKeyHash + checksum
+        address = base58.encode(bytes.fromhex(hash))
+        return P2PKH(network, address)
+
     def __init__(self, network: Any, address: str):
         super().__init__(network, address)
 
@@ -61,10 +75,16 @@ class P2PKH(Base58Address):  # Legacy
     def get_redeemScript(self) -> str:
         return self.get_scriptPublicKey()
 
+    def get_publicKeyHash(self) -> str:
+        return Base58Address.decode(self.get_address())[2:42]
+
     def get_bytes_scriptPublicKey(self) -> bytes:
         return bytes.fromhex(self.get_scriptPublicKey())
 
     def get_bytes_redeemScript(self) -> bytes:
         return bytes.fromhex(self.get_redeemScript())
+
+    def get_bytes_publicKeyHash(self) -> bytes:
+        return bytes.fromhex(Base58Address.decode(self.get_address())[2:42])
 
 

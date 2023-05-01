@@ -39,8 +39,7 @@ class Base58Address(BaseAddress, ABC):
         return base58.check_encode(Converter.hex_to_bytes(scriptPublicKey))
 
     @staticmethod
-    def scriptPublicKey_to_address(network: Any,
-                                   scriptPublicKey: str) -> str:
+    def scriptPublicKey_to_address(network: Any, scriptPublicKey: str) -> str:
         Base58Address._is_scriptPublicKey(scriptPublicKey)
         if scriptPublicKey[0:6] == "76a914":  # P2PKH
             script = Converter.int_to_hex(network.PUBLIC_KEY_ADDRESS, 1) + scriptPublicKey[6:46]
