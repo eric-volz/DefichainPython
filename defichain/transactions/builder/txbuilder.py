@@ -51,6 +51,7 @@ class TxBuilder:
         self.utxo = UTXO(self._builder)
         self.accounts = Accounts(self._builder)
         self.loan = Loans(self._builder)
+        self.masternode = Masternode(self._builder)
         self.pool = Pool(self._builder)
 
         self.vault = Vault(self._builder)

@@ -2,10 +2,10 @@ from defichain import Account
 from defichain.exceptions.transactions import TxBuilderError, NotYetSupportedError
 
 from defichain.transactions.address import Address
-from defichain.transactions.constants import AddressTypes
+from defichain.transactions.constants import AddressTypes, DefiTxType
 from defichain.networks import Network
 from defichain.transactions.remotedata.remotedata import RemoteData
-from defichain.transactions.rawtransactions import Transaction, TxP2WPKHInput, TxP2SHInput, TxAddressOutput, \
+from defichain.transactions.rawtransactions import Transaction, TxInput, TxP2WPKHInput, TxP2SHInput, TxAddressOutput, \
     TxDefiOutput, estimate_fee
 from defichain.transactions.defitx.modules.basedefitx import BaseDefiTx
 
@@ -26,6 +26,7 @@ class RawTransactionBuilder:
     # Build Transaction
     def build_transactionInputs(self, inputs=[]) -> Transaction:
         tx = self.new_transaction()
+
         if inputs or self.get_dataSource() is None:
             tx.set_inputs(inputs)
         else:
@@ -38,29 +39,48 @@ class RawTransactionBuilder:
                 elif address.get_addressType() == AddressTypes.P2SH:
                     tx.add_input(TxP2SHInput(input["txid"], input["vout"], self.get_account().get_p2wpkh(),
                                              input["value"]))
-                # build P2WPKH Input
+                # Build P2WPKH Input
                 elif address.get_addressType() == AddressTypes.P2WPKH:
                     tx.add_input(TxP2WPKHInput(input["txid"], input["vout"], self.get_address(), input["value"]))
+            # Check Inputs for masternode collateral
+            tx.set_inputs(self.checkMasternodeInputs(tx.get_inputs()))
         return tx
 
     def build_defiTx(self, value: int, defiTx: BaseDefiTx, inputs=[]) -> Transaction:
         tx = self.build_transactionInputs(inputs)
-        defitx_output = TxDefiOutput(value, defiTx)
+
+        # Check for errors in Inputs
+        # Check masternode creation errors
+        if defiTx.get_defiTxType() == DefiTxType.OP_DEFI_TX_CREATE_MASTER_NODE:
+            if tx.get_inputsValue() - value < 2000000000000:
+                raise TxBuilderError("The address holds not enough DFI to create a masternode")
+            if tx.get_inputsValue() < 2001000000000:
+                raise TxBuilderError("The address holds not enough DFI to pay the 10 DFI fee to create a masternode")
         if tx.get_inputsValue() - value < 0:
             raise TxBuilderError("The value of the output is bigger then the value of the input")
+        # Adding Outputs to the transaction
+        # DefiTx Output
+        defitxOutput = TxDefiOutput(value, defiTx)
+        tx.add_output(defitxOutput)
 
+        # Masternode Output
+        if defiTx.get_defiTxType() == DefiTxType.OP_DEFI_TX_CREATE_MASTER_NODE:
+            masternodeOutput = TxAddressOutput(2000000000000, self.get_address())
+            value = masternodeOutput.get_value() + value
+            tx.add_output(masternodeOutput)
+
+        # Change Output
         change_output = TxAddressOutput(tx.get_inputsValue() - value, self.get_address())
-        tx.add_output(defitx_output)
         tx.add_output(change_output)
 
         # Calculate fee
         fee = estimate_fee(tx, self.get_feePerByte())
 
         # Subtract fee from output
-        value = tx.get_outputs()[1].get_value() - fee
+        value = tx.get_outputs()[-1].get_value() - fee
         if value < 0:
             raise TxBuilderError("The used address has not enough UTXO to pay the transaction fee")
-        tx.get_outputs()[1].set_value(value)
+        tx.get_outputs()[-1].set_value(value)
 
         # Sign and Return
         self.sign(tx)
@@ -68,6 +88,17 @@ class RawTransactionBuilder:
 
     def sign(self, tx: Transaction) -> None:
         tx.sign(self.get_account().get_network(), [self.get_account().get_privateKey()])
+
+    def checkMasternodeInputs(self, inputs: [TxInput]) -> []:
+        newInputs = []
+        for input in inputs:
+            # Check Value
+            if input.get_value() == 2000000000000:
+                # Check transaction txid with data source
+                if self.get_dataSource().check_masternode(input.get_txid()):
+                    continue
+            newInputs.append(input)
+        return newInputs
 
     # Get Information
     def get_address(self) -> str:

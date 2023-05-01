@@ -4,6 +4,7 @@ from defichain.exceptions.transactions import NotYetSupportedError
 from defichain.transactions.constants import DefiTx_SIGNATURE
 from .modules.accounts import *
 from .modules.loans import *
+from .modules.masternode import *
 from .modules.pool import *
 
 from .modules.vault import *
@@ -40,10 +41,16 @@ class DefiTx:
             return AccountToAccount.deserialize(network, hex[position:])
 
         # Loans
-        if DefiTxType.OP_DEFI_TX_TAKE_LOAN == defiTxType:
+        elif DefiTxType.OP_DEFI_TX_TAKE_LOAN == defiTxType:
             return TakeLoan.deserialize(network, hex[position:])
-        if DefiTxType.OP_DEFI_TX_PAYBACK_LOAN == defiTxType:
+        elif DefiTxType.OP_DEFI_TX_PAYBACK_LOAN == defiTxType:
             return PaybackLoan.deserialize(network, hex[position:])
+
+        # Masternode
+        elif DefiTxType.OP_DEFI_TX_CREATE_MASTER_NODE == defiTxType:
+            return CreateMasternode.deserialize(network, hex[position:])
+        elif DefiTxType.OP_DEFI_TX_RESIGN_MASTER_NODE == defiTxType:
+            return ResignMasternode.deserialize(network, hex[position:])
 
         # Pool
         elif DefiTxType.OP_DEFI_TX_POOL_SWAP == defiTxType:
