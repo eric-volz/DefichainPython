@@ -11,6 +11,8 @@ Builder Modules
 
     txbuilder
     accounts
+    loans
+    masternode
     pool
     utxo
     vault

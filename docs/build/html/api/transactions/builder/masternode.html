@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Accounts" href="accounts.html" /><link rel="prev" title="Transaction Builder" href="index.html" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Pool" href="pool.html" /><link rel="prev" title="Loans" href="loans.html" />
 
     <link rel="shortcut icon" href="../../../_static/logo.png"/><meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>TxBuilder - DefichainPython v3.0.0b0</title>
+        <title>Masternode - DefichainPython v3.0.0b0</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
@@ -216,10 +216,10 @@
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">Transactions</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current has-children"><a class="reference internal" href="index.html">Transaction Builder</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">TxBuilder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="txbuilder.html">TxBuilder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="accounts.html">Accounts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="loans.html">Loans</a></li>
-<li class="toctree-l3"><a class="reference internal" href="masternode.html">Masternode</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Masternode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pool.html">Pool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="utxo.html">UTXO</a></li>
 <li class="toctree-l3"><a class="reference internal" href="vault.html">Vault</a></li>
@@ -267,114 +267,31 @@
           </label>
         </div>
         <article role="main">
-          <section id="txbuilder">
-<span id="builder-txbuilder"></span><h1>TxBuilder<a class="headerlink" href="#txbuilder" title="Permalink to this headline">#</a></h1>
+          <section id="masternode">
+<span id="builder-masternode"></span><h1>Masternode<a class="headerlink" href="#masternode" title="Permalink to this headline">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="defichain.transactions.builder.TxBuilder">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.transactions.builder.</span></span><span class="sig-name descname"><span class="pre">TxBuilder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">defichain.hdwallet.account.Account</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataSource</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../ocean/ocean.html#defichain.Ocean" title="defichain.ocean.ocean.Ocean"><span class="pre">defichain.ocean.ocean.Ocean</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../node/node.html#defichain.Node" title="defichain.node.node.Node"><span class="pre">defichain.node.node.Node</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feePerByte</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder" title="Permalink to this definition">#</a></dt>
-<dd><p>This it the main class to build transactions. The transaction will be built with the information provided and
-automatically signed.</p>
-<p>All transactions are created for the given address.
-The account parameter must match the given address and contains the matching private key.</p>
-<p>Through the given data source, all the necessary information is pulled from the blockchain which is
-required to create the transaction. The standard data source is the ocean infrastructure.
-However, this can also be replaced by a Defichain node connection.
-If no data source is specified, the appropriate inputs must be passed to the individual methods.</p>
-<p>By default, a fee of one satoshi per byte is used.</p>
-<dl class="simple">
-<dt>Input Handling:</dt><dd><p>All inputs of an address are always combined to one output.</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="defichain.transactions.builder.modules.Masternode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.transactions.builder.modules.</span></span><span class="sig-name descname"><span class="pre">Masternode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">builder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.transactions.builder.modules.Masternode" title="Permalink to this definition">#</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="defichain.transactions.builder.modules.Masternode.createmasternode">
+<span class="sig-name descname"><span class="pre">createmasternode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operatorAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeLock</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">defichain.transactions.rawtransactions.tx.Transaction</span></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.Masternode.createmasternode" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates a transaction to create a masternode with the given operator address and time lock</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>address</strong> (<em>str</em>) – (required) address for which the transaction is created</p></li>
-<li><p><strong>account</strong> (<em>Account</em>) – (required) account object belonging to the given address</p></li>
-<li><p><strong>dataSource</strong> (<a class="reference internal" href="../../ocean/ocean.html#defichain.Ocean" title="defichain.Ocean"><em>Ocean</em></a><em> | </em><a class="reference internal" href="../../node/node.html#defichain.Node" title="defichain.Node"><em>Node</em></a><em> | </em><em>None</em>) – (required) data source for creating the transaction</p></li>
-<li><p><strong>feePerByte</strong> (<em>float</em>) – (optional) approximate fee paid per byte</p></li>
+<li><p><strong>operatorAddress</strong> (<em>str</em>) – (required) legacy address of the operator</p></li>
+<li><p><strong>timeLock</strong> (<em>int</em>) – (optional) time period to lock the masternode: 0 (default), 5, 10 years</p></li>
 </ul>
 </dd>
 </dl>
+</dd></dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="defichain.transactions.builder.TxBuilder.send_tx">
-<span class="sig-name descname"><span class="pre">send_tx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">defichain.transactions.rawtransactions.tx.Transaction</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxFeeRate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder.send_tx" title="Permalink to this definition">#</a></dt>
-<dd><p>Broadcasts the created transaction to the blockchain using the provided data source</p>
+<dt class="sig sig-object py" id="defichain.transactions.builder.modules.Masternode.resignmasternode">
+<span class="sig-name descname"><span class="pre">resignmasternode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">masternodeId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">defichain.transactions.rawtransactions.tx.Transaction</span></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.Masternode.resignmasternode" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates a transaction resigning your masternode.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>tx</strong> (<em>Transaction</em><em> | </em><em>str</em>) – (required) transaction object or serialized transaction string</p></li>
-<li><p><strong>maxFeeRate</strong> (<em>float</em>) – (optional) maximum fee rate</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>“hex” (str) - the transaction hash</p>
-</dd>
-</dl>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="defichain.transactions.builder.TxBuilder.test_tx">
-<span class="sig-name descname"><span class="pre">test_tx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">defichain.transactions.rawtransactions.tx.Transaction</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxFeeRate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder.test_tx" title="Permalink to this definition">#</a></dt>
-<dd><p>Tests if the transaction would be accepted by the blockchain using the data source</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>tx</strong> (<em>Transaction</em><em> | </em><em>str</em>) – (required) transaction object or serialized transaction string</p></li>
-<li><p><strong>maxFeeRate</strong> (<em>float</em>) – (optional) maximum fee rate</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="defichain.transactions.builder.TxBuilder.get_inputs_tx">
-<span class="sig-name descname"><span class="pre">get_inputs_tx</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">defichain.transactions.rawtransactions.tx.Transaction</span></span></span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder.get_inputs_tx" title="Permalink to this definition">#</a></dt>
-<dd><p>Builds a transaction just with the inputs of the address.
-The outputs have to be manually specified.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Transaction - just with inputs</p>
-</dd>
-</dl>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="defichain.transactions.builder.TxBuilder.get_address">
-<span class="sig-name descname"><span class="pre">get_address</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder.get_address" title="Permalink to this definition">#</a></dt>
-<dd><p>Returns the address specified in the builder</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>address (str)</p>
-</dd>
-</dl>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="defichain.transactions.builder.TxBuilder.get_account">
-<span class="sig-name descname"><span class="pre">get_account</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">defichain.hdwallet.account.Account</span></span></span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder.get_account" title="Permalink to this definition">#</a></dt>
-<dd><p>Returns the account specified in the builder</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Account</p>
-</dd>
-</dl>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="defichain.transactions.builder.TxBuilder.get_dataSource">
-<span class="sig-name descname"><span class="pre">get_dataSource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">defichain.transactions.remotedata.remotedata.RemoteData</span></span></span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder.get_dataSource" title="Permalink to this definition">#</a></dt>
-<dd><p>Returns the data source specified in the builder</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>RemoteData</p>
-</dd>
-</dl>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="defichain.transactions.builder.TxBuilder.get_feePerByte">
-<span class="sig-name descname"><span class="pre">get_feePerByte</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder.get_feePerByte" title="Permalink to this definition">#</a></dt>
-<dd><p>Returns the fee per byte specified in the builder</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>float</p>
+<dd class="field-odd"><p><strong>masternodeId</strong> (<em>str</em>) – (required) masternodeId: txid of the creation of the masternode</p>
 </dd>
 </dl>
 </dd></dl>
@@ -386,23 +303,23 @@ The outputs have to be manually specified.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="accounts.html">
+          <a class="next-page" href="pool.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Accounts</div>
+                <div class="title">Pool</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="index.html">
+          <a class="prev-page" href="loans.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Transaction Builder</div>
+                <div class="title">Loans</div>
                 
               </div>
             </a>

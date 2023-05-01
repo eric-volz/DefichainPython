@@ -216,6 +216,8 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="api/transactions/builder/index.html">Transaction Builder</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/transactions/builder/txbuilder.html">TxBuilder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/transactions/builder/accounts.html">Accounts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/transactions/builder/loans.html">Loans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/transactions/builder/masternode.html">Masternode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/transactions/builder/pool.html">Pool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/transactions/builder/utxo.html">UTXO</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/transactions/builder/vault.html">Vault</a></li>
@@ -401,7 +403,11 @@
         <li><a href="api/node/loan.html#defichain.node.Loan.createloanscheme">createloanscheme() (defichain.node.Loan method)</a>
 </li>
         <li><a href="api/node/masternodes.html#defichain.node.Masternodes.createmasternode">createmasternode() (defichain.node.Masternodes method)</a>
+
+        <ul>
+          <li><a href="api/transactions/builder/masternode.html#defichain.transactions.builder.modules.Masternode.createmasternode">(defichain.transactions.builder.modules.Masternode method)</a>
 </li>
+        </ul></li>
         <li><a href="api/node/util.html#defichain.node.Util.createmultisig">createmultisig() (defichain.node.Util method)</a>
 </li>
         <li><a href="api/node/poolpair.html#defichain.node.Poolpair.createpoolpair">createpoolpair() (defichain.node.Poolpair method)</a>
@@ -976,10 +982,10 @@
 </li>
         <li><a href="api/node/wallet.html#defichain.node.Wallet.listlockunspent">listlockunspent() (defichain.node.Wallet method)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/masternodes.html#defichain.node.Masternodes.listmasternodes">listmasternodes() (defichain.node.Masternodes method)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/oracles.html#defichain.node.Oracles.listoracles">listoracles() (defichain.node.Oracles method)</a>
 </li>
         <li><a href="api/node/accounts.html#defichain.node.Accounts.listpendingdusdswaps">listpendingdusdswaps() (defichain.node.Accounts method)</a>
@@ -1048,6 +1054,8 @@
           <li><a href="api/ocean/loan.html#defichain.ocean.Loan">(class in defichain.ocean)</a>
 </li>
         </ul></li>
+        <li><a href="api/transactions/builder/loans.html#defichain.transactions.builder.modules.Loans">Loans (class in defichain.transactions.builder.modules)</a>
+</li>
         <li><a href="api/node/wallet.html#defichain.node.Wallet.lockunspent">lockunspent() (defichain.node.Wallet method)</a>
 </li>
         <li><a href="api/logger.html#defichain.logger.Logger">Logger (class in defichain.logger)</a>
@@ -1062,6 +1070,8 @@
   <h2>M</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/transactions/builder/masternode.html#defichain.transactions.builder.modules.Masternode">Masternode (class in defichain.transactions.builder.modules)</a>
+</li>
         <li><a href="api/node/masternodes.html#defichain.node.Masternodes">Masternodes (class in defichain.node)</a>
 
         <ul>
@@ -1076,10 +1086,10 @@
 </li>
         <li><a href="api/hdwallet/wallet.html#defichain.Wallet.mnemonic">mnemonic() (defichain.Wallet method)</a>
 </li>
-        <li><a href="api/hdwallet/utils.html#defichain.hdwallet.utils.mnemonic_to_entropy">mnemonic_to_entropy() (in module defichain.hdwallet.utils)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/hdwallet/utils.html#defichain.hdwallet.utils.mnemonic_to_entropy">mnemonic_to_entropy() (in module defichain.hdwallet.utils)</a>
+</li>
         <li>
     module
 
@@ -1152,7 +1162,11 @@
         <li><a href="api/hdwallet/wallet.html#defichain.Wallet.path">path() (defichain.Wallet method)</a>
 </li>
         <li><a href="api/node/loan.html#defichain.node.Loan.paybackloan">paybackloan() (defichain.node.Loan method)</a>
+
+        <ul>
+          <li><a href="api/transactions/builder/loans.html#defichain.transactions.builder.modules.Loans.paybackloan">(defichain.transactions.builder.modules.Loans method)</a>
 </li>
+        </ul></li>
         <li><a href="api/node/vault.html#defichain.node.Vault.paybackwithcollateral">paybackwithcollateral() (defichain.node.Vault method)</a>
 </li>
         <li><a href="api/node/network.html#defichain.node.Network.ping">ping() (defichain.node.Network method)</a>
@@ -1207,14 +1221,18 @@
           <li><a href="api/transactions/builder/pool.html#defichain.transactions.builder.modules.Pool.removepoolliquidity">(defichain.transactions.builder.modules.Pool method)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/wallet.html#defichain.node.Wallet.removeprunedfunds">removeprunedfunds() (defichain.node.Wallet method)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/wallet.html#defichain.node.Wallet.rescanblockchain">rescanblockchain() (defichain.node.Wallet method)</a>
 </li>
         <li><a href="api/node/masternodes.html#defichain.node.Masternodes.resignmasternode">resignmasternode() (defichain.node.Masternodes method)</a>
+
+        <ul>
+          <li><a href="api/transactions/builder/masternode.html#defichain.transactions.builder.modules.Masternode.resignmasternode">(defichain.transactions.builder.modules.Masternode method)</a>
 </li>
+        </ul></li>
         <li><a href="api/hdwallet/wallet.html#defichain.Wallet.root_xprivate_key">root_xprivate_key() (defichain.Wallet method)</a>
 </li>
         <li><a href="api/hdwallet/wallet.html#defichain.Wallet.root_xpublic_key">root_xpublic_key() (defichain.Wallet method)</a>
@@ -1320,17 +1338,21 @@
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/node/loan.html#defichain.node.Loan.takeloan">takeloan() (defichain.node.Loan method)</a>
+
+        <ul>
+          <li><a href="api/transactions/builder/loans.html#defichain.transactions.builder.modules.Loans.takeloan">(defichain.transactions.builder.modules.Loans method)</a>
 </li>
+        </ul></li>
         <li><a href="api/ocean/rawTx.html#defichain.ocean.RawTx.test">test() (defichain.ocean.RawTx method)</a>
 </li>
         <li><a href="api/node/node.html#defichain.Node.test_connection">test_connection() (defichain.Node method)</a>
 </li>
         <li><a href="api/transactions/builder/txbuilder.html#defichain.transactions.builder.TxBuilder.test_tx">test_tx() (defichain.transactions.builder.TxBuilder method)</a>
 </li>
-        <li><a href="api/node/rawtransactions.html#defichain.node.Rawtransactions.testmempoolaccept">testmempoolaccept() (defichain.node.Rawtransactions method)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/node/rawtransactions.html#defichain.node.Rawtransactions.testmempoolaccept">testmempoolaccept() (defichain.node.Rawtransactions method)</a>
+</li>
         <li><a href="api/node/poolpair.html#defichain.node.Poolpair.testpoolswap">testpoolswap() (defichain.node.Poolpair method)</a>
 </li>
         <li><a href="api/node/tokens.html#defichain.node.Tokens">Tokens (class in defichain.node)</a>
