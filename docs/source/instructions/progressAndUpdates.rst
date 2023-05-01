@@ -112,10 +112,10 @@ Since this is a community supported project, the community also has the right to
         UpdateLoanToken         |:rotating_light:|
         TakeLoan                |:white_check_mark:|
         PaybackLoan             |:white_check_mark:|
-        PaybackLoanV2           |:white_check_mark:|
+        PaybackLoanV2           |:rotating_light:|
 
-        CreateMasternode        |:rotating_light:|
-        ResignMasternode        |:rotating_light:|
+        CreateMasternode        |:white_check_mark:|
+        ResignMasternode        |:white_check_mark:|
         UpdateMasternode        |:rotating_light:|
 
         AppointOracle           |:rotating_light:|
