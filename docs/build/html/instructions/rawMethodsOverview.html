@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Additional Information" href="../additional/index.html" /><link rel="prev" title="Progress and Updates" href="progressAndUpdates.html" />
 
     <link rel="shortcut icon" href="../_static/logo.png"/><meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>Raw Methods Overview - DefichainPython v3.0.0b0</title>
+        <title>Raw Methods Overview - DefichainPython v3.0.0b1</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
@@ -124,7 +124,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">DefichainPython v3.0.0b0</div></a>
+      <a href="../index.html"><div class="brand">DefichainPython v3.0.0b1</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -147,7 +147,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">DefichainPython v3.0.0b0</span>
+  <span class="sidebar-brand-text">DefichainPython v3.0.0b1</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -274,7 +274,7 @@
 <section id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">#</a></h2>
 <p>== Accounts ==</p>
-<p>accounthistorycount ( “owner” {“no_rewards”:bool,”token”:”str”,”txtype”:”str”} )</p>
+<p>accounthistorycount ( “owner” {“no_rewards”:bool,”token”:”str”,”txtype”:”str”,”txtypes”:[“Transaction Type”,…]} )</p>
 <p>accounttoaccount “from” {“address”:”str”} ( [{“txid”:”hex”,”vout”:n},…] )</p>
 <p>accounttoutxos “from” {“address”:”str”} ( [{“txid”:”hex”,”vout”:n},…] )</p>
 <p>executesmartcontract “name” “amount” ( “address” [{“txid”:”hex”,”vout”:n},…] )</p>
@@ -285,7 +285,7 @@
 <p>getpendingdusdswaps “address”</p>
 <p>getpendingfutureswaps “address”</p>
 <p>gettokenbalances ( {“start”:”str”,”including_start”:bool,”limit”:n} indexed_amounts symbol_lookup )</p>
-<p>listaccounthistory ( “owner” {“maxBlockHeight”:n,”depth”:n,”no_rewards”:bool,”token”:”str”,”txtype”:”str”,”limit”:n,”txn”:n,”format”:”str”} )</p>
+<p>listaccounthistory ( “owner” {“maxBlockHeight”:n,”depth”:n,”no_rewards”:bool,”token”:”str”,”txtype”:”str”,”txtypes”:[“Transaction Type”,…],”limit”:n,”start”:n,”including_start”:bool,”txn”:n,”format”:”str”} )</p>
 <p>listaccounts ( {“start”:”str”,”including_start”:bool,”limit”:n} verbose indexed_amounts is_mine_only )</p>
 <p>listburnhistory ( {“maxBlockHeight”:n,”depth”:n,”token”:”str”,”txtype”:”str”,”limit”:n} )</p>
 <p>listcommunitybalances</p>
@@ -427,11 +427,12 @@
 <p>updatepoolpair ( {“pool”:”str”,”status”:bool,”commission”:n,”ownerAddress”:”str”,”customRewards”:”str”} [{“txid”:”hex”,”vout”:n},…] )</p>
 <p>== Proposals ==</p>
 <p>creategovcfp ( {“title”:”str”,”context”:”str”,”contextHash”:”str”,”cycles”:n,”amount”:amount,”payoutAddress”:”str”} [{“txid”:”hex”,”vout”:n},…] )</p>
-<p>creategovvoc ( {“title”:”str”,”context”:”str”,”contextHash”:”str”,”emergency”:bool} [{“txid”:”hex”,”vout”:n},…] )</p>
+<p>creategovvoc ( {“title”:”str”,”context”:”str”,”contextHash”:”str”,”emergency”:bool,”special”:bool} [{“txid”:”hex”,”vout”:n},…] )</p>
 <p>getgovproposal “proposalId”</p>
-<p>listgovproposals ( “type” “status” )</p>
-<p>listgovproposalvotes “proposalId” ( “masternode” cycle )</p>
+<p>listgovproposals ( “type” “status” cycle {“start”:”hex”,”including_start”:bool,”limit”:n} )</p>
+<p>listgovproposalvotes ( “proposalId” “masternode” cycle {“start”:n,”including_start”:bool,”limit”:n} aggregate valid )</p>
 <p>votegov “proposalId” “masternodeId” “decision” ( [{“txid”:”hex”,”vout”:n},…] )</p>
+<p>votegovbatch [“proposalId”,”masternodeId”,”decision”,…] ( sleepTime )</p>
 <p>== Rawtransactions ==</p>
 <p>analyzepsbt “psbt”</p>
 <p>combinepsbt [“psbt”,…]</p>
@@ -493,7 +494,7 @@
 <p>getcustomtx “txid” ( “blockhash” )</p>
 <p>gettoken “key”</p>
 <p>listtokens ( {“start”:n,”including_start”:bool,”limit”:n} verbose )</p>
-<p>minttokens “amounts” ( [{“txid”:”hex”,”vout”:n},…] )</p>
+<p>minttokens “amounts” ( [{“txid”:”hex”,”vout”:n},…] “to” )</p>
 <p>updatetoken “token” ( {“symbol”:”str”,”name”:”str”,”isDAT”:bool,”mintable”:bool,”tradeable”:bool,”finalize”:bool} [{“txid”:”hex”,”vout”:n},…] )</p>
 <p>== Util ==</p>
 <p>createmultisig nrequired [“key”,…] ( “address_type” )</p>

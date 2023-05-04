@@ -23,7 +23,7 @@ copyright = '2023, Intr0c'
 author = 'Intr0c'
 
 # The full version, including alpha/beta/rc tags
-release = 'v3.0.0b0'
+release = 'v3.0.0b1'
 
 
 # -- General configuration ---------------------------------------------------
