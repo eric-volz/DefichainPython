@@ -16,6 +16,9 @@ class Masternode:
         :type operatorAddress: str
         :param timeLock: (optional) time period to lock the masternode: 0 (default), 5, 10 years
         :type timeLock: int
+        :param inputs: (optional) Inputs
+        :type inputs: TxInput
+        :return: Transaction
         """
 
         defiTx = CreateMasternode(operatorAddress, timeLock)
@@ -27,6 +30,9 @@ class Masternode:
 
         :param masternodeId: (required) masternodeId: txid of the creation of the masternode
         :type masternodeId: str
+        :param inputs: (optional) Inputs
+        :type inputs: TxInput
+        :return: Transaction
         """
 
         defiTx = ResignMasternode(masternodeId)

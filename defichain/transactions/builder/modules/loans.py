@@ -18,6 +18,9 @@ class Loans:
         :type addressTo: str
         :param amounts: (required) AddressAmount
         :type amounts: str | [str]
+        :param inputs: (optional) Inputs
+        :type inputs: TxInput
+        :return: Transaction
         """
 
         # Convert Float to Integer
@@ -41,6 +44,9 @@ class Loans:
         :type addressFrom: str
         :param amounts: (required) AddressAmount
         :type amounts: str | [str]
+        :param inputs: (optional) Inputs
+        :type inputs: TxInput
+        :return: Transaction
         """
 
         # Convert Float to Integer

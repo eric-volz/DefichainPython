@@ -50,10 +50,10 @@ class TxBuilder:
 
         self.utxo = UTXO(self._builder)
         self.accounts = Accounts(self._builder)
-        self.loan = Loans(self._builder)
+        self.governance = Governance(self._builder)
+        self.loans = Loans(self._builder)
         self.masternode = Masternode(self._builder)
         self.pool = Pool(self._builder)
-
         self.vault = Vault(self._builder)
 
         # Verify if address is represented by provided account
