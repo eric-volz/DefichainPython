@@ -84,4 +84,3 @@ class Converter:
                 value = Converter.float_to_int(float(value))
                 newAddressAmount.add(address, token, value)
         return newAddressAmount.build()
-

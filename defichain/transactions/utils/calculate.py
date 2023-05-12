@@ -94,6 +94,25 @@ class Calculate:
         else:
             return int.from_bytes(bytes.fromhex(hex), byteorder="little")
 
+    @staticmethod
+    def addressAmount_sum(addressAmount: {}) -> "int | float":
+        resultValue = 0
+        for address in addressAmount:
+            if isinstance(addressAmount[address], list):
+                for amount in addressAmount[address]:
+                    value, token = amount.split('@')
+                    if "." in value:
+                        resultValue += float(value)
+                    else:
+                        resultValue += int(value)
+            else:
+                value, token = addressAmount[address].split('@')
+                if "." in value:
+                    resultValue += float(value)
+                else:
+                    resultValue += int(value)
+        return resultValue
+
 
 if __name__ == "__main__":
     c = Calculate.write_varInt(2 ** 32)
