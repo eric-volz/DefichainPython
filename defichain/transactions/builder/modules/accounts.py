@@ -1,5 +1,5 @@
-from defichain.transactions.defitx import UtxosToAccount, AccountToAccount
-from defichain.transactions.utils import Converter
+from defichain.transactions.defitx import UtxosToAccount, AccountToUtxos, AccountToAccount
+from defichain.transactions.utils import Converter, Calculate
 from defichain.transactions.builder.rawtransactionbuilder import RawTransactionBuilder, Transaction
 
 
@@ -27,6 +27,25 @@ class Accounts:
 
         defiTx = UtxosToAccount(address, value, tokenId)
         return self._builder.build_defiTx(value, defiTx, inputs)
+
+    def accounttoutxos(self, addressFrom: str, addressAmountTo: {}, inputs=[]):
+        """
+        Creates s transaction to convert tokens into utxos
+
+        :param addressFrom: (required) the defi address of sender
+        :type addressFrom: str
+        :param addressAmountTo: (required) AddressAmount
+        :type addressAmountTo:
+        :param inputs: (optional) Inputs
+        :type inputs: TxInput
+        :return: Transaction
+        """
+        # Convert Float to Integer
+        addressAmountTo = Converter.addressAmount_float_to_int(addressAmountTo)
+        value = Calculate.addressAmount_sum(addressAmountTo)
+
+        defiTx = AccountToUtxos(addressFrom, value, 2)
+        return self._builder.build_defiTx(0, defiTx, inputs, addressAmountTo=addressAmountTo)
 
     def accounttoaccount(self, addressFrom: str, addressAmountTo: {}, inputs=[]) -> "Transaction":
         """

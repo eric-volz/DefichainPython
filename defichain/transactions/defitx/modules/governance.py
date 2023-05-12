@@ -25,7 +25,7 @@ class CreateVoc(BaseDefiTx):
 
 class Vote(BaseDefiTx):
     """
-    Vote for proposal
+    Builds the defi transaction: Vote
 
     :param proposalId: (required) The proposal txid
     :type proposalId: str

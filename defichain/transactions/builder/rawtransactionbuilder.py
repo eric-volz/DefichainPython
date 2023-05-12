@@ -46,7 +46,7 @@ class RawTransactionBuilder:
             tx.set_inputs(self.checkMasternodeInputs(tx.get_inputs()))
         return tx
 
-    def build_defiTx(self, value: int, defiTx: BaseDefiTx, inputs=[]) -> Transaction:
+    def build_defiTx(self, value: int, defiTx: BaseDefiTx, inputs=[], **additionalData) -> Transaction:
         tx = self.build_transactionInputs(inputs)
 
         # Check for errors in Inputs
@@ -70,17 +70,26 @@ class RawTransactionBuilder:
             tx.add_output(masternodeOutput)
 
         # Change Output
-        change_output = TxAddressOutput(tx.get_inputsValue() - value, self.get_address())
-        tx.add_output(change_output)
+        changeOutput = TxAddressOutput(tx.get_inputsValue() - value, self.get_address())
+        tx.add_output(changeOutput)
+
+        # AccountToUtxos Output
+        if defiTx.get_defiTxType() == DefiTxType.OP_DEFI_TX_ACCOUNT_TO_UTXOS:
+            addressAmountTo = additionalData["addressAmountTo"]
+
+            # Build Outputs for Utxos
+            for address in addressAmountTo:
+                outputValue = int(addressAmountTo[address].split("@")[0])
+                tx.add_output(TxAddressOutput(outputValue, address, 0))
 
         # Calculate fee
         fee = estimate_fee(tx, self.get_feePerByte())
 
         # Subtract fee from output
-        value = tx.get_outputs()[-1].get_value() - fee
+        value = changeOutput.get_value() - fee
         if value < 0:
             raise TxBuilderError("The used address has not enough UTXO to pay the transaction fee")
-        tx.get_outputs()[-1].set_value(value)
+        changeOutput.set_value(value)
 
         # Sign and Return
         self.sign(tx)

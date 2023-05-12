@@ -2,7 +2,7 @@ from typing import Any
 
 from defichain.transactions.constants import DefiTxType
 from defichain.transactions.address import Address
-from defichain.transactions.utils import Converter, Token, Verify
+from defichain.transactions.utils import Converter, Calculate, Token, Verify
 from .basedefitx import BaseDefiTx
 from .baseinput import ScriptBalances, TokenBalanceInt32
 from ..builddefitx import BuildDefiTx
@@ -10,7 +10,7 @@ from ..builddefitx import BuildDefiTx
 
 class UtxosToAccount(BaseDefiTx):
     """
-    Convert DFI UTXO to DFI Token
+    Builds the defi transaction: UtxosToAccount
 
     :param address: (required) the address with the utxo
     :type address: str
@@ -95,13 +95,82 @@ class UtxosToAccount(BaseDefiTx):
 
 
 class AccountToUtxos(BaseDefiTx):
-    """TODO: MVP"""
-    pass
+    """
+    Builds the defi transaction: AccountToUtxos
+
+    :param addressFrom: (required) the defi address of the sender
+    :type addressFrom: str
+    :param value: (required) amount of token to convert
+    :type value: int
+    :param mintingOutputsStart: (required) start of outputs that mint utxos
+    :type mintingOutputsStart: int
+    """
+
+    @staticmethod
+    def deserialize(network: Any, hex: str) -> "AccountToUtxos":
+        pass
+
+    def __init__(self, addressFrom: str, value: int, mintingOutputsStart: int):
+        self._addressFrom, self._addressTo, self._value, self._mintingOutputsStart = None, None, None, None
+        self.set_addressFrom(addressFrom)
+        self.set_value(value)
+        self.set_mintingOutputsStart(mintingOutputsStart)
+
+    def __bytes__(self) -> bytes:
+        # Convert to Bytes
+        defiTxType = Converter.hex_to_bytes(self.get_defiTxType())
+        addressFrom = Converter.hex_to_bytes(Address.from_address(self.get_addressFrom()).get_scriptPublicKey())
+        tokenBalance = TokenBalanceInt32(0, self.get_value()).bytes()
+        mintingOutputsStart = Converter.hex_to_bytes(Calculate.write_varInt(self.get_mintingOutputsStart()))
+
+        length_addressFrom = Converter.int_to_bytes(len(addressFrom), 1)
+        numberOfTokenBalance = Converter.int_to_bytes(1, 1)
+
+        # Build AccountToUtxosDefiTx
+        result = defiTxType
+        result += length_addressFrom
+        result += addressFrom
+        result += numberOfTokenBalance
+        result += tokenBalance
+        result += mintingOutputsStart
+        return BuildDefiTx.build_defiTx(result)
+
+    def to_json(self) -> {}:
+        json = {}
+        json.update({"defiTxType": {"typeName": DefiTxType.from_hex(self.get_defiTxType()),
+                                    "typeHex": self.get_defiTxType()}})
+        json.update({"addressFrom": self.get_addressFrom()})
+        json.update({"value": self.get_value()})
+        json.update({"mintingOutputsStart": self.get_mintingOutputsStart()})
+        return json
+
+    # Get Information
+    def get_defiTxType(self) -> str:
+        return DefiTxType.OP_DEFI_TX_ACCOUNT_TO_UTXOS
+
+    def get_addressFrom(self) -> str:
+        return self._addressFrom
+
+    def get_value(self) -> int:
+        return self._value
+
+    def get_mintingOutputsStart(self) -> int:
+        return self._mintingOutputsStart
+
+    # Set Information
+    def set_addressFrom(self, addressFrom: str) -> None:
+        self._addressFrom = addressFrom
+
+    def set_value(self, value: int) -> None:
+        self._value = value
+
+    def set_mintingOutputsStart(self, mintingOutputsStart: int):
+        self._mintingOutputsStart = mintingOutputsStart
 
 
 class AccountToAccount(BaseDefiTx):
     """
-    Transfers token (DFI, BTC, ETH, ...) from one address to another
+    Builds the defi transaction: AccountToAccount
 
     :param addressFrom: the defi address of the sender
     :type addressFrom: str
