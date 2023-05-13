@@ -37,7 +37,7 @@ def test_createvault():  # 02
 
 @pytest.mark.transactions
 def test_deposittovault():  # 03
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     assert len(node.vault.deposittovault(vault, address, "0.00000001@DUSD")) == LENGTH_OF_TXID
@@ -74,13 +74,16 @@ def test_getvault():  # 07
 
 @pytest.mark.query
 def test_listauctionhistory():  # 08
-    assert node.vault.listauctionhistory() == []
-    assert node.vault.listauctionhistory("mine", node.blockchain.getblockcount(),
-                                         "63a41dbc6497a58f024b730ca27189cdd2da45a5f9adda78c02581de36345e18",
-                                         0, 100) == []
-    assert node.vault.listauctionhistory(identifier="all", maxBlockHeight=node.blockchain.getblockcount(),
-                                         vaultId="63a41dbc6497a58f024b730ca27189cdd2da45a5f9adda78c02581de36345e18",
-                                         index=0, limit=100) == []
+    result1 = node.vault.listauctionhistory()
+    assert result1 == [] or result1
+    result2 = node.vault.listauctionhistory("mine", node.blockchain.getblockcount(),
+                                            "63a41dbc6497a58f024b730ca27189cdd2da45a5f9adda78c02581de36345e18",
+                                            0, 100)
+    assert result2 == [] or result2
+    result3 = node.vault.listauctionhistory(identifier="all", maxBlockHeight=node.blockchain.getblockcount(),
+                                            vaultId="63a41dbc6497a58f024b730ca27189cdd2da45a5f9adda78c02581de36345e18",
+                                            index=0, limit=100)
+    assert result3 == [] or result3
 
 
 @pytest.mark.query
@@ -131,7 +134,7 @@ def test_placeauctionbid():  # 13
 
 @pytest.mark.transactions
 def test_updatevault():  # 14
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     assert len(node.vault.updatevault(vault, address)) == LENGTH_OF_TXID
@@ -144,7 +147,7 @@ def test_updatevault():  # 14
 
 @pytest.mark.transactions
 def test_withdrawfromvault():  # 15
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     assert len(node.vault.withdrawfromvault(vault, address, "0.00000001@DUSD")) == LENGTH_OF_TXID

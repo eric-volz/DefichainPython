@@ -13,7 +13,7 @@ vault = load_secrets_conf()["vault_address"]
 
 @pytest.mark.transactions
 def test_createloanscheme():  # 01
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     string = ".* RPC_INVALID_REQUEST: Test LoanSchemeTx execution failed:\ntx not from foundation member!"
@@ -27,7 +27,7 @@ def test_createloanscheme():  # 01
 
 @pytest.mark.transactions
 def test_destroyloanscheme():  # 02
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     string = ".* RPC_INVALID_REQUEST: Test DestroyLoanSchemeTx execution failed:\ntx not from foundation member!"
@@ -87,7 +87,7 @@ def test_listloantokens():  # 10
 
 @pytest.mark.transactions
 def test_paybackloan():  # 11
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     amounts = ["0.00000001@SPY", "0.00000001@SPY"]
@@ -135,7 +135,7 @@ def test_setloantoken():  # 14
 
 @pytest.mark.transactions
 def test_takeloan():  # 15
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     amounts = ["0.00000002@SPY", "0.00000002@SPY"]

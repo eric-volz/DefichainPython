@@ -1,7 +1,7 @@
 import time
 
 from defichain import Ocean
-from tests.util import createNode
+from tests.node import node
 from tests.util import load_secrets_conf
 
 """
@@ -21,10 +21,10 @@ DUSD_AMOUNT = 0.1
 DFI_AMOUNT = 0.01
 VAULT_MIN_RATIO = 400
 
-node = createNode()
 ocean = Ocean()
 ADDRESS = load_secrets_conf()["wallet_address"]
 VAULT = load_secrets_conf()["vault_address"]
+
 
 # All needed functions
 def check_min_and_max_utxo():

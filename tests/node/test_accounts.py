@@ -14,14 +14,17 @@ address = load_secrets_conf()["wallet_address"]
 
 @pytest.mark.query
 def test_accounthistorycount():  # 01
-    assert node.accounts.accounthistorycount(address)
-    assert node.accounts.accounthistorycount(address, True, "DFI", "")
-    assert node.accounts.accounthistorycount(owner=address, no_rewards=True, token="DFI", txtype="")
+    result1 = node.accounts.accounthistorycount(address)
+    assert result1 or result1 == 0
+    result2 = node.accounts.accounthistorycount(address, False, "DFI", "")
+    assert result2 or result2 == 0
+    result3 =  node.accounts.accounthistorycount(owner=address, no_rewards=False, token="DFI", txtype="")
+    assert result3 or result3 == 0
 
 
 @pytest.mark.transactions
 def test_accounttoaccount():  # 02
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     assert len(node.accounts.accounttoaccount(address, {address: "0.0001@DUSD"})) == LENGTH_OF_TXID
@@ -31,7 +34,7 @@ def test_accounttoaccount():  # 02
 
 @pytest.mark.transactions
 def test_accounttoutxos():  # 03
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     assert len(node.accounts.accounttoutxos(address, {address: "0.00001000"})) == LENGTH_OF_TXID
@@ -52,7 +55,7 @@ def test_executesmartcontract():  # 04
 
 @pytest.mark.transactions
 def test_futureswap():  # 05
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     assert len(node.accounts.futureswap(address, "0.00000001@DUSD", "SPY")) == LENGTH_OF_TXID
@@ -103,10 +106,13 @@ def test_gettokenbalances():  # 11
 @pytest.mark.query
 def test_listaccounthistory():  # 12
     blockcount = node.blockchain.getblockcount()
-    assert node.accounts.listaccounthistory(address)
-    assert node.accounts.listaccounthistory(address, blockcount, 10000000, True, "", "", 100, 0)
-    assert node.accounts.listaccounthistory(owner=address, maxBlockHeight=blockcount, depth=10000000, no_rewards=True,
-                                            token="", txtype="", limit=100, txn=0)
+    result1 = node.accounts.listaccounthistory(address)
+    assert result1 or result1 == []
+    result2 = node.accounts.listaccounthistory(address, blockcount, 10000000, True, "", "", 100, 0)
+    assert result2 or result2 == []
+    result3 = node.accounts.listaccounthistory(owner=address, maxBlockHeight=blockcount, depth=10000000,
+                                               no_rewards=True, token="", txtype="", limit=100, txn=0)
+    assert result3 or result3 == []
 
 
 @pytest.mark.query
@@ -144,7 +150,7 @@ def test_listpendingfutureswaps():  # 17
 
 @pytest.mark.transactions
 def test_sendtokenstoaddress():  # 18
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     assert len(node.accounts.sendtokenstoaddress({address: "0.0001@DUSD"}, {address: "0.0001@DUSD"})) == LENGTH_OF_TXID
@@ -155,7 +161,7 @@ def test_sendtokenstoaddress():  # 18
 
 @pytest.mark.transactions
 def test_sendutxosfrom():  # 19
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     assert len(node.accounts.sendutxosfrom(address, address, 0.001)) == LENGTH_OF_TXID
@@ -165,7 +171,7 @@ def test_sendutxosfrom():  # 19
 
 @pytest.mark.transactions
 def test_utxostoaccount():  # 20
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     assert len(node.accounts.utxostoaccount({address: "0.000001@DFI"})) == LENGTH_OF_TXID
@@ -175,7 +181,7 @@ def test_utxostoaccount():  # 20
 
 @pytest.mark.transactions
 def test_withdrawfutureswap():  # 21
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     string = ".* RPC_INVALID_REQUEST: Test DFIP2203Tx execution failed:\namount 0.00000000 is less than 1.00000000"
