@@ -38,6 +38,8 @@ class DefiTx:
         # Account
         if DefiTxType.OP_DEFI_TX_UTXOS_TO_ACCOUNT == defiTxType:
             return UtxosToAccount.deserialize(network, hex[position:])
+        elif DefiTxType.OP_DEFI_TX_ACCOUNT_TO_UTXOS == defiTxType:
+            return AccountToUtxos.deserialize(network, hex[position:])
         elif DefiTxType.OP_DEFI_TX_ACCOUNT_TO_ACCOUNT == defiTxType:
             return AccountToAccount.deserialize(network, hex[position:])
 

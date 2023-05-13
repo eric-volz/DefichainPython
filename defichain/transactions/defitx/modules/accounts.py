@@ -108,7 +108,27 @@ class AccountToUtxos(BaseDefiTx):
 
     @staticmethod
     def deserialize(network: Any, hex: str) -> "AccountToUtxos":
-        pass
+        position = 0
+
+        length_addressFrom = Converter.hex_to_int(hex[position: position + 2]) * 2
+        position += 2
+
+        addressFrom = Address.from_scriptPublicKey(network, hex[position: position + length_addressFrom])
+        position += length_addressFrom
+
+        numberOfTokenBalances = Converter.hex_to_int(hex[position: position + 2])
+        position += 2
+
+        token = Converter.hex_to_int(hex[position: position + 8])
+        position += 8
+
+        value = Converter.hex_to_int(hex[position: position + 16])
+        position += 16
+
+        length_mintingOutputsStart = Calculate.length_varInt(hex[position:]) * 2
+        mintingOutputsStart = Calculate.read_varInt(hex[position: position + length_mintingOutputsStart])
+
+        return AccountToUtxos(addressFrom.get_address(), value, mintingOutputsStart)
 
     def __init__(self, addressFrom: str, value: int, mintingOutputsStart: int):
         self._addressFrom, self._addressTo, self._value, self._mintingOutputsStart = None, None, None, None
