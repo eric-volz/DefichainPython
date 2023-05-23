@@ -6,7 +6,7 @@ from defichain.networks import Network
 from defichain.transactions.address import Address
 from defichain.transactions.keys import PrivateKey, KeyError, PublicKey
 from defichain.transactions.utils import Converter, Calculate
-from defichain.transactions.constants import SIGHASH
+from defichain.transactions.constants import SIGHASH, AddressTypes
 
 from .txbase import TxBase
 from .txinput import TxBaseInput, TxInput, TxP2PKHInput, TxP2SHInput, TxP2WPKHInput, TxCoinbaseInput
@@ -79,6 +79,24 @@ class BaseTransaction(TxBase, ABC):
 
     def get_fee(self) -> "int | None":
         return self.get_inputsValue() - self.get_outputsValue() if self.get_inputsValue() is not None else None
+
+    def get_unspent(self) -> [TxInput]:
+        outputs = self.get_outputs()
+        unspent = []
+        vout = 0
+        for output in outputs:
+            if isinstance(output, TxAddressOutput):
+                addressType = Address.from_address(output.get_address()).get_addressType()
+
+                if addressType == AddressTypes.P2PKH:
+                    unspent.append(TxP2PKHInput(self.get_txid(), vout))
+                elif addressType == AddressTypes.P2SH:
+                    unspent.append(TxP2SHInput(self.get_txid(), vout, output.get_address(), output.get_value()))
+                elif addressType == AddressTypes.P2WPKH:
+                    unspent.append(TxP2WPKHInput(self.get_txid(), vout, output.get_address(), output.get_value()))
+
+            vout += 1
+        return unspent
 
     # Get Information
     def get_version(self) -> int:
@@ -232,7 +250,7 @@ class Transaction(BaseTransaction):
         :type network: Network
         :param hex: (required) the raw transaction as hexadecimal sting
         :type hex: str
-        :return: "Transaction"
+        :return: Transaction
         """
         try:
             tx = Transaction([], [])
@@ -423,8 +441,14 @@ class Transaction(BaseTransaction):
         """
         Signs the raw transaction with the given private keys
 
-        :param: key: private key can be in wif or hex format
-        :return: None
+        :param network: (required) the corresponding network from the raw transaction
+        :type network: Network
+        :param private_keys: (required) a list of private keys. If there is only one private key in the list, it will
+        be used to sign all inputs of the transaction. If you have inputs witch use different private keys, provide a
+        separate private key for every input in the list. The private keys have to be provided in the same
+        order as the inputs
+        :type private_keys: [str]
+        :return: Transaction
         """
         if not isinstance(private_keys, list):
             raise RawTransactionError("The given private keys have to be parsed in a list: [key, key, ...]")
@@ -440,24 +464,33 @@ class Transaction(BaseTransaction):
                 raise KeyError("Given private key is not valid")
             keys.append({"private": key.get_privateKey(), "public": key.get_publicKey()})
 
-        # Assign private and public keys to the correct input
+        # Sign
+        index = 0
         for input in self.get_inputs():
             if isinstance(input, TxP2PKHInput):
                 raise NotYetSupportedError()
-            if not input._private_key:
-                for key in keys:
-                    priv = PrivateKey(network, key["private"])
-                    if input.get_address() in [priv.p2sh_address(), priv.p2wpkh_address(), priv.p2sh_address()]:
-                        input._private_key = key["private"]
-                        input._publicKey = key["public"]
+            elif isinstance(input, TxP2WPKHInput) or isinstance(input, TxP2SHInput):
+                if len(private_keys) == 1:
+                    privKey = keys[0]["private"]
+                    pubKey = keys[0]["public"]
+                else:
+                    if len(private_keys) <= index:
+                        raise RawTransactionError("The transaction could not from be signed. Not enough private keys "
+                                                  "were provided in the list")
+                    else:
+                        privKey = keys[index]["private"]
+                        pubKey = keys[index]["public"]
 
-        # Sign the inputs with the given keys
-        for input in self.get_inputs():
-            witness_hash = WitnessHash(self, input)
-            signature = sign_input(input._private_key, witness_hash.bytes_hash())
-            witness = Witness(signature, input._publicKey)
-            input.set_witness(witness)
+                witness_hash = WitnessHash(self, input)
+                signature = sign_input(privKey, witness_hash.bytes_hash())
+                witness = Witness(signature, pubKey)
+                input.set_witness(witness)
+
+            else:
+                raise NotYetSupportedError()
+            index += 1
         self._signed = True
+
         return self
 
     def _analyse(self):
