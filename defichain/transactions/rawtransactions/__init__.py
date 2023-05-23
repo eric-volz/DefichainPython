@@ -5,7 +5,7 @@ from .tx import Transaction
 from .txinput import TxInput, TxP2PKHInput, TxP2SHInput, TxP2WPKHInput, TxCoinbaseInput
 
 # Transaction Output
-from .txoutput import TxOutput, TxAddressOutput, TxMsgOutput, TxDefiOutput
+from .txoutput import TxOutput, TxAddressOutput, TxDataOutput, TxDefiOutput
 
 # Witness
 from .witness import WitnessHash, Witness

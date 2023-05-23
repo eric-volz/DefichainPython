@@ -49,6 +49,8 @@ class TxBuilder:
                                               self.get_feePerByte())
 
         self.utxo = UTXO(self._builder)
+        self.data = Data(self._builder)
+
         self.accounts = Accounts(self._builder)
         self.governance = Governance(self._builder)
         self.loans = Loans(self._builder)

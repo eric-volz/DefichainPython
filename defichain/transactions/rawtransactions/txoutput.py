@@ -95,7 +95,7 @@ class TxOutput(TxBaseOutput):
     @staticmethod
     def deserialize(network: Any, hex: str) -> "TxOutput":
         """
-        Deserializes a transaction output into an output object: TxAddressOutput | TxMsgOutput | TxDefiOutput |
+        Deserializes a transaction output into an output object: TxAddressOutput | TxDataOutput | TxDefiOutput |
         TxCoinbaseOutput.
 
         :param network: (required) the corresponding network from the raw transaction
@@ -111,7 +111,7 @@ class TxOutput(TxBaseOutput):
             elif output.get_script()[4: 12] == "aa21a9ed":
                 return TxCoinbaseOutput.deserialize(network, hex)
             else:
-                return TxMsgOutput.deserialize(network, hex)
+                return TxDataOutput.deserialize(network, hex)
         if len(output.get_script()) > 0:
             return TxAddressOutput.deserialize(network, hex)
         return output
@@ -187,66 +187,56 @@ class TxAddressOutput(TxOutput):
         self.set_address(Converter.bytes_to_hex(address))
 
 
-class TxMsgOutput(TxOutput):
+class TxDataOutput(TxOutput):
 
     @staticmethod
-    def deserialize(network: Any, hex: str) -> "TxMsgOutput":
+    def deserialize(network: Any, hex: str) -> "TxDataOutput":
         output = TxBaseOutput.deserialize(network, hex)
         OP_Code = output.get_script()[0: 2]
         if OP_Code != OPCodes.OP_RETURN:
             raise DeserializeError("The given output to decode is not an message output (there is not OP_RETURN)")
         length_script = Converter.hex_to_int(output.get_script()[2: 4]) * 2
-        msg = Converter.hex_to_str(output.get_script()[4: 4 + length_script])
-        txMsgOutput = TxMsgOutput(msg=msg, tokenId=output.get_tokenId())
-        txMsgOutput.set_value(output.get_value())
-        return txMsgOutput
+        data = Converter.hex_to_str(output.get_script()[4: 4 + length_script])
+        txDataOutput = TxDataOutput(data=data, tokenId=output.get_tokenId())
+        txDataOutput.set_value(output.get_value())
+        return txDataOutput
 
-    def __init__(self, msg: str, tokenId: int = 0):
+    def __init__(self, data: str, tokenId: int = 0):
         """
-        An output witch includes a message.
+        An output witch includes a data.
 
-        Uses OP_RETURN Code.
-        TODO: Is limited to around 200 bytes
-
-        :param msg: (required) your text in plane text like "Hello Defichain Community!"
-        :type msg: str
+        :param data: (required) your data in hex encoding
+        :type data: str
         :param tokenId: (optional) which token you want to send (almost always 0 -> stands for DFI)
         :type tokenId: int
         """
-        self._msg = None
-        self.set_msg(msg)
-        super().__init__(0, self.get_customScript(), tokenId)
+        self._data = None
+        self.set_data(data)
+        super().__init__(0, self.get_script(), tokenId)
 
     # Get Information
-    def get_msg(self) -> str:
-        return self._msg
+    def get_data(self) -> str:
+        return self._data
 
-    def get_customScript(self) -> str:
-        return Converter.bytes_to_hex(Script.custom_script(self.get_msg()))
-
-    def get_bytes_customScript(self) -> bytes:
-        return Converter.hex_to_bytes(self.get_customScript())
-
-    def get_hex_msg(self) -> str:
-        return Converter.str_to_hex(self.get_msg())
+    def get_script(self) -> str:
+        op_return = OPCodes.OP_RETURN
+        data = Converter.str_to_hex(self.get_data())
+        lengthData = Calculate.write_compactSize(int(len(data) / 2))
+        return op_return + lengthData + data
 
     def to_json(self) -> {}:
         json = {}
-        json.update({"outputType": "msg"})
+        json.update({"outputType": "data"})
         json.update({"value": self.get_value()})
-        json.update({"rawMsg": self.get_hex_msg()})
-        json.update({"decodesMsg": self.get_msg()})
+        json.update({"rawData": self.get_data()})
         json.update({"script": self.get_script()})
         json.update({"tokenId": self.get_tokenId()})
         return json
 
     # Set Information
-    def set_msg(self, msg: str) -> None:
-        self._msg = msg
-        self.set_script(self.get_customScript())
-
-    def set_hex_msg(self, msg: str) -> None:
-        self.set_msg(Converter.hex_to_str(msg))
+    def set_data(self, data: str) -> None:
+        self._data = data
+        self.set_script(self.get_script())
 
 
 class TxDefiOutput(TxOutput):
