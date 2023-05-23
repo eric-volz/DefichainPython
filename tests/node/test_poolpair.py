@@ -13,7 +13,7 @@ vault = load_secrets_conf()["vault_address"]
 
 @pytest.mark.transactions
 def test_addpoolliquidity():  # 01
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     dusd_pool = node.poolpair.getpoolpair(17)
@@ -31,7 +31,7 @@ def test_addpoolliquidity():  # 01
 
 @pytest.mark.transactions
 def test_compositeswap():  # 02
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     assert node.poolpair.compositeswap(address, "DFI", 0.00000001, address, "DUSD")
@@ -76,7 +76,7 @@ def test_listpoolshares():  # 06
 
 @pytest.mark.transactions
 def test_poolswap():  # 07
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     assert node.poolpair.poolswap(address, "DFI", 0.00000001, address, "DUSD")
@@ -87,7 +87,7 @@ def test_poolswap():  # 07
 
 @pytest.mark.transactions
 def test_removepoolliquidityy():  # 08
-    while len(node.wallet.listunspent()) < 1:
+    while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
     assert node.poolpair.removepoolliquidity(address, "0.00000001@DUSD-DFI")

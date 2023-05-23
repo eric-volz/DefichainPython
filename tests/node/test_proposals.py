@@ -72,13 +72,13 @@ def test_votegov():  # 06
     with pytest.raises(InternalServerError, match=string):
         assert node.proposals.votegov("df925903d16ddcde1c10062b20f990a2f653002d37fe9633daf978a45bd7c612",
                                       "e54d0814d406317dfaa38f365471ff59fb7f7725769c0aecf3d0830a59de0100",
-                                      "neutral")
+                                      "yes")
     with pytest.raises(InternalServerError, match=string):
         assert node.proposals.votegov("df925903d16ddcde1c10062b20f990a2f653002d37fe9633daf978a45bd7c612",
                                       "e54d0814d406317dfaa38f365471ff59fb7f7725769c0aecf3d0830a59de0100",
-                                      "neutral", [])
+                                      "yes", [])
     with pytest.raises(InternalServerError, match=string):
         assert node.proposals.votegov(proposalId="df925903d16ddcde1c10062b20f990a2f653002d37fe9633daf978a45bd7c612",
                                       masternodeId="e54d0814d406317dfaa38f365471ff59fb7f7725769c0aecf3d0830a59de0100",
-                                      decision="neutral",
+                                      decision="yes",
                                       inputs=[])

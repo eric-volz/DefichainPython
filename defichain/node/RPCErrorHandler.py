@@ -24,6 +24,11 @@ class RPCErrorHandler:
                 if logger:
                     self.logger.error("NodeError", f"Unauthorized")
                 raise Unauthorized()
+            if self.statusCode == 503:
+                if logger:
+                    self.logger.error("NodeError", f"ServiceUnavailable: "
+                                                   f"The service you are trying to connect to is not available")
+                raise ServiceUnavailable("The service you are trying to connect to is not available")
             else:
                 self.response_text = response.json()
                 if 'error' in self.response_text and self.response_text['error'] is not None:
@@ -50,7 +55,3 @@ class RPCErrorHandler:
                         if logger:
                             self.logger.error("NodeError", f"InternalServerError: {rpc_name}: {msg}")
                         raise InternalServerError(f"{rpc_name}: {msg}")
-                    if self.statusCode == 503:
-                        if logger:
-                            self.logger.error("NodeError", f"ServiceUnavailable: {rpc_name}: {msg}")
-                        raise ServiceUnavailable(f"{rpc_name}: {msg}")

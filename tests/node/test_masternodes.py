@@ -41,9 +41,9 @@ def test_getmasternode():  # 04
 
 @pytest.mark.query
 def test_getmasternodeblocks():  # 05
-    mn_id = "e54d0814d406317dfaa38f365471ff59fb7f7725769c0aecf3d0830a59de0100"
-    ownerAddress = "8TirqFLz1Gm6uPVthQdfxh4sp84CLgnHBy"
-    operatorAddress = "8V1DZnQaFRgKY9GPkvcXt1WjcsjGx7ApWM"
+    mn_id = "f02de244dfc9e64412a8ff5ca518e806dd65bd896ab62e85e77996981cb36c04"
+    ownerAddress = "8UNfA7MdNLTRsbzBP6Qm9N7HWoLHeNLB8n"
+    operatorAddress = "8TGDAfyR21MQNVVqvaiL6bq9Xt4TxeTuSy"
     depth = 1000000
     assert node.masternodes.getmasternodeblocks(mn_id)
     assert node.masternodes.getmasternodeblocks(id=mn_id)

@@ -81,6 +81,8 @@ class Node:
 
         # Setup all different modules
         self._rpc = RPC(self.url, logger)
+        self._logger = logger
+
         self.accounts = Accounts(self)
         self.blockchain = Blockchain(self)
         self.control = Control(self)
@@ -156,7 +158,9 @@ class Node:
         try:
             self.network.ping()
         except ServiceUnavailable as e:
-            raise ServiceUnavailable(f"RPC_CLIENT_INVALID_IP_OR_SUBNET: Invalid IP/Subnet {e}")
+            if self._logger:
+                self._logger.error("ConnectionError", f"RPC_CLIENT_INVALID_IP_OR_SUBNET: Invalid IP/Subnet")
+            raise ServiceUnavailable(f"RPC_CLIENT_INVALID_IP_OR_SUBNET: Invalid IP/Subnet")
 
         except Exception as e:
             raise Exception(e)
