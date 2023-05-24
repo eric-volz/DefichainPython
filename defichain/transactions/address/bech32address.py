@@ -32,8 +32,9 @@ class Bech32Address(BaseAddress, ABC):
         return result
 
     @staticmethod
-    def encode(network: Any, scriptPublicKey: str) -> str:
-        binary = binascii.unhexlify(scriptPublicKey)
+    def encode(network: Any, data: str) -> str:
+        data = "0014" + data
+        binary = binascii.unhexlify(data)
         version = binary[0] - 0x50 if binary[0] else 0
         program = binary[2:]
         return bech32.encode(network.SEGWIT_ADDRESS.HRP, version, program)
@@ -41,7 +42,7 @@ class Bech32Address(BaseAddress, ABC):
     @staticmethod
     def scriptPublicKey_to_address(network: Any, scriptPublicKey: str) -> str:
         if scriptPublicKey[0:4] == "0014":
-            return Bech32Address.encode(network, scriptPublicKey)
+            return Bech32Address.encode(network, scriptPublicKey[4:])
 
     @staticmethod
     def verify(address: str) -> bool:

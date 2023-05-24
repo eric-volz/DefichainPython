@@ -3,6 +3,7 @@ from typing import Any
 import hashlib
 import binascii
 
+from defichain.exceptions.transactions import AddressError
 from defichain.networks import Network
 from defichain.transactions.constants import AddressTypes, OPCodes
 from defichain.transactions.keys import PrivateKey, PublicKey
@@ -54,11 +55,21 @@ class P2PKH(Base58Address):  # Legacy
 
     @staticmethod
     def from_publicKeyHash(network: Any, publicKeyHash: str) -> "P2PKH":
-        checksumHash = "12" + publicKeyHash
+        if network.NETWORK == "mainnet":
+            checksumHash = "12" + publicKeyHash
+        elif network.NETWORK == "testnet":
+            checksumHash = "0f" + publicKeyHash
+        else:
+            raise AddressError("The specified network is not supported")
         for _ in range(2):
             checksumHash = hashlib.sha256(binascii.unhexlify(checksumHash)).hexdigest()
         checksum = checksumHash[:8]
-        hash = "12" + publicKeyHash + checksum
+        if network.NETWORK == "mainnet":
+            hash = "12" + publicKeyHash + checksum
+        elif network.NETWORK == "testnet":
+            hash = "0f" + publicKeyHash + checksum
+        else:
+            raise AddressError("The specified network is not supported")
         address = base58.encode(bytes.fromhex(hash))
         return P2PKH(network, address)
 
