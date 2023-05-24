@@ -38,7 +38,7 @@ There are no preconditions for the tests of ocean and hdwallet.
 ### Install requirements
 
 ```bash
-pip install -r requirements_dev.txt
+pip install -r requirements_tests.txt
 ```
 
 ### Run tests
