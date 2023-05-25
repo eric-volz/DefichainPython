@@ -26,19 +26,19 @@ def test_raed_varInt():  # 04
 
 @pytest.mark.transactions
 def test_length_compactSize():  # 05
-    assert Calculate.length_compactSize(TestCalculate.COMPACTSIZE) == 3
+    assert Calculate.length_compactSize(TestCalculate.COMPACT_SIZE) == 3
 
 
 @pytest.mark.transactions
 def test_write_compactSize():  # 06
-    assert Calculate.write_compactSize(TestCalculate.INT) == TestCalculate.COMPACTSIZE
+    assert Calculate.write_compactSize(TestCalculate.INT) == TestCalculate.COMPACT_SIZE
 
 
 @pytest.mark.transactions
 def test_raed_compactSize():  # 07
-    assert Calculate.read_compactSize(TestCalculate.COMPACTSIZE) == TestCalculate.INT
+    assert Calculate.read_compactSize(TestCalculate.COMPACT_SIZE) == TestCalculate.INT
 
 
 @pytest.mark.transactions
 def test_addressAmountSum():  # 08
-    assert Calculate.addressAmountSum(TestCalculate.ADDRESSAMOUNT) == 32898
+    assert Calculate.addressAmountSum(TestCalculate.ADDRESS_AMOUNT) == 32898

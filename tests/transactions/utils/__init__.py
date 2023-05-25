@@ -4,7 +4,21 @@ class TestCalculate:
     DHASH: str = "ea07687190f4a6a974710eaaac483fad6436deb73d6a9297c76cdb658054b2d4"
     INT: int = 65535
     VARINT: str = "82fe7f"
-    COMPACTSIZE: str = "fdffff"
-    ADDRESSAMOUNT: str = {'df1qsqa3yt6sfkx3nu5ch88ymlzwnwd5wkkstywjvu': ['232@DFI', '234@DFI'],
+    COMPACT_SIZE: str = "fdffff"
+    ADDRESS_AMOUNT: str = {'df1qsqa3yt6sfkx3nu5ch88ymlzwnwd5wkkstywjvu': ['232@DFI', '234@DFI'],
                           '8bXZh4A9NWW9weWW7nUpLJhAMmfLL6o5wo': '32432@DFI'}
+
+
+class TestConverter:
+    INT: int = 478560411976
+    BYTES: bytes = b'Hallo'
+    HEX: str = "48616c6c6f"
+    STR: str = "Hallo"
+    FLOAT: float = 4785.60411976
+    AMOUNT_INT: str = "100000000@DFI"
+    AMOUNT_FLOAT: str = "1@DFI"
+    ADDRESS_AMOUNT_INT = {'df1qsqa3yt6sfkx3nu5ch88ymlzwnwd5wkkstywjvu': ['23543352@DFI', '254353434@DFI'],
+                          '8bXZh4A9NWW9weWW7nUpLJhAMmfLL6o5wo': '32454355332@DFI'}
+    ADDRESS_AMOUNT_FLOAT = {'df1qsqa3yt6sfkx3nu5ch88ymlzwnwd5wkkstywjvu': ['0.23543352@DFI', '2.54353434@DFI'],
+                            '8bXZh4A9NWW9weWW7nUpLJhAMmfLL6o5wo': '324.54355332@DFI'}
 
