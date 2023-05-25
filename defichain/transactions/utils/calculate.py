@@ -95,7 +95,7 @@ class Calculate:
             return int.from_bytes(bytes.fromhex(hex), byteorder="little")
 
     @staticmethod
-    def addressAmount_sum(addressAmount: {}) -> "int | float":
+    def addressAmountSum(addressAmount: {}) -> "int | float":
         resultValue = 0
         for address in addressAmount:
             if isinstance(addressAmount[address], list):
