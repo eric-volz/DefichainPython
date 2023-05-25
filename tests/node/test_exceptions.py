@@ -52,7 +52,7 @@ def test_NotFound():  # 05
 @pytest.mark.query
 def test_ServiceUnavailable():  # 06
     response.status_code = 503
-    string = "ServiceUnavailable(503): RPC_INVALID_REQUEST: Das ist ein Test"
+    string = "ServiceUnavailable(503): The service you are trying to connect to is not available"
     with pytest.raises(Exception, match=re.escape(string)):
         assert RPCErrorHandler(response, logger)
 
