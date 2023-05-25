@@ -20,7 +20,7 @@ class P2SH(Base58Address):  # Pay to Script Hash
         :type publicKey: str
         :return: P2SH - returns the P2SH address object
         """
-        return P2SH(network, PublicKey(network, publicKey).p2wpkh_address())
+        return P2SH(network, PublicKey(network, publicKey).p2sh_address())
 
     @staticmethod
     def from_privateKey(network: Any, privateKey: str) -> "P2SH":
@@ -33,7 +33,7 @@ class P2SH(Base58Address):  # Pay to Script Hash
         :type privateKey: str
         :return: P2SH - returns the P2SH address object
         """
-        return P2SH(network, PrivateKey(network, privateKey).p2wpkh_address())
+        return P2SH(network, PrivateKey(network, privateKey).p2sh_address())
 
     @staticmethod
     def from_scriptPublicKey(network: Any, scriptPublicKey: str) -> "P2SH":

@@ -49,7 +49,7 @@ class P2WPKH(Bech32Address):  # Native Segwit
 
     @staticmethod
     def from_publicKeyHash(network: Any, publicKeyHash: str) -> "P2WPKH":
-        address = Bech32Address.encode(network, "0014" + publicKeyHash)
+        address = Bech32Address.encode(network, publicKeyHash)
         return P2WPKH(network, address)
 
     def __init__(self, network: Any, address: str):
