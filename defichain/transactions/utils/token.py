@@ -42,8 +42,9 @@ class Token:
                 if _type == TokenTypes.LIQUIDITY:
                     if token["symbol"] == str(symbol):
                         return int(token["id"])
-                    elif token["symbol"] == str(f"{symbol.split('-')[1]}-{symbol.split('-')[0]}"):
-                        return int(token["id"])
+                    elif len(symbol.split("-")) > 1:
+                        if token["symbol"] == str(f"{symbol.split('-')[1]}-{symbol.split('-')[0]}"):
+                            return int(token["id"])
                 if token["symbol"] == str(symbol):
                     return int(token["id"])
         raise TokenError(f"The given symbol: {symbol} does not exist. Check your input.")
@@ -66,7 +67,7 @@ class Token:
             raise TokenError("The given token id is not valid")
 
     @staticmethod
-    def checkAndConvert(network: Any, tokenId: "int | str"):
+    def checkAndConvert(network: Any, tokenId: "int | str") -> int:
         if isinstance(tokenId, str) and not Verify.is_only_number_str(tokenId):
             return int(Token.get_id_from_symbol(network, tokenId))
         else:
