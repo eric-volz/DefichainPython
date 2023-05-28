@@ -52,3 +52,15 @@ class TestToken:
         for token in tokens:
             TESTNET_SYMBOLS.append(token.get("symbol"))
 
+
+class TestVerify:
+    HEX_TRUE = "79328a"
+    HEX_FALSE = "Hallo"
+    INT_TRUE = 123978
+    INT_FALSE = 294.0
+    FLOAT_TRUE = 72042.3
+    FLOAT_FALSE = 7432
+    STR_TRUE = "Hallo"
+    STR_FALSE = 809
+    STR_NUMBER_TRUE = "79243"
+    STR_NUMBER_FALSE = "75892h42"
