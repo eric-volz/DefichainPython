@@ -42,7 +42,7 @@ class Accounts:
         """
         # Convert Float to Integer
         addressAmountTo = Converter.addressAmount_float_to_int(addressAmountTo)
-        value = Calculate.addressAmount_sum(addressAmountTo)
+        value = Calculate.addressAmountSum(addressAmountTo)
 
         defiTx = AccountToUtxos(addressFrom, value, 2)
         return self._builder.build_defiTx(0, defiTx, inputs, addressAmountTo=addressAmountTo)

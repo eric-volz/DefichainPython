@@ -68,7 +68,7 @@ class BaseAddress(ABC):
 
     @staticmethod
     @abstractmethod
-    def encode(network: Any, scriptPublicKey: str) -> str:
+    def encode(network: Any, data: str) -> str:
         """
         Encodes a script public key into an address
 
@@ -80,8 +80,8 @@ class BaseAddress(ABC):
 
         :param network: (required) The network witch the script public key should be encoded for
         :type network: Network
-        :param scriptPublicKey: script public key
-        :type scriptPublicKey: str
+        :param data: data
+        :type data: str
         :return: "hex" (str) - address of the given script public key
         """
         pass

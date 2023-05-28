@@ -44,7 +44,6 @@ class CreateMasternode(BaseDefiTx):
         # Convert to Bytes
         defiTxType = Converter.hex_to_bytes(self.get_defiTxType())
 
-        print(self.get_operatorAddress())
         if Address.from_address(self.get_operatorAddress()).get_addressType() == AddressTypes.P2PKH:
             operatorType = Converter.int_to_bytes(1, 1)
             operatorPubKeyHash = P2PKH(Address.from_address(self.get_operatorAddress()).get_network(),
