@@ -10,7 +10,7 @@ from defichain.transactions.constants import SIGHASH, AddressTypes
 
 from .txbase import TxBase
 from .txinput import TxBaseInput, TxInput, TxP2PKHInput, TxP2SHInput, TxP2WPKHInput, TxCoinbaseInput
-from .txoutput import TxBaseOutput, TxOutput, TxAddressOutput, TxMsgOutput, TxDefiOutput, TxCoinbaseOutput
+from .txoutput import TxBaseOutput, TxOutput, TxAddressOutput, TxDataOutput, TxDefiOutput, TxCoinbaseOutput
 from .witness import WitnessHash, Witness
 from .sign import sign_input
 
