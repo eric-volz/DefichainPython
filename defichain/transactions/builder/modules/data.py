@@ -33,7 +33,7 @@ class Data:
 
         # Convert Float to Integer
         addressAmountTo = Converter.addressAmount_float_to_int(addressAmountTo)
-        outputValue = Calculate.addressAmount_sum(addressAmountTo)
+        outputValue = Calculate.addressAmountSum(addressAmountTo)
 
         # Building the transaction
         tx = self._builder.build_transactionInputs(inputs)
