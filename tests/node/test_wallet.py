@@ -346,7 +346,7 @@ def test_rescanblockchain():  # 41
                                         stop_height=node.blockchain.getblockcount())
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_sendmany():  # 42
     while len(node.wallet.listunspent()) < 1:
         time.sleep(1)
@@ -357,7 +357,7 @@ def test_sendmany():  # 42
                                 replaceable=True, conf_target=1, estimate_mode="UNSET")
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_sendtoaddress():  # 43
     while len(node.wallet.listunspent()) < 1:
         time.sleep(1)

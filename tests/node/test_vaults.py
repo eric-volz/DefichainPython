@@ -7,6 +7,7 @@ from defichain.exceptions.http.InternalServerError import InternalServerError
 from defichain.exceptions.http.BadRequest import BadRequest
 
 from . import node
+
 address = load_secrets_conf()["wallet_address"]
 vault = load_secrets_conf()["vault_address"]
 
@@ -35,7 +36,7 @@ def test_createvault():  # 02
         assert node.vault.createvault(ownerAddress=address, loanSchemeId="MIN150", inputs=[])
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_deposittovault():  # 03
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
@@ -116,6 +117,7 @@ def test_listvaults():  # 11
     assert node.vault.listvaults(ownerAddress=address, loanSchemeId="MIN150", state="active", verbose=False,
                                  start=vault, including_start=True, limit=100)
 
+
 @pytest.mark.query
 def test_paybackwithcollateral():  # 12
     pass  # has to be implemented (tested manually)
@@ -132,7 +134,7 @@ def test_placeauctionbid():  # 13
         assert node.vault.placeauctionbid(vaultId=vault, index=0, _from=address, amount="0.01DUSD", inputs=[])
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_updatevault():  # 14
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
@@ -145,7 +147,7 @@ def test_updatevault():  # 14
     assert len(node.vault.updatevault(vaultId=vault, loanSchemeId="MIN150", inputs=[])) == LENGTH_OF_TXID
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_withdrawfromvault():  # 15
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)

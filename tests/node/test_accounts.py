@@ -22,7 +22,7 @@ def test_accounthistorycount():  # 01
     assert result3 or result3 == 0
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_accounttoaccount():  # 02
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
@@ -32,7 +32,7 @@ def test_accounttoaccount():  # 02
     assert len(node.accounts.accounttoaccount(_from=address, to={address: "0.0001@DUSD"}, inputs=[])) == LENGTH_OF_TXID
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_accounttoutxos():  # 03
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
@@ -53,7 +53,7 @@ def test_executesmartcontract():  # 04
         assert node.accounts.executesmartcontract(name="test", amount="0.00000001@DFI", address=address, inputs=[])
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_futureswap():  # 05
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
@@ -148,7 +148,7 @@ def test_listpendingfutureswaps():  # 17
     assert result or result == []
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_sendtokenstoaddress():  # 18
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
@@ -159,7 +159,7 @@ def test_sendtokenstoaddress():  # 18
                                                  selectionMode="pie")) == LENGTH_OF_TXID
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_sendutxosfrom():  # 19
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
@@ -169,7 +169,7 @@ def test_sendutxosfrom():  # 19
     assert len(node.accounts.sendutxosfrom(_from=address, to=address, amount=0.001, change=address)) == LENGTH_OF_TXID
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_utxostoaccount():  # 20
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
@@ -179,7 +179,7 @@ def test_utxostoaccount():  # 20
     assert len(node.accounts.utxostoaccount(amounts={address: "0.000001@DFI"}, inputs=[])) == LENGTH_OF_TXID
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_withdrawfutureswap():  # 21
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)

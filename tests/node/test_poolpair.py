@@ -11,7 +11,7 @@ address = load_secrets_conf()["wallet_address"]
 vault = load_secrets_conf()["vault_address"]
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_addpoolliquidity():  # 01
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
@@ -29,7 +29,7 @@ def test_addpoolliquidity():  # 01
     assert node.poolpair.addpoolliquidity(_from=_from, shareAddress=address, inputs=[])
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_compositeswap():  # 02
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
@@ -74,7 +74,7 @@ def test_listpoolshares():  # 06
     assert node.poolpair.listpoolshares(start=0, including_start=True, limit=100, verbose=True, is_mine_only=False)
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_poolswap():  # 07
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
@@ -85,7 +85,7 @@ def test_poolswap():  # 07
                                   tokenTo="DUSD", maxPrice=2, inputs=[])
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_removepoolliquidityy():  # 08
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
