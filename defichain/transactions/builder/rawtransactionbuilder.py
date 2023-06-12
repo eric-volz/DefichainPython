@@ -44,6 +44,8 @@ class RawTransactionBuilder:
                     tx.add_input(TxP2WPKHInput(input["txid"], input["vout"], self.get_address(), input["value"]))
             # Check Inputs for masternode collateral
             tx.set_inputs(self.checkMasternodeInputs(tx.get_inputs()))
+        if tx.get_inputs() == []:
+            raise TxBuilderError(f"Given address: {self._address} has no unspent inputs. Check your builder object!")
         return tx
 
     def build_defiTx(self, value: int, defiTx: BaseDefiTx, inputs=[], **additionalData) -> Transaction:
