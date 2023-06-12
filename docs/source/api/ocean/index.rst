@@ -24,6 +24,7 @@ Ocean Modules
 -------------
 
 .. toctree::
+    :maxdepth: 1
 
     ocean
     address
