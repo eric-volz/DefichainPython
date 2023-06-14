@@ -93,7 +93,7 @@ Since this is a community supported project, the community also has the right to
         Transaction Methods     Progress
         ====================    ========
         UtxosToAccount          |:white_check_mark:|
-        AccountToUtxos          |:rotating_light:|
+        AccountToUtxos          |:white_check_mark:|
         AccountToAccount        |:white_check_mark:|
         AnyAccountToAccount     |:rotating_light:|
         SetFutureSwap           |:rotating_light:|
@@ -102,7 +102,7 @@ Since this is a community supported project, the community also has the right to
         SetGovernanceHeight     |:rotating_light:|
         CreateCfp               |:rotating_light:|
         CreateVoc               |:rotating_light:|
-        Vote                    |:rotating_light:|
+        Vote                    |:white_check_mark:|
 
         SetLoanScheme           |:rotating_light:|
         DestroyLoanScheme       |:rotating_light:|

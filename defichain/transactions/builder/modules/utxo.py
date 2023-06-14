@@ -1,6 +1,6 @@
 from defichain.exceptions.transactions import TxBuilderError
 from defichain.transactions.rawtransactions import TxAddressOutput, estimate_fee
-from defichain.transactions.utils import Converter
+from defichain.transactions.utils import Converter, Calculate, Token
 from defichain.transactions.builder.rawtransactionbuilder import RawTransactionBuilder, Transaction
 
 
@@ -81,3 +81,58 @@ class UTXO:
 
         self._builder.sign(tx)
         return tx
+
+    def sendmany(self, addressAmountTo: {}, changeAddress=None, inputs=[]) -> Transaction:
+        """
+        Sends the specified amount of UTXO to the specified addresses. Returns the remaining UTXO from the input to the
+        sender address if not changed.
+
+        :param addressAmountTo: (required) AddressAmount
+        :type addressAmountTo: json string
+        :param changeAddress: (required) address to which the remaining UTXO should be sent
+        :type changeAddress: str
+        :param inputs: (optional) Inputs
+        :type inputs: TxInput
+        :return: Transaction
+        """
+
+        if inputs is None:
+            inputs = []
+        if addressAmountTo is None:
+            addressAmountTo = {}
+        if changeAddress is None:
+            changeAddress = self._builder.get_address()
+
+        # Convert Float to Integer
+        addressAmountTo = Converter.addressAmount_float_to_int(addressAmountTo)
+        outputValue = Calculate.addressAmountSum(addressAmountTo)
+
+        # Building the transaction
+        tx = self._builder.build_transactionInputs(inputs)
+        inputValue = tx.get_inputsValue()
+
+        # Building Transaction Outputs
+        for address in addressAmountTo:
+            value, token = addressAmountTo[address].split("@")
+            token = Token.checkAndConvert(self._builder.get_network(), token)
+            if token != 0:
+                raise TxBuilderError("The used method only support sending DFI")
+            addressOutput = TxAddressOutput(int(value), address)
+            tx.add_output(addressOutput)
+
+        changeOutputValue = inputValue - outputValue
+        changeOutput = TxAddressOutput(changeOutputValue, changeAddress)
+        tx.add_output(changeOutput)
+
+        # Calculate fee
+        fee = estimate_fee(tx, self._builder.get_feePerByte())
+
+        # Subtract fee from output
+        value = changeOutput.get_value() - fee
+        if value < 0:
+            raise TxBuilderError("The used address has not enough UTXO to pay the transaction fee")
+        changeOutput.set_value(value)
+
+        self._builder.sign(tx)
+        return tx
+
