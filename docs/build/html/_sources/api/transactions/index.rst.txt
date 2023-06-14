@@ -7,3 +7,4 @@ Transactions
     :maxdepth: 1
 
     builder/index
+    advanced/index

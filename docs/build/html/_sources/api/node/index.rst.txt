@@ -28,6 +28,7 @@ Node Modules
 ------------
 
 .. toctree::
+    :maxdepth: 1
 
     node
     accounts
