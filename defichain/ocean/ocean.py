@@ -47,6 +47,16 @@ class Ocean:
     def __init__(self, url: str = "https://ocean.defichain.com", version: str = "v0",
                  network: str = "mainnet", logger: Logger = None) -> "Ocean":
 
+        if url != "https://ocean.defichain.com":
+            pass
+        elif network == "mainnet":
+            url = "https://ocean.defichain.com"
+        elif network == "testnet":
+            url = "https://testnet.ocean.jellyfishsdk.com"
+        else:
+            raise Exception("The network that is specified is not available. Use one of these networks: 'mainnet', "
+                            "'testnet'")
+
         self._attachedURL = url + "/" + version + "/" + network + "/"
         self._test_connection()
 
