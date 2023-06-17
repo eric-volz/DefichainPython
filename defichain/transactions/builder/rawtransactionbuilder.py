@@ -5,8 +5,8 @@ from defichain.transactions.address import Address
 from defichain.transactions.constants import AddressTypes, DefiTxType
 from defichain.networks import Network
 from defichain.transactions.remotedata.remotedata import RemoteData
-from defichain.transactions.rawtransactions import Transaction, TxInput, TxP2WPKHInput, TxP2SHInput, TxAddressOutput, \
-    TxDefiOutput, estimate_fee
+from defichain.transactions.rawtransactions import Transaction, TxInput, TxP2PKHInput, TxP2WPKHInput, TxP2SHInput, \
+    TxAddressOutput, TxDefiOutput, estimate_fee
 from defichain.transactions.defitx.modules.basedefitx import BaseDefiTx
 
 
@@ -34,7 +34,7 @@ class RawTransactionBuilder:
                 address = Address.from_scriptPublicKey(self.get_account().get_network(), input["scriptPubKey"])
                 # Build P2PKH Input
                 if address.get_addressType() == AddressTypes.P2PKH:
-                    raise NotYetSupportedError()
+                    tx.add_input(TxP2PKHInput(input["txid"], input["vout"], self.get_address(), input["value"]))
                 # Build P2SH Input
                 elif address.get_addressType() == AddressTypes.P2SH:
                     tx.add_input(TxP2SHInput(input["txid"], input["vout"], self.get_account().get_p2wpkh(),
@@ -44,7 +44,7 @@ class RawTransactionBuilder:
                     tx.add_input(TxP2WPKHInput(input["txid"], input["vout"], self.get_address(), input["value"]))
             # Check Inputs for masternode collateral
             tx.set_inputs(self.checkMasternodeInputs(tx.get_inputs()))
-        if tx.get_inputs() == []:
+        if not tx.get_inputs():
             raise TxBuilderError(f"Given address: {self._address} has no unspent inputs. Check your builder object!")
         return tx
 

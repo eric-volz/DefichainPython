@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Any
+from hashlib import sha256
 
 from defichain.exceptions.transactions import RawTransactionError, NotYetSupportedError, DeserializeError
 from defichain.networks import Network
@@ -12,7 +13,7 @@ from .txbase import TxBase
 from .txinput import TxBaseInput, TxInput, TxP2PKHInput, TxP2SHInput, TxP2WPKHInput, TxCoinbaseInput
 from .txoutput import TxBaseOutput, TxOutput, TxAddressOutput, TxDataOutput, TxDefiOutput, TxCoinbaseOutput
 from .witness import WitnessHash, Witness
-from .sign import sign_input
+from .sign import sign_segwit_input, sign_legacy_input
 
 
 class BaseTransaction(TxBase, ABC):
@@ -34,6 +35,9 @@ class BaseTransaction(TxBase, ABC):
     @abstractmethod
     def _analyse(self):
         pass
+
+    def unsigned(self) -> str:
+        return Converter.bytes_to_hex(self.bytes_unsigned())
 
     def bytes_unsigned(self) -> bytes:
         # Version
@@ -63,11 +67,8 @@ class BaseTransaction(TxBase, ABC):
     def get_inputsValue(self) -> "int | None":
         result = 0
         for input in self.get_inputs():
-            if isinstance(input, TxP2PKHInput) or isinstance(input, TxCoinbaseInput):
+            if input.get_value() is None:
                 return None
-            elif isinstance(input, TxP2WPKHInput) or isinstance(input, TxP2SHInput):
-                if input.get_value() is None:
-                    return None
             result += input.get_value()
         return result
 
@@ -314,7 +315,8 @@ class Transaction(BaseTransaction):
                     elif hex[position: position + 2] == "02":
                         position += 2
                         length_signature = Converter.hex_to_int(hex[position: position + 2]) * 2
-                        length_publicKey = Converter.hex_to_int(hex[position + 2 + length_signature: position + 2 + length_signature + 2]) * 2
+                        length_publicKey = Converter.hex_to_int(
+                            hex[position + 2 + length_signature: position + 2 + length_signature + 2]) * 2
                         length_witness = 2 + length_signature + 2 + length_publicKey
                         witness = Witness.deserialize(network, hex[position: position + length_witness])
                         witnesses.append(witness)
@@ -327,7 +329,8 @@ class Transaction(BaseTransaction):
                 count_inputs = 0
                 for input in inputs:
                     if isinstance(input, TxP2SHInput):
-                        publicKey_address = PublicKey(network, witnesses[count_witness].get_publicKey()).p2wpkh_address()
+                        publicKey_address = PublicKey(network,
+                                                      witnesses[count_witness].get_publicKey()).p2wpkh_address()
                         script_address = Address.from_scriptPublicKey(network, input.get_scriptSig()[2:]).get_address()
                         if publicKey_address == script_address:
                             input.set_witness(witnesses[count_witness])
@@ -348,7 +351,6 @@ class Transaction(BaseTransaction):
 
             # Coinbase Transaction
             if tx.is_coinbase():
-
                 numberOfCoinbaseElements = Converter.hex_to_int(hex[position: position + 2])
                 position += 2
 
@@ -453,7 +455,7 @@ class Transaction(BaseTransaction):
         if not isinstance(private_keys, list):
             raise RawTransactionError("The given private keys have to be parsed in a list: [key, key, ...]")
 
-        # Check if wif and calc hexadecimal private key
+        # Check if wif and calc hexadecimal private key and public key
         keys = []
         for key in private_keys:
             if PrivateKey.is_privateKey(network, key):
@@ -464,31 +466,51 @@ class Transaction(BaseTransaction):
                 raise KeyError("Given private key is not valid")
             keys.append({"private": key.get_privateKey(), "public": key.get_publicKey()})
 
-        # Sign
         index = 0
+        scriptSignatures = []
         for input in self.get_inputs():
-            if isinstance(input, TxP2PKHInput):
-                raise NotYetSupportedError()
-            elif isinstance(input, TxP2WPKHInput) or isinstance(input, TxP2SHInput):
-                if len(private_keys) == 1:
-                    privKey = keys[0]["private"]
-                    pubKey = keys[0]["public"]
+            # Check Keys for Input
+            if len(private_keys) == 1:
+                privKey = keys[0]["private"]
+                pubKey = keys[0]["public"]
+            else:
+                if len(private_keys) <= index:
+                    raise RawTransactionError("The transaction could not from be signed. Not enough private keys "
+                                              "were provided in the list")
                 else:
-                    if len(private_keys) <= index:
-                        raise RawTransactionError("The transaction could not from be signed. Not enough private keys "
-                                                  "were provided in the list")
-                    else:
-                        privKey = keys[index]["private"]
-                        pubKey = keys[index]["public"]
+                    privKey = keys[index]["private"]
+                    pubKey = keys[index]["public"]
 
+            # Sign different Inputs
+            if isinstance(input, TxP2PKHInput):
+                SIGHASH_ALL = Converter.int_to_bytes(SIGHASH, 4)
+
+                input.set_scriptSig(Address.from_address(input.get_address()).get_scriptPublicKey())
+                h = sha256(self.bytes() + SIGHASH_ALL).digest()
+
+                signature = sign_legacy_input(privKey, h, SIGHASH_ALL)
+                scriptSignature = Converter.int_to_hex(int(len(signature) / 2), 1) + signature + \
+                                  Converter.int_to_hex(int(len(pubKey) / 2), 1) + pubKey
+                input.set_scriptSig("")
+                scriptSignatures.append(scriptSignature)
+
+            elif isinstance(input, TxP2WPKHInput) or isinstance(input, TxP2SHInput):
                 witness_hash = WitnessHash(self, input)
-                signature = sign_input(privKey, witness_hash.bytes_hash())
+                signature = sign_segwit_input(privKey, witness_hash.bytes_hash())
                 witness = Witness(signature, pubKey)
                 input.set_witness(witness)
 
             else:
                 raise NotYetSupportedError()
             index += 1
+
+        # Assign ScriptSignatures to P2PKH Inputs after signing
+        index = 0
+        for input in self.get_inputs():
+            if isinstance(input, TxP2PKHInput):
+                input.set_scriptSig(scriptSignatures[index])
+            index += 1
+
         self._signed = True
 
         return self

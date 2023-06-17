@@ -2,6 +2,7 @@ from abc import ABC
 from typing import Any
 
 from .txbase import TxBase
+from defichain.transactions.keys import PublicKey
 from defichain.exceptions.transactions import AddressError, DeserializeError
 from defichain.transactions.constants import SEQUENCE
 from defichain.transactions.utils import Converter
@@ -190,8 +191,9 @@ class TxInput(TxBaseInput):
         json.update({"sequence": self.get_sequence()})
         return json
 
-    def to_p2pkhInput(self) -> "TxP2PKHInput":
-        return TxP2PKHInput(self.get_txid(), self.get_vout(), self.get_scriptSig(), self.get_sequence())
+    def to_p2pkhInput(self, network: Any) -> "TxP2PKHInput":
+        address = Address.from_scriptPublicKey(network, self.get_scriptSig()).get_address()
+        return TxP2PKHInput(self.get_txid(), self.get_vout(), address, None, self.get_sequence())
 
     def to_p2shInput(self, network: Any) -> "TxP2SHInput":
         address = Address.from_scriptPublicKey(network, self.get_scriptSig()).get_address()
@@ -219,13 +221,18 @@ class TxP2PKHInput(TxInput):
     def deserialize(network: Any, hex: str) -> "TxP2PKHInput":
         input = TxBaseInput.deserialize(network, hex)
         if input.get_scriptSig() != "":
-            if len(input.get_scriptSig()) < 23:
+            if len(input.get_scriptSig()) < 214:
                 raise DeserializeError("The given input to decode is not an p2pkh input")
+        publicKey = input.get_scriptSig()[-66:]
+        address = PublicKey(network, publicKey).p2pkh_address()
+        resultInput = TxP2PKHInput(input.get_txid(), input.get_vout(), address, input.get_value(), input.get_sequence())
+        resultInput.set_scriptSig(input.get_scriptSig())
+        return resultInput
 
-        return TxP2PKHInput(input.get_txid(), input.get_vout(), input.get_scriptSig(), input.get_sequence())
-
-    def __init__(self, txid: str, vout: int, scriptSig: str = "", sequence: str = SEQUENCE):
-        super().__init__(txid, vout, scriptSig, sequence)
+    def __init__(self, txid: str, vout: int, address: str = "", value: int = None, sequence: str = SEQUENCE):
+        super().__init__(txid, vout, "", sequence)
+        self.set_value(value)
+        self.set_address(address)
 
     def to_json(self) -> {}:
         json = {}
@@ -234,6 +241,8 @@ class TxP2PKHInput(TxInput):
         json.update({"vout": self.get_vout()})
         json.update({"scriptSig": self.get_scriptSig()})
         json.update({"sequence": self.get_sequence()})
+        json.update({"address": self.get_address()})
+        json.update({"value": self.get_value()})
         return json
 
 

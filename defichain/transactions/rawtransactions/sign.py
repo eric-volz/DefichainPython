@@ -2,12 +2,31 @@ from binascii import hexlify, unhexlify
 import struct
 from hashlib import sha256
 from ecdsa import SigningKey, SECP256k1
-from ecdsa.util import sigencode_der
+from ecdsa.util import sigencode_der, sigencode_der_canonize
 
 from defichain.transactions.constants import ORDER
+from defichain.transactions.utils import Converter
 
 
-def sign_input(privateKey: str, data: bytes) -> str:
+def sign_legacy_input(privateKey: str, data: bytes, sigHash: bytes) -> str:
+    """
+    Signs the given data with a given private key in a deterministic way
+
+    :param privateKey: (required) private key to sign the input
+    :type privateKey: str
+    :param data: (required) data that has to be signed
+    :type data: bytes
+    :param sigHash: (required) sigHash to be signed with
+    :type sigHash: bytes
+    :return: "hex" - signature of data
+    """
+    sk = SigningKey.from_string(unhexlify(privateKey), curve=SECP256k1)
+    s = sk.sign_deterministic(data, hashfunc=sha256, sigencode=sigencode_der_canonize)
+    signature = Converter.bytes_to_hex(s) + Converter.bytes_to_hex(sigHash)[:2]  # SIGHASH_ALL
+    return signature
+
+
+def sign_segwit_input(privateKey: str, data: bytes) -> str:
     """
     Signs the given data with a given private key in a deterministic way
 
