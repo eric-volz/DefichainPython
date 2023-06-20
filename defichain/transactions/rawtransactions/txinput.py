@@ -95,7 +95,9 @@ class TxBaseInput(TxBase, ABC):
         return Converter.int_to_bytes(self.get_value(), 8)
 
     def get_bytes_unsignedInput(self) -> bytes:
-        return self.get_bytes_txid() + self.get_bytes_vout() + Converter.int_to_bytes(0, 1) + self.get_bytes_sequence()
+        scriptSigLength = len(self.get_bytes_scriptSig())
+        return self.get_bytes_txid() + self.get_bytes_vout() + Converter.int_to_bytes(scriptSigLength, 1) + \
+            self.get_bytes_scriptSig() + self.get_bytes_sequence()
 
     # Set Information
     def set_txid(self, txid: str) -> None:

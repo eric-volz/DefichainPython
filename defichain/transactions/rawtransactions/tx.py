@@ -131,8 +131,7 @@ class BaseTransaction(TxBase, ABC):
         return Converter.bytes_to_hex(bytes(reversed(Calculate.dHash256(self.bytes_unsigned()))))
 
     def get_hash(self):
-        hash = Calculate.dHash256(self.bytes())
-        return Converter.bytes_to_hex(bytes(reversed(hash)))
+        return Converter.bytes_to_hex(bytes(reversed(Calculate.dHash256(self.bytes()))))
 
     def get_bytes_version(self) -> bytes:
         return Converter.int_to_bytes(self.get_version(), 4)
