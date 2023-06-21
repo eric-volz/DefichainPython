@@ -1,0 +1,468 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <link rel="shortcut icon" href="../_static/logo.png"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.05.20 -->
+        <title>How to use mnemonic seed phrase for your wallet.dat file - DefichainPython v3.0.0b2</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">DefichainPython v3.0.0b2</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">DefichainPython v3.0.0b2</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Instructions</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../instructions/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructions/progressAndUpdates.html">Progress and Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructions/rawMethodsOverview.html">Raw Methods Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="index.html">Additional Information</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Additional Information</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="basicUsageOfRawTransactions.html">Basic Usage Of Transactions Builder</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/node/index.html">Node / RPC</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Node / RPC</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/node.html">Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/accounts.html">Accounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/blockchain.html">Blockchain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/control.html">Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/generating.html">Generating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/loan.html">Loan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/masternodes.html">Masternodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/mining.html">Mining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/network.html">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/oracles.html">Oracles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/poolpair.html">Poolpair</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/proposals.html">Proposals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/rawtransactions.html">Rawtransactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/spv.html">Spv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/stats.html">Stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/tokens.html">Tokens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/util.html">Util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/vault.html">Vault</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/wallet.html">Wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/node/zmq.html">Zmq</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/ocean/index.html">Ocean</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Ocean</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/ocean/ocean.html">Ocean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ocean/address.html">Address</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ocean/blocks.html">Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ocean/consortium.html">Consortium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ocean/fee.html">Fee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ocean/governance.html">Governance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ocean/loan.html">Loan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ocean/masternodes.html">Masternodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ocean/oracles.html">Oracles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ocean/poolpair.html">Poolpairs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ocean/prices.html">Prices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ocean/rawTx.html">RawTx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ocean/rpc.html">Rpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ocean/stats.html">Stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ocean/tokens.html">Tokens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ocean/transactions.html">Transactions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/hdwallet/index.html">HDWallet</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of HDWallet</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/hdwallet/wallet.html">Wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/hdwallet/utils.html">Utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/transactions/index.html">Transactions</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Transactions</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/transactions/builder/index.html">Transaction Builder</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Transaction Builder</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/transactions/builder/txbuilder.html">TxBuilder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/transactions/builder/accounts.html">Accounts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/transactions/builder/loans.html">Loans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/transactions/builder/masternode.html">Masternode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/transactions/builder/pool.html">Pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/transactions/builder/utxo.html">UTXO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/transactions/builder/vault.html">Vault</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/transactions/advanced/index.html">Advanced</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Advanced</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/transactions/advanced/remotedata.html">RemoteDataOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/transactions/advanced/remotedata.html#remotedatanode">RemoteDataNode</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/logger.html">Logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/mnemonic.html">Mnemonic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../legal/community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legal/licenseAndDisclaimer.html">License &amp; Disclaimer</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="how-to-use-mnemonic-seed-phrase-for-your-wallet-dat-file">
+<h1>How to use mnemonic seed phrase for your wallet.dat file<a class="headerlink" href="#how-to-use-mnemonic-seed-phrase-for-your-wallet-dat-file" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>Personally, I find it difficult to rely solely on a single file as security for all my crypto assets. So I tried how it
+is possible to create and restore a wallet.dat file just from a mnemonic seed phrase.
+But you can also restore the wallet just from the wallet.dat file.</p>
+<p>To be clear: this has nothing to do with the defichain light wallet.</p>
+<p>Here is my approach to make this possible:</p>
+</section>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>a fully synced defichain node</p></li>
+<li><p>Python3 installed on your device</p></li>
+<li><p>install the python package: <a class="reference external" href="%22https://github.com/meherett/python-hdwallet">hdwallet</a></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>hdwallet
+</pre></div>
+</div>
+</section>
+<section id="best-practice">
+<h2>Best practice<a class="headerlink" href="#best-practice" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>write down the mnemonic seed phase on a piece of paper and put it in a secure place</p></li>
+<li><p>don’t fully rely on the mnemonic seed phrase</p>
+<ul>
+<li><p>also make backups of the wallet.dat as you would normally do</p></li>
+</ul>
+</li>
+<li><p>encrypt your wallet.dat with a passphrase</p></li>
+<li><p>try to be offline while creating or restoring the wallet.dat</p></li>
+<li><p>try to restore the wallet one time before using it</p>
+<ul>
+<li><p>to be sure that everything works as expected</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="create-a-wallet-with-mnemonic-seed-phrase">
+<h2>Create a wallet with mnemonic seed phrase<a class="headerlink" href="#create-a-wallet-with-mnemonic-seed-phrase" title="Permalink to this heading">#</a></h2>
+<section id="generate-a-mnemonic-seed-phrase">
+<h3>1. Generate a mnemonic seed phrase<a class="headerlink" href="#generate-a-mnemonic-seed-phrase" title="Permalink to this heading">#</a></h3>
+<p>This two lines of code give you a newly generated mnemonic seed phrase.</p>
+<p>Be sure to keep it save!!!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdwallet.utils</span> <span class="kn">import</span> <span class="n">generate_mnemonic</span>
+
+<span class="n">mnemonic</span> <span class="o">=</span> <span class="n">generate_mnemonic</span><span class="p">(</span><span class="n">language</span><span class="o">=</span><span class="s2">&quot;english&quot;</span><span class="p">,</span> <span class="n">strength</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="converting-the-words-into-wallet-import-format-wif">
+<h3>2. Converting the words into <a class="reference external" href="https://river.com/learn/terms/w/wallet-import-format-wif/">Wallet import format (WIF)</a><a class="headerlink" href="#converting-the-words-into-wallet-import-format-wif" title="Permalink to this heading">#</a></h3>
+<p>This format is needed to be able to import the seed into a newly created wallet</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hdwallet</span> <span class="kn">import</span> <span class="n">HDWallet</span>
+
+<span class="n">wallet</span> <span class="o">=</span> <span class="n">HDWallet</span><span class="p">()</span>  <span class="c1"># creating an empty wallet in the python code</span>
+<span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="p">)</span>  <span class="c1"># importing the mnemonic seed phrase into the wallet</span>
+
+<span class="n">wif</span> <span class="o">=</span> <span class="n">wallet</span><span class="o">.</span><span class="n">wif</span><span class="p">()</span>  <span class="c1"># extract the calculated WIF seed from the wallet inside the code</span>
+</pre></div>
+</div>
+</section>
+<section id="creating-a-blank-wallet">
+<h3>3. Creating a blank wallet<a class="headerlink" href="#creating-a-blank-wallet" title="Permalink to this heading">#</a></h3>
+<p>With this line of code you will create a wallet with the name and passphrase you have set</p>
+<p>Explanation of parameters:</p>
+<ol class="arabic simple">
+<li><p>wallet_name: you can choose the wallet name yourself</p></li>
+<li><p>disable_private_keys: has to be false</p></li>
+<li><p>blank: has to be true</p></li>
+<li><p>passphrase: is recommended</p></li>
+<li><p>avoid_reuse: default is false</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>createwallet<span class="w"> </span>name<span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span>passphrase<span class="w"> </span><span class="nb">false</span>
+</pre></div>
+</div>
+</section>
+<section id="importing-the-wif-into-the-newly-created-blank-wallet">
+<h3>4. Importing the WIF into the newly created blank wallet<a class="headerlink" href="#importing-the-wif-into-the-newly-created-blank-wallet" title="Permalink to this heading">#</a></h3>
+<p>Explanation of parameters:</p>
+<ol class="arabic simple">
+<li><p>newkeypool: True</p></li>
+<li><p>seed: has to be the wif step 2</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sethdseed<span class="w"> </span><span class="nb">true</span><span class="w"> </span>wif
+</pre></div>
+</div>
+<p>Now you are good to go and able to use the wallet like every other wallet</p>
+</section>
+</section>
+<section id="recover-a-wallet-with-mnemonic-seed-phrase">
+<h2>Recover a wallet with mnemonic seed phrase<a class="headerlink" href="#recover-a-wallet-with-mnemonic-seed-phrase" title="Permalink to this heading">#</a></h2>
+<section id="follow-steps-from-above">
+<h3>1. Follow steps from above<a class="headerlink" href="#follow-steps-from-above" title="Permalink to this heading">#</a></h3>
+<p>Follow steps 2 - 4 for creating a wallet with mnemonic seed phrase.</p>
+</section>
+<section id="rescanblockchain">
+<h3>2. Rescanblockchain<a class="headerlink" href="#rescanblockchain" title="Permalink to this heading">#</a></h3>
+<p>Rescan the blockchain to see all transaction and balances in the wallet</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rescanblockchain
+</pre></div>
+</div>
+</section>
+</section>
+<section id="disclaimer">
+<h2>Disclaimer<a class="headerlink" href="#disclaimer" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Don’t try to use a mnemonic seed phrase for an existing wallet</p></li>
+<li><p>This possibility to create the wallet using the mnemonic seed phrase should always exist</p>
+<ul>
+<li><p>but there could also be changes made to the code that could invalidate the mnemonic seed phrase</p></li>
+<li><p>therefore you should always backup the wallet.dat additionally</p></li>
+</ul>
+</li>
+</ul>
+<p>THE INSTRUCTION IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Intr0c
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">How to use mnemonic seed phrase for your wallet.dat file</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#best-practice">Best practice</a></li>
+<li><a class="reference internal" href="#create-a-wallet-with-mnemonic-seed-phrase">Create a wallet with mnemonic seed phrase</a><ul>
+<li><a class="reference internal" href="#generate-a-mnemonic-seed-phrase">1. Generate a mnemonic seed phrase</a></li>
+<li><a class="reference internal" href="#converting-the-words-into-wallet-import-format-wif">2. Converting the words into Wallet import format (WIF)</a></li>
+<li><a class="reference internal" href="#creating-a-blank-wallet">3. Creating a blank wallet</a></li>
+<li><a class="reference internal" href="#importing-the-wif-into-the-newly-created-blank-wallet">4. Importing the WIF into the newly created blank wallet</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#recover-a-wallet-with-mnemonic-seed-phrase">Recover a wallet with mnemonic seed phrase</a><ul>
+<li><a class="reference internal" href="#follow-steps-from-above">1. Follow steps from above</a></li>
+<li><a class="reference internal" href="#rescanblockchain">2. Rescanblockchain</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#disclaimer">Disclaimer</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/tabs.js"></script>
+    </body>
+</html>
