@@ -28,7 +28,7 @@ class Masternode:
         """
         Creates a transaction resigning your masternode.
 
-        :param masternodeId: (required) masternodeId: txid of the creation of the masternode
+        :param masternodeId: (required) txid of the creation of the masternode
         :type masternodeId: str
         :param inputs: (optional) Inputs
         :type inputs: TxInput
@@ -36,5 +36,25 @@ class Masternode:
         """
 
         defiTx = ResignMasternode(masternodeId)
+        return self._builder.build_defiTx(0, defiTx, inputs)
+
+    def updatemasternode(self, masternodeId: str, ownerAddress: str = None, operatorAddress: str = None,
+                         rewardAddress: str = None, inputs=[]) -> Transaction:
+        """
+        Creates a transaction to change owner, operator or reward address of a masternode.
+
+        :param masternodeId: (required) txid of the creation of the masternode
+        :type masternodeId: str
+        :param ownerAddress: (optional) new owner address
+        :type ownerAddress: str
+        :param operatorAddress: (optional) new operator address
+        :type operatorAddress: str
+        :param rewardAddress: (optional) new reward address
+        :type rewardAddress: str
+        :param inputs:(optional) Inputs
+        :type inputs: TxInput
+        :return: Transaction
+        """
+        defiTx = UpdateMasternode(masternodeId, ownerAddress, operatorAddress, rewardAddress)
         return self._builder.build_defiTx(0, defiTx, inputs)
 
