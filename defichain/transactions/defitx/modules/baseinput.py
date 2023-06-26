@@ -5,6 +5,7 @@ from defichain.exceptions.transactions import AddressError
 from defichain.transactions.utils import Token, Verify, BuildAddressAmounts
 from defichain.transactions.address import Address
 from defichain.transactions.utils import Converter, Calculate
+from defichain.transactions.constants import AddressTypes
 
 
 class BaseInput(ABC):
@@ -167,9 +168,11 @@ class ScriptBalances(BaseInput):
 
         for _ in range(numberOfReceivers):
             length_addressTo = Converter.hex_to_int(hex[position: position + 2]) * 2
-            numberOfAmounts = Converter.hex_to_int(hex[position + 2 + length_addressTo: position + 2 + length_addressTo + 2])
+            numberOfAmounts = Converter.hex_to_int(
+                hex[position + 2 + length_addressTo: position + 2 + length_addressTo + 2])
 
-            scriptBalance = ScriptBalances.deserialize(network, hex[position: position + 2 + length_addressTo + 2 + numberOfAmounts * TokenBalanceInt32.estimated_size()])
+            scriptBalance = ScriptBalances.deserialize(network, hex[
+                                                                position: position + 2 + length_addressTo + 2 + numberOfAmounts * TokenBalanceInt32.estimated_size()])
             scriptBalances.append(scriptBalance)
 
             position += 2 + length_addressTo + 2 + numberOfAmounts * TokenBalanceInt32.estimated_size()
@@ -213,4 +216,67 @@ class ScriptBalances(BaseInput):
 
     def get_bytes_script(self) -> bytes:
         return Converter.hex_to_bytes(self.get_script())
+
+
+class MasternodeUpdates(BaseInput):
+    """
+    Update Types: 1 byte, 1 = OwnerAddress, 2 = OperatorAddress, 3 = SetRewardAddress, 4 = RemRewardAddress
+    Address Types: 1 byte, 1 = p2pkh, 4 = p2wpkh, 0 to remove reward address
+    """
+
+    @staticmethod
+    def deserialize(network: Any, hex: str):
+        pass
+
+    def __init__(self, updateType: int, address: str):
+        self._updateType, self._address, self._addressType = None, None, None
+        self.set_updateType(updateType)
+        self.set_address(address)
+
+    def __bytes__(self) -> bytes:
+        # Convert to Bytes
+        updateType = Converter.int_to_bytes(self.get_updateType(), 1)
+        addressType = Converter.int_to_bytes(self._addressType, 1)
+        if self.get_address() == "":
+            addressPubKeyHash = Converter.hex_to_bytes("")
+        else:
+            addressPubKeyHash = Converter.hex_to_bytes(Address.from_address(self.get_address()).get_publicKeyHash())
+
+        sizeAddressPubKeyHash = Converter.int_to_bytes(len(addressPubKeyHash), 1)
+
+        # Build UpdateMasternodeDefiTx
+        result = updateType
+        result += addressType
+        result += sizeAddressPubKeyHash
+        result += addressPubKeyHash
+
+        return result
+
+    # Get Information
+    def get_updateType(self) -> int:
+        return self._updateType
+
+    def get_address(self) -> str:
+        return self._address
+
+    def get_addressType(self) -> int:
+        return self._addressType
+
+    # Set Information
+    def set_updateType(self, updateType: int):
+        self._updateType = updateType
+
+    def set_address(self, address: str):
+        if address == "":
+            self._addressType = 0
+            self._address = address
+        else:
+            addressType = Address.from_address(address).get_addressType()
+            if addressType == AddressTypes.P2PKH:
+                self._addressType = 1
+            elif addressType == AddressTypes.P2WPKH:
+                self._addressType = 4
+            else:
+                raise AddressError("Only P2PKH and P2WPKH can be used to update the masternode")
+            self._address = address
 

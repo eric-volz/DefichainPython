@@ -58,6 +58,8 @@ class DefiTx:
             return CreateMasternode.deserialize(network, hex[position:])
         elif DefiTxType.OP_DEFI_TX_RESIGN_MASTER_NODE == defiTxType:
             return ResignMasternode.deserialize(network, hex[position:])
+        elif DefiTxType.OP_DEFI_TX_UPDATE_MASTER_NODE == defiTxType:
+            return UpdateMasternode.deserialize(network, hex[position:])
 
         # Pool
         elif DefiTxType.OP_DEFI_TX_POOL_SWAP == defiTxType:
