@@ -135,7 +135,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -268,14 +268,219 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="utils">
-<span id="hdwallet-utils"></span><h1>Utils<a class="headerlink" href="#utils" title="Permalink to this heading">#</a></h1>
+          <section id="module-defichain.hdwallet.utils">
+<span id="utils"></span><span id="hdwallet-utils"></span><h1>Utils<a class="headerlink" href="#module-defichain.hdwallet.utils" title="Permalink to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="defichain.hdwallet.utils.generate_passphrase">
+<span class="sig-prename descclassname"><span class="pre">defichain.hdwallet.utils.</span></span><span class="sig-name descname"><span class="pre">generate_passphrase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">32</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.hdwallet.utils.generate_passphrase" title="Permalink to this definition">#</a></dt>
+<dd><p>Generate entropy hex string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>length</strong> (<em>int</em>) – Passphrase length, default to 32.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>str – Passphrase hex string.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.hdwallet.utils</span> <span class="kn">import</span> <span class="n">generate_passphrase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">generate_passphrase</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+<span class="go">&quot;N39rPfa3QvF2Tm2nPyoBpXNiBFXJywTz&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="defichain.hdwallet.utils.generate_entropy">
+<span class="sig-prename descclassname"><span class="pre">defichain.hdwallet.utils.</span></span><span class="sig-name descname"><span class="pre">generate_entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">128</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.hdwallet.utils.generate_entropy" title="Permalink to this definition">#</a></dt>
+<dd><p>Generate entropy hex string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>strength</strong> (<em>int</em>) – Entropy strength, default to 128.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>str – Entropy hex string.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.hdwallet.utils</span> <span class="kn">import</span> <span class="n">generate_entropy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">generate_entropy</span><span class="p">(</span><span class="n">strength</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+<span class="go">&quot;ee535b143b0d9d1f87546f9df0d06b1a&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="defichain.hdwallet.utils.generate_mnemonic">
+<span class="sig-prename descclassname"><span class="pre">defichain.hdwallet.utils.</span></span><span class="sig-name descname"><span class="pre">generate_mnemonic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'english'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">256</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.hdwallet.utils.generate_mnemonic" title="Permalink to this definition">#</a></dt>
+<dd><p>Generate mnemonic words.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>language</strong> (<em>str</em>) – Mnemonic language, default to english.</p></li>
+<li><p><strong>strength</strong> (<em>int</em>) – Entropy strength, default to 128.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>str – Mnemonic words.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.hdwallet.utils</span> <span class="kn">import</span> <span class="n">generate_mnemonic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">generate_mnemonic</span><span class="p">(</span><span class="n">language</span><span class="o">=</span><span class="s2">&quot;french&quot;</span><span class="p">)</span>
+<span class="go">&quot;sceptre capter séquence girafe absolu relatif fleur zoologie muscle sirop saboter parure&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="defichain.hdwallet.utils.is_entropy">
+<span class="sig-prename descclassname"><span class="pre">defichain.hdwallet.utils.</span></span><span class="sig-name descname"><span class="pre">is_entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entropy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#defichain.hdwallet.utils.is_entropy" title="Permalink to this definition">#</a></dt>
+<dd><p>Check entropy hex string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>entropy</strong> (<em>str</em>) – entropy.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool – Entropy valid/invalid.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.hdwallet.utils</span> <span class="kn">import</span> <span class="n">is_entropy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_entropy</span><span class="p">(</span><span class="n">entropy</span><span class="o">=</span><span class="s2">&quot;ee535b143b0d9d1f87546f9df0d06b1a&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="defichain.hdwallet.utils.is_mnemonic">
+<span class="sig-prename descclassname"><span class="pre">defichain.hdwallet.utils.</span></span><span class="sig-name descname"><span class="pre">is_mnemonic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mnemonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#defichain.hdwallet.utils.is_mnemonic" title="Permalink to this definition">#</a></dt>
+<dd><p>Check mnemonic words.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mnemonic</strong> (<em>str</em>) – Mnemonic words.</p></li>
+<li><p><strong>language</strong> (<em>str</em>) – Mnemonic language, default to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool – Mnemonic valid/invalid.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.hdwallet.utils</span> <span class="kn">import</span> <span class="n">is_mnemonic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">&quot;sceptre capter séquence girafe absolu relatif fleur zoologie muscle sirop saboter parure&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="defichain.hdwallet.utils.get_entropy_strength">
+<span class="sig-prename descclassname"><span class="pre">defichain.hdwallet.utils.</span></span><span class="sig-name descname"><span class="pre">get_entropy_strength</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entropy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#defichain.hdwallet.utils.get_entropy_strength" title="Permalink to this definition">#</a></dt>
+<dd><p>Get entropy strength.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>entropy</strong> (<em>str</em>) – Entropy hex string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>int – Entropy strength.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.hdwallet.utils</span> <span class="kn">import</span> <span class="n">get_entropy_strength</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_entropy_strength</span><span class="p">(</span><span class="n">entropy</span><span class="o">=</span><span class="s2">&quot;ee535b143b0d9d1f87546f9df0d06b1a&quot;</span><span class="p">)</span>
+<span class="go">128</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="defichain.hdwallet.utils.get_mnemonic_strength">
+<span class="sig-prename descclassname"><span class="pre">defichain.hdwallet.utils.</span></span><span class="sig-name descname"><span class="pre">get_mnemonic_strength</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mnemonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#defichain.hdwallet.utils.get_mnemonic_strength" title="Permalink to this definition">#</a></dt>
+<dd><p>Get mnemonic strength.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mnemonic</strong> (<em>str</em>) – Mnemonic words.</p></li>
+<li><p><strong>language</strong> (<em>str</em>) – Mnemonic language, default to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>int – Mnemonic strength.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.hdwallet.utils</span> <span class="kn">import</span> <span class="n">get_mnemonic_strength</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_mnemonic_strength</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">&quot;sceptre capter séquence girafe absolu relatif fleur zoologie muscle sirop saboter parure&quot;</span><span class="p">)</span>
+<span class="go">128</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="defichain.hdwallet.utils.get_mnemonic_language">
+<span class="sig-prename descclassname"><span class="pre">defichain.hdwallet.utils.</span></span><span class="sig-name descname"><span class="pre">get_mnemonic_language</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mnemonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.hdwallet.utils.get_mnemonic_language" title="Permalink to this definition">#</a></dt>
+<dd><p>Get mnemonic language.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mnemonic</strong> (<em>str</em>) – Mnemonic words.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>str – Mnemonic language.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.hdwallet.utils</span> <span class="kn">import</span> <span class="n">get_mnemonic_language</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_mnemonic_language</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">&quot;sceptre capter séquence girafe absolu relatif fleur zoologie muscle sirop saboter parure&quot;</span><span class="p">)</span>
+<span class="go">&quot;french&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="defichain.hdwallet.utils.entropy_to_mnemonic">
+<span class="sig-prename descclassname"><span class="pre">defichain.hdwallet.utils.</span></span><span class="sig-name descname"><span class="pre">entropy_to_mnemonic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entropy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'english'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.hdwallet.utils.entropy_to_mnemonic" title="Permalink to this definition">#</a></dt>
+<dd><p>Get mnemonic from entropy hex string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>entropy</strong> (<em>str</em>) – Entropy hex string.</p></li>
+<li><p><strong>language</strong> (<em>str</em>) – Mnemonic language, default to english.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>str – Mnemonic words.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.hdwallet.utils</span> <span class="kn">import</span> <span class="n">entropy_to_mnemonic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entropy_to_mnemonic</span><span class="p">(</span><span class="n">entropy</span><span class="o">=</span><span class="s2">&quot;ee535b143b0d9d1f87546f9df0d06b1a&quot;</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;korean&quot;</span><span class="p">)</span>
+<span class="go">&quot;학력 외침 주민 스위치 출연 연습 근본 여전히 울음 액수 귀신 마누라&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="defichain.hdwallet.utils.mnemonic_to_entropy">
+<span class="sig-prename descclassname"><span class="pre">defichain.hdwallet.utils.</span></span><span class="sig-name descname"><span class="pre">mnemonic_to_entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mnemonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.hdwallet.utils.mnemonic_to_entropy" title="Permalink to this definition">#</a></dt>
+<dd><p>Get entropy from mnemonic words.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mnemonic</strong> (<em>str</em>) – Mnemonic words.</p></li>
+<li><p><strong>language</strong> (<em>str</em>) – Mnemonic language, default to english.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>str – Enropy hex string.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.hdwallet.utils</span> <span class="kn">import</span> <span class="n">mnemonic_to_entropy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mnemonic_to_entropy</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">&quot;학력 외침 주민 스위치 출연 연습 근본 여전히 울음 액수 귀신 마누라&quot;</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;korean&quot;</span><span class="p">)</span>
+<span class="go">&quot;ee535b143b0d9d1f87546f9df0d06b1a&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
         </article>
@@ -321,8 +526,36 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Utils</a><ul>
+<li><a class="reference internal" href="#defichain.hdwallet.utils.generate_passphrase"><code class="docutils literal notranslate"><span class="pre">generate_passphrase()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.hdwallet.utils.generate_entropy"><code class="docutils literal notranslate"><span class="pre">generate_entropy()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.hdwallet.utils.generate_mnemonic"><code class="docutils literal notranslate"><span class="pre">generate_mnemonic()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.hdwallet.utils.is_entropy"><code class="docutils literal notranslate"><span class="pre">is_entropy()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.hdwallet.utils.is_mnemonic"><code class="docutils literal notranslate"><span class="pre">is_mnemonic()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.hdwallet.utils.get_entropy_strength"><code class="docutils literal notranslate"><span class="pre">get_entropy_strength()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.hdwallet.utils.get_mnemonic_strength"><code class="docutils literal notranslate"><span class="pre">get_mnemonic_strength()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.hdwallet.utils.get_mnemonic_language"><code class="docutils literal notranslate"><span class="pre">get_mnemonic_language()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.hdwallet.utils.entropy_to_mnemonic"><code class="docutils literal notranslate"><span class="pre">entropy_to_mnemonic()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.hdwallet.utils.mnemonic_to_entropy"><code class="docutils literal notranslate"><span class="pre">mnemonic_to_entropy()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

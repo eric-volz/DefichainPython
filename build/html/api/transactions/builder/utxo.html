@@ -135,7 +135,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -268,7 +268,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -276,6 +276,67 @@
         <article role="main">
           <section id="utxo">
 <span id="builder-utxo"></span><h1>UTXO<a class="headerlink" href="#utxo" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.transactions.builder.modules.UTXO">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.transactions.builder.modules.</span></span><span class="sig-name descname"><span class="pre">UTXO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">builder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.transactions.builder.modules.UTXO" title="Permalink to this definition">#</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="defichain.transactions.builder.modules.UTXO.send">
+<span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addressTo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">changeAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Transaction</span></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.UTXO.send" title="Permalink to this definition">#</a></dt>
+<dd><p>Sends the specified amount of UTXO to the specified address. Returns the remaining UTXO from the input to the
+sender address if not changed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>float</em><em> | </em><em>int</em>) – (required) amount of UTXO to send</p></li>
+<li><p><strong>addressTo</strong> (<em>str</em>) – (required) address to send the UTXO to</p></li>
+<li><p><strong>changeAddress</strong> (<em>str</em>) – (optional) address to which the remaining UTXO should be sent</p></li>
+<li><p><strong>inputs</strong> (<em>TxInputs</em>) – (optional) Inputs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Transaction</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.transactions.builder.modules.UTXO.sendall">
+<span class="sig-name descname"><span class="pre">sendall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addressTo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Transaction</span></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.UTXO.sendall" title="Permalink to this definition">#</a></dt>
+<dd><p>Sends all UTXO to the specified address</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addressTo</strong> (<em>str</em>) – (required) address to send the UTXO to</p></li>
+<li><p><strong>inputs</strong> (<em>TxInput</em>) – (optional) Inputs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Transaction</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.transactions.builder.modules.UTXO.sendmany">
+<span class="sig-name descname"><span class="pre">sendmany</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addressAmountTo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">changeAddress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Transaction</span></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.UTXO.sendmany" title="Permalink to this definition">#</a></dt>
+<dd><p>Sends the specified amount of UTXO to the specified addresses. Returns the remaining UTXO from the input to the
+sender address if not changed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addressAmountTo</strong> (<em>json string</em>) – (required) AddressAmount</p></li>
+<li><p><strong>changeAddress</strong> (<em>str</em>) – (required) address to which the remaining UTXO should be sent</p></li>
+<li><p><strong>inputs</strong> (<em>TxInput</em>) – (optional) Inputs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Transaction</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
         </article>
@@ -321,8 +382,32 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">UTXO</a><ul>
+<li><a class="reference internal" href="#defichain.transactions.builder.modules.UTXO"><code class="docutils literal notranslate"><span class="pre">UTXO</span></code></a><ul>
+<li><a class="reference internal" href="#defichain.transactions.builder.modules.UTXO.send"><code class="docutils literal notranslate"><span class="pre">UTXO.send()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.transactions.builder.modules.UTXO.sendall"><code class="docutils literal notranslate"><span class="pre">UTXO.sendall()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.transactions.builder.modules.UTXO.sendmany"><code class="docutils literal notranslate"><span class="pre">UTXO.sendmany()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

@@ -135,7 +135,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -268,7 +268,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -276,6 +276,80 @@
         <article role="main">
           <section id="node">
 <span id="node-node"></span><h1>Node<a class="headerlink" href="#node" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.Node">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'127.0.0.1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">8554</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wallet_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wallet_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wallet_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wallet_timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'http'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../logger.html#defichain.logger.Logger" title="defichain.logger.Logger"><span class="pre">Logger</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.Node" title="Permalink to this definition">#</a></dt>
+<dd><p>This is the main interface to communicate with your Defichain Node.</p>
+<p>User and password are required to connect to the node and can be found in defi.conf.
+Before returning a node object, the connection to the node is tested via ping.</p>
+<p>If your wallet is already imported use: wallet_name to specify to use this wallet.
+if your wallet is not imported use: wallet_path to import the wallet and use it.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user</strong> (<em>str</em>) – (required) user witch is set in your defi.conf</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – (required) password witch is set in your defi.conf</p></li>
+<li><p><strong>url</strong> (<em>str</em>) – (optional) the url or ip at which your node can be reached (default=localhost)</p></li>
+<li><p><strong>port</strong> (<em>int</em>) – (optional) the port at which your node can be reached (default=8554)</p></li>
+<li><p><strong>wallet_name</strong> (<em>str</em>) – (optional) if your wallet is already imported, enter the name here (default=””)</p></li>
+<li><p><strong>wallet_path</strong> (<em>str</em>) – (optional) if your wallet is not imported you can specify the path here:
+it will be imported and becomes usable under the same parameter</p></li>
+<li><p><strong>wallet_password</strong> (<em>str</em>) – (optional) password for wallet if it needs to be decrypted (default=””)</p></li>
+<li><p><strong>wallet_timeout</strong> (<em>int</em>) – (optional) time to elapse after the wallet is locked again (default=60)</p></li>
+<li><p><strong>protocol</strong> (<em>str</em>) – (optional) the protocol which is used for the request (default=http)</p></li>
+<li><p><strong>logger</strong> (<a class="reference internal" href="../logger.html#logger"><span class="std std-ref">Logger</span></a>) – (optional) Logger Object</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Node (object) The object to interact with your Defichain Node</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8554</span><span class="p">,</span> <span class="n">wallet_name</span><span class="o">=</span><span class="s2">&quot;myWallet&quot;</span><span class="p">,</span> <span class="n">wallet_password</span><span class="o">=</span><span class="s2">&quot;yourPassword&quot;</span><span class="p">,</span> <span class="n">wallet_timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blockcount</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">blockchain</span><span class="o">.</span><span class="n">getblockcount</span><span class="p">()</span>  <span class="c1">#  returns block height of the latest block</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">blockcount</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Node.decrypt_wallet">
+<span class="sig-name descname"><span class="pre">decrypt_wallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wallet_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wallet_timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.Node.decrypt_wallet" title="Permalink to this definition">#</a></dt>
+<dd><p>Decrypts wallet for a specific time if a password is given</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wallet_password</strong> (<em>str</em>) – wallet password</p></li>
+<li><p><strong>wallet_timeout</strong> (<em>int</em>) – time to elapse until wallet is locked again</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Node.load_wallet">
+<span class="sig-name descname"><span class="pre">load_wallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wallet_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.Node.load_wallet" title="Permalink to this definition">#</a></dt>
+<dd><p>Loads wallet into the Node</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>wallet_path</strong> (<em>str</em>) – Path where the wallet is located in the filesystem</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Node.test_connection">
+<span class="sig-name descname"><span class="pre">test_connection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defichain.Node.test_connection" title="Permalink to this definition">#</a></dt>
+<dd><p>Tests Connection to Defichain Node and raises ServiceUnavailable exception if no connection occurred</p>
+<dl class="field-list simple">
+<dt class="field-odd">Exception<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ServiceUnavailable</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
         </article>
@@ -321,8 +395,32 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Node</a><ul>
+<li><a class="reference internal" href="#defichain.Node"><code class="docutils literal notranslate"><span class="pre">Node</span></code></a><ul>
+<li><a class="reference internal" href="#defichain.Node.decrypt_wallet"><code class="docutils literal notranslate"><span class="pre">Node.decrypt_wallet()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.Node.load_wallet"><code class="docutils literal notranslate"><span class="pre">Node.load_wallet()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.Node.test_connection"><code class="docutils literal notranslate"><span class="pre">Node.test_connection()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

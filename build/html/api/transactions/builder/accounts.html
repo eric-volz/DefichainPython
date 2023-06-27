@@ -135,7 +135,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -268,7 +268,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -276,6 +276,66 @@
         <article role="main">
           <section id="accounts">
 <span id="builder-accounts"></span><h1>Accounts<a class="headerlink" href="#accounts" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.transactions.builder.modules.Accounts">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.transactions.builder.modules.</span></span><span class="sig-name descname"><span class="pre">Accounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">builder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.transactions.builder.modules.Accounts" title="Permalink to this definition">#</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="defichain.transactions.builder.modules.Accounts.utxostoaccount">
+<span class="sig-name descname"><span class="pre">utxostoaccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Transaction</span></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.Accounts.utxostoaccount" title="Permalink to this definition">#</a></dt>
+<dd><p>Converts UTXOs to token</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>address</strong> (<em>str</em>) – (required) the address of the account to be converted from</p></li>
+<li><p><strong>value</strong> (<em>int</em><em> | </em><em>float</em>) – (required) the amount of UTXOs to convert to token</p></li>
+<li><p><strong>tokenId</strong> (<em>int</em>) – (optional) the token id of the converted token (default: 0 -&gt; DFI)</p></li>
+<li><p><strong>inputs</strong> (<em>TxInput</em>) – (optional) Inputs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Transaction</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.transactions.builder.modules.Accounts.accounttoutxos">
+<span class="sig-name descname"><span class="pre">accounttoutxos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addressFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addressAmountTo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.transactions.builder.modules.Accounts.accounttoutxos" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates s transaction to convert tokens into utxos</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addressFrom</strong> (<em>str</em>) – (required) the defi address of sender</p></li>
+<li><p><strong>addressAmountTo</strong> – (required) AddressAmount</p></li>
+<li><p><strong>inputs</strong> (<em>TxInput</em>) – (optional) Inputs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Transaction</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.transactions.builder.modules.Accounts.accounttoaccount">
+<span class="sig-name descname"><span class="pre">accounttoaccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addressFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addressAmountTo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Transaction</span></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.Accounts.accounttoaccount" title="Permalink to this definition">#</a></dt>
+<dd><p>Sends token from one address to another address</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addressFrom</strong> (<em>str</em>) – (required) address from which the tokens should be sent</p></li>
+<li><p><strong>addressAmountTo</strong> (<em>addressAmount</em>) – (required) addressAmount</p></li>
+<li><p><strong>inputs</strong> (<em>TxInput</em>) – (optional) Inputs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Transaction</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
         </article>
@@ -321,8 +381,32 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Accounts</a><ul>
+<li><a class="reference internal" href="#defichain.transactions.builder.modules.Accounts"><code class="docutils literal notranslate"><span class="pre">Accounts</span></code></a><ul>
+<li><a class="reference internal" href="#defichain.transactions.builder.modules.Accounts.utxostoaccount"><code class="docutils literal notranslate"><span class="pre">Accounts.utxostoaccount()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.transactions.builder.modules.Accounts.accounttoutxos"><code class="docutils literal notranslate"><span class="pre">Accounts.accounttoutxos()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.transactions.builder.modules.Accounts.accounttoaccount"><code class="docutils literal notranslate"><span class="pre">Accounts.accounttoaccount()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

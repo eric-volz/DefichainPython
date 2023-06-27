@@ -289,6 +289,116 @@
 <span class="go">True</span>
 </pre></div>
 </div>
+<span class="target" id="module-defichain.mnemonic"></span><dl class="py class">
+<dt class="sig sig-object py" id="defichain.mnemonic.Mnemonic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.mnemonic.</span></span><span class="sig-name descname"><span class="pre">Mnemonic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'english'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.mnemonic.Mnemonic" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates a mnemonic instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>language</strong> (<em>str</em>) – (optional) language of the mnemonic seed: english, chinese_simplified, chinese_traditional, french,
+italian, japanese, korean, spanish</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Mnemonic – Mnemonic instance.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Mnemonic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Mnemonic</span><span class="p">(</span><span class="n">language</span><span class="o">=</span><span class="s2">&quot;english&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.mnemonic.Mnemonic.list_languages">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">list_languages</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#defichain.mnemonic.Mnemonic.list_languages" title="Permalink to this definition">#</a></dt>
+<dd><p>List all languages for mnemonic seed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(array) languages</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Mnemonic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Mnemonic</span><span class="o">.</span><span class="n">list_languages</span><span class="p">()</span>
+<span class="go">[&#39;korean&#39;, &#39;japanese&#39;, &#39;chinese_simplified&#39;, &#39;english&#39;, &#39;french&#39;, &#39;italian&#39;, &#39;chinese_traditional&#39;, &#39;spanish&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.mnemonic.Mnemonic.detect_language">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">detect_language</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mnemonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.mnemonic.Mnemonic.detect_language" title="Permalink to this definition">#</a></dt>
+<dd><p>Scan the Mnemonic until the language becomes unambiguous</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mnemonic</strong> (<em>str</em>) – (required) the mnemonic seed</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(string) language of the mnemonic seed</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Mnemonic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mnemonic</span> <span class="o">=</span> <span class="n">Mnemonic</span><span class="p">(</span><span class="n">language</span><span class="o">=</span><span class="s2">&quot;english&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Mnemonic</span><span class="o">.</span><span class="n">detect_language</span><span class="p">(</span><span class="n">mnemonic</span><span class="p">)</span>
+<span class="go">&quot;english&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.mnemonic.Mnemonic.generate">
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">256</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.mnemonic.Mnemonic.generate" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a new mnemonic using a random generated number as entropy.</p>
+<p>As defined in BIP39, the entropy must be a multiple of 32 bits, and its size must be between 128 and 256 bits.
+Therefore the possible values for <cite>strength</cite> are 128, 160, 192, 224 and 256.</p>
+<p>If not provided, the default entropy length will be set to 128 bits.</p>
+<p>The return is a list of words that encodes the generated entropy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>strength</strong> (<em>int</em>) – (optional) Number of bytes used as entropy</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(string) A randomly generated mnemonic</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Mnemonic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mnemonic</span> <span class="o">=</span> <span class="n">Mnemonic</span><span class="p">(</span><span class="n">language</span><span class="o">=</span><span class="s2">&quot;english&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mnemonic</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+<span class="go">&quot;shoulder unusual practice sight apart course eager true diesel rescue diagram denial oppose total fun rocket spend chapter spider paddle benefit empower type purse&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.mnemonic.Mnemonic.check">
+<span class="sig-name descname"><span class="pre">check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mnemonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#defichain.mnemonic.Mnemonic.check" title="Permalink to this definition">#</a></dt>
+<dd><p>Checks if the mnemonic seed is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mnemonic</strong> (<em>str</em>) – (required) mnemonic seed</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Mnemonic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mn</span> <span class="o">=</span> <span class="n">Mnemonic</span><span class="p">(</span><span class="n">language</span><span class="o">=</span><span class="s2">&quot;english&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span> <span class="o">=</span> <span class="n">mn</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mn</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 </section>
 
@@ -348,7 +458,16 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Mnemonic</a><ul>
-<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#example">Example</a><ul>
+<li><a class="reference internal" href="#defichain.mnemonic.Mnemonic"><code class="docutils literal notranslate"><span class="pre">Mnemonic</span></code></a><ul>
+<li><a class="reference internal" href="#defichain.mnemonic.Mnemonic.list_languages"><code class="docutils literal notranslate"><span class="pre">Mnemonic.list_languages()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.mnemonic.Mnemonic.detect_language"><code class="docutils literal notranslate"><span class="pre">Mnemonic.detect_language()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.mnemonic.Mnemonic.generate"><code class="docutils literal notranslate"><span class="pre">Mnemonic.generate()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.mnemonic.Mnemonic.check"><code class="docutils literal notranslate"><span class="pre">Mnemonic.check()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
