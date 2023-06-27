@@ -7,6 +7,8 @@ from ecdsa.ecdsa import int_to_string, string_to_int
 from binascii import hexlify, unhexlify
 
 from defichain.mnemonic import Mnemonic
+from defichain.hdwallet.encrypt import AESCipher
+from defichain.networks import DefichainMainnet, DefichainTestnet
 from hashlib import sha256
 from typing import Optional, Any, Union
 
@@ -16,6 +18,7 @@ import struct
 import unicodedata
 import hashlib
 import base58
+import json
 
 from defichain.libs.ripemd160 import ripemd160
 from defichain.libs.ecc import S256Point, G
@@ -26,7 +29,7 @@ from defichain.networks.networks import Network
 
 from .derivations import Derivation
 
-from defichain.exceptions.hdwallet.DerivationError import DerivationError
+from defichain.exceptions.hdwallet import DerivationError, NetworkError, WalletError
 
 from .utils import (
     get_bytes, is_entropy, is_mnemonic, get_entropy_strength, _unhexlify,
@@ -55,6 +58,70 @@ class Wallet:
 
     :returns: Wallet -- Hierarchical Deterministic Wallet instance.
     """
+
+    @staticmethod
+    def decrypt(passphrase: str, data: str = None, filename: str = None) -> "Wallet":
+        """
+        Decrypt a wallet, witch is stored as a string
+
+        >>> from defichain import Wallet
+        >>> from defichain.networks import DefichainMainnet
+        >>> Wallet.decrypt("password", filename="wallet.hd")
+
+        :param passphrase: (required) the passphrase / key to decrypt the data
+        :type passphrase: str
+        :param data: (optional) encrypted data
+        :type data: str
+        :param filename: (optional) filename, where the encrypted data is stored
+        :type filename: str
+        :return: Wallet
+        """
+        # Decryption module
+        aes = AESCipher(passphrase)
+
+        # Check if only one attribute is specified
+        if data and filename:
+            raise AttributeError("Only one of the parameters may be given: data or filename")
+
+        # Copy data from file if specified
+        if filename:
+            with open(filename, "r") as f:
+                data = f.read()
+
+        # Decrypt
+        wallet_data = json.loads(aes.decrypt(data))
+
+        # Select Network
+        networkType = wallet_data.get("network")
+        if networkType == "mainnet":
+            network = DefichainMainnet
+        elif networkType == "testnet":
+            network = DefichainTestnet
+        else:
+            raise NotImplementedError("Only defichain mainnet and testnet is supported")
+
+        # Build Wallet
+        language = wallet_data.get("language")
+        wallet_passphrase = wallet_data.get("passphrase")
+
+        wallet = Wallet(network)
+
+        if wallet_data.get("entropy"):
+            wallet.from_entropy(entropy=wallet_data.get("entropy"), language=language, passphrase=wallet_passphrase)
+        elif wallet_data.get("mnemonic"):
+            wallet.from_mnemonic(mnemonic=wallet_data.get("mnemonic"), language=language, passphrase=wallet_passphrase)
+        elif wallet_data.get("seed"):
+            wallet.from_seed(wallet_data.get("seed"))
+        elif wallet_data.get("wif"):
+            wallet.from_wif(wallet_data.get("wif"))
+        elif wallet_data.get("private_key"):
+            wallet.from_private_key(wallet_data.get("private_key"))
+        elif wallet_data.get("public_key"):
+            wallet.from_public_key(wallet_data.get("public_key"))
+        else:
+            raise WalletError("The necessary information to restore the wallet is not given")
+
+        return wallet
 
     def __init__(self, network: Any, semantic: Optional[str] = None, use_default_path: bool = True):
         self._cryptocurrency: Any = None
@@ -1244,6 +1311,21 @@ class Wallet:
             _unhexlify(self._cryptocurrency.WIF_SECRET_KEY) + self._key.to_string() + b"\x01") if self._key else None
 
     def get_account(self, index: int = 0, prefix: str = "m/1129/0/0/"):
+        """
+        Returns the account of the specified prefix and index
+
+        >>> from defichain import Wallet
+        >>> from defichain.networks import DefichainMainnet
+        >>> wallet = Wallet(network=DefichainMainnet)
+        >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
+        >>> wallet.get_account(0)
+
+        :param index: (optional) number of account
+        :type index: int
+        :param prefix: (optional) prefix from which the account is to be derived
+        :type prefix: str
+        :return: Account
+        """
         from .account import Account
         previousPath = self.path()
         path = prefix + str(index)
@@ -1258,6 +1340,30 @@ class Wallet:
         if self.seed():
             self.from_path(previousPath)
         return acc
+
+    def encrypt(self, passphrase: str, filename: str = None) -> str:
+        """
+        Encrypts the wallet into a string
+
+        >>> from defichain import Wallet
+        >>> from defichain.networks import DefichainMainnet
+        >>> wallet = Wallet(network=DefichainMainnet)
+        >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
+        >>> wallet.encrypt("password")
+
+        :param passphrase: (required) the passphrase / key to encrypt the data
+        :type passphrase: str
+        :param filename: (required) filename, where the encrypted data should be stored
+        :type filename: str
+        :return: str -- encrypted string
+        """
+        aes = AESCipher(passphrase)
+        e = aes.encrypt(json.dumps(self.dumps()))
+
+        if filename:
+            with open(filename, "w") as f:
+                f.write(e)
+        return e
 
     def dumps(self) -> dict:
         """
