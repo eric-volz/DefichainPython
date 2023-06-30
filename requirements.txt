@@ -2,3 +2,4 @@ requests>=2.31.0
 six>=1.16.0
 ecdsa>=0.18.0
 base58>=2.1.1
+pycryptodome>=3.18.0
