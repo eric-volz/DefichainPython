@@ -293,6 +293,29 @@
 </dd>
 </dl>
 <dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.decrypt">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decrypt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">passphrase</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#defichain.Wallet" title="defichain.hdwallet.wallet.Wallet"><span class="pre">Wallet</span></a></span></span><a class="headerlink" href="#defichain.Wallet.decrypt" title="Permalink to this definition">#</a></dt>
+<dd><p>Decrypt a wallet, witch is stored as a string</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Wallet</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;wallet.hd&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>passphrase</strong> (<em>str</em>) – (required) the passphrase / key to decrypt the data</p></li>
+<li><p><strong>data</strong> (<em>str</em>) – (optional) encrypted data</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – (optional) filename, where the encrypted data is stored</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Wallet</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="defichain.Wallet.from_entropy">
 <span class="sig-name descname"><span class="pre">from_entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entropy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'english'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">passphrase</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#defichain.Wallet" title="defichain.hdwallet.wallet.Wallet"><span class="pre">Wallet</span></a></span></span><a class="headerlink" href="#defichain.Wallet.from_entropy" title="Permalink to this definition">#</a></dt>
 <dd><p>Master from Entropy hex string.</p>
@@ -1104,6 +1127,54 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.get_account">
+<span class="sig-name descname"><span class="pre">get_account</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'m/1129/0/0/'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.Wallet.get_account" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the account of the specified prefix and index</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">&quot;venture fitness paper little blush april rigid where find volcano fetch crack label polar dash&quot;</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">&quot;password&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">get_account</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<em>int</em>) – (optional) number of account</p></li>
+<li><p><strong>prefix</strong> (<em>str</em>) – (optional) prefix from which the account is to be derived</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Account</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.Wallet.encrypt">
+<span class="sig-name descname"><span class="pre">encrypt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">passphrase</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.Wallet.encrypt" title="Permalink to this definition">#</a></dt>
+<dd><p>Encrypts the wallet into a string</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">&quot;venture fitness paper little blush april rigid where find volcano fetch crack label polar dash&quot;</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">&quot;password&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>passphrase</strong> (<em>str</em>) – (required) the passphrase / key to encrypt the data</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – (required) filename, where the encrypted data should be stored</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>str – encrypted string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="defichain.Wallet.dumps">
 <span class="sig-name descname"><span class="pre">dumps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#defichain.Wallet.dumps" title="Permalink to this definition">#</a></dt>
 <dd><p>Get All Wallet imformations.</p>
@@ -1184,6 +1255,7 @@
             <ul>
 <li><a class="reference internal" href="#">Wallet</a><ul>
 <li><a class="reference internal" href="#defichain.Wallet"><code class="docutils literal notranslate"><span class="pre">Wallet</span></code></a><ul>
+<li><a class="reference internal" href="#defichain.Wallet.decrypt"><code class="docutils literal notranslate"><span class="pre">Wallet.decrypt()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.Wallet.from_entropy"><code class="docutils literal notranslate"><span class="pre">Wallet.from_entropy()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.Wallet.from_mnemonic"><code class="docutils literal notranslate"><span class="pre">Wallet.from_mnemonic()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.Wallet.from_seed"><code class="docutils literal notranslate"><span class="pre">Wallet.from_seed()</span></code></a></li>
@@ -1222,6 +1294,8 @@
 <li><a class="reference internal" href="#defichain.Wallet.p2wpkh_address"><code class="docutils literal notranslate"><span class="pre">Wallet.p2wpkh_address()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.Wallet.p2wpkh_in_p2sh_address"><code class="docutils literal notranslate"><span class="pre">Wallet.p2wpkh_in_p2sh_address()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.Wallet.wif"><code class="docutils literal notranslate"><span class="pre">Wallet.wif()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.Wallet.get_account"><code class="docutils literal notranslate"><span class="pre">Wallet.get_account()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.Wallet.encrypt"><code class="docutils literal notranslate"><span class="pre">Wallet.encrypt()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.Wallet.dumps"><code class="docutils literal notranslate"><span class="pre">Wallet.dumps()</span></code></a></li>
 </ul>
 </li>
