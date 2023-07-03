@@ -15,7 +15,6 @@ import sys
 from typing import Any, Dict
 sys.path.insert(0, os.path.abspath('../..'))
 
-
 # -- Project information -----------------------------------------------------
 
 project = 'DefichainPython'
@@ -23,7 +22,8 @@ copyright = '2023, Intr0c'
 author = 'Intr0c'
 
 # The full version, including alpha/beta/rc tags
-release = 'v3.0.0b2'
+from setup import VERSION
+release = 'v' + VERSION
 
 
 # -- General configuration ---------------------------------------------------
