@@ -24,7 +24,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -e git+https://github.com/eric-volz/DefichainPython#egg=defichain
+          pip install defichain == 3.0.0b3
       - name: Execute Script
         run: |
           cd defichain/transactions/constants
