@@ -11,7 +11,7 @@ address = load_secrets_conf()["wallet_address"]
 vault = load_secrets_conf()["vault_address"]
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_createloanscheme():  # 01
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
@@ -25,7 +25,7 @@ def test_createloanscheme():  # 01
         assert node.loan.createloanscheme(mincolratio=100, interestrate=10, id="MIN100", inputs=[])
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_destroyloanscheme():  # 02
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
@@ -85,7 +85,7 @@ def test_listloantokens():  # 10
     assert node.loan.listloantokens()
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_paybackloan():  # 11
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
@@ -133,7 +133,7 @@ def test_setloantoken():  # 14
                                       interest=0, inputs=[])
 
 
-@pytest.mark.transactions
+@pytest.mark.tx
 def test_takeloan():  # 15
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
