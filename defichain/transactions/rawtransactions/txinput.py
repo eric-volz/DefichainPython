@@ -213,8 +213,10 @@ class TxP2PKHInput(TxInput):
     :type txid: str
     :param vout: (required) previous transaction output number
     :type vout: int
-    :param scriptSig: (optional) signature of P2PKH input
-    :type scriptSig: str
+    :param address: (optional) address from which the UTXO are spend - (required for signing of the input)
+    :type address: str
+    :param value: (optional) previous transaction output value
+    :type value: int
     :param sequence: (optional) makes input replaceable when not "ffffffff"
     :type sequence: str
     """
@@ -222,11 +224,15 @@ class TxP2PKHInput(TxInput):
     @staticmethod
     def deserialize(network: Any, hex: str) -> "TxP2PKHInput":
         input = TxBaseInput.deserialize(network, hex)
+        address = ""
+
+        # Checks if inputs has a script signature and extracts address
         if input.get_scriptSig() != "":
             if len(input.get_scriptSig()) < 214:
                 raise DeserializeError("The given input to decode is not an p2pkh input")
-        publicKey = input.get_scriptSig()[-66:]
-        address = PublicKey(network, publicKey).p2pkh_address()
+            publicKey = input.get_scriptSig()[-66:]
+            address = PublicKey(network, publicKey).p2pkh_address()
+
         resultInput = TxP2PKHInput(input.get_txid(), input.get_vout(), address, input.get_value(), input.get_sequence())
         resultInput.set_scriptSig(input.get_scriptSig())
         return resultInput
