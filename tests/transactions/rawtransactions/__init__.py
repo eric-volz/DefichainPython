@@ -25,8 +25,22 @@ class TestInputs:
     P2WPKH_Input_Serialized = "061ca2791086a0df7c4786bbf16b933873d47ef0029ea539ce7e23d398fcbc3d0100000000ffffffff"
 
 
+class TestOutputs:
+    VALUE: int = 500
+    DATA: str = "#ROADTO50"
+    Data_Output_Serialized: str = "00000000000000000b6a0923524f4144544f353000"
 
-_p2wpkhAddressOutput = TxAddressOutput(500, "df1q29x7wpn8flcqgscre4xfjgp99mppcmaus83uzt")
+    DefiTx = UtxosToAccount("df1q29x7wpn8flcqgscre4xfjgp99mppcmaus83uzt", 1)
+    DefiTx_Serialized: str = "6a2a446654785501160014514de706674ff0044303cd4c9920252ec21c6fbc01000000000100000000000000"  # UtxoToAccount DefiTx
+    DefiTx_Output_Serialized: str = "01000000000000002c6a2a446654785501160014514de706674ff0044303cd4c9920252ec21c6fbc" \
+                                    "0100000000010000000000000000"
+
+    P2PKH_Address_Output = TxAddressOutput(VALUE, Addresses.P2PKH)
+    P2PKH_Address_Output_Serialized = "f4010000000000001976a9145720415061b4e2feb76eebcb3a9940ae4413373588ac00"
+    P2SH_Address_Output = TxAddressOutput(VALUE, Addresses.P2SH)
+    P2SH_Address_Output_Serialized = "f40100000000000017a914453dfd6b24118d99ec767d3b6188dce50e6705b38700"
+    P2WPKH_Address_Output = TxAddressOutput(VALUE, Addresses.P2WPKH)
+    P2WPKH_Address_Output_Serialized = "f401000000000000160014514de706674ff0044303cd4c9920252ec21c6fbc00"
 
 
 class TestFee:

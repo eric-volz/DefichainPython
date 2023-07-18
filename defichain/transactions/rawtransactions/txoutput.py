@@ -188,6 +188,14 @@ class TxAddressOutput(TxOutput):
 
 
 class TxDataOutput(TxOutput):
+    """
+    An output witch includes a data.
+
+    :param data: (required) your data in hex encoding
+    :type data: str
+    :param tokenId: (optional) which token you want to send (almost always 0 -> stands for DFI)
+    :type tokenId: int
+    """
 
     @staticmethod
     def deserialize(network: Any, hex: str) -> "TxDataOutput":
@@ -202,14 +210,6 @@ class TxDataOutput(TxOutput):
         return txDataOutput
 
     def __init__(self, data: str, tokenId: int = 0):
-        """
-        An output witch includes a data.
-
-        :param data: (required) your data in hex encoding
-        :type data: str
-        :param tokenId: (optional) which token you want to send (almost always 0 -> stands for DFI)
-        :type tokenId: int
-        """
         self._data = None
         self.set_data(data)
         super().__init__(0, self.get_script(), tokenId)
