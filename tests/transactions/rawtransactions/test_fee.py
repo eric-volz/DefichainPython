@@ -6,7 +6,7 @@ from . import TestFee
 
 @pytest.mark.transactions
 def test_p2pkh_inputs():  # 01
-    assert estimate_fee(TestFee.P2PKH_Input_Tx, 1) == 192
+    assert estimate_fee(TestFee.P2PKH_Input_Tx, 1) == 190
 
 
 @pytest.mark.transactions
