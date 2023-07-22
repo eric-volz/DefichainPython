@@ -1128,7 +1128,7 @@ class Wallet:
         >>> wallet.default_address()
         "dKYzYQDmN9TFEdZy46mFtStbqYLnougqzY"
         """
-        return self.p2wpkh_in_p2sh_address()
+        return self.p2sh_address()
 
     def legacy_address(self) -> str:
         """
@@ -1225,7 +1225,7 @@ class Wallet:
             return None
         return ensure_string(encode(self._cryptocurrency.SEGWIT_ADDRESS.HRP, 0, public_key_hash))
 
-    def p2wpkh_in_p2sh_address(self) -> Optional[str]:
+    def p2sh_address(self) -> Optional[str]:
         """
         Get P2WPKH nested in P2SH address.
 
@@ -1236,7 +1236,7 @@ class Wallet:
         >>> wallet = Wallet(network=DefichainMainnet)
         >>> wallet.from_mnemonic(mnemonic="venture fitness paper little blush april rigid where find volcano fetch crack label polar dash", passphrase="password")
         >>> wallet.from_path(path="m/1129/0/0/0")
-        >>> wallet.p2wpkh_in_p2sh_address()
+        >>> wallet.p2sh_address()
         "dKYzYQDmN9TFEdZy46mFtStbqYLnougqzY"
         """
 
@@ -1411,6 +1411,6 @@ class Wallet:
             addresses=dict(
                 legacy=self.p2pkh_address(),
                 bech32=self.p2wpkh_address(),
-                default=self.p2wpkh_in_p2sh_address()
+                default=self.p2sh_address()
             )
         )
