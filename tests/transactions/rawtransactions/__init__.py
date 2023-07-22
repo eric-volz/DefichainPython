@@ -67,3 +67,14 @@ class TestFee:
 
     P2PKH_and_P2SH_and_P2WPKH_Input_Tx = Transaction([TestInputs.P2PKH_Input, TestInputs.P2SH_Input,
                                                       TestInputs.P2WPKH_Input], [TestOutputs.P2WPKH_Address_Output])
+
+
+class TestSign:
+    Data: str = "#ROADTO50"
+    SigHash: int = 1
+    DataBytes: bytes = Converter.hex_to_bytes(Converter.str_to_hex(Data))
+    SigHashBytes: bytes = Converter.int_to_bytes(SigHash, 4)
+    LegacySignature: str = "3045022100e5249785adcb636419f09eee671140dc849d9a1dc66ea53f0d99c638cf43124a0220013527b7da" \
+                           "35e20f7810632f9e2e1baae4062ca96fc25fbc94127294d2be9d9e01"
+    SegwitSignature: str = "304402200eb225e931074883443b7d02ff85312fd5c323ac7ea22180d88b951ff93b627002200b21bde8faa0" \
+                           "8971435b94342d119343c43fadb42163f1f09f95a621f4d89afe01"
