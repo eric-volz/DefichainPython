@@ -1087,8 +1087,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="defichain.Wallet.p2wpkh_in_p2sh_address">
-<span class="sig-name descname"><span class="pre">p2wpkh_in_p2sh_address</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.Wallet.p2wpkh_in_p2sh_address" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="defichain.Wallet.p2sh_address">
+<span class="sig-name descname"><span class="pre">p2sh_address</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.Wallet.p2sh_address" title="Permalink to this definition">#</a></dt>
 <dd><p>Get P2WPKH nested in P2SH address.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -1100,7 +1100,7 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">DefichainMainnet</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="s2">&quot;venture fitness paper little blush april rigid where find volcano fetch crack label polar dash&quot;</span><span class="p">,</span> <span class="n">passphrase</span><span class="o">=</span><span class="s2">&quot;password&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;m/1129/0/0/0&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">p2wpkh_in_p2sh_address</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">p2sh_address</span><span class="p">()</span>
 <span class="go">&quot;dKYzYQDmN9TFEdZy46mFtStbqYLnougqzY&quot;</span>
 </pre></div>
 </div>
@@ -1292,7 +1292,7 @@
 <li><a class="reference internal" href="#defichain.Wallet.bech32_address"><code class="docutils literal notranslate"><span class="pre">Wallet.bech32_address()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.Wallet.p2pkh_address"><code class="docutils literal notranslate"><span class="pre">Wallet.p2pkh_address()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.Wallet.p2wpkh_address"><code class="docutils literal notranslate"><span class="pre">Wallet.p2wpkh_address()</span></code></a></li>
-<li><a class="reference internal" href="#defichain.Wallet.p2wpkh_in_p2sh_address"><code class="docutils literal notranslate"><span class="pre">Wallet.p2wpkh_in_p2sh_address()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.Wallet.p2sh_address"><code class="docutils literal notranslate"><span class="pre">Wallet.p2sh_address()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.Wallet.wif"><code class="docutils literal notranslate"><span class="pre">Wallet.wif()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.Wallet.get_account"><code class="docutils literal notranslate"><span class="pre">Wallet.get_account()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.Wallet.encrypt"><code class="docutils literal notranslate"><span class="pre">Wallet.encrypt()</span></code></a></li>
