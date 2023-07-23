@@ -48,7 +48,7 @@ class Account:
         return self._wallet.wif()
 
     def get_p2sh(self):
-        return self._wallet.p2wpkh_in_p2sh_address()
+        return self._wallet.p2sh_address()
 
     def get_p2pkh(self):
         return self._wallet.p2pkh_address()
