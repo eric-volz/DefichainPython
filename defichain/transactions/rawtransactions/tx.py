@@ -81,22 +81,27 @@ class BaseTransaction(TxBase, ABC):
     def get_fee(self) -> "int | None":
         return self.get_inputsValue() - self.get_outputsValue() if self.get_inputsValue() is not None else None
 
-    def get_unspent(self) -> [TxInput]:
+    def get_unspent(self, p2wpkh_for_p2sh_input: [] = None) -> [TxInput]:
         outputs = self.get_outputs()
         unspent = []
-        vout = 0
-        for output in outputs:
-            if isinstance(output, TxAddressOutput):
-                addressType = Address.from_address(output.get_address()).get_addressType()
+        for vout in range(len(outputs)):
+            if isinstance(outputs[vout], TxAddressOutput):
+                addressType = Address.from_address(outputs[vout].get_address()).get_addressType()
 
                 if addressType == AddressTypes.P2PKH:
-                    unspent.append(TxP2PKHInput(self.get_txid(), vout))
+                    unspent.append(TxP2PKHInput(self.get_txid(), vout, outputs[vout].get_address(),
+                                                outputs[vout].get_value()))
                 elif addressType == AddressTypes.P2SH:
-                    unspent.append(TxP2SHInput(self.get_txid(), vout, output.get_address(), output.get_value()))
+                    if not isinstance(p2wpkh_for_p2sh_input, list):
+                        raise TypeError("The addresses must be passed via a list")
+                    if not p2wpkh_for_p2sh_input:
+                        raise RawTransactionError("To create the unspents, you need to provide the corresponding P2WPKH"
+                                                  " address for the P2SH address.")
+                    unspent.append(TxP2SHInput(self.get_txid(), vout, p2wpkh_for_p2sh_input.pop(),
+                                               outputs[vout].get_value()))
                 elif addressType == AddressTypes.P2WPKH:
-                    unspent.append(TxP2WPKHInput(self.get_txid(), vout, output.get_address(), output.get_value()))
-
-            vout += 1
+                    unspent.append(TxP2WPKHInput(self.get_txid(), vout, outputs[vout].get_address(),
+                                                 outputs[vout].get_value()))
         return unspent
 
     # Get Information
