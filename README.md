@@ -7,7 +7,7 @@
 
 # [DefichainPython](https://github.com/eric-volz/DefichainPython)
 
-This library is a community funded project. The objective is to interact with the defichain as effortlessly as possible, 
+This library is a community funded project. The objective is to interact with the defichain blockchain as effortlessly as possible, 
 utilizing a variety of methods:
 
 1. __[Node / RPC](#node--rpc)__
