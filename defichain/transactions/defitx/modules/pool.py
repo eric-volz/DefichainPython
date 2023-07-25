@@ -436,11 +436,3 @@ class RemovePoolLiquidity(BaseDefiTx):
 
     def set_amount(self, amount: str):
         self._amount = amount
-
-
-class CreatePoolPair(BaseDefiTx):
-    pass
-
-
-class UpdatePoolPair(BaseDefiTx):
-    pass
