@@ -94,7 +94,7 @@ Install the beta package from PyPi.
 
 .. code-block:: python
 
-    pip install defichain==3.0.0b2
+    pip install defichain==3.0.0b3
 
 Building Raw Transaction
 ------------------------
