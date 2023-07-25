@@ -36,6 +36,7 @@ extensions = [
     'sphinx_mdinclude',
     'sphinx_inline_tabs',
     'sphinxemoji.sphinxemoji',
+    'sphinx_copybutton',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -55,7 +56,7 @@ autodoc_member_order = "bysource"
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-#html_theme = 'alabaster'
+# html_theme = 'alabaster'
 html_theme = 'furo'
 html_title = f"DefichainPython {release}"
 language = "en"
