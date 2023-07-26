@@ -7,6 +7,14 @@ from .basedefitx import BaseDefiTx
 from ..builddefitx import BuildDefiTx
 
 
+class SetGovernance(BaseDefiTx):
+    pass
+
+
+class SetGovernanceHeight(BaseDefiTx):
+    pass
+
+
 class CreateCfp(BaseDefiTx):
     pass
 
