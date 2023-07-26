@@ -3,9 +3,6 @@ from defichain.networks import DefichainMainnet
 from defichain import Wallet
 from defichain.transactions.utils import BuildAddressAmounts
 
-from defichain.transactions.defitx import DefiTx, UtxosToAccount, AccountToUtxos, AccountToAccount, AnyAccountToAccount, \
-    SetFutureSwap
-
 
 class Keys:
     mnemonic = "zone myth seat market badge hamster puppy worry mind attend heavy churn upgrade heart scan address " \
@@ -56,3 +53,16 @@ class TestAccounts:
     account_to_account_p2wpkh_serialized: str = "6a4c5c4466547842160014ad56321e69b7e2d30aeca9f49979ffc53084296f011976" \
                                                 "a914ad56321e69b7e2d30aeca9f49979ffc53084296f88ac03000000000100000000" \
                                                 "000000020000000100000000000000710000000100000000000000"
+
+
+class TestGovernance:
+    proposalId: str = "1f4039ab714cf73ff1d92b58608ed20a73a799cde88c103b679bdafd83eb472b"
+    masternodeId: str = "d590154d5b106d910cfc07850830b2ddd6f12094d89c2ed69a6e1a836ec7a0fd"
+    decision: () = ("yes", "No", "neutral")
+
+    vote_yes_serialized: str = "6a46446654784f2b47eb83fdda9b673b108ce8cd99a7730ad28e60582bd9f13ff74c71ab39401ffda0c76" \
+                               "e831a6e9ad62e9cd89420f1d6ddb230088507fc0c916d105b4d1590d501"
+    vote_no_serialized: str = "6a46446654784f2b47eb83fdda9b673b108ce8cd99a7730ad28e60582bd9f13ff74c71ab39401ffda0c76e" \
+                              "831a6e9ad62e9cd89420f1d6ddb230088507fc0c916d105b4d1590d502"
+    vote_neutral_serialized: str = "6a46446654784f2b47eb83fdda9b673b108ce8cd99a7730ad28e60582bd9f13ff74c71ab39401ffda" \
+                                   "0c76e831a6e9ad62e9cd89420f1d6ddb230088507fc0c916d105b4d1590d503"
