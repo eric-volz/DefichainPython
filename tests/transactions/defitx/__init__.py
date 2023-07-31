@@ -109,3 +109,31 @@ class TestMasternode:
     update_masternode_serialized: str = "6a4c6b446654786d9655130b555f62765f37db18d3f289855f0acfd121005d7b3303be51f115" \
                                         "599903010114a386a4920ac131a0f506dea101d9f4a699f0da49020114a9d692734b0130b71f" \
                                         "39d1705aca21868b4950e403041462bedabefef5f52260ec388e5bfd023a97779d89"
+
+
+class TestPool:
+    addressFrom: str = Addresses.P2WPKH
+    tokenFrom: str = "BTC"
+    amountFrom: int = 1000
+    addressTo: str = Addresses.P2PKH
+    tokenTo: str = 0
+    tokenTo2: str = 66
+    maxPrice: int = 999999999
+    pools: [] = ["BTC-DFI", "DFI-DUSD", "DUSD-MSTR"]
+
+    poolswap_serialized: str = "6a4c504466547873160014ad56321e69b7e2d30aeca9f49979ffc53084296f02e8030000000000001976a" \
+                               "914ad56321e69b7e2d30aeca9f49979ffc53084296f88ac000900000000000000ffe0f50500000000"
+    compositeswap_serialized: str = "6a4c544466547869160014ad56321e69b7e2d30aeca9f49979ffc53084296f02e803000000000000" \
+                                    "1976a914ad56321e69b7e2d30aeca9f49979ffc53084296f88ac420900000000000000ffe0f50500" \
+                                    "00000003051147"
+
+    addressAmount: {} = {Addresses.P2WPKH: ["100000000@DFI", "1070@BTC"]}
+
+    addpoolliquidity_serialized: str = "6a4c4d446654786c01160014ad56321e69b7e2d30aeca9f49979ffc53084296f020000000000e" \
+                                       "1f50500000000020000002e04000000000000160014ad56321e69b7e2d30aeca9f49979ffc530" \
+                                       "84296f"
+
+    removeAmount = "1@BTC-DFI"
+
+    removepoolliquidity_serialized: str = "6a254466547872160014ad56321e69b7e2d30aeca9f49979ffc53084296f05010000000000" \
+                                          "0000"
