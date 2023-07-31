@@ -91,3 +91,21 @@ class TestLoans:
     paybackloan_p2wpkh_serialized: str = "6a4c5544665478480032782da0c785ac0909384d2df9e78982c89830c973fc2a4d6fc14c13e" \
                                          "539ce160014ad56321e69b7e2d30aeca9f49979ffc53084296f024200000001000000000000" \
                                          "00710000000100000000000000"
+
+
+class TestMasternode:
+    mn_id: str = "995915f151be03337b5d0021d1cf0a5f8589f2d318db375f76625f550b135596"
+    operatorAddress: str = "8WZsy6xubp4sn3CiMBQCz6CzBN3JdtpVNj"
+    ownerAddress: str = "8VzWANbjh6GUZ48xorXuLg1ygh81w8ZSD9"
+    rewardAddress: str = "df1qv2ld40h77h6jyc8v8z89hlgz82th08vfdvece3"
+    timeLock: () = (0, 5, 10)
+
+    create_massternode_timelock_0_serialized: str = "6a1a446654784301a9d692734b0130b71f39d1705aca21868b4950e4"
+    create_massternode_timelock_5_serialized: str = "6a1c446654784301a9d692734b0130b71f39d1705aca21868b4950e40401"
+    create_massternode_timelock_10_serialized: str = "6a1c446654784301a9d692734b0130b71f39d1705aca21868b4950e40802"
+
+    resign_masternode_serialized: str = "6a2544665478529655130b555f62765f37db18d3f289855f0acfd121005d7b3303be51f1155999"
+
+    update_masternode_serialized: str = "6a4c6b446654786d9655130b555f62765f37db18d3f289855f0acfd121005d7b3303be51f115" \
+                                        "599903010114a386a4920ac131a0f506dea101d9f4a699f0da49020114a9d692734b0130b71f" \
+                                        "39d1705aca21868b4950e403041462bedabefef5f52260ec388e5bfd023a97779d89"
