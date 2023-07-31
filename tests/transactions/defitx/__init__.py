@@ -137,3 +137,22 @@ class TestPool:
 
     removepoolliquidity_serialized: str = "6a254466547872160014ad56321e69b7e2d30aeca9f49979ffc53084296f05010000000000" \
                                           "0000"
+
+
+class TestVaults:
+    ownerAddress: str = Addresses.P2WPKH
+    schemeId: str = "MIN150"
+
+    createvault_serialized: str = "6a234466547856160014ad56321e69b7e2d30aeca9f49979ffc53084296f064d494e313530"
+
+    vaultId: str = "5cbe99407674a689fa9b8a522462b7a4b3e7893f61453ce3fa77f1307f7d0600"
+    addressFrom: str = Addresses.P2WPKH
+    amount: str = "1@DUSD"
+
+    deposittovault_serialized: str = "6a45446654785300067d7f30f177fae33c45613f89e7b3a4b76224528a9bfa89a674764099be5c1" \
+                                     "60014ad56321e69b7e2d30aeca9f49979ffc53084296f0f0100000000000000"
+
+    addressTo: str = Addresses.P2WPKH
+
+    withdrawfromvault_serialized: str = "6a45446654784a00067d7f30f177fae33c45613f89e7b3a4b76224528a9bfa89a674764099be" \
+                                        "5c160014ad56321e69b7e2d30aeca9f49979ffc53084296f0f0100000000000000"
