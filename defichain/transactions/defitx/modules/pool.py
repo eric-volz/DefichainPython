@@ -61,7 +61,7 @@ class PoolSwap(BaseDefiTx):
 
         return PoolSwap(addressFrom.get_address(), tokenFrom, amountFrom, addressTo.get_address(), tokenTo, maxPrice)
 
-    def __init__(self, addressFrom: str, tokenFrom: int, amountFrom: int, addressTo: str, tokenTo: int,
+    def __init__(self, addressFrom: str, tokenFrom: "int | str", amountFrom: int, addressTo: str, tokenTo: "int | str",
                  maxPrice: int):
 
         self._addressFrom, self._tokenFrom, self._amountFrom, self._addressTo, self._tokenTo, self._maxPrice = None, \
@@ -206,8 +206,8 @@ class CompositeSwap(PoolSwap):
         return CompositeSwap(poolSwap.get_addressFrom(), poolSwap.get_tokenFrom(), poolSwap.get_amountFrom(),
                              poolSwap.get_addressTo(), poolSwap.get_tokenTo(), poolSwap.get_maxPrice(), pools)
 
-    def __init__(self, addressFrom: str, tokenFrom: int, amountFrom: int, addressTo: str, tokenTo: int, maxPrice: int,
-                 pools: [str]):
+    def __init__(self, addressFrom: str, tokenFrom: "int | str", amountFrom: int, addressTo: str,
+                 tokenTo: "int | str", maxPrice: int, pools: [str]):
         super().__init__(addressFrom, tokenFrom, amountFrom, addressTo, tokenTo, maxPrice)
         self._pools = None
         self.set_pools(pools)
