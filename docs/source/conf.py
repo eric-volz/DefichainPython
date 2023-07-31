@@ -69,4 +69,4 @@ html_static_path = ["_static"]
 html_theme_options = {
     "announcement": "",
 }
-html_favicon = 'logo/defichainpython-logo-small.png'
+html_favicon = 'logo/logo.png'
