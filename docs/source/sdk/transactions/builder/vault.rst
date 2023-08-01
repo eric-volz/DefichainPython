@@ -1,10 +1,10 @@
-.. _Builder Loans:
+.. _Transaction Builder Vault:
 
 .. automodule:: defichain.transactions.builder.modules
     :noindex:
 
-Loans
+Vault
 -----
 
-.. autoclass:: Loans
+.. autoclass:: Vault
     :members:

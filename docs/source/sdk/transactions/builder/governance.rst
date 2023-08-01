@@ -1,10 +1,10 @@
-.. _Builder Accounts:
+.. _Transaction Builder Governance:
 
 .. automodule:: defichain.transactions.builder.modules
     :noindex:
 
-Accounts
---------
+Governance
+----------
 
-.. autoclass:: Accounts
+.. autoclass:: Governance
     :members:

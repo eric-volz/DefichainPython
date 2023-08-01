@@ -1,10 +1,10 @@
-.. _Builder UTXO:
+.. _Transaction Builder Pool:
 
 .. automodule:: defichain.transactions.builder.modules
     :noindex:
 
-UTXO
+Pool
 ----
 
-.. autoclass:: UTXO
+.. autoclass:: Pool
     :members:

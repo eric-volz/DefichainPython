@@ -1,14 +1,12 @@
 .. include:: ../../README.rst
 
 .. toctree::
-    :caption: Instructions
     :hidden:
     :maxdepth: 1
 
     instructions/quickstart
     instructions/progressAndUpdates
-    instructions/rawMethodsOverview
-    additional/index
+    guides/index
 
 .. toctree::
     :caption: API
@@ -16,11 +14,21 @@
 
     api/node/index
     api/ocean/index
-    api/hdwallet/index
-    api/transactions/index
-    api/logger
-    api/mnemonic
     api/exceptions
+
+.. toctree::
+    :caption: SDK
+    :hidden:
+
+    sdk/hdwallet/index
+    sdk/transactions/index
+
+.. toctree::
+    :caption: Utils
+    :hidden:
+
+    utils/logger
+    utils/mnemonic
 
 .. toctree::
     :caption: Legal

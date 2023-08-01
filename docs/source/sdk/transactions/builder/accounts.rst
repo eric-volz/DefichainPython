@@ -1,10 +1,10 @@
-.. _Builder Masternode:
+.. _Transaction Builder Accounts:
 
 .. automodule:: defichain.transactions.builder.modules
     :noindex:
 
-Masternode
-----------
+Accounts
+--------
 
-.. autoclass:: Masternode
+.. autoclass:: Accounts
     :members:

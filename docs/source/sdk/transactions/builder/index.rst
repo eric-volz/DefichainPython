@@ -11,6 +11,8 @@ Builder Modules
 
     txbuilder
     accounts
+    data
+    governance
     loans
     masternode
     pool

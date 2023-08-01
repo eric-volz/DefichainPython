@@ -1,10 +1,10 @@
-.. _Builder Pool:
+.. _Transaction Builder Data:
 
 .. automodule:: defichain.transactions.builder.modules
     :noindex:
 
-Pool
+Data
 ----
 
-.. autoclass:: Pool
+.. autoclass:: Data
     :members:

@@ -146,7 +146,7 @@ You can also use no data source. But then you have to provide the needed informa
 2. Transaction Builder
 ______________________
 
-The :ref:`transaction builder <Builder TxBuilder>` is the hart of the hole implementation. It creates transactions for the specified address and
+The :ref:`transaction builder <Transaction Builder TxBuilder>` is the hart of the hole implementation. It creates transactions for the specified address and
 is thereby using the corresponding account to sign the transaction and the data source to query all needed data.
 
 .. code-block:: python

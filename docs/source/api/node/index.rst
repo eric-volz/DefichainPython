@@ -13,7 +13,7 @@ It offers other possibilities, such as automatically importing and using a
 wallet or decrypting a password-protected wallet.
 
 All individual methods are assigned to specific modules.
-These modules match the ones that are output by the :ref:`help method<instruction rawMethodsOverview>`.
+These modules match the ones that are output by the :ref:`help method<Node RawMethodsOverview>`.
 For example, the getblockcount method belongs to the blockchain
 module and the compositeswap method belongs to the poolpair module.
 
@@ -24,7 +24,7 @@ You can find more explanations :ref:`below <Node requestStructure>`
 
     If you want to log all requests and results, you can use the new :ref:`Logger` Class.
 
-Node Modules
+Node Modules 
 ------------
 
 .. toctree::
@@ -51,6 +51,12 @@ Node Modules
     wallet
     zmq
 
+.. toctree::
+    :maxdepth: 1
+    :hidden:
+
+    rawMethodsOverview
+
 .. _Node requestStructure:
 
 Request Structure
@@ -74,7 +80,7 @@ Example:
     node.blockchain.getblockcount()
 
 If you are not sure in which module your method is located, use the search function
-in the upper left corner or look in the :ref:`instruction rawMethodsOverview`
+in the upper left corner or look in the :ref:`Node RawMethodsOverview`
 
 Default Inputs
 --------------

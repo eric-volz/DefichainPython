@@ -1,4 +1,4 @@
-.. _Builder TxBuilder:
+.. _Transaction Builder TxBuilder:
 
 .. automodule:: defichain.transactions.builder
     :noindex:
