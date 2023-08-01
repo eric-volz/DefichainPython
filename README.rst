@@ -1,13 +1,15 @@
-|PyPI Version| |PyPI Python Version| |Downloads|
+.. image:: https://raw.githubusercontent.com/eric-volz/DefichainPython/docs/rework/docs/source/logo/readme/defichainpython-logo-big.png
+    :align: center
+    :alt: DefichainPython Logo
 
+\
+
+|PyPI Version| |PyPI Python Version| |Downloads|
 |Build and Deploy Documentation to GitHub Pages| |Tests|
 
-`DefichainPython <https://github.com/eric-volz/DefichainPython>`__
-==================================================================
-
 This library is a community funded project. The objective is to interact
-with the defichain blockchain as effortlessly as possible, utilizing a
-variety of methods:
+with the defichain blockchain as effortlessly as possible. This can be archived by
+utilizing a variety of methods:
 
 1. `Node / RPC <#node--rpc>`__
 2. `Ocean <#ocean>`__
