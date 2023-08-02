@@ -14,7 +14,7 @@ this_directory = path.abspath(path.dirname(__file__))
 
 
 def long_description():
-    with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    with open(path.join(this_directory, 'README.rst'), encoding='utf-8') as f:
         LONG_DESCRIPTION = f.read()
     return LONG_DESCRIPTION
 
@@ -35,7 +35,6 @@ if __name__ == "__main__":
         url="https://github.com/eric-volz/DefichainPython",
         description=DESCRIPTION,
         long_description=long_description(),
-        long_description_content_type='text/markdown',
         packages=["defichain"] + ["defichain." + package for package in find_packages(where="defichain")],
         package_data={'': ['*.txt', '*.json']},
         install_requires=requirements(),

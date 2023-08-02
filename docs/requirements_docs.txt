@@ -4,3 +4,4 @@ furo>=2022.4.7
 sphinx_mdinclude>=0.5.1
 sphinx_inline_tabs>=2022.1.2b11
 sphinxemoji>=0.2.0
+requests

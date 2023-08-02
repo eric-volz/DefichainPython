@@ -450,9 +450,9 @@ class Transaction(BaseTransaction):
         :param network: (required) the corresponding network from the raw transaction
         :type network: Network
         :param private_keys: (required) a list of private keys. If there is only one private key in the list, it will
-        be used to sign all inputs of the transaction. If you have inputs witch use different private keys, provide a
-        separate private key for every input in the list. The private keys have to be provided in the same
-        order as the inputs
+            be used to sign all inputs of the transaction. If you have inputs witch use different private keys, provide a
+            separate private key for every input in the list. The private keys have to be provided in the same
+            order as the inputs
         :type private_keys: [str]
         :return: Transaction
         """

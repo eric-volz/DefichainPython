@@ -51,7 +51,7 @@ class Masternode:
         :type operatorAddress: str
         :param rewardAddress: (optional) new reward address
         :type rewardAddress: str
-        :param inputs:(optional) Inputs
+        :param inputs: (optional) Inputs
         :type inputs: TxInput
         :return: Transaction
         """
