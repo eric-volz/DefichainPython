@@ -5,7 +5,9 @@
 \
 
 |PyPI Version| |PyPI Python Version| |Downloads|
-|Build and Deploy Documentation to GitHub Pages| |Tests|
+|Docs Build| |Tests|
+
+|Telegram Group| |Twitter / X|
 
 This library is a community funded project. The objective is to interact
 with the defichain blockchain as effortlessly as possible. This can be archived by
@@ -171,18 +173,20 @@ takeloan, …) for mainnet and testnet.
 `Community <https://docs.defichain-python.de/build/html/legal/community.html>`__
 --------------------------------------------------------------------------------
 
-This `project <https://github.com/DeFiCh/dfips/issues/133>`__ is funded
-by the Defichain Community: Thank you for your trust! If you have
-suggestions for improvement or other ideas open an
-`issue <https://github.com/eric-volz/DefichainPython/issues>`__, write
-me on `Twitter <https://twitter.com/Intr0c>`__ or via email
-(introc@volz.link)!
+This `project <https://github.com/eric-volz/DefichainPython>`_ is funded by the Defichain Community:
+
+**Thank you for your trust!**
+
+If you have suggestions for improvement or other ideas open an
+`issue <https://github.com/eric-volz/DefichainPython/issues>`_, write me on
+`Twitter / X <https://twitter.com/defichainpython>`_ or via email (`defichainpython@volz.link <defichainpython@volz.link>`_)!
+
+
 
 `License & Disclaimer <https://docs.defichain-python.de/build/html/legal/licenseAndDisclaimer.html>`__
 ------------------------------------------------------------------------------------------------------
 
-By using (this repo), you (the user) agree to be bound by the `terms of
-this
+By using (this repo), you (the user) agree to be bound by the `terms of this
 license <https://github.com/eric-volz/defichainLibrary/blob/main/LICENSE>`__
 (MIT License).
 
@@ -192,7 +196,11 @@ license <https://github.com/eric-volz/defichainLibrary/blob/main/LICENSE>`__
    :target: https://pypi.org/project/defichain
 .. |Downloads| image:: https://static.pepy.tech/personalized-badge/defichain?period=total&units=international_system&left_color=grey&right_color=green&left_text=Downloads
    :target: https://pepy.tech/project/defichain
-.. |Build and Deploy Documentation to GitHub Pages| image:: https://github.com/eric-volz/DefichainPython/actions/workflows/publish_docs.yml/badge.svg
+.. |Docs Build| image:: https://github.com/eric-volz/DefichainPython/actions/workflows/publish_docs.yml/badge.svg
    :target: https://github.com/eric-volz/DefichainPython/actions/workflows/publish_docs.yml
 .. |Tests| image:: https://github.com/eric-volz/DefichainPython/actions/workflows/tests.yml/badge.svg
    :target: https://github.com/eric-volz/DefichainPython/actions/workflows/tests.yml
+.. |Telegram Group| image:: https://img.shields.io/badge/Telegram-Group-blue.svg?style=flat-square
+   :target: https://t.me/DefichainPython
+.. |Twitter / X| image:: https://img.shields.io/badge/Twitter / X-@DefichainPython-lightblue.svg?style=flat-square
+   :target: https://twitter.com/defichainpython
