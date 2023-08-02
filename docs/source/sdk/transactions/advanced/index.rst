@@ -10,4 +10,5 @@ Advanced
     defitx/index
     rawtransactions/index
     remotedata/index
+    keys
     utils
