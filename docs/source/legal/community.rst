@@ -3,13 +3,13 @@
 Community
 =========
 
-This `project <https://github.com/DeFiCh/dfips/issues/133>`_ is funded by the Defichain Community:
+This `project <https://github.com/eric-volz/DefichainPython>`_ is funded by the Defichain Community:
 
-Thank you for your trust!
+**Thank you for your trust!**
 
 If you have suggestions for improvement or other ideas open an
 `issue <https://github.com/eric-volz/DefichainPython/issues>`_, write me on
-`Twitter <https://twitter.com/Intr0c>`_ or via email (`introc@volz.link <introc@volz.link>`_)!
+`Twitter <https://twitter.com/defichainpython>`_ or via email (`defichainpython@volz.link <defichainpython@volz.link>`_)!
 
 Telegram
 --------
@@ -52,8 +52,8 @@ Twitter
     <a class="twitter-timeline" href="https://twitter.com/DefichainPython?ref_src=twsrc%5Etfw">Tweets by DefichainPython</a>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-Resources
----------
+Community Resources
+-------------------
 .. tab:: Announcements
 
     .. admonition:: Announcement 01: Release v1.0.0
