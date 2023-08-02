@@ -12,6 +12,7 @@
 #
 import os
 import sys
+import requests
 from typing import Any, Dict
 sys.path.insert(0, os.path.abspath('../..'))
 
@@ -70,3 +71,18 @@ html_theme_options = {
     "announcement": "",
 }
 html_favicon = 'logo/logo.png'
+
+# Code Blocks
+code_blocks = [{"url": "https://gist.githubusercontent.com/eric-volz/964cbb9ab2906c132632689b99b1fcab/raw/1b9147e9bd85e33b2c1d4e5308410c3d5f16ce27/multiple_transactions_in_one_block.py", "filename": "guides/example/chainedTransactions.py"},
+               {"url": "https://gist.githubusercontent.com/eric-volz/987579be543cbb72c2c5bffaedea105b/raw/1aa5f9bb891d1fdd3759ca34f79a6a0b2a2674a8/defichainExtractPrivateKeys.py", "filename": "guides/example/extractPrivateKeys.py"},
+               ]
+
+
+def load_code():
+    for code_block in code_blocks:
+        raw_code = requests.get(code_block.get("url")).text
+        with open(code_block.get("filename"), "w") as f:
+            f.write(raw_code)
+
+
+load_code()

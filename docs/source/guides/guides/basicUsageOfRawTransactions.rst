@@ -83,7 +83,7 @@ In case of the lightwallet the private seed will be derived from the mnemonic se
 
 Example:
 
-.. image:: ../../additionalInfos/pictures/announcement03/lightwallet.jpg
+.. image:: ../../../additionalInfos/pictures/announcement03/lightwallet.jpg
     :height: 600px
     :alt: Alternative text
 
