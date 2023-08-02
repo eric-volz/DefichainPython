@@ -8,3 +8,9 @@ Transactions
 
     builder/index
     advanced/index
+
+.. toctree::
+    :maxdepth: 1
+    :hidden:
+
+    exceptions

@@ -44,6 +44,12 @@ Wallet Components
     wallet
     utils
 
+.. toctree::
+    :maxdepth: 1
+    :hidden:
+
+    exceptions
+
 .. _HDWallet illustration:
 
 Illustration
