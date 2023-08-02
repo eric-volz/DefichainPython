@@ -4,8 +4,8 @@
     :hidden:
     :maxdepth: 1
 
-    instructions/quickstart
-    instructions/progressAndUpdates
+    main/quickstart
+    main/statusAndTasks
     guides/index
 
 .. toctree::
