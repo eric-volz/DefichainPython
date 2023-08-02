@@ -1,10 +1,11 @@
-.. image:: https://raw.githubusercontent.com/eric-volz/DefichainPython/docs/rework/docs/source/logo/readme/defichainpython-logo-big.png
+.. image:: https://github.com/eric-volz/DefichainPython/blob/main/docs/source/logo/readme/defichainpython-logo-big.png?raw=true
     :align: center
     :alt: DefichainPython Logo
 
 \
 
 |PyPI Version| |PyPI Python Version| |Downloads|
+
 |Docs Build| |Tests|
 
 |Telegram Group| |Twitter / X|
