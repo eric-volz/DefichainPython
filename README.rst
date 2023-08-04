@@ -183,7 +183,7 @@ status of each module yourself on the
 `status page <https://docs.defichain-python.de/build/html/main/statusAndTasks.html>`_!
 
 All official updates and CFPs are listed on
-`this page <file:///home/executor/Code/PyCharm/DefichainPython/docs/build/html/legal/community.html>`_!
+`this page <https://docs.defichain-python.de/build/html/legal/community.html>`_!
 
 If you have suggestions for improvement or other ideas, open an
 `issue <https://github.com/eric-volz/DefichainPython/issues>`_, write me on
