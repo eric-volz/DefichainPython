@@ -8,7 +8,7 @@
 
 |Docs Build| |Tests|
 
-|Telegram Group| |Twitter / X|
+|Telegram Group| |Twitter / X| |Status Page|
 
 This library is a community funded project. The objective is to interact
 with the defichain blockchain as effortlessly as possible. This can be archived by
@@ -178,10 +178,18 @@ This `project <https://github.com/eric-volz/DefichainPython>`_ is funded by the 
 
 **Thank you for your trust!**
 
-If you have suggestions for improvement or other ideas open an
-`issue <https://github.com/eric-volz/DefichainPython/issues>`_, write me on
-`Twitter / X <https://twitter.com/defichainpython>`_ or via email (`defichainpython@volz.link <defichainpython@volz.link>`_)!
+Because of that the community has the right to know about the progress and status of the project. You can view the
+status of each module yourself on the
+`status page <https://docs.defichain-python.de/build/html/main/statusAndTasks.html>`_!
 
+All official updates and CFPs are listed on
+`this page <file:///home/executor/Code/PyCharm/DefichainPython/docs/build/html/legal/community.html>`_!
+
+If you have suggestions for improvement or other ideas, open an
+`issue <https://github.com/eric-volz/DefichainPython/issues>`_, write me on
+`Twitter / X <https://twitter.com/defichainpython>`_, leave a comment in the
+`telegram group <https://t.me/DefichainPython>`_ or write me oldschool via email
+(`defichainpython@volz.link <defichainpython@volz.link>`_)!
 
 
 `License & Disclaimer <https://docs.defichain-python.de/build/html/legal/licenseAndDisclaimer.html>`__
@@ -205,3 +213,5 @@ license <https://github.com/eric-volz/defichainLibrary/blob/main/LICENSE>`__
    :target: https://t.me/DefichainPython
 .. |Twitter / X| image:: https://img.shields.io/badge/Twitter / X-@DefichainPython-lightblue.svg?style=flat-square
    :target: https://twitter.com/defichainpython
+.. |Status Page| image:: https://img.shields.io/badge/Status-Page-black.svg?style=flat-square
+   :target: https://docs.defichain-python.de/build/html/main/statusAndTasks.html
