@@ -2,7 +2,6 @@ from defichain import Account, Ocean, Node
 
 from defichain.exceptions.transactions import TxBuilderError
 
-from defichain.transactions.remotedata.remotedata import RemoteData
 from defichain.transactions.remotedata import RemoteDataOcean, RemoteDataNode
 
 from .rawtransactionbuilder import RawTransactionBuilder
