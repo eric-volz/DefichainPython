@@ -38,6 +38,7 @@ extensions = [
     'sphinx_inline_tabs',
     'sphinxemoji.sphinxemoji',
     'sphinx_copybutton',
+    'sphinx_sitemap',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -61,6 +62,7 @@ autodoc_member_order = "bysource"
 html_theme = 'furo'
 html_title = f"DefichainPython {release}"
 language = "en"
+html_baseurl = 'https://docs.defichain-python.de/build/html/'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
