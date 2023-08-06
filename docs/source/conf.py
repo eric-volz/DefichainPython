@@ -62,6 +62,8 @@ autodoc_member_order = "bysource"
 html_theme = 'furo'
 html_title = f"DefichainPython {release}"
 language = "en"
+
+sitemap_url_scheme = "{link}"
 html_baseurl = 'https://docs.defichain-python.de/build/html/'
 
 # Add any paths that contain custom static files (such as style sheets) here,
