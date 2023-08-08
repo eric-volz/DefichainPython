@@ -4,41 +4,55 @@ from defichain.transactions.builder.rawtransactionbuilder import RawTransactionB
 
 
 class Accounts:
+    """
+    **The methods of this module create transactions that interact with your account/address.**
+
+    1. **utxostoaccount**: converts the specified amount of UTXO to token
+
+    2. **accounttoutxos**: converts specified amount of token to UTXO
+
+    3. **accounttoaccount**: sends token from one address to another address
+
+    """
 
     def __init__(self, builder):
         self._builder: RawTransactionBuilder = builder
 
-    def utxostoaccount(self, address: str, value: "int | float", tokenId: int = 0, inputs=[]) -> "Transaction":
+    def utxostoaccount(self, address: str, amount: "float | int", tokenId: int = 0, inputs=[]) -> "Transaction":
         """
-        Converts UTXOs to token
+        Creates a transaction that converts the specified amount of UTXO to token
+
+        >>> builder.accounts.utxostoaccount("df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e", 1) # converts one UTXO to token
 
         :param address: (required) the address of the account to be converted from
         :type address: str
-        :param value: (required) the amount of UTXOs to convert to token
-        :type value: int | float
+        :param amount: (required) the amount of UTXOs to convert to token
+        :type amount: float | int
         :param tokenId: (optional) the token id of the converted token (default: 0 -> DFI)
         :type tokenId: int
-        :param inputs: (optional) Inputs
-        :type inputs: TxInput
-        :return: Transaction
+        :param inputs: (optional) additional inputs to spend
+        :type inputs: [TxInput]
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
         # Convert Float to Integer
-        value = Converter.float_to_int(value)
+        amount = Converter.float_to_int(amount)
 
-        defiTx = UtxosToAccount(address, value, tokenId)
-        return self._builder.build_defiTx(value, defiTx, inputs)
+        defiTx = UtxosToAccount(address, amount, tokenId)
+        return self._builder.build_defiTx(amount, defiTx, inputs)
 
-    def accounttoutxos(self, addressFrom: str, addressAmountTo: {}, inputs=[]):
+    def accounttoutxos(self, addressFrom: str, addressAmountTo: {}, inputs=[]) -> "Transaction":
         """
-        Creates s transaction to convert tokens into utxos
+        Creates a transaction that converts specified amount of token to UTXO
 
-        :param addressFrom: (required) the defi address of sender
+        >>> builder.accounts.accounttoutxos("df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e", {"df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e": "1@DFI", "df1qzfwy63ggj5jfpul7r04kn2ss8kjz2sda57fa4m": "1@DFI"}) # converts two token to UTXO
+
+        :param addressFrom: (required) the address of the account to be converted from
         :type addressFrom: str
-        :param addressAmountTo: (required) AddressAmount
-        :type addressAmountTo:
-        :param inputs: (optional) Inputs
-        :type inputs: TxInput
-        :return: Transaction
+        :param addressAmountTo: (required) json with specified address and amount to send
+        :type addressAmountTo: :ref:`Transactions AddressAmount`
+        :param inputs: (optional) additional inputs to spend
+        :type inputs: [TxInput]
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
         # Convert Float to Integer
         addressAmountTo = Converter.addressAmount_float_to_int(addressAmountTo)
@@ -49,15 +63,17 @@ class Accounts:
 
     def accounttoaccount(self, addressFrom: str, addressAmountTo: {}, inputs=[]) -> "Transaction":
         """
-        Sends token from one address to another address
+        Creates a transaction that sends token from one address to another address
+
+        >>> builder.accounts.accounttoaccount("df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e", {"df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e": "0.00001@BTC", "df1qzfwy63ggj5jfpul7r04kn2ss8kjz2sda57fa4m": "1@DFI"}) # sends 0.00001 BTC and 1 DFI to other addresses
 
         :param addressFrom: (required) address from which the tokens should be sent
         :type addressFrom: str
-        :param addressAmountTo: (required) addressAmount
-        :type addressAmountTo: addressAmount
-        :param inputs: (optional) Inputs
-        :type inputs: TxInput
-        :return: Transaction
+        :param addressAmountTo: (required) json with specified address and amount to send
+        :type addressAmountTo: :ref:`Transactions AddressAmount`
+        :param inputs: (optional) additional inputs to spend
+        :type inputs: [TxInput]
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
 
         # Convert Float to Integer

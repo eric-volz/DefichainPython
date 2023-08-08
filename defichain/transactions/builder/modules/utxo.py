@@ -5,30 +5,41 @@ from defichain.transactions.builder.rawtransactionbuilder import RawTransactionB
 
 
 class UTXO:
+    """
+    **The methods of this module create UTXO transactions.**
+
+    1. **send**: send just one specified amount from the builder address to another address
+
+    2. **sendall**: send all utxo from the builder address to another address
+
+    3. **sendmany**: send specified amounts from the builder address to multiple different addresses.
+    """
 
     def __init__(self, builder):
         self._builder: RawTransactionBuilder = builder
 
-    def send(self, value: "float | int", addressTo: str, changeAddress: str = None, inputs=[]) -> Transaction:
+    def send(self, amount: "float | int", addressTo: str, changeAddress: str = None, inputs=[]) -> Transaction:
         """
-        Sends the specified amount of UTXO to the specified address. Returns the remaining UTXO from the input to the
-        sender address if not changed.
+        Creates a transaction that sends the specified amount of UTXO to the specified address and returns the
+        remaining UTXO from the input to the sender address if not changed
 
-        :param value: (required) amount of UTXO to send
-        :type value: float | int
+        >>> builder.utxo.send(1, "df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e") # sends one UTXO DFI to the specified address
+
+        :param amount: (required) amount of UTXO to send
+        :type amount: float | int
         :param addressTo: (required) address to send the UTXO to
         :type addressTo: str
         :param changeAddress: (optional) address to which the remaining UTXO should be sent
         :type changeAddress: str
-        :param inputs: (optional) Inputs
-        :type inputs: TxInputs
-        :return: Transaction
+        :param inputs: (optional) additional inputs to spend
+        :type inputs: [TxInput]
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
         if changeAddress is None:
             changeAddress = self._builder.get_address()
 
         # Convert Float to Integer
-        value = Converter.float_to_int(value)
+        value = Converter.float_to_int(amount)
 
         # If to_address is the same as account address
         if addressTo == self._builder.get_address() or addressTo == changeAddress:
@@ -57,13 +68,15 @@ class UTXO:
 
     def sendall(self, addressTo: str, inputs=[]) -> Transaction:
         """
-        Sends all UTXO to the specified address
+        Creates a transaction that sends all UTXO to the specified address
+
+        >>> builder.utxo.sendall("df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e") # sends all UTXO DFI to the specified address
 
         :param addressTo: (required) address to send the UTXO to
         :type addressTo: str
-        :param inputs: (optional) Inputs
-        :type inputs: TxInput
-        :return: Transaction
+        :param inputs: (optional) additional inputs to spend
+        :type inputs: [TxInput]
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
         tx = self._builder.build_transactionInputs(inputs)
         inputValue = tx.get_inputsValue()
@@ -84,16 +97,18 @@ class UTXO:
 
     def sendmany(self, addressAmountTo: {}, changeAddress=None, inputs=[]) -> Transaction:
         """
-        Sends the specified amount of UTXO to the specified addresses. Returns the remaining UTXO from the input to the
-        sender address if not changed.
+        Creates a transaction that sends the specified amount of UTXO to the specified addresses. Returns the
+        remaining UTXO from the input to the sender address if not changed
 
-        :param addressAmountTo: (required) AddressAmount
-        :type addressAmountTo: json string
+        >>> builder.utxo.sendmany({"df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e": "1@DFI", "df1qzfwy63ggj5jfpul7r04kn2ss8kjz2sda57fa4m": "1@DFI"}) # sends each address one UTXO DFI
+
+        :param addressAmountTo: (required) json with specified address and amount to send
+        :type addressAmountTo:  :ref:`Transactions AddressAmount`
         :param changeAddress: (required) address to which the remaining UTXO should be sent
         :type changeAddress: str
-        :param inputs: (optional) Inputs
-        :type inputs: TxInput
-        :return: Transaction
+        :param inputs: (optional) additional inputs to spend
+        :type inputs: [TxInput]
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
 
         if inputs is None:

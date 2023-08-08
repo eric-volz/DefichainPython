@@ -2,7 +2,6 @@ from defichain import Account, Ocean, Node
 
 from defichain.exceptions.transactions import TxBuilderError
 
-from defichain.transactions.remotedata.remotedata import RemoteData
 from defichain.transactions.remotedata import RemoteDataOcean, RemoteDataNode
 
 from .rawtransactionbuilder import RawTransactionBuilder
@@ -13,21 +12,36 @@ from defichain.transactions.rawtransactions import Transaction
 
 class TxBuilder:
     """
-    This it the main class to build transactions. The transaction will be built with the information provided and
-    automatically signed.
+    **This it the main class to build transactions!**
+
+    The transaction will be built with the information provided and automatically signed.
 
     All transactions are created for the given address.
     The account parameter must match the given address and contains the matching private key.
 
     Through the given data source, all the necessary information is pulled from the blockchain which is
-    required to create the transaction. The standard data source is the ocean infrastructure.
-    However, this can also be replaced by a Defichain node connection.
+    required to create the transaction. The suggested data source is the ocean infrastructure.
+    However, this can also be replaced by a defichain node connection.
     If no data source is specified, the appropriate inputs must be passed to the individual methods.
 
     By default, a fee of one satoshi per byte is used.
 
-    Input Handling:
-        All inputs of an address are always combined to one output.
+    All inputs of an address are always combined to one output.
+
+    >>> # Import ocean, wallet, network and txbuilder
+    >>> from defichain import Ocean
+    >>> from defichain import Wallet
+    >>> from defichain.networks import DefichainMainnet
+    >>> from defichain import TxBuilder
+    >>> # Specify ocean connection
+    >>> ocean =  Ocean(network="mainnet")
+    >>> # Create wallet and account
+    >>> mnemonic = "avocado key fan step egg engage winter upper attitude carry regret mixed utility body party trip valid oppose gas ensure deputy suspect blur trade"
+    >>> wallet = Wallet(DefichainMainnet)
+    >>> wallet.from_mnemonic(mnemonic)
+    >>> account = wallet.get_account(0)
+    >>> # Create TxBuilder
+    >>> builder = TxBuilder(account.get_p2wpkh(), account, ocean)
 
     :param address: (required) address for which the transaction is created
     :type address: str
@@ -70,7 +84,7 @@ class TxBuilder:
         :type tx: Transaction | str
         :param maxFeeRate: (optional) maximum fee rate
         :type maxFeeRate: float
-        :return: "hex" (str) - the transaction hash
+        :return: "hex" (str) - txid
         """
         if self.get_dataSource() is not None:
             if isinstance(tx, Transaction):
@@ -119,14 +133,14 @@ class TxBuilder:
         Builds a transaction just with the inputs of the address.
         The outputs have to be manually specified.
 
-        :return: Transaction - just with inputs
+        :return: :ref:`Transaction Advanced RawTransactions Transaction` - just with inputs
         """
         return self._builder.build_transactionInputs()
 
     # Get Information
     def get_address(self) -> str:
         """
-        Returns the address specified in the builder
+        Returns the address specified in the builder object
 
         :return: address (str)
         """
@@ -134,23 +148,23 @@ class TxBuilder:
 
     def get_account(self) -> Account:
         """
-        Returns the account specified in the builder
+        Returns the account specified in the builder object
 
-        :return: Account
+        :return: :ref:`HDWallet account`
         """
         return self._account
 
-    def get_dataSource(self) -> "RemoteData":
+    def get_dataSource(self) -> "RemoteDataOcean | RemoteDataNode | None":
         """
-        Returns the data source specified in the builder
+        Returns the data source specified in the builder object
 
-        :return: RemoteData
+        :return: :ref:`Transaction Advanced RemoteData Ocean` | :ref:`Transaction Advanced RemoteData Node` | None
         """
         return self._dataSource
 
     def get_feePerByte(self) -> float:
         """
-        Returns the fee per byte specified in the builder
+        Returns the fee per byte specified in the builder object
 
         :return: float
         """
