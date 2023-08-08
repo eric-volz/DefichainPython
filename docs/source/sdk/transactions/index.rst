@@ -15,7 +15,12 @@ Transactions
 
     exceptions
 
+.. _Transactions Amounts:
+
+Amounts
+-------
+
 .. _Transactions AddressAmount:
 
-AddressAmount
--------------
+Address Amount
+--------------
