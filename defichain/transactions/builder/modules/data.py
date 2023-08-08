@@ -38,7 +38,7 @@ class Data:
         :type changeAddress: str
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
 
         if inputs is None:
@@ -100,7 +100,7 @@ class Data:
         :type changeAddress: str
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
 
         if inputs is None:

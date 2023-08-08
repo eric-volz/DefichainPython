@@ -29,7 +29,7 @@ class Masternode:
         :type timeLock: int
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
 
         defiTx = CreateMasternode(operatorAddress, timeLock)
@@ -45,7 +45,7 @@ class Masternode:
         :type masternodeId: str
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
 
         defiTx = ResignMasternode(masternodeId)
@@ -68,7 +68,7 @@ class Masternode:
         :type rewardAddress: str
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
         defiTx = UpdateMasternode(masternodeId, ownerAddress, operatorAddress, rewardAddress)
         return self._builder.build_defiTx(0, defiTx, inputs)

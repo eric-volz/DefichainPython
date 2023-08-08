@@ -29,7 +29,7 @@ class Loans:
         :type amounts: :ref:`Transactions Amounts`
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
 
         # Convert Float to Integer
@@ -57,7 +57,7 @@ class Loans:
         :type amounts: :ref:`Transactions Amounts`
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
 
         # Convert Float to Integer

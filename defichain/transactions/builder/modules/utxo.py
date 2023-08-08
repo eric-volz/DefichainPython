@@ -33,7 +33,7 @@ class UTXO:
         :type changeAddress: str
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
         if changeAddress is None:
             changeAddress = self._builder.get_address()
@@ -76,7 +76,7 @@ class UTXO:
         :type addressTo: str
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
         tx = self._builder.build_transactionInputs(inputs)
         inputValue = tx.get_inputsValue()
@@ -108,6 +108,7 @@ class UTXO:
         :type changeAddress: str
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
 
         if inputs is None:

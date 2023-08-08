@@ -27,7 +27,7 @@ class Governance:
         :type decision: str
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
 
         defiTx = Vote(proposalId, masternodeId, decision)

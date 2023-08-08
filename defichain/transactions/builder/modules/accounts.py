@@ -32,7 +32,7 @@ class Accounts:
         :type tokenId: int
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
         # Convert Float to Integer
         amount = Converter.float_to_int(amount)
@@ -52,7 +52,7 @@ class Accounts:
         :type addressAmountTo: :ref:`Transactions AddressAmount`
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
         # Convert Float to Integer
         addressAmountTo = Converter.addressAmount_float_to_int(addressAmountTo)
@@ -73,7 +73,7 @@ class Accounts:
         :type addressAmountTo: :ref:`Transactions AddressAmount`
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
 
         # Convert Float to Integer

@@ -84,7 +84,7 @@ class TxBuilder:
         :type tx: Transaction | str
         :param maxFeeRate: (optional) maximum fee rate
         :type maxFeeRate: float
-        :return: "hex" (str) - transaction hash (txid)
+        :return: "hex" (str) - txid
         """
         if self.get_dataSource() is not None:
             if isinstance(tx, Transaction):
@@ -133,7 +133,7 @@ class TxBuilder:
         Builds a transaction just with the inputs of the address.
         The outputs have to be manually specified.
 
-        :return: Transaction - just with inputs
+        :return: :ref:`Transaction Advanced RawTransactions Transaction` - just with inputs
         """
         return self._builder.build_transactionInputs()
 
@@ -150,7 +150,7 @@ class TxBuilder:
         """
         Returns the account specified in the builder object
 
-        :return: Account
+        :return: :ref:`HDWallet account`
         """
         return self._account
 
@@ -158,7 +158,7 @@ class TxBuilder:
         """
         Returns the data source specified in the builder object
 
-        :return: RemoteData
+        :return: :ref:`Transaction Advanced RemoteData Ocean` | :ref:`Transaction Advanced RemoteData Node` | None
         """
         return self._dataSource
 

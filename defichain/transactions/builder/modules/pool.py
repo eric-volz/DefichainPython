@@ -40,7 +40,7 @@ class Pool:
         :type maxPrice: float | int
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
         # Convert Float to Integer
         amountFrom = Converter.float_to_int(amountFrom)
@@ -72,7 +72,7 @@ class Pool:
         :type pools: [str]
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
 
         # Convert Float to Integer
@@ -94,7 +94,7 @@ class Pool:
         :type shareAddress: str
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
 
         # Convert Float to Integer
@@ -115,7 +115,7 @@ class Pool:
         :type amount: :ref:`Transactions Amounts`
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
 
         # Convert Float to Integer

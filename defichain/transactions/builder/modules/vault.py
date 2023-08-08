@@ -34,7 +34,7 @@ class Vault:
         :type schemeId: str
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
 
         defiTx = CreateVault(ownerAddress, schemeId)
@@ -54,7 +54,7 @@ class Vault:
         :type amount: :ref:`Transactions Amounts`
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
 
         # Convert Float to Integer
@@ -77,7 +77,7 @@ class Vault:
         :type amount: :ref:`Transactions Amounts`
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
-        :return: Transaction
+        :return: :ref:`Transaction Advanced RawTransactions Transaction`
         """
 
         # Convert Float to Integer
