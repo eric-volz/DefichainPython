@@ -10,11 +10,11 @@ class UTXO:
 
     You can do that three on different ways:
 
-    1. send: send just one specified amount from the builder address to another address
+    1. **send**: send just one specified amount from the builder address to another address
 
-    2. sendall: send all utxo from the builder address to another address
+    2. **sendall**: send all utxo from the builder address to another address
 
-    3. sendmany: send specified amounts from the builder address to multiple different addresses.
+    3. **sendmany**: send specified amounts from the builder address to multiple different addresses.
     """
 
     def __init__(self, builder):
@@ -22,9 +22,8 @@ class UTXO:
 
     def send(self, amount: "float | int", addressTo: str, changeAddress: str = None, inputs=[]) -> Transaction:
         """
-        Sends the specified amount of UTXO to the specified address.
-
-        Returns the remaining UTXO from the input to the sender address if not changed.
+        Creates a transaction that sends the specified amount of UTXO to the specified address and returns the
+        remaining UTXO from the input to the sender address if not changed
 
         >>> builder.utxo.send(1, "df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e") # sends one UTXO DFI to the specified address
 
@@ -34,8 +33,8 @@ class UTXO:
         :type addressTo: str
         :param changeAddress: (optional) address to which the remaining UTXO should be sent
         :type changeAddress: str
-        :param inputs: (optional) Inputs
-        :type inputs: TxInput
+        :param inputs: (optional) additional inputs to spend
+        :type inputs: [TxInput]
         :return: Transaction
         """
         if changeAddress is None:
@@ -71,14 +70,14 @@ class UTXO:
 
     def sendall(self, addressTo: str, inputs=[]) -> Transaction:
         """
-        Sends all UTXO to the specified address
+        Creates a transaction that sends all UTXO to the specified address
 
         >>> builder.utxo.sendall("df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e") # sends all UTXO DFI to the specified address
 
         :param addressTo: (required) address to send the UTXO to
         :type addressTo: str
-        :param inputs: (optional) Inputs
-        :type inputs: TxInput
+        :param inputs: (optional) additional inputs to spend
+        :type inputs: [TxInput]
         :return: Transaction
         """
         tx = self._builder.build_transactionInputs(inputs)
@@ -100,8 +99,8 @@ class UTXO:
 
     def sendmany(self, addressAmountTo: {}, changeAddress=None, inputs=[]) -> Transaction:
         """
-        Sends the specified amount of UTXO to the specified addresses. Returns the remaining UTXO from the input to the
-        sender address if not changed.
+        Creates a transaction that sends the specified amount of UTXO to the specified addresses. Returns the
+        remaining UTXO from the input to the sender address if not changed
 
         >>> builder.utxo.sendmany({"df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e": "1@DFI", "df1qzfwy63ggj5jfpul7r04kn2ss8kjz2sda57fa4m": "1@DFI"}) # sends each address one UTXO DFI
 
@@ -109,9 +108,8 @@ class UTXO:
         :type addressAmountTo:  :ref:`Transactions AddressAmount`
         :param changeAddress: (required) address to which the remaining UTXO should be sent
         :type changeAddress: str
-        :param inputs: (optional) Inputs
-        :type inputs: TxInput
-        :return: Transaction
+        :param inputs: (optional) additional inputs to spend
+        :type inputs: [TxInput]
         """
 
         if inputs is None:
