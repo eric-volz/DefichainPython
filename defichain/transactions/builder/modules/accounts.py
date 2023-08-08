@@ -5,9 +5,7 @@ from defichain.transactions.builder.rawtransactionbuilder import RawTransactionB
 
 class Accounts:
     """
-    **The methods of this module are responsible for interacting with your account / address.**
-
-    You can interact with your address on three different ways:
+    **The methods of this module create transactions that interact with your account/address.**
 
     1. **utxostoaccount**: converts the specified amount of UTXO to token
 

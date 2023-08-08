@@ -6,9 +6,7 @@ from defichain.transactions.builder.rawtransactionbuilder import RawTransactionB
 
 class UTXO:
     """
-    **The methods of this module are responsible for sending UTXO to different addresses.**
-
-    You can do that three on different ways:
+    **The methods of this module create UTXO transactions.**
 
     1. **send**: send just one specified amount from the builder address to another address
 

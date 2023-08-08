@@ -6,14 +6,12 @@ from defichain.transactions.builder.rawtransactionbuilder import RawTransactionB
 
 class Data:
     """
-    **The methods of this module are responsible for embedding your own data into the blockchain.**
+    **The methods of this module create transactions that write data to the blockchain.**
 
     **The data can only be 76 bytes in size.**
 
     You can only use a connection to a defichain node to submit this kind of transaction to the blockchain. The
     ocean network will refuse the transaction.
-
-    You can put data into the blockchain on two different ways:
 
     1. **hex_data**: transaction witch includes your own hexadecimal data
 
@@ -29,6 +27,8 @@ class Data:
 
         You can only use a connection to a defichain node to submit this kind of transaction to the blockchain. The
         ocean network will refuse the transaction.
+
+        >>> builder.data.hex_data("48656c6c6f2044656669676874657273")
 
         :param data: (required) hexadecimal data
         :type data: hex
@@ -87,6 +87,8 @@ class Data:
 
         You can only use a connection to a defichain node to submit this kind of transaction to the blockchain. The
         ocean network will refuse the transaction.
+
+        >>> builder.data.hex_data("Hello Defighters")
 
         :param data: (required) string data
         :type data: str
