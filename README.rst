@@ -90,7 +90,7 @@ Ask for the utxo balance of an address:
    # Print the utxo balance of the requested address
    print(utxo_balance)
 
-3. `HDWallet <https://docs.defichain-python.de/build/html/api/hdwallet/index.html>`__:
+3. `HDWallet <https://docs.defichain-python.de/build/html/sdk/hdwallet/index.html>`__:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 HDWallet (Hierarchical Deterministic Wallet) is a special wallet
@@ -125,7 +125,7 @@ Create a wallet for mainnet from mnemonic seed:
    print(account.get_privateKey())  # c72f08c17b475d641a711ef1e16bcdb0cc0c1210e6da846060b2e04d5c2299b3
    print(account.get_wif())  # L3tu3Bx5n8aWgcDd14btMPgxQ8H5VYbbNoodrNESaonom64YPnr9
 
-4. `Transactions <https://docs.defichain-python.de/build/html/api/transactions/index.html>`__:
+4. `Transactions <https://docs.defichain-python.de/build/html/sdk/transactions/index.html>`__:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This transaction implementation enables you to create, sign and
