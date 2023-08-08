@@ -4,22 +4,27 @@ from defichain.transactions.builder.rawtransactionbuilder import RawTransactionB
 
 
 class Governance:
+    """
+    **The methods of this module create governance transactions**
+
+    1. **vote**: transaction witch includes your own hexadecimal data
+    """
 
     def __init__(self, builder):
         self._builder: RawTransactionBuilder = builder
 
     def vote(self, proposalId: str, masternodeId: str, decision: str, inputs=[]) -> Transaction:
         """
-        Vote for proposal
+        Creates a transaction that votes for proposal
 
-        :param proposalId: (required) The proposal txid
+        :param proposalId: (required) the proposal txid
         :type proposalId: str
-        :param masternodeId: (required) The masternodeId to vote with
+        :param masternodeId: (required) the masternodeId to vote with
         :type masternodeId: str
-        :param decision: (required) The vote decision (yes/no/neutral)
+        :param decision: (required) the vote decision (yes / no / neutral)
         :type decision: str
-        :param inputs: (optional) Inputs
-        :type inputs: TxInput
+        :param inputs: (optional) additional inputs to spend
+        :type inputs: [TxInput]
         :return: Transaction
         """
 
