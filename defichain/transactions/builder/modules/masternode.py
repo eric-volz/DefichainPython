@@ -4,6 +4,15 @@ from defichain.transactions.builder.rawtransactionbuilder import RawTransactionB
 
 
 class Masternode:
+    """
+    **The methods of this module create masternode transactions**
+
+    1. **createmasternode**: transaction to create a masternode
+
+    2. **resignmasternode**: transaction to resigning the masternode
+
+    3. **updatemasternode**: transaction to change owner, operator or reward address of a masternode
+    """
 
     def __init__(self, builder):
         self._builder: RawTransactionBuilder = builder
@@ -12,12 +21,14 @@ class Masternode:
         """
         Creates a transaction to create a masternode with the given operator address and time lock
 
+        >>> builder.masternode.createmasternode("8HZ4oMoussmoVRghTaSqmB4Q74wPeiCyHC") # create a masternode
+
         :param operatorAddress: (required) legacy address of the operator
         :type operatorAddress: str
         :param timeLock: (optional) time period to lock the masternode: 0 (default), 5, 10 years
         :type timeLock: int
-        :param inputs: (optional) Inputs
-        :type inputs: TxInput
+        :param inputs: (optional) additional inputs to spend
+        :type inputs: [TxInput]
         :return: Transaction
         """
 
@@ -26,12 +37,14 @@ class Masternode:
 
     def resignmasternode(self, masternodeId: str, inputs=[]) -> Transaction:
         """
-        Creates a transaction resigning your masternode.
+        Creates a transaction to resigning the masternode.
 
-        :param masternodeId: (required) txid of the creation of the masternode
+        >>> builder.masternode.resignmasternode("4e5a3a891653b7ea017a0560f5c873bdf183f52a013606341faa2823c54a2d9c") # resign a masternode
+
+        :param masternodeId: (required) masternode id
         :type masternodeId: str
-        :param inputs: (optional) Inputs
-        :type inputs: TxInput
+        :param inputs: (optional) additional inputs to spend
+        :type inputs: [TxInput]
         :return: Transaction
         """
 
@@ -43,7 +56,9 @@ class Masternode:
         """
         Creates a transaction to change owner, operator or reward address of a masternode.
 
-        :param masternodeId: (required) txid of the creation of the masternode
+        >>> builder.masternode.updatemasternode(rewardAddress="df1qtmk8nad9n03nwmanqfpug94h3jqjn3gyytl3gl") # update masternode reward address
+
+        :param masternodeId: (required) masternode id
         :type masternodeId: str
         :param ownerAddress: (optional) new owner address
         :type ownerAddress: str
@@ -51,8 +66,8 @@ class Masternode:
         :type operatorAddress: str
         :param rewardAddress: (optional) new reward address
         :type rewardAddress: str
-        :param inputs: (optional) Inputs
-        :type inputs: TxInput
+        :param inputs: (optional) additional inputs to spend
+        :type inputs: [TxInput]
         :return: Transaction
         """
         defiTx = UpdateMasternode(masternodeId, ownerAddress, operatorAddress, rewardAddress)
