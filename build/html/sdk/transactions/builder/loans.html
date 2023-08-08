@@ -224,6 +224,7 @@
 <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../hdwallet/index.html">HDWallet</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of HDWallet</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../hdwallet/wallet.html">Wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hdwallet/account.html">Account</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../hdwallet/utils.html">Utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../hdwallet/exceptions.html">Wallet Exceptions</a></li>
 </ul>
@@ -327,21 +328,29 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.transactions.builder.modules.Loans">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.transactions.builder.modules.</span></span><span class="sig-name descname"><span class="pre">Loans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">builder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.transactions.builder.modules.Loans" title="Permalink to this definition">#</a></dt>
-<dd><dl class="py method">
+<dd><p><strong>The methods of this module create loan transactions</strong></p>
+<ol class="arabic simple">
+<li><p><strong>takeloan</strong>: transaction to take a loan in the desired amount out of the specified vault</p></li>
+<li><p><strong>paybackloan</strong>: transaction to pay back the loan token to the specified vault</p></li>
+</ol>
+<dl class="py method">
 <dt class="sig sig-object py" id="defichain.transactions.builder.modules.Loans.takeloan">
 <span class="sig-name descname"><span class="pre">takeloan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vaultId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addressTo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../advanced/rawtransactions/tx.html#defichain.transactions.rawtransactions.Transaction" title="defichain.transactions.rawtransactions.tx.Transaction"><span class="pre">Transaction</span></a></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.Loans.takeloan" title="Permalink to this definition">#</a></dt>
-<dd><p>Creates a transaction to mint loan token in desired amount based on defined loan</p>
+<dd><p>Creates a transaction to take a loan in the desired amount out of the specified vault</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">takeloan</span><span class="p">(</span><span class="s2">&quot;8040fe5eaa75f942dabf57bcdace3a5b71e3eb4fab53467e064e870396913800&quot;</span><span class="p">,</span> <span class="s2">&quot;df1qrvrnk0zyaen8x3pfrza3yznwrrrv5y08rkgrk2&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;1@DUSD&quot;</span><span class="p">,</span> <span class="s2">&quot;2@COIN&quot;</span><span class="p">])</span> <span class="c1"># takes loan from a vault</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>vaultId</strong> (<em>str</em>) – (required) id of vault used for loan</p></li>
-<li><p><strong>addressTo</strong> (<em>str</em>) – (required) address to transfer tokens</p></li>
-<li><p><strong>amounts</strong> (<em>str</em><em> | </em><em>[</em><em>str</em><em>]</em>) – (required) AddressAmount</p></li>
-<li><p><strong>inputs</strong> (<a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a>) – (optional) Inputs</p></li>
+<li><p><strong>vaultId</strong> (<em>str</em>) – (required) vault id</p></li>
+<li><p><strong>addressTo</strong> (<em>str</em>) – (required) address to transfer tokens to</p></li>
+<li><p><strong>amounts</strong> (<a class="reference internal" href="../index.html#transactions-amounts"><span class="std std-ref">Amounts</span></a>) – (required) string with amount and token separated by an &#64;</p></li>
+<li><p><strong>inputs</strong> (<em>[</em><a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a><em>]</em>) – (optional) additional inputs to spend</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Transaction</p>
+<dd class="field-even"><p><a class="reference internal" href="../advanced/rawtransactions/tx.html#transaction-advanced-rawtransactions-transaction"><span class="std std-ref">Transaction</span></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -349,18 +358,21 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.transactions.builder.modules.Loans.paybackloan">
 <span class="sig-name descname"><span class="pre">paybackloan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vaultId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addressFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../advanced/rawtransactions/tx.html#defichain.transactions.rawtransactions.Transaction" title="defichain.transactions.rawtransactions.tx.Transaction"><span class="pre">Transaction</span></a></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.Loans.paybackloan" title="Permalink to this definition">#</a></dt>
-<dd><p>Creates a transaction to return the loan in desired amount</p>
+<dd><p>Creates a transaction to pay back the loan token to the specified vault</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">loan</span><span class="o">.</span><span class="n">paybackloan</span><span class="p">(</span><span class="s2">&quot;8040fe5eaa75f942dabf57bcdace3a5b71e3eb4fab53467e064e870396913800&quot;</span><span class="p">,</span> <span class="s2">&quot;df1qrvrnk0zyaen8x3pfrza3yznwrrrv5y08rkgrk2&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;1@DUSD&quot;</span><span class="p">,</span> <span class="s2">&quot;2@COIN&quot;</span><span class="p">])</span> <span class="c1"># pay backs loan to a vault</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>vaultId</strong> (<em>str</em>) – (required) id of vault used for loan</p></li>
+<li><p><strong>vaultId</strong> (<em>str</em>) – (required) vault id</p></li>
 <li><p><strong>addressFrom</strong> (<em>str</em>) – (required) address containing repayment tokens</p></li>
-<li><p><strong>amounts</strong> (<em>str</em><em> | </em><em>[</em><em>str</em><em>]</em>) – (required) AddressAmount</p></li>
-<li><p><strong>inputs</strong> (<a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a>) – (optional) Inputs</p></li>
+<li><p><strong>amounts</strong> (<a class="reference internal" href="../index.html#transactions-amounts"><span class="std std-ref">Amounts</span></a>) – (required) string with amount and token separated by an &#64;</p></li>
+<li><p><strong>inputs</strong> (<em>[</em><a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a><em>]</em>) – (optional) additional inputs to spend</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Transaction</p>
+<dd class="field-even"><p><a class="reference internal" href="../advanced/rawtransactions/tx.html#transaction-advanced-rawtransactions-transaction"><span class="std std-ref">Transaction</span></a></p>
 </dd>
 </dl>
 </dd></dl>

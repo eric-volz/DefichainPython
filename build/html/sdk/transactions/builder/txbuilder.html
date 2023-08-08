@@ -224,6 +224,7 @@
 <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../hdwallet/index.html">HDWallet</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of HDWallet</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../hdwallet/wallet.html">Wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hdwallet/account.html">Account</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../hdwallet/utils.html">Utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../hdwallet/exceptions.html">Wallet Exceptions</a></li>
 </ul>
@@ -326,25 +327,38 @@
 <span id="transaction-builder-txbuilder"></span><h1>TxBuilder<a class="headerlink" href="#txbuilder" title="Permalink to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.transactions.builder.TxBuilder">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.transactions.builder.</span></span><span class="sig-name descname"><span class="pre">TxBuilder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Account</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataSource</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../../api/ocean/ocean.html#defichain.Ocean" title="defichain.Ocean"><span class="pre">Ocean</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../../api/node/node.html#defichain.Node" title="defichain.Node"><span class="pre">Node</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feePerByte</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder" title="Permalink to this definition">#</a></dt>
-<dd><p>This it the main class to build transactions. The transaction will be built with the information provided and
-automatically signed.</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.transactions.builder.</span></span><span class="sig-name descname"><span class="pre">TxBuilder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../hdwallet/account.html#defichain.Account" title="defichain.hdwallet.account.Account"><span class="pre">Account</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataSource</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../../api/ocean/ocean.html#defichain.Ocean" title="defichain.Ocean"><span class="pre">Ocean</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../../api/node/node.html#defichain.Node" title="defichain.Node"><span class="pre">Node</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feePerByte</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder" title="Permalink to this definition">#</a></dt>
+<dd><p><strong>This it the main class to build transactions!</strong></p>
+<p>The transaction will be built with the information provided and automatically signed.</p>
 <p>All transactions are created for the given address.
 The account parameter must match the given address and contains the matching private key.</p>
 <p>Through the given data source, all the necessary information is pulled from the blockchain which is
-required to create the transaction. The standard data source is the ocean infrastructure.
-However, this can also be replaced by a Defichain node connection.
+required to create the transaction. The suggested data source is the ocean infrastructure.
+However, this can also be replaced by a defichain node connection.
 If no data source is specified, the appropriate inputs must be passed to the individual methods.</p>
 <p>By default, a fee of one satoshi per byte is used.</p>
-<dl class="simple">
-<dt>Input Handling:</dt><dd><p>All inputs of an address are always combined to one output.</p>
-</dd>
-</dl>
+<p>All inputs of an address are always combined to one output.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Import ocean, wallet, network and txbuilder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Ocean</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">TxBuilder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Specify ocean connection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ocean</span> <span class="o">=</span>  <span class="n">Ocean</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="s2">&quot;mainnet&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create wallet and account</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mnemonic</span> <span class="o">=</span> <span class="s2">&quot;avocado key fan step egg engage winter upper attitude carry regret mixed utility body party trip valid oppose gas ensure deputy suspect blur trade&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">account</span> <span class="o">=</span> <span class="n">wallet</span><span class="o">.</span><span class="n">get_account</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create TxBuilder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span> <span class="o">=</span> <span class="n">TxBuilder</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">get_p2wpkh</span><span class="p">(),</span> <span class="n">account</span><span class="p">,</span> <span class="n">ocean</span><span class="p">)</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>address</strong> (<em>str</em>) – (required) address for which the transaction is created</p></li>
-<li><p><strong>account</strong> (<em>Account</em>) – (required) account object belonging to the given address</p></li>
+<li><p><strong>account</strong> (<a class="reference internal" href="../../hdwallet/account.html#defichain.Account" title="defichain.Account"><em>Account</em></a>) – (required) account object belonging to the given address</p></li>
 <li><p><strong>dataSource</strong> (<a class="reference internal" href="../../../api/ocean/ocean.html#defichain.Ocean" title="defichain.Ocean"><em>Ocean</em></a><em> | </em><a class="reference internal" href="../../../api/node/node.html#defichain.Node" title="defichain.Node"><em>Node</em></a><em> | </em><em>None</em>) – (required) data source for creating the transaction</p></li>
 <li><p><strong>feePerByte</strong> (<em>float</em>) – (optional) approximate fee paid per byte</p></li>
 </ul>
@@ -362,7 +376,7 @@ If no data source is specified, the appropriate inputs must be passed to the ind
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>“hex” (str) - the transaction hash</p>
+<dd class="field-even"><p>“hex” (str) - txid</p>
 </dd>
 </dl>
 </dd></dl>
@@ -391,7 +405,7 @@ If no data source is specified, the appropriate inputs must be passed to the ind
 The outputs have to be manually specified.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Transaction - just with inputs</p>
+<dd class="field-odd"><p><a class="reference internal" href="../advanced/rawtransactions/tx.html#transaction-advanced-rawtransactions-transaction"><span class="std std-ref">Transaction</span></a> - just with inputs</p>
 </dd>
 </dl>
 </dd></dl>
@@ -399,7 +413,7 @@ The outputs have to be manually specified.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.transactions.builder.TxBuilder.get_address">
 <span class="sig-name descname"><span class="pre">get_address</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder.get_address" title="Permalink to this definition">#</a></dt>
-<dd><p>Returns the address specified in the builder</p>
+<dd><p>Returns the address specified in the builder object</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>address (str)</p>
@@ -409,22 +423,22 @@ The outputs have to be manually specified.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.transactions.builder.TxBuilder.get_account">
-<span class="sig-name descname"><span class="pre">get_account</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Account</span></span></span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder.get_account" title="Permalink to this definition">#</a></dt>
-<dd><p>Returns the account specified in the builder</p>
+<span class="sig-name descname"><span class="pre">get_account</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../hdwallet/account.html#defichain.Account" title="defichain.hdwallet.account.Account"><span class="pre">Account</span></a></span></span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder.get_account" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the account specified in the builder object</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Account</p>
+<dd class="field-odd"><p><a class="reference internal" href="../../hdwallet/account.html#hdwallet-account"><span class="std std-ref">Account</span></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.transactions.builder.TxBuilder.get_dataSource">
-<span class="sig-name descname"><span class="pre">get_dataSource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">RemoteData</span></span></span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder.get_dataSource" title="Permalink to this definition">#</a></dt>
-<dd><p>Returns the data source specified in the builder</p>
+<span class="sig-name descname"><span class="pre">get_dataSource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../advanced/remotedata/ocean.html#defichain.transactions.remotedata.RemoteDataOcean" title="defichain.transactions.remotedata.RemoteDataOcean"><span class="pre">RemoteDataOcean</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../advanced/remotedata/node.html#defichain.transactions.remotedata.RemoteDataNode" title="defichain.transactions.remotedata.RemoteDataNode"><span class="pre">RemoteDataNode</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder.get_dataSource" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the data source specified in the builder object</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>RemoteData</p>
+<dd class="field-odd"><p><a class="reference internal" href="../advanced/remotedata/ocean.html#transaction-advanced-remotedata-ocean"><span class="std std-ref">Remote Data Ocean</span></a> | <a class="reference internal" href="../advanced/remotedata/node.html#transaction-advanced-remotedata-node"><span class="std std-ref">Remote Data Node</span></a> | None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -432,7 +446,7 @@ The outputs have to be manually specified.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.transactions.builder.TxBuilder.get_feePerByte">
 <span class="sig-name descname"><span class="pre">get_feePerByte</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder.get_feePerByte" title="Permalink to this definition">#</a></dt>
-<dd><p>Returns the fee per byte specified in the builder</p>
+<dd><p>Returns the fee per byte specified in the builder object</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>

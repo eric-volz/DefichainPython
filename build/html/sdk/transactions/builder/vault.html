@@ -224,6 +224,7 @@
 <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../hdwallet/index.html">HDWallet</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of HDWallet</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../hdwallet/wallet.html">Wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hdwallet/account.html">Account</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../hdwallet/utils.html">Utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../hdwallet/exceptions.html">Wallet Exceptions</a></li>
 </ul>
@@ -327,17 +328,32 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.transactions.builder.modules.Vault">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.transactions.builder.modules.</span></span><span class="sig-name descname"><span class="pre">Vault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">builder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.transactions.builder.modules.Vault" title="Permalink to this definition">#</a></dt>
-<dd><dl class="py method">
+<dd><p><strong>The methods of this module create vault transactions</strong></p>
+<ol class="arabic simple">
+<li><p><strong>createvault</strong>: transaction for creating a vault</p></li>
+<li><p><strong>deposittovault</strong>: transaction for depositing collateral token to a vault</p></li>
+<li><p><strong>withdrawfromvault</strong>: transaction for withdraw of collateral from a vault</p></li>
+</ol>
+<dl class="py method">
 <dt class="sig sig-object py" id="defichain.transactions.builder.modules.Vault.createvault">
 <span class="sig-name descname"><span class="pre">createvault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ownerAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schemeId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../advanced/rawtransactions/tx.html#defichain.transactions.rawtransactions.Transaction" title="defichain.transactions.rawtransactions.tx.Transaction"><span class="pre">Transaction</span></a></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.Vault.createvault" title="Permalink to this definition">#</a></dt>
-<dd><p>Creates a transaction for creating a vault</p>
+<dd><p>Creates a transaction for creating a vault.</p>
+<p>The creation of a vault will cost you 1 UTXO as a fee by the blockchain.</p>
+<p>SchemeIDs mainnet: MIN1000, MIN500, MIN350, MIN200, MIN175, MIN150
+SchemeIDs testnet: C1000, C500, C350, C200, C175, C150</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">createvault</span><span class="p">(</span><span class="s2">&quot;df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e&quot;</span><span class="p">,</span> <span class="s2">&quot;MIN150&quot;</span><span class="p">)</span> <span class="c1"># creates a new vault</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ownerAddress</strong> (<em>str</em>) – (required) the address where vault will be created</p></li>
 <li><p><strong>schemeId</strong> (<em>str</em>) – (required) the scheme id for the vault</p></li>
-<li><p><strong>inputs</strong> (<a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a>) – (optional) Inputs</p></li>
+<li><p><strong>inputs</strong> (<em>[</em><a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a><em>]</em>) – (optional) additional inputs to spend</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../advanced/rawtransactions/tx.html#transaction-advanced-rawtransactions-transaction"><span class="std std-ref">Transaction</span></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -345,18 +361,21 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.transactions.builder.modules.Vault.deposittovault">
 <span class="sig-name descname"><span class="pre">deposittovault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vaultId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addressFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../advanced/rawtransactions/tx.html#defichain.transactions.rawtransactions.Transaction" title="defichain.transactions.rawtransactions.tx.Transaction"><span class="pre">Transaction</span></a></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.Vault.deposittovault" title="Permalink to this definition">#</a></dt>
-<dd><p>Creates a transaction for depositing collateral token amount to vault</p>
+<dd><p>Creates a transaction for depositing collateral token to a vault</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">deposittovault</span><span class="p">(</span><span class="s2">&quot;5cbe99407674a689fa9b8a522462b7a4b3e7893f61453ce3fa77f1307f7d0600&quot;</span><span class="p">,</span> <span class="s2">&quot;df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e&quot;</span><span class="p">,</span> <span class="s2">&quot;100@DFI&quot;</span><span class="p">)</span> <span class="c1"># deposits collateral to a vault</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>vaultId</strong> (<em>str</em>) – (required) vault id</p></li>
 <li><p><strong>addressFrom</strong> (<em>str</em>) – (required) address containing collateral</p></li>
-<li><p><strong>amount</strong> (<em>str</em>) – (required) Amount of collateral in <a class="reference external" href="mailto:amount&#37;&#52;&#48;symbol">amount<span>&#64;</span>symbol</a> format</p></li>
-<li><p><strong>inputs</strong> (<a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a>) – (optional) Inputs</p></li>
+<li><p><strong>amount</strong> (<a class="reference internal" href="../index.html#transactions-amounts"><span class="std std-ref">Amounts</span></a>) – (required) string with amount and token separated by an &#64;</p></li>
+<li><p><strong>inputs</strong> (<em>[</em><a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a><em>]</em>) – (optional) additional inputs to spend</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Transaction</p>
+<dd class="field-even"><p><a class="reference internal" href="../advanced/rawtransactions/tx.html#transaction-advanced-rawtransactions-transaction"><span class="std std-ref">Transaction</span></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -364,18 +383,21 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.transactions.builder.modules.Vault.withdrawfromvault">
 <span class="sig-name descname"><span class="pre">withdrawfromvault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vaultId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addressTo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../advanced/rawtransactions/tx.html#defichain.transactions.rawtransactions.Transaction" title="defichain.transactions.rawtransactions.tx.Transaction"><span class="pre">Transaction</span></a></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.Vault.withdrawfromvault" title="Permalink to this definition">#</a></dt>
-<dd><p>Creates a transaction for withdraw of collateral token from a vault</p>
+<dd><p>Creates a transaction for withdraw of collateral from a vault</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">vault</span><span class="o">.</span><span class="n">withdrawfromvault</span><span class="p">(</span><span class="s2">&quot;5cbe99407674a689fa9b8a522462b7a4b3e7893f61453ce3fa77f1307f7d0600&quot;</span><span class="p">,</span> <span class="s2">&quot;df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e&quot;</span><span class="p">,</span> <span class="s2">&quot;100@DFI&quot;</span><span class="p">)</span> <span class="c1"># withdraws collateral from a vault</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>vaultId</strong> (<em>str</em>) – (required) vault id</p></li>
-<li><p><strong>addressTo</strong> (<em>str</em>) – (required) destination address for withdraw of collateral</p></li>
-<li><p><strong>amount</strong> (<em>str</em>) – (required) Amount of collateral in <a class="reference external" href="mailto:amount&#37;&#52;&#48;symbol">amount<span>&#64;</span>symbol</a> format</p></li>
-<li><p><strong>inputs</strong> (<a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a>) – (optional) Inputs</p></li>
+<li><p><strong>addressTo</strong> (<em>str</em>) – (required) destination address for withdrawn collateral</p></li>
+<li><p><strong>amount</strong> (<a class="reference internal" href="../index.html#transactions-amounts"><span class="std std-ref">Amounts</span></a>) – (required) string with amount and token separated by an &#64;</p></li>
+<li><p><strong>inputs</strong> (<em>[</em><a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a><em>]</em>) – (optional) additional inputs to spend</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Transaction</p>
+<dd class="field-even"><p><a class="reference internal" href="../advanced/rawtransactions/tx.html#transaction-advanced-rawtransactions-transaction"><span class="std std-ref">Transaction</span></a></p>
 </dd>
 </dl>
 </dd></dl>

@@ -224,6 +224,7 @@
 <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../hdwallet/index.html">HDWallet</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of HDWallet</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../hdwallet/wallet.html">Wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hdwallet/account.html">Account</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../hdwallet/utils.html">Utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../hdwallet/exceptions.html">Wallet Exceptions</a></li>
 </ul>
@@ -327,21 +328,28 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.transactions.builder.modules.Governance">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.transactions.builder.modules.</span></span><span class="sig-name descname"><span class="pre">Governance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">builder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.transactions.builder.modules.Governance" title="Permalink to this definition">#</a></dt>
-<dd><dl class="py method">
+<dd><p><strong>The methods of this module create governance transactions</strong></p>
+<ol class="arabic simple">
+<li><p><strong>vote</strong>: transaction witch includes your own hexadecimal data</p></li>
+</ol>
+<dl class="py method">
 <dt class="sig sig-object py" id="defichain.transactions.builder.modules.Governance.vote">
 <span class="sig-name descname"><span class="pre">vote</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proposalId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">masternodeId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../advanced/rawtransactions/tx.html#defichain.transactions.rawtransactions.Transaction" title="defichain.transactions.rawtransactions.tx.Transaction"><span class="pre">Transaction</span></a></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.Governance.vote" title="Permalink to this definition">#</a></dt>
-<dd><p>Vote for proposal</p>
+<dd><p>Creates a transaction that votes for proposal</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">governance</span><span class="o">.</span><span class="n">vote</span><span class="p">(</span><span class="s2">&quot;1f4039ab714cf73ff1d92b58608ed20a73a799cde88c103b679bdafd83eb472b&quot;</span><span class="p">,</span> <span class="s2">&quot;33abc61982725be797f83b47da6f41a344f4d64879d84e31d87a91281070add8&quot;</span><span class="p">,</span> <span class="s2">&quot;neutral&quot;</span><span class="p">)</span>  <span class="c1"># creates a vote transaction</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>proposalId</strong> (<em>str</em>) – (required) The proposal txid</p></li>
-<li><p><strong>masternodeId</strong> (<em>str</em>) – (required) The masternodeId to vote with</p></li>
-<li><p><strong>decision</strong> (<em>str</em>) – (required) The vote decision (yes/no/neutral)</p></li>
-<li><p><strong>inputs</strong> (<a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a>) – (optional) Inputs</p></li>
+<li><p><strong>proposalId</strong> (<em>str</em>) – (required) the proposal txid</p></li>
+<li><p><strong>masternodeId</strong> (<em>str</em>) – (required) the masternodeId to vote with</p></li>
+<li><p><strong>decision</strong> (<em>str</em>) – (required) the vote decision (yes / no / neutral)</p></li>
+<li><p><strong>inputs</strong> (<em>[</em><a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a><em>]</em>) – (optional) additional inputs to spend</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Transaction</p>
+<dd class="field-even"><p><a class="reference internal" href="../advanced/rawtransactions/tx.html#transaction-advanced-rawtransactions-transaction"><span class="std std-ref">Transaction</span></a></p>
 </dd>
 </dl>
 </dd></dl>

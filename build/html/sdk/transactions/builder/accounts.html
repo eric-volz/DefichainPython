@@ -224,6 +224,7 @@
 <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../hdwallet/index.html">HDWallet</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of HDWallet</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../hdwallet/wallet.html">Wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hdwallet/account.html">Account</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../hdwallet/utils.html">Utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../hdwallet/exceptions.html">Wallet Exceptions</a></li>
 </ul>
@@ -327,39 +328,51 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.transactions.builder.modules.Accounts">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.transactions.builder.modules.</span></span><span class="sig-name descname"><span class="pre">Accounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">builder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.transactions.builder.modules.Accounts" title="Permalink to this definition">#</a></dt>
-<dd><dl class="py method">
+<dd><p><strong>The methods of this module create transactions that interact with your account/address.</strong></p>
+<ol class="arabic simple">
+<li><p><strong>utxostoaccount</strong>: converts the specified amount of UTXO to token</p></li>
+<li><p><strong>accounttoutxos</strong>: converts specified amount of token to UTXO</p></li>
+<li><p><strong>accounttoaccount</strong>: sends token from one address to another address</p></li>
+</ol>
+<dl class="py method">
 <dt class="sig sig-object py" id="defichain.transactions.builder.modules.Accounts.utxostoaccount">
-<span class="sig-name descname"><span class="pre">utxostoaccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../advanced/rawtransactions/tx.html#defichain.transactions.rawtransactions.Transaction" title="defichain.transactions.rawtransactions.Transaction"><span class="pre">Transaction</span></a></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.Accounts.utxostoaccount" title="Permalink to this definition">#</a></dt>
-<dd><p>Converts UTXOs to token</p>
+<span class="sig-name descname"><span class="pre">utxostoaccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../advanced/rawtransactions/tx.html#defichain.transactions.rawtransactions.Transaction" title="defichain.transactions.rawtransactions.Transaction"><span class="pre">Transaction</span></a></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.Accounts.utxostoaccount" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates a transaction that converts the specified amount of UTXO to token</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">utxostoaccount</span><span class="p">(</span><span class="s2">&quot;df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># converts one UTXO to token</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>address</strong> (<em>str</em>) – (required) the address of the account to be converted from</p></li>
-<li><p><strong>value</strong> (<em>int</em><em> | </em><em>float</em>) – (required) the amount of UTXOs to convert to token</p></li>
+<li><p><strong>amount</strong> (<em>float</em><em> | </em><em>int</em>) – (required) the amount of UTXOs to convert to token</p></li>
 <li><p><strong>tokenId</strong> (<em>int</em>) – (optional) the token id of the converted token (default: 0 -&gt; DFI)</p></li>
-<li><p><strong>inputs</strong> (<a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a>) – (optional) Inputs</p></li>
+<li><p><strong>inputs</strong> (<em>[</em><a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a><em>]</em>) – (optional) additional inputs to spend</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Transaction</p>
+<dd class="field-even"><p><a class="reference internal" href="../advanced/rawtransactions/tx.html#transaction-advanced-rawtransactions-transaction"><span class="std std-ref">Transaction</span></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.transactions.builder.modules.Accounts.accounttoutxos">
-<span class="sig-name descname"><span class="pre">accounttoutxos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addressFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addressAmountTo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.transactions.builder.modules.Accounts.accounttoutxos" title="Permalink to this definition">#</a></dt>
-<dd><p>Creates s transaction to convert tokens into utxos</p>
+<span class="sig-name descname"><span class="pre">accounttoutxos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addressFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addressAmountTo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../advanced/rawtransactions/tx.html#defichain.transactions.rawtransactions.Transaction" title="defichain.transactions.rawtransactions.tx.Transaction"><span class="pre">Transaction</span></a></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.Accounts.accounttoutxos" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates a transaction that converts specified amount of token to UTXO</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">accounttoutxos</span><span class="p">(</span><span class="s2">&quot;df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e&quot;</span><span class="p">:</span> <span class="s2">&quot;1@DFI&quot;</span><span class="p">,</span> <span class="s2">&quot;df1qzfwy63ggj5jfpul7r04kn2ss8kjz2sda57fa4m&quot;</span><span class="p">:</span> <span class="s2">&quot;1@DFI&quot;</span><span class="p">})</span> <span class="c1"># converts two token to UTXO</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>addressFrom</strong> (<em>str</em>) – (required) the defi address of sender</p></li>
-<li><p><strong>addressAmountTo</strong> – (required) AddressAmount</p></li>
-<li><p><strong>inputs</strong> (<a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a>) – (optional) Inputs</p></li>
+<li><p><strong>addressFrom</strong> (<em>str</em>) – (required) the address of the account to be converted from</p></li>
+<li><p><strong>addressAmountTo</strong> (<a class="reference internal" href="../index.html#transactions-addressamount"><span class="std std-ref">Address Amount</span></a>) – (required) json with specified address and amount to send</p></li>
+<li><p><strong>inputs</strong> (<em>[</em><a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a><em>]</em>) – (optional) additional inputs to spend</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Transaction</p>
+<dd class="field-even"><p><a class="reference internal" href="../advanced/rawtransactions/tx.html#transaction-advanced-rawtransactions-transaction"><span class="std std-ref">Transaction</span></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -367,17 +380,20 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="defichain.transactions.builder.modules.Accounts.accounttoaccount">
 <span class="sig-name descname"><span class="pre">accounttoaccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addressFrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addressAmountTo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../advanced/rawtransactions/tx.html#defichain.transactions.rawtransactions.Transaction" title="defichain.transactions.rawtransactions.tx.Transaction"><span class="pre">Transaction</span></a></span></span><a class="headerlink" href="#defichain.transactions.builder.modules.Accounts.accounttoaccount" title="Permalink to this definition">#</a></dt>
-<dd><p>Sends token from one address to another address</p>
+<dd><p>Creates a transaction that sends token from one address to another address</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">accounttoaccount</span><span class="p">(</span><span class="s2">&quot;df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e&quot;</span><span class="p">:</span> <span class="s2">&quot;0.00001@BTC&quot;</span><span class="p">,</span> <span class="s2">&quot;df1qzfwy63ggj5jfpul7r04kn2ss8kjz2sda57fa4m&quot;</span><span class="p">:</span> <span class="s2">&quot;1@DFI&quot;</span><span class="p">})</span> <span class="c1"># sends 0.00001 BTC and 1 DFI to other addresses</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>addressFrom</strong> (<em>str</em>) – (required) address from which the tokens should be sent</p></li>
-<li><p><strong>addressAmountTo</strong> (<em>addressAmount</em>) – (required) addressAmount</p></li>
-<li><p><strong>inputs</strong> (<a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a>) – (optional) Inputs</p></li>
+<li><p><strong>addressAmountTo</strong> (<a class="reference internal" href="../index.html#transactions-addressamount"><span class="std std-ref">Address Amount</span></a>) – (required) json with specified address and amount to send</p></li>
+<li><p><strong>inputs</strong> (<em>[</em><a class="reference internal" href="../advanced/rawtransactions/txinput.html#defichain.transactions.rawtransactions.TxInput" title="defichain.transactions.rawtransactions.TxInput"><em>TxInput</em></a><em>]</em>) – (optional) additional inputs to spend</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Transaction</p>
+<dd class="field-even"><p><a class="reference internal" href="../advanced/rawtransactions/tx.html#transaction-advanced-rawtransactions-transaction"><span class="std std-ref">Transaction</span></a></p>
 </dd>
 </dl>
 </dd></dl>

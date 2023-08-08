@@ -42,6 +42,7 @@ Wallet Components
     :maxdepth: 1
 
     wallet
+    account
     utils
 
 .. toctree::
