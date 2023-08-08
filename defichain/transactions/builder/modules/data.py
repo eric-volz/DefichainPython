@@ -28,13 +28,13 @@ class Data:
         You can only use a connection to a defichain node to submit this kind of transaction to the blockchain. The
         ocean network will refuse the transaction.
 
-        >>> builder.data.hex_data("48656c6c6f2044656669676874657273")
+        >>> builder.data.hex_data("48656c6c6f2044656669676874657273") # includes hexadecimal data into the blockchain
 
         :param data: (required) hexadecimal data
         :type data: hex
-        :param addressAmountTo: (required) json with specified address and amount to send
+        :param addressAmountTo: (optional) json with specified address and amount to send
         :type addressAmountTo: :ref:`Transactions AddressAmount`
-        :param changeAddress: (required) address to which the remaining UTXO should be sent
+        :param changeAddress: (optional) address to which the remaining UTXO should be sent
         :type changeAddress: str
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
@@ -88,13 +88,15 @@ class Data:
         You can only use a connection to a defichain node to submit this kind of transaction to the blockchain. The
         ocean network will refuse the transaction.
 
-        >>> builder.data.hex_data("Hello Defighters")
+        The string data will automaticly be converted into hexadecimal data.
+
+        >>> builder.data.hex_data("Hello Defighters") # includes string data into the blockchain
 
         :param data: (required) string data
         :type data: str
-        :param addressAmountTo: (required) json with specified address and amount to send
+        :param addressAmountTo: (optional) json with specified address and amount to send
         :type addressAmountTo: :ref:`Transactions AddressAmount`
-        :param changeAddress: (required) address to which the remaining UTXO should be sent
+        :param changeAddress: (optional) address to which the remaining UTXO should be sent
         :type changeAddress: str
         :param inputs: (optional) additional inputs to spend
         :type inputs: [TxInput]
