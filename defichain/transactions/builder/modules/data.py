@@ -5,22 +5,39 @@ from defichain.transactions.builder.rawtransactionbuilder import RawTransactionB
 
 
 class Data:
+    """
+    **The methods of this module are responsible for embedding your own data into the blockchain.**
+
+    **The data can only be 76 bytes in size.**
+
+    You can only use a connection to a defichain node to submit this kind of transaction to the blockchain. The
+    ocean network will refuse the transaction.
+
+    You can put data into the blockchain on two different ways:
+
+    1. **hex_data**: transaction witch includes your own hexadecimal data
+
+    2. **str_data**: transaction witch includes your own string data
+    """
 
     def __init__(self, builder):
         self._builder: RawTransactionBuilder = builder
 
     def hex_data(self, data: str, addressAmountTo=None, changeAddress: str = None, inputs=None) -> Transaction:
         """
-        Creates a transaction to submit data to the blockchain
+        Creates a transaction witch includes your own hexadecimal data. **The data can only be 76 bytes in size.**
+
+        You can only use a connection to a defichain node to submit this kind of transaction to the blockchain. The
+        ocean network will refuse the transaction.
 
         :param data: (required) hexadecimal data
-        :type data: str
-        :param addressAmountTo: (required) AddressAmount
-        :type addressAmountTo: json string
+        :type data: hex
+        :param addressAmountTo: (required) json with specified address and amount to send
+        :type addressAmountTo: :ref:`Transactions AddressAmount`
         :param changeAddress: (required) address to which the remaining UTXO should be sent
         :type changeAddress: str
-        :param inputs: (optional) Inputs
-        :type inputs: TxInput
+        :param inputs: (optional) additional inputs to spend
+        :type inputs: [TxInput]
         :return: Transaction
         """
 
@@ -66,18 +83,22 @@ class Data:
 
     def str_data(self, data: str, addressAmountTo=None, changeAddress: str = None, inputs=None) -> Transaction:
         """
-        Creates a transaction to submit data to the blockchain
+        Creates a transaction witch includes your own string data. **The data can only be 76 bytes in size.**
+
+        You can only use a connection to a defichain node to submit this kind of transaction to the blockchain. The
+        ocean network will refuse the transaction.
 
         :param data: (required) string data
         :type data: str
-        :param addressAmountTo: (required) AddressAmount
-        :type addressAmountTo: json string
+        :param addressAmountTo: (required) json with specified address and amount to send
+        :type addressAmountTo: :ref:`Transactions AddressAmount`
         :param changeAddress: (required) address to which the remaining UTXO should be sent
         :type changeAddress: str
-        :param inputs: (optional) Inputs
-        :type inputs: TxInput
+        :param inputs: (optional) additional inputs to spend
+        :type inputs: [TxInput]
         :return: Transaction
         """
+
         if inputs is None:
             inputs = []
         if addressAmountTo is None:
