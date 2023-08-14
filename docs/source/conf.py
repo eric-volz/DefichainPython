@@ -77,7 +77,7 @@ html_theme_options = {
 html_favicon = 'logo/logo.png'
 
 # Code Blocks
-code_blocks = [{"url": "https://gist.githubusercontent.com/eric-volz/964cbb9ab2906c132632689b99b1fcab/raw/476962d3edbdcc68c99e767fabea7ee726337717/multiple_transactions_in_one_block.py", "filename": "guides/example/chainedTransactions.py"},
+code_blocks = [{"url": "https://gist.githubusercontent.com/eric-volz/964cbb9ab2906c132632689b99b1fcab/raw/6ef58341fba7a5f0f544de14d49dcccab49f4281/multiple_transactions_in_one_block.py", "filename": "guides/example/chainedTransactions.py"},
                {"url": "https://gist.githubusercontent.com/eric-volz/987579be543cbb72c2c5bffaedea105b/raw/1aa5f9bb891d1fdd3759ca34f79a6a0b2a2674a8/defichainExtractPrivateKeys.py", "filename": "guides/example/extractPrivateKeys.py"},
                ]
 
