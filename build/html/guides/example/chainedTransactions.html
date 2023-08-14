@@ -330,23 +330,26 @@
 <span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainTestnet</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">This is an example to show you how you can chain transactions with the DefichainPython Library.</span>
-<span class="sd">-----------------------------------------------------------------------------------------------</span>
-<span class="sd">Chaining transactions, in this case, means that they depend on each other. The second chained transaction uses the unspent </span>
-<span class="sd">inputs of the first transaction, the third transaction uses the unspent inputs of the second transaction ...</span>
+<span class="sd">Example to show how you can chain transactions with the DefichainPython Library!</span>
+<span class="sd">--------------------------------------------------------------------------------</span>
+<span class="sd">Chaining transactions, in this case, means that they depend on each other. The </span>
+<span class="sd">second chained transaction uses the unspent inputs of the first transaction, the </span>
+<span class="sd">third transaction uses the unspent inputs of the second transaction ...</span>
 <span class="sd">It&#39;s mostly used to include multiple transactions in the same block.</span>
 
-<span class="sd">It&#39;s important to point out that there are two layers of coins. There are UTXO DFI and Token. The UTXO can always be spent</span>
-<span class="sd">in the next transaction. The Token on the other hand, can only be spent in a following transaction inside the same block if</span>
-<span class="sd">the outcome of the used DefiTx is pre determined.</span>
+<span class="sd">It&#39;s important to point out that there are two layers of coins. There are UTXO </span>
+<span class="sd">DFI and Token. The UTXO can always be spent in the next transaction. The Token </span>
+<span class="sd">on the other hand, can only be spent in a following transaction inside the same </span>
+<span class="sd">block ifthe outcome of the used DefiTx is pre determined.</span>
 
 <span class="sd">Example:</span>
-<span class="sd">When executing a takeloan, you want to have exactly 5 DUSD. The system knows that you will get exactly 5 DUSD and you can </span>
-<span class="sd">use them in the next tx.</span>
+<span class="sd">When executing a takeloan, you want to have exactly 5 DUSD. The system knows </span>
+<span class="sd">that you will get exactly 5 DUSD and you can use them in the next tx.</span>
 
-<span class="sd">When executing a poolswap you want to exchange 1 DFI into BTC. But the system only knows how much BTC you will get </span>
-<span class="sd">when the next block has been minted. So the transactions that should be executed after the poolswap cannot continue with </span>
-<span class="sd">the BTC output of the poolswap.</span>
+<span class="sd">When executing a poolswap you want to exchange 1 DFI into BTC. But the system </span>
+<span class="sd">only knows how much BTC you will get when the next block has been minted. So </span>
+<span class="sd">the transactions that should be executed after the poolswap cannot continue </span>
+<span class="sd">with the BTC output of the poolswap.</span>
 
 <span class="sd">Installation:</span>
 <span class="sd">To use this feature, you have to install a beta version of the package:</span>
