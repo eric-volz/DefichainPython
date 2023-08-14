@@ -3,18 +3,28 @@ from defichain import TxBuilder, Ocean, Wallet
 from defichain.networks import DefichainTestnet
 
 """
-In this example, several transactions build on each other. This means that the second transaction uses the inputs of the 
-first transaction and so on.
-With defi transactions (poolswap, takeloan, utxotoaccount) only those transactions can build on each other where the 
-result is absolutely clear. 
+This is an example to show you how you can chain transactions with the DefichainPython Library.
+-----------------------------------------------------------------------------------------------
+Chaining transactions, in this case, means that they depend on each other. The second chained transaction uses the unspent 
+inputs of the first transaction, the third transaction uses the unspent inputs of the second transaction ...
+It's mostly used to include multiple transactions in the same block.
+
+It's important to point out that there are two layers of coins. There are UTXO DFI and Token. The UTXO can always be spent
+in the next transaction. The Token on the other hand, can only be spent in a following transaction inside the same block if
+the outcome of the used DefiTx is pre determined.
 
 Example:
-When executing takeloan you want to have exactly 5 DUSD. The system knows that you will get exactly 5 DUSD and you can 
-use them in the next Tx.
+When executing a takeloan, you want to have exactly 5 DUSD. The system knows that you will get exactly 5 DUSD and you can 
+use them in the next tx.
 
-When executing a pool swap you want to exchange 1 DFI into BTC. But the system only knows how much BTC you will get 
-when the block has been minted. So transactions that come after a poolswap cannot continue with the output of the 
-poolswap.
+When executing a poolswap you want to exchange 1 DFI into BTC. But the system only knows how much BTC you will get 
+when the next block has been minted. So the transactions that should be executed after the poolswap cannot continue with 
+the BTC output of the poolswap.
+
+Installation:
+To use this feature, you have to install a beta version of the package:
+
+pip install defichain==3.0.0b3
 """
 
 """Script Setup"""
@@ -25,7 +35,7 @@ account = wallet.get_account()  # get account
 ADDRESS = account.get_p2wpkh()  # address to use
 VAULT_ID = "9429280b52dff4784465b3b00174fc12722907d6459bb7c50f2fad0dc5c20083"  # vault to use
 
-ocean = Ocean(url="https://testnet.ocean.jellyfishsdk.com", network="testnet")  # testnet ocean connection
+ocean = Ocean(network="testnet")  # testnet ocean connection
 builder = TxBuilder(ADDRESS, account, ocean, 1.0)  # transaction builder
 
 """Account Setup"""

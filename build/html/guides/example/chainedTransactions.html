@@ -330,18 +330,28 @@
 <span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainTestnet</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">In this example, several transactions build on each other. This means that the second transaction uses the inputs of the </span>
-<span class="sd">first transaction and so on.</span>
-<span class="sd">With defi transactions (poolswap, takeloan, utxotoaccount) only those transactions can build on each other where the </span>
-<span class="sd">result is absolutely clear. </span>
+<span class="sd">This is an example to show you how you can chain transactions with the DefichainPython Library.</span>
+<span class="sd">-----------------------------------------------------------------------------------------------</span>
+<span class="sd">Chaining transactions, in this case, means that they depend on each other. The second chained transaction uses the unspent </span>
+<span class="sd">inputs of the first transaction, the third transaction uses the unspent inputs of the second transaction ...</span>
+<span class="sd">It&#39;s mostly used to include multiple transactions in the same block.</span>
+
+<span class="sd">It&#39;s important to point out that there are two layers of coins. There are UTXO DFI and Token. The UTXO can always be spent</span>
+<span class="sd">in the next transaction. The Token on the other hand, can only be spent in a following transaction inside the same block if</span>
+<span class="sd">the outcome of the used DefiTx is pre determined.</span>
 
 <span class="sd">Example:</span>
-<span class="sd">When executing takeloan you want to have exactly 5 DUSD. The system knows that you will get exactly 5 DUSD and you can </span>
-<span class="sd">use them in the next Tx.</span>
+<span class="sd">When executing a takeloan, you want to have exactly 5 DUSD. The system knows that you will get exactly 5 DUSD and you can </span>
+<span class="sd">use them in the next tx.</span>
 
-<span class="sd">When executing a pool swap you want to exchange 1 DFI into BTC. But the system only knows how much BTC you will get </span>
-<span class="sd">when the block has been minted. So transactions that come after a poolswap cannot continue with the output of the </span>
-<span class="sd">poolswap.</span>
+<span class="sd">When executing a poolswap you want to exchange 1 DFI into BTC. But the system only knows how much BTC you will get </span>
+<span class="sd">when the next block has been minted. So the transactions that should be executed after the poolswap cannot continue with </span>
+<span class="sd">the BTC output of the poolswap.</span>
+
+<span class="sd">Installation:</span>
+<span class="sd">To use this feature, you have to install a beta version of the package:</span>
+
+<span class="sd">pip install defichain==3.0.0b3</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">&quot;&quot;&quot;Script Setup&quot;&quot;&quot;</span>
@@ -352,7 +362,7 @@
 <span class="n">ADDRESS</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">get_p2wpkh</span><span class="p">()</span>  <span class="c1"># address to use</span>
 <span class="n">VAULT_ID</span> <span class="o">=</span> <span class="s2">&quot;9429280b52dff4784465b3b00174fc12722907d6459bb7c50f2fad0dc5c20083&quot;</span>  <span class="c1"># vault to use</span>
 
-<span class="n">ocean</span> <span class="o">=</span> <span class="n">Ocean</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://testnet.ocean.jellyfishsdk.com&quot;</span><span class="p">,</span> <span class="n">network</span><span class="o">=</span><span class="s2">&quot;testnet&quot;</span><span class="p">)</span>  <span class="c1"># testnet ocean connection</span>
+<span class="n">ocean</span> <span class="o">=</span> <span class="n">Ocean</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="s2">&quot;testnet&quot;</span><span class="p">)</span>  <span class="c1"># testnet ocean connection</span>
 <span class="n">builder</span> <span class="o">=</span> <span class="n">TxBuilder</span><span class="p">(</span><span class="n">ADDRESS</span><span class="p">,</span> <span class="n">account</span><span class="p">,</span> <span class="n">ocean</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># transaction builder</span>
 
 <span class="sd">&quot;&quot;&quot;Account Setup&quot;&quot;&quot;</span>
