@@ -1,5 +1,6 @@
 from defichain import Wallet, Ocean, TxBuilder
 from defichain.networks import DefichainMainnet
+from defichain.transactions.rawtransactions import Transaction
 from defichain.transactions.utils import BuildAddressAmounts
 
 
@@ -19,9 +20,10 @@ class Addresses:
     P2WPKH: str = Keys.wallet.p2wpkh_address()
 
 
-builder_p2pkh = TxBuilder(Keys.account.get_p2pkh(), Keys.account, Ocean())
-builder_p2sh = TxBuilder(Keys.account.get_p2sh(), Keys.account, Ocean())
-builder_p2wpkh = TxBuilder(Keys.account.get_p2wpkh(), Keys.account, Ocean())
+ocean = Ocean()
+builder_p2pkh = TxBuilder(Keys.account.get_p2pkh(), Keys.account, ocean)
+builder_p2sh = TxBuilder(Keys.account.get_p2sh(), Keys.account, ocean)
+builder_p2wpkh = TxBuilder(Keys.account.get_p2wpkh(), Keys.account, ocean)
 
 
 class TestAccounts:
@@ -49,7 +51,16 @@ class TestPool:
 
 
 class TestTxBuilder:
-    pass
+    tx_serialized = "040000000001011f5bf7e7c3bb19f0859837bf0a2c2fa45122657dd6b8249c49cbad808aa5a9720100000000ffffffff" \
+                    "020000000000000000446a424466547842160014e9678d52be85d48ee605909dd937136b0798ec880117a914b1e44951" \
+                    "2e420ba5e2e66c08b427ac5f04c2c19d87010f000000cb90a8010000000000d8cac10500000000160014e9678d52be85" \
+                    "d48ee605909dd937136b0798ec880002473044022014102e4032ad8dc30dbd74203dd678bec62efc857df19cd9295c66" \
+                    "a1f0e52bd202207e5afe81ccc521c7d7a259d93445b4f2892298f3b092e2e199de277d683e8b19012103e536a76363d1" \
+                    "e4b44f9548c9e53f9d7c2fd8d354e0009c71f7f1944db13733b200000000"
+    tx = Transaction.deserialize(DefichainMainnet, tx_serialized)
+
+    inputs_tx_serialized = "040000000149b8ea9b2b0224e44126b86bd1e2889a7dac0ec06fcfb0dc4dd13782e1c84fce0100000000fffff" \
+                           "fff0000000000"
 
 
 class TestUTXO:
@@ -106,3 +117,6 @@ class TestUTXO:
 
 class TestVault:
     pass
+
+
+print(builder_p2wpkh.get_inputs_tx())

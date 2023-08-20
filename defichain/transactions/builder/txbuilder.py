@@ -123,9 +123,9 @@ class TxBuilder:
         raise TxBuilderError("The transaction cannot be tested because no data source is given")
 
     def _verify(self):
-        if not (self.get_address() != self.get_account().get_p2pkh() or
-                self.get_address() != self.get_account().get_p2sh() or
-                self.get_address() != self.get_account().get_p2wpkh()):
+        if not (self.get_address() == self.get_account().get_p2pkh() or
+                self.get_address() == self.get_account().get_p2sh() or
+                self.get_address() == self.get_account().get_p2wpkh()):
             raise TxBuilderError("The given address does not match the given account!")
 
     def get_inputs_tx(self) -> Transaction:
