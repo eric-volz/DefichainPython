@@ -1,7 +1,7 @@
 from defichain import Wallet, Ocean, TxBuilder
 from defichain.networks import DefichainMainnet
 from defichain.transactions.rawtransactions import Transaction
-from defichain.transactions.utils import BuildAddressAmounts
+from defichain.transactions.utils import BuildAddressAmounts, Converter
 
 
 class Keys:
@@ -31,7 +31,22 @@ class TestAccounts:
 
 
 class TestData:
-    pass
+    string = "Hello DeFighters"
+    hex = Converter.str_to_hex(string)
+
+    addressAmountTo = BuildAddressAmounts()
+    addressAmountTo.add(builder_p2pkh.get_address(), "DFI", 0.000001)
+    addressAmountTo.add(builder_p2sh.get_address(), "DFI", 0.000001)
+    addressAmountTo.add(builder_p2wpkh.get_address(), "DFI", 0.000001)
+
+    hex_serialized = "0400000000010149b8ea9b2b0224e44126b86bd1e2889a7dac0ec06fcfb0dc4dd13782e1c84fce0100000000fffffff" \
+                     "f050000000000000000226a203438363536633663366632303434363534363639363736383734363537323733006400" \
+                     "0000000000001976a914ad56321e69b7e2d30aeca9f49979ffc53084296f88ac00640000000000000017a91493a457d" \
+                     "0e4cc789beb65eb77742d35297652dafe87006400000000000000160014ad56321e69b7e2d30aeca9f49979ffc53084" \
+                     "296f00403a000000000000160014ad56321e69b7e2d30aeca9f49979ffc53084296f0002483045022100e3841478525" \
+                     "ee6227f0725a4721d0ca3b81742043bee2ad5cbe22518a3effb2802206f34d721767b7d29916123a770e44b0c6a440e" \
+                     "d8b4e46fb8aed206311ae996be012103f110404297e471ad86d1aabc8a885bd4d1ec71bc3f31bef8ed2ff9ad3032460" \
+                     "000000000"
 
 
 class TestGovernance:
@@ -119,4 +134,4 @@ class TestVault:
     pass
 
 
-print(builder_p2wpkh.get_inputs_tx())
+print(builder_p2wpkh.data.hex_data(TestData.hex, TestData.addressAmountTo.build(), Addresses.P2WPKH))
