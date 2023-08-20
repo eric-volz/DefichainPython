@@ -50,7 +50,30 @@ class TestData:
 
 
 class TestGovernance:
-    pass
+    proposal_id = "1f4039ab714cf73ff1d92b58608ed20a73a799cde88c103b679bdafd83eb472b"
+    mn_id = "977969d7aaa3748d1156f569368d997213a055d051fdb1ae744e979e714f415f"
+
+    vote_yes_serialized = "0400000000010149b8ea9b2b0224e44126b86bd1e2889a7dac0ec06fcfb0dc4dd13782e1c84fce0100000000ff" \
+                          "ffffff020000000000000000486a46446654784f2b47eb83fdda9b673b108ce8cd99a7730ad28e60582bd9f13f" \
+                          "f74c71ab39401f5f414f719e974e74aeb1fd51d055a01372998d3669f556118d74a3aad76979970100aa3b0000" \
+                          "00000000160014ad56321e69b7e2d30aeca9f49979ffc53084296f000247304402203e5b60ebcb8c287fc7b5a6" \
+                          "68e4ff3263c511693a85a04164995a5dbabf6286700220710f8c1a5b31a5b6b0efd9368d7bd44d4a708ff215fb" \
+                          "9783f78d250b359947f6012103f110404297e471ad86d1aabc8a885bd4d1ec71bc3f31bef8ed2ff9ad30324600" \
+                          "00000000"
+    vote_no_serialized = "0400000000010149b8ea9b2b0224e44126b86bd1e2889a7dac0ec06fcfb0dc4dd13782e1c84fce0100000000fff" \
+                         "fffff020000000000000000486a46446654784f2b47eb83fdda9b673b108ce8cd99a7730ad28e60582bd9f13ff7" \
+                         "4c71ab39401f5f414f719e974e74aeb1fd51d055a01372998d3669f556118d74a3aad76979970200aa3b0000000" \
+                         "00000160014ad56321e69b7e2d30aeca9f49979ffc53084296f0002473044022047b44ee8781ba055a862685691" \
+                         "2a79de925ef14a72616bee333ebc6e344b6392022071e20cdabc89d3ec0817447c2c001f745e452ada307f2b600" \
+                         "0d604a6ddd4619b012103f110404297e471ad86d1aabc8a885bd4d1ec71bc3f31bef8ed2ff9ad30324600000000" \
+                         "00"
+    vote_neutral_serialized = "0400000000010149b8ea9b2b0224e44126b86bd1e2889a7dac0ec06fcfb0dc4dd13782e1c84fce01000000" \
+                              "00ffffffff020000000000000000486a46446654784f2b47eb83fdda9b673b108ce8cd99a7730ad28e6058" \
+                              "2bd9f13ff74c71ab39401f5f414f719e974e74aeb1fd51d055a01372998d3669f556118d74a3aad7697997" \
+                              "0300aa3b000000000000160014ad56321e69b7e2d30aeca9f49979ffc53084296f00024830450221009443" \
+                              "17eec70221bba9f0aaf1e17891abd6282854965c50b3ac6b7b48e753452a022052f5df31d4913e886f18f2" \
+                              "762b6c157e1412af36a6eaadef9f7da0e2d651aa13012103f110404297e471ad86d1aabc8a885bd4d1ec71" \
+                              "bc3f31bef8ed2ff9ad3032460000000000"
 
 
 class TestLoans:
@@ -132,6 +155,3 @@ class TestUTXO:
 
 class TestVault:
     pass
-
-
-print(builder_p2wpkh.data.hex_data(TestData.hex, TestData.addressAmountTo.build(), Addresses.P2WPKH))
