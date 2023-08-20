@@ -1,6 +1,6 @@
 from defichain import Wallet, Ocean, TxBuilder
 from defichain.networks import DefichainMainnet
-from defichain.transactions.rawtransactions import Transaction
+from defichain.transactions.rawtransactions import Transaction, TxP2WPKHInput
 from defichain.transactions.utils import BuildAddressAmounts, Converter
 
 
@@ -127,9 +127,37 @@ class TestLoans:
                               "97e471ad86d1aabc8a885bd4d1ec71bc3f31bef8ed2ff9ad3032460000000000"
 
 
-
 class TestMasternode:
-    pass
+    operatorAddress = Addresses.P2PKH
+    ownerAddress = Addresses.P2WPKH
+    rewardAddress = Addresses.P2WPKH
+    mn_id = "bb0b3fbf55ca4153601a0c636420b8107c1fbd7c745cd9fcf7b939f9a248c3f5"
+    input = TxP2WPKHInput("bb0b3fbf55ca4153601a0c636420b8107c1fbd7c745cd9fcf7b939f9a248c3f5", 0, Addresses.P2WPKH,
+                          2001100000000)
+
+    createmasternode_serialized = "04000000000101f5c348a2f939b9f7fcd95c747cbd1f7c10b82064630c1a605341ca55bf3f0bbb0000" \
+                                  "000000ffffffff0300ca9a3b000000001c6a1a446654784301ad56321e69b7e2d30aeca9f49979ffc5" \
+                                  "3084296f0000204aa9d1010000160014ad56321e69b7e2d30aeca9f49979ffc53084296f00fadff505" \
+                                  "00000000160014ad56321e69b7e2d30aeca9f49979ffc53084296f0002483045022100e8f6ef84400b" \
+                                  "2699504f65c38eef15c480ff3b466a0c649a6436aef872ca22b702204e06f4590de172c7c9720d96b6" \
+                                  "47e0f878b44499cadbe49fcff057d1e3b72fe7012103f110404297e471ad86d1aabc8a885bd4d1ec71" \
+                                  "bc3f31bef8ed2ff9ad3032460000000000"
+
+    resignmasternode_serialized = "0400000000010149b8ea9b2b0224e44126b86bd1e2889a7dac0ec06fcfb0dc4dd13782e1c84fce0100" \
+                                  "000000ffffffff020000000000000000276a254466547852f5c348a2f939b9f7fcd95c747cbd1f7c10" \
+                                  "b82064630c1a605341ca55bf3f0bbb00cb3b000000000000160014ad56321e69b7e2d30aeca9f49979" \
+                                  "ffc53084296f00024830450221009f83118db2e647f62c334300243ad6e7e8ce10c999b0ebb19c2e2a" \
+                                  "a8eb3fc344022048fe5f0737bb520e0da66bef2ec66bf672bb9a98c62e919bd9158c0ce61a007f0121" \
+                                  "03f110404297e471ad86d1aabc8a885bd4d1ec71bc3f31bef8ed2ff9ad3032460000000000"
+
+    updatemasternode_serialized = "0400000000010149b8ea9b2b0224e44126b86bd1e2889a7dac0ec06fcfb0dc4dd13782e1c84fce0100" \
+                                  "000000ffffffff0200000000000000006e6a4c6b446654786df5c348a2f939b9f7fcd95c747cbd1f7c" \
+                                  "10b82064630c1a605341ca55bf3f0bbb03010414ad56321e69b7e2d30aeca9f49979ffc53084296f02" \
+                                  "0114ad56321e69b7e2d30aeca9f49979ffc53084296f030414ad56321e69b7e2d30aeca9f49979ffc5" \
+                                  "3084296f00843b000000000000160014ad56321e69b7e2d30aeca9f49979ffc53084296f0002483045" \
+                                  "022100bbfd15e70473bcd068084b70d10d8b99652b15b972ccce8148fcb2f39f136942022060b13920" \
+                                  "62df2268febd4faf7513a43850a14f230d98cfd4a96a3bc92b4429f2012103f110404297e471ad86d1" \
+                                  "aabc8a885bd4d1ec71bc3f31bef8ed2ff9ad3032460000000000"
 
 
 class TestPool:
