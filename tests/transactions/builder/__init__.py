@@ -275,4 +275,31 @@ class TestUTXO:
 
 
 class TestVault:
-    pass
+    vault_id = "5cbe99407674a689fa9b8a522462b7a4b3e7893f61453ce3fa77f1307f7d0600"
+    amount = "1@DFI"
+    input = TxP2WPKHInput("bb0b3fbf55ca4153601a0c636420b8107c1fbd7c745cd9fcf7b939f9a248c3f5", 0,
+                          Addresses.P2WPKH, 200000000)
+
+    create_vault_serialized = "04000000000101f5c348a2f939b9f7fcd95c747cbd1f7c10b82064630c1a605341ca55bf3f0bbb00000000" \
+                              "00ffffffff0200e1f50500000000256a234466547856160014ad56321e69b7e2d30aeca9f49979ffc53084" \
+                              "296f064d494e3135300011e0f50500000000160014ad56321e69b7e2d30aeca9f49979ffc53084296f0002" \
+                              "473044022042f0f6f6922c13a273b304a23ed9e9d5187bfa271203d6a5e97d2d84572f88f8022028e0425c" \
+                              "3bf1d43f65f2b1958fcb269b7ceb4ae495a06e44316c52fa2868f196012103f110404297e471ad86d1aabc" \
+                              "8a885bd4d1ec71bc3f31bef8ed2ff9ad3032460000000000"
+
+    deposit_to_vault_serialized = "0400000000010149b8ea9b2b0224e44126b86bd1e2889a7dac0ec06fcfb0dc4dd13782e1c84fce0100" \
+                                  "000000ffffffff020000000000000000476a45446654785300067d7f30f177fae33c45613f89e7b3a4" \
+                                  "b76224528a9bfa89a674764099be5c160014ad56321e69b7e2d30aeca9f49979ffc53084296f0000e1" \
+                                  "f5050000000000ab3b000000000000160014ad56321e69b7e2d30aeca9f49979ffc53084296f000248" \
+                                  "3045022100828fb96c8e172e4c146ed026d0c029f11dea2b255b33f0be7b7e6ac5723a849502205452" \
+                                  "7bcc3ea6492a094331899f28a0d5ab48a1dcb3b2f1616d984795042d1f1c012103f110404297e471ad" \
+                                  "86d1aabc8a885bd4d1ec71bc3f31bef8ed2ff9ad3032460000000000"
+
+    withdraw_from_vault_serialized = "0400000000010149b8ea9b2b0224e44126b86bd1e2889a7dac0ec06fcfb0dc4dd13782e1c84fce0" \
+                                     "100000000ffffffff020000000000000000476a45446654785300067d7f30f177fae33c45613f89" \
+                                     "e7b3a4b76224528a9bfa89a674764099be5c160014ad56321e69b7e2d30aeca9f49979ffc530842" \
+                                     "96f0000e1f5050000000000ab3b000000000000160014ad56321e69b7e2d30aeca9f49979ffc530" \
+                                     "84296f0002483045022100828fb96c8e172e4c146ed026d0c029f11dea2b255b33f0be7b7e6ac57" \
+                                     "23a8495022054527bcc3ea6492a094331899f28a0d5ab48a1dcb3b2f1616d984795042d1f1c0121" \
+                                     "03f110404297e471ad86d1aabc8a885bd4d1ec71bc3f31bef8ed2ff9ad3032460000000000"
+
