@@ -27,7 +27,37 @@ builder_p2wpkh = TxBuilder(Keys.account.get_p2wpkh(), Keys.account, ocean)
 
 
 class TestAccounts:
-    pass
+    addressAmountTo = BuildAddressAmounts()
+    addressAmountTo.add(builder_p2pkh.get_address(), "DFI", 0.000001)
+    addressAmountTo.add(builder_p2sh.get_address(), "DFI", 0.000001)
+    addressAmountTo.add(builder_p2wpkh.get_address(), "DFI", 0.000001)
+
+    utxo_to_account_serialized = "0400000000010149b8ea9b2b0224e44126b86bd1e2889a7dac0ec06fcfb0dc4dd13782e1c84fce01000" \
+                                 "00000ffffffff02e8030000000000002c6a2a446654785501160014ad56321e69b7e2d30aeca9f49979" \
+                                 "ffc53084296f0100000000e80300000000000000de37000000000000160014ad56321e69b7e2d30aeca" \
+                                 "9f49979ffc53084296f000247304402202bb5f317aad5169d3a2c28fff5a2b2054919de11b1ca27b5c9" \
+                                 "fdbe6e604a349c0220313ed9f1e8aa6299beb6de2d2b4f0257bce1a75d8a544bfac2e9f69976c8ab4f0" \
+                                 "12103f110404297e471ad86d1aabc8a885bd4d1ec71bc3f31bef8ed2ff9ad3032460000000000"
+
+    account_to_utxo_serialized = "0400000000010149b8ea9b2b0224e44126b86bd1e2889a7dac0ec06fcfb0dc4dd13782e1c84fce01000" \
+                                 "00000ffffffff0500000000000000002c6a2a4466547862160014ad56321e69b7e2d30aeca9f49979ff" \
+                                 "c53084296f01000000002c010000000000000200623b000000000000160014ad56321e69b7e2d30aeca" \
+                                 "9f49979ffc53084296f0064000000000000001976a914ad56321e69b7e2d30aeca9f49979ffc5308429" \
+                                 "6f88ac00640000000000000017a91493a457d0e4cc789beb65eb77742d35297652dafe8700640000000" \
+                                 "0000000160014ad56321e69b7e2d30aeca9f49979ffc53084296f000247304402203a3d19170629e354" \
+                                 "55c8169a213f08db2c9a3a4483a88b545fc0f2d9a48e1c9b02206bc53e2fc118d33f900ab01ee771fed" \
+                                 "dd215108b73bd7009b58c51ce4e92a0fb012103f110404297e471ad86d1aabc8a885bd4d1ec71bc3f31" \
+                                 "bef8ed2ff9ad3032460000000000"
+
+    account_to_account_serialized = "0400000000010149b8ea9b2b0224e44126b86bd1e2889a7dac0ec06fcfb0dc4dd13782e1c84fce01" \
+                                    "00000000ffffffff020000000000000000906a4c8d4466547842160014ad56321e69b7e2d30aeca9" \
+                                    "f49979ffc53084296f031976a914ad56321e69b7e2d30aeca9f49979ffc53084296f88ac01000000" \
+                                    "00640000000000000017a91493a457d0e4cc789beb65eb77742d35297652dafe8701000000006400" \
+                                    "000000000000160014ad56321e69b7e2d30aeca9f49979ffc53084296f0100000000640000000000" \
+                                    "000000623b000000000000160014ad56321e69b7e2d30aeca9f49979ffc53084296f000247304402" \
+                                    "20317cb4dd19fb1d8d69e006f55ca6cd7e04697dad4ae8b6ac3c18e9990d538293022055712f1240" \
+                                    "2da68ebfbc269e5e25186c8b6b3f0bdc0d07e020edc142587aaf3d012103f110404297e471ad86d1" \
+                                    "aabc8a885bd4d1ec71bc3f31bef8ed2ff9ad3032460000000000"
 
 
 class TestData:
