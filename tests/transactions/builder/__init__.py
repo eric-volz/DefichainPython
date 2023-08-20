@@ -161,7 +161,52 @@ class TestMasternode:
 
 
 class TestPool:
-    pass
+    addressFrom = Addresses.P2WPKH
+    tokenFrom = "BTC"
+    amountFrom = 0.00001
+    addressTo = Addresses.P2WPKH
+    tokenTo = "DFI"
+    maxPrice = 999999999999
+    pools = ["BTC-DFI"]
+
+    addressAmountFrom = BuildAddressAmounts()
+    addressAmountFrom.add(builder_p2pkh.get_address(), "DFI", 1)
+    addressAmountFrom.add(builder_p2sh.get_address(), "BTC", 0.00000900)
+
+    amount = "1@BTC-DFI"
+
+    poolswap_serialized = "0400000000010149b8ea9b2b0224e44126b86bd1e2889a7dac0ec06fcfb0dc4dd13782e1c84fce0100000000ff" \
+                          "ffffff020000000000000000506a4c4d4466547873160014ad56321e69b7e2d30aeca9f49979ffc53084296f02" \
+                          "e803000000000000160014ad56321e69b7e2d30aeca9f49979ffc53084296f00ff0fa5d4e80000000000000000" \
+                          "00000000a23b000000000000160014ad56321e69b7e2d30aeca9f49979ffc53084296f0002473044022047ae54" \
+                          "3054577329232db52d4c751e57c90cbfca85550480e6ef0bcc6217b0c30220504807313852d5b3c322ae1f7df1" \
+                          "c58d95865f8271e22b67dbe408b20b7917c6012103f110404297e471ad86d1aabc8a885bd4d1ec71bc3f31bef8" \
+                          "ed2ff9ad3032460000000000"
+
+    compositeswap_serialized = "0400000000010149b8ea9b2b0224e44126b86bd1e2889a7dac0ec06fcfb0dc4dd13782e1c84fce0100000" \
+                               "000ffffffff020000000000000000526a4c4f4466547869160014ad56321e69b7e2d30aeca9f49979ffc5" \
+                               "3084296f02e803000000000000160014ad56321e69b7e2d30aeca9f49979ffc53084296f00ff0fa5d4e80" \
+                               "000000000000000000000010500a03b000000000000160014ad56321e69b7e2d30aeca9f49979ffc53084" \
+                               "296f0002483045022100e5c90efa4faa569353d6909fe8a074fe08431dcef7a1d8f6a6ae4ed28492f6af0" \
+                               "2206fc034dfbb74e6a4e195ebeca5f0b694186f88a34c6e91230bee98556feffc96012103f110404297e4" \
+                               "71ad86d1aabc8a885bd4d1ec71bc3f31bef8ed2ff9ad3032460000000000"
+
+    addpoolliquidity_serialized = "0400000000010149b8ea9b2b0224e44126b86bd1e2889a7dac0ec06fcfb0dc4dd13782e1c84fce0100" \
+                                  "000000ffffffff0200000000000000006c6a4c69446654786c021976a914ad56321e69b7e2d30aeca9" \
+                                  "f49979ffc53084296f88ac010000000000e1f5050000000017a91493a457d0e4cc789beb65eb77742d" \
+                                  "35297652dafe8701020000008403000000000000160014ad56321e69b7e2d30aeca9f49979ffc53084" \
+                                  "296f00863b000000000000160014ad56321e69b7e2d30aeca9f49979ffc53084296f00024730440220" \
+                                  "3ea1ddcbe2d83bcb29d4b085dd2437ad8f551fca59f0e9da6d21c23431bd813e022059489220dea26d" \
+                                  "7a525cd0a32729fb72788518c63dfa2b0d7bcd04d130af22d9012103f110404297e471ad86d1aabc8a" \
+                                  "885bd4d1ec71bc3f31bef8ed2ff9ad3032460000000000"
+
+    removepoolliquidity_serialized = "0400000000010149b8ea9b2b0224e44126b86bd1e2889a7dac0ec06fcfb0dc4dd13782e1c84fce0" \
+                                     "100000000ffffffff020000000000000000276a254466547872160014ad56321e69b7e2d30aeca9" \
+                                     "f49979ffc53084296f0500e1f5050000000000cb3b000000000000160014ad56321e69b7e2d30ae" \
+                                     "ca9f49979ffc53084296f000247304402204acca74602c6d0428d38869b10a97831bde0f1c89ab1" \
+                                     "c736f52c3cb1584ec37602201d7357fcd0192f923387a402c6c53cb5402eb6fd4edd401f6ab5073" \
+                                     "ad4cd89a3012103f110404297e471ad86d1aabc8a885bd4d1ec71bc3f31bef8ed2ff9ad30324600" \
+                                     "00000000"
 
 
 class TestTxBuilder:
