@@ -62,7 +62,7 @@ class Data:
 
         for address in addressAmountTo:
             value, token = addressAmountTo[address].split("@")
-            addressOutput = TxAddressOutput(value, address)
+            addressOutput = TxAddressOutput(int(value), address)
             tx.add_output(addressOutput)
 
         changeOutputValue = inputValue - outputValue
