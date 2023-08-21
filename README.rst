@@ -14,7 +14,7 @@ This library is a community funded project. The objective is to interact
 with the defichain blockchain as effortlessly as possible. This can be archived by
 utilizing a variety of methods:
 
-1. `Node / RPC <#node--rpc>`__
+1. `Node / RPC <#node-rpc>`__
 2. `Ocean <#ocean>`__
 3. `HDWallet <#hdwallet>`__
 4. `Transactions <#transactions>`__
