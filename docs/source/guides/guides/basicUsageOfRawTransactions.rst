@@ -90,11 +90,11 @@ Example:
 Installation
 ------------
 
-Install the beta package from PyPi.
+Install the package from PyPi.
 
 .. code-block:: python
 
-    pip install defichain==3.0.0b3
+    pip install defichain -U
 
 Building Raw Transaction
 ------------------------
