@@ -328,9 +328,25 @@
         </div>
         <article role="main">
           <section id="transaction-builder">
-<span id="builder-index"></span><h1>Transaction Builder<a class="headerlink" href="#transaction-builder" title="Permalink to this heading">#</a></h1>
-<section id="builder-modules">
-<h2>Builder Modules<a class="headerlink" href="#builder-modules" title="Permalink to this heading">#</a></h2>
+<span id="transaction-builder-index"></span><h1>Transaction Builder<a class="headerlink" href="#transaction-builder" title="Permalink to this heading">#</a></h1>
+<p>The <a class="reference internal" href="txbuilder.html#transaction-builder-txbuilder"><span class="std std-ref">TxBuilder class</span></a> tries to reduces the complexity of creating a transaction to a minimum.
+The objective is to empower everyone to create their own transactions.</p>
+<p>The <a class="reference internal" href="txbuilder.html#transaction-builder-txbuilder"><span class="std std-ref">class</span></a> arguments will be explained inside the class itself. But an example with explanation can be read
+<a class="reference internal" href="#transaction-builder-example"><span class="std std-ref">below</span></a>.</p>
+<p>The TxBuilder, as well as the whole implementation, supports building transactions for
+<a class="reference internal" href="../advanced/address/index.html#transaction-advanced-address-index"><span class="std std-ref">all address types</span></a> (P2PKH, P2SH, P2WPKH) currently supported by defichain.
+Both networks, mainnet and testnet, are supported.</p>
+<div class="caution admonition">
+<p class="admonition-title">Assumptions</p>
+<p>Because of the reduced the complexity when using the TxBuilder some assumptions had to be made:</p>
+<ul class="simple">
+<li><p>All UTXO inputs of an address will be used and combined to one UTXO output (unless otherwise stated in the method)</p></li>
+<li><p>When executing a DefiTx the UTXO outputs will always go back to the same address</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<section id="txbuilder-modules">
+<h2>TxBuilder Modules<a class="headerlink" href="#txbuilder-modules" title="Permalink to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="txbuilder.html">TxBuilder</a></li>
@@ -344,6 +360,82 @@
 <li class="toctree-l1"><a class="reference internal" href="vault.html">Vault</a></li>
 </ul>
 </div>
+</section>
+<section id="example-with-explanation">
+<span id="transaction-builder-example"></span><h2>Example with explanation<a class="headerlink" href="#example-with-explanation" title="Permalink to this heading">#</a></h2>
+<p>The following example demonstrates how to create, sign, and send a transaction to the defichain network using the
+TxBuilder object:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Import ocean, wallet, txbuilder and the network</span>
+<span class="kn">from</span> <span class="nn">defichain</span> <span class="kn">import</span> <span class="n">Ocean</span><span class="p">,</span> <span class="n">Wallet</span><span class="p">,</span> <span class="n">TxBuilder</span>
+<span class="kn">from</span> <span class="nn">defichain.networks</span> <span class="kn">import</span> <span class="n">DefichainMainnet</span>
+
+<span class="c1"># 2. Specify ocean connection</span>
+<span class="n">ocean</span> <span class="o">=</span>  <span class="n">Ocean</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="s2">&quot;mainnet&quot;</span><span class="p">)</span>
+
+<span class="c1"># 3. Create wallet and account</span>
+<span class="n">mnemonic</span> <span class="o">=</span> <span class="s2">&quot;avocado key fan step egg engage winter upper attitude carry regret mixed utility body party trip valid oppose gas ensure deputy suspect blur trade&quot;</span>
+
+<span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span><span class="n">DefichainMainnet</span><span class="p">)</span>
+<span class="n">wallet</span><span class="o">.</span><span class="n">from_mnemonic</span><span class="p">(</span><span class="n">mnemonic</span><span class="p">)</span>
+
+<span class="n">account</span> <span class="o">=</span> <span class="n">wallet</span><span class="o">.</span><span class="n">get_account</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># 4. Create TxBuilder</span>
+<span class="n">builder</span> <span class="o">=</span> <span class="n">TxBuilder</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">get_p2wpkh</span><span class="p">(),</span> <span class="n">account</span><span class="p">,</span> <span class="n">ocean</span><span class="p">)</span>
+
+<span class="n">addressFrom</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">get_p2wpkh</span><span class="p">()</span>
+<span class="n">tokenFrom</span> <span class="o">=</span> <span class="s2">&quot;BTC&quot;</span>
+<span class="n">amount</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">addressTo</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">get_p2wpkh</span><span class="p">()</span>
+<span class="n">tokenTo</span> <span class="o">=</span> <span class="s2">&quot;DFI&quot;</span>
+<span class="n">maxprice</span> <span class="o">=</span> <span class="mi">3000</span>
+
+<span class="c1"># 5. Build poolswap transaction</span>
+<span class="n">tx</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">poolswap</span><span class="p">(</span><span class="n">addressFrom</span><span class="p">,</span> <span class="n">tokenFrom</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">addressTo</span><span class="p">,</span> <span class="n">tokenTo</span><span class="p">,</span> <span class="n">maxprice</span><span class="p">)</span>
+
+<span class="c1"># 6. Send transaction into the blockchain</span>
+<span class="n">txid</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">send_tx</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
+
+<span class="c1"># 7. Print txid</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">txid</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="initialization-of-the-txbuilder-object">
+<h3>Initialization of the TxBuilder object<a class="headerlink" href="#initialization-of-the-txbuilder-object" title="Permalink to this heading">#</a></h3>
+<p>The following four steps must always be fulfilled at the beginning of a new project / script to create a TxBuilder
+object:</p>
+<ol class="arabic simple">
+<li><p>First, all the necessary elements required for creating transactions must be imported. This includes a connection to
+<a class="reference internal" href="../../../api/ocean/index.html#ocean-index"><span class="std std-ref">Ocean</span></a>, the <a class="reference internal" href="../../hdwallet/index.html#hdwallet-index"><span class="std std-ref">Wallet</span></a> Implementation, and the
+<a class="reference internal" href="#transaction-builder-index"><span class="std std-ref">TxBuilder</span></a> object itself. Since this example pertains to building transactions for the
+mainnet, the correct network must be imported.</p></li>
+<li><p>In the second step, the <a class="reference internal" href="../../../api/ocean/ocean.html#ocean-ocean"><span class="std std-ref">ocean</span></a> object is initialized, establishing a connection to the Ocean
+mainnet. This connection is necessary because certain information from the blockchain are required to create a
+transaction. These details do not necessarily have to come from Ocean; you can also use a connection to your own
+<a class="reference internal" href="../../../api/node/index.html#node-index"><span class="std std-ref">defichain node</span></a> or manually input the required information.</p></li>
+<li><p>In the third step, the <a class="reference internal" href="../../hdwallet/account.html#hdwallet-account"><span class="std std-ref">account</span></a> being used must be initialized. In the example, a
+<a class="reference internal" href="../../hdwallet/wallet.html#hdwallet-wallet"><span class="std std-ref">wallet</span></a> is initialized using a mnemonic seed, and from that seed, the first account is
+derived. This is similar to using the first address in the LightWallet. However, the account object can also be
+initialized directly using the private key.</p></li>
+<li><p>As the fourth step, the <a class="reference internal" href="txbuilder.html#transaction-builder-txbuilder"><span class="std std-ref">TxBuilder</span></a> object is initialized with the dependencies
+created earlier. Since an account represents exactly one private key, which in turn corresponds to three different
+<a class="reference internal" href="../advanced/address/index.html#transaction-advanced-address-index"><span class="std std-ref">address types</span></a> (P2PKH, P2SH, P2WPKH), the appropriate address must be
+provided as the first argument.</p></li>
+</ol>
+</section>
+<section id="creating-signing-and-sending-transactions">
+<h3>Creating, signing, and sending transactions<a class="headerlink" href="#creating-signing-and-sending-transactions" title="Permalink to this heading">#</a></h3>
+<p>The following three steps are based on the previously created TxBuilder object.</p>
+<ol class="arabic simple" start="5">
+<li><p>In this code line, the actual transaction is created and automatically signed using the TxBuilder object. In this
+example, a <a class="reference internal" href="pool.html#transaction-builder-pool"><span class="std std-ref">poolswap</span></a> transaction is shown. Creating transactions closely
+follows the arguments known by the defichain node. All implemented transaction types and their arguments can be
+found in the <a class="reference internal" href="#transaction-builder-index"><span class="std std-ref">documentation</span></a>.</p></li>
+<li><p>Once the transaction is created and signed, it can be added to the defichain network using the TxBuilder object as
+well.</p></li>
+<li><p>If the transaction is valid and accepted by the blockchain, a transaction hash is returned.</p></li>
+</ol>
+</section>
 </section>
 </section>
 
@@ -403,7 +495,12 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Transaction Builder</a><ul>
-<li><a class="reference internal" href="#builder-modules">Builder Modules</a></li>
+<li><a class="reference internal" href="#txbuilder-modules">TxBuilder Modules</a></li>
+<li><a class="reference internal" href="#example-with-explanation">Example with explanation</a><ul>
+<li><a class="reference internal" href="#initialization-of-the-txbuilder-object">Initialization of the TxBuilder object</a></li>
+<li><a class="reference internal" href="#creating-signing-and-sending-transactions">Creating, signing, and sending transactions</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

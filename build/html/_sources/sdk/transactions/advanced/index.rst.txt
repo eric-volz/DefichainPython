@@ -1,7 +1,9 @@
-.. _Advanced Index:
+.. _Transaction Advanced Index:
 
 Advanced
 ========
+
+Will be documented soon!❤️
 
 .. toctree::
     :maxdepth: 1

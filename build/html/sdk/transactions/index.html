@@ -329,19 +329,152 @@
         <article role="main">
           <section id="transactions">
 <span id="transactions-index"></span><h1>Transactions<a class="headerlink" href="#transactions" title="Permalink to this heading">#</a></h1>
+<p>This is the entry page to get information about building a raw transaction for defichain using python.</p>
+<p><strong>There are two ways to use this implementation:</strong></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="builder/index.html#transaction-builder-index"><span class="std std-ref">Transaction Builder</span></a>: Abstracts the complexity of creating a transaction to a minimum
+<strong>(recommended for 99% of users)</strong></p></li>
+<li><p><a class="reference internal" href="advanced/index.html#transaction-advanced-index"><span class="std std-ref">Advanced</span></a>: You can create transaction on your own behave and stay very flexible while
+using the infrastructure of the library</p></li>
+</ol>
 <div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="builder/index.html">Transaction Builder</a></li>
-<li class="toctree-l1"><a class="reference internal" href="advanced/index.html">Advanced</a></li>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<hr class="docutils" />
+<section id="default-input-structure">
+<h2>Default Input Structure<a class="headerlink" href="#default-input-structure" title="Permalink to this heading">#</a></h2>
+<p>There will be some input structures throughout the implementation witch will be explained below:</p>
+<span class="target" id="module-defichain.transactions.utils"></span><section id="amounts">
+<span id="transactions-amounts"></span><h3>Amounts<a class="headerlink" href="#amounts" title="Permalink to this heading">#</a></h3>
+<p>The amount describes a combination of an token amount (int / float) and the corresponding token symbol: <a class="reference external" href="mailto:amount&#37;&#52;&#48;token">amount<span>&#64;</span>token</a></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;1@DFI&quot;</span>  <span class="c1"># one amount</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="s2">&quot;1@DFI&quot;</span><span class="p">,</span> <span class="s2">&quot;1@BTC&quot;</span><span class="p">,</span> <span class="s2">&quot;1@ETH&quot;</span><span class="p">]</span>  <span class="c1"># multiple amounts</span>
+</pre></div>
+</div>
+<p>There is an helper class to make the creation of amounts evan easier:</p>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.transactions.utils.</span></span><span class="sig-name descname"><span class="pre">BuildAmounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amounts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>An easy to use class to quickly build amounts.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>amounts</strong> (<em>str</em><em> or </em><em>array str</em>) – import already existing amounts: “<a class="reference external" href="mailto:amount&#37;&#52;&#48;token">amount<span>&#64;</span>token</a>” or [”<a class="reference external" href="mailto:amount1&#37;&#52;&#48;t1">amount1<span>&#64;</span>t1</a>”, “<a class="reference external" href="mailto:amount2&#37;&#52;&#48;t2">amount2<span>&#64;</span>t2</a>”]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.node</span> <span class="kn">import</span> <span class="n">BuildAmounts</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">amounts</span> <span class="o">=</span> <span class="n">BuildAmounts</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">amounts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;DFI&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">amounts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">amounts</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+<span class="go">[&#39;1@DFI&#39;, &#39;2@BTC&#39;]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../api/node/index.html#defichain.node.BuildAmounts" title="defichain.node.util.BuildAmounts"><span class="pre">BuildAmounts</span></a></span></span></dt>
+<dd><p>Add an amount to other amounts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coin</strong> (<em>str</em>) – coin to use</p></li>
+<li><p><strong>amount</strong> (<em>float</em>) – amount of specified coin</p></li>
 </ul>
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<section id="amounts">
-<span id="transactions-amounts"></span><h2>Amounts<a class="headerlink" href="#amounts" title="Permalink to this heading">#</a></h2>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>“BuildAmounts”</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span></dt>
+<dd><p>Returns the amount</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns the amount. If it is a single amount, it will return a string. If there are multiple amounts
+it will return a list of strings.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="address-amount">
-<span id="transactions-addressamount"></span><h2>Address Amount<a class="headerlink" href="#address-amount" title="Permalink to this heading">#</a></h2>
+<section id="address-amounts">
+<span id="transactions-addressamount"></span><h3>Address Amounts<a class="headerlink" href="#address-amounts" title="Permalink to this heading">#</a></h3>
+<p>The address is the key, the value are the <a class="reference internal" href="#transactions-amounts"><span class="std std-ref">amounts</span></a>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    &quot;address&quot;: &quot;amounts&quot;
+}
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    &quot;dcTKz5SQrqf4vGVsgra76ptXeNBcxPrenP&quot;: &quot;1@DFI&quot;,
+    &quot;df1qzkf582h0sgfksj0yn0wxz0r9amyqfferm5wycs&quot;: [&quot;2.0@BTC&quot;, &quot;3.0@ETH&quot;]
+}
+</pre></div>
+</div>
+<p>There is an helper class to make the creation of address amounts evan easier:</p>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.transactions.utils.</span></span><span class="sig-name descname"><span class="pre">BuildAddressAmounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_amounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">{}</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>An easy to use class to quickly build address amounts.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>address_amounts</strong> (<em>json string</em>) – import an existing json address amount: {“address”: “amounts”}</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">defichain.node</span> <span class="kn">import</span> <span class="n">BuildAddressAmounts</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">address_amounts</span> <span class="o">=</span> <span class="n">BuildAddressAmounts</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">address_amounts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;address1&quot;</span><span class="p">,</span> <span class="s2">&quot;DFI&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">address_amounts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;address2&quot;</span><span class="p">,</span> <span class="s2">&quot;BTC&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">address_amounts</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+<span class="go">{&#39;address1&#39;: &#39;1@DFI&#39;, &#39;address2&#39;: &#39;2@BTC&#39;}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../api/node/index.html#defichain.node.BuildAddressAmounts" title="defichain.node.util.BuildAddressAmounts"><span class="pre">BuildAddressAmounts</span></a></span></span></dt>
+<dd><p>Add an amount to already existing address amounts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>address</strong> (<em>str</em>) – defichain address</p></li>
+<li><p><strong>coin</strong> (<em>str</em>) – the coin to use</p></li>
+<li><p><strong>amount</strong> (<em>str</em>) – the amount of the specified coin</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>“BuildAddressAmounts”</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span></dt>
+<dd><p>Returns the address amount.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns the address amount</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 </section>
 </section>
 
@@ -401,8 +534,11 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Transactions</a><ul>
+<li><a class="reference internal" href="#default-input-structure">Default Input Structure</a><ul>
 <li><a class="reference internal" href="#amounts">Amounts</a></li>
-<li><a class="reference internal" href="#address-amount">Address Amount</a></li>
+<li><a class="reference internal" href="#address-amounts">Address Amounts</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
