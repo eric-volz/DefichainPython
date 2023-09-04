@@ -1,4 +1,4 @@
-.. _Ocean index:
+.. _Ocean Index:
 
 Ocean
 =====
