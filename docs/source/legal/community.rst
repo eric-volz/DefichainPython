@@ -87,7 +87,7 @@ Community Resources
     .. admonition:: CFP-2203-07: DeFiChain Python Library (1 800 DFI)
         :class: caution
 
-        This is the application for the project
+        Integration of connection to the Defichain Node and Ocean
 
     `GitHub: CFP 1 <https://github.com/DeFiCh/dfips/issues/133>`_
 
@@ -98,9 +98,18 @@ Community Resources
     .. admonition:: Defichain Python Library II (5000 DFI)
         :class: caution
 
-        The second CFP for this project
+        Implementation of HDWallet
 
     `GitHub: CFP 2 <https://github.com/DeFiCh/dfips/issues/234>`_
 
     `Reddit: CFP 2 <https://www.reddit.com/r/defiblockchain/comments/ynseds/cfp_defichain_python_library_ii_5000_dfi/>`_
+
+    .. admonition:: Defichain Python Library III (60000 DFI)
+        :class: caution
+
+        Implementation of the creation of RawTransactions
+
+    `Governance: CFP 3 <https://defiscan.live/governance/6b2c1829a123216afab81af5c0f2386c4c4d48920b871937d186a02d621c918b>`_
+
+    `Reddit: CFP 3 <https://www.reddit.com/r/defiblockchain/comments/16865vs/cfp_defichain_python_library_iii_60000_dfi/>`_
 
