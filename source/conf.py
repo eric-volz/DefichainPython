@@ -72,7 +72,8 @@ html_baseurl = 'https://docs.defichain-python.de/build/html/'
 
 html_static_path = ["_static"]
 html_theme_options = {
-    "announcement": "",
+    "announcement": "A new CFP has just been uploaded: "
+                    "Feedback about the project would be really appreciated on reddit!❤️",
 }
 html_favicon = 'logo/logo.png'
 
