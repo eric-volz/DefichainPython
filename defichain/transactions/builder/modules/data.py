@@ -10,8 +10,11 @@ class Data:
 
     **The data can only be 76 bytes in size.**
 
-    You can only use a connection to a defichain node to submit this kind of transaction to the blockchain. The
-    ocean network will refuse the transaction.
+    .. admonition:: Only submittable via defichain node
+        :class: note
+
+        You can only use a connection to a defichain node to submit this kind of transaction to the blockchain. The
+        ocean network will refuse the transaction.
 
     1. **hex_data**: transaction witch includes your own hexadecimal data
 

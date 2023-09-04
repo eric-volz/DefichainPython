@@ -3,11 +3,18 @@
 Transactions
 ============
 
-Documentation  is coming soon!
+This is the entry page to get information about building a raw transaction for defichain using python.
 
+**There are two ways to use this implementation:**
+
+1. :ref:`Transaction Builder Index`: Abstracts the complexity of creating a transaction to a minimum
+   **(recommended for 99% of users)**
+2. :ref:`Transaction Advanced Index`: You can create transaction on your own behave and stay very flexible while
+   using the infrastructure of the library
 
 .. toctree::
     :maxdepth: 1
+    :hidden:
 
     builder/index
     advanced/index
@@ -18,8 +25,12 @@ Documentation  is coming soon!
 
     exceptions
 
-Helper Classes
---------------
+----
+
+Default Input Structure
+-----------------------
+
+There will be some input structures throughout the implementation witch will be explained below:
 
 .. automodule:: defichain.transactions.utils
 
