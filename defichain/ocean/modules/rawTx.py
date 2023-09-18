@@ -54,6 +54,6 @@ class RawTx:
 
         :example:
 
-        >>> ocean.rawTx.test("af6294e9729c6a4f31439e86374541658f35f4cc372a51e06c725429d875ac5c")
+        >>> ocean.rawTx.get("af6294e9729c6a4f31439e86374541658f35f4cc372a51e06c725429d875ac5c")
         """
         return self._ocean._conn.get(f"rawtx/{txid}")

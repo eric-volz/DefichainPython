@@ -39,8 +39,8 @@ class Ocean:
     :example:
 
             >>> from defichain import Ocean
-            >>> ocaen = Ocean()
-            >>> blocks = ocaen.blocks.list()  #  returns the latest 30 blocks
+            >>> ocean = Ocean()
+            >>> blocks = ocean.blocks.list()  #  returns the latest 30 blocks
             >>> print(blocks)
     """
 
