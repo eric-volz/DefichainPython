@@ -3,13 +3,30 @@ import io
 
 
 class Calculate:
+    """
+    **Important methods to calculate different things.**
+    """
 
     @staticmethod
     def dHash256(h: hex) -> bytes:
+        """
+        Double hash's the hex input
+
+        :param h: (required) double hashing the hex input
+        :type h: hex
+        :return: bytes -- double hashed hex
+        """
         return hashlib.sha256(hashlib.sha256(h).digest()).digest()
 
     @staticmethod
     def length_varInt(hex: str) -> int:
+        """
+        Reads the length of characters of varInt
+
+        :param hex: (required) hex with varInt at the beginning
+        :type hex: str
+        :return: int -- number of characters of varInt
+        """
         size = 0
         split = [hex[i:i + 2] for i in range(0, len(hex), 2)]
         for s in split:
@@ -23,6 +40,13 @@ class Calculate:
 
     @staticmethod
     def write_varInt(n: int) -> str:
+        """
+        Calculates varInt from integer
+
+        :param n: (required) number
+        :type n: int
+        :return: str -- varInt
+        """
         # https://github.com/JellyfishSDK/jellyfish/blob/d57b37bb2b10dfb44389c0d1f6a0c6428fa82d7e/packages/jellyfish-buffer/src/VarInt.ts#L21
         # https://github.com/DeFiCh/ain/blob/0edc8e002ddc634dcb80785b9e9e01606fd8e4f7/src/serialize.h#L355
         buffer = [None for _ in range(20)]
@@ -43,6 +67,13 @@ class Calculate:
 
     @staticmethod
     def read_varInt(hex: str) -> int:
+        """
+        Calculates integer from varInt
+
+        :param hex: (required) varInt
+        :type hex: str
+        :return: int -- integer
+        """
         buffer = io.BytesIO(bytes.fromhex(hex))
 
         n = 0
@@ -56,6 +87,13 @@ class Calculate:
 
     @staticmethod
     def length_compactSize(hex: str) -> int:
+        """
+        Reads the length of characters of compactSize
+
+        :param hex: (required) hex with compactSize at the beginning
+        :type hex: str
+        :return: int -- number of characters of compactSize
+        """
         indicator = hex[0:2]
         if indicator == "fd":
             return 3
@@ -68,6 +106,13 @@ class Calculate:
 
     @staticmethod
     def write_compactSize(n: int, unit="hex") -> "str | bytes":
+        """
+        Calculates compactSize from integer
+
+        :param n: (required) number
+        :type n: int
+        :return: str -- compactSize
+        """
         if n < 0xfd:
             result = n.to_bytes(length=1, byteorder="little").hex()
         elif n <= 0xffff:
@@ -85,6 +130,13 @@ class Calculate:
 
     @staticmethod
     def read_compactSize(hex: str) -> int:
+        """
+        Calculates integer from compactSize
+
+        :param hex: (required) compactSize
+        :type hex: str
+        :return: int -- integer
+        """
         if hex[0:2] == "fd":
             return int.from_bytes(bytes.fromhex(hex[2:6]), byteorder="little")
         elif hex[0:2] == "fe":
@@ -96,6 +148,15 @@ class Calculate:
 
     @staticmethod
     def addressAmountSum(addressAmount: {}) -> "int | float":
+        """
+        Sums up all values in a addressAmount json.
+
+        Different tokens are not taken into account in the sum.
+
+        :param addressAmount: (required) :ref:`Transactions AddressAmount`
+        :type addressAmount: {}
+        :return: int | float -- sum of the addressAmount
+        """
         resultValue = 0
         for address in addressAmount:
             if isinstance(addressAmount[address], list):
