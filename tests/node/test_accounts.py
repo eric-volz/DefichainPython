@@ -98,9 +98,9 @@ def test_getpendingfutureswaps():  # 10
 @pytest.mark.query
 def test_gettokenbalances():  # 11
     assert node.accounts.gettokenbalances()
-    assert node.accounts.gettokenbalances(0, True, 100, False, False)
+    assert node.accounts.gettokenbalances(0, True, 100, False, False, False)
     assert node.accounts.gettokenbalances(start=0, including_start=True, limit=100, indexed_amounts=False,
-                                          symbol_lookup=False)
+                                          symbol_lookup=False, evm=False)
 
 
 @pytest.mark.query

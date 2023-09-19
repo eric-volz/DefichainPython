@@ -230,11 +230,11 @@ class Accounts:
         return self._node._rpc.call("getpendingfutureswaps", address)
 
     def gettokenbalances(self, start: str = None, including_start: bool = None, limit: int = None,
-                         indexed_amounts: bool = False, symbol_lookup: bool = False) -> []:  # 11
+                         indexed_amounts: bool = False, symbol_lookup: bool = False, evm: bool = False) -> []:  # 11
         """
         Returns the balances of all accounts that belong to the wallet.
 
-        :param start: (optional) Optional first key to iterate from, in lexicographical order.Typically it's set to last tokenID from previous request.
+        :param start: (optional) Optional first key to iterate from, in lexicographical order. Typically it's set to last tokenID from previous request.
         :type start: str
         :param including_start: (optional) If true, then iterate including starting position. False by default
         :type including_start: bool
@@ -244,6 +244,8 @@ class Accounts:
         :type indexed_amounts: bool
         :param symbol_lookup: (optional) Use token symbols in output (default = false)
         :type symbol_lookup: bool
+        :param evm: (optional) Include DFI balances in the EVM layer (default = false): Note: This does not include DST20 tokens
+        :type evm: bool
         :return: [...] (json array) -- object with balances information
 
         :example:
@@ -255,7 +257,7 @@ class Accounts:
         pagination.append("including_start", including_start)
         pagination.append("limit", limit)
 
-        return self._node._rpc.call("gettokenbalances", pagination.build(), indexed_amounts, symbol_lookup)
+        return self._node._rpc.call("gettokenbalances", pagination.build(), indexed_amounts, symbol_lookup, evm)
 
     def listaccounthistory(self, owner: str, maxBlockHeight: int = None, depth: int = None, no_rewards: bool = None,
                            token: str = None, txtype: str = None, limit: int = None, txn: int = None,
