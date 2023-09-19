@@ -1,11 +1,12 @@
 from .wallet import Wallet
+from typing import Any
 from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
 
 
 class Account:
 
     @staticmethod
-    def _is_publicKey(network: "DefichainMainnet | DefichainTestnet", publicKey: str) -> bool:
+    def _is_publicKey(network: Any, publicKey: str) -> bool:
         try:
             Wallet(network).from_public_key(publicKey)
             return True
@@ -13,7 +14,7 @@ class Account:
             return False
 
     @staticmethod
-    def _is_privateKey(network: "DefichainMainnet | DefichainTestnet", privateKey: str) -> bool:
+    def _is_privateKey(network: Any, privateKey: str) -> bool:
         try:
             Wallet(network).from_private_key(privateKey)
             return True
@@ -21,14 +22,14 @@ class Account:
             return False
 
     @staticmethod
-    def _is_wif(network: "DefichainMainnet | DefichainTestnet", wif: str) -> bool:
+    def _is_wif(network: Any, wif: str) -> bool:
         try:
             Wallet(network).from_wif(wif)
             return True
         except:
             return False
 
-    def __init__(self, network: "DefichainMainnet | DefichainTestnet", key: str):
+    def __init__(self, network: Any, key: str):
         self._network = None
         self._wallet: Wallet = Wallet(network)
         self.set_network(network)
