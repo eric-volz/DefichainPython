@@ -13,4 +13,4 @@ Will be documented soon!❤️
     rawtransactions/index
     remotedata/index
     keys
-    utils
+    utils/index
