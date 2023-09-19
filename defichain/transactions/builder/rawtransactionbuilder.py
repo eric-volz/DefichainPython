@@ -2,12 +2,13 @@ from defichain import Account
 from defichain.exceptions.transactions import TxBuilderError, NotYetSupportedError
 
 from defichain.transactions.address import Address
-from defichain.transactions.constants import AddressTypes, DefiTxType
+from defichain.transactions.constants import AddressTypes, DefiTxType, SEQUENCE
 from defichain.networks import Network
 from defichain.transactions.remotedata.remotedata import RemoteData
 from defichain.transactions.rawtransactions import Transaction, TxInput, TxP2PKHInput, TxP2WPKHInput, TxP2SHInput, \
     TxAddressOutput, TxDefiOutput, estimate_fee
 from defichain.transactions.defitx.modules.basedefitx import BaseDefiTx
+from defichain.transactions.utils import Converter
 
 
 class RawTransactionBuilder:
@@ -16,12 +17,13 @@ class RawTransactionBuilder:
     def new_transaction() -> Transaction:
         return Transaction([], [])
 
-    def __init__(self, address: str, account: Account, dataSource: RemoteData, feePerByte: float):
-        self._address, self._account, self._dataSource, self._feePerByte = None, None, None, None
+    def __init__(self, address: str, account: Account, dataSource: RemoteData, feePerByte: float, replaceable: bool):
+        self._address, self._account, self._dataSource, self._feePerByte, self._replaceable = None, None, None, None, None
         self.set_address(address)
         self.set_account(account)
         self.set_dataSource(dataSource)
         self.set_feePerByte(feePerByte)
+        self.set_replaceable(replaceable)
 
     # Build Transaction
     def build_transactionInputs(self, inputs=[]) -> Transaction:
@@ -30,18 +32,35 @@ class RawTransactionBuilder:
         if inputs or self.get_dataSource() is None:
             tx.set_inputs(inputs)
         else:
+            #  Transaction should be replaceable
+            if self.get_replaceable():
+                sequence: str = Converter.int_to_hex(Converter.hex_to_int(SEQUENCE) - 1, 4)
+            else:
+                sequence: str = SEQUENCE
+
             for input in self.get_dataSource().get_unspent(self.get_address()):
                 address = Address.from_scriptPublicKey(self.get_account().get_network(), input["scriptPubKey"])
                 # Build P2PKH Input
                 if address.get_addressType() == AddressTypes.P2PKH:
-                    tx.add_input(TxP2PKHInput(input["txid"], input["vout"], self.get_address(), input["value"]))
+                    tx.add_input(TxP2PKHInput(input["txid"],
+                                              input["vout"],
+                                              self.get_address(),
+                                              input["value"],
+                                              sequence))
                 # Build P2SH Input
                 elif address.get_addressType() == AddressTypes.P2SH:
-                    tx.add_input(TxP2SHInput(input["txid"], input["vout"], self.get_account().get_p2wpkh(),
-                                             input["value"]))
+                    tx.add_input(TxP2SHInput(input["txid"],
+                                             input["vout"],
+                                             self.get_account().get_p2wpkh(),
+                                             input["value"],
+                                             sequence))
                 # Build P2WPKH Input
                 elif address.get_addressType() == AddressTypes.P2WPKH:
-                    tx.add_input(TxP2WPKHInput(input["txid"], input["vout"], self.get_address(), input["value"]))
+                    tx.add_input(TxP2WPKHInput(input["txid"],
+                                               input["vout"],
+                                               self.get_address(),
+                                               input["value"],
+                                               sequence))
             # Check Inputs for masternode collateral
             tx.set_inputs(self.checkMasternodeInputs(tx.get_inputs()))
         if not tx.get_inputs():
@@ -127,6 +146,9 @@ class RawTransactionBuilder:
     def get_feePerByte(self) -> float:
         return self._feePerByte
 
+    def get_replaceable(self) -> bool:
+        return self._replaceable
+
     def get_network(self) -> Network:
         return self.get_account().get_network()
 
@@ -142,3 +164,7 @@ class RawTransactionBuilder:
 
     def set_feePerByte(self, feePerByte: float) -> None:
         self._feePerByte = feePerByte
+
+    def set_replaceable(self, replaceable: bool) -> None:
+        self._replaceable = replaceable
+
