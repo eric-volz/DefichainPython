@@ -4,7 +4,7 @@ import io
 
 class Calculate:
     """
-    **Important methods to calculate different things.**
+    **Methods to calculate different things.**
     """
 
     @staticmethod
@@ -153,8 +153,8 @@ class Calculate:
 
         Different tokens are not taken into account in the sum.
 
-        :param addressAmount: (required) :ref:`Transactions AddressAmount`
-        :type addressAmount: {}
+        :param addressAmount: (required) AddressAmount
+        :type addressAmount: :ref:`Transactions AddressAmount`
         :return: int | float -- sum of the addressAmount
         """
         resultValue = 0
