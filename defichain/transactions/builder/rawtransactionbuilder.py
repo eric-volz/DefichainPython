@@ -34,7 +34,7 @@ class RawTransactionBuilder:
         else:
             #  Transaction should be replaceable
             if self.get_replaceable():
-                sequence: str = Converter.int_to_hex(Converter.hex_to_int(SEQUENCE) - 1, 4)
+                sequence: str = Converter.int_to_hex(Converter.hex_to_int(SEQUENCE) - 2, 4)
             else:
                 sequence: str = SEQUENCE
 
