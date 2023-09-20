@@ -52,15 +52,17 @@ class TxBuilder:
     :param feePerByte: (optional) approximate fee paid per byte
     :type feePerByte: float
     """
-    def __init__(self, address: str, account: Account, dataSource: "Ocean | Node | None", feePerByte=1.0):
-        self._address, self._account, self._dataSource, self._feePerByte = None, None, None, None
+    def __init__(self, address: str, account: Account, dataSource: "Ocean | Node | None", feePerByte=1.0,
+                 replaceable: bool = False):
+        self._address, self._account, self._dataSource, self._feePerByte, self._replaceable = None, None, None, None, None
         self._set_address(address)
         self._set_account(account)
         self._set_dataSource(dataSource)
         self._set_feePerByte(feePerByte)
+        self._set_replaceable(replaceable)
 
         self._builder = RawTransactionBuilder(self.get_address(), self.get_account(), self.get_dataSource(),
-                                              self.get_feePerByte())
+                                              self.get_feePerByte(), self.get_replaceable())
 
         self.utxo = UTXO(self._builder)
         self.data = Data(self._builder)
@@ -170,6 +172,14 @@ class TxBuilder:
         """
         return self._feePerByte
 
+    def get_replaceable(self) -> bool:
+        """
+        Returns if the builder object creates transactions that are replaceable
+
+        :return: bool
+        """
+        return self._replaceable
+
     # Set Information
     def _set_address(self, address: str) -> None:
         self._address = address
@@ -189,5 +199,8 @@ class TxBuilder:
 
     def _set_feePerByte(self, feePerByte: float) -> None:
         self._feePerByte = feePerByte
+
+    def _set_replaceable(self, replaceable: bool) -> None:
+        self._replaceable = replaceable
 
 
