@@ -75,6 +75,29 @@ class Wallet:
         """
         return self._node._rpc.call("addmultisigaddress", nrequired, keys, label, address_type)
 
+    def addressmap(self, input: str, type: int):
+        """
+        Give the equivalent of an address from EVM to DVM and versa
+
+        Map Types:
+
+        1 - Address format: DFI -> ERC55
+
+        2 - Address format: ERC55 -> DFI
+
+        :param input: (required) DVM address or EVM address
+        :type input: str
+        :param type: (required) Map types
+        :type type: int
+        :return: json - returns corresponding DVM or EVM address
+
+        :example:
+
+            >>> node.wallet.addressmap("df1quwxpegclg5pjdxnnept0mdzujc33ufey0tje7c", 1)
+        """
+
+        return self._node._rpc.call("addressmap", input, type)
+
     def backupwallet(self, destination: str) -> None:  # 04
         """
         Safely copies current wallet file to destination, which can be a directory or a path with filename

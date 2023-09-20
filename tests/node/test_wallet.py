@@ -40,9 +40,17 @@ def test_addmultisigaddress():  # 03
     assert node.wallet.addmultisigaddress(nrequired=3, keys=[address1, address2, address3], label="test",
                                           address_type="legacy")
 
+@pytest.mark.query
+def test_addressmap():  # 04
+    dvm = "tf1qncaf0dv3ny7h6dtfc7ptcfx50zzfevt20vs3pj"
+    evm = "0x023CD8A7135EcDe81AE12725907CA32ceF0e1D30"
+
+    assert node.wallet.addressmap(dvm, 1)
+    assert node.wallet.addressmap(evm, 2)
+
 
 @pytest.mark.query
-def test_backupwallet():  # 04
+def test_backupwallet():  # 05
     assert node.wallet.backupwallet(path + os.sep + "backup_wallet") is None
     os.remove(path + os.sep + "backup_wallet")
     assert node.wallet.backupwallet(destination=path + os.sep + "backup_wallet") is None
@@ -50,7 +58,7 @@ def test_backupwallet():  # 04
 
 
 @pytest.mark.query
-def test_bumpfee():  # 05
+def test_bumpfee():  # 06
     txid = "8bb2a97832d5614523b75b082975c15ad17422df659898c5a5112757d438fb39"
     string = ".* RPC_INVALID_ADDRESS_OR_KEY: Invalid or non-wallet transaction id"
     with pytest.raises(InternalServerError, match=string):
@@ -62,7 +70,7 @@ def test_bumpfee():  # 05
 
 
 @pytest.mark.query
-def test_createwallet():  # 06
+def test_createwallet():  # 07
     wallet_name = load_secrets_conf()["wallet_name"].split(os.sep)[-1]
     string = f".* RPC_WALLET_ERROR: Wallet {wallet_name} already exists."
     with pytest.raises(InternalServerError, match=string):
@@ -75,13 +83,13 @@ def test_createwallet():  # 06
 
 
 @pytest.mark.query
-def test_dumpprivkey():  # 07
+def test_dumpprivkey():  # 08
     assert node.wallet.dumpprivkey(address)
     assert node.wallet.dumpprivkey(address=address)
 
 
 @pytest.mark.query
-def test_dumpwallet():  # 08
+def test_dumpwallet():  # 09
     assert node.wallet.dumpwallet(path + os.sep + "dump_wallet")
     os.remove(path + os.sep + "dump_wallet")
     assert node.wallet.dumpwallet(filename=path + os.sep + "dump_wallet")
@@ -89,7 +97,7 @@ def test_dumpwallet():  # 08
 
 
 @pytest.mark.query
-def test_encryptwallet():  # 09
+def test_encryptwallet():  # 10
     """
     assumes that a password has been set!
     Otherwise, the test fails and test is new password of the wallet
@@ -102,19 +110,19 @@ def test_encryptwallet():  # 09
 
 
 @pytest.mark.query
-def test_getaddressesbylabel():  # 10
+def test_getaddressesbylabel():  # 11
     assert node.wallet.getaddressesbylabel("")
     assert node.wallet.getaddressesbylabel(label="")
 
 
 @pytest.mark.query
-def test_getaddressinfo():  # 11
+def test_getaddressinfo():  # 12
     assert node.wallet.getaddressinfo(address)
     assert node.wallet.getaddressinfo(address=address)
 
 
 @pytest.mark.query
-def test_getbalance():  # 12
+def test_getbalance():  # 13
     string = '.* RPC_WALLET_ERROR: wallet does not have the "avoid reuse" feature enabled'
     with pytest.raises(InternalServerError, match=string):
         assert node.wallet.getbalance()
@@ -125,41 +133,41 @@ def test_getbalance():  # 12
 
 
 @pytest.mark.query
-def test_getbalances():  # 13
+def test_getbalances():  # 14
     assert node.wallet.getbalances()
     assert node.wallet.getbalances(with_tokens=False)
 
 
 @pytest.mark.query
-def test_getnewaddress():  # 14
+def test_getnewaddress():  # 15
     assert node.wallet.getnewaddress()
     assert node.wallet.getnewaddress("", "legacy")
     assert node.wallet.getnewaddress(label="", address_type="legacy")
 
 
 @pytest.mark.query
-def test_getrawchangeaddress():  # 15
+def test_getrawchangeaddress():  # 16
     assert node.wallet.getrawchangeaddress()
     assert node.wallet.getrawchangeaddress("legacy")
     assert node.wallet.getrawchangeaddress(address_type="legacy")
 
 
 @pytest.mark.query
-def test_getreceivedbyaddress():  # 16
+def test_getreceivedbyaddress():  # 17
     assert node.wallet.getreceivedbyaddress(address)
     assert node.wallet.getreceivedbyaddress(address, 1)
     assert node.wallet.getreceivedbyaddress(address=address, minconf=1)
 
 
 @pytest.mark.query
-def test_getreceivedbylabel():  # 17
+def test_getreceivedbylabel():  # 18
     assert node.wallet.getreceivedbylabel("")
     assert node.wallet.getreceivedbylabel("", 1)
     assert node.wallet.getreceivedbylabel(label="", minconf=1)
 
 
 @pytest.mark.query
-def test_gettransaction():  # 18
+def test_gettransaction():  # 19
     txid = node.wallet.listtransactions(count=1)[0]["txid"]
 
     assert node.wallet.gettransaction(txid)
@@ -168,7 +176,7 @@ def test_gettransaction():  # 18
 
 
 @pytest.mark.query
-def test_getunconfirmedbalance():  # 19
+def test_getunconfirmedbalance():  # 20
     result1 = node.wallet.getunconfirmedbalance()
     assert result1 or result1 == 0.0
     result2 = node.wallet.getunconfirmedbalance(False)
@@ -178,21 +186,21 @@ def test_getunconfirmedbalance():  # 19
 
 
 @pytest.mark.query
-def test_getwalletinfo():  # 20
+def test_getwalletinfo():  # 21
     assert node.wallet.getwalletinfo()
     assert node.wallet.getwalletinfo(False)
     assert node.wallet.getwalletinfo(with_tokens=False)
 
 
 @pytest.mark.query
-def test_importaddress():  # 21
+def test_importaddress():  # 22
     assert node.wallet.importaddress(address, rescan=False) is None
     assert node.wallet.importaddress(address, "", False, False) is None
     assert node.wallet.importaddress(address=address, label="", rescan=False, p2sh=False) is None
 
 
 @pytest.mark.query
-def test_importmulti():  # 22
+def test_importmulti():  # 23
     string = '.* RPC_TYPE_ERROR: Expected type object, got bool'
     with pytest.raises(InternalServerError, match=string):
         assert node.wallet.importmulti([])
@@ -203,7 +211,7 @@ def test_importmulti():  # 22
 
 
 @pytest.mark.query
-def test_importprivkey():  # 23
+def test_importprivkey():  # 24
     priv_key = "KxmHsh3zrURFKPsqR5fUAyE6viuqe4dRc6KUzKyGtPyjhWXzmPVN"
 
     assert node.wallet.importprivkey(priv_key, rescan=False) is None
@@ -212,12 +220,12 @@ def test_importprivkey():  # 23
 
 
 @pytest.mark.query
-def test_importprunedfunds():  # 24
+def test_importprunedfunds():  # 25
     pass
 
 
 @pytest.mark.query
-def test_importpubkey():  # 25
+def test_importpubkey():  # 26
     pub_key = "028bfcd13b59fe60442ae6dd2861b327ba47c5def1d289b5e5b73c8db0ad65a327"
 
     assert node.wallet.importpubkey(pub_key, rescan=False) is None
@@ -226,7 +234,7 @@ def test_importpubkey():  # 25
 
 
 @pytest.mark.query
-def test_importwallet():  # 26
+def test_importwallet():  # 27
     wallet_name = load_secrets_conf()["wallet_name"]
     string = ".* RPC_INVALID_PARAMETER: Cannot open wallet dump file"
     with pytest.raises(InternalServerError, match=string):
@@ -236,32 +244,32 @@ def test_importwallet():  # 26
 
 
 @pytest.mark.query
-def test_keypoolrefill():  # 27
+def test_keypoolrefill():  # 28
     assert node.wallet.keypoolrefill() is None
     assert node.wallet.keypoolrefill(100) is None
     assert node.wallet.keypoolrefill(newsize=100) is None
 
 
 @pytest.mark.query
-def test_listaddressgroupings():  # 28
+def test_listaddressgroupings():  # 29
     assert node.wallet.listaddressgroupings()
 
 
 @pytest.mark.query
-def test_listlables():  # 29
+def test_listlables():  # 30
     assert node.wallet.listlabels()
     assert node.wallet.listlabels("")
     assert node.wallet.listlabels(purpose="")
 
 
 @pytest.mark.query
-def test_listlockunspent():  # 30
+def test_listlockunspent():  # 31
     result = node.wallet.listlockunspent()
     assert result or result == []
 
 
 @pytest.mark.query
-def test_listreceivedbyaddress():  # 31
+def test_listreceivedbyaddress():  # 32
     assert node.wallet.listreceivedbyaddress()
     assert node.wallet.listreceivedbyaddress(1, False, True, address)
     assert node.wallet.listreceivedbyaddress(minconf=1, include_empty=False, include_watchonly=True,
@@ -269,14 +277,14 @@ def test_listreceivedbyaddress():  # 31
 
 
 @pytest.mark.query
-def test_listreceivedbylabel():  # 32
+def test_listreceivedbylabel():  # 33
     assert node.wallet.listreceivedbylabel()
     assert node.wallet.listreceivedbylabel(1, False, True)
     assert node.wallet.listreceivedbylabel(minconf=1, include_empty=False, include_watchonly=True)
 
 
 @pytest.mark.query
-def test_listsinceblock():  # 33
+def test_listsinceblock():  # 34
     assert node.wallet.listsinceblock()
     assert node.wallet.listsinceblock("279b1a87aedc7b9471d4ad4e5f12967ab6259926cd097ade188dfcf22ebfe72a", 1, True, True)
     assert node.wallet.listsinceblock(blockhash="279b1a87aedc7b9471d4ad4e5f12967ab6259926cd097ade188dfcf22ebfe72a",
@@ -284,14 +292,14 @@ def test_listsinceblock():  # 33
 
 
 @pytest.mark.query
-def test_listtransactions():  # 34
+def test_listtransactions():  # 35
     assert node.wallet.listtransactions()
     assert node.wallet.listtransactions("*", 10, 0, True, False)
     assert node.wallet.listtransactions(label="*", count=10, skip=0, include_watchonly=True, exclude_custom_tx=False)
 
 
 @pytest.mark.query
-def test_listunspent():  # 35
+def test_listunspent():  # 36
     result1 = node.wallet.listunspent()
     assert result1 or result1 == []
     result2 = node.wallet.listunspent(1, 9999999, [], True, 0, 9999999, 10, 9999999, "DFI")
@@ -302,17 +310,17 @@ def test_listunspent():  # 35
 
 
 @pytest.mark.query
-def test_listwalletdir():  # 36
+def test_listwalletdir():  # 37
     assert node.wallet.listwalletdir()
 
 
 @pytest.mark.query
-def test_listwallets():  # 37
+def test_listwallets():  # 38
     assert node.wallet.listwallets()
 
 
 @pytest.mark.query
-def test_loadwallet():  # 38
+def test_loadwallet():  # 39
     wallet_name = load_secrets_conf()["wallet_name"]
     string = ".* RPC_WALLET_ERROR: Wallet file verification failed: Error loading wallet .*"
     with pytest.raises(InternalServerError, match=string):
@@ -322,14 +330,14 @@ def test_loadwallet():  # 38
 
 
 @pytest.mark.query
-def test_lockunspent():  # 39
+def test_lockunspent():  # 40
     assert node.wallet.lockunspent(True)
     assert node.wallet.lockunspent(True, [])
     assert node.wallet.lockunspent(unlock=True, transactions=[])
 
 
 @pytest.mark.query
-def test_removeprunedfunds():  # 40
+def test_removeprunedfunds():  # 41
     txid = "e56d3960e850ffe5dffd4733ced07d644527eb81e86440952195ce9556b665ea"
 
     string = ".* RPC_INVALID_PARAMETER: Transaction does not exist in wallet."
@@ -340,14 +348,14 @@ def test_removeprunedfunds():  # 40
 
 
 @pytest.mark.query
-def test_rescanblockchain():  # 41
+def test_rescanblockchain():  # 42
     assert node.wallet.rescanblockchain(node.blockchain.getblockcount()-100, node.blockchain.getblockcount())
     assert node.wallet.rescanblockchain(start_height=node.blockchain.getblockcount() - 100,
                                         stop_height=node.blockchain.getblockcount())
 
 
 @pytest.mark.tx
-def test_sendmany():  # 42
+def test_sendmany():  # 43
     while len(node.wallet.listunspent()) < 1:
         time.sleep(1)
 
@@ -358,7 +366,7 @@ def test_sendmany():  # 42
 
 
 @pytest.mark.tx
-def test_sendtoaddress():  # 43
+def test_sendtoaddress():  # 44
     while len(node.wallet.listunspent()) < 1:
         time.sleep(1)
 
@@ -370,26 +378,26 @@ def test_sendtoaddress():  # 43
 
 
 @pytest.mark.query
-def test_sethdseed():  # 44
+def test_sethdseed():  # 45
     assert node.wallet.sethdseed() is None
     assert node.wallet.sethdseed(False, None) is None
     assert node.wallet.sethdseed(newkeypool=False, seed=None) is None
 
 
 @pytest.mark.query
-def test_setlabel():  # 45
+def test_setlabel():  # 46
     assert node.wallet.setlabel(address, "") is None
     assert node.wallet.setlabel(address=address, label="") is None
 
 
 @pytest.mark.query
-def test_settxfee():  # 46
+def test_settxfee():  # 47
     assert node.wallet.settxfee(0.00001)
     assert node.wallet.settxfee(amount=0.00001)
 
 
 @pytest.mark.query
-def test_setwalletflag():  # 47
+def test_setwalletflag():  # 48
     string = ".* RPC_INVALID_PARAMETER: Wallet flag is already set to false: avoid_reuse"
     assert node.wallet.setwalletflag("avoid_reuse")
     assert node.wallet.setwalletflag("avoid_reuse", False)
@@ -398,13 +406,13 @@ def test_setwalletflag():  # 47
 
 
 @pytest.mark.query
-def test_signmessage():  # 48
+def test_signmessage():  # 49
     assert node.wallet.signmessage(address, "test")
     assert node.wallet.signmessage(address=address, message="test")
 
 
 @pytest.mark.query
-def test_signrawtransactionwithwallet():  # 49
+def test_signrawtransactionwithwallet():  # 50
     # Wait for valid unspent parameter
     while not node.wallet.listunspent(addresses=[address]):
         time.sleep(0.5)
@@ -422,14 +430,14 @@ def test_signrawtransactionwithwallet():  # 49
 
 
 @pytest.mark.query
-def test_unloadwallet():  # 50
+def test_unloadwallet():  # 51
     pass
     #assert node.wallet.unloadwallet() is None
     #node.wallet.loadwallet(load_secrets_conf()["wallet_name"])
 
 
 @pytest.mark.query
-def test_walletcreatefundedpsbt():  # 51
+def test_walletcreatefundedpsbt():  # 52
     # Wait for valid unspent parameter
     while not node.wallet.listunspent(addresses=[address]):
         time.sleep(0.5)
@@ -462,19 +470,19 @@ def test_walletcreatefundedpsbt():  # 51
 
 
 @pytest.mark.query
-def test_walletlock():  # 52
+def test_walletlock():  # 53
     assert node.wallet.walletlock() is None
     node.wallet.walletpassphrase(load_secrets_conf()["wallet_password"], 3600)
 
 
 @pytest.mark.query
-def test_walletpassphrase():  # 53
+def test_walletpassphrase():  # 54
     assert node.wallet.walletpassphrase(load_secrets_conf()["wallet_password"], 3600) is None
     assert node.wallet.walletpassphrase(passphrase=load_secrets_conf()["wallet_password"], timeout=3600) is None
 
 
 @pytest.mark.query
-def test_walletpassphrasechange():  # 54
+def test_walletpassphrasechange():  # 55
     secrets = load_secrets_conf()
     assert node.wallet.walletpassphrasechange(secrets["wallet_password"], secrets["wallet_password"]) is None
     assert node.wallet.walletpassphrasechange(oldpassphrase=secrets["wallet_password"],
@@ -482,7 +490,7 @@ def test_walletpassphrasechange():  # 54
 
 
 @pytest.mark.query
-def test_walletprocesspsbt():  # 55
+def test_walletprocesspsbt():  # 56
     # Wait for valid unspent parameter
     while not node.wallet.listunspent(addresses=[address]):
         time.sleep(0.5)

@@ -34,6 +34,7 @@ Node Modules
     accounts
     blockchain
     control
+    evm
     generating
     loan
     masternodes
@@ -135,6 +136,15 @@ BuildAddressAmounts
 ___________________
 
 .. autoclass:: BuildAddressAmounts
+    :members:
+
+
+.. _Node TransferDomain:
+
+TransferDomain
+______________
+
+.. autoclass:: BuildTransferDomainData
     :members:
 
 .. _Node Inputs:
