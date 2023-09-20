@@ -21,4 +21,4 @@ from defichain.node.modules.zmq import Zmq
 
 # Util methods
 
-from defichain.node.util import BuildAmounts, BuildAddressAmounts
+from defichain.node.util import BuildAmounts, BuildAddressAmounts, BuildTransferDomainData

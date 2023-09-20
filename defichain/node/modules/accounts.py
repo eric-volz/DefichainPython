@@ -459,6 +459,53 @@ class Accounts:
         change = _from if change is None else change
         return self._node._rpc.call("sendutxosfrom", _from, to, amount, change)
 
+    def transferdomain(self, array: [{}]) -> str:
+        """
+        Creates (and submits to local node and network) a tx to transfer assets across domains.
+        DVM to EVM/EVM to DVM, etc.
+
+        You can use the class :ref:`Node TransferDomain` to build your transferdomain data more easily.
+
+        Defichain Virtual Machine (DVM) has the domain: 2
+
+        Ethereum Virtual Machine (EVM) has the domain: 3
+
+        :param array: (required) A json array of src and dst json objects
+
+            .. code-block::
+
+                [
+                    {
+                        "src": {               (json object) Source arguments
+                            "address": "str",    (string, required) Source address
+                            "amount": "str",     (string, required) Amount transfered, the value is amount in amount@token format
+                            "domain": n,         (numeric, required) Domain of source: 2 - DVM, 3 - EVM
+                        },
+                        "dst": {               (json object) Destination arguments
+                            "address": "str",    (string, required) Destination address
+                            "amount": "str",     (string, required) Amount transfered, the value is amount in amount@token format
+                            "domain": n,         (numeric, required) Domain of source: 2 - DVM, 3 - EVM
+                        },
+                    },
+                    ...
+                ]
+
+        :type array: [{}]
+        :return: "hash" (string) -- The hex-encoded hash of broadcasted transaction
+
+        :example:
+
+            Sending 1 DFI from DVM to EVM:
+
+            >>> node.accounts.transferdomain([{"src":{"address":"<DFI_address>", "amount":"1.0@DFI", "domain": 2}, "dst":{"address":"<ETH_address>", "amount":"1.0@DFI", "domain": 3}}])
+
+            Sending 1 DFI from EVM to DVM:
+
+            >>> node.accounts.transferdomain([{"src":{"address":"<ETH_address>", "amount":"1.0@DFI", "domain": 3}, "dst":{"address":"<DFI_address>", "amount":"1.0@DFI", "domain": 2}}])
+        """
+
+        return self._node._rpc.call("transferdomain", array)
+
     def utxostoaccount(self, amounts: {}, inputs: [{}] = None) -> str:  # 20
         """
         Creates (and submits to local node and network) a transfer transaction from the wallet UTXOs to specfied account.

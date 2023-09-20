@@ -18,7 +18,7 @@ def test_accounthistorycount():  # 01
     assert result1 or result1 == 0
     result2 = node.accounts.accounthistorycount(address, False, "DFI", "")
     assert result2 or result2 == 0
-    result3 =  node.accounts.accounthistorycount(owner=address, no_rewards=False, token="DFI", txtype="")
+    result3 = node.accounts.accounthistorycount(owner=address, no_rewards=False, token="DFI", txtype="")
     assert result3 or result3 == 0
 
 
@@ -60,7 +60,8 @@ def test_futureswap():  # 05
 
     assert len(node.accounts.futureswap(address, "0.00000001@DUSD", "SPY")) == LENGTH_OF_TXID
     assert len(node.accounts.futureswap(address, "0.00000001@DUSD", "SPY", [])) == LENGTH_OF_TXID
-    assert len(node.accounts.futureswap(address=address, amount="0.00000001@DUSD", destination="SPY", inputs=[])) == LENGTH_OF_TXID
+    assert len(node.accounts.futureswap(address=address, amount="0.00000001@DUSD", destination="SPY",
+                                        inputs=[])) == LENGTH_OF_TXID
 
 
 @pytest.mark.query
@@ -154,7 +155,8 @@ def test_sendtokenstoaddress():  # 18
         time.sleep(1)
 
     assert len(node.accounts.sendtokenstoaddress({address: "0.0001@DUSD"}, {address: "0.0001@DUSD"})) == LENGTH_OF_TXID
-    assert len(node.accounts.sendtokenstoaddress({address: "0.0001@DUSD"}, {address: "0.0001@DUSD"}, "pie")) == LENGTH_OF_TXID
+    assert len(
+        node.accounts.sendtokenstoaddress({address: "0.0001@DUSD"}, {address: "0.0001@DUSD"}, "pie")) == LENGTH_OF_TXID
     assert len(node.accounts.sendtokenstoaddress(_from={address: "0.0001@DUSD"}, to={address: "0.0001@DUSD"},
                                                  selectionMode="pie")) == LENGTH_OF_TXID
 
@@ -170,7 +172,19 @@ def test_sendutxosfrom():  # 19
 
 
 @pytest.mark.tx
-def test_utxostoaccount():  # 20
+def test_transferdomain():  # 20
+    transferdomain_list = [{'src': {'address': 'tadW3axn125CKFtfdccyJwnRvqCYvLj9SB', 'amount': '1@DFI', 'domain': 2},
+                            'dst': {'address': '0xB553De274BFc1293DC703B013464202fC65E3FDF', 'amount': '1@DFI', 'domain': 3}}]
+
+    string = ".* RPC_WALLET_ERROR: Add-on auth TX failed: Insufficient funds"
+    with pytest.raises(InternalServerError, match=string):
+        assert node.accounts.transferdomain(transferdomain_list)
+    with pytest.raises(InternalServerError, match=string):
+        assert node.accounts.transferdomain(array=transferdomain_list)
+
+
+@pytest.mark.tx
+def test_utxostoaccount():  # 21
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 
@@ -180,7 +194,7 @@ def test_utxostoaccount():  # 20
 
 
 @pytest.mark.tx
-def test_withdrawfutureswap():  # 21
+def test_withdrawfutureswap():  # 22
     while len(node.wallet.listunspent()) < 3:
         time.sleep(1)
 

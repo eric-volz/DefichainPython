@@ -137,6 +137,15 @@ ___________________
 .. autoclass:: BuildAddressAmounts
     :members:
 
+
+.. _Node TransferDomain:
+
+TransferDomain
+______________
+
+.. autoclass:: BuildTransferDomainData
+    :members:
+
 .. _Node Inputs:
 
 Inputs
