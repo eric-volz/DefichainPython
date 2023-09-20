@@ -25,6 +25,8 @@ builder_p2pkh = TxBuilder(Keys.account.get_p2pkh(), Keys.account, ocean)
 builder_p2sh = TxBuilder(Keys.account.get_p2sh(), Keys.account, ocean)
 builder_p2wpkh = TxBuilder(Keys.account.get_p2wpkh(), Keys.account, ocean)
 
+builder_replaceable = TxBuilder(Keys.account.get_p2wpkh(), Keys.account, ocean, replaceable=True)
+
 
 class TestAccounts:
     addressAmountTo = BuildAddressAmounts()
@@ -303,3 +305,11 @@ class TestVault:
                                      "23a8495022054527bcc3ea6492a094331899f28a0d5ab48a1dcb3b2f1616d984795042d1f1c0121" \
                                      "03f110404297e471ad86d1aabc8a885bd4d1ec71bc3f31bef8ed2ff9ad3032460000000000"
 
+
+class TestReplaceableTransactions:
+    replaceable_transaction_serialized = "0400000000010149b8ea9b2b0224e44126b86bd1e2889a7dac0ec06fcfb0dc4dd13782e1c84" \
+                                         "fce0100000000fdffffff01fc3b000000000000160014ad56321e69b7e2d30aeca9f49979ff" \
+                                         "c53084296f0002483045022100f8ed99fa62c18ecde71dee21d62d8e1c62037d0fd984013c5" \
+                                         "65ef37a5ea52090022057cd12501d5e8d7c4a82219102679dfeb751f009f3e238bfe59840f1" \
+                                         "5debf141012103f110404297e471ad86d1aabc8a885bd4d1ec71bc3f31bef8ed2ff9ad30324" \
+                                         "60000000000"
