@@ -2,6 +2,7 @@
 from defichain.node.modules.accounts import Accounts
 from defichain.node.modules.blockchain import Blockchain
 from defichain.node.modules.control import Control
+from defichain.node.modules.evm import EVM
 from defichain.node.modules.generating import Generating
 from defichain.node.modules.loan import Loan
 from defichain.node.modules.masternodes import Masternodes

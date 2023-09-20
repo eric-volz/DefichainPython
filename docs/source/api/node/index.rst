@@ -34,6 +34,7 @@ Node Modules
     accounts
     blockchain
     control
+    evm
     generating
     loan
     masternodes
