@@ -333,7 +333,7 @@
 <span id="transaction-builder-txbuilder"></span><h1>TxBuilder<a class="headerlink" href="#txbuilder" title="Permalink to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="defichain.transactions.builder.TxBuilder">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.transactions.builder.</span></span><span class="sig-name descname"><span class="pre">TxBuilder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../hdwallet/account.html#defichain.Account" title="defichain.hdwallet.account.Account"><span class="pre">Account</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataSource</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../../api/ocean/ocean.html#defichain.Ocean" title="defichain.Ocean"><span class="pre">Ocean</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../../api/node/node.html#defichain.Node" title="defichain.Node"><span class="pre">Node</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feePerByte</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.transactions.builder.</span></span><span class="sig-name descname"><span class="pre">TxBuilder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../hdwallet/account.html#defichain.Account" title="defichain.hdwallet.account.Account"><span class="pre">Account</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataSource</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../../api/ocean/ocean.html#defichain.Ocean" title="defichain.Ocean"><span class="pre">Ocean</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../../api/node/node.html#defichain.Node" title="defichain.Node"><span class="pre">Node</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feePerByte</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replaceable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder" title="Permalink to this definition">#</a></dt>
 <dd><p><strong>This it the main class to build transactions!</strong></p>
 <p>The transaction will be built with the information provided and automatically signed.</p>
 <p>All transactions are created for the given address.
@@ -460,6 +460,17 @@ The outputs have to be manually specified.</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.transactions.builder.TxBuilder.get_replaceable">
+<span class="sig-name descname"><span class="pre">get_replaceable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#defichain.transactions.builder.TxBuilder.get_replaceable" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns if the builder object creates transactions that are replaceable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -528,6 +539,7 @@ The outputs have to be manually specified.</p>
 <li><a class="reference internal" href="#defichain.transactions.builder.TxBuilder.get_account"><code class="docutils literal notranslate"><span class="pre">TxBuilder.get_account()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.transactions.builder.TxBuilder.get_dataSource"><code class="docutils literal notranslate"><span class="pre">TxBuilder.get_dataSource()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.transactions.builder.TxBuilder.get_feePerByte"><code class="docutils literal notranslate"><span class="pre">TxBuilder.get_feePerByte()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.transactions.builder.TxBuilder.get_replaceable"><code class="docutils literal notranslate"><span class="pre">TxBuilder.get_replaceable()</span></code></a></li>
 </ul>
 </li>
 </ul>
