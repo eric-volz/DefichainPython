@@ -51,6 +51,8 @@ class TxBuilder:
     :type dataSource: Ocean | Node | None
     :param feePerByte: (optional) approximate fee paid per byte
     :type feePerByte: float
+    :param replaceable: (optional) allows transactions to be replacable by transactions with higher fee
+    :type replaceable: bool
     """
     def __init__(self, address: str, account: Account, dataSource: "Ocean | Node | None", feePerByte=1.0,
                  replaceable: bool = False):
