@@ -1,0 +1,503 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Generating" href="generating.html" /><link rel="prev" title="Control" href="control.html" />
+        <link rel="canonical" href="https://docs.defichain-python.de/build/html/api/node/evm.html" />
+
+    <link rel="shortcut icon" href="../../_static/logo.png"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.03.27 -->
+        <title>EVM - DefichainPython v3.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<div class="announcement">
+  <aside class="announcement-content">
+     A new CFP has just been uploaded: Feedback about the project would be really appreciated on reddit!❤️ 
+  </aside>
+</div>
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">DefichainPython v3.0.0</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">DefichainPython v3.0.0</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../main/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main/statusAndTasks.html">Status and Tasks</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../guides/index.html">Guides and Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../guides/guides/index.html">Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../guides/guides/basicUsageOfRawTransactions.html">Basic Usage Of Transactions Builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../guides/guides/automateAddress.html">How To Automate Your Defichain Address?</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../guides/example/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../guides/example/chainedTransactions.html">Chain Transactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../guides/example/extractPrivateKeys.html">Extract Private Keys</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Node / RPC</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="node.html">Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="accounts.html">Accounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blockchain.html">Blockchain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control.html">Control</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">EVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generating.html">Generating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loan.html">Loan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="masternodes.html">Masternodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mining.html">Mining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network.html">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oracles.html">Oracles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="poolpair.html">Poolpair</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proposals.html">Proposals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rawtransactions.html">Rawtransactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spv.html">Spv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stats.html">Stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tokens.html">Tokens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">Util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vault.html">Vault</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wallet.html">Wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zmq.html">Zmq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rawMethodsOverview.html">Raw Methods Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ocean/index.html">Ocean</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/ocean.html">Ocean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/address.html">Address</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/blocks.html">Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/consortium.html">Consortium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/fee.html">Fee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/governance.html">Governance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/loan.html">Loan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/masternodes.html">Masternodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/oracles.html">Oracles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/poolpair.html">Poolpairs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/prices.html">Prices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/rawTx.html">RawTx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/rpc.html">Rpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/stats.html">Stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/tokens.html">Tokens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ocean/transactions.html">Transactions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">HTTP Exceptions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SDK</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../sdk/hdwallet/index.html">HDWallet</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../sdk/hdwallet/wallet.html">Wallet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sdk/hdwallet/account.html">Account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sdk/hdwallet/utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sdk/hdwallet/exceptions.html">Wallet Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../sdk/transactions/index.html">Transactions</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../sdk/transactions/builder/index.html">Transaction Builder</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../sdk/transactions/builder/txbuilder.html">TxBuilder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sdk/transactions/builder/accounts.html">Accounts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sdk/transactions/builder/data.html">Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sdk/transactions/builder/governance.html">Governance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sdk/transactions/builder/loans.html">Loans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sdk/transactions/builder/masternode.html">Masternode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sdk/transactions/builder/pool.html">Pool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sdk/transactions/builder/utxo.html">UTXO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sdk/transactions/builder/vault.html">Vault</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../sdk/transactions/advanced/index.html">Advanced</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../sdk/transactions/advanced/address/index.html">Addresses</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../sdk/transactions/advanced/address/p2pkh.html">P2PKH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sdk/transactions/advanced/address/p2sh.html">P2SH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sdk/transactions/advanced/address/p2wpkh.html">P2WPKH</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../sdk/transactions/advanced/defitx/index.html">DefiTx</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../sdk/transactions/advanced/defitx/accounts.html">Accounts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sdk/transactions/advanced/defitx/governance.html">Governance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sdk/transactions/advanced/defitx/loans.html">Loans</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sdk/transactions/advanced/defitx/masternode.html">Masternode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sdk/transactions/advanced/defitx/pool.html">Pool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sdk/transactions/advanced/defitx/vault.html">Vault</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../sdk/transactions/advanced/rawtransactions/index.html">Raw Transactions</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../sdk/transactions/advanced/rawtransactions/fee.html">Fee</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sdk/transactions/advanced/rawtransactions/sign.html">Sign</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sdk/transactions/advanced/rawtransactions/tx.html">Transaction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sdk/transactions/advanced/rawtransactions/txinput.html">Transactions Inputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sdk/transactions/advanced/rawtransactions/txoutput.html">Transactions Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sdk/transactions/advanced/rawtransactions/witness.html">Wittness</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../sdk/transactions/advanced/remotedata/index.html">Remote Data Source</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../sdk/transactions/advanced/remotedata/node.html">Remote Data Node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sdk/transactions/advanced/remotedata/ocean.html">Remote Data Ocean</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../sdk/transactions/advanced/keys.html">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sdk/transactions/advanced/utils.html">Utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../sdk/transactions/exceptions.html">Transactions Exceptions</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Utils</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../utils/logger.html">Logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils/mnemonic.html">Mnemonic</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/licenseAndDisclaimer.html">License &amp; Disclaimer</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="evm">
+<span id="node-evm"></span><h1>EVM<a class="headerlink" href="#evm" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="defichain.node.EVM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">EVM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.EVM" title="Permalink to this definition">#</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.EVM.evmtx">
+<span class="sig-name descname"><span class="pre">evmtx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonce</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gasPrice</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gasLimit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.EVM.evmtx" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates (and submits to local node and network) a tx to send DFI token to EVM address.</p>
+<p><strong>Inputs must be in hex format</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_from</strong> (<em>str</em>) – (required) From ERC55 address</p></li>
+<li><p><strong>nonce</strong> (<em>hex</em>) – (required) Transaction nonce</p></li>
+<li><p><strong>gasPrice</strong> (<em>hex</em>) – (required) Gas Price in Gwei</p></li>
+<li><p><strong>gasLimit</strong> (<em>hex</em>) – (required) Gas limit</p></li>
+<li><p><strong>to</strong> (<em>str</em>) – (required) To address. Can be empty</p></li>
+<li><p><strong>value</strong> (<em>hex</em>) – (required) Amount to send in DFI</p></li>
+<li><p><strong>data</strong> (<em>hex</em>) – (optional) Hex encoded data. Can be blank.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>“hash” - (string) The hex-encoded hash of broadcasted transaction</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">evm</span><span class="o">.</span><span class="n">evmtx</span><span class="p">(</span><span class="s2">&quot;0xB553De274BFc1293DC703B013464202fC65E3FDF&quot;</span><span class="p">,</span> <span class="mh">0x0</span><span class="p">,</span> <span class="mh">0x09184e72a000</span><span class="p">,</span> <span class="mh">0x2710</span><span class="p">,</span> <span class="s2">&quot;0xB553De274BFc1293DC703B013464202fC65E3FDF&quot;</span><span class="p">,</span> <span class="mh">0x1e4876e800</span><span class="p">,</span> <span class="mh">0x0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.EVM.logvmmaps">
+<span class="sig-name descname"><span class="pre">logvmmaps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.EVM.logvmmaps" title="Permalink to this definition">#</a></dt>
+<dd><p>Logs all block or tx indexes for debugging.</p>
+<p>0 - DVMToEVM Blocks</p>
+<p>1 - EVMToDVM Blocks</p>
+<p>2 - DVMToEVM TXs</p>
+<p>3 - EVMToDVM TXs</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>type</strong> (<em>int</em>) – (required) Type of logs</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>json - (array) Json object with account balances if rpcresult is enabled.This is for debugging purposes only.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">evm</span><span class="o">.</span><span class="n">logvmmaps</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.EVM.vmmap">
+<span class="sig-name descname"><span class="pre">vmmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.EVM.vmmap" title="Permalink to this definition">#</a></dt>
+<dd><p>Give the equivalent of an address, blockhash or transaction from EVM to DVM</p>
+<p>Map Types:</p>
+<p>0 - Auto</p>
+<p>1 - Block Number: DFI -&gt; EVM</p>
+<p>2 - Block Number: EVM -&gt; DFI</p>
+<p>3 - Block Hash: DFI -&gt; EVM</p>
+<p>4 - Block Hash: EVM -&gt; DFI</p>
+<p>5 - Tx Hash: DFI -&gt; EVM</p>
+<p>6 - Tx Hash: EVM -&gt; DFI</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>str</em>) – (required) DVM address, EVM blockhash, EVM transactio</p></li>
+<li><p><strong>type</strong> (<em>int</em>) – (required) Map types</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>str - The hex-encoded string for address, block or transaction or (number) block number</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">evm</span><span class="o">.</span><span class="n">vmmap</span><span class="p">(</span><span class="s2">&quot;1600000&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="generating.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Generating</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="control.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Control</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Intr0c
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">EVM</a><ul>
+<li><a class="reference internal" href="#defichain.node.EVM"><code class="docutils literal notranslate"><span class="pre">EVM</span></code></a><ul>
+<li><a class="reference internal" href="#defichain.node.EVM.evmtx"><code class="docutils literal notranslate"><span class="pre">EVM.evmtx()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.node.EVM.logvmmaps"><code class="docutils literal notranslate"><span class="pre">EVM.logvmmaps()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.node.EVM.vmmap"><code class="docutils literal notranslate"><span class="pre">EVM.vmmap()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/scripts/furo.js"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    </body>
+</html>

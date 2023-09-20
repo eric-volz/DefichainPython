@@ -185,6 +185,7 @@
 <li class="toctree-l2"><a class="reference internal" href="accounts.html">Accounts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="blockchain.html">Blockchain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control.html">Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evm.html">EVM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generating.html">Generating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="loan.html">Loan</a></li>
 <li class="toctree-l2"><a class="reference internal" href="masternodes.html">Masternodes</a></li>
@@ -402,6 +403,31 @@ for their inputs to be respent.  It can be used to replace “stuck” or evicte
 </dd>
 <dt class="field-odd">Example<span class="colon">:</span></dt>
 <dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">addmultisigaddress</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5&quot;</span><span class="p">,</span> <span class="s2">&quot;171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="defichain.node.Wallet.addressmap">
+<span class="sig-name descname"><span class="pre">addressmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.Wallet.addressmap" title="Permalink to this definition">#</a></dt>
+<dd><p>Give the equivalent of an address from EVM to DVM and versa</p>
+<p>Map Types:</p>
+<p>1 - Address format: DFI -&gt; ERC55</p>
+<p>2 - Address format: ERC55 -&gt; DFI</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>str</em>) – (required) DVM address or EVM address</p></li>
+<li><p><strong>type</strong> (<em>int</em>) – (required) Map types</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>json - returns corresponding DVM or EVM address</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">wallet</span><span class="o">.</span><span class="n">addressmap</span><span class="p">(</span><span class="s2">&quot;df1quwxpegclg5pjdxnnept0mdzujc33ufey0tje7c&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
@@ -2199,6 +2225,7 @@ that we can sign for.</p>
 <li><a class="reference internal" href="#defichain.node.Wallet.abandontransaction"><code class="docutils literal notranslate"><span class="pre">Wallet.abandontransaction()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.node.Wallet.abortrescan"><code class="docutils literal notranslate"><span class="pre">Wallet.abortrescan()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.node.Wallet.addmultisigaddress"><code class="docutils literal notranslate"><span class="pre">Wallet.addmultisigaddress()</span></code></a></li>
+<li><a class="reference internal" href="#defichain.node.Wallet.addressmap"><code class="docutils literal notranslate"><span class="pre">Wallet.addressmap()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.node.Wallet.backupwallet"><code class="docutils literal notranslate"><span class="pre">Wallet.backupwallet()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.node.Wallet.bumpfee"><code class="docutils literal notranslate"><span class="pre">Wallet.bumpfee()</span></code></a></li>
 <li><a class="reference internal" href="#defichain.node.Wallet.createwallet"><code class="docutils literal notranslate"><span class="pre">Wallet.createwallet()</span></code></a></li>

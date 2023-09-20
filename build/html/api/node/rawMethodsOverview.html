@@ -185,6 +185,7 @@
 <li class="toctree-l2"><a class="reference internal" href="accounts.html">Accounts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="blockchain.html">Blockchain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control.html">Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evm.html">EVM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generating.html">Generating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="loan.html">Loan</a></li>
 <li class="toctree-l2"><a class="reference internal" href="masternodes.html">Masternodes</a></li>
@@ -345,7 +346,7 @@
 <p>getburninfo</p>
 <p>getpendingdusdswaps “address”</p>
 <p>getpendingfutureswaps “address”</p>
-<p>gettokenbalances ( {“start”:”str”,”including_start”:bool,”limit”:n} indexed_amounts symbol_lookup )</p>
+<p>gettokenbalances ( {“start”:”str”,”including_start”:bool,”limit”:n} indexed_amounts symbol_lookup evm )</p>
 <p>listaccounthistory ( “owner” {“maxBlockHeight”:n,”depth”:n,”no_rewards”:bool,”token”:”str”,”txtype”:”str”,”txtypes”:[“Transaction Type”,…],”limit”:n,”start”:n,”including_start”:bool,”txn”:n,”format”:”str”} )</p>
 <p>listaccounts ( {“start”:”str”,”including_start”:bool,”limit”:n} verbose indexed_amounts is_mine_only )</p>
 <p>listburnhistory ( {“maxBlockHeight”:n,”depth”:n,”token”:”str”,”txtype”:”str”,”limit”:n} )</p>
@@ -354,6 +355,7 @@
 <p>listpendingfutureswaps</p>
 <p>sendtokenstoaddress {“address”:”str”} {“address”:”str”} ( “selectionMode” )</p>
 <p>sendutxosfrom “from” “to” amount ( “change” )</p>
+<p>transferdomain [{“src”:obj,”dst”:obj},…]</p>
 <p>utxostoaccount {“address”:”str”} ( [{“txid”:”hex”,”vout”:n},…] )</p>
 <p>withdrawfutureswap “address” “amount” ( “destination” [{“txid”:”hex”,”vout”:n},…] )</p>
 <p>== Blockchain ==</p>
@@ -397,6 +399,10 @@
 <p>logging ( [“include_category”,…] [“exclude_category”,…] )</p>
 <p>stop</p>
 <p>uptime</p>
+<p>== Evm ==</p>
+<p>evmtx “from” nonce gasPrice gasLimit “to” value ( “data” )</p>
+<p>logvmmaps type</p>
+<p>vmmap “input” type</p>
 <p>== Generating ==</p>
 <p>generatetoaddress nblocks “address” ( maxtries )</p>
 <p>== Icxorderbook ==</p>
@@ -585,6 +591,7 @@
 <p>abandontransaction “txid”</p>
 <p>abortrescan</p>
 <p>addmultisigaddress nrequired [“key”,…] ( “label” “address_type” )</p>
+<p>addressmap “input” type</p>
 <p>backupwallet “destination”</p>
 <p>bumpfee “txid” ( options )</p>
 <p>createwallet “wallet_name” ( disable_private_keys blank “passphrase” avoid_reuse )</p>
