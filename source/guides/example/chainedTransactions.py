@@ -25,9 +25,8 @@ the transactions that should be executed after the poolswap cannot continue
 with the BTC output of the poolswap.
 
 Installation:
-To use this feature, you have to install a beta version of the package:
 
-pip install defichain==3.0.0b3
+pip install defichain -U
 """
 
 """Script Setup"""

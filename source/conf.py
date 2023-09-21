@@ -78,15 +78,19 @@ html_theme_options = {
 html_favicon = 'logo/logo.png'
 
 # Code Blocks
-code_blocks = [{"url": "https://gist.githubusercontent.com/eric-volz/964cbb9ab2906c132632689b99b1fcab/raw/6ef58341fba7a5f0f544de14d49dcccab49f4281/multiple_transactions_in_one_block.py", "filename": "guides/example/chainedTransactions.py"},
+code_blocks = [{"url": "https://gist.githubusercontent.com/eric-volz/964cbb9ab2906c132632689b99b1fcab/raw/a1fec9ad25bd4deb0d361b33f8f05b2dc9b74ca0/multiple_transactions_in_one_block.py", "filename": "guides/example/chainedTransactions.py"},
                {"url": "https://gist.githubusercontent.com/eric-volz/987579be543cbb72c2c5bffaedea105b/raw/1aa5f9bb891d1fdd3759ca34f79a6a0b2a2674a8/defichainExtractPrivateKeys.py", "filename": "guides/example/extractPrivateKeys.py"},
                ]
 
 
 def load_code():
     for code_block in code_blocks:
-        raw_code = requests.get(code_block.get("url")).text
-        with open(code_block.get("filename"), "w") as f:
+        url = code_block.get("url")
+        filename = code_block.get("filename")
+        if os.path.exists(filename):
+            os.remove(filename)
+        raw_code = requests.get(url).text
+        with open(filename, "w") as f:
             f.write(raw_code)
 
 
