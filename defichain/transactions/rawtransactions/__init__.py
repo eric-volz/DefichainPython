@@ -11,4 +11,4 @@ from .txoutput import TxOutput, TxAddressOutput, TxDataOutput, TxDefiOutput, TxC
 from .witness import WitnessHash, Witness
 
 # Fee
-from .fee import estimate_fee
+from .fee import estimate_size, estimate_fee, estimate_vsize

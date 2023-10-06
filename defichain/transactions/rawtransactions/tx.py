@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any
 from hashlib import sha256
+import math
 
 from defichain.exceptions.transactions import RawTransactionError, NotYetSupportedError, DeserializeError
 from defichain.networks import Network
@@ -80,6 +81,12 @@ class BaseTransaction(TxBase, ABC):
 
     def get_fee(self) -> "int | None":
         return self.get_inputsValue() - self.get_outputsValue() if self.get_inputsValue() is not None else None
+
+    def get_weight(self) -> int:
+        return 3 * len(self.bytes_unsigned()) + self.size()
+
+    def get_vSize(self) -> int:
+        return math.ceil(len(self.bytes_unsigned()) + (self.size() - len(self.bytes_unsigned())) / 4)
 
     def get_unspent(self, p2wpkh_for_p2sh_input: [] = None) -> [TxInput]:
         outputs = self.get_outputs()
@@ -558,6 +565,8 @@ class Transaction(BaseTransaction):
         json.update({"txid": self.get_txid()})
         json.update({"hash": self.get_hash()})
         json.update({"size": self.size()})
+        json.update({"vsize": self.get_vSize()})
+        json.update({"weight": self.get_weight()})
         json.update({"fee": self.get_fee()})
         json.update({"version": self.get_version()})
         if not self.get_marker() is None:
