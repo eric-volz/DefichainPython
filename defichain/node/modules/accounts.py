@@ -230,7 +230,7 @@ class Accounts:
         return self._node._rpc.call("getpendingfutureswaps", address)
 
     def gettokenbalances(self, start: str = None, including_start: bool = None, limit: int = None,
-                         indexed_amounts: bool = False, symbol_lookup: bool = False, evm: bool = False) -> []:  # 11
+                         indexed_amounts: bool = False, symbol_lookup: bool = False, evm: bool = None) -> []:  # 11
         """
         Returns the balances of all accounts that belong to the wallet.
 
