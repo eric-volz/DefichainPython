@@ -2,7 +2,7 @@ from abc import ABC
 from typing import Any
 
 from .txbase import TxBase
-from defichain.exceptions.transactions import DeserializeError
+from defichain.exceptions.transactions import DeserializeError, InputError
 from defichain.transactions.constants import OPCodes, DefiTx_SIGNATURE
 from defichain.transactions.utils import Converter, Calculate
 from defichain.transactions.defitx.modules.basedefitx import BaseDefiTx
@@ -73,6 +73,8 @@ class TxBaseOutput(TxBase, ABC):
 
     # Set Information
     def set_value(self, value: int) -> None:
+        if value < 0:
+            raise InputError("The output value is negative. It must be positive or at least zero.")
         self._value = value
 
     def set_script(self, script: str) -> None:
