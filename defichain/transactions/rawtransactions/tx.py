@@ -134,7 +134,7 @@ class BaseTransaction(TxBase, ABC):
         return self._witnessHash
 
     def get_witness(self) -> [Witness]:
-        return [input.get_witness() for input in self.get_inputs()]
+        return self._witness
 
     def get_lockTime(self) -> int:
         return self._lockTime
