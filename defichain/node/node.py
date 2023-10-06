@@ -57,6 +57,8 @@ class Node:
     :type protocol: str
     :param logger: (optional) Logger Object
     :type logger: :ref:`Logger`
+    :param disablewallet: (optional) will allow the implementation to work with a disabled wallet
+    :type disablewallet: bool
     :return: Node (object) The object to interact with your Defichain Node
 
     :example:
@@ -69,7 +71,9 @@ class Node:
 
     def __init__(self, user: str, password: str, url: str = "127.0.0.1", port: int = 8554, wallet_name: str = "",
                  wallet_path: str = None, wallet_password: str = "", wallet_timeout: int = 60,
-                 protocol: str = "http", logger: Logger = None):
+                 protocol: str = "http", logger: Logger = None, disablewallet: bool = False):
+
+        self.disablewallet = disablewallet
 
         # Parameter Check
         if wallet_name != "" and wallet_path is not None:
@@ -78,7 +82,10 @@ class Node:
             wallet_name = wallet_path
 
         # Setup URL
-        self.url = f"{protocol}://{user}:{password}@{url}:{port}/wallet/{wallet_name}"
+        if not self.disablewallet:
+            self.url = f"{protocol}://{user}:{password}@{url}:{port}/wallet/{wallet_name}"
+        else:
+            self.url = f"{protocol}://{user}:{password}@{url}:{port}"
 
         # Setup all different modules
         self._rpc = RPC(self.url, logger)
@@ -110,22 +117,23 @@ class Node:
         self.test_connection()
 
         # Check if only one wallet
-        wallets = self.wallet.listwallets()
-        if len(wallets) == 1:  # Only one wallet is loaded
-            url = f"{protocol}://{user}:{password}@{url}:{port}/wallet/{wallets[0]}"
-            self._rpc.update_url(url)
-        # If more than one wallet is loaded the default wallet "" will be used. If you want tu use a specific wallet you
-        # have zu specify the wallet in the wallet_name parameter
-        elif len(wallets) > 1 and not "" in wallets:
-            msg = "Warning: You have not specified an wallet in the wallet_name parameter. If you use an method where " \
-                  "an wallet is needed an error will accrue!"
-            print(msg)
-            if logger:
-                logger.error("NodeWarning", msg)
+        if not disablewallet:
+            wallets = self.wallet.listwallets()
+            if len(wallets) == 1:  # Only one wallet is loaded
+                url = f"{protocol}://{user}:{password}@{url}:{port}/wallet/{wallets[0]}"
+                self._rpc.update_url(url)
+            # If more than one wallet is loaded the default wallet "" will be used. If you want tu use a specific wallet you
+            # have zu specify the wallet in the wallet_name parameter
+            elif len(wallets) > 1 and not "" in wallets:
+                msg = "Warning: You have not specified an wallet in the wallet_name parameter. If you use an method where " \
+                      "an wallet is needed an error will accrue!"
+                print(msg)
+                if logger:
+                    logger.error("NodeWarning", msg)
 
-        # Prepare Wallet
-        self.load_wallet(wallet_path)
-        self.decrypt_wallet(wallet_password, wallet_timeout)
+            # Prepare Wallet
+            self.load_wallet(wallet_path)
+            self.decrypt_wallet(wallet_password, wallet_timeout)
 
     def decrypt_wallet(self, wallet_password: str, wallet_timeout: int):
         """
