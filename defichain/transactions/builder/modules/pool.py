@@ -86,7 +86,7 @@ class Pool:
         """
         Creates an add pool liquidity transaction with the specified data
 
-        >>> builder.pool.addpoolliquidity({"df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e": ["1@DFI", "0.0001@BTC"], "df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e") # creates a add pool liquidity transaction
+        >>> builder.pool.addpoolliquidity({"df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e": ["1@DFI", "0.0001@BTC"]}, "df1qw8c57c3c4u7k2h4gv2d5x4jr4qgq6cugg33g6e") # creates a add pool liquidity transaction
 
         :param addressAmountFrom: (required) json with specified address and amount to send
         :type addressAmountFrom: :ref:`Transactions AddressAmount`
