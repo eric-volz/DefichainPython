@@ -260,8 +260,8 @@ class Accounts:
         return self._node._rpc.call("gettokenbalances", pagination.build(), indexed_amounts, symbol_lookup, evm)
 
     def listaccounthistory(self, owner: str, maxBlockHeight: int = None, depth: int = None, no_rewards: bool = None,
-                           token: str = None, txtype: str = None, limit: int = None, txn: int = None,
-                           format: str = None) -> [{}]:  # 12
+                           token: str = None, txtype: str = None, txtypes: [] = None, limit: int = None,
+                           start: int = None, including_start: bool = None, txn: int = None, format: str = None) -> [{}]:  # 12
         """
         Returns information about account history.
 
@@ -277,8 +277,14 @@ class Accounts:
         :type token: str
         :param txtype: (optional) Filter by transaction type, supported letter from {CustomTxType}
         :type txtype: str
+        :param txtypes: (optional) Filter multiple transaction types, supported letter from {CustomTxType}
+        :type txtypes: json array
         :param limit: (optional) Maximum number of records to return, 100 by default
         :type limit: int
+        :param start: (optional) Number of entries to skip
+        :type start: int
+        :param including_start: (optional) If true, then iterate including starting position. False by default
+        :type including_start: int
         :param txn: (optional) Order in block, unlimited by default
         :type txn: int
         :param format: (optional) Return amounts with the following: 'id' -> <amount>@id; (default)'symbol' -> <amount>@symbol
@@ -295,7 +301,10 @@ class Accounts:
         options.append("no_rewards", no_rewards)
         options.append("token", token)
         options.append("txtype", txtype)
+        options.append("txtypes", txtypes)
         options.append("limit", limit)
+        options.append("start", start)
+        options.append("including_start", including_start)
         options.append("txn", txn)
         options.append("format", format)
 
