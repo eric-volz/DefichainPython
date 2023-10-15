@@ -352,7 +352,7 @@ class Wallet:
         """
         return self._node._rpc.call("getaddressinfo", address)
 
-    def getbalance(self, dummy: str = "*", minconf: int = 0, include_watchonly: bool = True, avoid_reuse: bool = True,
+    def getbalance(self, dummy: str = "*", minconf: int = 0, include_watchonly: bool = True, avoid_reuse: bool = None,
                    with_tokens: bool = False) -> {}:  # 12
         """
         Returns the total available balance.
