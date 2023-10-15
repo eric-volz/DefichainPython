@@ -201,12 +201,8 @@ def test_importaddress():  # 22
 
 @pytest.mark.query
 def test_importmulti():  # 23
-    string = '.* RPC_TYPE_ERROR: Expected type object, got bool'
-    with pytest.raises(InternalServerError, match=string):
         assert node.wallet.importmulti([])
-    with pytest.raises(InternalServerError, match=string):
         assert node.wallet.importmulti([], False)
-    with pytest.raises(InternalServerError, match=string):
         assert node.wallet.importmulti(requests=[], rescan=False)
 
 

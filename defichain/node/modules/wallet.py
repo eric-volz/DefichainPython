@@ -683,7 +683,7 @@ class Wallet:
         """
         options = BuildJson()
         options.append("rescan", rescan)
-        return self._node._rpc.call("importmulti", requests, rescan)
+        return self._node._rpc.call("importmulti", requests, options.build())
 
     def importprivkey(self, privkey: str, label: str = "", rescan: bool = True) -> None:  # 23
         """
