@@ -19,10 +19,11 @@ module and the compositeswap method belongs to the poolpair module.
 
 You can find more explanations :ref:`below <Node requestStructure>`
 
-.. admonition:: New Logger available
+.. admonition:: Usage of Floats
     :class: caution
 
-    If you want to log all requests and results, you can use the new :ref:`Logger` Class.
+    Keep in mind that the node can only handel floats up to 8 decimal places.
+    Otherwise it will result in a 500 HTTP Error.
 
 Node Modules 
 ------------
