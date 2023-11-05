@@ -331,90 +331,10 @@
         <article role="main">
           <section id="evm">
 <span id="node-evm"></span><h1>EVM<a class="headerlink" href="#evm" title="Permalink to this heading">#</a></h1>
-<dl class="py class">
+<dl class="py attribute">
 <dt class="sig sig-object py" id="defichain.node.EVM">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">EVM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.EVM" title="Permalink to this definition">#</a></dt>
-<dd><dl class="py method">
-<dt class="sig sig-object py" id="defichain.node.EVM.evmtx">
-<span class="sig-name descname"><span class="pre">evmtx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonce</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gasPrice</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gasLimit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#defichain.node.EVM.evmtx" title="Permalink to this definition">#</a></dt>
-<dd><p>Creates (and submits to local node and network) a tx to send DFI token to EVM address.</p>
-<p><strong>Inputs must be in hex format</strong></p>
-<dl class="field-list">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>_from</strong> (<em>str</em>) – (required) From ERC55 address</p></li>
-<li><p><strong>nonce</strong> (<em>hex</em>) – (required) Transaction nonce</p></li>
-<li><p><strong>gasPrice</strong> (<em>hex</em>) – (required) Gas Price in Gwei</p></li>
-<li><p><strong>gasLimit</strong> (<em>hex</em>) – (required) Gas limit</p></li>
-<li><p><strong>to</strong> (<em>str</em>) – (required) To address. Can be empty</p></li>
-<li><p><strong>value</strong> (<em>hex</em>) – (required) Amount to send in DFI</p></li>
-<li><p><strong>data</strong> (<em>hex</em>) – (optional) Hex encoded data. Can be blank.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>“hash” - (string) The hex-encoded hash of broadcasted transaction</p>
-</dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">evm</span><span class="o">.</span><span class="n">evmtx</span><span class="p">(</span><span class="s2">&quot;0xB553De274BFc1293DC703B013464202fC65E3FDF&quot;</span><span class="p">,</span> <span class="mh">0x0</span><span class="p">,</span> <span class="mh">0x09184e72a000</span><span class="p">,</span> <span class="mh">0x2710</span><span class="p">,</span> <span class="s2">&quot;0xB553De274BFc1293DC703B013464202fC65E3FDF&quot;</span><span class="p">,</span> <span class="mh">0x1e4876e800</span><span class="p">,</span> <span class="mh">0x0</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="defichain.node.EVM.logvmmaps">
-<span class="sig-name descname"><span class="pre">logvmmaps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">{}</span></span></span><a class="headerlink" href="#defichain.node.EVM.logvmmaps" title="Permalink to this definition">#</a></dt>
-<dd><p>Logs all block or tx indexes for debugging.</p>
-<p>0 - DVMToEVM Blocks</p>
-<p>1 - EVMToDVM Blocks</p>
-<p>2 - DVMToEVM TXs</p>
-<p>3 - EVMToDVM TXs</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>type</strong> (<em>int</em>) – (required) Type of logs</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>json - (array) Json object with account balances if rpcresult is enabled.This is for debugging purposes only.</p>
-</dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">evm</span><span class="o">.</span><span class="n">logvmmaps</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="defichain.node.EVM.vmmap">
-<span class="sig-name descname"><span class="pre">vmmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defichain.node.EVM.vmmap" title="Permalink to this definition">#</a></dt>
-<dd><p>Give the equivalent of an address, blockhash or transaction from EVM to DVM</p>
-<p>Map Types:</p>
-<p>0 - Auto</p>
-<p>1 - Block Number: DFI -&gt; EVM</p>
-<p>2 - Block Number: EVM -&gt; DFI</p>
-<p>3 - Block Hash: DFI -&gt; EVM</p>
-<p>4 - Block Hash: EVM -&gt; DFI</p>
-<p>5 - Tx Hash: DFI -&gt; EVM</p>
-<p>6 - Tx Hash: EVM -&gt; DFI</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>input</strong> (<em>str</em>) – (required) DVM address, EVM blockhash, EVM transactio</p></li>
-<li><p><strong>type</strong> (<em>int</em>) – (required) Map types</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>str - The hex-encoded string for address, block or transaction or (number) block number</p>
-</dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">evm</span><span class="o">.</span><span class="n">vmmap</span><span class="p">(</span><span class="s2">&quot;1600000&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
+<span class="sig-prename descclassname"><span class="pre">defichain.node.</span></span><span class="sig-name descname"><span class="pre">EVM</span></span><a class="headerlink" href="#defichain.node.EVM" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of 3</p>
 </dd></dl>
 
 </section>
@@ -475,12 +395,7 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">EVM</a><ul>
-<li><a class="reference internal" href="#defichain.node.EVM"><code class="docutils literal notranslate"><span class="pre">EVM</span></code></a><ul>
-<li><a class="reference internal" href="#defichain.node.EVM.evmtx"><code class="docutils literal notranslate"><span class="pre">EVM.evmtx()</span></code></a></li>
-<li><a class="reference internal" href="#defichain.node.EVM.logvmmaps"><code class="docutils literal notranslate"><span class="pre">EVM.logvmmaps()</span></code></a></li>
-<li><a class="reference internal" href="#defichain.node.EVM.vmmap"><code class="docutils literal notranslate"><span class="pre">EVM.vmmap()</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#defichain.node.EVM"><code class="docutils literal notranslate"><span class="pre">EVM</span></code></a></li>
 </ul>
 </li>
 </ul>
