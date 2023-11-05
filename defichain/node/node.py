@@ -7,7 +7,7 @@ from .rpc import RPC
 from .modules.accounts import Accounts
 from .modules.blockchain import Blockchain
 from .modules.control import Control
-from .modules.evm import EVM
+from .modules.evm import Evm
 from .modules.generating import Generating
 from .modules.loan import Loan
 from .modules.masternodes import Masternodes
@@ -94,7 +94,7 @@ class Node:
         self.accounts = Accounts(self)
         self.blockchain = Blockchain(self)
         self.control = Control(self)
-        self.evm = EVM(self)
+        self.evm = Evm(self)
         self.generating = Generating(self)
         self.icxorderbook = None
         self.loan = Loan(self)
