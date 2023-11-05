@@ -1,5 +1,5 @@
 # Just to be present: Node
-from defichain.node.modules.accounts import Accounts
+from defichain.node.modules.accounts import Accounts, DVM, EVM
 from defichain.node.modules.blockchain import Blockchain
 from defichain.node.modules.control import Control
 from defichain.node.modules.evm import Evm

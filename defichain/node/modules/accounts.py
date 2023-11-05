@@ -1,5 +1,7 @@
 from ..util import BuildJson
 
+DVM: int = 2
+EVM: int = 3
 
 class Accounts:
     def __init__(self, node):
