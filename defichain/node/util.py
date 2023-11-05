@@ -153,11 +153,11 @@ class BuildTransferDomainData:
 
     :example:
 
-        >>> from defichain.node import BuildTransferDomainData
+        >>> from defichain.node import BuildTransferDomainData, DVM, EVM
         >>>
         >>> transferdomain_data = BuildTransferDomainData()
-        >>> transferdomain_data.add_transfer("dvm_address", "evm_address", "1@DFI", 2, 3)
-        >>> transferdomain_data.add_transfer("evm_address", "dvm_address", "1@DFI", 3, 2)
+        >>> transferdomain_data.add_transfer("dvm_address", "evm_address", "1@DFI", DVM, EVM)
+        >>> transferdomain_data.add_transfer("evm_address", "dvm_address", "1@DFI", EVM, DVM)
         >>> transferdomain_data.build()
     """
 
