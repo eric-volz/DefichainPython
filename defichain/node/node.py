@@ -70,16 +70,10 @@ class Node:
     """
 
     def __init__(self, user: str, password: str, url: str = "127.0.0.1", port: int = 8554, wallet_name: str = "",
-                 wallet_path: str = None, wallet_password: str = "", wallet_timeout: int = 60,
+                 wallet_password: str = "", wallet_timeout: int = 60,
                  protocol: str = "http", logger: Logger = None, disablewallet: bool = False):
 
         self.disablewallet = disablewallet
-
-        # Parameter Check
-        if wallet_name != "" and wallet_path is not None:
-            raise WrongParameters(f"Only one parameter of wallet_name or wallet_path may be given at a time!")
-        elif wallet_name == "" and wallet_path is not None:
-            wallet_name = wallet_path
 
         # Setup URL
         if not self.disablewallet:
@@ -119,20 +113,12 @@ class Node:
         # Check if only one wallet
         if not disablewallet:
             wallets = self.wallet.listwallets()
-            if len(wallets) == 1:  # Only one wallet is loaded
+
+            if not wallet_name:
                 url = f"{protocol}://{user}:{password}@{url}:{port}/wallet/{wallets[0]}"
                 self._rpc.update_url(url)
-            # If more than one wallet is loaded the default wallet "" will be used. If you want tu use a specific wallet you
-            # have zu specify the wallet in the wallet_name parameter
-            elif len(wallets) > 1 and not "" in wallets:
-                msg = "Warning: You have not specified an wallet in the wallet_name parameter. If you use an method where " \
-                      "an wallet is needed an error will accrue!"
-                print(msg)
-                if logger:
-                    logger.error("NodeWarning", msg)
 
             # Prepare Wallet
-            self.load_wallet(wallet_path)
             self.decrypt_wallet(wallet_password, wallet_timeout)
 
     def decrypt_wallet(self, wallet_password: str, wallet_timeout: int):
