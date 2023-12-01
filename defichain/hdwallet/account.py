@@ -1,4 +1,4 @@
-from .wallet import Wallet
+from .dvm_wallet import DVMWallet
 from typing import Any
 from defichain.networks import DefichainMainnet, DefichainTestnet, DefichainRegtest
 
@@ -8,7 +8,7 @@ class Account:
     @staticmethod
     def _is_publicKey(network: Any, publicKey: str) -> bool:
         try:
-            Wallet(network).from_public_key(publicKey)
+            DVMWallet(network).from_public_key(publicKey)
             return True
         except:
             return False
@@ -16,7 +16,7 @@ class Account:
     @staticmethod
     def _is_privateKey(network: Any, privateKey: str) -> bool:
         try:
-            Wallet(network).from_private_key(privateKey)
+            DVMWallet(network).from_private_key(privateKey)
             return True
         except:
             return False
@@ -24,14 +24,14 @@ class Account:
     @staticmethod
     def _is_wif(network: Any, wif: str) -> bool:
         try:
-            Wallet(network).from_wif(wif)
+            DVMWallet(network).from_wif(wif)
             return True
         except:
             return False
 
     def __init__(self, network: Any, key: str):
         self._network = None
-        self._wallet: Wallet = Wallet(network)
+        self._wallet: DVMWallet = DVMWallet(network)
         self.set_network(network)
         self.set_key(key)
 
