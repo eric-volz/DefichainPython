@@ -11,6 +11,7 @@ from .bech32address import Bech32Address
 from .p2pkh import P2PKH
 from .p2sh import P2SH
 from .p2wpkh import P2WPKH
+from .erc55 import ERC55
 
 
 class Address:
@@ -53,10 +54,17 @@ class Address:
             for network in [DefichainMainnet, DefichainTestnet]:
                 if prefix == network.SEGWIT_ADDRESS.HRP:
                     return network, AddressTypes.P2WPKH
+
+        # ERC55
+        try:
+            if ERC55.verify(address):
+                return None, AddressTypes.ERC55
+        except:
+            pass
         raise AddressError("This address ist not supported")
 
     @staticmethod
-    def from_address(address: str) -> "BaseAddress":
+    def from_address(address: str) -> "P2PKH | P2SH | P2WPKH | ERC55":
         """
         Creates the matching address object for the given address
 
@@ -71,6 +79,8 @@ class Address:
             return P2SH(network, address)
         elif addressType == AddressTypes.P2WPKH:  # Native Segwit
             return P2WPKH(network, address)
+        elif addressType == AddressTypes.ERC55:  # ERC55
+            return ERC55(address)
         else:
             raise AddressError("This address ist not supported")
 
@@ -95,6 +105,12 @@ class Address:
         # Bech32
         try:
             return Address.from_address(Bech32Address.scriptPublicKey_to_address(network, scriptPublicKey))
+        except:
+            pass
+
+        # ERC55
+        try:
+            return Address.from_address(ERC55.from_scriptPublicKey(scriptPublicKey).get_address())
         except:
             pass
 
