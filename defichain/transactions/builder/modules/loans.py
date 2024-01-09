@@ -19,7 +19,7 @@ class Loans:
         """
         Creates a transaction to take a loan in the desired amount out of the specified vault
 
-        >>> builder.loan.takeloan("8040fe5eaa75f942dabf57bcdace3a5b71e3eb4fab53467e064e870396913800", "df1qrvrnk0zyaen8x3pfrza3yznwrrrv5y08rkgrk2", ["1@DUSD", "2@COIN"]) # takes loan from a vault
+        >>> builder.loans.takeloan("8040fe5eaa75f942dabf57bcdace3a5b71e3eb4fab53467e064e870396913800", "df1qrvrnk0zyaen8x3pfrza3yznwrrrv5y08rkgrk2", ["1@DUSD", "2@COIN"]) # takes loan from a vault
 
         :param vaultId: (required) vault id
         :type vaultId: str
@@ -47,7 +47,7 @@ class Loans:
         """
         Creates a transaction to pay back the loan token to the specified vault
 
-        >>> builder.loan.paybackloan("8040fe5eaa75f942dabf57bcdace3a5b71e3eb4fab53467e064e870396913800", "df1qrvrnk0zyaen8x3pfrza3yznwrrrv5y08rkgrk2", ["1@DUSD", "2@COIN"]) # pay backs loan to a vault
+        >>> builder.loans.paybackloan("8040fe5eaa75f942dabf57bcdace3a5b71e3eb4fab53467e064e870396913800", "df1qrvrnk0zyaen8x3pfrza3yznwrrrv5y08rkgrk2", ["1@DUSD", "2@COIN"]) # pay backs loan to a vault
 
         :param vaultId: (required) vault id
         :type vaultId: str
